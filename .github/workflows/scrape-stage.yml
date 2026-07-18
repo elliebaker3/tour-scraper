@@ -148,13 +148,33 @@ jobs:
             echo "number=$STAGE" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Run capture
+      - name: Run capture (with incremental pushes every 10 min)
         env:
           TOUR_RADIO_URL: ${{ secrets.TOUR_RADIO_URL }}
         run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
           python -m tourscraper stage \
             --stage "${{ steps.stage.outputs.number }}" \
-            --max-hours "${{ github.event.inputs.max_hours || '5.5' }}"
+            --max-hours "${{ github.event.inputs.max_hours || '5.5' }}" &
+          CAPTURE_PID=$!
+          # Push captured data incrementally so the repo stays fresh during the
+          # stage and nothing is lost if the runner dies mid-capture. Audio
+          # stays out (gitignored); it lands in the artifact at the end.
+          while kill -0 $CAPTURE_PID 2>/dev/null; do
+            sleep 600
+            kill -0 $CAPTURE_PID 2>/dev/null || break
+            git add data/
+            if git commit -m "data: incremental capture $(date -u +%H:%M) UTC" >/dev/null 2>&1; then
+              if git pull --rebase origin "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+                git push >/dev/null 2>&1 && echo "pushed incremental at $(date -u +%H:%M)"
+              else
+                git rebase --abort 2>/dev/null || true
+                echo "incremental push skipped (conflict); final commit will retry"
+              fi
+            fi
+          done
+          wait $CAPTURE_PID
 
       - name: Upload everything as artifact (belt and suspenders)
         if: always()
