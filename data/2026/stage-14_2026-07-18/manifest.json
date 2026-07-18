@@ -1,1 +1,20 @@
-[{"recorded_at": "2026-07-17T23:58:28+00:00", "kind": "profile", "source": "https://racecenter.letour.fr/profils/2026/profile-14-7cd66b6883091ae55eac33a73c6e4026.csv", "via": "autodiscover"}]
+[
+  {
+    "recorded_at": "2026-07-17T23:58:28+00:00",
+    "kind": "profile",
+    "source": "https://racecenter.letour.fr/profils/2026/profile-14-7cd66b6883091ae55eac33a73c6e4026.csv",
+    "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-18T04:11:34.346+00:00",
+    "kind": "profile",
+    "source": "https://racecenter.letour.fr/profils/2026/profile-14-7cd66b6883091ae55eac33a73c6e4026.csv",
+    "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-18T04:11:34.369+00:00",
+    "kind": "profile",
+    "source": "https://racecenter.letour.fr/profils/2026/profile-14-tiny-834ffcff770e3aca72553d1778212efa.csv",
+    "via": "autodiscover"
+  }
+]

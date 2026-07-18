@@ -9,10 +9,10 @@ deposits them, organized per stage, into `data/`.
 
 | # | Source | How it's captured | Lands in |
 |---|--------|-------------------|----------|
-| 1 | Time-stamped detailed event feed | SSE `/live-stream` binds that look like commentary items, auto-deduped; if it turns out to be a plain JSON endpoint, the `poll` fallback captures it | `events.jsonl`, `polls/*.jsonl` |
-| 2 | Per-second speed + distance-to-finish for every rider | SSE `telemetryCompetitor-{year}` (per-rider GPS/speed snapshots) and `pack-{year}` (groups, gaps, remaining distance) | `telemetry.jsonl`, `groups.jsonl` |
-| 3 | Live radio feed | `ffmpeg`, one persistent connection for the whole session, segmented into hourly files on the *output* side (`-f segment`) so nothing is dropped at hour boundaries | `radio/*.mp3` |
-| 4 | Elevation profile of each stage | **Not working yet as of 2026** — the CSV path this was built against is confirmed gone (see "Known unknowns"). `fetch_profiles()` will find nothing until the real 2026 mechanism is captured via HAR | `profile.csv` (once fixed) |
+| 1 | Time-stamped detailed event feed | Confirmed real 2026 endpoint: `poll_endpoints.flashInfoLive` = `/api/flashInfoLive-{year}-{stage}`. Also written raw from SSE `/live-stream` if it turns out to double up there | `polls/flashInfoLive.jsonl`, `events.jsonl` |
+| 2 | Per-second speed + distance-to-finish for every rider | SSE `telemetryCompetitor-{year}` / `pack-{year}` (per-rider GPS/speed, groups/gaps/remaining distance), cross-checked against the confirmed `checkpointList-{year}-{stage}` poll endpoint, which keys checkpoint passes the same way (`cpnumero`) as the elevation profile CSV — this is the join that lets the Navigator place the leader on the profile | `telemetry.jsonl`, `groups.jsonl`, `polls/checkpointList.jsonl` |
+| 3 | Live radio feed | `ffmpeg`, one persistent connection for the whole session, segmented into hourly files on the *output* side (`-f segment`) so nothing is dropped at hour boundaries. URL still needs discovery — see `autodiscover` below | `radio/*.mp3` |
+| 4 | Elevation profile of each stage | The old static-HTML/JS-bundle regex scan (`fetch_profiles`) no longer finds it — 2026 loads it dynamically with an unpredictable content hash in the filename. `autodiscover` (headless browser) finds and downloads it automatically instead | `profile.csv` |
 
 Everything on the SSE stream is *also* written verbatim to
 `live-stream.raw.jsonl` before any parsing. If A.S.O. changed a field name for
@@ -73,20 +73,45 @@ python -m tourscraper stage --stage 14 --max-hours 6
 runs all three recorders concurrently (SSE + pollers + radio) with a hard stop.
 Or run them individually: `live`, `poll`, `radio` — same flags.
 
-## Discovering endpoints that can't be guessed (event feed, radio URL)
+## Discovering endpoints that can't be guessed (radio URL, profile CSV) — automatically
 
-The detailed commentary feed and the radio stream URL are best captured from a
-real browser session during a live stage:
+```bash
+python -m tourscraper autodiscover
+```
 
-1. Open https://racecenter.letour.fr/en/ during Saturday's stage, start the
-   radio player, let the page run ~2 minutes.
+This is the same idea as the manual HAR-capture workflow below, but it drives
+a **headless Chromium** (Playwright) instead of asking you to open DevTools —
+so it can run unattended in CI with nobody at a keyboard. It:
+
+- loads racecenter.letour.fr for real, so anything only reachable by running
+  the site's own JS (like the elevation-profile CSV's hashed filename) gets
+  captured
+- watches every HTTP response *and* individual SSE frames (via the Chrome
+  DevTools Protocol) for ~2.5 minutes
+- downloads any elevation-profile CSVs it sees, straight into `data/{year}/profiles/`
+  and the matching stage folder
+- patches `config/config.yaml` with `radio_stream_url` / `poll_endpoints`
+  when it finds exactly one confident candidate; ambiguous finds are left for
+  you to pick from `data/{year}/reference/autodiscover-endpoints.json`
+
+The GitHub Actions workflow runs this automatically in a `discover` job ~2.5
+hours before each stage (see below) — no manual step needed. The one thing it
+still can't fully guarantee: the radio stream sometimes only starts once the
+broadcast is actually live, so run it again closer to air time if the first
+pass doesn't find `radio_stream_url`.
+
+### Manual fallback (HAR capture)
+
+If `autodiscover` comes up empty on something, the manual path still works:
+
+1. Open https://racecenter.letour.fr/en/ during a live stage, start the radio
+   player, let the page run ~2 minutes.
 2. DevTools → Network → right-click → **Save all as HAR with content**.
 3. `python -m tourscraper har capture.har`
 
 It prints candidate JSON/SSE/audio endpoints and saves the inventory. Paste the
 commentary endpoint into `config/config.yaml` under `poll_endpoints`, and the
-audio/m3u8 URL into `radio_stream_url` (or the `TOUR_RADIO_URL` repo secret for
-GitHub Actions).
+audio/m3u8 URL into `radio_stream_url`.
 
 ## Backfilling stages that already happened
 
@@ -118,12 +143,19 @@ heatwave), so per-stage archived pages beat pre-Tour route files.
 
 Three options, most-hands-off first:
 
-1. **GitHub Actions** (`.github/workflows/scrape-stage.yml`): push this repo to
-   GitHub, edit the cron line to ~15 min before stage start (UTC), and GitHub's
-   servers run the capture and commit the data back to the repo. Your machine
-   can be off. Data is also uploaded as a run artifact in case the commit
-   fails. Jobs cap at 6h — start close to stage start, or fire a second
-   overlapping run via `workflow_dispatch` for marathon mountain days.
+1. **GitHub Actions** (`.github/workflows/scrape-stage.yml`, recommended — this
+   is the truly zero-touch path): two scheduled jobs, both need their cron
+   times recomputed for each stage's actual start/finish (in
+   `data/2026/reference/stages.json` once you've run `bootstrap`):
+   - `discover` fires ~2.5h before race start, runs `autodiscover` (headless
+     browser, no manual step), and commits whatever it finds back to `main`.
+   - `scrape` fires ~50min before race start, auto-detects the day's stage
+     number from `stages.json` (no hardcoded stage number to remember to
+     update), and runs the actual capture.
+   Your machine can be off the entire time. Data is also uploaded as a run
+   artifact in case the commit fails. Jobs cap at 6h — that's why `scrape`
+   starts close to the actual race start rather than hours early; fire a
+   second overlapping run via `workflow_dispatch` for marathon mountain days.
 2. **A tiny always-on box** (Raspberry Pi, $5 VPS): `scripts/install_systemd.sh`
    installs a user-level systemd timer.
 3. **Your own machine on a schedule**: `scripts/com.tourtools.scraper.plist`
@@ -154,27 +186,30 @@ things year to year — `probe` + `har` are your recovery tools when they do.
   personal, don't redistribute the data or audio, and if you ever want to ship
   Tour Tools publicly, that's the point to look into A.S.O. licensing.
 
-## Known unknowns (read before Saturday)
+## Known unknowns
 
 - **2026 field names may differ** from the 2025-era binds. Mitigation: raw log
   + `reparse`, and `probe` before the stage.
-- **The event feed's exact location** (SSE bind vs. JSON endpoint) is the main
-  thing to confirm via the HAR capture on Saturday.
-- **Radio stream URL** must be discovered once via HAR, then it's set-and-forget.
-- **The elevation profile CSV is confirmed gone.** Checked directly against the
-  live 2026 site: `/api/stage-2026` no longer has a profile field on any of
-  the 21 stages (any type — PLN/HMG/EQU/PAS/VAL all checked), and the app's
-  main JS bundle has zero references to `/profils/` or `.csv` anywhere. The
-  frontend still has an `AppStoreModule.profile` field set via a `setProfile()`
-  mutation, so the data exists somewhere client-side — most likely delivered
-  as another bind on the same `/live-stream` SSE connection (same channel as
-  `telemetryCompetitor`/`pack`), or fetched by a route-specific JS chunk that
-  only loads once you open a stage's profile widget in the browser. Either
-  way, `fetch_profiles()`'s CSV-hunt will find nothing this year — the raw SSE
-  log already captures unrecognized binds verbatim, so if it does turn out to
-  ride the live-stream, it'll be in `live-stream.raw.jsonl` even without a
-  dedicated parser; confirm the actual mechanism via the Saturday HAR capture
-  same as the event feed and radio URL, then wire up a real parser.
+- **Radio stream URL**: `autodiscover` tries to find it automatically but the
+  audio stream may only start once the broadcast is actually live — if it
+  comes up empty, re-run `autodiscover` closer to air time, or fall back to
+  the manual HAR capture.
+- **The `/live-stream` SSE connection carries a signed `xdt=` query token**
+  when opened by a real browser (a short-lived JWT-like value, issued at page
+  load). This scraper's plain `requests` connection doesn't send one, but got
+  an identical HTTP 200 + `text/event-stream` response during testing — so
+  it's most likely optional (analytics/session-correlation) rather than
+  required auth. Unconfirmed until verified against a real live stage; if
+  `record_live()` connects but no `telemetryCompetitor`/`pack` binds ever
+  arrive during an actual stage, this token is the first thing to suspect.
+- **The elevation profile CSV update (correcting an earlier note in this
+  file):** it is *not* gone. `/api/stage-2026` genuinely has no profile field,
+  and the JS bundle has zero static `/profils/`/`.csv` references — but a real
+  browser session shows the site still fetches
+  `/profils/{year}/profile-{stage}-<hash>.csv` (plus a `-tiny-` variant), just
+  with a content hash that isn't derivable from any static text, only from
+  actually running the page's JS. `autodiscover` handles this correctly by
+  browsing for real and downloading whatever it observes.
 - Telemetry granularity is whatever the feed pushes (roughly per-second in past
   years, from GPS on bikes/motos; time trials and crashes get noisy).
 - **Radio has no rewind.** ffmpeg keeps one connection open all session and

@@ -100,7 +100,10 @@ def run_autodiscover(cfg: Config, watch_seconds: int = 150, apply_config: bool =
         cdp.on("Network.eventSourceMessageReceived", on_sse)
 
         print(f"[autodiscover] loading {cfg.base_url}/en/ ...")
-        page.goto(cfg.base_url + "/en/", wait_until="networkidle", timeout=30000)
+        # NOT "networkidle": the page keeps a persistent SSE connection open
+        # by design (that IS the live-stream), so network activity never goes
+        # idle -- networkidle would time out on every single run.
+        page.goto(cfg.base_url + "/en/", wait_until="load", timeout=30000)
 
         for selector in RADIO_SELECTORS:
             try:
