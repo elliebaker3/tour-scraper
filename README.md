@@ -41,7 +41,7 @@ data/2026/
 can later align race data with your stage *recording's* timeline — the core
 join the Navigator needs.
 
-## Quick start (run this before Saturday)
+## Quick start
 
 Needs Python 3.10+ — if your default `python3` resolves to something older (e.g.
 a conda `base` env), point the venv at a newer interpreter explicitly
@@ -179,7 +179,7 @@ things year to year — `probe` + `har` are your recovery tools when they do.
 
 ## Ground rules baked in
 
-- Honest User-Agent, single SSE connection, 30s poll interval, 1s pauses
+- Honest User-Agent, single SSE connection, 15s poll interval, 1s pauses
   between profile downloads — a lighter footprint than one open browser tab.
 - This is publicly displayed data archived for a personal project. Note that
   letour.fr's terms may restrict automated access and reuse; keep this archive
