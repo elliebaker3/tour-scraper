@@ -39,6 +39,9 @@ poll_endpoints:
   # bib composition, gaps in seconds, and remaining distance. Same data as the
   # SSE pack bind, as a poll-able REST snapshot -- belt and suspenders.
   pack: "/api/pack-{year}-{stage}"
+  # Per-rider live GPS: all riders with LatLon, kmToFinish, kph, position.
+  # Same data as the SSE telemetryCompetitor bind, poll-able.
+  telemetry: "/api/telemetryCompetitor-{year}"
   flashInfoLive: "/api/flashInfoLive-{year}-{stage}"
   checkpointList: "/api/checkpointList-{year}-{stage}"
 poll_interval_seconds: 15
