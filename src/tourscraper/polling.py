@@ -63,7 +63,19 @@ def poll_loop(cfg: Config, store: StageStore, stop_after_seconds: int | None = N
 
 def record_radio(cfg: Config, store: StageStore, stop_after_seconds: int | None = None,
                  chunk_seconds: int = 3600) -> None:
-    """Record cfg.radio_stream_url via ffmpeg in chunks; reconnect on failure."""
+    """Record cfg.radio_stream_url via ffmpeg, split into hourly files.
+
+    A live stream has no "rewind" — whatever airs while nothing is reading the
+    socket is gone forever. So this keeps ONE ffmpeg process (one persistent
+    connection) alive for the whole session and lets ffmpeg's own `-f segment`
+    muxer cut that continuous decode into hourly files on the output side.
+    That's what makes it gapless: unlike restarting a fresh ffmpeg per chunk
+    (which pays a reconnect + process-startup cost at every boundary, losing a
+    few seconds of live audio each hour), segmenting the output never drops
+    the input connection at all. The outer while-loop only exists to restart
+    ffmpeg if it dies outright (stream truly disappears longer than
+    reconnect_delay_max) — a real gap, but not a self-inflicted one.
+    """
     if not cfg.radio_stream_url:
         print("[radio] radio_stream_url not set in config.yaml; skipping. "
               "Find the stream URL (see README 'Radio') and add it.")
@@ -73,28 +85,36 @@ def record_radio(cfg: Config, store: StageStore, stop_after_seconds: int | None 
         return
     store.write_manifest({"kind": "radio", "source": cfg.radio_stream_url})
     started = time.monotonic()
+    attempt = 0
     while True:
         if stop_after_seconds and time.monotonic() - started > stop_after_seconds:
             break
         remaining = None
         if stop_after_seconds:
             remaining = max(1, int(stop_after_seconds - (time.monotonic() - started)))
-        duration = min(chunk_seconds, remaining) if remaining else chunk_seconds
         stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        out = store.dir / "radio" / f"radio_{stamp}.mp3"
+        pattern = str(store.dir / "radio" / f"radio_{stamp}_%03d.mp3")
         cmd = [
             "ffmpeg", "-hide_banner", "-loglevel", "warning",
             "-reconnect", "1", "-reconnect_streamed", "1", "-reconnect_delay_max", "10",
             "-user_agent", cfg.user_agent,
             "-i", cfg.radio_stream_url,
-            "-t", str(duration),
-            "-c:a", "libmp3lame", "-b:a", "64k",
-            str(out),
         ]
-        print(f"[radio] recording chunk -> {out}")
+        if remaining:
+            cmd += ["-t", str(remaining)]
+        cmd += [
+            "-c:a", "libmp3lame", "-b:a", "64k",
+            "-f", "segment", "-segment_time", str(chunk_seconds), "-reset_timestamps", "1",
+            pattern,
+        ]
+        print(f"[radio] recording (single connection, hourly segments) -> {pattern}")
         try:
             subprocess.run(cmd, check=False)
         except KeyboardInterrupt:
             break
+        attempt += 1
+        print(f"[radio] ffmpeg exited (attempt {attempt}); this is a real gap "
+              f"(the live source was unreachable beyond ffmpeg's own reconnect "
+              f"window) — reconnecting now")
         time.sleep(2)
     print("[radio] stopped")

@@ -11,7 +11,7 @@ deposits them, organized per stage, into `data/`.
 |---|--------|-------------------|----------|
 | 1 | Time-stamped detailed event feed | SSE `/live-stream` binds that look like commentary items, auto-deduped; if it turns out to be a plain JSON endpoint, the `poll` fallback captures it | `events.jsonl`, `polls/*.jsonl` |
 | 2 | Per-second speed + distance-to-finish for every rider | SSE `telemetryCompetitor-{year}` (per-rider GPS/speed snapshots) and `pack-{year}` (groups, gaps, remaining distance) | `telemetry.jsonl`, `groups.jsonl` |
-| 3 | Live radio feed | `ffmpeg` stream recorder, hourly chunks | `radio/*.mp3` |
+| 3 | Live radio feed | `ffmpeg`, one persistent connection for the whole session, segmented into hourly files on the *output* side (`-f segment`) so nothing is dropped at hour boundaries | `radio/*.mp3` |
 | 4 | Elevation profile of each stage | Route-point CSVs at `/profils/{year}/profile-NN-<hash>.csv`, auto-discovered from the stage API and page bundles | `profile.csv` |
 
 Everything on the SSE stream is *also* written verbatim to
@@ -155,3 +155,8 @@ things year to year — `probe` + `har` are your recovery tools when they do.
 - **Radio stream URL** must be discovered once via HAR, then it's set-and-forget.
 - Telemetry granularity is whatever the feed pushes (roughly per-second in past
   years, from GPS on bikes/motos; time trials and crashes get noisy).
+- **Radio has no rewind.** ffmpeg keeps one connection open all session and
+  `-reconnect` covers brief network blips, but if the stream is unreachable
+  longer than `reconnect_delay_max` (10s) the outer loop restarts ffmpeg and
+  that stretch of live audio is genuinely gone — there's no source to recover
+  it from after the fact.
