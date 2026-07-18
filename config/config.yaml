@@ -35,6 +35,10 @@ poll_endpoints:
   publication: "/api/publication_en-{year}-{stage}"
   # Weather + avg speed + km-from-start along the route, updates during race.
   insights: "/api/insights-{year}-{stage}"
+  # Race groups: named groups (breakaway/chasers/peloton/dropped) with full
+  # bib composition, gaps in seconds, and remaining distance. Same data as the
+  # SSE pack bind, as a poll-able REST snapshot -- belt and suspenders.
+  pack: "/api/pack-{year}-{stage}"
   flashInfoLive: "/api/flashInfoLive-{year}-{stage}"
   checkpointList: "/api/checkpointList-{year}-{stage}"
 poll_interval_seconds: 15
