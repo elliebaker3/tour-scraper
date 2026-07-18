@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- macOS launchd job. Install:
+     cp scripts/com.tourtools.scraper.plist ~/Library/LaunchAgents/
+     launchctl load ~/Library/LaunchAgents/com.tourtools.scraper.plist
+     NOTE: your Mac must be awake (see caffeinate / pmset in README). -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.tourtools.scraper</string>
+  <key>ProgramArguments</key><array>
+    <string>/usr/bin/python3</string>
+    <string>-m</string><string>tourscraper</string>
+    <string>stage</string><string>--max-hours</string><string>6</string>
+  </array>
+  <key>WorkingDirectory</key><string>/Users/CHANGEME/tour-scraper</string>
+  <key>StartCalendarInterval</key><dict>
+    <key>Hour</key><integer>11</integer>
+    <key>Minute</key><integer>45</integer>
+  </dict>
+  <key>StandardOutPath</key><string>/tmp/tour-scraper.log</string>
+  <key>StandardErrorPath</key><string>/tmp/tour-scraper.err</string>
+</dict></plist>

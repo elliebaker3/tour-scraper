@@ -1,0 +1,27 @@
+# tour-scraper configuration. Everything here overrides the defaults in
+# src/tourscraper/config.py.
+
+base_url: "https://racecenter.letour.fr"
+year: 2026
+data_dir: "data"
+
+# Live SSE stream (EventSource endpoint used by the racecenter page)
+live_stream_endpoint: "/live-stream"
+
+# Static reference endpoints ({year} is substituted)
+competitors_endpoint: "/api/allCompetitors-{year}"
+stages_endpoint: "/api/stage-{year}"
+teams_endpoint: "/api/team-{year}"
+
+# Fallback pollers. If the detailed commentary/event feed turns out to be a
+# plain JSON endpoint instead of an SSE bind, discover it with
+# `python -m tourscraper har capture.har` and add it here:
+poll_endpoints: {}
+#  commentary: "https://racecenter.letour.fr/api/..."
+poll_interval_seconds: 30
+
+# Radio Tour / live radio stream URL. Find via the HAR command (look for
+# audio/mpegurl entries while the radio player is open), then paste here.
+radio_stream_url: ""
+
+timeout_seconds: 20

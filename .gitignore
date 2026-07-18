@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+# Radio audio can get large; commit it via Git LFS or keep it out of git.
+# Comment the next line out if you've set up LFS (see README).
+data/**/radio/*.mp3

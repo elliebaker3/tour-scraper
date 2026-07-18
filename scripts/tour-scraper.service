@@ -1,0 +1,15 @@
+# systemd service (Linux server / Raspberry Pi). Install with install_systemd.sh
+[Unit]
+Description=Tour de France stage data capture
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/tour-scraper
+ExecStart=/usr/bin/python3 -m tourscraper stage --max-hours 6
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target

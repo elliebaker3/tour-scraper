@@ -1,0 +1,10 @@
+[Unit]
+Description=Start Tour capture daily before stage start
+
+[Timer]
+# UTC on most servers — set to ~15 min before stage start, edit as schedule shifts
+OnCalendar=*-07-* 09:45:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

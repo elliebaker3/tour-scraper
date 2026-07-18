@@ -1,0 +1,70 @@
+# Runs the full stage capture on GitHub's servers — your computer can be off.
+#
+# Notes:
+# - Times below are UTC. TdF stages typically roll ~10:00–17:30 UTC; adjust
+#   per the official schedule (early starts on long stages, later on short ones).
+# - GitHub-hosted jobs are capped at 6 hours, which covers a stage if you start
+#   near stage start. The workflow commits data back to the repo when done, and
+#   ALSO uploads it as an artifact mid-failure-proofing.
+# - Radio audio is uploaded as an artifact rather than committed (repo bloat);
+#   flip the LFS section in the README if you'd rather commit it.
+# - cron can fire a few minutes late on GitHub; start it 15 min early.
+
+name: scrape-stage
+
+on:
+  schedule:
+    # Every day at 09:45 UTC during the Tour window (edit dates/times!)
+    - cron: "45 9 * 7 *"
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "Stage number (e.g. 14)"
+        required: false
+      max_hours:
+        description: "Hours to record"
+        default: "5.75"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -r requirements.txt
+
+      - name: Run capture
+        env:
+          TOUR_RADIO_URL: ${{ secrets.TOUR_RADIO_URL }}
+        run: |
+          python -m tourscraper stage \
+            --stage "${{ github.event.inputs.stage || '' }}" \
+            --max-hours "${{ github.event.inputs.max_hours || '5.75' }}"
+
+      - name: Upload everything as artifact (belt and suspenders)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-data-${{ github.run_id }}
+          path: data/
+          retention-days: 30
+
+      - name: Commit data back to repo (excluding audio)
+        if: always()
+        run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git commit -m "data: capture $(date -u +%F)" || echo "nothing to commit"
+          git pull --rebase origin ${GITHUB_REF_NAME} || true
+          git push || echo "push failed; data still in artifact"
