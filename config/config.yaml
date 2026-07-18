@@ -27,12 +27,20 @@ teams_endpoint: "/api/team-{year}"
 # Both need --stage passed on the command line to resolve {stage}; without it
 # poll_loop skips them rather than polling a broken URL all session.
 poll_endpoints:
+  # THE detailed live commentary/event feed (data source #1) -- confirmed live
+  # mid-stage 14: cumulative list of timestamped items (breakaway composition,
+  # attacks, jersey updates...). Empty/204 before the stage goes live; that's
+  # why pre-race probing missed it. _en suffix = English locale (also exists
+  # as publication_fr etc.).
+  publication: "/api/publication_en-{year}-{stage}"
+  # Weather + avg speed + km-from-start along the route, updates during race.
+  insights: "/api/insights-{year}-{stage}"
   flashInfoLive: "/api/flashInfoLive-{year}-{stage}"
   checkpointList: "/api/checkpointList-{year}-{stage}"
 poll_interval_seconds: 15
 
-# Radio Tour / live radio stream URL. Find via the HAR command (look for
-# audio/mpegurl entries while the radio player is open), then paste here.
-radio_stream_url: ""
+# Live radio stream. Discovered 2026-07-18: the URL is published statically in
+# /api/event under extras.radioUrl -- no HAR/browser capture needed after all.
+radio_stream_url: "https://ice.creacast.com/lequipe-au1"
 
 timeout_seconds: 20
