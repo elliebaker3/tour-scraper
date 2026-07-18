@@ -8,5 +8,16 @@
       "flashInfoLive",
       "checkpointList"
     ]
+  },
+  {
+    "recorded_at": "2026-07-18T12:46:40.087+00:00",
+    "kind": "poll",
+    "endpoints": [
+      "publication",
+      "insights",
+      "pack",
+      "flashInfoLive",
+      "checkpointList"
+    ]
   }
 ]
