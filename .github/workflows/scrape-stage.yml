@@ -3,13 +3,17 @@
 # Two jobs, gated by which schedule fired (see the `if:` on each job), so one
 # workflow file covers both:
 #
-#   discover  - runs early (well before the stage), headless-browses
-#               racecenter.letour.fr with Playwright to grab whatever needs a
-#               real browser session: the elevation-profile CSV (its filename
-#               has an unpredictable content hash, not guessable from static
-#               HTML/JS) and, best-effort, the radio stream URL. Commits any
-#               config.yaml / data changes back to main so the scrape job
-#               below picks them up.
+#   discover  - headless-browses racecenter.letour.fr with Playwright to grab
+#               whatever needs a real browser session: the elevation-profile
+#               CSV (its filename has an unpredictable content hash, not
+#               guessable from static HTML/JS) and, best-effort, the radio
+#               stream URL. Commits any config.yaml / data changes back to
+#               main so the scrape job below picks them up. Runs THREE times
+#               (2.5h before / 30min before / at race start) because the
+#               profile CSV is available early but the radio stream often
+#               only goes live close to actual air time -- each later
+#               attempt is a free extra shot at catching it, not a retry of
+#               a failure.
 #   scrape    - the actual capture: SSE live-stream + the confirmed 2026 REST
 #               poll endpoints (flashInfoLive = the event feed, checkpointList
 #               = checkpoint pass data) + radio. Commits data/ back when done.
@@ -30,9 +34,17 @@ name: scrape-stage
 
 on:
   schedule:
-    # discover: run ~2.5h before race start, only needs the site reachable,
-    # not the race live, since profile/checkpoint endpoints work pre-race too.
+    # discover, attempt 1: ~2.5h before race start. Profile/checkpoint
+    # endpoints already work this early (pre-race), but the radio stream
+    # often isn't live yet at this point -- that's expected, not a failure.
     - cron: "0 9 * 7 *"
+    # discover, attempt 2: ~30min before race start (7:00am EDT / 11:00 UTC)
+    # -- a second try at the radio URL specifically, closer to when the
+    # broadcast is likely to actually be live.
+    - cron: "0 11 * 7 *"
+    # discover, attempt 3: right at race start (7:30am EDT / 11:30 UTC) --
+    # last automatic try before falling back to a manual check.
+    - cron: "30 11 * 7 *"
     # scrape: start ~50min before race start, run long enough to comfortably
     # cover a scheduled ~4h08m stage plus delay/finish-line buffer.
     - cron: "40 10 * 7 *"
@@ -51,7 +63,11 @@ on:
 
 jobs:
   discover:
-    if: github.event_name == 'workflow_dispatch' && inputs.run_discover || github.event.schedule == '0 9 * 7 *'
+    if: >-
+      github.event_name == 'workflow_dispatch' && inputs.run_discover ||
+      github.event.schedule == '0 9 * 7 *' ||
+      github.event.schedule == '0 11 * 7 *' ||
+      github.event.schedule == '30 11 * 7 *'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
