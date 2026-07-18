@@ -43,9 +43,17 @@ join the Navigator needs.
 
 ## Quick start (run this before Saturday)
 
+Needs Python 3.10+ — if your default `python3` resolves to something older (e.g.
+a conda `base` env), point the venv at a newer interpreter explicitly
+(`python3.12 -m venv .venv`, adjusting the path/version for your machine).
+
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+pip install --upgrade pip
+pip install -e .            # NOT just `pip install -r requirements.txt` — that
+                             # installs the dependencies but not the tourscraper
+                             # package itself, so `python -m tourscraper` won't
+                             # find it.
 
 python -m tourscraper probe        # do the endpoints answer? what shape?
 python -m tourscraper bootstrap    # riders / teams / stages -> data/2026/reference/
