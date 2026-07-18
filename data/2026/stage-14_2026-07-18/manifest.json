@@ -52,5 +52,17 @@
     "kind": "profile",
     "source": "https://racecenter.letour.fr/profils/2026/profile-14-tiny-834ffcff770e3aca72553d1778212efa.csv",
     "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-18T11:45:31.657+00:00",
+    "kind": "profile",
+    "source": "https://racecenter.letour.fr/profils/2026/profile-14-7cd66b6883091ae55eac33a73c6e4026.csv",
+    "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-18T11:45:31.666+00:00",
+    "kind": "profile",
+    "source": "https://racecenter.letour.fr/profils/2026/profile-14-tiny-834ffcff770e3aca72553d1778212efa.csv",
+    "via": "autodiscover"
   }
 ]
