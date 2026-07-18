@@ -12,7 +12,7 @@ deposits them, organized per stage, into `data/`.
 | 1 | Time-stamped detailed event feed | SSE `/live-stream` binds that look like commentary items, auto-deduped; if it turns out to be a plain JSON endpoint, the `poll` fallback captures it | `events.jsonl`, `polls/*.jsonl` |
 | 2 | Per-second speed + distance-to-finish for every rider | SSE `telemetryCompetitor-{year}` (per-rider GPS/speed snapshots) and `pack-{year}` (groups, gaps, remaining distance) | `telemetry.jsonl`, `groups.jsonl` |
 | 3 | Live radio feed | `ffmpeg`, one persistent connection for the whole session, segmented into hourly files on the *output* side (`-f segment`) so nothing is dropped at hour boundaries | `radio/*.mp3` |
-| 4 | Elevation profile of each stage | Route-point CSVs at `/profils/{year}/profile-NN-<hash>.csv`, auto-discovered from the stage API and page bundles | `profile.csv` |
+| 4 | Elevation profile of each stage | **Not working yet as of 2026** — the CSV path this was built against is confirmed gone (see "Known unknowns"). `fetch_profiles()` will find nothing until the real 2026 mechanism is captured via HAR | `profile.csv` (once fixed) |
 
 Everything on the SSE stream is *also* written verbatim to
 `live-stream.raw.jsonl` before any parsing. If A.S.O. changed a field name for
@@ -161,6 +161,20 @@ things year to year — `probe` + `har` are your recovery tools when they do.
 - **The event feed's exact location** (SSE bind vs. JSON endpoint) is the main
   thing to confirm via the HAR capture on Saturday.
 - **Radio stream URL** must be discovered once via HAR, then it's set-and-forget.
+- **The elevation profile CSV is confirmed gone.** Checked directly against the
+  live 2026 site: `/api/stage-2026` no longer has a profile field on any of
+  the 21 stages (any type — PLN/HMG/EQU/PAS/VAL all checked), and the app's
+  main JS bundle has zero references to `/profils/` or `.csv` anywhere. The
+  frontend still has an `AppStoreModule.profile` field set via a `setProfile()`
+  mutation, so the data exists somewhere client-side — most likely delivered
+  as another bind on the same `/live-stream` SSE connection (same channel as
+  `telemetryCompetitor`/`pack`), or fetched by a route-specific JS chunk that
+  only loads once you open a stage's profile widget in the browser. Either
+  way, `fetch_profiles()`'s CSV-hunt will find nothing this year — the raw SSE
+  log already captures unrecognized binds verbatim, so if it does turn out to
+  ride the live-stream, it'll be in `live-stream.raw.jsonl` even without a
+  dedicated parser; confirm the actual mechanism via the Saturday HAR capture
+  same as the event feed and radio URL, then wire up a real parser.
 - Telemetry granularity is whatever the feed pushes (roughly per-second in past
   years, from GPS on bikes/motos; time trials and crashes get noisy).
 - **Radio has no rewind.** ffmpeg keeps one connection open all session and

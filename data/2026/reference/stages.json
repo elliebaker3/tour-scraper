@@ -1,0 +1,1970 @@
+[
+  {
+    "departureCity": {
+      "label": "Carcassonne",
+      "cityLangs": [],
+      "id": 29595,
+      "code": "carcassonne",
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 14e fois<br />\nPréfecture de l’Aude (11)<br />\nHabitants : 46 500 (Carcassonnais et Carcassonnaises)<br />\n<br />\nLa première visite du Tour à Carcassonne date de 1947 et la cité a d’emblée marqué l’histoire puisque c’est en la quittant qu’Albert Bourlon se lança dans la plus longue échappée solitaire victorieuse de l’épreuve, conclue 253 km plus loin à Luchon. Les arrivées qui y ont été jugées au XXIe siècle sont partagées entre des sprints massifs et des échappées victorieuses. Sur le Tour 2025, c’est Tim Wellens qui a fait pencher la balance du côté des attaquants, vêtu du maillot de champion de Belgique à la veille de sa fête nationale. Il y succédait au palmarès à Mark Cavendish (2021) et Jasper Philipsen (2022)."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nA stage town for the 14th time<br />\nPrefecture of Aude (11)<br />\nPopulation: 46,500 (Carcassonnais and Carcassonnaises)<br />\n<br />\nThe Tour first visited Carcassonne in 1947, and the city immediately went down in history as Albert Bourlon set off on the race’s longest successful solo breakaway, which concluded 253km later in Luchon. The finishes that have taken place here in the 21st century have been split between bunch sprints and breakaway victories. In the 2025 Tour, Belgian champion Tim Wellens’ attacking performance was rewarded with a solo victory on the eve of his country’s national day. He followed Mark Cavendish (2021) and Jasper Philipsen (2022) in the list of winners here."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nZum 14. Mal Etappenort<br />\nPräfektur des Departements Aude (11)<br />\nEinwohner*innen 46 500<br />\n<br />\n Das erste Gastspiel der Frankreich-Rundfahrt in Carcassonne fand 1947 statt und ging gleich in die Annalen ein: Unmittelbar hinter der Stadtgrenze startete Albert Bourlon die längste Soloflucht der Tour-Geschichte, die nach 253 km in Luchon mit seinem Sieg endete. Im 21. Jahrhundert verteilten sich die Zielankünfte in Carcassonne bislang gleichmäßig zwischen Massensprints und erfolgreichen Ausreißern. 2025 ließ Tim Wellens das Pendel zugunsten der Angreifer ausschlagen – im Trikot des belgischen Meisters, am Vorabend seines Nationalfeiertags. Damit trug er sich nach Mark Cavendish (2021) und Jasper Philipsen (2022) in die Siegerliste ein."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 14ª vez<br />\nPrefectura del departamento del Aude (11)<br />\nHabitantes 46.500 (Carcassonnais y Carcassonnaises)<br />\n<br />\n La primera visita del Tour a Carcasona se remonta a 1947 y dejó ya una huella en la historia de la prueba, ya que fue al salir de la ciudad cuando Albert Bourlon se lanzó a la escapada en solitario más larga y exitosa de la prueba, que concluyó 253 km más lejos, en Luchon. Las llegadas que se han decidido entre sus murallas en el siglo XXI alternan esprints masivos con escapadas victoriosas. En el Tour 2025, fue Tim Wellens quien decantó la balanza a favor de los atacantes, vestido con el maillot de campeón de Bélgica en vísperas de su fiesta nacional. Sucedía así en el palmarés a Mark Cavendish (2021) y Jasper Philipsen (2022)."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et4-carcassonne-gettyimages-821319288/69470/220:0,1212:992-0-0-70/e422f"
+      }
+    },
+    "endTime": "17:34:00",
+    "podiumDisplayMode": "instantpodium",
+    "lengthDisplay": 182,
+    "showGroups": true,
+    "timezone": "Europe/Paris",
+    "length": 181.9,
+    "isCancelled": false,
+    "id": 25321,
+    "type": "VAL",
+    "stage": 4,
+    "date": "2026-07-07T00:00:00+02:00",
+    "arrivalCity": {
+      "cityLangs": [],
+      "label": "Foix",
+      "code": "foix",
+      "id": 29934,
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et4-foix-gettyimages-91819255/69471/16:0,1428:1412-0-0-70/27f3d",
+        "texts": [
+          {
+            "text": [
+              "<br />\nVille-étape pour la 8e fois<br />\nPréfecture de l’Ariège (09)<br />\nHabitants : 9 800 (Fuxéens et Fuxéennes)<br />\n<br />\nLes cinq arrivées à Foix ont souri à des audacieux. C’était le cas en 2008 pour Kurt-Asle Arvesen, qui avait eu raison de ses deux derniers compagnons de route, Alessandro Ballan et Martin Elmiger. Luis Leon Sanchez, en 2012, avait à son tour faussé compagnie au groupe d’attaque du jour. En 2017, un jour de fête nationale, c’est Warren Barguil qui réglait au sprint un quatuor comprenant également Alberto Contador, Nairo Quintana et Mikel Landa. Deux ans plus tard la ligne avait été placée sur les hauteurs du Prat d’Albis, où Simon Yates s’était imposé. Enfin, en 2022, le Canadien Hugo Houle s’était lancé dans un raid en solitaire de 40 kilomètres pour signer l’unique victoire québécoise sur le Tour."
+            ],
+            "locale": "fr"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 8th time<br />\nPrefecture of Ariège (09)<br />\nPopulation: 9,800 (Fuxéens and Fuxéennes)<br />\n<br />\nThe five finishes in Foix have rewarded audacious racers. This was the case in 2008 when Kurt-Asle Arvesen outsprinted his last two breakaway companions, Alessandro Ballan and Martin Elmiger. In 2012, Luis León Sánchez rode to a solo victory after jumping away from the breakaway group. On Bastille Day in 2017, Warren Barguil was the fastest of a quartet that also included Alberto Contador, Nairo Quintana and Mikel Landa. Two years later, the finish line was on the high ridge above town at Prat dAlbis, where Simon Yates was the victor. The last winner here, in 2022, was Canadian Hugo Houle, who made a 40km solo break to claim what remains Quebec’s only Tour success."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 8. Mal Etappenort<br />\nPräfektur des Departements Ariège (09)<br />\nEinwohner*innen 9 800<br />\n<br />\n Die fünf Zielankünfte der Tour in Foix gingen allesamt an mutige Angreifer. So war es 2008, als Kurt-Asle Arvesen sich im Sprint gegen seine beiden letzten Fluchtgefährten Alessandro Ballan und Martin Elmiger durchsetzte. Vier Jahre später triumphierte Luis León Sánchez, nachdem er sich von der Ausreißergruppe des Tages abgesetzt hatte. 2017, am französischen Nationalfeiertag, gewann Warren Barguil den Sprint eines Quartetts mit Alberto Contador, Nairo Quintana und Mikel Landa. Zwei Jahre später wurde das Ziel auf das Hochplateau Prat d'Albis verlegt, wo Simon Yates erfolgreich war. 2022 schließlich feierte der Kanadier Hugo Houle mit einem 40 km langen Soloritt den ersten Tour-Etappensieg für Quebec."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 8ª vez<br />\nPrefectura del departamento de Ariège (09)<br />\nHabitantes 9.800 (fuxéens y fuxéennes)<br />\n<br />\n Las cinco llegadas a Foix han coronado a los más audaces. Fue el caso en 2008 de Kurt-Asle Arvesen, que se impuso a sus dos últimos compañeros de ruta, Alessandro Ballan y Martin Elmiger. Luis León Sánchez, en 2012, también se escapó del grupo de atacantes. En 2017, día de la fiesta nacional, fue Warren Barguil quien adelantó en el esprint a un cuarteto en el que también figuraban Alberto Contador, Nairo Quintana y Mikel Landa. Dos años más tarde, la meta se situó en las alturas del Prat d'Albis, con victoria para Simon Yates. Por último, en 2022, el canadiense Hugo Houle se lanzó a una escapada en solitario de 40 kilómetros para firmar la única victoria quebequense en el Tour."
+            ]
+          }
+        ]
+      }
+    },
+    "startTime": "13:25:00",
+    "_id": "0af4f9e2b7d39579b7e04c2d82e37dcd8ead6eaf21ff7295fb2331eb75dbc69d",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012296802,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "id": 25318,
+    "arrivalCity": {
+      "code": "barcelone",
+      "label": "Barcelone",
+      "id": 29639,
+      "cityLangs": [],
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "Ville-étape pour la 5e fois<br />\n <br />\nCapitale de la communauté autonome de Catalogne. 2e ville d’Espagne<br />\n <br />\nHabitants : 1 670 000 (Barcelonais et Barcelonaises)<br />\n <br />\nLe nom de Barcelone évoque spontanément Antoni Gaudi, l’architecte de génie qui a laissé son empreinte sur la ville, du parc Guell à la Casa Battlo et surtout en lançant le chantier de la majestueuse Sagrada Família, qui poursuit son périple d’œuvre inachevée et dont la plus haute des 18 tours sera inaugurée en juin prochain. L’amateur de sport est quant à lui ébloui par l’histoire presque aussi ancienne du FC Barcelone, dont les footballeurs ont remporté le championnat d’Espagne à 28 reprises et se sont imposés cinq fois au plus haut niveau européen, grâce aux exploits de Johann Cruyff, Diego Maradona, Leo Messi ou encore Lamine Yamal, parmi les Blaugranas les plus marquants de l’épopée du club catalan. Si le Barça brille aussi à l’échelon international avec ses sections basket et handball, la capitale de la Catalogne reste avant tout marquée par l’organisation des Jeux Olympiques de 1992, qui ont permis de refaçonner sa géographie. Ces 25es JO de l’ère moderne, ceux de la Dream Team de Michael Jordan et Magic Johnson ou encore du premier titre olympique de Marie-José Pérec sur 400 mètres, avaient pour centre névralgique la colline de Montjuïc, que les coureurs du Tour de France vont fréquenter copieusement à l’occasion des deux premières étapes en juillet 2026."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nCapital of the autonomous community of Catalonia.<br />\nSpain’s second largest city.<br />\nPopulation: 1,670,000 (Barcelonais and Barcelonaises)<br />\n<br />\nThe name Barcelona immediately brings to mind Antoni Gaudí, the architectural genius who left his mark on the city in the shape of the Park Güell, Casa Batlló and, above all, by initiating the construction of the majestic Sagrada Família, on which work will continue with the tallest of its 18 towers set to be inaugurated next June.. Sports fans have been captivated the historic successes of FC Barcelona for almost as long. The iconic football club has won the Spanish championship 28 times and been crowned European champions five times thanks to the exploits of Johann Cruyff, Diego Maradona, Lionel Messi and Lamine Yamal, who are among the many renowned players to have worn the Catalan club’s famous blaugrana (blue and red) colours. While Barça’s handball and basketball teams have also shone on the international stage, the Catalan capital’s defining sporting moment was the hosting of the 1992 Olympic Games, which helped to reshape the city’s geography. The 25th Olympic Games is remembered for Michael Jordan and Magic Johnson’s Dream Team and for French athlete Marie-José Pérec’s first Olympic title in the 400 metres, while its focal point was the Montjuïc hill, which the Tour de France riders will become very familiar with during the opening two stages in July 2026."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nHauptstadt der Autonomen Gemeinschaft Katalonien und zweitgrößte Stadt Spaniens<br />\nEinwohner*innen 1 670 000<br />\n<br />\n Barcelona ist untrennbar mit dem genialen Architekten Antoni Gaudí verbunden, der der Stadt seinen Stempel aufgedrückt hat, vom Park Güell über die Casa Batlló bis hin zum Bau der imposanten Sagrada Família, die nach wie vor unvollendet ist und deren höchster der insgesamt 18 Türme im Juni diesen Jahres eingeweiht wird. Sportfans sind hingegen von der fast ebenso langen Geschichte des FC Barcelona begeistert. Der legendäre Fußballclub hat dank Topstars wie Johann Cruyff, Diego Maradona, Lionel Messi und Lamine Yamal, die neben zahlreichen anderen namhaften Spielern das berühmte Blaugrana-Trikot (blau-rot) des katalanischen Vereins getragen haben, 28 Mal die spanische Meisterschaft gewonnen und sich 5 Mal auf europäischer Ebene durchgesetzt. Barça ist auch im Basketball und Handball auf höchstem internationalen Niveau vertreten. Doch der prägendste Moment für die Sportgeschichte der Stadt war sicherlich die Ausrichtung der Olympischen Spiele 1992, die sich auch nachhaltig im Stadtbild niedergeschlagen haben. Das geografische Zentrum der 25. Olympischen Spiele der Neuzeit, bei denen Michael Jordans und Magic Johnsons Dream Team glänzten und Marie-José Pérec ihren ersten Olympiasieg über 400 Meter feierte, war der Hausberg Montjuïc. Im Juli 2026 wird er erneut im Rampenlicht stehen, wenn die Fahrer der Tour de France auf den ersten beiden Etappen dort kräftig Höhenmeter sammeln."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 5ª vez<br />\nCapital de la comunidad autónoma de Cataluña. 2ª ciudad española.<br />\nHabitantes 1.670.000 (barceloneses y barcelonesas)<br />\n<br />\n El nombre de Barcelona evoca de inmediato la figura de Antonio Gaudí, el genio de la arquitectura que dejó su impronta en la ciudad, desde el Parque Güell hasta la Casa Batlló y, de manera particular, al dar inicio a las obras de la majestuosa Sagrada Familia, que continúa su andadura como obra inacabada y cuya torre más alta, de las 18 que componen el conjunto, será inaugurada el próximo mes de junio. Los amantes del deporte, por su parte, quedan deslumbrados por la historia, casi tan antigua, del FC Barcelona, cuyos futbolistas han ganado la liga española en 28 ocasiones y se han impuesto cinco veces en la máxima competición europea gracias a las hazañas de Johann Cruyff, Diego Antonio Maradona, Leo Messi o Lamine Yamal, por citar solo algunos de los blaugranas más destacados de la épica del club catalán. Si bien el Barça también brilla a nivel internacional con sus equipos de baloncesto y balonmano, la capital de Cataluña sigue estando marcada sobre todo por la organización de los Juegos Olímpicos de 1992, que permitieron remodelar su geografía. Los 25º Juegos Olímpicos de la era moderna, los del dream team de Michael Jordan y Magic Johnson o los del primer título olímpico de Marie-José Pérec en 400 metros, tuvieron como centro neurálgico la colina de Montjuïc, una colina que servirá de terreno de juego para los corredores del Tour de Francia durante las dos primeras etapas en julio de 2026. `"
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et1-barcelone-rambla-mirador-de-colom-barcelone-credit-getty-images-deejpilot-11zon/69464/583:0,1997:1414-0-0-70/14478"
+      }
+    },
+    "startTime": "17:05:00",
+    "isCancelled": false,
+    "type": "EQU",
+    "podiumDisplayMode": "instantpodium",
+    "date": "2026-07-04T00:00:00+02:00",
+    "departureCity": {
+      "content": {
+        "texts": [
+          {
+            "text": [
+              "Ville-étape pour la 5e fois<br />\n <br />\nCapitale de la communauté autonome de Catalogne. 2e ville d’Espagne<br />\n <br />\nHabitants : 1 670 000 (Barcelonais et Barcelonaises)<br />\n <br />\nLe nom de Barcelone évoque spontanément Antoni Gaudi, l’architecte de génie qui a laissé son empreinte sur la ville, du parc Guell à la Casa Battlo et surtout en lançant le chantier de la majestueuse Sagrada Família, qui poursuit son périple d’œuvre inachevée et dont la plus haute des 18 tours sera inaugurée en juin prochain. L’amateur de sport est quant à lui ébloui par l’histoire presque aussi ancienne du FC Barcelone, dont les footballeurs ont remporté le championnat d’Espagne à 28 reprises et se sont imposés cinq fois au plus haut niveau européen, grâce aux exploits de Johann Cruyff, Diego Maradona, Leo Messi ou encore Lamine Yamal, parmi les Blaugranas les plus marquants de l’épopée du club catalan. Si le Barça brille aussi à l’échelon international avec ses sections basket et handball, la capitale de la Catalogne reste avant tout marquée par l’organisation des Jeux Olympiques de 1992, qui ont permis de refaçonner sa géographie. Ces 25es JO de l’ère moderne, ceux de la Dream Team de Michael Jordan et Magic Johnson ou encore du premier titre olympique de Marie-José Pérec sur 400 mètres, avaient pour centre névralgique la colline de Montjuïc, que les coureurs du Tour de France vont fréquenter copieusement à l’occasion des deux premières étapes en juillet 2026."
+            ],
+            "locale": "fr"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nCapital of the autonomous community of Catalonia.<br />\nSpain’s second largest city.<br />\nPopulation: 1,670,000 (Barcelonais and Barcelonaises)<br />\n<br />\nThe name Barcelona immediately brings to mind Antoni Gaudí, the architectural genius who left his mark on the city in the shape of the Park Güell, Casa Batlló and, above all, by initiating the construction of the majestic Sagrada Família, on which work will continue with the tallest of its 18 towers set to be inaugurated next June.. Sports fans have been captivated the historic successes of FC Barcelona for almost as long. The iconic football club has won the Spanish championship 28 times and been crowned European champions five times thanks to the exploits of Johann Cruyff, Diego Maradona, Lionel Messi and Lamine Yamal, who are among the many renowned players to have worn the Catalan club’s famous blaugrana (blue and red) colours. While Barça’s handball and basketball teams have also shone on the international stage, the Catalan capital’s defining sporting moment was the hosting of the 1992 Olympic Games, which helped to reshape the city’s geography. The 25th Olympic Games is remembered for Michael Jordan and Magic Johnson’s Dream Team and for French athlete Marie-José Pérec’s first Olympic title in the 400 metres, while its focal point was the Montjuïc hill, which the Tour de France riders will become very familiar with during the opening two stages in July 2026."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nHauptstadt der Autonomen Gemeinschaft Katalonien und zweitgrößte Stadt Spaniens<br />\nEinwohner*innen 1 670 000<br />\n<br />\n Barcelona ist untrennbar mit dem genialen Architekten Antoni Gaudí verbunden, der der Stadt seinen Stempel aufgedrückt hat, vom Park Güell über die Casa Batlló bis hin zum Bau der imposanten Sagrada Família, die nach wie vor unvollendet ist und deren höchster der insgesamt 18 Türme im Juni diesen Jahres eingeweiht wird. Sportfans sind hingegen von der fast ebenso langen Geschichte des FC Barcelona begeistert. Der legendäre Fußballclub hat dank Topstars wie Johann Cruyff, Diego Maradona, Lionel Messi und Lamine Yamal, die neben zahlreichen anderen namhaften Spielern das berühmte Blaugrana-Trikot (blau-rot) des katalanischen Vereins getragen haben, 28 Mal die spanische Meisterschaft gewonnen und sich 5 Mal auf europäischer Ebene durchgesetzt. Barça ist auch im Basketball und Handball auf höchstem internationalen Niveau vertreten. Doch der prägendste Moment für die Sportgeschichte der Stadt war sicherlich die Ausrichtung der Olympischen Spiele 1992, die sich auch nachhaltig im Stadtbild niedergeschlagen haben. Das geografische Zentrum der 25. Olympischen Spiele der Neuzeit, bei denen Michael Jordans und Magic Johnsons Dream Team glänzten und Marie-José Pérec ihren ersten Olympiasieg über 400 Meter feierte, war der Hausberg Montjuïc. Im Juli 2026 wird er erneut im Rampenlicht stehen, wenn die Fahrer der Tour de France auf den ersten beiden Etappen dort kräftig Höhenmeter sammeln."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 5ª vez<br />\nCapital de la comunidad autónoma de Cataluña. 2ª ciudad española.<br />\nHabitantes 1.670.000 (barceloneses y barcelonesas)<br />\n<br />\n El nombre de Barcelona evoca de inmediato la figura de Antonio Gaudí, el genio de la arquitectura que dejó su impronta en la ciudad, desde el Parque Güell hasta la Casa Batlló y, de manera particular, al dar inicio a las obras de la majestuosa Sagrada Familia, que continúa su andadura como obra inacabada y cuya torre más alta, de las 18 que componen el conjunto, será inaugurada el próximo mes de junio. Los amantes del deporte, por su parte, quedan deslumbrados por la historia, casi tan antigua, del FC Barcelona, cuyos futbolistas han ganado la liga española en 28 ocasiones y se han impuesto cinco veces en la máxima competición europea gracias a las hazañas de Johann Cruyff, Diego Antonio Maradona, Leo Messi o Lamine Yamal, por citar solo algunos de los blaugranas más destacados de la épica del club catalán. Si bien el Barça también brilla a nivel internacional con sus equipos de baloncesto y balonmano, la capital de Cataluña sigue estando marcada sobre todo por la organización de los Juegos Olímpicos de 1992, que permitieron remodelar su geografía. Los 25º Juegos Olímpicos de la era moderna, los del dream team de Michael Jordan y Magic Johnson o los del primer título olímpico de Marie-José Pérec en 400 metros, tuvieron como centro neurálgico la colina de Montjuïc, una colina que servirá de terreno de juego para los corredores del Tour de Francia durante las dos primeras etapas en julio de 2026. <br />\n`"
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et1-barcelone-sagrada-familia-barcelone-credit-getty-images-tomas-sereda-11zon/69465/0:161,3404:3565-0-0-70/8ac77"
+      },
+      "cityLangs": [],
+      "code": "barcelone",
+      "label": "Barcelone",
+      "id": 29639
+    },
+    "stage": 1,
+    "lengthDisplay": 19.6,
+    "endTime": "19:16:00",
+    "length": 19.6,
+    "showGroups": false,
+    "timezone": "Europe/Madrid",
+    "_id": "4b72e42270585a2c0496546e16ec20938ba2f669490dc5a77b69dedd75bddfff",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1783168094546,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "id": 25340,
+    "isCancelled": false,
+    "date": "2026-07-25T00:00:00+02:00",
+    "startTime": "11:30:00",
+    "arrivalCity": {
+      "id": 30276,
+      "code": "alpe-d-huez",
+      "label": "Alpe d'Huez",
+      "cityLangs": [],
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/20/69804/905:0,4510:3605-0-0-70/fb403",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 33e fois<br />\nStation de tourisme de montagne de l’Isère (38) rattachée à la commune d’Huez<br />\nHabitants 1 300 (D’Huizats et D’Huizates)<br />\n<br />\n Voilà une montagne qui choisit ses héros par cycles. Héritiers de Bernard Hinault, les Français ont repris le flambeau en 2011 avec Pierre Rolland et, en 2013, avec Christophe Riblon. Thibaut Pinot y a ensuite signé l’un de ses plus beaux succès en 2015, mais la station est depuis passée sous pavillon britannique les jours de visite du Tour. Geraint Thomas en 2018 puis Tom Pidcock en 2022 ont connu la joie de lever les bras à l’Alpe d’Huez. Deux ans plus tard, le drapeau des Pays-Bas y a été hissé à nouveau pour Demi Vollering dans le Tour de France Femmes avec Zwift, pourtant battue de 4 secondes au classement général final sur Kasia Niewiadoma."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 33rd time<br />\nMountain resort in Isère (38) attached to the commune of Huez<br />\nPopulation: 1,300 (D’Huizats and D’Huizates)<br />\n<br />\nThis is a mountain where success goes in cycles. The French successors to Bernard Hinault’s win emerged in this century, Pierre Rolland picking up the torch in 2011, followed, in 2013, by Christophe Riblon. Thibaut Pinot then achieved one of his greatest successes here in 2015. Since then, the ski station has been under British control on the days the Tour has visited. Geraint Thomas (2018) and then Tom Pidcock (2022) both celebrated victory at Alpe d’Huez. Two years later, the Dutch flag was raised again by Demi Vollering at the Tour de France Femmes avec Zwift, although she was beaten in the final overall classification by Kasia Niewiadoma by just four seconds."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nZum 33. Mal Etappenort<br />\nZur Gemeinde Huez gehörender Wintersportort im Departement Isère (38)<br />\nEinwohner*innen 1 300<br />\n<br />\n Alpe d’Huez – ein Berg unter wechselnder Vorherrschaft. In der Nachfolge von Bernard Hinault übernahmen zunächst die Franzosen das Zepter: Pierre Rolland (2011) und Christophe Riblon (2013). Thibaut Pinot feierte hier 2015 einen seiner schönsten Erfolge, doch danach bestimmten die Briten das Geschehen. Geraint Thomas 2018 und Tom Pidcock 2022 durften auf der Alpe d’Huez jubeln. Zwei Jahre später schließlich wehte wieder die niederländische Fahne – gehisst von Demi Vollering bei der Tour de France Femmes avec Zwift, auch wenn sie im Gesamtklassement um vier Sekunden an Kasia Niewiadoma scheiterte."
+            ],
+            "locale": "de"
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 33.ª vez<br />\nEstación turística de montaña del departamento de Isère (38) perteneciente al municipio de Huez<br />\nHabitantes 1.300 (D’Huizats y D’Huizates)<br />\n<br />\n He aquí una montaña que elige a sus héroes por ciclos. Herederos de Bernard Hinault, los franceses tomaron el relevo en 2011 con Pierre Rolland y, en 2013, con Christophe Riblon. Thibaut Pinot logró aquí uno de sus mayores éxitos en 2015, pero desde entonces la estación ha enarbolado pabellón británico los días de visita del Tour. Geraint Thomas en 2018 y Tom Pidcock en 2022 se llevaron los honores en Alpe d'Huez. Dos años más tarde, la bandera de los Países Bajos volvió a ondear en el Alpe D’Huez en honor a Demi Vollering en el Tour de France Femmes avec Zwift, si bien la ciclista cayó derrotada por Kasia Niewiadoma por 4 segundos en la general final."
+            ]
+          }
+        ]
+      }
+    },
+    "stage": 20,
+    "type": "HMG",
+    "endTime": "16:29:00",
+    "podiumDisplayMode": "instantpodium",
+    "lengthDisplay": 171,
+    "departureCity": {
+      "updatedBy": "malbarelli",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/20/69795/0:617,1680:2297-0-0-70/cabfb",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 24e fois<br />\nCommune de l’Isère (38)<br />\nHabitants 2 900 (Bourcats et Bourcates)<br />\n<br />\n Le peloton passe généralement au Bourg d’Oisans avant de s’attaquer à la montée de l’Alpe d’Huez. La commune iséroise a aussi donné lieu à de nombreux départs d’étapes de montagne historiques, comme la première fois en 1952 lorsque Fausto Coppi a enchaîné ses succès à l’Alpe et à Sestrières. Mais c’est bien en direction de Saint-Étienne que l’on quitte le plus souvent Le Bourg d’Oisans. L’intitulé de l’étape a été proposé cinq fois aux coureurs : Franco Chioccoli en 1992, Maximilian Sciandri en 1995, Ludo Dierckxsens en 1999, Marcus Burghardt en 2008 et Mads Pedersen en 2022, y ont associé leurs noms."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nStage town for the 24th time<br />\nCommune in Isère (38)<br />\nPopulation: 2,900 (Bourcats and Bourcates)<br />\n<br />\nThe peloton usually passes through Bourg d’Oisans as it heads for the climb up to Alpe d’Huez. The commune in Isère has also been the starting point for many historic mountain stages. The first time these two events combined was in 1952 when Fausto Coppi achieved back-to-back victories at Alpe d’Huez and Sestrières. However, Saint-Étienne is more often the destination when the riders depart Bourg d’Oisans. This stage has been run on five occasions, victory going to Franco Chioccoli in 1992, Max Sciandri in 1995, Ludo Dierckxsens in 1999, Marcus Burghardt in 2008 and Mads Pedersen in 2022."
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "<br />\nZum 24. Mal Etappenort<br />\nGemeinde im Departement Isère (38)<br />\nEinwohner*innen 2 900<br />\n<br />\n Das Peloton passiert Le Bourg-d’Oisans in der Regel, bevor es den Anstieg nach Alpe d’Huez in Angriff nimmt. Die Gemeinde im Departement Isère war zudem Ausgangspunkt zahlreicher historischer Bergetappen – erstmals 1952, als Fausto Coppi nach dem Sieg in Alpe d‘Huez auch in Sestriere triumphierte. Am häufigsten, insgesamt fünf Mal, stand die Etappe von Le Bourg d’Oisans nach Saint-Étienne auf dem Programm, und dort schrieben Franco Chioccioli (1992), Maximilian Sciandri (1995), Ludo Dierckxsens (1999), Marcus Burghardt (2008) und Mads Pedersen (2022) ihre Namen in die Tour-Chronik."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 24.ª vez<br />\nMunicipio del departamento de Isère (38)<br />\nHabitantes 2.900 (Bourcats y Bourcates)<br />\n<br />\n El pelotón suele pasar por Bourg d'Oisans antes de afrontar la ascensión al Alpe d'Huez. Esta localidad del departamento de Isère también ha sido el punto de partida de numerosas etapas de montaña históricas, como la primera en 1952, cuando Fausto Coppi encadenó sus éxitos en Alpe y Sestrières. Pero es hacia Saint-Étienne hacia donde se sale con más frecuencia de Le Bourg d'Oisans. La victoria de etapa se la han embolsado en cinco ocasiones los siguientes corredores: Franco Chioccoli en 1992, Maximilian Sciandri en 1995, Ludo Dierckxsens en 1999, Marcus Burghardt en 2008 y Mads Pedersen en 2022."
+            ],
+            "locale": "es"
+          }
+        ]
+      },
+      "cityLangs": [],
+      "label": "Le Bourg d'Oisans",
+      "updatedAt": "2025-10-17T17:27:58+02:00",
+      "code": "bourg-d-oisans",
+      "id": 29619
+    },
+    "length": 170.9,
+    "showGroups": true,
+    "timezone": "Europe/Paris",
+    "_id": "6fd61462168b294550703b0e4f2906d0c7d41a3be64930e8f64b14880f05f80c",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012591699,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "departureCity": {
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape : pour la 5e fois<br />\nPréfecture : de la Dordogne (24)<br />\nHabitants : 29 900 (Périgourdins et Périgourdines)<br />\n<br />\n Sur le Tour, le nom de la préfecture de la Dordogne est lié à ceux de rouleurs hors du commun s’étant illustrés sur des chronos partant ou arrivant à Périgueux. Jacques Anquetil y a livré une réelle démonstration en 1961, en rajoutant ce jour-là près de trois minutes à son avance sur Charly Gaul. En 1994, c’est sur cette étape, dessinée en sens inverse à destination de Bergerac, que Miguel Indurain enfilait le Maillot Jaune. Vingt ans plus tard, la tradition était respectée avec un succès de Tony Martin."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 5th time<br />\nPrefecture of Dordogne (24)<br />\nPopulation: 29,900 (Périgourdins and Périgourdines)<br />\n<br />\nOn the Tour, the prefecture of Dordogne has developed a link with outstanding rouleurs, a number of whom have distinguished themselves in time trials starting or finishing in Périgueux. Jacques Anquetil put on a real demonstration here in 1961, boosting his lead over Charly Gaul by nearly three minutes that day. In 1994, on a time trial ridden in the opposite direction towards Bergerac, Miguel Induráin donned the Yellow Jersey. Twenty years later, tradition was maintained when Tony Martin took victory."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 5. Mal Etappenort<br />\nPräfektur des Departements Dordogne (24)<br />\nEinwohner*innen 29 900<br />\n<br />\n Der Name der Präfektur der Dordogne ist in der Tour-Geschichte eng mit großen Zeitfahrern verbunden, die in Périgueux ihren Start- oder Zielpunkt hatten. 1961 lieferte Jacques Anquetil hier eine Meisterleistung ab und vergrößerte seinen Vorsprung auf Charly Gaul um fast drei Minuten. 1994 eroberte Miguel Indurain auf der Etappe in umgekehrter Richtung nach Bergerac das Gelbe Trikot. Zwanzig Jahre später setzte Tony Martin diese Tradition mit seinem Sieg im Zeitfahren fort."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 5ª vez<br />\nPrefectura del departamento de la Dordoña (24)<br />\nHabitantes 29.900 (Périgourdins y Périgourdines)<br />\n<br />\n En el Tour, el nombre de la prefectura de Dordoña está vinculado al de ciclistas excepcionales que han brillado en contrarrelojes con salida o llegada en Périgueux. Jacques Anquetil desplegó todo su poderío en 1961, ampliando ese día en casi tres minutos su ventaja sobre Charly Gaul. En 1994, fue en esta etapa, pero trazada en sentido inverso con destino a Bergerac, donde Miguel Indurain se enfundó el maillot amarillo. Veinte años más tarde, la tradición se mantuvo viva con el éxito de Tony Martin."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et8-perigueux-gettyimages-1419906352-1/69478/207:0,1623:1416-0-0-70/0bdbc"
+      },
+      "id": 29656,
+      "code": "perigueux",
+      "cityLangs": [],
+      "label": "Périgueux"
+    },
+    "endTime": "17:31:00",
+    "podiumDisplayMode": "instantpodium",
+    "lengthDisplay": 180.5,
+    "showGroups": true,
+    "timezone": "Europe/Paris",
+    "length": 180.4,
+    "isCancelled": false,
+    "id": 25326,
+    "stage": 8,
+    "type": "PLN",
+    "date": "2026-07-11T00:00:00+02:00",
+    "arrivalCity": {
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et8-bergerac-11zon/69479/1215:0,5220:4005-0-0-70/84ae9",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 5e fois<br />\nSous-préfecture de la Dordogne (24)<br />\nHabitants 26 900 (Bergeracois et Bergeracoises)<br />\n<br />\n Bien que le héros de la pièce d’Edmond Rostand n’ait aucun lien direct avec la ville, Cyrano a tout de même été érigé en statue sur une place du centre historique de Bergerac. Hormis les chronos pour lesquels elle a été associée à Périgueux, la ville a connu deux arrivées d’étapes en ligne sur le Tour de France. En 2014, il avait fallu autant de flair que de puissance au Lituanien Ramunas Navardauskas pour piéger le peloton avec une attaque magistrale à 13 kilomètres de l’arrivée. Puis, en 2017, c’est la pointe de vitesse imparable de Marcel Kittel qui lui avait permis de décrocher la 13e de ses 14 victoires sur le Tour."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nStage town for the 5th time<br />\nSub-prefecture of Dordogne (24)<br />\nPopulation: 26,900 (Bergeracois and Bergeracoises)<br />\n<br />\nAlthough the hero of Edmond Rostand’s play has no direct connection with the town, Cyrano has nevertheless been immortalised with a statue in a square in Bergerac’s historic centre. Apart from the time trials associated with Périgueux, the town has hosted two Tour stage finishes. In 2014, Lithuania’s Ramunas Navardauskas required equal amounts of flair and power to catch the peloton out with a masterful attack 13 kilometres from the finish. In 2017, Marcel Kittel’s unmatchable speed enabled him to clinch the 13th of his 14 Tour victories."
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "<br />\nZum 5. Mal Etappenort<br />\nUnterpräfektur des Departements Dordogne (24)<br />\nEinwohner*innen 26 900<br />\n<br />\n Auch wenn der Held aus Edmond Rostands Theaterstück keinen direkten Bezug zu dieser Stadt hat, wurde Cyrano dennoch mit einer Statue auf einem Platz in der Altstadt von Bergerac geehrt. Abgesehen von den Zeitfahren in Verbindung mit Périgueux war die Stadt bislang zweimal Etappenziel der Tour de France. 2014 bewies der Litauer Ramunas Navardauskas gleichermaßen Gespür und Durchsetzungsvermögen, als er das Peloton mit einem meisterhaften Angriff 13 km vor dem Ziel überraschte. 2017 war es dann Marcel Kittels unaufhaltsamer Endspurt, der ihm den 13. seiner insgesamt 14 Tour-Siege einbrachte."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 5ª vez<br />\nSubprefectura del departamento de la Dordoña (24)<br />\nHabitantes 26.900 (Bergeracois y Bergeracoises)<br />\n<br />\n Aunque el héroe de la obra de Edmond Rostand no tiene ninguna relación directa con la ciudad, Cyrano tiene una estatua en una plaza del centro histórico de la localidad. Aparte de las etapas contrarreloj en las que se ha asociado con Périgueux, la ciudad ha sido meta de dos etapas en línea del Tour de Francia. En 2014, el lituano Ramunas Navardauskas tuvo que emplear tanto ingenio como potencia para sorprender al pelotón con un magistral ataque a 13 kilómetros de la meta. Tres años más tarde, en 2017, fue la imparable velocidad punta de Marcel Kittel la que le permitió descorchar la 13ª de sus 14 victorias en el Tour."
+            ],
+            "locale": "es"
+          }
+        ]
+      },
+      "label": "Bergerac",
+      "cityLangs": [],
+      "code": "bergerac",
+      "id": 29655
+    },
+    "startTime": "13:25:00",
+    "_id": "81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012699618,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "podiumDisplayMode": "instantpodium",
+    "length": 154.6,
+    "endTime": "17:31:00",
+    "startTime": "14:00:00",
+    "timezone": "Europe/Paris",
+    "stage": 9,
+    "departureCity": {
+      "id": 32675,
+      "label": "Malemort",
+      "updatedBy": "malbarelli",
+      "updatedAt": "2025-10-17T17:24:27+02:00",
+      "cityLangs": [],
+      "createdAt": "2025-10-17T17:24:27+02:00",
+      "createdBy": "malbarelli",
+      "code": "malemort",
+      "country": {
+        "id": 1964,
+        "code": "fra"
+      },
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape inédite<br />\nCommune de la Corrèze (19)<br />\nHabitants 8 000 (Malemortois et Malemortoises)<br />\n<br />\n Tout au long de l’année, on parle surtout de rugby à Malemort, commune née en 2016 d’une fusion de deux cités limitrophes de Brive-la-Gaillarde. Les joueurs du CA Brive ont l’habitude de faire frissonner toute la Corrèze et l’on se souvient de leurs exploits en Coupe d’Europe qui remonte au siècle précédent (vainqueurs 1997, finalistes 1998). Plus récemment, Brive a reçu le Tour de France pour la neuxième fois de son histoire en 2012. Mark Cavendish s’était appliqué à poursuivre la tradition des victoires au sprint, succédant notamment au Belge Edouard Sels (1964), au Britannique Barry Hoban (1969) et à l’Italien Mario Cipollini (1998)."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nA new stage town<br />\nCommune in Corrèze (19)<br />\nPopulation: 8,000 (Malemortois and Malemortoises)<br />\n<br />\nThroughout the year, rugby is the main topic of conversation in Malemort, a commune created in 2016 from the merger of two towns close to Brive-la-Gaillarde. CA Brive’s players have become used to thrilling fans in the Corrèze, even though their European Cup exploits date back to last century (winners in 1997, finalists in 1998). More recently, Brive hosted the Tour de France for the ninth time in 2012. Mark Cavendish maintained the tradition for sprint victories, following in the footsteps of Belgium’s Edouard Sels (1964), Britain’s Barry Hoban (1969) and Italy’s Mario Cipollini (1998)."
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nErstmaliger Etappenort<br />\nGemeinde im Departement Corrèze (19)<br />\nEinwohner*innen 8 000<br />\n<br />\n Malemort entstand 2016 aus dem Zusammenschluss zweier Gemeinden im Arrondissement Brive-la-Gaillarde. Hier dreht sich das ganze Jahr über so gut wie alles um Rugby: Die Spieler des CA Brive lassen regelmäßig die gesamte Corrèze erbeben, und ihre Europapokal-Erfolge der 1990er-Jahre (Sieg 1997, Finale 1998) sind unvergessen. Doch auch die Tour de France hat hier ihre Spuren hinterlassen: 2012 war Brive zum neunten Mal Gastgeber. Mark Cavendish gewann im Sprint und reihte sich damit in eine Tradition ein, die vom Belgier Edouard Sels (1964) über den Briten Barry Hoban (1969) bis zum Italiener Mario Cipollini (1998) reicht."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa inédita<br />\nMunicipio del departamento de Corrèze (19)<br />\nHabitantes 8.000 (Malemortois y Malemortoises)<br />\n<br />\n Durante todo el año, en Malemort, municipio nacido en 2016 de la fusión de dos ciudades limítrofes con Brive-la-Gaillarde, se habla sobre todo de rugby. Los jugadores del CA Brive suelen hacer vibrar a todo Corrèze con su talento y se recuerdan sus hazañas en la Copa de Europa, que se remontan al siglo pasado (ganadores en 1997, finalistas en 1998). Más recientemente, Brive acogió el Tour de Francia por novena vez en su historia en 2012. Mark Cavendish se esforzó por continuar la tradición de victorias al esprint, sucediendo al belga Edouard Sels (1964), al británico Barry Hoban (1969) y al italiano Mario Cipollini (1998)."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et9-malemort-cville-de-malemort/69480/560:0,2747:2187-0-0-70/e35c6"
+      }
+    },
+    "isCancelled": false,
+    "type": "VAL",
+    "lengthDisplay": 155,
+    "date": "2026-07-12T00:00:00+02:00",
+    "id": 25327,
+    "arrivalCity": {
+      "id": 31642,
+      "label": "Ussel",
+      "cityLangs": [],
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et9-ussel-11zon/69482/871:0,3231:2360-0-0-70/d9e35",
+        "texts": [
+          {
+            "text": [
+              "<br />\nVille-étape inédite<br />\nSous-préfecture de la Corrèze (19)<br />\nHabitants 9 200 (Ussellois et Usselloises)<br />\n<br />\n Ville inédite sur le parcours du Tour, Ussel deviendra la sixième dans le département de Corrèze, rejoignant par exemple Sarran, Brive et Tulle. Pour autant, la commune a déjà l’habitude d’accueillir le peloton, par exemple celui de Paris-Corrèze qui y a terminé sa route en 2003 avec Nicolas Fritsch en tête. Mais c’est à l’occasion du Tour du Limousin qu’Ussel a vu en pleine action des vainqueurs d’étapes du Tour de France : Francis Campaner y a levé les bras en 1975, précédant Mariano Martinez en 1978, Jean-François Bernard en 1985 et enfin David Moncoutié en 2001. Chez les dames, le dernier passage à Ussel du Tour Féminin en Limousin a vu le succès de Marianne Vos."
+            ],
+            "locale": "fr"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nA new stage town<br />\nSub-prefecture of Corrèze (19)<br />\nPopulation: 9,200 (Ussellois and Usselloises)<br />\n<br />\nA new town on the Tour route, Ussel will become the sixth to host the race in the department of Corrèze, alongside the likes of Sarran, Brive and Tulle. The town is, however, already used to welcoming the professional peloton, for Paris-Corrèze, for example, which finished here in 2003 when Nicolas Fritsch was first across the line. Ussel has also seen Tour de France stage-winners celebrating victory: Francis Campaner was the victor here in 1975, followed by Mariano Martinez in 1978, Jean-François Bernard in 1985 and, most recently, David Moncoutié in 2001. Turning to the women, Marianne Vos was the victor the last time the Tour Féminin en Limousin paused in Ussel in 2012."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nErstmaliger Etappenort<br />\nUnterpräfektur des Departements Corrèze (19)<br />\nEinwohner*innen 9 200<br />\n<br />\n Mit dem Tour-Neuling Ussel wächst die Zahl der Etappenorte im Departement Corrèze, darunter Sarran, Brive und Tulle, auf sechs an. Die Gemeinde ist im Radsport längst kein unbeschriebenes Blatt. 2003 gewann Nicolas Fritsch hier eine Etappe von Paris–Corrèze. Im Rahmen der Tour du Limousin jubelten in Ussel zudem bereits mehrere Tour-Etappensieger: Francis Campaner (1975), Mariano Martinez (1978), Jean-François Bernard (1985) und David Moncoutié (2001). Auch die Tour Féminin en Limousin machte hier Station – mit einem Sieg von Marianne Vos auf der Schlussetappe."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa inédita<br />\nSubprefectura del departamento de Corrèze (19)<br />\nHabitantes 9.200 (Ussellois y Usselloises)<br />\n<br />\n Ussel, una ciudad inédita en el recorrido del Tour, se convertirá en la sexta del departamento de Corrèze, uniéndose así a Sarran, Brive y Tulle, entre otras. Sin embargo, el municipio ya está acostumbrado a recibir al pelotón, como por ejemplo el de la París-Corrèze, que terminó en él su recorrido en 2003 con Nicolas Fritsch a la cabeza. Pero fue durante el Tour du Limousin cuando Ussel vio en plena acción a los ganadores de etapas del Tour de Francia: Francis Campaner levantó los brazos en 1975, seguido de Mariano Martínez en 1978, Jean-François Bernard en 1985 y, por último, David Moncoutié en 2001. En cuanto a las mujeres, la última visita a Ussel del Tour Femenino en Limousin vio triunfar a Marianne Vos."
+            ]
+          }
+        ]
+      },
+      "code": "ussel"
+    },
+    "showGroups": true,
+    "_id": "6b325c30b7dd6bea28c24fbd1ed781d99c3af185217b84200d8a75f187000532",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1783805581398,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "showGroups": true,
+    "startTime": "12:40:00",
+    "lengthDisplay": 186.5,
+    "date": "2026-07-09T00:00:00+02:00",
+    "length": 186.2,
+    "isCancelled": false,
+    "departureCity": {
+      "code": "pau",
+      "id": 29559,
+      "cityLangs": [],
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et6-pau-place-clemenceau-gettyimages/69474/127:0,1543:1416-0-0-70/3bc3a",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 77e fois<br />\nPréfecture des Pyrénées-Atlantiques (64)<br />\nHabitants : 77 600 (Palois et Paloises), 162 000 dans les 32 communes de la Communauté d’agglomération Pau Béarn Pyrénées<br />\n<br />\nC’est Tadej Pogacar qui est devenu le maître des départs palois, d’abord en signant son premier succès d’étape à Laruns en 2020, puis en 2021, avec une victoire à Luz-Ardiden qui confirmait sa domination sans partage sur la course cette année-là. Mais pour le retour à Laruns en 2023, c’est Jai Hindley qui s’est fait remarquer en gagnant l’étape tout en prenant les commandes du classement général, tandis que le champion slovène connaissait un premier accroc dans son match face à Jonas Vingegaard. En 2025 « Pogi » avait bien les cartes en mains pour partir à la conquête de Superbagnères, mais c’est Thymen Arensman qui a surgi d’un groupe d’échappés, puis a su résister pour s’imposer au sommet."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage city for the 77th time<br />\nPrefecture of Pyrénées-Atlantiques (64)<br />\nPopulation: 77,600 (Palois and Paloises); 162,000 within the 32 communes comprising the Pau Béarn Pyrénées municipality<br />\n<br />\nTadej Pogačar has become something of a master of stage starts in Pau. In 2020, he took his first stage victory in Laruns and then in 2021 he confirmed his undisputed domination of that edition with victory in Luz-Ardiden. When the race returned to Laruns in 2023, Jai Hindley came to the fore by winning the stage and taking the lead in the overall classification, while the Slovenian champion suffered his first setback in his duel with Jonas Vingegaard. In 2025, “Pogi” looked well set to conquer Superbagnères, but Thymen Arensman held on to win at the summit after going clear from the breakaway group."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nZum 77. Mal Etappenort<br />\nPräfektur des Departements Pyrénées-Atlantiques (64)<br />\nEinwohner*innen 77 600 in Pau, 162 000 in den 32 Kommunen des Gemeindeverbands Pau Béarn Pyrénées<br />\n<br />\n Die Etappenstarts in Pau wurden zum Sprungbrett für Tadej Pogačars Aufstieg: 2020 holte er in Laruns seinen ersten Tour-Etappensieg, 2021 bestätigte er seine Vormachtstellung mit dem Erfolg in Luz-Ardiden. 2023 aber schrieb Jai Hindley Geschichte: Er triumphierte in Laruns und übernahm das Gelbe Trikot, während der slowenische Champion erstmals im Duell mit Jonas Vingegaard schwächelte. 2025 schien „Pogi“ alle Trümpfe in der Hand zu haben, um den Schlussanstieg nach Superbagnères für sich zu entscheiden. Doch aus einer Ausreißergruppe heraus setzte sich Thymen Arensman ab und verteidigte seinen Vorsprung bis ins Ziel."
+            ],
+            "locale": "de"
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 77.ª vez<br />\nPrefectura del departamento de Pyrénées-Atlantiques (64)<br />\nHabitantes 77.600 (Palois y Paloises), 162.000 en los 32 municipios de la aglomeración de Pau Béarn Pyrénées<br />\n<br />\n Tadej Pogacar se ha convertido en el maestro de las salidas de Pau, primero al lograr su primera victoria de etapa en Laruns en 2020 y luego, en 2021, con una victoria en Luz-Ardiden que confirmó su dominio aplastante en la edición de ese año. Pero en el regreso a Laruns en 2023, fue Jai Hindley quien destacó al ganar la etapa y ponerse al frente de la clasificación general, mientras que el campeón esloveno sufría su primer tropiezo en su duelo con Jonas Vingegaard. En 2025, “Pogi” tenía todas las cartas en la mano para conquistar Superbagnères, pero fue Thymen Arensman quien surgió de un grupo de fugados y supo resistir para imponerse en la cima."
+            ]
+          }
+        ]
+      },
+      "label": "Pau"
+    },
+    "endTime": "17:46:00",
+    "type": "HMG",
+    "podiumDisplayMode": "instantpodium",
+    "arrivalCity": {
+      "id": 32673,
+      "country": {
+        "code": "fra",
+        "id": 1964
+      },
+      "code": "gavarnie-gedre",
+      "createdBy": "malbarelli",
+      "updatedBy": "malbarelli",
+      "cityLangs": [],
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape inédite<br />\nCommune des Hautes-Pyrénées (65)<br />\nHabitants : 350 (Gavarniens et Gavarniennes, Gédrois et Gédroises)<br />\n<br />\nLa fusion de Gavarnie et Gèdre en 2016 a occasionné la formation de la commune la plus vaste d’Occitanie, l’une des plus grandes de France en termes de superficie. La renommée de ce territoire est assurée par le cirque de Gavarnie, classé au patrimoine mondial de l’UNESCO. Mais la station de ski avait déjà fait son apparition sur la planète vélo.  Notamment avec l’arrivée d’une étape de la Ronde de l’Isard en 2022, où Lenny Martinez s’y était classé 2e derrière l’Espagnol Samuel Fernandez, tandis que le Norvégien Johannes Staune-Mittet promenait le maillot de leader qu’il allait conserver toute la semaine."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nA new stage town<br />\nCommune in Hautes-Pyrénées (65)<br />\nPopulation: 350 (Gavarniens and Gavarniennes, Gédrois and Gédroises)<br />\n<br />\nThe merger of Gavarnie and Gèdre in 2016 resulted in the formation of the largest commune in Occitanie and the one of the biggest in France in terms of surface area. The area’s reputation is assured by the Cirque de Gavarnie, a UNESCO World Heritage Site. The ski resort made its debut on the cycling scene In 2022 when it hosted a stage finish of the Ronde de l’Isard. Lenny Martinez finished second behind Spain’s Samuel Fernández, while Norway’s Johannes Staune-Mittet took the leader’s jersey, which he held for the rest of the race."
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "<br />\nErstmaliger Etappenort<br />\nGemeinde im Departement Hautes-Pyrénées (65)<br />\nEinwohner*innen 350<br />\n<br />\n Durch den Zusammenschluss von Gavarnie und Gèdre im Jahr 2016 entstand die flächenmäßig größte Gemeinde Okzitaniens und eine der größten Frankreichs. Wahrzeichen der Region ist der zum UNESCO-Weltkulturerbe zählende Cirque de Gavarnie. Auch der Radsport hat in dem Skigebiet bereits Station gemacht: 2022 endete hier eine Etappe der Ronde de l’Isard. Lenny Martinez belegte dabei hinter dem Spanier Samuel Fernandez Rang zwei, während der Norweger Johannes Staune-Mittet das Trikot des Gesamtführenden übernahm und es bis zum Ende der Rundfahrt verteidigte."
+            ],
+            "locale": "de"
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa inédita<br />\nMunicipio del departamento de Hautes-Pyrénées (65)<br />\nHabitantes 350 (Gavarniens y Gavarniennes, Gédrois y Gédroises)<br />\n<br />\n La fusión de Gavarnie y Gèdre en 2016 dio lugar a la creación del municipio más extenso de Occitania y uno de los más grandes de Francia en términos de superficie. La fama de este territorio está garantizada por el circo de Gavarnie, declarado Patrimonio de la Humanidad por la UNESCO. Dicho esto, la estación de esquí ya había irrumpido en el mundo del ciclismo. En particular, con la llegada de una etapa de la Ronde de l'Isard en 2022, en la que Lenny Martínez quedó segundo por detrás del español Samuel Fernández, mientras que el noruego Johannes Staune-Mittet se hizo con el maillot de líder, que conservaría durante toda la semana."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et6-gavarnie-gettyimages-2226668941/69475/249:0,1665:1416-0-0-70/e5540"
+      },
+      "label": "Gavarnie-Gèdre",
+      "createdAt": "2025-10-17T17:23:47+02:00",
+      "updatedAt": "2025-10-17T17:23:47+02:00"
+    },
+    "stage": 6,
+    "id": 25324,
+    "timezone": "Europe/Paris",
+    "_id": "687aef2a8ed1cf4caec596072194c192f4bb00eac53f321f9c781591965251a4",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781788162799,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "length": 185.2,
+    "timezone": "Europe/Paris",
+    "showGroups": true,
+    "lengthDisplay": 185.5,
+    "endTime": "17:25:00",
+    "podiumDisplayMode": "instantpodium",
+    "departureCity": {
+      "content": {
+        "texts": [
+          {
+            "text": [
+              "<br />\nVille-étape pour la 2e fois<br />\nCommune de l’Isère (38)<br />\nHabitants 21 900 (Voironnais et Voironnaises)<br />\n<br />\n La ville a déjà donné en 1977 le départ d’une étape conclue victorieusement à Saint-Étienne par Joachim Agostinho. Elle est aussi entrée en août dernier dans le club des rares villes ayant reçu des étapes de deux grands Tours différents, avec le plaisir supplémentaire d’avoir célébré sur son podium, l’été dernier, la conquête du maillot rouge de La Vuelta par David Gaudu. Le leader des Groupama-FDJ s’était imposé la veille en Italie et a subtilement manœuvré pour devancer à l’addition des places Jonas Vingegaard, chronométré dans la même seconde à l’issue des quatre premières étapes."
+            ],
+            "locale": "fr"
+          },
+          {
+            "text": [
+              "<br />\nStage town for the second time<br />\nCommune in Isère (38)<br />\nPopulation: 21,900 (Voironnais and Voironnaises)<br />\n<br />\nThe town hosted a stage start in 1977, when Joachim Agostinho went on to win in Saint-Étienne. Last August, it also joined the select club of towns that have hosted stages of two different Grand Tours, and fans there had the added pleasure of celebrating David Gaudu’s capture of the Vuelta’s red leader’s jersey. The Groupama-FDJ leader had won the day before in Italy and skilfully manoeuvred to finish ahead of Jonas Vingegaard, with whom he was tied on time after the opening four stages."
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 6. Mal Etappenort<br />\nZur Gemeinde Orcières gehörender Wintersportort im Departement Hautes-Alpes (05)<br />\nEinwohner*innen 670<br />\n<br />\n Die Tour-Geschichte verbindet mit Orcières-Merlette vor allem die erste Ankunft im Jahr 1971 und die beeindruckende Machtdemonstration von Luis Ocaña. Als Taktgeber einer furchtlosen Ausreißergruppe legte der Spanier die letzten 60 km solo zurück und baute seinen Vorsprung auf Eddy Merckx auf fast neun Minuten aus. Der Abstand schien uneinholbar, doch das Duell der beiden großen Favoriten endete tragisch: Ocaña stürzte in den Pyrenäen und musste aufgeben. Fast fünfzig Jahre später wiederholte sich die Symbolik: Primož Roglič gewann 2020 ebenfalls in Orcières-Merlette, doch sein Traum zerbrach ebenso jäh, als er im Schlusszeitfahren in La Planche des Belles Filles das Gelbe Trikot verlor."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 6ª vez<br />\nEstación turística de montaña del departamento de Hautes-Alpes (05) perteneciente al municipio de Orcières<br />\nHabitantes 670 (Orcatus y Orcatuses)<br />\n<br />\n La leyenda del Tour recuerda sobre todo la primera vez que la carrera desembarcó en Orcières en 1971 y la toma de poder autoritaria de Luis Ocaña. Protagonista de una escapada audaz, el español completó en solitario los últimos 60 kilómetros, elevando su ventaja sobre Eddy Merckx a casi nueve minutos. La ventaja parecía entonces decisiva, pero el duelo entre los dos gigantes terminó finalmente con la caída y el abandono del español en los Pirineos. La anécdota puede dar que pensar a Primoz Roglic, también ganador en la estación de los Hautes-Alpes al comienzo del Tour 2020 y cuya desilusión fue simbólicamente igual de brutal en la contrarreloj de la Planche des Belles Filles. "
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/18/69798/426:0,3298:2872-0-0-70/e9e80"
+      },
+      "label": "Voiron",
+      "cityLangs": [],
+      "code": "voiron",
+      "id": 29344
+    },
+    "startTime": "12:50:00",
+    "arrivalCity": {
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 6e fois<br />\nStation de tourisme de montagne des Hautes-Alpes (05) rattachée à la commune d’Orcières<br />\nHabitants 670 (Orcatus et Orcatuses)<br />\n<br />\n La légende du Tour retient surtout la première arrivée à Orcières en 1971 et la prise de pouvoir autoritaire de Luis Ocaña. Chef d’orchestre d’une échappée décomplexée, l’Espagnol achevait en solitaire les 60 derniers kilomètres, portant son avantage sur Eddy Merckx à près de neuf minutes. La marge semblait alors décisive, mais le duel entre les deux grands favoris s’achevait finalement sur la chute et l’abandon de l’Espagnol dans les Pyrénées. L’anecdote peut faire réfléchir Primoz Roglic, également vainqueur dans la station des Hautes-Alpes en début de Tour 2020 et dont la désillusion a été symboliquement tout aussi brutale sur le chrono de la Planche des Belles Filles."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the sixth time<br />\nMountain resort in Hautes-Alpes (05) attached to the commune of Orcières<br />\nPopulation: 670 (Orcatus and Orcatuses)<br />\n<br />\nThe best-remembered Tour finish in Orcières was the first one in 1971, when Luis Ocaña imposed himself on his rivals. The driving force in a relentlessly fast breakaway, the Spaniard rode the last 60 kilometres alone and finished almost nine minutes ahead of Eddy Merckx. The margin seemed decisive at the time, but the duel between the two big favourites ultimately ended when the Spaniard crashed in the Pyrenees and abandoned the race. This anecdote may provide Primož Roglič with food for thought, as he also won in the Hautes-Alpes resort early on in the 2020 Tour only to suffer brutal disappointment in that edition’s final time trial at La Planche des Belles Filles."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nZum 28. Mal Etappenort<br />\nPräfektur des Departements Hautes-Alpes (05)<br />\nEinwohner*innen 41 000<br />\n<br />\n Die letzten Ankünfte in Gap waren von erfolgreichen Ausreißversuchen geprägt. Insbesondere Matteo Trentin (2019), Ruben Plaza (2015), Rui Costa (2013) und Thor Hushovd (2011) konnten ihre Flucht erfolgreich abschließen. Von Gap aus führten zudem zahlreiche Etappen Richtung Digne-les-Bains und Briançon – legendär 1953, als Louison Bobet am Anstieg zum Col d’Izoard attackierte und das Gelbe Trikot eroberte. In der jüngeren Vergangenheit prägten mehrere Gap–Alpe d’Huez-Etappen die Tour, zuletzt 2013 mit der Glanzleistung von Christophe Riblon. Und 2024 schließlich bescherte die Route Gap–Barcelonnette dem Belgier Victor Campenaerts seinen ersten Etappensieg bei der Tour de France."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 2ª vez<br />\nMunicipio del departamento de Isère (38)<br />\nHabitantes 21.900 (Voironnais y Voironnaises)<br />\n<br />\n Ya en 1977, la ciudad acogió la salida de una etapa que coronó a Joachim Agostinho en Saint-Étienne. El pasado mes de agosto entró también en el selecto club de ciudades que han acogido etapas de dos Grandes Vueltas diferentes, con el placer añadido de haber celebrado en su podio, el verano pasado, la conquista del maillot rojo de La Vuelta por David Gaudu. El líder del Groupama-FDJ se impuso la víspera en Italia y maniobró sutilmente para superar en la clasificación general a Jonas Vingegaard, cronometrado en el mismo segundo al término de las cuatro primeras etapas."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et18-orcieres-merlette-gettyimages-2177586703-11zon/69806/486:0,1891:1405-0-0-70/c2cac"
+      },
+      "label": "Orcières-Merlette",
+      "cityLangs": [],
+      "id": 29705,
+      "code": "orcieres-merlette"
+    },
+    "date": "2026-07-23T00:00:00+02:00",
+    "type": "HMG",
+    "stage": 18,
+    "id": 25338,
+    "isCancelled": false,
+    "_id": "61a088208454d11b5835d7365674eefeb2e52d650542e11100b87883d32391bd",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012776814,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "lengthDisplay": 167,
+    "startTime": "13:15:00",
+    "departureCity": {
+      "label": "Aurillac",
+      "code": "aurillac",
+      "id": 29648,
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et10-aurillac-gettyimages-2150397956-11zon/69483/572:0,3076:2504-0-0-70/c56b0",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 10e fois<br />\nPréfecture du Cantal (15)<br />\nHabitants 26 200 (Aurillacois et Aurillacoises)<br />\n<br />\n La préfecture du Cantal est aussi la capitale historique de l’industrie du parapluie, mais les coureurs du Tour l’ont globalement atteinte sans pépins lors des six arrivées d’étapes qui s’y sont jouées. La dernière reste même un précieux souvenir pour Luis Leon Sanchez, qui y avait remporté sa première étape sur le Tour de France en 2008. Le vainqueur du Tour 2012, Bradley Wiggins, a lui aussi une référence de choix à Aurillac, puisqu’il y avait gagné une étape du Tour de l’Avenir en 2005. La dernière visite du Tour remonte à 2024, pour un départ qui avait porté chance à Biniam Girmay, vainqueur un peu plus tard à Villeneuve-sur-Lot."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 10th time<br />\nPrefecture of Cantal (15)<br />\nPopulation: 26,200 (Aurillacois and Aurillacoises)<br />\n<br />\nCantal’s prefecture is also the historic capital of the umbrella industry, but the Tour’s riders have generally reached it without incident during the six stage finishes that have taken place here. The race’s last finish here in 2008 provided a very good memory for Luis León Sánchez, as he won his first Tour stage. The winner of the 2012 Tour, Bradley Wiggins, also has a special connection with Aurillac, having won a stage of the Tour de l’Avenir here in 2005. The last time the Tour visited was for a start in 2024 that proved providential for Biniam Girmay, who went on to triumph a little later in Villeneuve-sur-Lot."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 10. Mal Etappenort<br />\nPräfektur des Departements Cantal (15)<br />\nEinwohner*innen 26 200<br />\n<br />\n Aurillac, die Präfektur des Departements Cantal, ist seit jeher ein Zentrum der Regenschirmproduktion – und zugleich ein vertrauter Name in der Tour-Geschichte. Sechsmal war die Stadt Zielort einer Etappe, stets ohne größere Zwischenfälle. Besonders in Erinnerung bleibt der Sieg von Luis León Sánchez im Jahr 2008, seinem ersten Erfolg bei der Tour. Auch Bradley Wiggins verbindet mit Aurillac eine persönliche Episode: 2005 gewann er hier bei der Tour de l’Avenir, Jahre bevor er 2012 die Frankreich-Rundfahrt für sich entschied. Beim jüngsten Besuch 2024 stand Aurillac als Startort im Rampenlicht – ein Auftakt, der Biniam Girmay Glück brachte, denn er feierte dann in Villeneuve-sur-Lot einen Etappensieg."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por décima vez<br />\nPrefectura del departamento de Cantal (15)<br />\nHabitantes 26.200 (Aurillacois y Aurillacoises)<br />\n<br />\n La prefectura de Cantal es también la capital histórica de la industria de los paraguas, si bien los corredores del Tour la han alcanzado sin contratiempos en las seis llegadas de etapa que se han disputado en ella. La última sigue siendo un recuerdo preciado para Luis León Sánchez, que ganó en la localidad su primera etapa en el Tour de Francia en 2008. El ganador del Tour 2012, Bradley Wiggins, también tiene un recuerdo especial de Aurillac, ya que se coronó en ella en una etapa del Tour del Porvenir de 2005. La última visita del Tour se remonta a 2024, con una salida que fue un claro talismán para Biniam Girmay, quien se impondría poco después en Villeneuve-sur-Lot."
+            ]
+          }
+        ]
+      },
+      "cityLangs": []
+    },
+    "length": 166.6,
+    "arrivalCity": {
+      "label": "Le Lioran",
+      "id": 30485,
+      "code": "le-lioran",
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 4e fois<br />\nStation de tourisme de montagne du Cantal (15) rattachée à la commune de Laveissière<br />\nHabitants 540 (Valagnons et Valagnonnes)<br />\n<br />\n La station de ski bâtie au pied du Plomb du Cantal a accueilli le peloton du Tour de France pour l’arrivée de la plus longue étape du Tour 1975, remportée par Michel Pollentier après 260 km de course. En 2016, c’est Greg Van Avermaet, qui s’était imposé en même temps qu’il revêtait le Maillot Jaune au Lioran. En 2024, Jonas Vingegaard avait donné espoir à tous ses supporters en gagnant pour la première fois un duel au sprint avec Tadej Pogacar. Mais le Slovène n’allait plus se laisser surprendre jusqu’à l’arrivée finale à Nice."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nStage town for the fourth time<br />\nMountain resort in Cantal (15) attached to the commune of Laveissière<br />\nPopulation: 540 (Valagnons and Valagnonnes)<br />\n<br />\nThe ski resort built at the foot of the Plomb du Cantal welcomed the Tour de France peloton for the finish of the longest stage of the 1975 edition, won by Michel Pollentier after 260km of racing. In 2016, Greg Van Avermaet won at Le Lioran and also took the Yellow Jersey. In 2024, Jonas Vingegaard gave his supporters hope by winning a sprint duel with Tadej Pogačar for the first time. However, the Slovenian wasn’t caught out again as he went on to seal overall victory in Nice."
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 4. Mal Etappenort<br />\nZur Gemeinde Laveissière gehörendes Wintersportgebiet im Departement Cantal (15)<br />\nEinwohner*innen 540<br />\n<br />\n Das am Fuße des Plomb du Cantal gelegende Skigebiet war bereits 1975 Zielort der längsten Etappe der Tour de France, die Michel Pollentier nach 260 km für sich entscheiden konnte. 2016 war es Greg Van Avermaet, der in Le Lioran triumphierte und damit das Gelbe Trikot überstreifte. Bei der Tour-Rückkehr 2024 sorgte Jonas Vingegaard für Aufsehen: Er gewann erstmals ein Sprintduell gegen Tadej Pogačar. Doch der Slowene ließ sich dann bis zur Schlussankunft in Nizza nicht mehr überraschen."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 4ª vez<br />\nEstación turística de montaña de Cantal (15) perteneciente al municipio de Laveissière<br />\nHabitantes 540 (Valagnons y Valagnonnes)<br />\n<br />\n La estación de esquí construida a los pies del Plomb du Cantal acogió al pelotón del Tour de Francia para la llegada de la etapa más larga del Tour de 1975, ganada por Michel Pollentier tras 260 km de carrera. En 2016, fue Greg Van Avermaet quien se impuso al tiempo que se enfundaba el maillot amarillo en Lioran. En 2024, Jonas Vingegaard dio esperanzas a todos sus seguidores al ganar por primera vez un duelo al esprint con Tadej Pogacar. Con todo, el esloveno no se dejó sorprender hasta la llegada final en Niza."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et10-le-lioran-telepherique-du-plomb-du-cantal-le-lioran-credit-up-two-you-et11-11zon/69486/1015:0,3981:2966-0-0-70/3aa03"
+      },
+      "cityLangs": []
+    },
+    "isCancelled": false,
+    "endTime": "17:14:00",
+    "showGroups": true,
+    "type": "HMG",
+    "podiumDisplayMode": "instantpodium",
+    "date": "2026-07-14T00:00:00+02:00",
+    "timezone": "Europe/Paris",
+    "id": 25329,
+    "stage": 10,
+    "_id": "480f5ecb8df79be6e23c3743382c1c279354632096f4a1ff7109eb33a9e744dd",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1783875108155,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "podiumDisplayMode": "instantpodium",
+    "id": 25341,
+    "timezone": "Europe/Paris",
+    "showGroups": true,
+    "type": "PLN",
+    "date": "2026-07-26T00:00:00+02:00",
+    "stage": 21,
+    "lengthDisplay": 132.5,
+    "endTime": "19:34:00",
+    "isCancelled": false,
+    "length": 132.5,
+    "arrivalCity": {
+      "label": "Paris Champs-Élysées",
+      "id": 30113,
+      "code": "paris-champs-elysees",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/21/69793/366:0,1782:1416-0-0-70/d717a",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\n51e arrivée sur les Champs-Élysées<br />\nCapitale de la France et de la Région Île-de-France<br />\nCommune-département et Préfecture (75)<br />\nHabitants 2 120 000 (Parisiens et Parisiennes)<br />\n<br />\n La capitale de la France a gagné à travers les siècles un prestige inégalable, qui en a fait la première destination touristique mondiale. Son succès tient autant à la majesté de ses monuments, de la cathédrale Notre-Dame de Paris à la tour Eiffel en passant par le musée du Louvre et l’Arc de Triomphe, qu’au bouillonnement culturel qui l’anime et à cet insaisissable chic parisien qui continue de fasciner. La Ville Lumière s’est également imposée comme l’une des scènes sportives majeures de la planète, grâce à des événements réguliers dont le tournoi de Roland-Garros ou l’arrivée finale du Tour de France, et bien sûr, l’organisation des Jeux Olympiques et Paralympiques de l’été 2024, dont les innovations comme la cérémonie d’ouverture en cœur de ville et un marathon ouvert à tous ont déjà marqué l’histoire du sport."
+            ]
+          },
+          {
+            "text": [
+              "<br />\n51st finish on the Champs-Élysées<br />\nCapital of France and the Île-de-France region Commune-department and prefecture (75)<br />\nPopulation: 2,120,000 (Parisiens and Parisiennes)<br />\n<br />\nOver the centuries, the French capital has earned unrivalled prestige, making it the world’s leading tourist destination. Its success is due as much to the majesty of its monuments – from Cathedral of Notre-Dame to the Eiffel Tower, the Louvre Museum and the Arc de Triomphe – as to the cultural vibrancy that enlivens it and the elusive Parisian chic that continues to fascinate. The City of Light has also established itself as one of the world’s major sporting venues, thanks to regular events such as the Roland-Garros tennis tournament and the final stage of the Tour de France... and, of course, the organisation of the Olympic and Paralympic Games in the summer of 2024, when innovations such as the holding the opening ceremony in the heart of the city and having a marathon open to all helped to make sporting history."
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "<br />\n51. Zielankunft auf den Champs-Élysées<br />\nHauptstadt Frankreichs und Hauptort der Region Île-de-France<br />\nGebietskörperschaft mit Sonderstatus Ville de Paris (75C)<br />\nEinwohner*innen 2 120 000<br />\n<br />\n Die französische Hauptstadt hat sich im Laufe der Jahrhunderte ein unübertroffenes Prestige erworben. Heute zählt sie zu den beliebtesten Reisezielen der Welt. Ihr Erfolg beruht nicht nur auf den beeindruckenden Bauwerken – von Notre-Dame und dem Eiffelturm bis zum Louvre und dem Arc de Triomphe –, sondern auch auf dem pulsierenden kulturellen Leben und dem schwer fassbaren „Pariser Chic“, der bis heute fasziniert. Auch sportlich ist die Stadt der Lichter eine Weltmetropole: Roland-Garros, die Zielankunft der Tour de France und zuletzt die Olympischen und Paralympischen Spiele 2024 haben die Stadt ins Rampenlicht gerückt. Mit Innovationen wie einer Eröffnungsfeier im Herzen der Stadt und einem Marathon für alle schrieb Paris dabei Sportgeschichte."
+            ],
+            "locale": "de"
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\n51ª llegada a los Campos Elíseos<br />\nCapital de Francia y de la región de Île-de-France<br />\nMunicipio-departamento y prefectura (75)<br />\nHabitantes 2.120.000 (parisinos y parisinas)<br />\n<br />\n La capital de Francia ha adquirido a lo largo de los siglos un prestigio inigualable, como avala su condición de primer destino turístico mundial. Su éxito se debe tanto a la majestuosidad de sus monumentos, desde la catedral de Notre-Dame de París hasta la Torre Eiffel, pasando por el Museo del Louvre y el Arco del Triunfo, como a su vibrante vida cultural y a ese indescriptible chic parisino que sigue causando fascinación a todo aquel que la visita. La Ciudad de la Luz también se ha consolidado como uno de los principales escenarios deportivos del planeta, gracias a eventos regulares como el torneo de tenis Roland Garros o la llegada final del Tour de Francia y, por supuesto, la organización de los Juegos Olímpicos y Paralímpicos del verano de 2024, cuyas innovaciones, como la ceremonia de inauguración en el centro de la ciudad y una maratón abierta a todos, ya han escrito una página inolvidable de la historia del deporte."
+            ]
+          }
+        ]
+      },
+      "cityLangs": []
+    },
+    "departureCity": {
+      "label": "Thoiry",
+      "id": 32677,
+      "createdBy": "malbarelli",
+      "country": {
+        "id": 1964,
+        "code": "fra"
+      },
+      "updatedBy": "malbarelli",
+      "createdAt": "2025-10-17T17:28:37+02:00",
+      "code": "thoiry",
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nSite-étape inédit<br />\nCommune des Yvelines (78)<br />\nHabitants 1 450 (Thoirysiens et Thoirysiennes)<br />\n<br />\n La petite commune des Yvelines bénéficie d’une renommée sans rapport avec sa densité démographique grâce à son château de style Renaissance et surtout à la faveur de son parc animalier qui s’étend sur 150 hectares. Ouvert au public depuis 1968 et rebaptisé Wow Safari Thoiry, le zoo attire plus de 600 000 visiteurs chaque année, qui se déplacent pour observer environ 1 500 animaux, dont une partie évolue en semi-liberté : éléphants, antilopes, girafes, zèbres, hippopotames et autruches dans la réserve africaine et ours noirs, coyotes ou encore bisons dans la réserve américaine."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nA new stage town<br />\nCommune in Yvelines (78)<br />\nPopulation: 1,450 (Thoirysiens and Thoirysiennes)<br />\n<br />\nThis small commune in the department of Yvelines enjoys a renown belied by its population density thanks to its Renaissance-style château and, above all, its 150-hectare safari park. Opened in 1968 and subsequently renamed Wow Safari Thoiry, it attracts more than 600,000 visitors each year, who come to see around 1,500 animals, some of which live in semi-freedom, including elephants, antelopes, giraffes, zebras, hippopotamuses and ostriches in the African reserve, and black bears, coyotes and bison in the American reserve."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nErstmalige Etappenstation<br />\nGemeinde im Departement Yvelines (78)<br />\nEinwohner*innen 1 450<br />\n<br />\n Die Gemeinde in den Yvelines zählt wahrlich nicht zu den größten im Land, ist aber nichtsdestotrotz für ihr Renaissance-Schloss und vor allem den 150 ha großen Tierpark weithin bekannt. Seit seiner Eröffnung im Jahr 1968 und der Umbenennung in Wow Safari Thoiry zieht der Zoo jährlich mehr als 600 000 Besucherinnen und Besucher an. Sie kommen, um rund 1 500 Tiere zu erleben, die in naturnahen Freigehegen leben: Elefanten, Antilopen, Giraffen, Zebras, Flusspferde und Strauße im Afrika-Bereich sowie Schwarzbären, Kojoten und Bisons im Amerika-Bereich."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nLugar etapa inédito<br />\nMunicipio del departamento de Yvelines (78)<br />\nHabitantes 1.450 (Thoirysiens y Thoirysiennes)<br />\n<br />\n El pequeño municipio de Yvelines goza de una fama inversamente proporcional a su densidad demográfica gracias a su castillo renacentista y, sobre todo, a su parque zoológico, que se extiende sobre 150 hectáreas. Abierto al público desde 1968 y rebautizado como Wow Safari Thoiry, el zoológico atrae a más de 600.000 visitantes cada año, que acuden para admirar unos 1.500 animales, algunos de ellos en semilibertad: elefantes, antílopes, jirafas, cebras, hipopótamos y avestruces en la reserva africana, y osos negros, coyotes y bisontes en la reserva americana."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/21/69803/313:0,1729:1416-0-0-70/4b2de"
+      },
+      "cityLangs": [],
+      "updatedAt": "2025-10-17T17:28:37+02:00"
+    },
+    "startTime": "16:25:00",
+    "_id": "ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1784277694890,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "length": 179.1,
+    "timezone": "Europe/Paris",
+    "showGroups": true,
+    "lengthDisplay": 179.5,
+    "podiumDisplayMode": "instantpodium",
+    "endTime": "17:39:00",
+    "departureCity": {
+      "updatedAt": "2025-10-17T17:25:20+02:00",
+      "id": 32676,
+      "cityLangs": [],
+      "createdAt": "2025-10-17T17:25:20+02:00",
+      "content": {
+        "texts": [
+          {
+            "text": [
+              "<br />\nSite-étape inédit<br />\nCircuit automobile de la Nièvre (58) rattaché à la commune de Magny-Cours<br />\nHabitants 1 450 (Magniens et Magniennes)<br />\n<br />\n Dans sa configuration moderne, le circuit de Nevers Magny-Cours inauguré en 1989 a accueilli les Grand Prix de France de Formule 1 de 1991 à 2008 et a notamment vu la victoire d’Alain Prost en 1993, en plus de huit succès de Michael Schumacher. Le circuit a également ouvert ses portes au peloton mondial pour Paris-Nice. John Degenkolb avait su mettre le turbo en 2014 dans la dernière ligne droite pour signer son unique succès sur la Course au soleil et s’offrir le plaisir de déshabiller Nacer Bouhanni du maillot de leader."
+            ],
+            "locale": "fr"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nA new stage location<br />\nMotor racing circuit in Nièvre (58) attached to the commune of Magny-Cours<br />\nPopulation: 1,450 (Magniens and Magniennes)<br />\n<br />\nReconfigured and then relaunched in its modern configuration in 1989, the Nevers Magny-Cours circuit hosted the French Formula 1 Grand Prix between 1991 and 2008. Alain Prost won here in 1993, while Michael Schumacher claimed no fewer than eight victories here. The circuit also opened its doors to the professional peloton for Paris-Nice. John Degenkolb engaged his turbo on the final straight in 2014 to claim his only victory in “the race to the sun” and had the added pleasure of taking the leader’s jersey from Nacer Bouhanni."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nErstmalige Etappenstation<br />\nZur Gemeinde Magny-Cours gehörende Motorsport-Rennstrecke im Departement Nièvre (58)<br />\nEinwohner*innen 1 450<br />\n<br />\n Der 1989 eingeweihte Circuit de Nevers Magny-Cours war von 1991 bis 2008 Austragungsort des Großen Preises von Frankreich in der Formel 1. Hier feierte Michael Schumacher nicht weniger als acht Siege, während Alain Prost 1993 triumphierte. Auch der Radsport hat die Rennstrecke bereits für sich entdeckt: 2014 war Magny-Cours Ziel einer Etappe von Paris–Nizza. Auf der langen Zielgeraden zündete John Degenkolb den Turbo und sicherte sich seinen einzigen Erfolg beim „Rennen zur Sonne“. Als Krönung nahm er an diesem Tag Nacer Bouhanni das Gelbe Trikot ab."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nLugar etapa inédito<br />\nCircuito automovilístico de la Nièvre (58) perteneciente al municipio de Magny-Cours<br />\nHabitantes 1.450 (Magniens y Magniennes)<br />\n<br />\n En su configuración moderna, el circuito de Nevers Magny-Cours, inaugurado en 1989, acogió el Gran Premio de Francia de Fórmula 1 de 1991 a 2008 y fue testigo, entre otros, de la victoria de Alain Prost en 1993, además de ocho triunfos de Michael Schumacher. El circuito también abrió sus puertas al pelotón mundial para la París-Niza. John Degenkolb supo acelerar en 2014 en la recta final para lograr su única victoria en la Carrera del Sol, arrebatándole el maillot de líder a Nacer Bouhanni."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et12-circuit-nevers-magny-cours-11zon/69801/487:0,4973:4486-0-0-70/d9bfb"
+      },
+      "updatedBy": "malbarelli",
+      "code": "circuit-nevers-magny-cours",
+      "label": "Circuit Nevers Magny-Cours",
+      "country": {
+        "id": 1964,
+        "code": "fra"
+      },
+      "createdBy": "malbarelli"
+    },
+    "startTime": "13:40:00",
+    "arrivalCity": {
+      "cityLangs": [],
+      "label": "Chalon-sur-Saône",
+      "code": "chalon-sur-saone",
+      "id": 29653,
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 6e fois<br />\nSous-préfecture de Saône-et-Loire (71)<br />\nHabitants 44 600 (Chalonnais et Chalonnaises)<br />\n<br />\n Les connaisseurs du sport français ont suivi l’émergence de l’Elan Chalon, double vainqueur du championnat de France de basket (2012, 2017). Mais en matière de cyclisme, les historiens remarqueront que le pionnier du cyclisme britannique, Brian Robinson, s’y était imposé en 1959 au terme d’une longue échappée solitaire. Lors de l’arrivée suivante à Chalon, c’est en piégeant les sprinteurs dans le dernier kilomètre que Thierry Marie remportait sa seconde étape sur le Tour 1988. En revanche, Dylan Groenewegen ne s’est pas laissé surprendre lorsqu’il a fallu déclencher son accélération pour remporter en 2019 la quatrième de ses six étapes sur le Tour."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage city for the 6th time<br />\nSub-prefecture of Saône-et-Loire (71)<br />\nPopulation: 44,600 (Chalonnais and Chalonnaises)<br />\n<br />\nFrench sports fans have followed the rise of Elan Chalon, two-time winners of the French basketball championship (2012, 2017). When it comes to cycling, historians will highlight British racing pioneer Brian Robinson’s victory here in 1959 after a long solo breakaway. On the Tour’s next finish in Chalon, in 1988, Thierry Marie won his second stage by outsmarting the sprinters in the final kilometre. Dylan Groenewegen, however, wasn’t caught napping when he drew on his finishing speed to claim the fourth of his six Tour stages in 2019."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nZum 6. Mal Etappenort<br />\nUnterpräfektur des Departements Saône-et-Loire (71)<br />\nEinwohner*innen 44 600<br />\n<br />\n Kennern des französischen Sports ist der Aufstieg des Vereins Élan Sportif Chalonnais, zweifacher französischer Basketballmeister (2012, 2017), sicherlich nicht entgangen. Doch auch in der Geschichte des Radsports hat die Stadt ihre Spuren hinterlassen. 1959 feierte hier der britische Pionier Brian Robinson nach einer langen Solofahrt einen prestigeträchtigen Etappensieg. Bei der nächsten Ankunft in Chalon 1988 konnte Thierry Marie auf dem letzten Kilometer die Sprinter überraschen und seinen zweiten Etappensieg bei der Tour erringen. 2019 ließ sich Dylan Groenewegen nicht ausmanövrieren, setzte zum Sprint an und gewann souverän – es war der vierte seiner insgesamt sechs Tour-Etappensiege."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 6ª vez<br />\nSubprefectura del departamento de Saône-et-Loire (71)<br />\nHabitantes 44.600 (Chalonnais y Chalonnaises)<br />\n<br />\n Los aficionados al deporte francés han seguido la trayectoria del Elan Chalon, doble ganador del campeonato francés de baloncesto (2012, 2017). En lo que respecta al ciclismo, los historiadores señalarán que el pionero del ciclismo británico, Brian Robinson, se impuso allí en 1959 tras una larga escapada en solitario. En la siguiente llegada a Chalon, Thierry Marie ganó su segunda etapa en el Tour de 1988 al sorprender a los esprínters en el último kilómetro. Por su parte, Dylan Groenewegen no se dejó sorprender cuando tuvo que acelerar para ganar en 2019 la cuarta de sus seis etapas en el Tour."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et12-chalon-sur-saone-gettyimages-1464258754-11zon/69811/852:0,3127:2275-0-0-70/e300f"
+      }
+    },
+    "date": "2026-07-16T00:00:00+02:00",
+    "type": "PLN",
+    "stage": 12,
+    "id": 25331,
+    "isCancelled": false,
+    "_id": "73b2be3e6077faec9ed7055eef368048f6a4bed18b1dbd0e37f0844c7a21e852",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012380891,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "startTime": "13:20:00",
+    "arrivalCity": {
+      "label": "Belfort",
+      "cityLangs": [],
+      "code": "belfort",
+      "id": 29535,
+      "content": {
+        "texts": [
+          {
+            "text": [
+              "<br />\nVille-étape pour la 33e fois<br />\nPréfecture du Territoire de Belfort (90)<br />\nHabitants 46 000 (Belfortains et Belfortaines)<br />\n<br />\n C’est en voisin que le Colmarien Auguste Bartholdi a transformé la ville en façonnant le Lion de Belfort. Bien plus tard, en 2012, l’animal a transmis sa force et son courage à un tout jeune coureur dont le talent commençait à s’exprimer. Après le départ donné à Belfort, Thibaut Pinot remportait à Porrentruy sa première étape sur le Tour de France, à 22 ans. Depuis, le peloton s’est élancé deux fois sous le regard du fauve de pierre : en 2019 pour une victoire de Dylan Groenewegen à Chalon-sur-Saône puis, en 2023, pour les derniers grands frissons de « Tibopino », juste avant le succès de Tadej Pogacar au Markstein."
+            ],
+            "locale": "fr"
+          },
+          {
+            "text": [
+              "<br />\nStage town for the 33rd time<br />\nPrefecture of the Territory of Belfort (90)<br />\nPopulation: 46,000 (Belfortains and Belfortaines)<br />\n<br />\nHailing from nearby Colmar, Auguste Bartholdi transformed his neighbouring town by sculpting the Lion of Belfort. Much later, in 2012 to be exact, the animal passed on its strength and courage to a young cyclist whose talent was beginning to stand out. After a start in Belfort, Thibaut Pinot won his first Tour stage at Porrentruy at the age of 22. Since then, the peloton has set off twice beneath the gaze of the stone beast: in 2019, when Dylan Groenewegen took victory in Chalon-sur-Saône, and in 2023, when “Tibopino” produced his last thrilling performance prior to Tadej Pogačar’s success at Le Markstein."
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "<br />\nZum 33. Mal Etappenort<br />\nPräfektur des Departements Territoire de Belfort (90)<br />\nEinwohner*innen 46 000<br />\n<br />\n 1880 setzte der Colmarer Bildhauer Auguste Bartholdi der Stadt ein Denkmal, das bis heute für Stärke und Mut steht: den Löwen von Belfort. 2012 schien das Tier seine Symbolkraft auf einen jungen Fahrer zu übertragen – Thibaut Pinot. Mit nur 22 Jahren gewann er nach dem Start in Belfort in Porrentruy seine erste Etappe bei der Tour de France und kündigte damit seinen Aufstieg in die Weltspitze an. Seither ist das Feld zweimal hier unter dem Blick des steinernen Löwen aufgebrochen – 2019, als Dylan Groenewegen in Chalon-sur-Saône den Sprint gewann, und 2023, als „Tibopino“ seine Fans noch einmal in Ekstase versetzte – bis ihm Tadej Pogačar den ersehnten Sieg in Le Markstein doch noch wegschnappte."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 33.ª vez<br />\nPrefectura del departamento del Territoire de Belfort (90)<br />\nHabitantes 46.000 (Belfortains y Belfortaines)<br />\n<br />\n El oriundo de la localidad vecina de Colmar, Auguste Bartholdi, transformó Belfort al esculpir el León de Belfort. Mucho más tarde, en 2012, el animal transmitió su fuerza y su coraje a un joven ciclista cuyo talento comenzaba a despuntar. Tras la salida en Belfort, Thibaut Pinot ganó en Porrentruy su primera etapa en el Tour de Francia a los 22 años. Desde entonces, el pelotón ha salido dos veces bajo la mirada del felino de piedra: en 2019, con la victoria de Dylan Groenewegen en Chalon-sur-Saône y, en 2023, con las últimas emociones fuertes de “Tibopino”, justo antes del éxito de Tadej Pogacar en Markstein."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et13-belfort-gettyimages-2160462612-11zon/69808/233:0,1648:1415-0-0-70/f300b"
+      }
+    },
+    "date": "2026-07-17T00:00:00+02:00",
+    "type": "VAL",
+    "stage": 13,
+    "id": 25332,
+    "isCancelled": false,
+    "length": 205.8,
+    "showGroups": true,
+    "timezone": "Europe/Paris",
+    "lengthDisplay": 206,
+    "endTime": "17:59:00",
+    "podiumDisplayMode": "instantpodium",
+    "departureCity": {
+      "label": "Dole",
+      "cityLangs": [],
+      "updatedAt": "2021-10-15T12:14:30+02:00",
+      "code": "dole",
+      "id": 29591,
+      "updatedBy": "fhazene",
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 5e fois<br />\nSous-préfecture du Jura (39)<br />\nHabitants 23 800 (Dolois et Doloises)<br />\n<br />\n La ville de Louis Pasteur a accueilli le Tour de France à quatre reprises. En 1939, le Luxembourgeois François Neuens s’y imposa au terme d’une échappée, tandis que Maurice Archambaud remporta l’après-midi même le chrono tracé entre Dole et Dijon. Un départ a ensuite été organisé en 1992, pour une étape que s’adjugeait Rolf Jaermann à Saint-Gervais… sans menacer la position de Pascal Lino, qui promenait le Maillot Jaune à travers les routes de France depuis dix jours. En 2017, une étape intégralement jurassienne avait vu la victoire de Lilian Calmejane à la station des Rousses. Enfin l’édition 2022 proposait une étape entre Dole et Lausanne qui a parfaitement convenu à Wout van Aert, vainqueur d’un concours de puncheurs dans la cité olympique devant Michael Matthews et Tadej Pogacar."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 5th time<br />\nSub-prefecture of Jura (39)<br />\nPopulation: 23,800 (Dolois and Doloises)<br />\n<br />\nLouis Pasteur’s home town has welcomed the Tour de France on four occasions. In 1939, Luxembourg’s François Neuens won here after a breakaway, while Maurice Archambaud won the time trial between Dole and Dijon that same afternoon. Dole hosted a stage start in 1992, when Rolf Jaermann went on to win in Saint-Gervais... although he offered no threat to race leader Pascal Lino, who’d been in the Yellow Jersey for ten days. In 2017, a stage that took place entirely within the Jura saw Lilian Calmejane triumph at Les Rousses. Finally, the 2022 edition featured a stage between Dole and Lausanne that perfectly suited Wout van Aert, who won on a punchy uphill finish in the Olympic city ahead of Michael Matthews and Tadej Pogačar."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 5. Mal Etappenort<br />\nUnterpräfektur des Departements Jura (39)<br />\nEinwohner*innen 23 800<br />\n<br />\n Die Tour de France war bereits viermal in Dole, der Heimatstadt von Louis Pasteur, zu Gast. 1939 triumphierte hier der Luxemburger François Neuens nach einer langen Ausreißerfahrt, ehe Maurice Archambaud am selben Nachmittag das Zeitfahren nach Dijon gewann. 1992 startete in Dole eine Etappe, die Rolf Jaermann in Saint-Gervais für sich entschied, ohne jedoch Pascal Lino im Gelben Trikot ernsthaft zu gefährden, das er seit zehn Tagen trug. 2017 führte eine vollständig im Jura verlaufende Etappe nach Station des Rousses, wo Lilian Calmejane den Sieg davontrug. 2022 rollte das Peloton von Dole nach Lausanne. Dort, in der olympischen Stadt, zeigte Wout van Aert seine Klasse: Im Puncheur-Sprint ließ er Michael Matthews und Tadej Pogačar hinter sich."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 5ª vez<br />\nSubprefectura del departamento del Jura (39)<br />\nHabitantes 23.800 (Dolois y Doloises)<br />\n<br />\n La ciudad de Louis Pasteur ha acogido el Tour de Francia en cuatro ocasiones. En 1939, el luxemburgués François Neuens se impuso tras una escapada, mientras que Maurice Archambaud ganó esa misma tarde la contrarreloj disputada entre Dole y Dijon. Posteriormente, en 1992, se organizó una salida para una etapa que ganó Rolf Jaermann en Saint-Gervais... sin amenazar, eso sí, la posición de Pascal Lino, que llevaba diez días luciendo el maillot amarillo por las carreteras de Francia. En 2017, una etapa íntegramente “jurasiana” vio la victoria de Lilian Calmejane en la estación de Les Rousses. Por último, la edición de 2022 propuso una etapa entre Dole y Lausana que le vino como anillo al dedo a Wout van Aert, ganador de una prueba de puncheurs en la ciudad olímpica por delante de Michael Matthews y Tadej Pogacar."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et13-dole-gettyimages-2111941589-11zon/69799/282:0,1691:1409-0-0-70/f7076"
+      }
+    },
+    "_id": "c23a6e0e20c83dd78490a4c362a76a821f8a15b2640f10a5e8cb4718cc3ebb21",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012403216,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "id": 25339,
+    "timezone": "Europe/Paris",
+    "arrivalCity": {
+      "code": "alpe-d-huez",
+      "cityLangs": [],
+      "id": 30276,
+      "label": "Alpe d'Huez",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/19/69792/41:273,3649:3881-0-0-70/cbdad",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 32e fois<br />\nStation de tourisme de montagne de l’Isère (38) rattachée à la commune d’Huez<br />\nHabitants 1 300 (D’Huizats et D’Huizates)<br />\n<br />\n En 1952, Fausto Coppi lançait la grande histoire des arrivées perchées en station en allant chercher le Maillot Jaune au sommet de la route aux 21 lacets. La répétition des succès de Joop Zoetemelk, Hennie Kuiper ou Peter Winnen lui a valu plus tard le surnom de « montagne des Hollandais » avant que les Italiens s’y illustrent à nouveau avec Gianni Bugno puis Marco Pantani. Côté français, Laurent Fignon, en 1984, y avait marqué de précieux points dans son duel avec Bernard Hinault, premier Tricolore à s’y imposer ensuite en 1986 lors d’un célèbre finish en forme de passage de témoin avec son coéquipier américain Greg LeMond."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 32nd time<br />\nMountain resort in Isère (38) attached to the commune of Huez<br />\nPopulation: 1,300 (D’Huizats and D’Huizates)<br />\n<br />\nIn 1952, Fausto Coppi launched the fabled history of mountain finishes by taking the Yellow Jersey at the top of the now famous road with 21 hairpins. Thanks to Joop Zoetemelk, Hennie Kuiper and Peter Winnen each winning here twice, it earned the nickname “Dutch mountain”, before the Italians returned to the fore once again with Gianni Bugno and then Marco Pantani. As for the French, Laurent Fignon gained some valuable ground here in 1984 during his duel with Bernard Hinault. Two years later, Hinault became the first Frenchman to win here in a famous finish that also saw him hand over power to his American teammate Greg LeMond."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nZum 32. Mal Etappenort<br />\nZur Gemeinde Huez gehörender Wintersportort im Departement Isère (38)<br />\nEinwohner*innen 1 300<br />\n<br />\n Im Jahr 1952 schrieb Fausto Coppi das erste Kapitel der Bergankünfte, indem er sich am Ende der legendären Gebirgsstraße mit ihren 21 Kehren das Gelbe Trikot sicherte. Die wiederholten Erfolge von Joop Zoetemelk, Hennie Kuiper und Peter Winnen brachten Alpe d’Huez später den Beinamen „Berg der Holländer“ ein, ehe mit Gianni Bugno und Marco Pantani dort wieder die Italiener den Ton angaben. Was die Franzosen anbelangt, so konnte sich Laurent Fignon 1984 hier in seinem Duell mit Bernard Hinault entscheidend absetzen. Zwei Jahre später war es dann Hinault, der als erster Franzose auf diesem Anstieg triumphierte – in einem berühmten Finish, das wie eine symbolische Staffelstab-Übergabe an seinen amerikanischen Teamkollegen Greg LeMond wirkte."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 32.ª vez<br />\nEstación de turismo de montaña del departamento de Isère (38) perteneciente al municipio de Huez<br />\nHabitantes 1.300 (D’Huizats y D’Huizates)<br />\n<br />\n En 1952, Fausto Coppi inició la gran historia de las llegadas en altura al conseguir el maillot amarillo en la cima de la carretera de las 21 curvas. Los repetidos éxitos de Joop Zoetemelk, Hennie Kuiper o Peter Winnen le valieron más tarde el apodo de “la montaña de los holandeses”, antes de que los italianos volvieran a brillar en ella de la mano de Gianni Bugno y Marco Pantani. Por parte francesa, Laurent Fignon, en 1984, sumó valiosos puntos en su duelo con Bernard Hinault, primer francés en imponerse en ella y, posteriormente, en 1986, en un famoso final en forma de relevo con su compañero de equipo estadounidense Greg LeMond."
+            ],
+            "locale": "es"
+          }
+        ]
+      }
+    },
+    "stage": 19,
+    "podiumDisplayMode": "instantpodium",
+    "type": "HMG",
+    "date": "2026-07-24T00:00:00+02:00",
+    "length": 127.9,
+    "endTime": "17:34:00",
+    "isCancelled": false,
+    "departureCity": {
+      "label": "Gap",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/19/69805/536:0,3572:3036-0-0-70/02ba2",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 28e fois<br />\nPréfecture des Hautes-Alpes (05)<br />\nHabitants 41 000 (Gapençais et Gapençaises)<br />\n<br />\n Les dernières arrivées à Gap ont vu des échappées couronnées de succès, spécialement pour Matteo Trentin (2019), Ruben Plaza (2015), Rui Costa (2013) ou Thor Hushovd (2011). Les étapes qui en sont parties ont souvent mis le cap sur Digne, puis sur Briançon, notamment en 1953 lorsque Louison Bobet s’est envolé à l’assaut du col d’Izoard pour aller chercher le Maillot Jaune. La période récente a ensuite vu une série de Gap-Alpe d’Huez, dont le dernier épisode, en 2013, a été marqué par un numéro de haut vol de Christophe Riblon. Et, en 2024, la route Gap-Barcelonnette était enfin celle du succès sur le Tour pour le Belge Victor Campenaerts."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nStage city for the 28th time<br />\nPrefecture of Hautes-Alpes (05)<br />\nPopulation: 41,000 (Gapençais and Gapençaises)<br />\n<br />\nThe last few finishes in Gap have seen breakaways going the distance, as was the case with Matteo Trentin (2019), Rubén Plaza (2015), Rui Costa (2013) and Thor Hushovd (2011). Stages that have started there often headed for Digne and then Briançon, notably in 1953 when Louison Bobet took flight on the Col d’Izoard to claim the Yellow Jersey. More recently, there has been a series of Gap-Alpe d’Huez stages, the last of which, in 2013, featured a spectacular performance by Christophe Riblon. And in 2024, a Gap-Barcelonnette stage finally resulted in a Tour success for Belgian rider Victor Campenaerts."
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "<br />\nZum 28. Mal Etappenort<br />\nPräfektur des Departements Hautes-Alpes (05)<br />\nEinwohner*innen 41 000<br />\n<br />\nDie letzten Ankünfte in Gap waren von erfolgreichen Ausreißversuchen geprägt. Insbesondere Matteo Trentin (2019), Ruben Plaza (2015), Rui Costa (2013) und Thor Hushovd (2011) konnten ihre Flucht erfolgreich abschließen. Von Gap aus führten zudem zahlreiche Etappen Richtung Digne-les-Bains und Briançon – legendär 1953, als Louison Bobet am Anstieg zum Col d’Izoard attackierte und das Gelbe Trikot eroberte. In der jüngeren Vergangenheit prägten mehrere Gap–Alpe d’Huez-Etappen die Tour, zuletzt 2013 mit der Glanzleistung von Christophe Riblon. Und 2024 schließlich bescherte die Route Gap–Barcelonnette dem Belgier Victor Campenaerts seinen ersten Etappensieg bei der Tour de France."
+            ],
+            "locale": "de"
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 28.ª vez<br />\nPrefectura del departamento de Hautes-Alpes (05)<br />\nHabitantes 41.000 (Gapençais y Gapençaises)<br />\n<br />\n Las últimas llegadas a Gap han sido testigo de escapadas coronadas por el éxito, especialmente para Matteo Trentin (2019), Rubén Plaza (2015), Rui Costa (2013) o Thor Hushovd (2011). Las etapas que partían de la localidad solían poner rumbo a Digne y luego a Briançon, y destaca la de 1953, cuando Louison Bobet se lanzó al ataque del puerto de Izoard para hacerse con el maillot amarillo. En la historia reciente hemos sido testigos de varias etapas Gap-Alpe d'Huez, estando la última de ellas, la de la edición 2013, marcada por una espectacular actuación de Christophe Riblon. Y, en 2024, la ruta Gap-Barcelonnette fue finalmente la del éxito en el Tour del belga Victor Campenaerts. "
+            ]
+          }
+        ]
+      },
+      "cityLangs": [],
+      "id": 29561,
+      "code": "gap"
+    },
+    "lengthDisplay": 128,
+    "showGroups": true,
+    "startTime": "14:15:00",
+    "_id": "f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781788235703,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "arrivalCity": {
+      "content": {
+        "texts": [
+          {
+            "text": [
+              "<br />\nVille-étape pour la 10e fois<br />\nSous-préfecture de Haute-Savoie (74)<br />\nHabitants 37 700 (Thononais et Thononaises)<br />\n<br />\n La deuxième ville de Haute-Savoie a accueilli le Tour de France pour la première fois en 1955. En partant des rivages du lac Léman, le peloton n’avait pas encore clairement identifié le potentiel de Charly Gaul, qui s’élançait un peu plus loin en solitaire à l’assaut du Galibier pour triompher sur l’étape de Briançon avec près de 14 minutes d’avance. Le Luxembourgeois de 23 ans termina sur la troisième marche du podium à Paris, derrière Louison Bobet et Jean Brankart. Quant à la dernière arrivée jugée à Thonon, elle avait vu en 1981 la victoire au sprint de Sean Kelly."
+            ],
+            "locale": "fr"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 10th time<br />\nSub-prefecture of Haute-Savoie (74)<br />\nPopulation: 37,700 (Thononais and Thononaises)<br />\n<br />\nThe second largest town in Haute-Savoie hosted the Tour de France for the first time in 1955. When it set off from the shores of Lake Geneva, the peloton wasn’t completely aware of the extent of Charly Gaul’s ability. He attacked not long after the start and then went solo on the Galibier before triumphing in Briançon with a lead of almost 14 minutes. The 23-year-old Luxembourger finished third on the podium in Paris, behind Louison Bobet and Jean Brankart. In terms of stage finishes, the last one in Thonon was in 1981, when Sean Kelly won in a sprint."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nZum 10. Mal Etappenort<br />\nUnterpräfektur des Departements Haute-Savoie (74)<br />\nEinwohner*innen 37 700<br />\n<br />\n Der erste Tour-Auftritt der zweitgrößten Stadt des Departements Haute-Savoie war im Jahr 1955. Schon bald nach dem Start am Ufer des Genfer Sees offenbarte sich das Potenzial des jungen Luxemburgers Charly Gaul: Mit einem eindrucksvollen Alleingang über den Galibier gewann er die Etappe nach Briançon mit fast 14 Minuten Vorsprung. In Paris stand der 23-Jährige schließlich als Dritter auf dem Podium, hinter Louison Bobet und Jean Brankart. Die letzte Zielankunft in Thonon-les-Bains war 1981 und endete mit einem Sprintsieg von Sean Kelly."
+            ],
+            "locale": "de"
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 10ª vez<br />\nSubprefectura del departamento de Alta Saboya (74)<br />\nHabitantes 37.700 (Thononais y Thononaises)<br />\n<br />\n La segunda ciudad de Alta Saboya acogió el Tour de Francia por primera vez en 1955. Al tomar la salida a orillas del lago Lemán, el pelotón aún no había identificado claramente el potencial de Charly Gaul, que se lanzó un poco más lejos en solitario al asalto del Galibier para triunfar en la etapa de Briançon con casi 14 minutos de ventaja. El luxemburgués de 23 años terminó en el tercer puesto del podio en París, por detrás de Louison Bobet y Jean Brankart. En cuanto a la última llegada decidida en Thonon, en 1981, fue Sean Kelly quien se llevó los honores al esprint."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et16-thonon-les-bains-thonon-chateau-de-ripaille-atdestination-leman-4/69794/462:0,4422:3960-0-0-70/88526"
+      },
+      "label": "Thonon-les-Bains",
+      "id": 32216,
+      "cityLangs": [],
+      "code": "thonon-les-bains"
+    },
+    "stage": 16,
+    "id": 25336,
+    "timezone": "Europe/Paris",
+    "type": "PAS",
+    "podiumDisplayMode": "instantpodium",
+    "lengthDisplay": 26.1,
+    "departureCity": {
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 15e fois<br />\nCommune de Haute-Savoie (74)<br />\nHabitants 9 300 (Évianais et Évianaises)<br />\n<br />\n La petite ville qui borde le lac Léman était déjà une station thermale de prestige lorsqu’elle a été la première commune de province choisie pour ce qui ne s’appelait pas encore en 1926 un Grand Départ. À cette époque, la ville d’eau a même reçu le Tour sur 12 éditions consécutives. Toujours au XXe siècle, c’est déjà pour le départ d’un chrono que les coureurs sont revenus à Évian en 1979, avec 55 km à parcourir jusqu’à Avoriaz, où le vainqueur Bernard Hinault subtilisait le Maillot Jaune à Joop Zoetemelk. Plus récemment, le Critérium du Dauphiné 2010 a démarré par la victoire d’Alberto Contador lors du prologue."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nStage town for the 15th time<br />\nCommune of Haute-Savoie (74)<br />\nPopulation: 9,300 (Évianais and Évianaises)<br />\n<br />\nThe small town on the shores of Lake Geneva was already a prestigious spa resort when, in 1926, it became the first provincial town to be chosen to host the Grand Départ, although it wasn’t known as that then. During that period, the spa town welcomed the Tour for 12 consecutive editions. Still in the 20th century, the riders returned to Évian in 1979 for the start of a 55km time trial to Avoriaz, where the winner Bernard Hinault seized the Yellow Jersey from Joop Zoetemelk. More recently, the 2010 Critérium du Dauphiné began here, Alberto Contador taking victory in the prologue."
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "<br />\nZum 15. Mal Etappenort<br />\nGemeinde im Departement Haute-Savoie (74)<br />\nEinwohner*innen 9 300<br />\n<br />\n Évian-les-Bains, die mondäne Kurstadt am Genfer See, schrieb 1926 Geschichte: Als erste Provinzkommune durfte sie den Tour-Start ausrichten – einen „Grand Départ“, wie es heute heißt. Zwölf Jahre in Folge kehrte die Rundfahrt danach in die Thermalstadt zurück. Auch später blieb Évian mit der Tour verbunden: 1979 startete hier ein Einzelzeitfahren über 55 km nach Avoriaz, bei dem Bernard Hinault Joop Zoetemelk das Gelbe Trikot abnahm. Und 2010 war es Alberto Contador, der beim hier gestarteten Prolog des Critérium du Dauphiné triumphierte."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 15ª vez<br />\nMunicipio del departamento de Alta Saboya (74)<br />\nHabitantes 9.300 (Évianais y Évianaises)<br />\n<br />\n Esta pequeña localidad a orillas del lago Lemán era ya una prestigiosa estación balnearia cuando fue elegida como primer municipio provincial para lo que en 1926 aún no se conocía como Gran Départ. En aquella época, la ciudad balneario acogió el Tour durante 12 ediciones consecutivas. También en el siglo XX, los ciclistas volvieron a Évian en 1979 para la salida de una contrarreloj, con 55 km por recorrer hasta Avoriaz, donde el ganador Bernard Hinault le arrebató el maillot amarillo a Joop Zoetemelk. Más recientemente, la Critérium del Dauphiné 2010 comenzó en Évian con la victoria de Alberto Contador en el prólogo."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et16-evian-gettyimages-2228015326-11zon/69802/393:0,1692:1299-0-0-70/5e409"
+      },
+      "label": "Évian-les-Bains",
+      "id": 29335,
+      "updatedBy": "malbarelli",
+      "cityLangs": [],
+      "code": "evian-les-bains",
+      "updatedAt": "2025-10-17T17:26:54+02:00"
+    },
+    "endTime": "17:50:00",
+    "isCancelled": false,
+    "date": "2026-07-21T00:00:00+02:00",
+    "length": 26.1,
+    "showGroups": false,
+    "startTime": "13:00:00",
+    "_id": "873524f689a83bf204502034a2093e0dc0700615dad69b457b6971f23a478929",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781788234184,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "stage": 7,
+    "type": "PLN",
+    "arrivalCity": {
+      "code": "bordeaux",
+      "id": 29522,
+      "cityLangs": [],
+      "label": "Bordeaux",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpeg/et7-bordeaux-place-de-la-bourse-et-son-miroir-d-eau-bordeauxcalexander-demyanenko/69476/674:0,2993:2319-0-0-70/7b452",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 82e fois<br />\nPréfecture de la Gironde (33) et chef-lieu de la Région Nouvelle-Aquitaine<br />\nHabitants : 266 000 (Bordelais et Bordelaises)<br />\n<br />\nLa préfecture de Nouvelle-Aquitaine n’est distancée que par Paris au classement de la fidélité au Tour, et pourrait presque rivaliser en tant que capitale du sprint, à l’examen du palmarès des 81 arrivées jugées depuis 1903. Rik Van Looy, André Darrigade, Walter Godefroot, Freddy Maertens, Danny Van Poppel, Erik Zabel, Mark Cavendish ou encore Jasper Philipsen lors de la dernière visite en 2023 : les plus grands spécialistes l’ont emporté au vélodrome de Lescure ou sur les quais. Et pourtant, le recordman des victoires d’étapes dans la ville reste Eddy Merckx, qui s’y est imposé à quatre reprises, dont trois fois dans des contre-la-montre."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 82nd time<br />\nPrefecture of Gironde (33) and capital of the Nouvelle-Aquitaine region<br />\nPopulation: 266,000 (Bordelais and Bordelaises)<br />\n<br />\nThe prefecture of Nouvelle-Aquitaine is second only to Paris in terms of Tour visits and, based on the list of winners of the 81 finishes since 1903, just about rivals it as the capital of sprinting. The greatest specialists have won either at the Lescure velodrome or on Bordeaux’s quaysides, including Rik Van Looy, André Darrigade, Walter Godefroot, Freddy Maertens, Danny Van Poppel, Erik Zabel, Mark Cavendish and, on the last visit in 2023, Jasper Philipsen. However, the record holder for stage victories in the city is Eddy Merckx, who won here four times, including three time trial successes."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 82. Mal Etappenort<br />\nPräfektur des Departements Gironde (33) und Hauptort der Region Nouvelle-Aquitaine<br />\nEinwohner*innen 266 000<br />\n<br />\n Was die Tour-Teilnahme anbelangt, wird die Präfektur der Region Nouvelle-Aquitaine nur von Paris übertroffen. Mit 81 gewerteten Zielankünften seit 1903 gilt sie als Hauptstadt der Sprinter. Von Rik Van Looy über André Darrigade, Walter Godefroot, Freddy Maertens und Erik Zabel bis zu Mark Cavendish und Jasper Philipsen (2023) haben hier die größten Spezialisten triumphiert, sei es im Vélodrome Lescure oder auf den Kais. Der Rekordhalter für Etappensiege in der Stadt bleibt jedoch Eddy Merckx, der hier viermal gewann, davon dreimal im Zeitfahren. "
+            ]
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 82.ª vez<br />\nPrefectura del departamento de la Gironda (33) y capital de la región de Nueva Aquitania<br />\nHabitantes 266.000 (bordeleses y bordelesas)<br />\n<br />\n La prefectura de Nueva Aquitania solo es superada por París en el ranking de fidelidad al Tour y podría casi rivalizar con ella como capital del esprint, a juzgar por el palmarés de las 81 llegadas acogidas en la localidad desde 1903. Rik Van Looy, André Darrigade, Walter Godefroot, Freddy Maertens, Danny Van Poppel, Erik Zabel, Mark Cavendish o Jasper Philipsen en la última visita en 2023: los mejores especialistas han ganado en el velódromo de Lescure o en los muelles. Sin embargo, el récord de victorias de etapa en la ciudad sigue perteneciendo a Eddy Merckx, que se impuso en cuatro ocasiones, tres de ellas en etapas contrarreloj."
+            ],
+            "locale": "es"
+          }
+        ]
+      }
+    },
+    "startTime": "13:25:00",
+    "date": "2026-07-10T00:00:00+02:00",
+    "isCancelled": false,
+    "id": 25325,
+    "timezone": "Europe/Paris",
+    "showGroups": true,
+    "length": 175.1,
+    "departureCity": {
+      "updatedBy": "malbarelli",
+      "content": {
+        "texts": [
+          {
+            "text": [
+              "<br />\nVille-étape inédite<br />\nCommune des Landes (40)<br />\nHabitants : 4 650 (Hagetmaniens et Hagetmaniennes)<br />\n<br />\nOn cultive le savoir-faire de la chaise et du fauteuil dans le bourg landais d’Hagetmau. Mais les spectateurs n’étaient probablement pas assis en 2021, alors que le peloton traversait la commune à l’occasion d’une des dernières étapes, promise à un coureur échappé. Ce jour-là, l’étape était partie de Mourenx dans le département voisin des Hautes-Pyrénées, en direction de Libourne où Matej Mohoric avait levé les bras en solitaire pour la deuxième fois sur cette édition, après sa victoire au Creusot."
+            ],
+            "locale": "fr"
+          },
+          {
+            "text": [
+              "<br />\nA new stage town<br />\nCommune in Landes (40)<br />\nPopulation: 4,650 (Hagetmaniens and Hagetmaniennes)<br />\n<br />\nThe Landes village of Hagetmau is renowned for its expertise in chair and armchair manufacturing. But spectators probably weren’t sitting down when the peloton passed through the commune on one of the final stages in the 2021 race, which was destined to be won by a breakaway rider. The stage had started in Mourenx, in the neighbouring department of Hautes-Pyrénées, and headed to Libourne, where Matej Mohorič celebrated victory for the second time in that race having already won at Le Creusot."
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nErstmaliger Etappenort<br />\nGemeinde im Departement Landes (40)<br />\nEinwohner*innen 4 650<br />\n<br />\n Hagetmau im Departement Landes ist weithin für sein Savoir-faire in der Herstellung von Stühlen und Sesseln bekannt. 2021 konnte sich das Publikum jedoch kaum auf seinen Sitzgelegenheiten halten, als das Peloton auf einer der letzten Etappen, die ein Ausreißer für sich entscheiden sollte, durch die Gemeinde rollte. Die Etappe startete in Mourenx im benachbarten Departement Hautes-Pyrénées und endete in Libourne, wo Matej Mohorič nach seinem Erfolg in Le Creusot seinen zweiten Solosieg dieser Tour feierte."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa inédita<br />\nMunicipio del departamento de Las Landas (40)<br />\nHabitantes 4.650 (Hagetmaniens y Hagetmaniennes)<br />\n<br />\n La localidad landesa de Hagetmau es conocida por su tradición artesana, más concretamente por la fabricación de sillas y sillones. Dicho esto, es harto improbable que los espectadores estuvieran sentados en 2021 cuando el pelotón atravesó el municipio en una de las últimas etapas, que se saldaría finalmente con la victoria de un integrante de la fuga. Ese día, la etapa partió de Mourenx, en el vecino departamento de Hautes Pyrénées, en dirección a Libourne, donde Matej Mohoric alzó los brazos en solitario por segunda vez en dicha edición tras su victoria en Le Creusot."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et7-hagetmau/69477/0:486,1944:2430-0-0-70/4e801"
+      },
+      "cityLangs": [],
+      "createdAt": "2025-10-17T17:24:01+02:00",
+      "updatedAt": "2025-10-17T17:24:01+02:00",
+      "id": 32674,
+      "createdBy": "malbarelli",
+      "label": "Hagetmau",
+      "country": {
+        "id": 1964,
+        "code": "fra"
+      },
+      "code": "hagetmau"
+    },
+    "lengthDisplay": 175.5,
+    "podiumDisplayMode": "instantpodium",
+    "endTime": "17:24:00",
+    "_id": "dfa6157c0a3ed5562706a2851792616752762b77b16c8337a822ec1827ba4a0b",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012493247,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "endTime": "17:40:00",
+    "podiumDisplayMode": "instantpodium",
+    "lengthDisplay": 161.5,
+    "departureCity": {
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et11-vichy-gettyimages-2190689987-11zon/69800/1076:0,2475:1399-0-0-70/91df6",
+        "texts": [
+          {
+            "text": [
+              "<br />\nVille-étape pour la 2e fois<br />\nSous-préfecture de l’Allier (03)<br />\nHabitants 25 800 (Vichyssois et Vichyssoises)<br />\n<br />\n Le Tour de France a très régulièrement visité l’Allier ces dernières années, notamment lors de l’étape remportée à Moulins en 2023 par Jasper Philipsen. Pour sa part, la station thermale du département, inscrite au patrimoine mondial de l’UNESCO au côté de dix autres grandes villes d’eau européennes avait accueilli une seule arrivée du Tour de France en 1952. Lors de ce contre-la-montre parti de Clermont-Ferrand, c’est Fiorenzo Magni qui s’était imposé à la veille de l’arrivée finale, sans toutefois faire d’ombre au leader de l’équipe italienne Fausto Coppi, dominateur incontesté de cette édition. En 2025, c’est pour une étape de Paris-Nice que le peloton avait été réuni à Vichy, direction la Loge des Gardes où Joao Almeida s’était imposé. "
+            ],
+            "locale": "fr"
+          },
+          {
+            "text": [
+              "<br />\nStage town for the second time<br />\nSub-prefecture of Allier (03)<br />\nPopulation: 25,800 (Vichyssois and Vichyssoises)<br />\n<br />\nThe Tour de France has visited the department of Allier regularly in recent years, notably for the stage won to Moulins in 2023 by Jasper Philipsen. As for the department’s spa town, listed as a UNESCO World Heritage Site alongside ten other Great Spa Towns of Europe, it had hosted only one Tour de France finish before — in 1952. On the penultimate day of that edition, Fiorenzo Magni won a time trial that started in Clermont-Ferrand, although Fausto Coppi, his compatriot and leader of the Italian team, was already right out of his rivals’ sight by that point. In 2025, the peloton gathered in Vichy for a Paris-Nice stage that finished in La Loge des Gardes, where João Almeida was the victor."
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "<br />\nZum 2. Mal Etappenort<br />\nUnterpräfektur des Departements Allier (03)<br />\nEinwohner*innen 25 800<br />\n<br />\n Die Tour de France war in den letzten Jahren regelmäßig im Departement Allier zu Gast, etwa 2023 in Moulins, wo Jasper Philipsen die Etappe gewann. Der Kurort Vichy hingegen war in seiner Geschichte nur einmal Zielort der Tour: 1952 endete hier ein Zeitfahren, das in Clermont-Ferrand gestartet war. Fiorenzo Magni setzte sich am Vorabend der Schlussetappe durch, konnte seinem Teamkapitän Fausto Coppi jedoch kaum Zeit abnehmen – der Italiener dominierte diese Ausgabe souverän. Im Jahr 2025 kehrte der Radsportzirkus nach Vichy zurück, diesmal im Rahmen von Paris–Nizza. Von hier aus führte die Etappe nach La Loge des Gardes, wo João Almeida den Sieg errang."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 2ª vez<br />\nSubprefectura del departamento de Allier (03)<br />\nHabitantes 25.800 (Vichyssois y Vichyssoises)<br />\n<br />\n Aunque el Tour de Francia ha visitado con regularidad el departamento de Allier en los últimos años, especialmente durante la etapa ganada en Moulins en 2023 por Jasper Philipsen, la estación termal del departamento solo ha acogido una llegada del Tour de Francia en toda su historia, concretamente la de 1952. En esa contrarreloj que partió de Clermont-Ferrand, Fiorenzo Magni se impuso en la víspera de la llegada final, sin eclipsar por ello al líder del equipo italiano Fausto Coppi, ganador indiscutible de esa edición. En 2025, el pelotón se reunió en Vichy para una etapa de la París-Niza, en dirección a la Loge des Gardes, donde se impuso Joao Almeida."
+            ],
+            "locale": "es"
+          }
+        ]
+      },
+      "cityLangs": [],
+      "label": "Vichy",
+      "id": 29426,
+      "code": "vichy"
+    },
+    "length": 161.3,
+    "showGroups": true,
+    "timezone": "Europe/Paris",
+    "id": 25330,
+    "isCancelled": false,
+    "date": "2026-07-15T00:00:00+02:00",
+    "startTime": "14:05:00",
+    "arrivalCity": {
+      "id": 29420,
+      "code": "nevers",
+      "label": "Nevers",
+      "cityLangs": [],
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 4e fois<br />\nPréfecture de la Nièvre (58)<br />\nHabitants 33 200 (Neversois et Neversoises)<br />\n<br />\n Idéalement placée sur la diagonale du soleil, la préfecture de la Nièvre est l’une des villes les plus fréquentées par Paris-Nice. À ce stade de la course, ce sont le plus souvent des sprinteurs qui ont trouvé matière à s’y exprimer, comme Mario Cipollini (1992-93), Tom Steels (1998), Jaan Kirsipuu (1999-2000) ou Gert Steegmans pour la dernière arrivée en peloton (2008). Mais au printemps dernier c’est un chrono par équipe qui s’est joué entre le circuit et la ville, remporté par les Visma | Lease a Bike du futur vainqueur Matteo Jorgenson. Le Tour n’y est plus venu depuis 2003 et un sprint gagnant d’Alessandro Petacchi."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nStage town for the 4th time<br />\nPrefecture of Nièvre (58)<br />\nPopulation: 33,200 (Neversois and Neversoises)<br />\n<br />\nIdeally placed on the diagonal route of “the race to the sun”, Nièvre’s prefecture is one of the towns most frequented by Paris-Nice. Coming early on in the race, it’s tended to favour sprinters, including Mario Cipollini (1992-93), Tom Steels (1998), Jaan Kirsipuu (1999-2000) and Gert Steegmans on the last bunch finish in 2008. However, last spring, a team time trial run between the motor-racing circuit and the town was won by the Visma | Lease a Bike line-up that featured Matteo Jorgenson, who went on to win the race. The Tour hasn’t been here since 2003, when Alessandro Petacchi won the bunch sprint."
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 4. Mal Etappenort<br />\nPräfektur des Departements Nièvre (58)<br />\nEinwohner*innen 33 200<br />\n<br />\n Die Präfektur des Departements Nièvre – ideal gelegen auf der Diagonale des „Rennens zur Sonne“ – zählt zu den häufigsten Etappenorten von Paris–Nizza. In dieser Phase des Rennens waren es meist die Sprinter, die hier glänzten: Mario Cipollini (1992/1993), Tom Steels (1998), Jaan Kirsipuu (1999/2000) oder Gert Steegmans beim letzten Massensprint im Jahr 2008. Im Frühjahr 2025 stand Nevers erneut im Mittelpunkt, diesmal mit einem Mannschaftszeitfahren zwischen der Autorennstrecke und dem Stadtzentrum. Den Sieg holte sich Visma | Lease a Bike – mit dem späteren Sieger der Gesamtwertung Matteo Jorgenson. Die Tour de France selbst war zuletzt 2003 in Nevers zu Gast, als Alessandro Petacchi im Sprint triumphierte."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 4ª vez<br />\nPrefectura del departamento de Nièvre (58)<br />\nHabitantes 33.200 (Neversois y Neversoises)<br />\n<br />\n Con una ubicación ideal bañada por el sol, la prefectura de Nièvre es una de las ciudades más frecuentadas por la París-Niza. En esta etapa de la carrera, suelen ser los esprínters los que brillan, como Mario Cipollini (1992-93), Tom Steels (1998), Jaan Kirsipuu (1999-2000) o Gert Steegmans en la última llegada en pelotón (2008). Sin embargo, la primavera pasada se disputó una contrarreloj por equipos entre el circuito y la ciudad, que ganó el Visma | Lease a Bike del futuro ganador Matteo Jorgenson. El Tour no ha vuelto a esta localidad desde 2003, edición que vio ganar a Alessandro Petacchi al esprint."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et11-nevers-gettyimages-1049060296-11zon/69809/345:0,1761:1416-0-0-70/b916c"
+      }
+    },
+    "type": "PLN",
+    "stage": 11,
+    "_id": "f84e104d97468ba337478a4d0df0cb9a10211d61c5257c46ddafefc03285f672",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012758474,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "lengthDisplay": 155.5,
+    "endTime": "17:38:00",
+    "podiumDisplayMode": "instantpodium",
+    "departureCity": {
+      "cityLangs": [],
+      "label": "Mulhouse",
+      "code": "mulhouse",
+      "id": 29551,
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille à vélo 3 vélos (2022)<br />\nVille-étape pour la 18e fois<br />\nSous-préfecture du Haut-Rhin (68)<br />\nHabitants 105 000 (Mulhousiens et Mulhousiennes)<br />\n<br />\n Le plus grand musée de l’automobile du monde, la Cité de l’Automobile, se trouve à Mulhouse, tout comme la Cité du train. Mais la ville a aussi quelques belles histoires de vélo à raconter. Ainsi, au terme de la première étape du Tour 1926, le vainqueur Jules Buysse y endossait le Maillot Jaune, finalement remporté à Paris par… Lucien Buysse, son frère aîné. Il n’y a qu’un seul autre exemple d’une fratrie, également belge, qui ait porté le Maillot Jaune dans une même édition du Tour : Romain et Sylvère Maes en 1939. C’est aussi à Mulhouse que Tony Martin a signé une de ses rares victoires hors chrono, sur le Tour 2014."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nStage city for the 18th time<br />\nSub-prefecture of Haut-Rhin (68)<br />\nPopulation: 105,000 (Mulhousiens and Mulhousiennes)<br />\n<br />\nThe world’s largest car museum, the Cité de l’Automobile, is located in Mulhouse, as is the Cité du Train museum. The city also has some great cycling tales to tell. At the end of the opening day of the 1926 Tour, the stage winner Jules Buysse pulled on the Yellow Jersey, which was ultimately won in Paris by... Lucien Buysse, his older brother. On only one other occasion have siblings worn the Yellow Jersey in the same edition of the Tour, and they were Belgian too: Romain and Sylvère Maes in 1939. During the 2014 Tour, Mulhouse also witnessed one of Tony Martin’s rare non-time trial victories."
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 18. Mal Etappenort<br />\nUnterpräfektur des Departements Haut-Rhin (68)<br />\nEinwohner*innen 105 000<br />\n<br />\n In Mulhouse befindet sich das größte Automobilmuseum der Welt, die Cité de l'Automobile, wie auch das Eisenbahnmuseum, Cité du train. Doch die Stadt hat auch einige bemerkenswerte Radsportgeschichten zu erzählen. 1926 schlüpfte Jules Buysse nach seinem Etappensieg in Mulhouse ins Gelbe Trikot – das später in Paris an seinen älteren Bruder Lucien ging. Ein Brüderpaar im Maillot Jaune gab es sonst nur einmal in der Tour-Geschichte: 1939 mit den Belgiern Romain und Sylvère Maes. Und 2014 jubelte Tony Martin in Mulhouse über einen seiner seltenen Siege abseits des Zeitfahrens."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 18.ª vez<br />\nSubprefectura del departamento del Alto Rin (68)<br />\nHabitantes 105.000 (Mulhousianos y Mulhousianas)<br />\n<br />\n El museo del automóvil más grande del mundo, la Cité de l'Automobile, se encuentra en Mulhouse, al igual que la Cité du Train. Dicho esto, la ciudad también tiene algunas bonitas historias que contar sobre el ciclismo. A modo de ejemplo, al término de la primera etapa del Tour de 1926, el ganador Jules Buysse se enfundó el maillot amarillo, que finalmente ganó en París su hermano mayor, Lucien Buysse. Solo hay otro ejemplo de hermanos, también belgas, que hayan vestido el maillot amarillo en una misma edición del Tour: Romain y Sylvère Maes en 1939. Fue también en Mulhouse donde Tony Martin consiguió una de sus escasas victorias fuera del contexto de las contrarrelojes, concretamente en el Tour de 2014. "
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et14-mulhouse-11zon/69797/493:0,3758:3265-0-0-70/48bce"
+      }
+    },
+    "length": 155.3,
+    "showGroups": true,
+    "timezone": "Europe/Paris",
+    "id": 25333,
+    "isCancelled": false,
+    "startTime": "13:30:00",
+    "arrivalCity": {
+      "createdBy": "hkohler",
+      "code": "le-markstein-fellering",
+      "label": "Le Markstein Fellering",
+      "country": {
+        "id": 1964,
+        "code": "fra"
+      },
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et14-le-marktein-grand-ballon-le-marksteinctristan-vuano-adt/69812/811:0,4480:3669-0-0-70/af3cf",
+        "texts": [
+          {
+            "text": [
+              "<br />\nSite-étape pour la 2e fois<br />\nStation de tourisme de montagne et sommet (1 265 m) du massif des Vosges dans le Haut-Rhin (68) rattachée à la commune d’Oderen<br />\nHabitants 1 250 (Odernois et Odernoises)<br />\n<br />\n Durant les années 80, deux étapes de la Coupe du monde de ski alpin ont été organisées dans la station vosgienne. Bien après la légende suédoise Ingemar Stenmark, une autre championne s’est illustrée au Markstein à l’occasion du Tour de France Femmes avec Zwift 2022 : Annemiek Van Vleuten y a pris le Maillot Jaune en éloignant définitivement toutes ses rivales. Et, en 2023, Tadej Pogacar avait mis un point d’honneur à s’imposer dans les derniers jours d’un Tour qui lui échappait, au grand dam de Thibaut Pinot, privé devant son public d’un succès dont il rêvait pour achever son ultime Tour."
+            ],
+            "locale": "fr"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage site for the second time<br />\nMountain resort and summit (1,265m) in the Vosges mountains in Haut-Rhin (68) attached to the commune of Oderen<br />\nPopulation: 1,250 (Odernois and Odernoises)<br />\n<br />\nDuring the 1980s, two rounds of the Alpine Skiing World Cup were organised in the Vosges resort. Long after Swedish legend Ingemar Stenmark had tasted success here, another champion made her mark at Le Markstein during the 2022 Tour de France Femmes avec Zwift: Annemiek van Vleuten took the Yellow Jersey here and effectively tied up the overall title such was her advantage at the line. And in 2023, Tadej Pogačar made it a point of honour to win here in the final days of a Tour that was slipping away from him, much to the consternation of Thibaut Pinot, who was denied the victory in front of his home fans that he’d been dreaming of in his last Tour."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nZum 2. Mal Etappenstation<br />\nZur Gemeinde Oderen gehörender Wintersportort und Gipfel (1265 m) in den Vogesen im Departement Haut-Rhin (68)<br />\nEinwohner*innen 1 250<br />\n<br />\n In den 1980er-Jahren machte das Wintersportgebiet in den Vogesen als Schauplatz zweier Weltcup-Rennen im alpinen Skisport von sich reden. Lange nach der Ära der schwedischen Legende Ingemar Stenmark schrieb hier eine andere große Sportlerin Geschichte: Bei der Tour de France Femmes avec Zwift 2022 eroberte Annemiek van Vleuten in Le Markstein das Gelbe Trikot und das sie dann nicht mehr abgeben sollte. Und 2023 setzte Tadej Pogačar alles daran, in den letzten Tagen einer für ihn verlorenen Tour noch einen Etappensieg zu feiern – sehr zum Leidwesen von Thibaut Pinot, der vor heimischem Publikum um den ersehnten Triumph seiner Abschiedstour gebracht wurde."
+            ],
+            "locale": "de"
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nLugar etapa por 2ª vez<br />\nEstación de turismo de montaña y cima (1.265 m) del macizo de los Vosgos en el Alto Rin (68), perteneciente al municipio de Oderen<br />\nHabitantes 1.250 (Odernois y Odernoises)<br />\n<br />\n Durante los años 80, se organizaron dos etapas de la Copa del Mundo de esquí alpino en la estación de los Vosgos. Mucho después de la leyenda sueca Ingemar Stenmark, otra campeona se distinguió en Markstein con motivo del Tour de France Femmes avec Zwift 2022: Annemiek Van Vleuten se hizo con el maillot amarillo alejando definitivamente a todas sus rivales. Y, en 2023, Tadej Pogacar se propuso ganar en los últimos días de un Tour que se le escapaba, para gran disgusto de Thibaut Pinot, privado ante su público del éxito con el que soñaba para completar su último Tour."
+            ]
+          }
+        ]
+      },
+      "updatedBy": "hkohler",
+      "updatedAt": "2022-10-27T08:14:01+02:00",
+      "id": 32645,
+      "cityLangs": [],
+      "createdAt": "2022-10-27T08:14:01+02:00"
+    },
+    "date": "2026-07-18T00:00:00+02:00",
+    "stage": 14,
+    "type": "HMG",
+    "_id": "8087e0289dce432fecf8e6710b9f0ee5e33378d4480ca3001b0237c990d4ab31",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012652960,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "showGroups": true,
+    "timezone": "Europe/Paris",
+    "length": 158.3,
+    "departureCity": {
+      "label": "Lannemezan",
+      "cityLangs": [],
+      "id": 29924,
+      "code": "lannemezan",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et5-lannemezan-11zon/69473/494:0,3518:3024-0-0-70/e038e",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 6e fois<br />\nCommune des Hautes-Pyrénées (65)<br />\nHabitants : 5 900 (Lannemezanais et Lannemezanaises)<br />\n<br />\nLa ville se prête aussi bien à l’éclosion de talents pour les sports de montagne que pour le rugby. C’est ainsi que l’ancien capitaine du XV de France, Pierre Berbizier, a aiguisé son sens tactique au CA Lannemezan, bien avant que la commune ne voie naître l’un de ses successeurs, Antoine Dupont. Parmi les enfants de Lannemezan, se distinguent aussi Paul-Henri de Le Rue, médaillé de bronze en snowboard aux Jeux de Turin (2006) et Marie-Laure Brunet, 3e à Vancouver (2010) de la poursuite en biathlon. Sur le Tour, le cinquième départ donné de Lannemezan, en 2015, avait lancé Joaquim Rodriguez vers sa troisième victoire d’étape, au Plateau de Beille."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 6th time<br />\nCommune in Hautes-Pyrénées (65)<br />\nPopulation: 5,900 (Lannemezanais and Lannemezanaises)<br />\n<br />\nThe town has produced significant talents in both winter sports and rugby. Former France rugby captain Pierre Berbizier honed his tactical skills at CA Lannemezan. A good while later, the commune was the birthplace of one of his successors, Antoine Dupont, who’s the current captain of the French national team. Other notable athletes who’ve emerged from Lannemezan include Paul-Henri de Le Rue, a snowboarding bronze medallist at the Turin Olympics (2006), and Marie-Laure Brunet, who was third in the biathlon pursuit in Vancouver (2010). With regard to the Tour, the fifth stage start from Lannemezan in 2015 was the launchpad for Joaquim Rodríguez’s third stage victory at Plateau de Beille."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 6. Mal Etappenort<br />\nGemeinde im Departement Hautes-Pyrénées (65)<br />\nEinwohner*innen 5 900<br />\n<br />\n Lannemezan hat sowohl im Wintersport als auch im Rugby große Namen hervorgebracht. Pierre Berbizier, einst Kapitän der französischen Rugby-Nationalmannschaft, begann hier beim CA Lannemezan – und mit Antoine Dupont brachte die Stadt später einen seiner Nachfolger hervor. Auch Olympiamedaillengewinner wie der Snowboarder Paul-Henri de Le Rue (Bronze 2006 in Turin) und die Biathletin Marie-Laure Brunet (Bronze 2010 in Vancouver) stammen aus der Gemeinde. Bei der Tour de France war Lannemezan 2015 zum fünften Mal Startort – und Ausgangspunkt für Joaquim Rodríguez’ dritten Etappensieg auf dem Plateau de Beille."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 6ª vez<br />\nMunicipio del departamento de Hautes-Pyrénées (65)<br />\nHabitantes 5.900 (Lannemezanais y Lannemezanaises)<br />\n<br />\n La ciudad se presta tanto a la eclosión de talentos en el universo de los deportes de montaña como del rugby. Así, el antiguo capitán del XV de Francia, Pierre Berbizier, agudizó su sentido táctico en el CA Lannemezan mucho antes de que el municipio viera nacer a uno de sus sucesores, Antoine Dupont. Entre los hijos predilectos de Lannemezan destacan también Paul-Henri de Le Rue, medalla de bronce en snowboard en los Juegos de Turín (2006), y Marie-Laure Brunet, tercera en Vancouver (2010) en la prueba de persecución de biatlón. En el Tour, la quinta salida desde Lannemezan, en 2015, lanzó a Joaquim Rodríguez hacia su tercera victoria de etapa en el Plateau de Beille."
+            ],
+            "locale": "es"
+          }
+        ]
+      }
+    },
+    "podiumDisplayMode": "instantpodium",
+    "endTime": "17:46:00",
+    "lengthDisplay": 158.5,
+    "type": "PLN",
+    "stage": 5,
+    "date": "2026-07-08T00:00:00+02:00",
+    "startTime": "14:15:00",
+    "arrivalCity": {
+      "code": "pau",
+      "id": 29559,
+      "cityLangs": [],
+      "label": "Pau",
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 77e fois<br />\nPréfecture des Pyrénées-Atlantiques (64)<br />\nHabitants : 77 600 (Palois et Paloises), 162 000 dans les 32 communes de la Communauté d’agglomération Pau Béarn Pyrénées<br />\n<br />\nL’histoire débutée en 1930 a installé Pau comme camp de base du Tour, avant ou après l’escalade des Pyrénées. Sa situation se prête à tous les profils d’étapes, comme en témoigne la liste des vainqueurs dans la cité d’Henri IV, allant des grimpeurs René Vietto et Fausto Coppi aux baroudeurs comme Pierrick Fédrigo, en passant par les sprinteurs Sean Kelly, Robbie McEwen, Arnaud Démare et en 2024, Jasper Philipsen. En 2019, c’est dans la capitale du Béarn qu’a été fêté le centenaire de l’apparition du Maillot Jaune, magistralement honoré par Julian Alaphilippe."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage city for the 77th time<br />\nPrefecture of Pyrénées-Atlantiques (64)<br />\nPopulation: 77,600 (Palois and Paloises); 162,000 within the 32 communes comprising the Pau Béarn Pyrénées municipality<br />\n<br />\nPau’s status as the Tour’s base camp either before or after climbs in the Pyrenees began in 1930. Its location lends itself to every type of stage, which is backed up by the list of winners in Henry IV’s home town, who range from climbers like René Vietto and Fausto Coppi to breakaway specialists such as Pierrick Fédrigo and to sprinters like Sean Kelly, Robbie McEwen, Arnaud Démare and, in 2024, Jasper Philipsen. In 2019, the capital of Béarn celebrated the centenary of the Yellow Jersey, when Julian Alaphilippe honoured it with a masterful performance."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 77. Mal Etappenort<br />\nPräfektur des Departements Pyrénées-Atlantiques (64)<br />\nEinwohner*innen 77 600 in Pau, 162 000 in den 32 Kommunen des Gemeindeverbands Pau Béarn Pyrénées<br />\n<br />\n Seit 1930 ist Pau eng mit der Tour de France verbunden. Im Laufe der Zeit hat sich die Geburtsstadt Heinrichs IV. als Basislager vor oder nach den anspruchsvollen Pyrenäen-Etappen etabliert. Die Siegerliste ist so bunt wie die Streckenprofile: Kletterer wie René Vietto und Fausto Coppi, Ausreißer wie Pierrick Fédrigo und Sprinter wie Sean Kelly, Robbie McEwen, Arnaud Démare oder Jasper Philipsen, der 2024 hier triumphierte. 2019 feierte die Hauptstadt der Provinz Béarn das hundertjährige Jubiläum des Gelben Trikots, das von Julian Alaphilippe mit einem Etappensieg in Gelb würdig begangen wurde."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 77.ª vez<br />\nPrefectura del departamento de Pyrénées-Atlantiques (64)<br />\nHabitantes 77.600 (Palois y Paloises), 162.000 en los 32 municipios de la aglomeración de Pau Béarn Pyrénées<br />\n<br />\n La historia, que comenzó en 1930, ha convertido a Pau en el campamento base del Tour antes o después de encarar los Pirineos. Su ubicación se presta a todo tipo de etapas, como avala la lista de corredores que saborearon el éxito en la ciudad de Enrique IV, que va desde los escaladores René Vietto y Fausto Coppi hasta baroudeurs como Pierrick Fédrigo, pasando por los velocistas Sean Kelly, Robbie McEwen, Arnaud Démare y, en 2024, Jasper Philipsen. En 2019, la capital de Bearne celebró el centenario de la aparición del Maillot Amarillo, una fecha especial magistralmente honrada por Julian Alaphilippe. "
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et5-pau-gettyimages/69472/96:21,1484:1409-0-0-70/3296b"
+      }
+    },
+    "isCancelled": false,
+    "id": 25322,
+    "_id": "185e4136886ae3f1f9ccdc007703aa9ed152e2f7551fb0252696910879593739",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012567195,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "podiumDisplayMode": "instantpodium",
+    "endTime": "17:08:00",
+    "lengthDisplay": 196,
+    "departureCity": {
+      "updatedAt": "2025-10-17T17:22:55+02:00",
+      "id": 32671,
+      "cityLangs": [],
+      "createdAt": "2025-10-17T17:22:55+02:00",
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape inédite<br />\nCommune de la communauté autonome de Catalogne<br />\nHabitants : 64 200 (Granollerenses)<br />\n<br />\nLa proche voisine de Barcelone est une référence pour les amateurs de handball. Les joueurs du Club Balonmano Granollers ont remporté 13 fois le championnat d’Espagne dans les années 50, 60 et 70, et ont même triomphé sur la scène européenne en 1995 et 1996. Côté vélo, la ville a accueilli le Tour de Catalogne à de nombreuses reprises, mais pas encore au XXIe siècle : Freddy Maertens sur un contre-la-montre en 1977 puis Laurent Jalabert en 1993 restent les deux derniers vainqueurs d’étapes à Granollers."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nA new stage town<br />\nMunicipality in the autonomous community of Catalonia<br />\nPopulation: 64,200 (Granollerenses)<br />\n<br />\nBarcelona’s close neighbour has a real reputation among handball fans. The Club Balonmano Granollers won the Spanish championship 13 times in the 1950s, 1960s and 1970s, and also triumphed on the European stage in 1995 and 1996. When it comes to cycling, the town has hosted the Tour of Catalonia on numerous occasions, although not in the 21st century: Freddy Maertens, winner of a time trial in 1977, and, in 1993, Laurent Jalabert were the last two stage winners in Granollers."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nErstmaliger Etappenort<br />\nGemeinde der Autonomen Gemeinschaft Katalonien<br />\nEinwohner*innen 64 200<br />\n<br />\n Die Nachbarstadt von Barcelona ist Handballfans bestens bekannt: Der Club Balonmano Granollers gewann in den 50er-, 60er- und 70er-Jahren ganze 13 Mal die spanische Meisterschaft und feierte 1995 und 1996 sogar europäische Triumphe. Aber auch der Radsport hat hier Geschichte geschrieben – mehrfach machte die Katalonien-Rundfahrt in Granollers Station, zuletzt mit Etappensiegen von Freddy Maertens im Zeitfahren 1977 und Laurent Jalabert 1993."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa inédita<br />\nMunicipio de la comunidad autónoma de Cataluña<br />\nHabitantes 64.200 (granollerenses)<br />\n<br />\n Esta localidad vecina a Barcelona es toda una referencia para los aficionados al balonmano. Los jugadores del Club Balonmano Granollers ganaron el campeonato de España en los años 50, 60 y 70 en trece ocasiones, y triunfaron incluso en la escena europea en 1995 y 1996. En cuanto al ciclismo, la ciudad ha acogido con frecuencia la Vuelta a Cataluña, pero no en el siglo XXI: Freddy Maertens en una contrarreloj en 1977 y Laurent Jalabert en 1993 son los dos últimos ganadores de etapa en Granollers."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et3-granollers-place-de-la-porxada-11zon/69468/879:0,4614:3735-0-0-70/2edad"
+      },
+      "updatedBy": "malbarelli",
+      "code": "granollers",
+      "label": "Granollers",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "createdBy": "malbarelli"
+    },
+    "length": 195.9,
+    "showGroups": true,
+    "timezone": "Europe/Paris",
+    "id": 25320,
+    "isCancelled": false,
+    "date": "2026-07-06T00:00:00+02:00",
+    "startTime": "12:20:00",
+    "arrivalCity": {
+      "createdBy": "malbarelli",
+      "label": "Les Angles",
+      "country": {
+        "code": "fra",
+        "id": 1964
+      },
+      "code": "les-angles",
+      "updatedBy": "malbarelli",
+      "content": {
+        "texts": [
+          {
+            "text": [
+              "<br />\nVille-étape inédite<br />\nCommune des Pyrénées-Orientales (66)<br />\nHabitants : 600 (Anglois et Angloises)<br />\n<br />\nL’été, la station pyrénéenne est notamment prisée des adeptes de VTT, qui s’y donnent rendez-vous pour des courses de descente. Mais elle a aussi accueilli en 2022 une arrivée de la Route d’Occitanie, où le Canadien Michael Woods avait pris les commandes du classement général en même temps qu’il remportait nettement l’étape devant Carlos Rodriguez. Si le peloton du Tour de France n’a encore jamais fréquenté Les Angles, il a en revanche pris à deux reprises le départ chez sa voisine Font-Romeu : en 1968 pour prendre la direction d’Albi, puis en 1976 alors que l’étape mettait le cap sur Saint-Gaudens."
+            ],
+            "locale": "fr"
+          },
+          {
+            "text": [
+              "<br />\nA new stage town<br />\nCommune in Pyrénées-Orientales (66)<br />\nPopulation: 600 (Anglois and Angloises)<br />\n<br />\nIn summer, this Pyrenean resort is very popular with mountain bikers, who gather there for downhill races. In 2022, it also hosted a stage finish of the Route d’Occitanie, when Canadian Michael Woods took the lead in the overall classification after taking the day’s honours ahead of Carlos Rodríguez. Although the Tour de France peloton has never visited Les Angles, neighbouring Font-Romeu has hosted two stage starts: in 1968, when the riders headed for Albi, and in 1976, when the stage went to Saint-Gaudens."
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "<br />\nErstmaliger Etappenort<br />\nGemeinde im Departement Pyrénées-Orientales (66)<br />\nEinwohner*innen 600<br />\n<br />\n Les Angles ist im Sommer ein wahres Mekka für Mountainbikerinnen und Mountainbiker, die sich hier bei spektakulären Downhill-Rennen messen. 2022 war der Ort zudem Etappenziel der Route d’Occitanie: Der Kanadier Michael Woods übernahm dort die Gesamtführung und gewann die Etappe klar vor Carlos Rodriguez. Die Tour de France selbst machte bisher hier noch nie Halt – wohl aber in der Nachbarstadt Font-Romeu, wo sie 1968 in Richtung Albi und 1976 nach Saint-Gaudens startete."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa inédita<br />\nMunicipio del departamento de Pyrénées-Orientales (66)<br />\nHabitantes 600 (anglois y angloises)<br />\n<br />\n En verano, esta estación pirenaica es muy popular entre los aficionados al ciclismo de montaña, que recalan en ella para participar en carreras de descenso. En 2022 también acogió una llegada de la Route d'Occitanie, en la que el canadiense Michael Woods se puso al frente de la clasificación general al tiempo que ganaba con rotundidad la etapa por delante de Carlos Rodríguez. Aunque el pelotón del Tour de Francia nunca ha pasado por Les Angles, sí ha tomado la salida en dos ocasiones en la vecina Font-Romeu: en 1968, para dirigirse a Albi, y en 1976, cuando la etapa puso rumbo a Saint-Gaudens."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et3-les-angles-les-angles-ete-panoramique-17/69469/673:0,3161:2488-0-0-70/a702a"
+      },
+      "cityLangs": [],
+      "createdAt": "2025-10-17T17:23:19+02:00",
+      "updatedAt": "2025-10-17T17:23:19+02:00",
+      "id": 32672
+    },
+    "type": "HMG",
+    "stage": 3,
+    "_id": "ce08c2daf6912c65670729a5acf84d170c77d108f135e85694623b4fdb293c03",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012477296,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "departureCity": {
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 4e fois<br />\nPréfecture de la Savoie (73)<br />\nHabitants 60 300 (Chambériens et Chambériennes)<br />\n<br />\n Porte d’entrée privilégiée vers toutes les vallées de Savoie, la préfecture du département a vu passer le peloton du Tour de façon quasi systématique. Et pourtant, la Cité des Ducs n’a connu qu’une seule arrivée d’étape, pendant l’été 2017. Le final avait été particulièrement mouvementé après l’ascension du Mont du Chat : chute et abandon dans la descente pour Richie Porte, offensive de Romain Bardet derrière le rescapé de l’échappée Warren Barguil, regroupement d’une élite de six cadors dont le Maillot Jaune Chris Froome, et un sprint jugé à la photo-finish en faveur de Rigoberto Uran devant le grimpeur breton, récompensé de ses efforts du jour par le maillot à pois."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 4th time<br />\nPrefecture of Savoie (73)<br />\nPopulation: 60,300 (Chambériens and Chambériennes)<br />\n<br />\nA key gateway to Savoie’s valleys, the department’s prefecture has regularly seen the Tour peloton pass through. However, the “City of the Dukes” has only hosted a single stage finish, in the summer of 2017. Coming after the climb over Mont du Chat, it proved particularly eventful: Richie Porte crashed and abandoned the race on the descent, Romain Bardet attacked behind Warren Barguil, the last survivor from the breakaway, and a group of six leading riders came together on the run-in, including Yellow Jersey Chris Froome. The sprint ended in a photo finish in which Rigoberto Urán edged out Breton climber Barguil, who was rewarded for his day’s efforts with the polka dot jersey."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 4. Mal Etappenort<br />\nPräfektur des Departements Savoie (73)<br />\nEinwohner*innen 60 300<br />\n<br />\n Das Peloton rollte im Laufe der Jahre immer wieder durch Chambéry, die Präfektur der Savoie und Drehscheibe der zahlreichen Täler des Departements. Doch nur einmal, im Sommer 2017, endete eine Etappe in der Cité des Ducs. Nach dem Anstieg zum Mont du Chat nahm das Finale einen turbulenten Verlauf. Richie Porte stürzte auf der Abfahrt und musste aufgeben, Romain Bardet attackierte hinter dem letzten Ausreißer Warren Barguil, und schließlich formierte sich eine Spitzengruppe von sechs Favoriten um Chris Froome im Gelben Trikot. Im Sprint setzte sich dann Rigoberto Urán hauchdünn vor Barguil durch, der sich mit dem Gepunkteten Trikot trösten durfte."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 4ª vez<br />\nPrefectura del departamento de Saboya (73)<br />\nHabitantes 60.300 (Chambériens y Chambériennes)<br />\n<br />\n Puerta de entrada privilegiada a todos los valles de Saboya, la prefectura del departamento ha visto desfilar al pelotón del Tour casi por defecto. Sin embargo, la llamada Ciudad de los Duques solo ha acogido una llegada de etapa, concretamente durante el verano de 2017. El final fue especialmente agitado tras la ascensión al Mont du Chat: caída y abandono en el descenso de Richie Porte, ofensiva de Romain Bardet por detrás del superviviente de la escapada Warren Barguil, reagrupamiento de una élite de seis favoritos, entre ellos el maillot amarillo Chris Froome, y un esprint decidido en la foto finish a favor de Rigoberto Urán por delante del escalador bretón, recompensado por sus esfuerzos ese día con el maillot de lunares."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et17-chambery-gettyimages-177006887-11zon/69807/608:0,2648:2040-0-0-70/38c8f"
+      },
+      "label": "Chambery",
+      "cityLangs": [],
+      "id": 29334,
+      "code": "chambery"
+    },
+    "lengthDisplay": 175,
+    "endTime": "17:28:00",
+    "podiumDisplayMode": "instantpodium",
+    "showGroups": true,
+    "timezone": "Europe/Paris",
+    "length": 174.7,
+    "isCancelled": false,
+    "id": 25337,
+    "stage": 17,
+    "type": "PLN",
+    "arrivalCity": {
+      "label": "Voiron",
+      "cityLangs": [],
+      "code": "voiron",
+      "id": 29344,
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 2e fois<br />\nCommune de l’Isère (38)<br />\nHabitants 21 900 (Voironnais et Voironnaises)<br />\n<br />\n La commune iséroise est connue pour la célèbre liqueur des Pères Chartreux dont le secret de fabrication est gardé depuis plusieurs siècles, et presque autant pour avoir accueilli au monde la discobole médaillée olympique et mondiale Melina Robert-Michon, ainsi que la handballeuse championne du monde (2003) Véronique Pecqueux-Rolland. Voisine de Grenoble, Voiron a vu triompher à l’occasion du Critérium du Dauphiné deux très sérieux coureurs de classiques belges : Stan Ockers en 1956 et Wout van Aert en 2019."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nStage town for the second time<br />\nCommune in Isère (38)<br />\nPopulation: 21,900 (Voironnais and Voironnaises)<br />\n<br />\nThis commune in Isère is primarily renowned for the famous Chartreuse liqueur made by the Carthusian monks, whose secret recipe has been kept for several centuries, but it’s also the birthplace of Olympic and world discus champion Melina Robert-Michon, as well as 2003 world handball champion Véronique Pecqueux-Rolland. Set close to Grenoble, Voiron has witnessed victories by two very significant Belgian Classics riders in the Critérium du Dauphiné: Stan Ockers in 1956 and Wout van Aert in 2019."
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 2. Mal Etappenort<br />\nGemeinde im Departement Isère (38)<br />\nEinwohner*innen 21 900<br />\n<br />\n Voiron ist doppelt berühmt: Zum einen für den Likör der Kartäusermönche, dessen Rezept seit Jahrhunderten geheim gehalten wird, und zum anderen für große Sportlerinnen wie die Diskuswerferin Mélina Robert-Michon, mehrfache Olympia- und WM-Medaillengewinnerin, sowie die Handball-Weltmeisterin von 2003, Véronique Pecqueux-Rolland. Als Nachbarstadt von Grenoble hat Voiron auch im Radsport Spuren hinterlassen: Beim Critérium du Dauphiné triumphierten hier zwei belgische Klassiker-Spezialisten – Stan Ockers 1956 und Wout van Aert 2019."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 2ª vez<br />\nMunicipio del departamento de Isère (38)<br />\nHabitantes 21.900 (Voironnais y Voironnaises)<br />\n<br />\n Este municipio del departamento de Isère es conocido por el famoso licor de los monjes cartujos, cuya fórmula se ha mantenido secreta durante siglos, y también por haber visto nacer a la lanzadora de disco y medallista olímpica y mundial Melina Robert-Michon, así como a la jugadora de balonmano campeona del mundo (2003) Véronique Pecqueux-Rolland. Vecina de Grenoble, Voiron ha sido testigo del triunfo en la Critérium del Dauphiné de dos importantes ciclistas clásicos belgas: Stan Ockers en 1956 y Wout van Aert en 2019."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et17-voiron-fetes-de-la-chartreuse-cville-de-voiron/69796/735:0,4740:4005-0-0-70/8b716"
+      }
+    },
+    "startTime": "13:35:00",
+    "date": "2026-07-22T00:00:00+02:00",
+    "_id": "0cd1639487e7086115459614e40423e7b928c28644ba27c13a841786d67f6106",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012317926,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "stage": 15,
+    "type": "HMG",
+    "date": "2026-07-19T00:00:00+02:00",
+    "arrivalCity": {
+      "content": {
+        "texts": [
+          {
+            "text": [
+              "<br />\nSite-étape inédit<br />\nCol (1 497 m) du massif des Bornes dans les Alpes en Haute-Savoie (74) rattaché à la commune de Brison (ou Brizon)<br />\nHabitants 470 (Brisonniers et Brisonnières)<br />\n<br />\n On découvre des talents sur le Tour de l’Avenir, et également des lieux promis à un destin prestigieux. C’est le cas pour le Plateau de Solaison, qui figurait au programme de la course des espoirs en 2014. L’ascension finale de l’étape avait sélectionné un Top 5 dans lequel on trouvait notamment Miguel Angel Lopez, Pierre Latour et Giulio Ciccone. Le Critérium du Dauphiné a ensuite envoyé les champions s’y départager pour l’ultime étape en 2017, l’occasion pour Jakob Fuglsang de déposséder Richie Porte du maillot de leader. En 2022, cette dernière journée était dominée par les Jumbo-Visma : le bouquet pour Jonas Vingegaard, la victoire finale pour Primoz Roglic, le tout main dans la main."
+            ],
+            "locale": "fr"
+          },
+          {
+            "text": [
+              "<br />\nA new stage site<br />\nPass (1,497m) in the Bornes massif in the Alps in Haute-Savoie (74), attached to the commune of Brison (or Brizon)<br />\nPopulation: 470 (Brisonniers and Brisonnières)<br />\n<br />\nThe Tour de l’Avenir is the race where young talent is discovered, often highlighting riders destined for a prestigious future. This was the case at Plateau de Solaison, which featured on the route of the 2014 edition of this under-23 race. At the end of the stage’s final climb, the top five included Miguel Ángel López, Pierre Latour and Giulio Ciccone. The Critérium du Dauphiné then sent its champions to battle it out there on the final stage in 2017, when Jakob Fuglsang took the opportunity to remove the leader’s jersey from Richie Porte’s shoulders. In 2022, the final day was dominated by Jumbo-Visma: the stage went to Jonas Vingegaard and overall victory to Primož Roglič after the pair had finished hand in hand."
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nErstmalige Etappenstation<br />\nZur Gemeinde Brison (oder Brizon) gehörender Pass (1497 m) der Bornes-Alpen im Departement Haute-Savoie (74)<br />\nEinwohner*innen 470<br />\n<br />\n Die Tour de l’Avenir, frührer als „Tour de France der Amateure“ bezeichnet und heute das wichtigste Etappenrennen für Nachwuchsfahrer, führte 2014 erstmals auf das Plateau de Solaison. Dort kristallisierte sich im Schlussanstieg eine 5er-Spitzengruppe mit Miguel Ángel López, Pierre Latour und Giulio Ciccone heraus. 2017 wurde hier die Schlussetappe des Critérium du Dauphiné ausgetragen, bei der Jakob Fuglsang Richie Porte im packenden Finale noch das Gelbe Trikot entreißen konnte. Und 2022 schrieb das Team Jumbo-Visma hier Geschichte – Jonas Vingegaard holte den Tagessieg, Primož Roglič die Gesamtwertung – sie fuhren Hand in Hand ins Ziel ein."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nLugar etapa inédito<br />\nPuerto (1.497 m) del massif des Bornes, en los Alpes, en Alta Saboya (74), perteneciente al municipio de Brison (o Brizon)<br />\nHabitantes 470 (Brisonniers y Brisonnières)<br />\n<br />\n En el Tour del Porvenir se descubren talentos, pero también lugares con un destino prometedor. Es el caso del Plateau de Solaison, que figuraba en el programa de la carrera de promesas en 2014. La ascensión final de la etapa seleccionó a los cinco primeros, entre los que se encontraban Miguel Ángel López, Pierre Latour y Giulio Ciccone. La Critérium del Dauphiné envió a los campeones a disputarse la última etapa en 2017, lo que le dio a Jakob Fuglsang la oportunidad de arrebatarle el maillot de líder a Richie Porte. En 2022, esta última jornada estuvo dominada por el Jumbo-Visma: el ramillete fue para Jonas Vingegaard y la victoria final para Primoz Roglic."
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et15-plateau-de-solaison-chateau-des-sires-de-faucigny-de-bonneville-cccfg/69810/821:0,4474:3653-0-0-70/eb458"
+      },
+      "code": "plateau-de-solaison",
+      "id": 30304,
+      "cityLangs": [],
+      "label": "Plateau de Solaison"
+    },
+    "startTime": "13:20:00",
+    "isCancelled": false,
+    "id": 25334,
+    "timezone": "Europe/Paris",
+    "showGroups": true,
+    "length": 183.9,
+    "departureCity": {
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et15-champagnole-hotel-de-ville-atville-de-champagnole/69791/1542:0,5002:3460-0-0-70/15f33",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 4e fois<br />\nCommune du Jura (39)<br />\nHabitants 8 100 (Champagnolais et Champagnolaises)<br />\n<br />\n Par vocation géographique, la « Perle du Jura » a surtout vu grandir des sportifs de ski nordique, comme Sylvain Guillaume, médaillé olympique de combiné nordique, ou le quintuple médaillé olympique de biathlon à Pékin, Quentin Fillon-Maillet. Le Tour l’a découverte en 1937 pour un chrono collectif remporté par l’équipe de Belgique du tenant du titre Sylvère Maes. En 1964, après un départ en direction de Thonon-les-Bains, Raymond Poulidor s’était invité dans une échappée qui avait contraint l’équipe Saint-Raphaël de Jacques Anquetil à mener grand train. Leur duel était déjà bien lancé. L’unique arrivée jugée à Champagnole, en 2020, a été réglée par Soren Kragh Andersen, échappé en solitaire."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the 4th time<br />\nCommune in Jura (39)<br />\nPopulation: 8,100 (Champagnolais and Champagnolaises)<br />\n<br />\nDue to its geographical location, the “Pearl of the Jura” has generally produced Nordic skiers, such as Sylvain Guillaume, an Olympic medallist in the Nordic combined, and Quentin Fillon-Maillet, the five-time Olympic medallist in the biathlon in Beijing. The Tour first came here in 1937 for a team time trial won by the Belgian team of defending champion Sylvère Maes. In 1964, early on in his duel with Jacques Anquetil, Raymond Poulidor joined a breakaway on a stage from Champagnole to Thonon-les-Bains, forcing his arch-rival’s Saint-Raphaël team into frantic pursuit. The only finish at Champagnole, in 2020, was won by lone breakaway Søren Kragh Andersen."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 4. Mal Etappenort<br />\nGemeinde im Departement Jura (39)<br />\nEinwohner*innen 8 100<br />\n<br />\n Die auch „Perle des Jura“ genannte Gemeinde hat zahlreiche Größen des nordischen Skisports hervorgebracht, darunter Sylvain Guillaume, Olympiamedaillengewinner in der nordischen Kombination, und Quentin Fillon-Maillet, der bei den Spielen in Peking fünfmal Edelmetall im Biathlon holte. Die Tour machte 1937 mit einem Mannschaftszeitfahren, das das belgische Team des Titelverteidigers Sylvère Maes für sich entschied, erstmals hier Station. 1964, nach dem Start in Richtung Thonon-les-Bains, schloss sich Raymond Poulidor einer Ausreißergruppe an und zwang damit das Team Saint-Raphaël von Jacques Anquetil zu harter Tempoarbeit – ihr legendäres Duell war längst eröffnet. Die bislang einzige Zielankunft in Champagnole, 2020, gewann Søren Kragh Andersen als Solist."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 4ª vez<br />\nMunicipio del departamento del Jura (39)<br />\nHabitantes 8.100 (Champagnolais y Champagnolaises)<br />\n<br />\n Por su ubicación geográfica, la “Perla del Jura” ha visto crecer sobre todo a deportistas de esquí nórdico, como Sylvain Guillaume, medallista olímpico de combinada nórdica, o Quentin Fillon-Maillet, cinco veces medallista olímpico de biatlón en Pekín. El Tour la descubrió en 1937 con una contrarreloj por equipos ganada por el equipo belga del vigente campeón Sylvère Maes. En 1964, tras la salida hacia Thonon-les-Bains, Raymond Poulidor se sumó a una escapada que obligó al equipo Saint-Raphaël de Jacques Anquetil a marcar un ritmo muy alto. Su duelo ya estaba en marcha. La única llegada disputada en Champagnole, en 2020, la ganó Soren Kragh Andersen, que se escapó en solitario."
+            ]
+          }
+        ]
+      },
+      "cityLangs": [],
+      "label": "Champagnole",
+      "id": 29516,
+      "code": "champagnole"
+    },
+    "podiumDisplayMode": "instantpodium",
+    "endTime": "17:55:00",
+    "lengthDisplay": 184,
+    "_id": "7e9e83501c166a930fe23675c3abfad207c89df1acebba7eea1f0e2825d39385",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781012350007,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  },
+  {
+    "departureCity": {
+      "updatedBy": "malbarelli",
+      "code": "tarragone",
+      "label": "Tarragone",
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape inédite<br />\nCommune de la communauté autonome de Catalogne<br />\nHabitants : 141 200 (Tarragonais et Tarragonaises)<br />\n<br />\nLes vestiges romains de Tarragone et en particulier son amphithéâtre du IIe siècle, bâti en surplomb de la mer Méditerranée, lui valent sa présence au patrimoine mondial de l’UNESCO. Bien avant le Tour 2026, la cité a été liée à la France par l’accueil des Pères Chartreux, qui y ont trouvé refuge après avoir été chassés de leur distillerie de Voiron. La célèbre liqueur aux 130 plantes a donc été également produite à Tarragone, désormais jumelée avec la commune iséroise. Ce partenariat a été signé l’été dernier à l’occasion du passage de La Vuelta, dont le peloton a fait étape à 18 reprises à Tarragone entre 1936 et 2023, avant de découvrir Voiron. "
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nA new stage town<br />\nMunicipality in the autonomous community of Catalonia<br />\nPopulation: 141,200 (Tarragonais and Tarragonaises)<br />\n<br />\nTarragona’s Roman ruins, and particularly its 2nd-century amphitheatre overlooking the Mediterranean, have earned it UNESCO World Heritage Status. Long before the 2026 Tour, the city had ties with France thanks to the Carthusian monks who found refuge there after being expelled from their distillery in Voiron. As a result, their famous Chartreuse liqueur, which is made using 130 plants, was also produced in Tarragona, which is now twinned with the commune in the department of Isère. This partnership was signed last summer during the Vuelta, which featured Tarragona 18 times as a stage town between 1936 and 2023 before it ventured to Voiron."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nErstmaliger Etappenort<br />\nGemeinde der Autonomen Gemeinschaft Katalonien<br />\nEinwohner*innen 141 200<br />\n<br />\n Die römischen Ruinen von Tarragona, allen voran das Amphitheater aus dem 2. Jahrhundert direkt am Mittelmeer, haben der Stadt einen Platz auf der UNESCO-Welterbeliste gesichert. Lange vor der Tour 2026 verband die Stadt bereits eine besondere Geschichte mit Frankreich: Sie gewährte den Kartäusermönchen Zuflucht, nachdem diese aus ihrer Brennerei in Voiron vertrieben worden waren. Der berühmte Likör aus 130 Kräutern wurde also auch in Tarragona hergestellt, das heute mit der Gemeinde Voiron im Departement Isère verpartnert ist. Im vergangenen Sommer wurde die Partnerschaft anlässlich der Durchfahrt der Vuelta besiegelt. Die Spanien-Rundfahrt hatte zuvor zwischen 1936 und 2023 bereits 18 Mal in Tarragona Halt gemacht, ehe sie erstmals Voiron ansteuerte."
+            ],
+            "locale": "de"
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa inédita<br />\nMunicipio de la comunidad autónoma de Cataluña<br />\nHabitantes 141.200 (tarraconenses)<br />\n<br />\n Los vestigios romanos de Tarragona y, en particular, su anfiteatro del siglo XI, que se alza sobre el mar Mediterráneo, han sido declarados Patrimonio de la Humanidad por la UNESCO. Mucho antes del Tour 2026, la ciudad ya estaba vinculada a Francia por la acogida de los monjes cartujos, que encontraron refugio en ella tras ser expulsados de su destilería de Voiron. Así, el famoso licor elaborado a partir de 130 plantas también se ha producido en Tarragona, actualmente hermanada con la localidad de Isère. Este hermanamiento se firmó el verano pasado con motivo del paso de La Vuelta, cuyo pelotón hizo etapa en Tarragona en 18 ocasiones entre 1936 y 2023 antes de recalar en Voiron."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et2-tarragone-amfitheatre-romain-alberich-fotografs-tarragona-turisme-11zon/69467/172:0,2101:1929-0-0-70/c74d5"
+      },
+      "id": 32670,
+      "cityLangs": [],
+      "updatedAt": "2025-10-17T17:22:19+02:00",
+      "createdBy": "malbarelli",
+      "createdAt": "2025-10-17T17:22:19+02:00",
+      "country": {
+        "code": "esp",
+        "id": 1959
+      }
+    },
+    "isCancelled": false,
+    "showGroups": true,
+    "id": 25319,
+    "timezone": "Europe/Madrid",
+    "date": "2026-07-05T00:00:00+02:00",
+    "stage": 2,
+    "startTime": "13:55:00",
+    "lengthDisplay": 168.5,
+    "length": 168.5,
+    "podiumDisplayMode": "instantpodium",
+    "type": "VAL",
+    "endTime": "17:35:00",
+    "arrivalCity": {
+      "label": "Barcelone",
+      "content": {
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 6e fois<br />\nCapitale de la communauté autonome de Catalogne. 2e ville d’Espagne<br />\nHabitants : 1 670 000 (Barcelonais et Barcelonaises)<br />\n<br />\nC’est dans la deuxième ville d’Espagne qu’a été créée en 1911 la plus ancienne course par étapes du pays, à l’initiative de l’hebdomadaire sportif devenu quotidien El Mundo Deportivo. Le recordman de titres sur le Tour de Catalogne, Mariano Canardo (1928-29-30-32-35-36-39) n’a remporté qu’une étape du Tour de France, lors de l’édition 1937 (Ax-les-Thermes), mais deux de ses successeurs ont inscrit à leur palmarès une victoire sur le Tour de France la même année. C’était le cas de Miguel Indurain en 1991 et 1992, et de Tadej Pogacar qui a nettement pris ses marques sur la colline de Montjuïc lors de son succès en 2024."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nStage town for the 6th time<br />\nCapital of the autonomous community of Catalonia. Spain’s second largest city<br />\nPopulation: 1,670,000 (Barcelonais and Barcelonaises)<br />\n<br />\nSpain’s second city was the birthplace of the country’s oldest stage race. Created in 1911, the Volta a Catalunya was launched by the weekly sports newspaper El Mundo Deportivo, which later became a daily. Mariano Cañardo holds the record for Tour of Catalonia titles (1928-29-30-32-35-36-39), although he only won a single stage of the Tour de France, in 1937 at Ax-les-Thermes. However, two of his successors managed to win the Tour de France in the same year as the Volta. Miguel Induráin achieved this feat in 1991 and 1992, while Tadej Pogačar won the final stage on the hill at Montjuïc during his victory in 2024."
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 6. Mal Etappenort<br />\nHauptstadt der Autonomen Gemeinschaft Katalonien und zweitgrößte Stadt Spaniens<br />\nEinwohner*innen 1 670 000<br />\n<br />\n In Spaniens zweitgrößter Stadt wurde 1911 auf Initiative der damals noch wöchentlich erscheinenden Sportzeitung El Mundo Deportivo das älteste Etappenrennen des Landes ins Leben gerufen. Mariano Cañardo, mit sieben Erfolgen Rekordsieger der Katalonien-Rundfahrt, feierte bei der Tour de France nur einen Etappensieg – 1937 in Ax-les-Thermes. Zwei seiner Nachfolger hingegen konnten im selben Jahr sowohl die Volta a Catalunya als auch eine Etappe der Frankreich-Rundfahrt gewinnen. Miguel Induráin gelang dieses Kunststück 1991 und 1992. Tadej Pogačar knüpfte 2024 daran an, als er bei seinem Gesamtsieg 2024 die Schlussetappe auf Barcelonas Hausberg Montjuïc für sich entschied."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nCiudad etapa por 6ª vez<br />\nCapital de la comunidad autónoma de Cataluña. 2ª ciudad española<br />\nHabitantes 1.670.000 (barceloneses y barcelonesas)<br />\n<br />\n Fue precisamente en la segunda ciudad española donde se creó en 1911 la carrera por etapas más antigua del país a iniciativa del semanario deportivo posteriormente convertido en diario El Mundo Deportivo. El plusmarquista de títulos en la Vuelta a Cataluña, Mariano Canardo (1928-29-30-32-35-36-39), solo ganó una etapa del Tour de Francia, concretamente en la edición de 1937 (Ax-les-Thermes), pero dos de sus sucesores inscribieron en su palmarés una victoria en la ronda gala ese mismo año. También brilló en la ciudad condal Miguel Indurain en 1991 y 1992 y, más recientemente, de Tadej Pogacar, que dejó huella en la colina de Montjuïc con su victoria en 2024."
+            ],
+            "locale": "es"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et2-barcelone-chateau-de-montjuic-getty-images-mediterranean-11zon/69466/366:0,1782:1416-0-0-70/95a9d"
+      },
+      "id": 29639,
+      "cityLangs": [],
+      "code": "barcelone"
+    },
+    "_id": "531305f6b8bb4fa80a3255c2c118edc5301f7e1f9ac580adb1596e42d0266d0e",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1781016407965,
+    "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
+    "_key": "stage"
+  }
+]

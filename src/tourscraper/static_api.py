@@ -107,9 +107,13 @@ def fetch_profiles(cfg: Config) -> None:
     urls = discover_profile_urls(cfg, session)
     if not urls:
         print(
-            "[profiles] none discovered automatically. Open the racecenter in your "
-            "browser during a stage, export a HAR (see README), then run: "
-            "python -m tourscraper har <file.har>"
+            "[profiles] none discovered automatically. As of 2026 this CSV path "
+            "appears to be gone from the site (confirmed: no /profils or .csv "
+            "references in the app bundle, no profile field on any stage in "
+            "/api/stage-2026) — this isn't just a live-vs-not-live timing issue. "
+            "Open the racecenter in your browser during a stage, export a HAR "
+            "(see README), then run: python -m tourscraper har <file.har> to find "
+            "the real 2026 mechanism."
         )
         return
     shared = cfg.year_dir / "profiles"
