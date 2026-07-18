@@ -16,5 +16,29 @@
     "kind": "profile",
     "source": "https://racecenter.letour.fr/profils/2026/profile-14-tiny-834ffcff770e3aca72553d1778212efa.csv",
     "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-18T04:12:37.425+00:00",
+    "kind": "poll",
+    "endpoints": [
+      "flashInfoLive",
+      "checkpointList"
+    ]
+  },
+  {
+    "recorded_at": "2026-07-18T04:12:37.426+00:00",
+    "kind": "live-stream",
+    "action": "start"
+  },
+  {
+    "recorded_at": "2026-07-18T04:14:15.548+00:00",
+    "kind": "live-stream",
+    "action": "stop",
+    "counts": {
+      "telemetry": 0,
+      "groups": 0,
+      "events": 0,
+      "raw-only": 4
+    }
   }
 ]
