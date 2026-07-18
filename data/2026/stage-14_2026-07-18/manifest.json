@@ -1,80 +1,12 @@
 [
   {
-    "recorded_at": "2026-07-17T23:58:28+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-14-7cd66b6883091ae55eac33a73c6e4026.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-18T04:11:34.346+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-14-7cd66b6883091ae55eac33a73c6e4026.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-18T04:11:34.369+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-14-tiny-834ffcff770e3aca72553d1778212efa.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-18T04:12:37.425+00:00",
+    "recorded_at": "2026-07-18T12:20:24.379+00:00",
     "kind": "poll",
     "endpoints": [
+      "publication",
+      "insights",
       "flashInfoLive",
       "checkpointList"
     ]
-  },
-  {
-    "recorded_at": "2026-07-18T04:12:37.426+00:00",
-    "kind": "live-stream",
-    "action": "start"
-  },
-  {
-    "recorded_at": "2026-07-18T04:14:15.548+00:00",
-    "kind": "live-stream",
-    "action": "stop",
-    "counts": {
-      "telemetry": 0,
-      "groups": 0,
-      "events": 0,
-      "raw-only": 4
-    }
-  },
-  {
-    "recorded_at": "2026-07-18T10:25:01.175+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-14-7cd66b6883091ae55eac33a73c6e4026.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-18T10:25:01.193+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-14-tiny-834ffcff770e3aca72553d1778212efa.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-18T11:45:31.657+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-14-7cd66b6883091ae55eac33a73c6e4026.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-18T11:45:31.666+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-14-tiny-834ffcff770e3aca72553d1778212efa.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-18T12:13:33.616+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-14-7cd66b6883091ae55eac33a73c6e4026.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-18T12:13:33.620+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-14-tiny-834ffcff770e3aca72553d1778212efa.csv",
-    "via": "autodiscover"
   }
 ]
