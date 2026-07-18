@@ -21,6 +21,7 @@ from pathlib import Path
 
 from .autodiscover import run_autodiscover
 from .backfill import reparse_backfill, run_backfill
+from .events_parse import write_events
 from .config import load_config
 from .har_discover import analyze_har
 from .live_stream import record_live, reparse
@@ -87,6 +88,9 @@ def main() -> None:
     p = sub.add_parser("reparse")
     p.add_argument("stage_dir")
 
+    p = sub.add_parser("events")
+    p.add_argument("stage_dir", help="e.g. data/2026/stage-14_2026-07-18")
+
     args = parser.parse_args()
     cfg = load_config(args.config)
 
@@ -106,6 +110,8 @@ def main() -> None:
         run_autodiscover(cfg, watch_seconds=args.watch_seconds, apply_config=not args.no_apply)
     elif args.command == "reparse":
         reparse(Path(args.stage_dir), cfg.year)
+    elif args.command == "events":
+        write_events(Path(args.stage_dir))
     else:
         store_needed = args.command in ("live", "poll", "radio")
         stop_after = int(args.max_hours * 3600)
