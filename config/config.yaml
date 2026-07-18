@@ -13,12 +13,23 @@ competitors_endpoint: "/api/allCompetitors-{year}"
 stages_endpoint: "/api/stage-{year}"
 teams_endpoint: "/api/team-{year}"
 
-# Fallback pollers. If the detailed commentary/event feed turns out to be a
-# plain JSON endpoint instead of an SSE bind, discover it with
-# `python -m tourscraper har capture.har` and add it here:
-poll_endpoints: {}
-#  commentary: "https://racecenter.letour.fr/api/..."
-poll_interval_seconds: 30
+# Fallback/complementary pollers -- confirmed live against the real 2026 site
+# (2026-07-17, via `autodiscover`) as actual REST JSON endpoints, not guesses:
+#   flashInfoLive-{year}-{stage}   -- the detailed timestamped event/commentary
+#                                     feed itself (data source #1). Empty `[]`
+#                                     off-hours; that's expected pre-race.
+#   checkpointList-{year}-{stage}  -- checkpoint locations + pass schedule,
+#                                     keyed the same way as the profile CSV's
+#                                     cpnumero column -- this is what lets the
+#                                     Navigator place the leader on the
+#                                     elevation map (data source #2, cross-
+#                                     checked against the SSE telemetry).
+# Both need --stage passed on the command line to resolve {stage}; without it
+# poll_loop skips them rather than polling a broken URL all session.
+poll_endpoints:
+  flashInfoLive: "/api/flashInfoLive-{year}-{stage}"
+  checkpointList: "/api/checkpointList-{year}-{stage}"
+poll_interval_seconds: 15
 
 # Radio Tour / live radio stream URL. Find via the HAR command (look for
 # audio/mpegurl entries while the radio player is open), then paste here.

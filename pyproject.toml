@@ -3,7 +3,7 @@ name = "tourscraper"
 version = "0.1.0"
 description = "Scrapers that archive Tour de France live data (telemetry, events, elevation profiles, radio) for the Tour Tools project"
 requires-python = ">=3.10"
-dependencies = ["requests>=2.31", "PyYAML>=6.0", "beautifulsoup4>=4.12"]
+dependencies = ["requests>=2.31", "PyYAML>=6.0", "beautifulsoup4>=4.12", "playwright>=1.40"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

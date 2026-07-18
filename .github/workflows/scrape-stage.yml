@@ -1,21 +1,41 @@
 # Runs the full stage capture on GitHub's servers — your computer can be off.
 #
+# Two jobs, gated by which schedule fired (see the `if:` on each job), so one
+# workflow file covers both:
+#
+#   discover  - runs early (well before the stage), headless-browses
+#               racecenter.letour.fr with Playwright to grab whatever needs a
+#               real browser session: the elevation-profile CSV (its filename
+#               has an unpredictable content hash, not guessable from static
+#               HTML/JS) and, best-effort, the radio stream URL. Commits any
+#               config.yaml / data changes back to main so the scrape job
+#               below picks them up.
+#   scrape    - the actual capture: SSE live-stream + the confirmed 2026 REST
+#               poll endpoints (flashInfoLive = the event feed, checkpointList
+#               = checkpoint pass data) + radio. Commits data/ back when done.
+#
 # Notes:
-# - Times below are UTC. TdF stages typically roll ~10:00–17:30 UTC; adjust
-#   per the official schedule (early starts on long stages, later on short ones).
-# - GitHub-hosted jobs are capped at 6 hours, which covers a stage if you start
-#   near stage start. The workflow commits data back to the repo when done, and
-#   ALSO uploads it as an artifact mid-failure-proofing.
+# - Times below are UTC and were set against a specific real stage start/finish
+#   (13:30-17:38 CEST); RECOMPUTE THEM for every stage — start times vary by
+#   several hours across the Tour. Stage start/end times are in
+#   data/2026/reference/stages.json once you've run `bootstrap`.
+# - GitHub-hosted jobs are hard-capped at 6 hours; that's why `scrape` starts
+#   close to the actual race start rather than hours early.
 # - Radio audio is uploaded as an artifact rather than committed (repo bloat);
 #   flip the LFS section in the README if you'd rather commit it.
-# - cron can fire a few minutes late on GitHub; start it 15 min early.
+# - cron can fire a few minutes late on GitHub; both jobs start with a safety
+#   margin baked into the times below, not right at the edge.
 
 name: scrape-stage
 
 on:
   schedule:
-    # Every day at 09:45 UTC during the Tour window (edit dates/times!)
-    - cron: "45 9 * 7 *"
+    # discover: run ~2.5h before race start, only needs the site reachable,
+    # not the race live, since profile/checkpoint endpoints work pre-race too.
+    - cron: "0 9 * 7 *"
+    # scrape: start ~50min before race start, run long enough to comfortably
+    # cover a scheduled ~4h08m stage plus delay/finish-line buffer.
+    - cron: "40 10 * 7 *"
   workflow_dispatch:
     inputs:
       stage:
@@ -23,12 +43,55 @@ on:
         required: false
       max_hours:
         description: "Hours to record"
-        default: "5.75"
+        default: "5.5"
+      run_discover:
+        description: "Also run the discover job"
+        type: boolean
+        default: true
 
 jobs:
-  scrape:
+  discover:
+    if: github.event_name == 'workflow_dispatch' && inputs.run_discover || github.event.schedule == '0 9 * 7 *'
     runs-on: ubuntu-latest
-    timeout-minutes: 355
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install (incl. Playwright + headless Chromium)
+        run: |
+          pip install -e .
+          playwright install --with-deps chromium
+
+      - name: Run autodiscover
+        run: python -m tourscraper autodiscover --watch-seconds 150
+
+      - name: Commit any discovered config/data changes
+        run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add config/config.yaml data/
+          git commit -m "autodiscover: $(date -u +%F) findings" || echo "nothing to commit"
+          git pull --rebase origin ${GITHUB_REF_NAME} || true
+          git push || echo "push failed"
+
+      - name: Upload inventory as artifact too (belt and suspenders)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autodiscover-${{ github.run_id }}
+          path: data/*/reference/autodiscover-endpoints.json
+          retention-days: 30
+
+  scrape:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '40 10 * 7 *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
     permissions:
       contents: write
     steps:
@@ -41,15 +104,37 @@ jobs:
       - name: Install
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Determine today's stage number (unless one was given explicitly)
+        id: stage
+        run: |
+          python -m tourscraper bootstrap
+          MANUAL="${{ github.event.inputs.stage }}"
+          if [ -n "$MANUAL" ]; then
+            echo "number=$MANUAL" >> "$GITHUB_OUTPUT"
+          else
+            STAGE=$(python3 -c "
+          import json, datetime
+          data = json.load(open('data/2026/reference/stages.json'))
+          today = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d')
+          matches = [s for s in data if str(s.get('date','')).startswith(today)]
+          print(matches[0]['stage'] if matches else '')
+          ")
+            if [ -z "$STAGE" ]; then
+              echo "::error::no stage in stages.json matches today's date ($(date -u +%F)) -- pass ?stage= manually via workflow_dispatch"
+              exit 1
+            fi
+            echo "number=$STAGE" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Run capture
         env:
           TOUR_RADIO_URL: ${{ secrets.TOUR_RADIO_URL }}
         run: |
           python -m tourscraper stage \
-            --stage "${{ github.event.inputs.stage || '' }}" \
-            --max-hours "${{ github.event.inputs.max_hours || '5.75' }}"
+            --stage "${{ steps.stage.outputs.number }}" \
+            --max-hours "${{ github.event.inputs.max_hours || '5.5' }}"
 
       - name: Upload everything as artifact (belt and suspenders)
         if: always()

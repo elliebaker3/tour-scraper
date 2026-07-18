@@ -47,8 +47,8 @@ class Config:
     timeout_seconds: int = 20
     retry_backoff_seconds: list = field(default_factory=lambda: [2, 5, 15, 30, 60])
 
-    def url(self, endpoint_template: str) -> str:
-        return self.base_url.rstrip("/") + endpoint_template.format(year=self.year)
+    def url(self, endpoint_template: str, **fmt) -> str:
+        return self.base_url.rstrip("/") + endpoint_template.format(year=self.year, **fmt)
 
     @property
     def year_dir(self) -> Path:

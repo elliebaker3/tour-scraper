@@ -22,22 +22,34 @@ from .storage import StageStore, utcnow
 from .static_api import get_with_retry, make_session
 
 
-def poll_loop(cfg: Config, store: StageStore, stop_after_seconds: int | None = None) -> None:
+def poll_loop(cfg: Config, store: StageStore, stop_after_seconds: int | None = None,
+              stage: str | int | None = None) -> None:
     if not cfg.poll_endpoints:
         print("[poll] no poll_endpoints configured; skipping")
         return
     session = make_session(cfg)
-    writers = {name: store.poll_writer(name) for name in cfg.poll_endpoints}
+    # Templates with a literal {stage} placeholder need a real stage number;
+    # skip them (rather than polling a broken URL all session) if none given.
+    active_endpoints = {}
+    for name, endpoint in cfg.poll_endpoints.items():
+        if "{stage}" in endpoint and stage is None:
+            print(f"[poll] skipping '{name}' ({endpoint}): needs --stage, none given")
+            continue
+        active_endpoints[name] = endpoint
+    if not active_endpoints:
+        print("[poll] no usable poll_endpoints (see above); skipping")
+        return
+    writers = {name: store.poll_writer(name) for name in active_endpoints}
     last_hash: dict[str, str] = {}
     started = time.monotonic()
-    store.write_manifest({"kind": "poll", "endpoints": list(cfg.poll_endpoints)})
-    print(f"[poll] polling {list(cfg.poll_endpoints)} every {cfg.poll_interval_seconds}s")
+    store.write_manifest({"kind": "poll", "endpoints": list(active_endpoints)})
+    print(f"[poll] polling {list(active_endpoints)} every {cfg.poll_interval_seconds}s")
 
     while True:
         if stop_after_seconds and time.monotonic() - started > stop_after_seconds:
             break
-        for name, endpoint in cfg.poll_endpoints.items():
-            url = endpoint if endpoint.startswith("http") else cfg.url(endpoint)
+        for name, endpoint in active_endpoints.items():
+            url = endpoint if endpoint.startswith("http") else cfg.url(endpoint, stage=stage)
             try:
                 resp = get_with_retry(session, cfg, url)
                 body = resp.text

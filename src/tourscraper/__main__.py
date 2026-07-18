@@ -8,6 +8,7 @@
   python -m tourscraper radio --stage 14       # record radio stream
   python -m tourscraper stage --stage 14       # ALL of the above concurrently
   python -m tourscraper har capture.har        # discover endpoints from a HAR
+  python -m tourscraper autodiscover           # same discovery, headless, no browser needed
   python -m tourscraper reparse data/2026/stage-14_2026-07-18
 """
 
@@ -18,6 +19,7 @@ import threading
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .autodiscover import run_autodiscover
 from .backfill import reparse_backfill, run_backfill
 from .config import load_config
 from .har_discover import analyze_har
@@ -41,7 +43,7 @@ def cmd_stage(cfg, args) -> None:
     stop_after = int(args.max_hours * 3600)
     threads = [
         threading.Thread(target=record_live, args=(cfg, store, stop_after), daemon=True),
-        threading.Thread(target=poll_loop, args=(cfg, store, stop_after), daemon=True),
+        threading.Thread(target=poll_loop, args=(cfg, store, stop_after, args.stage), daemon=True),
         threading.Thread(target=record_radio, args=(cfg, store, stop_after), daemon=True),
     ]
     for t in threads:
@@ -77,6 +79,11 @@ def main() -> None:
     p = sub.add_parser("har")
     p.add_argument("har_file")
 
+    p = sub.add_parser("autodiscover")
+    p.add_argument("--watch-seconds", type=int, default=150)
+    p.add_argument("--no-apply", action="store_true",
+                   help="save the inventory but don't patch config.yaml")
+
     p = sub.add_parser("reparse")
     p.add_argument("stage_dir")
 
@@ -95,6 +102,8 @@ def main() -> None:
         fetch_profiles(cfg)
     elif args.command == "har":
         analyze_har(cfg, args.har_file)
+    elif args.command == "autodiscover":
+        run_autodiscover(cfg, watch_seconds=args.watch_seconds, apply_config=not args.no_apply)
     elif args.command == "reparse":
         reparse(Path(args.stage_dir), cfg.year)
     else:
@@ -107,7 +116,7 @@ def main() -> None:
             if args.command == "live":
                 record_live(cfg, store, stop_after)
             elif args.command == "poll":
-                poll_loop(cfg, store, stop_after)
+                poll_loop(cfg, store, stop_after, args.stage)
             elif args.command == "radio":
                 record_radio(cfg, store, stop_after)
 
