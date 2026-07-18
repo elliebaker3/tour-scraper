@@ -77,8 +77,12 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add config/config.yaml data/
           git commit -m "autodiscover: $(date -u +%F) findings" || echo "nothing to commit"
-          git pull --rebase origin ${GITHUB_REF_NAME} || true
-          git push || echo "push failed"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
+            echo "push attempt $i failed (concurrent write?), retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done || echo "push failed after retries; findings are still in the uploaded artifact"
 
       - name: Upload inventory as artifact too (belt and suspenders)
         if: always()
@@ -151,5 +155,9 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add data/
           git commit -m "data: capture $(date -u +%F)" || echo "nothing to commit"
-          git pull --rebase origin ${GITHUB_REF_NAME} || true
-          git push || echo "push failed; data still in artifact"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
+            echo "push attempt $i failed (concurrent write?), retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done || echo "push failed after retries; data still in the uploaded artifact"
