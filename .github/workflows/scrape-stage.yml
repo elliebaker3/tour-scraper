@@ -19,37 +19,58 @@
 #               = checkpoint pass data) + radio. Commits data/ back when done.
 #
 # Notes:
-# - Times below are UTC and were set against a specific real stage start/finish
-#   (13:30-17:38 CEST); RECOMPUTE THEM for every stage — start times vary by
-#   several hours across the Tour. Stage start/end times are in
-#   data/2026/reference/stages.json once you've run `bootstrap`.
+# - The schedule below has explicit per-stage crons for stages 16-21 (the rest
+#   of the 2026 Tour), each computed from that stage's real start time. If the
+#   route changes mid-Tour (it has before -- stage 9 was shortened for heat),
+#   re-check data/2026/reference/stages.json and adjust the affected day's two
+#   crons. To add a stage: one discover cron at start-90min, one scrape cron at
+#   start-35min (both UTC), and add each to the matching job's `if:` below.
 # - GitHub-hosted jobs are hard-capped at 6 hours; that's why `scrape` starts
 #   close to the actual race start rather than hours early.
 # - Radio audio is uploaded as an artifact rather than committed (repo bloat);
 #   flip the LFS section in the README if you'd rather commit it.
-# - cron can fire a few minutes late on GitHub; both jobs start with a safety
-#   margin baked into the times below, not right at the edge.
+# - GitHub cron often fires late (observed ~55min on 2026-07-18); a late fire
+#   just shifts the capture window later and still catches the finish.
 
 name: scrape-stage
 
 on:
+  # EXPLICIT PER-STAGE SCHEDULE for the rest of the 2026 Tour.
+  #
+  # Start times vary a lot across stages (09:30-14:25 UTC for stages 16-21),
+  # and there are rest days, so a single generic "every July day" cron is
+  # wrong. Instead each remaining stage gets two crons, computed from its real
+  # start time in data/2026/reference/stages.json:
+  #   discover = start - 90min   (grabs that stage's elevation-profile CSV +
+  #                               refreshes reference data; works pre-race)
+  #   scrape   = start - 35min   (starts the capture; scrape auto-detects the
+  #                               stage number from today's UTC date, and
+  #                               5.75h of capture from 35min-early comfortably
+  #                               reaches the finish of every remaining stage,
+  #                               which are all <=5h long)
+  # GitHub cron often fires late (observed ~55min on 2026-07-18); if that
+  # happens the window just shifts later and still catches the high-value
+  # finish -- only the low-value neutralized rollout at the very start is at
+  # risk. Times are UTC. Format: "MIN HOUR DAY 7 *".
   schedule:
-    # discover, attempt 1: ~2.5h before race start. Profile/checkpoint
-    # endpoints already work this early (pre-race), but the radio stream
-    # often isn't live yet at this point -- that's expected, not a failure.
-    - cron: "0 9 * 7 *"
-    # discover, attempt 2: ~30min before race start (7:00am EDT / 11:00 UTC)
-    # -- a second try at the radio URL specifically, closer to when the
-    # broadcast is likely to actually be live.
-    - cron: "0 11 * 7 *"
-    # discover, attempt 3: right at race start (7:30am EDT / 11:30 UTC) --
-    # last automatic try before falling back to a manual check.
-    - cron: "30 11 * 7 *"
-    # scrape: cron is set ~70min before a typical ~11:20 UTC race start
-    # because GitHub cron routinely fires late (observed 55 min late on
-    # 2026-07-18). Even fired on time, 5.5h of capture from 10:10 covers a
-    # 15:55 UTC scheduled finish with buffer via the late-start margin.
-    - cron: "10 10 * 7 *"
+    # Stage 16 - Mon Jul 21, start 11:00 UTC
+    - cron: "30 9 21 7 *"    # discover
+    - cron: "25 10 21 7 *"   # scrape
+    # Stage 17 - Wed Jul 22, start 11:35 UTC
+    - cron: "5 10 22 7 *"    # discover
+    - cron: "0 11 22 7 *"    # scrape
+    # Stage 18 - Thu Jul 23, start 10:50 UTC
+    - cron: "20 9 23 7 *"    # discover
+    - cron: "15 10 23 7 *"   # scrape
+    # Stage 19 - Fri Jul 24, start 12:15 UTC
+    - cron: "45 10 24 7 *"   # discover
+    - cron: "40 11 24 7 *"   # scrape
+    # Stage 20 - Sat Jul 25, start 09:30 UTC
+    - cron: "0 8 25 7 *"     # discover
+    - cron: "55 8 25 7 *"    # scrape
+    # Stage 21 - Sun Jul 26, start 14:25 UTC (Champs-Elysees, late start)
+    - cron: "55 12 26 7 *"   # discover
+    - cron: "50 13 26 7 *"   # scrape
   workflow_dispatch:
     inputs:
       stage:
@@ -67,9 +88,12 @@ jobs:
   discover:
     if: >-
       github.event_name == 'workflow_dispatch' && inputs.run_discover ||
-      github.event.schedule == '0 9 * 7 *' ||
-      github.event.schedule == '0 11 * 7 *' ||
-      github.event.schedule == '30 11 * 7 *'
+      github.event.schedule == '30 9 21 7 *' ||
+      github.event.schedule == '5 10 22 7 *' ||
+      github.event.schedule == '20 9 23 7 *' ||
+      github.event.schedule == '45 10 24 7 *' ||
+      github.event.schedule == '0 8 25 7 *' ||
+      github.event.schedule == '55 12 26 7 *'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -111,7 +135,14 @@ jobs:
           retention-days: 30
 
   scrape:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '10 10 * 7 *'
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.schedule == '25 10 21 7 *' ||
+      github.event.schedule == '0 11 22 7 *' ||
+      github.event.schedule == '15 10 23 7 *' ||
+      github.event.schedule == '40 11 24 7 *' ||
+      github.event.schedule == '55 8 25 7 *' ||
+      github.event.schedule == '50 13 26 7 *'
     runs-on: ubuntu-latest
     timeout-minutes: 355
     permissions:
