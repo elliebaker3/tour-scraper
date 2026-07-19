@@ -3506,15 +3506,18 @@
     "profile": "https://img.aso.fr/core_app/img-cycling-tdf-png/123/71766/0:0,400:400-0-0-70/b5808",
     "nationality": "den",
     "_id": "c84b902e60b4daa0df66c844a15cc1691ef63f595a9ce85d1c191752ea252379",
+    "_updatedAt": 1784392581992,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-UXM",
-    "_updatedAt": 1783091866654,
     "_parent": "team-2026:245397a1a65898eeb06cb57484cf9b0404314b507d9ddb81976db7461a79674a",
-    "_key": "_id",
     "_virtual": "UXM-123-CHARMIG",
     "$team": "team-2026:245397a1a65898eeb06cb57484cf9b0404314b507d9ddb81976db7461a79674a",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 14,
+      "code": -2
     }
   },
   {
@@ -4270,15 +4273,18 @@
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-tdf-png/102/71878/0:0,400:400-70-0-70/1a8c7",
     "UCICode": "10064997256",
     "_id": "0362886d32acef891645378daf58ea74574256ec5673a767b69fb371f212962f",
+    "_updatedAt": 1784389539273,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-APT",
-    "_updatedAt": 1783091866036,
     "_parent": "team-2026:2a4c2c6b622e05f07c51b4fc102cc5fdf3ff78b7d0bc5649ed7a8034c1bd15cc",
-    "_key": "_id",
     "_virtual": "APT-102-DEBRUYNE",
     "$team": "team-2026:2a4c2c6b622e05f07c51b4fc102cc5fdf3ff78b7d0bc5649ed7a8034c1bd15cc",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 14,
+      "code": -4
     }
   },
   {

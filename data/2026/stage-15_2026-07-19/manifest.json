@@ -1,14 +1,7 @@
 [
   {
-    "recorded_at": "2026-07-19T10:41:24.659+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-15-1d34fac1919d6c39274d093321f16b1a.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-19T10:41:24.666+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-15-tiny-54b7914e99a730bd711ee25d9403278b.csv",
-    "via": "autodiscover"
+    "recorded_at": "2026-07-19T11:19:24.603+00:00",
+    "kind": "radio",
+    "source": "https://ice.creacast.com/lequipe-au1"
   }
 ]
