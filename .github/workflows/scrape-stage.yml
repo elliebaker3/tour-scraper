@@ -45,9 +45,11 @@ on:
     # discover, attempt 3: right at race start (7:30am EDT / 11:30 UTC) --
     # last automatic try before falling back to a manual check.
     - cron: "30 11 * 7 *"
-    # scrape: start ~50min before race start, run long enough to comfortably
-    # cover a scheduled ~4h08m stage plus delay/finish-line buffer.
-    - cron: "40 10 * 7 *"
+    # scrape: cron is set ~70min before a typical ~11:20 UTC race start
+    # because GitHub cron routinely fires late (observed 55 min late on
+    # 2026-07-18). Even fired on time, 5.5h of capture from 10:10 covers a
+    # 15:55 UTC scheduled finish with buffer via the late-start margin.
+    - cron: "10 10 * 7 *"
   workflow_dispatch:
     inputs:
       stage:
@@ -55,7 +57,7 @@ on:
         required: false
       max_hours:
         description: "Hours to record"
-        default: "5.5"
+        default: "5.75"
       run_discover:
         description: "Also run the discover job"
         type: boolean
@@ -109,9 +111,9 @@ jobs:
           retention-days: 30
 
   scrape:
-    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '40 10 * 7 *'
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '10 10 * 7 *'
     runs-on: ubuntu-latest
-    timeout-minutes: 340
+    timeout-minutes: 355
     permissions:
       contents: write
     steps:
@@ -156,7 +158,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           python -m tourscraper stage \
             --stage "${{ steps.stage.outputs.number }}" \
-            --max-hours "${{ github.event.inputs.max_hours || '5.5' }}" &
+            --max-hours "${{ github.event.inputs.max_hours || '5.75' }}" &
           CAPTURE_PID=$!
           # Push captured data incrementally so the repo stays fresh during the
           # stage and nothing is lost if the runner dies mid-capture. Audio
