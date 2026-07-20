@@ -116,8 +116,31 @@ The readout shows `calibrated · 1.000× real time`. Anchors persist per stage,
 so you only do this once. Two anchors far apart give a better rate fit than
 two close together; with only one anchor it assumes real time.
 
-Until you set anchors, guideposts stay hidden rather than being drawn in the
-wrong place.
+## The profile is always on screen
+
+The profile never disappears, because it does not depend on calibration: km and
+altitude are intrinsic to the scraped route. The bar switches axis instead.
+
+| | x-axis | needs | clicking to seek |
+|---|---|---|---|
+| **Calibrated** | recording time | a calibration + a loaded video | seeks |
+| **Otherwise** | route distance, km 0 → finish | nothing | declined |
+
+Distance mode is labelled (`distance · 155km · not calibrated`) and carries km
+ticks, so the shape always has scale. Guideposts are placed on it too — route
+ones by their own km, ticker ones by interpolating the time-synced profile.
+Seeking is *declined* rather than approximated while uncalibrated: a
+plausible-looking wrong seek is worse than none.
+
+Hovering anywhere on the bar reads out `km · altitude · race time · rec time`,
+so the scraped numbers behind the shape are one mouse-move away.
+
+Collapsing (**–**) hides the controls but keeps the profile as a slim strip.
+The controls are only how it gets calibrated; the profile is the thing you read.
+
+Test it with `python tests/test_extension_profile.py` (needs Playwright): it
+loads the real extension in headless Chromium and asserts the profile spans the
+full bar with no video and no calibration.
 
 ## Making the elevation line up exactly
 

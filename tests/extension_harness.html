@@ -1,0 +1,32 @@
+<!doctype html>
+<!-- Temporary test harness: stubs the chrome extension APIs so navigator.js can
+     be loaded in a plain page and its rendering asserted. Deleted after use. -->
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="navigator.css"></head>
+<body style="margin:0;background:#111;height:100vh">
+<script>
+  const qs = new URLSearchParams(location.search);
+  const pinned = qs.get("stage") ? Number(qs.get("stage")) : null;
+  window.chrome = {
+    runtime: { getURL: (p) => new URL(p, location.href).href },
+    storage: { local: {
+      get: (keys, cb) => cb(pinned ? { tnPinnedStage: pinned } : {}),
+      set: (obj, cb) => cb && cb(),
+    } },
+  };
+  // Fake player: duration/currentTime are readonly on a real element, so they
+  // are redefined here. Enabled only when ?video=1 so the no-video path is
+  // exercised too.
+  if (new URLSearchParams(location.search).get("video") === "1") {
+    const v = document.createElement("video");
+    Object.defineProperty(v, "duration", { value: 19226, configurable: true });
+    let ct = 0;
+    Object.defineProperty(v, "currentTime", {
+      get: () => ct, set: (x) => { ct = x; }, configurable: true,
+    });
+    document.body.appendChild(v);
+  }
+</script>
+<script src="probe.js"></script>
+<script src="autocalibrate.js"></script>
+<script src="navigator.js"></script>
+</body></html>

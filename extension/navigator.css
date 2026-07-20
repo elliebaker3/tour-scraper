@@ -23,8 +23,12 @@
   backdrop-filter: blur(6px);
 }
 
-.tn-root.tn-collapsed .tn-bar,
+/* Collapsing hides the controls but never the profile — the profile is the
+   thing being read, the controls are only how it gets calibrated. Collapsed,
+   it becomes a slim always-on strip. */
 .tn-root.tn-collapsed .tn-controls { display: none; }
+.tn-root.tn-collapsed .tn-bar { height: 30px; }
+.tn-root.tn-collapsed { padding-bottom: 8px; }
 
 .tn-head {
   display: flex;
@@ -80,10 +84,30 @@
 .tn-alt-hi { top: 3px; }
 .tn-alt-lo { bottom: 3px; }
 
-.tn-needcal {
-  position: absolute; inset: 0; display: flex; align-items: center;
-  justify-content: center; color: #ffd479; font-size: 12px;
-  background: rgba(0,0,0,.35); pointer-events: none;
+/* Distance-axis furniture. Deliberately quiet: it is scale for the profile,
+   not a competing signal. The old full-bar "calibrate first" scrim is gone —
+   it blacked out the very thing it was explaining. */
+.tn-ticks { position: absolute; inset: 0; pointer-events: none; }
+.tn-tick {
+  position: absolute; top: 0; bottom: 0; width: 1px;
+  background: rgba(255,255,255,.10);
+}
+.tn-tick span {
+  position: absolute; bottom: 2px; left: 3px;
+  font-size: 9px; color: #6f7784; text-shadow: 0 1px 2px #000;
+}
+.tn-axis {
+  position: absolute; left: 6px; top: 3px; font-size: 10px;
+  color: #93a0b3; pointer-events: none; text-shadow: 0 1px 2px #000;
+}
+
+/* Hover readout: the numbers behind the shape, without needing to seek. */
+.tn-hover {
+  position: absolute; top: 3px; display: none;
+  background: rgba(10, 12, 16, 0.92); color: #e8ecf2;
+  border: 1px solid rgba(255,255,255,.16); border-radius: 4px;
+  padding: 2px 6px; font-size: 10px; white-space: nowrap;
+  pointer-events: none; font-variant-numeric: tabular-nums;
 }
 
 .tn-controls {

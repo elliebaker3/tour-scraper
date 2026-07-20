@@ -35,6 +35,7 @@
   let video = null;
   let anchors = [];           // [{ tUtcMs, videoSec, label }]
   let root = null;
+  let hoverEl = null;         // readout element, re-attached after each render
   const enabled = Object.fromEntries(
     Object.entries(CATEGORIES).map(([k, v]) => [k, v.on]));
 
@@ -81,27 +82,44 @@
 
   // ---------------------------------------------------------------- render
 
+  const routeLength = () =>
+    bundle.coverage?.route_length_km ||
+    Math.max(...bundle.profile.map((p) => p.km)) || 1;
+
+  /** Which axis the bar is drawn against.
+   *
+   *  Time is what makes the bar *navigable* — but it needs both a calibration
+   *  and a loaded video, and until then every point maps to null and the bar
+   *  renders empty. The profile itself needs neither: km and altitude are
+   *  intrinsic to the scraped route. So distance is the fallback axis, and the
+   *  profile is on screen from the moment the panel exists. */
+  const axisMode = () => (cal && video?.duration) ? "time" : "dist";
+
   function profilePath(width, height) {
-    const pts = bundle.profile.filter((p) => p.t);
-    if (!pts.length || !video?.duration) return { d: "", pts: [] };
+    const mode = axisMode();
+    // Distance mode draws every point; time mode can only draw timed ones.
+    const pts = mode === "time" ? bundle.profile.filter((p) => p.t) : bundle.profile;
+    if (!pts.length) return { d: "", dEst: "", pts: [] };
     const alts = pts.map((p) => p.alt);
     const loA = Math.min(...alts), hiA = Math.max(...alts);
     const rangeA = Math.max(1, hiA - loA);
+    const len = routeLength();
 
     // Estimated points (GPS came online late, so the head is spanned from the
     // known start time) are drawn as a separate, dimmer shape. The whole stage
     // is shown, but "we saw this" and "we inferred this" stay distinguishable.
     const xy = [], xyEst = [];
     for (const p of pts) {
-      const sec = utcToVideo(Date.parse(p.t));
-      if (sec == null || sec < 0 || sec > video.duration) continue;
-      const pt = [
-        (sec / video.duration) * width,
-        height - ((p.alt - loA) / rangeA) * (height - 4) - 2,
-      ];
+      let x;
+      if (mode === "time") {
+        const sec = utcToVideo(Date.parse(p.t));
+        if (sec == null || sec < 0 || sec > video.duration) continue;
+        x = (sec / video.duration) * width;
+      } else {
+        x = (p.km / len) * width;      // spans 0 -> finish by construction
+      }
+      const pt = [x, height - ((p.alt - loA) / rangeA) * (height - 4) - 2];
       (p.est ? xyEst : xy).push(pt);
-      // Bridge the seam so the two shapes meet instead of leaving a notch.
-      if (p.est && xyEst.length && xy.length === 0) { /* still in the head */ }
     }
     if (xyEst.length && xy.length) xyEst.push(xy[0]);
     const area = (arr) => {
@@ -115,69 +133,183 @@
     return { d: area(xy), dEst: area(xyEst), pts: xy, loA, hiA };
   }
 
+  /** Where a guidepost sits along the route, in km.
+   *
+   *  Route guideposts (summits, sprints, the finish) carry their own km. Ticker
+   *  ones only carry a timestamp, so their position comes from the same
+   *  time-synced profile the bar is drawn from. Memoised because render runs
+   *  twice a second. */
+  const kmCache = new Map();
+  function guidepostKm(g) {
+    if (typeof g.km === "number") return g.km;
+    if (kmCache.has(g.t_utc)) return kmCache.get(g.t_utc);
+    const ms = Date.parse(g.t_utc);
+    let km = null, prev = null;
+    for (const p of bundle.profile) {
+      if (!p.t) continue;
+      const t = Date.parse(p.t);
+      if (t >= ms) {
+        if (!prev) { km = p.km; break; }          // before the race rolled out
+        const t0 = Date.parse(prev.t), span = t - t0;
+        km = prev.km + (p.km - prev.km) * (span > 0 ? (ms - t0) / span : 0);
+        break;
+      }
+      prev = p;
+    }
+    kmCache.set(g.t_utc, km);
+    return km;
+  }
+
   function render() {
-    if (!root || !bundle || !video?.duration) return;
+    if (!root || !bundle) return;
     const bar = root.querySelector(".tn-bar");
     const width = bar.clientWidth || 900;
-    const height = 54;
+    const height = bar.clientHeight || 54;
+    const mode = axisMode();
+    const len = routeLength();
+    const dur = video?.duration || 0;
 
     const { d, dEst, loA, hiA } = profilePath(width, height);
-    const needsAnchors = !cal;
 
+    // A guidepost's x depends on the axis: recording seconds when calibrated,
+    // route km otherwise. Distance mode still places every marker correctly --
+    // it just cannot seek to them, since no video time is known yet.
     const markers = [];
-    if (!needsAnchors) {
-      for (const g of bundle.guideposts) {
-        if (!enabled[g.category]) continue;
-        const sec = utcToVideo(Date.parse(g.t_utc));
-        if (sec == null || sec < 0 || sec > video.duration) continue;
-        const x = (sec / video.duration) * width;
-        const c = CATEGORIES[g.category]?.color || "#fff";
-        markers.push(
-          `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${c}"
-                data-sec="${sec.toFixed(1)}"
-                title="${fmt(sec)} — ${escapeHtml(g.label)}"></div>`);
+    for (const g of bundle.guideposts) {
+      if (!enabled[g.category]) continue;
+      let x, sec = null, tip;
+      if (mode === "time") {
+        sec = utcToVideo(Date.parse(g.t_utc));
+        if (sec == null || sec < 0 || sec > dur) continue;
+        x = (sec / dur) * width;
+        tip = `${fmt(sec)} — ${g.label}`;
+      } else {
+        const km = guidepostKm(g);
+        if (km == null) continue;
+        x = (km / len) * width;
+        tip = `km ${km.toFixed(1)} — ${g.label}`;
       }
+      const c = CATEGORIES[g.category]?.color || "#fff";
+      markers.push(
+        `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${c}"
+              ${sec == null ? "" : `data-sec="${sec.toFixed(1)}"`}
+              title="${escapeHtml(tip)}"></div>`);
     }
 
-    // Intensity heat strip: darker = more happening.
+    // Intensity heat strip: darker = more happening. Only meaningful on the
+    // time axis, where its windows correspond to stretches of the recording.
     let heat = "";
-    if (!needsAnchors && bundle.intensity?.length) {
+    if (mode === "time" && bundle.intensity?.length) {
       for (const s of bundle.intensity) {
         const sec = utcToVideo(Date.parse(s.t_utc));
-        if (sec == null || sec < 0 || sec > video.duration) continue;
-        const x = (sec / video.duration) * width;
-        const w = Math.max(1, (s.window_min * 60 / video.duration) * width);
+        if (sec == null || sec < 0 || sec > dur) continue;
+        const x = (sec / dur) * width;
+        const w = Math.max(1, (s.window_min * 60 / dur) * width);
         heat += `<div class="tn-heat" style="left:${x.toFixed(1)}px;width:${w.toFixed(1)}px;
                   opacity:${(s.normalised * 0.75).toFixed(2)}"></div>`;
       }
     }
 
-    const playX = (video.currentTime / video.duration) * width;
+    // Distance ticks make the profile readable on its own terms, without
+    // needing the playhead or a calibration to give it scale.
+    let ticks = "";
+    if (mode === "dist") {
+      for (const frac of [0.25, 0.5, 0.75]) {
+        ticks += `<div class="tn-tick" style="left:${(frac * width).toFixed(1)}px">
+                    <span>${Math.round(frac * len)}km</span></div>`;
+      }
+    }
+
+    const playhead = dur
+      ? `<div class="tn-playhead" style="left:${
+           ((mode === "time" ? video.currentTime / dur : playheadKm() / len) * width).toFixed(1)
+         }px"></div>`
+      : "";
 
     bar.innerHTML = `
       <div class="tn-heatwrap">${heat}</div>
-      <svg class="tn-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+      <svg class="tn-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"
+           preserveAspectRatio="none">
         <path d="${dEst || ""}" class="tn-profile tn-profile-est"/>
         <path d="${d}" class="tn-profile"/>
       </svg>
+      <div class="tn-ticks">${ticks}</div>
       <div class="tn-markers">${markers.join("")}</div>
-      <div class="tn-playhead" style="left:${playX.toFixed(1)}px"></div>
-      ${needsAnchors ? `<div class="tn-needcal">Set two anchors below to place guideposts →</div>` : ""}
-      ${d ? `<span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
+      ${playhead}
+      ${d || dEst ? `<span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
              <span class="tn-alt tn-alt-lo">${Math.round(loA)}m</span>` : ""}
+      ${mode === "dist" ? `<span class="tn-axis">distance · ${len.toFixed(0)}km${
+             cal ? "" : " · not calibrated"}</span>` : ""}
     `;
 
-    bar.querySelectorAll(".tn-marker").forEach((el) => {
+    bar.querySelectorAll(".tn-marker[data-sec]").forEach((el) => {
       el.addEventListener("click", (ev) => {
         ev.stopPropagation();
         video.currentTime = parseFloat(el.dataset.sec);
       });
     });
+    bar.appendChild(hoverEl);          // survives the innerHTML rewrite
 
-    const utcNow = videoToUtc(video.currentTime);
+    const utcNow = dur ? videoToUtc(video.currentTime) : null;
     root.querySelector(".tn-clock").textContent = utcNow
       ? `race ${new Date(utcNow).toISOString().slice(11, 19)}Z · rec ${fmt(video.currentTime)}`
-      : `rec ${fmt(video.currentTime)} · not calibrated`;
+      : dur ? `rec ${fmt(video.currentTime)} · not calibrated`
+            : "profile only · no video detected";
+  }
+
+  /** Nearest profile point to a fractional position along the bar, resolved on
+   *  whichever axis is in use. Returns km, altitude, race time and — when the
+   *  clock is known — the matching second of the recording. */
+  function sampleAt(frac) {
+    if (!bundle?.profile?.length) return null;
+    const mode = axisMode();
+    let best = null;
+    if (mode === "dist") {
+      const km = frac * routeLength();
+      for (const p of bundle.profile) {
+        if (!best || Math.abs(p.km - km) < Math.abs(best.km - km)) best = p;
+      }
+    } else {
+      const target = frac * video.duration;
+      let bestGap = Infinity;
+      for (const p of bundle.profile) {
+        if (!p.t) continue;
+        const sec = utcToVideo(Date.parse(p.t));
+        if (sec == null) continue;
+        const gap = Math.abs(sec - target);
+        if (gap < bestGap) { best = p; bestGap = gap; }
+      }
+    }
+    if (!best) return null;
+    return {
+      km: best.km, alt: best.alt, t: best.t, est: best.est,
+      sec: best.t ? utcToVideo(Date.parse(best.t)) : null,
+    };
+  }
+
+  /** km along the route -> second of the recording, via the point's race time. */
+  function kmToVideoSec(km) {
+    if (!cal) return null;
+    let best = null;
+    for (const p of bundle.profile) {
+      if (!p.t) continue;
+      if (!best || Math.abs(p.km - km) < Math.abs(best.km - km)) best = p;
+    }
+    return best ? utcToVideo(Date.parse(best.t)) : null;
+  }
+
+  /** The playhead in distance mode: where the leader was at the current race
+   *  time. Without a calibration there is no race time, so it parks at km 0. */
+  function playheadKm() {
+    const ms = videoToUtc(video.currentTime);
+    if (ms == null) return 0;
+    let prev = null;
+    for (const p of bundle.profile) {
+      if (!p.t) continue;
+      if (Date.parse(p.t) >= ms) return prev ? prev.km : p.km;
+      prev = p;
+    }
+    return prev ? prev.km : 0;
   }
 
   const escapeHtml = (s) => String(s).replace(/[&<>"']/g,
@@ -230,13 +362,45 @@
     });
     const bar = root.querySelector(".tn-bar");
 
+    hoverEl = document.createElement("div");
+    hoverEl.className = "tn-hover";
+
     bar.addEventListener("click", (ev) => {
       if (alignMode) return;                 // in align mode a click is a drag
+      if (!video?.duration) return;
       const rect = ev.currentTarget.getBoundingClientRect();
-      if (video?.duration) {
-        video.currentTime = ((ev.clientX - rect.left) / rect.width) * video.duration;
+      const frac = (ev.clientX - rect.left) / rect.width;
+      if (axisMode() === "time") {
+        video.currentTime = frac * video.duration;
+        return;
       }
+      // Distance axis: a click means "take me to this point on the road". That
+      // is only answerable once calibrated, since km -> race time -> recording
+      // time needs the middle step. Uncalibrated, seeking is declined rather
+      // than approximated -- a plausible-looking wrong seek is worse than none.
+      const sec = kmToVideoSec(frac * routeLength());
+      if (sec != null) video.currentTime = Math.max(0, Math.min(video.duration, sec));
     });
+
+    /* Hover readout. The profile is on screen permanently, so the numbers
+     * behind it should be one mouse-move away rather than requiring a seek. */
+    bar.addEventListener("mousemove", (ev) => {
+      const rect = bar.getBoundingClientRect();
+      const frac = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+      const s = sampleAt(frac);
+      if (!s) { hoverEl.style.display = "none"; return; }
+      const bits = [`km ${s.km.toFixed(1)}`, `${Math.round(s.alt)}m`];
+      if (s.t) bits.push(`${s.t.slice(11, 16)}Z`);
+      if (s.sec != null) bits.push(`rec ${fmt(s.sec)}`);
+      if (s.est) bits.push("est");
+      hoverEl.textContent = bits.join(" · ");
+      hoverEl.style.display = "block";
+      // Flip the label inboard near the right edge so it never gets clipped.
+      const x = frac * rect.width;
+      hoverEl.style.left = `${x.toFixed(0)}px`;
+      hoverEl.style.transform = x > rect.width - 130 ? "translateX(-100%)" : "translateX(4px)";
+    });
+    bar.addEventListener("mouseleave", () => { hoverEl.style.display = "none"; });
 
     /* Align mode: drag the profile until a summit sits where the video shows
      * it. Plain drag shifts (offset); shift-drag stretches about the left edge
@@ -581,8 +745,8 @@
 
     setInterval(() => {
       const v = findVideo();
-      if (v && v !== video) { video = v; render(); }
-      else if (video) render();
+      if (v && v !== video) video = v;
+      render();          // unconditional: the profile draws with or without video
     }, 500);
     window.addEventListener("resize", render);
     window.addEventListener("keydown", onAlignKey, true);
