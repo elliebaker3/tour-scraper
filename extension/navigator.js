@@ -52,15 +52,32 @@
   let cal = null;   // {refMs, offsetSec, rate}
   let alignMode = false;
 
+  /* The broadcast contains no inserted breaks, so rate is 1.0 by construction
+   * and ONE known moment is a complete calibration. Fitting a rate from two
+   * pins was actively harmful: it turned a few seconds of click imprecision
+   * into a slope applied across four hours, and on stage 14 produced 0.918x --
+   * "20 minutes of racing missing" -- from what is really a single mis-click.
+   *
+   * km 0 is the one input, and it is enough. */
+  const RATE = 1.0;
+
+  function pins() { return anchors.filter((a) => a.kind); }
+
   function calFromAnchors() {
+    const p = pins();
+    if (p.length) {
+      const primary = p.find((x) => x.kind === "start") || p[0];
+      return { refMs: primary.tUtcMs, offsetSec: primary.videoSec, rate: RATE };
+    }
     if (!anchors.length) return null;
     const a = anchors[0];
-    if (anchors.length === 1) return { refMs: a.tUtcMs, offsetSec: a.videoSec, rate: 1 };
+    if (anchors.length === 1) return { refMs: a.tUtcMs, offsetSec: a.videoSec, rate: RATE };
     const b = anchors[anchors.length - 1];
     const spanSec = (b.tUtcMs - a.tUtcMs) / 1000;
-    const rate = spanSec ? (b.videoSec - a.videoSec) / spanSec : 1;
+    const rate = spanSec ? (b.videoSec - a.videoSec) / spanSec : RATE;
     return { refMs: a.tUtcMs, offsetSec: a.videoSec, rate };
   }
+
 
   function utcToVideo(tUtcMs) {
     if (!cal) return null;
@@ -95,42 +112,94 @@
    *  profile is on screen from the moment the panel exists. */
   const axisMode = () => (cal && video?.duration) ? "time" : "dist";
 
+  /** Profile points that carry a race time, ascending. Built once per bundle. */
+  let _series = null;
+  function series() {
+    if (_series) return _series;
+    _series = bundle.profile
+      .filter((p) => p.t)
+      .map((p) => ({ t: Date.parse(p.t), alt: p.alt, km: p.km, est: !!p.est }))
+      .sort((a, b) => a.t - b.t);
+    return _series;
+  }
+
+  /** Elevation at a race time, with how it was arrived at.
+   *
+   *  The recording is longer than the race: there is build-up before km 0 and
+   *  coverage after the line, and those stretches have no elevation because
+   *  nobody was riding. Leaving them blank breaks the bar into fragments, so
+   *  they are imputed -- held at the start and finish altitudes, which is
+   *  where the race actually was -- and drawn faintly so an imputed stretch
+   *  never reads as measured. Gaps inside the race are bridged linearly. */
+  function elevationAt(tMs) {
+    const s = series();
+    if (!s.length) return null;
+    if (tMs <= s[0].t) return { alt: s[0].alt, cls: "imp" };
+    if (tMs >= s[s.length - 1].t) return { alt: s[s.length - 1].alt, cls: "imp" };
+    let lo = 0, hi = s.length - 1;
+    while (hi - lo > 1) {
+      const mid = (lo + hi) >> 1;
+      if (s[mid].t <= tMs) lo = mid; else hi = mid;
+    }
+    const a = s[lo], b = s[hi];
+    const span = b.t - a.t;
+    const alt = span > 0 ? a.alt + (b.alt - a.alt) * ((tMs - a.t) / span) : a.alt;
+    return { alt, cls: (a.est || b.est) ? "est" : "obs" };
+  }
+
   function profilePath(width, height) {
     const mode = axisMode();
-    // Distance mode draws every point; time mode can only draw timed ones.
-    const pts = mode === "time" ? bundle.profile.filter((p) => p.t) : bundle.profile;
-    if (!pts.length) return { d: "", dEst: "", pts: [] };
-    const alts = pts.map((p) => p.alt);
+    const alts = bundle.profile.map((p) => p.alt);
     const loA = Math.min(...alts), hiA = Math.max(...alts);
     const rangeA = Math.max(1, hiA - loA);
-    const len = routeLength();
-
-    // Estimated points (GPS came online late, so the head is spanned from the
-    // known start time) are drawn as a separate, dimmer shape. The whole stage
-    // is shown, but "we saw this" and "we inferred this" stay distinguishable.
-    const xy = [], xyEst = [];
-    for (const p of pts) {
-      let x;
-      if (mode === "time") {
-        const sec = utcToVideo(Date.parse(p.t));
-        if (sec == null || sec < 0 || sec > video.duration) continue;
-        x = (sec / video.duration) * width;
-      } else {
-        x = (p.km / len) * width;      // spans 0 -> finish by construction
-      }
-      const pt = [x, height - ((p.alt - loA) / rangeA) * (height - 4) - 2];
-      (p.est ? xyEst : xy).push(pt);
-    }
-    if (xyEst.length && xy.length) xyEst.push(xy[0]);
+    const y = (alt) => height - ((alt - loA) / rangeA) * (height - 4) - 2;
     const area = (arr) => {
       if (arr.length < 2) return "";
       let s = `M ${arr[0][0].toFixed(1)} ${height} L `;
-      s += arr.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L ");
+      s += arr.map(([x, yy]) => `${x.toFixed(1)} ${yy.toFixed(1)}`).join(" L ");
       s += ` L ${arr[arr.length - 1][0].toFixed(1)} ${height} Z`;
       return s;
     };
-    if (!xy.length && !xyEst.length) return { d: "", dEst: "", pts: [] };
-    return { d: area(xy), dEst: area(xyEst), pts: xy, loA, hiA };
+
+    if (mode === "time") {
+      // Sample once per pixel column rather than per route point. That is what
+      // makes the trace continuous across the ENTIRE bar: every column gets a
+      // value, whether measured, estimated or imputed.
+      const cols = [];
+      for (let px = 0; px <= width; px++) {
+        const sec = (px / width) * video.duration;
+        const tMs = videoToUtc(sec);
+        const e = tMs == null ? null : elevationAt(tMs);
+        if (e) cols.push({ x: px, y: y(e.alt), cls: e.cls });
+      }
+      // Contiguous runs of the same class become separate paths, each sharing
+      // a point with its neighbour so the shape has no seams.
+      const segs = [];
+      let run = [];
+      for (let i = 0; i < cols.length; i++) {
+        run.push(cols[i]);
+        const last = i === cols.length - 1;
+        if (last || cols[i + 1].cls !== cols[i].cls) {
+          if (!last) run.push(cols[i + 1]);          // bridge to the next run
+          segs.push({ cls: cols[i].cls, d: area(run.map((c) => [c.x, c.y])) });
+          run = [cols[i]];                            // and back again
+        }
+      }
+      return { segs, loA, hiA };
+    }
+
+    // Distance axis: plot every route point against its km. Spans 0 -> finish
+    // by construction, and needs no clock.
+    const len = routeLength();
+    const xy = [], xyEst = [];
+    for (const p of bundle.profile) {
+      (p.est ? xyEst : xy).push([(p.km / len) * width, y(p.alt)]);
+    }
+    if (xyEst.length && xy.length) xyEst.push(xy[0]);
+    return {
+      segs: [{ cls: "est", d: area(xyEst) }, { cls: "obs", d: area(xy) }],
+      loA, hiA,
+    };
   }
 
   /** Where a guidepost sits along the route, in km.
@@ -169,7 +238,12 @@
     const len = routeLength();
     const dur = video?.duration || 0;
 
-    const { d, dEst, loA, hiA } = profilePath(width, height);
+    const { segs, loA, hiA } = profilePath(width, height);
+    const CLS = { obs: "tn-profile", est: "tn-profile tn-profile-est",
+                  imp: "tn-profile tn-profile-imp" };
+    const paths = segs.filter((g) => g.d)
+      .map((g) => `<path d="${g.d}" class="${CLS[g.cls]}"/>`).join("");
+    const hasProfile = paths.length > 0;
 
     // A guidepost's x depends on the axis: recording seconds when calibrated,
     // route km otherwise. Distance mode still places every marker correctly --
@@ -234,17 +308,16 @@
       <div class="tn-heatwrap">${heat}</div>
       <svg class="tn-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"
            preserveAspectRatio="none">
-        <path d="${dEst || ""}" class="tn-profile tn-profile-est"/>
-        <path d="${d}" class="tn-profile"/>
+        ${paths}
       </svg>
       <div class="tn-ticks">${ticks}</div>
       <div class="tn-markers">${markers.join("")}</div>
       ${playhead}
-      ${d || dEst ? `<span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
+      ${hasProfile ? `<span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
              <span class="tn-alt tn-alt-lo">${Math.round(loA)}m</span>` : ""}
       ${mode === "dist"
-          ? `<span class="tn-axis tn-axis-warn">✕ NOT aligned to the video — x is
-               distance (0–${len.toFixed(0)}km), not time</span>`
+          ? `<span class="tn-axis tn-axis-warn">Set km 0 to calibrate — scrub to
+               the flag drop, then click "Km 0 is NOW"</span>`
           : `<span class="tn-axis">time · aligned to recording</span>`}
     `;
 
@@ -381,11 +454,12 @@
         <div class="tn-anchors">
           <select class="tn-anchor-pick"><option value="">pick a moment…</option></select>
           <button class="tn-anchor-add">Anchor here</button>
-          <button class="tn-sync-finish" title="Click at the exact moment the
-winner crosses the line. Two unmistakable moments (this and the flag drop)
-pin offset and rate exactly.">Finish is NOW</button>
           <button class="tn-sync-start" title="Click at the exact moment the
-stage rolls out from km 0.">Km 0 is NOW</button>
+stage rolls out from km 0. Rate is 1.0, so this alone calibrates
+everything.">Km 0 is NOW</button>
+          <input class="tn-km0-time" size="7" placeholder="0:59:09"
+                 title="Or type the recording time at km 0 (h:mm:ss)">
+          <button class="tn-km0-set">Set</button>
           <button class="tn-align" title="Drag the profile to line it up with what is on screen">Align</button>
           <button class="tn-auto">Auto-calibrate</button>
           <button class="tn-probe" title="Report what this player exposes">Diagnose</button>
@@ -499,10 +573,23 @@ stage rolls out from km 0.">Km 0 is NOW</button>
       updateAlignReadout();
     });
     root.querySelector(".tn-anchor-add").addEventListener("click", addAnchor);
-    root.querySelector(".tn-sync-finish")
-        .addEventListener("click", () => syncAt("finish"));
     root.querySelector(".tn-sync-start")
         .addEventListener("click", () => syncAt("start"));
+    const km0 = root.querySelector(".tn-km0-time");
+    const applyTyped = () => {
+      const sec = parseClock(km0.value);
+      if (sec == null) {
+        root.querySelector(".tn-anchor-state").textContent =
+          `could not read "${km0.value}" — use h:mm:ss, m:ss or plain seconds`;
+        return;
+      }
+      syncAt("start", sec);
+    };
+    root.querySelector(".tn-km0-set").addEventListener("click", applyTyped);
+    km0.addEventListener("keydown", (ev) => {
+      ev.stopPropagation();                 // don't let align-mode keys steal it
+      if (ev.key === "Enter") applyTyped();
+    });
     root.querySelector(".tn-auto").addEventListener("click", runAutoCalibrate);
     root.querySelector(".tn-probe").addEventListener("click", runProbe);
     root.querySelector(".tn-anchor-clear").addEventListener("click", () => {
@@ -589,7 +676,17 @@ stage rolls out from km 0.">Km 0 is NOW</button>
    *
    *  This beats the dropdown for the same reason it beats the metadata: no
    *  judgement about WHICH moment you are looking at is involved. */
-  function syncAt(kind) {
+  /** "1:02:03" / "62:03" / "3723" -> seconds. */
+  function parseClock(text) {
+    const s = String(text || "").trim();
+    if (!s) return null;
+    if (!/^\d+(:\d{1,2}){0,2}(\.\d+)?$/.test(s)) return null;
+    const parts = s.split(":").map(Number);
+    if (parts.some((n) => !isFinite(n))) return null;
+    return parts.reduce((acc, n) => acc * 60 + n, 0);
+  }
+
+  function syncAt(kind, atSec) {
     const el = root.querySelector(".tn-anchor-state");
     if (!video?.duration) { el.textContent = "no video"; return; }
     const cov = bundle.coverage || {};
@@ -598,7 +695,9 @@ stage rolls out from km 0.">Km 0 is NOW</button>
       : (cov.race_start_utc || cov.leader_first_seen_utc);
     if (!tUtc) { el.textContent = `no ${kind} time in this bundle`; return; }
 
-    const at = video.currentTime;
+    const at = (typeof atSec === "number" && isFinite(atSec))
+      ? Math.max(0, Math.min(video.duration, atSec))
+      : video.currentTime;
     // Drop every automatic anchor, not just a previous pin of this kind.
     // Auto anchors carry no `kind`, so filtering on kind alone left them in --
     // and since calFromAnchors reads only the FIRST and LAST anchor by race
@@ -620,25 +719,7 @@ stage rolls out from km 0.">Km 0 is NOW</button>
     if (zero != null) {
       parts.push(`=> rec 0:00 = ${new Date(zero).toISOString().slice(11, 19)}Z`);
     }
-    parts.push(anchors.length >= 2
-      ? `rate ${cal.rate.toFixed(4)}× (both moments pinned)`
-      : "rate assumed 1.000× — pin the other moment to fix it");
-
-    // A broadcast's rate lives very close to 1. Ads push it slightly ABOVE 1
-    // (recording longer than the race); nothing normal pushes it below, since
-    // that would mean racing is missing from the recording. So a rate far from
-    // 1 almost always means a pin landed on the wrong moment -- and worse, if
-    // footage really is cut, that is a discrete jump which a linear rate
-    // cannot model anyway: it would only be correct at the two pins.
-    if (anchors.length >= 2 && Math.abs(cal.rate - 1) > 0.03) {
-      const lost = (1 - cal.rate) * (anchors[anchors.length - 1].tUtcMs -
-                                     anchors[0].tUtcMs) / 60000;
-      parts.push(lost > 0
-        ? `⚠ implies ${lost.toFixed(0)} min of racing missing from the ` +
-          `recording — more likely one pin is on the wrong moment. ` +
-          `Press reset and pin ONLY the finish.`
-        : `⚠ implies ${(-lost).toFixed(0)} min of inserted breaks — check the pins.`);
-    }
+    parts.push("rate 1.000× (no breaks in this broadcast)");
     el.textContent = parts.join(" · ");
     console.log("[TourNavigator] manual sync:", el.textContent);
   }
@@ -889,9 +970,12 @@ stage rolls out from km 0.">Km 0 is NOW</button>
     restore(() => {
       refreshAnchorState();
       render();
-      // Nothing stored for this stage yet: try to calibrate unprompted, since
-      // the airing time alone is usually enough to place markers.
-      if (!anchors.length) setTimeout(runAutoCalibrate, 800);
+      // No automatic calibration on load. The broadcast's start metadata was
+      // 27 minutes adrift of the recording's real origin on stage 14, and a
+      // confidently wrong clock is worse than an obviously absent one -- it
+      // puts every summit on a descent with nothing on screen to say so.
+      // One observed moment, km 0, is exact and is all a rate-1.0 broadcast
+      // needs, so ask for it instead of guessing.
     });
 
     setInterval(() => {

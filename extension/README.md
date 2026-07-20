@@ -8,34 +8,36 @@ history, and a strip showing where the race got intense.
 It reads `video.currentTime` and sets it to seek. It does not capture,
 download or modify any stream.
 
+## Calibrate: one input, km 0
+
+Scrub to the flag drop — the moment the stage rolls out from km 0 — and click
+**"Km 0 is NOW"**. Or type the recording time straight in (`0:59:09`) and press
+**Set**. That is the whole calibration.
+
+One moment is enough because the broadcast has no inserted breaks, so rate is
+1.0 by construction. Fitting a rate from two pins was worse than not fitting
+one: it turned a few seconds of click imprecision into a slope applied across
+four hours, and on stage 14 produced 0.918× — "20 minutes of racing missing" —
+out of a single mis-click.
+
+**Nothing calibrates itself on load.** The player's own `displayStartTime` was
+27 minutes adrift of the recording's real origin, which put every summit on a
+descent with nothing on screen to say so. A confidently wrong clock is worse
+than an absent one, so the bar asks rather than guesses.
+
+The panel always states what it is assuming:
+
+    stage 14 (2026-07-18) · rec 0:00 = 10:36:29Z · rate 1.000× · matched airing date
+
+and once calibrated the clock names the gradient under the playhead
+(`km 148.7 · climbing 9.0%`). If the screen shows a climb and that says
+descending, the km-0 pin is off.
+
 ## Install
 
 1. `chrome://extensions` → enable **Developer mode**
 2. **Load unpacked** → select this `extension/` folder
 3. Open your stage recording. The panel pins to the bottom of the window.
-
-## It calibrates itself
-
-On load the panel reads the asset's airing time from the page's playback state,
-picks the matching stage bundle, and derives the offset. No clicks needed.
-
-**The stage is chosen by airing date, not by guesswork.** Peacock URLs are
-opaque asset ids, so the date in `__PLAYBACK_STATE__` is what identifies which
-stage you're watching. This matters more than it sounds: stage 15 data over a
-stage 14 recording lines up with nothing, and the failure is silent — every
-marker is simply wrong, with no error to tell you so.
-
-What it cannot get is **rate**. Ad breaks aren't enumerated anywhere readable
-(the player's metadata cues arrive with empty bodies), so rate is assumed
-1.00×, and markers drift progressively later in the recording as inserted ads
-accumulate. If you notice that drift, add **one** manual anchor near the finish:
-offset comes from the metadata, rate from your single click.
-
-Strategies are tried in order, best clock first:
-
-1. `shaka.getPresentationStartTimeAsDate()` — the stream's own wall clock, when reachable
-2. `__PLAYBACK_STATE__.displayStartTime` — the asset's airing time (what works on Peacock today)
-3. Caption "km to go" mentions — offset *and* rate, when captions are exposed (they aren't on Peacock)
 
 ## Calibrate automatically from captions (other players)
 
@@ -90,32 +92,6 @@ against what is really there rather than guessed at.
 It reads metadata only: element properties, timing ranges and state objects the
 page already created. No frames are read and no stream content is touched.
 
-## Calibrate manually (fallback, ~20 seconds)
-
-The data is in UTC race time; the player only knows "seconds into this
-recording". Those differ by an unknown offset (pre-race build-up) *and* an
-unknown rate (ad breaks, a broadcast joining late). Two anchors solve both.
-
-1. Scrub to a moment you can identify on screen. Pause there.
-2. In the dropdown, choose the matching moment. Click **Anchor here**.
-3. Repeat once more, far from the first (early + late is best).
-
-**Pick from the "Precise (GPS)" group.** Those are summits, the intermediate
-sprint and the finish, timed from GPS — the actual second the leader crossed
-that point — and they're the easiest to spot on screen thanks to the banner.
-The "Approximate (ticker)" group carries ASO's *publication* time, which lags
-the on-screen moment by seconds to a minute; fine as a fallback, worse as a
-reference point.
-
-**Put your two anchors far apart.** Rate is computed by dividing by the span
-between them, so a 10-second misjudgment across four hours is negligible, while
-the same error across twenty minutes gets multiplied into everything the tool
-extrapolates.
-
-The readout shows `calibrated · 1.000× real time`. Anchors persist per stage,
-so you only do this once. Two anchors far apart give a better rate fit than
-two close together; with only one anchor it assumes real time.
-
 ## The profile is always on screen
 
 The profile never disappears, because it does not depend on calibration: km and
@@ -139,14 +115,26 @@ Collapsing (**–**) hides the controls but keeps the profile as a slim strip.
 The controls are only how it gets calibrated; the profile is the thing you read.
 
 **The bar states which axis it is on.** Time mode says `time · aligned to
-recording`; distance mode carries an amber `NOT aligned to the video` badge and
-draws no playhead. An uncalibrated bar looks identical to a calibrated one, so
-reading distance as time is the most misleading failure available here — the
-shape is right and the position means nothing.
+recording`; before calibration it carries an amber prompt to set km 0 and draws
+no playhead. An uncalibrated bar looks identical to a calibrated one, so reading
+distance as time is the most misleading failure available here — the shape is
+right and the position means nothing.
 
-Once calibrated the clock also reports the gradient under the playhead
-(`km 148.7 · climbing 9.0%`). If the screen shows a climb and this says
-descending, the calibration is wrong — and Align mode is how to fix it.
+### Imputed stretches
+
+On the time axis the bar covers the whole *recording*, which is longer than the
+race: build-up before km 0, coverage after the line. Nobody is riding then, so
+no elevation exists. Rather than leave those ends blank and break the trace into
+fragments, they are held flat at the start and finish altitudes and drawn faint
+and dashed. Gaps inside the race are bridged linearly the same way.
+
+Three weights, three different claims:
+
+| | meaning |
+|---|---|
+| solid | GPS-observed |
+| dashed, dimmer | estimated — GPS was offline, pace inferred from the known start |
+| faint, fine dashes | imputed — no race happening at that point in the recording |
 
 Tests (need Playwright):
 
@@ -155,23 +143,18 @@ Tests (need Playwright):
 
 ## Making the elevation line up exactly
 
-Metadata gives a good offset but cannot give **rate** — ad breaks aren't
-readable anywhere — so alignment starts close and drifts later in the
-recording. Click **Align** to fix it against the picture:
+If the km-0 pin is a little off, **Align** nudges it against the picture
+rather than by arithmetic:
 
 | Action | Effect |
 |---|---|
 | Drag the bar | Shifts the whole profile (offset) |
-| **Shift**-drag | Stretches it about the left edge (rate) — this is what ad drift needs |
 | ← / → | Nudge 1 second |
 | ↑ / ↓ | Nudge 10 seconds |
 
 Everything updates live, so you judge alignment against what's on screen rather
-than trusting a number. The reliable method: scrub to a summit, drag until the
-profile's peak sits under the playhead, then jump to a summit near the *other*
-end and shift-drag until that one lines up too. Two summits far apart pin
-offset and rate together. Click **Done** to leave align mode; the calibration is
-saved per stage.
+than trusting a number. Click **Done** to leave align mode; the calibration is
+saved per stage, so km 0 is a once-per-stage step.
 
 ### The profile spans the whole stage
 

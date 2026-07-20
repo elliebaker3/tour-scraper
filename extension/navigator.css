@@ -182,3 +182,14 @@
   border-radius: 5px; padding: 3px 8px; cursor: pointer; font-weight: 600;
 }
 .tn-sync-finish:hover, .tn-sync-start:hover { background: #2c9c68; }
+
+/* Imputed stretches: the recording runs before km 0 and past the finish, where
+   there is no elevation because nobody is racing. Held flat at the start and
+   finish altitudes so the trace spans the whole bar, but drawn faint enough
+   that it can never be mistaken for measured terrain. */
+.tn-profile-imp {
+  fill: rgba(120, 190, 255, 0.10);
+  stroke: rgba(158, 210, 255, 0.35);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}

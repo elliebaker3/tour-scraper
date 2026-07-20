@@ -1,38 +1,37 @@
-"""Assert the bar actually aligns to the broadcast, and says so honestly.
+"""Assert the bar calibrates from km 0 and imputes elevation everywhere else.
 
-Two regressions are covered.
+The contract, after a long run of alignment bugs:
 
-1. Pinning a stage disabled calibration. loadBundle() only ran the FULL probe
-   when it needed to detect the stage, and the full probe is the only thing
-   that executes the MAIN-world script -- which is the only place
-   __PLAYBACK_STATE__ (and so the broadcast start time) is visible. Pinning
-   short-circuited that, auto-calibrate found no start time, and the bar fell
-   back to a distance axis that lines up with nothing.
+1. Nothing calibrates itself on load. The broadcast's own start metadata was
+   27 minutes adrift of the recording's real origin on stage 14, and a
+   confidently wrong clock is worse than an absent one -- it puts every summit
+   on a descent with nothing on screen to say so. The bar asks for km 0.
 
-2. A distance-axis bar looks identical to a time-axis one. If it cannot say
-   which it is, a climb on screen sitting over a descent on the bar is
-   indistinguishable from a calibration that is simply off.
+2. km 0 alone is a complete calibration. The broadcast has no inserted breaks,
+   so rate is 1.0 by construction. Fitting a rate from two pins turned a few
+   seconds of click imprecision into a slope across four hours (it produced
+   0.918x -- "20 minutes of racing missing" -- from a single mis-click).
 
-Ground truth is the real stage 14 replay: displayStartTime 2026-07-18T10:30:00Z,
-runtime 5h20m26s, race rolling at 11:35:38Z -> 3938s into the recording.
+3. The trace spans the whole bar. The recording runs before km 0 and past the
+   finish, where no elevation exists because nobody is racing; those stretches
+   are imputed and drawn faintly rather than left blank.
+
+Ground truth is the real stage 14 replay: runtime 5h20m26s, km 0 at 11:35:38Z,
+finish at 15:37:46Z.
 """
-import re, shutil, subprocess, sys, time, urllib.request
-from datetime import datetime, timedelta, timezone
+import json, shutil, subprocess, sys, time, urllib.request
+from datetime import datetime, timedelta
 from pathlib import Path
-import json
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
 EXT = ROOT / "extension"
 PORT = 8932
-DISPLAY_START_MS = 1784370600000            # 2026-07-18T10:30:00Z
+KM0_REC = 59 * 60 + 9          # observed recording time at the flag drop
 
 bundle = json.loads((EXT / "data" / "stage-14.json").read_text())
-prof = [p for p in bundle["profile"] if p.get("t")]
-
-
-def rec_sec(iso_t):
-    return (datetime.fromisoformat(iso_t).timestamp() * 1000 - DISPLAY_START_MS) / 1000
+start_utc = datetime.fromisoformat(bundle["coverage"]["race_start_utc"])
+fin_utc = datetime.fromisoformat(bundle["coverage"]["leader_last_seen_utc"])
 
 
 def gradient_at(km):
@@ -44,15 +43,8 @@ def gradient_at(km):
     return (b["alt"] - a["alt"]) / (d * 10) if d > 0 else None
 
 
-# Pick the steepest sustained climb and descent that the GPS actually observed,
-# so the expectation is anchored in measured data rather than the estimated head.
-scored = []
-for p in prof:
-    if p.get("est"):
-        continue
-    g = gradient_at(p["km"])
-    if g is not None:
-        scored.append((g, p))
+scored = [(gradient_at(p["km"]), p) for p in bundle["profile"]
+          if p.get("t") and not p.get("est") and gradient_at(p["km"]) is not None]
 scored.sort(key=lambda x: x[0])
 descent_g, descent_p = scored[0]
 climb_g, climb_p = scored[-1]
@@ -69,111 +61,93 @@ try:
         except Exception:
             time.sleep(0.1)
 
-    base = (f"http://127.0.0.1:{PORT}/_harness.html"
-            "?stage=14&video=1&playbackstate=1")
+    base = f"http://127.0.0.1:{PORT}/_harness.html?stage=14&video=1&playbackstate=1"
     with sync_playwright() as p:
         br = p.chromium.launch()
         page = br.new_page(viewport={"width": 1400, "height": 800})
         errs = []
         page.on("pageerror", lambda e: errs.append(str(e)))
-        page.on("console", lambda m: logs.append(m.text[:300]))
-        logs = []
 
         def state():
-            return page.evaluate("""() => ({
-              axis: (document.querySelector('.tn-axis')||{}).textContent || '',
-              clock: document.querySelector('.tn-clock').textContent,
-              anchorState: document.querySelector('.tn-anchor-state').textContent,
-              playhead: !!document.querySelector('.tn-playhead'),
-            })""")
+            return page.evaluate("""() => {
+              const bar = document.querySelector('.tn-bar');
+              const seg = (sel) => {
+                const d = [...bar.querySelectorAll(sel)]
+                  .map(p => p.getAttribute('d') || '').join(' ');
+                if (!d.trim()) return null;
+                const xs = [...d.matchAll(/(-?\\d+\\.?\\d*)\\s(-?\\d+\\.?\\d*)/g)]
+                  .map(m => parseFloat(m[1]));
+                return { min: Math.min(...xs), max: Math.max(...xs) };
+              };
+              return {
+                axis: (bar.querySelector('.tn-axis')||{}).textContent || '',
+                clock: document.querySelector('.tn-clock').textContent,
+                status: document.querySelector('.tn-anchor-state').textContent,
+                diag: document.querySelector('.tn-diag').textContent,
+                width: bar.clientWidth,
+                obs: seg('.tn-profile:not(.tn-profile-est):not(.tn-profile-imp)'),
+                est: seg('.tn-profile-est'),
+                imp: seg('.tn-profile-imp'),
+              };
+            }""")
 
-        # --- regression 1: a PINNED stage must still calibrate ---------------
+        # --- 1: no self-calibration on load; it asks for km 0 ----------------
         page.goto(base)
-        page.wait_for_selector(".tn-root", timeout=10000)
-        # Wait on the calibration actually landing, not on a substring that
-        # also appears in the failure text ("not time" contains "time").
-        try:
-            page.wait_for_function(
-                "() => { const e = document.querySelector('.tn-axis');"
-                "        return e && !e.textContent.includes('NOT aligned'); }",
-                timeout=15000)
-        except Exception:
-            pass
-        s = state()
-        print("--- pinned stage 14, broadcast start exposed ---")
-        print(f"  axis    {s['axis']}")
-        print(f"  status  {s['anchorState']}")
-        for l in logs:
-            print(f"  log     {l}")
-        assert "NOT aligned" not in s["axis"], "FAIL: pinned stage did not calibrate"
-        assert s["playhead"], "FAIL: no playhead once calibrated"
-
-        # --- offset is right: race start must land at 3938s ------------------
-        expect_start = (datetime.fromisoformat(
-            bundle["coverage"]["race_start_utc"]).timestamp() * 1000
-            - DISPLAY_START_MS) / 1000
-        page.evaluate(f"() => document.querySelector('video').currentTime = {expect_start}")
-        page.wait_for_timeout(900)
-        s = state()
-        print(f"\n  race start expected at rec {expect_start:.0f}s")
-        print(f"  clock   {s['clock']}")
-        want = bundle["coverage"]["race_start_utc"][11:19]
-        assert want in s["clock"], f"FAIL: expected race {want} in clock, got {s['clock']}"
-
-        # --- regression 2: climbs must read as climbs ------------------------
-        for label, pt, g in [("steepest climb", climb_p, climb_g),
-                             ("steepest descent", descent_p, descent_g)]:
-            sec = rec_sec(pt["t"])
-            page.evaluate(f"() => document.querySelector('video').currentTime = {sec}")
-            page.wait_for_timeout(900)
-            c = state()["clock"]
-            print(f"\n  {label}: km {pt['km']} alt {pt['alt']}m "
-                  f"gradient {g:+.1f}% -> rec {sec:.0f}s")
-            print(f"  clock   {c}")
-            word = "climbing" if g > 0 else "descending"
-            assert word in c, f"FAIL: expected '{word}' at km {pt['km']}, got: {c}"
-            # The playhead resolves to the nearest point of the DOWNSAMPLED
-            # profile, so a tenth of a km of slack is expected, not an error.
-            got_km = float(re.search(r"km (\d+\.\d)", c).group(1))
-            assert abs(got_km - pt["km"]) <= 0.5, \
-                f"FAIL: playhead at km {got_km}, expected ~{pt['km']}"
-
-        # --- honesty: no broadcast start => must say it is NOT aligned -------
-        page.goto(f"http://127.0.0.1:{PORT}/_harness.html?stage=14&video=1")
         page.wait_for_selector(".tn-root .tn-axis", timeout=10000)
         page.wait_for_timeout(3000)
         s = state()
-        print("\n--- no broadcast start exposed ---")
-        print(f"  axis    {s['axis'].strip()}")
-        print(f"  status  {s['anchorState']}")
-        assert "NOT aligned" in s["axis"], "FAIL: uncalibrated bar did not say so"
-        assert not s["playhead"], "FAIL: meaningless playhead drawn when uncalibrated"
+        print("--- on load ---")
+        print(f"  axis    {' '.join(s['axis'].split())}")
+        assert "Set km 0" in s["axis"], f"FAIL: expected a km-0 prompt, got: {s['axis']}"
 
-        # --- regression 3: a manual pin must WIN over the auto anchors -------
-        # Auto anchors carry no `kind`, so a filter on kind alone left them in
-        # place; calFromAnchors reads only the first and last anchor by race
-        # time, so the auto pair kept control and the pin changed nothing --
-        # while the panel confidently reported the unchanged value back.
-        page.goto(base)
-        page.wait_for_selector(".tn-root", timeout=10000)
-        page.wait_for_function(
-            "() => { const e = document.querySelector('.tn-axis');"
-            "        return e && !e.textContent.includes('NOT aligned'); }",
-            timeout=15000)
-        PIN_SEC = 4 * 3600 + 40 * 60 + 53          # the real observed finish
-        page.evaluate(f"() => document.querySelector('video').currentTime = {PIN_SEC}")
-        page.wait_for_timeout(300)
-        page.click(".tn-sync-finish")
-        page.wait_for_timeout(600)
-        status = page.evaluate(
-            "() => document.querySelector('.tn-anchor-state').textContent")
-        print("\n--- manual pin overrides auto anchors ---")
-        print(f"  status  {status}")
-        fin = datetime.fromisoformat(bundle["coverage"]["leader_last_seen_utc"])
-        want = (fin - timedelta(seconds=PIN_SEC)).strftime("%H:%M:%S")
-        print(f"  finish {fin:%H:%M:%S}Z pinned at rec {PIN_SEC}s => rec 0:00 must be {want}Z")
-        assert f"rec 0:00 = {want}Z" in status, \
-            f"FAIL: pin ignored; expected rec 0:00 = {want}Z, got: {status}"
+        # --- 2: km 0 typed into the box calibrates ---------------------------
+        page.fill(".tn-km0-time", "0:59:09")
+        page.click(".tn-km0-set")
+        page.wait_for_timeout(700)
+        s = state()
+        print("\n--- after typing km 0 = 0:59:09 ---")
+        print(f"  status  {s['status']}")
+        print(f"  diag    {s['diag']}")
+        want_zero = (start_utc - timedelta(seconds=KM0_REC)).strftime("%H:%M:%S")
+        assert "rate 1.000" in s["status"], f"FAIL: rate not locked: {s['status']}"
+        assert f"rec 0:00 = {want_zero}Z" in s["diag"], \
+            f"FAIL: expected rec 0:00 = {want_zero}Z, got: {s['diag']}"
+
+        # The finish must land where km 0 plus elapsed race time puts it.
+        want_fin = KM0_REC + (fin_utc - start_utc).total_seconds()
+        page.evaluate(f"() => document.querySelector('video').currentTime = {want_fin}")
+        page.wait_for_timeout(700)
+        c = state()["clock"]
+        print(f"\n  finish predicted at rec {want_fin:.0f}s -> {c}")
+        assert fin_utc.strftime("%H:%M:%S") in c, \
+            f"FAIL: finish not at predicted time, got: {c}"
+
+        # --- 3: climbs read as climbs ----------------------------------------
+        for label, pt, g in [("steepest climb", climb_p, climb_g),
+                             ("steepest descent", descent_p, descent_g)]:
+            sec = KM0_REC + (datetime.fromisoformat(pt["t"]) - start_utc).total_seconds()
+            page.evaluate(f"() => document.querySelector('video').currentTime = {sec}")
+            page.wait_for_timeout(700)
+            c = state()["clock"]
+            print(f"\n  {label}: km {pt['km']} ({g:+.1f}%) -> rec {sec:.0f}s")
+            print(f"  clock   {c}")
+            word = "climbing" if g > 0 else "descending"
+            assert word in c, f"FAIL: expected '{word}' at km {pt['km']}, got: {c}"
+
+        # --- 4: the trace spans the entire bar, imputed where it must --------
+        s = state()
+        segs = {k: s[k] for k in ("obs", "est", "imp") if s[k]}
+        lo = min(v["min"] for v in segs.values())
+        hi = max(v["max"] for v in segs.values())
+        print("\n--- coverage of the bar ---")
+        for k, v in segs.items():
+            print(f"  {k:4} x {v['min']:7.1f} -> {v['max']:7.1f}")
+        print(f"  total x {lo:.1f} -> {hi:.1f} of {s['width']}px")
+        assert lo <= 1, f"FAIL: trace starts at {lo}px, not the left edge"
+        assert hi >= s["width"] - 1, f"FAIL: trace ends at {hi}px of {s['width']}"
+        assert s["imp"], "FAIL: no imputed stretch drawn (pre-race/post-finish)"
+        assert s["imp"]["min"] <= 1, "FAIL: pre-race build-up not imputed"
+        assert s["imp"]["max"] >= s["width"] - 1, "FAIL: post-finish tail not imputed"
 
         print(f"\n  page errors: {errs or 'none'}")
         assert not errs, f"FAIL: page errors {errs}"
