@@ -149,6 +149,20 @@ try:
         assert s["imp"]["min"] <= 1, "FAIL: pre-race build-up not imputed"
         assert s["imp"]["max"] >= s["width"] - 1, "FAIL: post-finish tail not imputed"
 
+        # --- 5: a calibration saved by an older version must be discarded ----
+        # Otherwise reloading the extension restores the broken clock, no
+        # prompt appears, and it looks like nothing changed.
+        page.goto(base + "&stalecal=1")
+        page.wait_for_selector(".tn-root .tn-axis", timeout=10000)
+        page.wait_for_timeout(2500)
+        s = state()
+        print("\n--- reload with a stale saved calibration ---")
+        print(f"  axis    {' '.join(s['axis'].split())}")
+        print(f"  diag    {s['diag']}")
+        assert "Set km 0" in s["axis"], \
+            f"FAIL: stale calibration was restored instead of prompting: {s['axis']}"
+        assert "0.918" not in s["diag"], f"FAIL: stale rate survived: {s['diag']}"
+
         print(f"\n  page errors: {errs or 'none'}")
         assert not errs, f"FAIL: page errors {errs}"
         br.close()

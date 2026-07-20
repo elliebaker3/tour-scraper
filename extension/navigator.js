@@ -827,9 +827,20 @@ everything.">Km 0 is NOW</button>
     }
   }
 
+  /* Calibrations are saved per stage, which means a bad one outlives the bug
+   * that produced it: reloading the extension restores it, you see the same
+   * misalignment and no prompt, and conclude nothing changed. So the stored
+   * shape is versioned. Bump this whenever the meaning of a saved calibration
+   * changes and older entries are dropped rather than honoured. v2 is
+   * "derived from a km-0 pin at rate 1.0" -- which the metadata-derived and
+   * rate-fitted calibrations before it were not. */
+  const CAL_SCHEMA = 2;
+
   function persist() {
     try {
-      chrome.storage?.local?.set({ [STORAGE_KEY + ":" + stageKey()]: { anchors, cal } });
+      chrome.storage?.local?.set({
+        [STORAGE_KEY + ":" + stageKey()]: { v: CAL_SCHEMA, anchors, cal },
+      });
     } catch (_) { /* storage is a convenience, not a requirement */ }
   }
 
@@ -837,8 +848,17 @@ everything.">Km 0 is NOW</button>
     try {
       chrome.storage.local.get([STORAGE_KEY + ":" + stageKey()], (r) => {
         const saved = r?.[STORAGE_KEY + ":" + stageKey()];
-        if (saved && saved.cal) { anchors = saved.anchors || []; cal = saved.cal; }
-        else { anchors = saved || []; cal = calFromAnchors(); }
+        if (saved && saved.v === CAL_SCHEMA && saved.cal) {
+          anchors = saved.anchors || [];
+          cal = saved.cal;
+        } else {
+          if (saved) {
+            console.log("[TourNavigator] discarded a calibration saved by an " +
+                        "older version — set km 0 again");
+          }
+          anchors = [];
+          cal = null;
+        }
         cb();
       });
     } catch (_) { cb(); }
