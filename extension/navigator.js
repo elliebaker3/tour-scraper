@@ -277,6 +277,20 @@
       clock.textContent = dur ? `rec ${fmt(video.currentTime)} · not calibrated`
                               : "profile only · no video detected";
     }
+
+    // State the assumptions, always. Every alignment failure so far has been
+    // one of these four being quietly wrong, and none of them were visible:
+    // which stage is loaded, what date the recording is, where recording
+    // second 0 sits in race time, and the rate.
+    const diag = root.querySelector(".tn-diag");
+    const zero = cal ? videoToUtc(0) : null;
+    diag.textContent =
+      `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
+      (zero != null
+        ? `rec 0:00 = ${new Date(zero).toISOString().slice(11, 19)}Z · ` +
+          `rate ${cal.rate.toFixed(3)}×`
+        : "no clock") +
+      ` · ${bundle.__selection || ""}`;
   }
 
   /** Gradient at a point on the route, in percent, averaged over ~1km so it
@@ -361,6 +375,7 @@
         <button class="tn-collapse" title="Hide">–</button>
       </div>
       <div class="tn-bar"></div>
+      <div class="tn-diag"></div>
       <div class="tn-controls">
         <div class="tn-filters"></div>
         <div class="tn-anchors">
@@ -705,10 +720,6 @@
     });
 
     let chosen = null, why = "", airing = null;
-    if (pinned) {
-      chosen = index.stages.find((s) => s.stage === pinned) || null;
-      if (chosen) why = `pinned to stage ${pinned}`;
-    }
 
     // The full probe runs unconditionally, even when the stage is pinned.
     // It is the ONLY thing that executes the MAIN-world script, and the
@@ -726,13 +737,29 @@
         } catch (_) { /* keep trying */ }
         if (!airing) await new Promise((r) => setTimeout(r, 700 * attempt));
       }
-      if (chosen) {
-        why += airing ? "" : " (no airing time found — calibration may fail)";
-      } else if (airing) {
-        const day = new Date(airing).toISOString().slice(0, 10);
-        chosen = index.stages.find((s) => s.date === day) || null;
-        why = chosen ? `matched airing date ${day}`
-                     : `airing date ${day} has no bundle — pick a stage`;
+      // Detection beats a pin whenever detection actually works. A pin was
+      // meant for "the page won't tell us which stage this is", but it was
+      // stored globally and consulted first, so pinning a stage once applied
+      // it to every later recording -- and because a pinned choice counted as
+      // trustworthy, the mismatch never warned. Stage 15 data over a stage 14
+      // broadcast aligns with nothing, which is exactly the "zero alignment"
+      // this is meant to make impossible.
+      const day = airing ? new Date(airing).toISOString().slice(0, 10) : null;
+      const detected = day ? index.stages.find((s) => s.date === day) : null;
+      if (detected) {
+        chosen = detected;
+        why = `matched airing date ${day}`;
+        if (pinned && pinned !== detected.stage) {
+          why += ` (ignoring stale pin to stage ${pinned})`;
+          try { chrome.storage.local.remove("tnPinnedStage"); } catch (_) {}
+        }
+      } else if (pinned && index.stages.find((s) => s.stage === pinned)) {
+        chosen = index.stages.find((s) => s.stage === pinned);
+        why = `pinned to stage ${pinned}` +
+              (day ? ` — but this recording aired ${day}, which has no bundle`
+                   : " (no airing time found — calibration may fail)");
+      } else if (day) {
+        why = `airing date ${day} has no bundle — pick a stage`;
       } else {
         why = "could not read airing date — pick a stage";
       }
@@ -748,7 +775,7 @@
                 "| airing:", airing ? new Date(airing).toISOString() : null,
                 "| available:", index.stages.map((s) => `${s.stage}@${s.date}`));
     bundle_index = index;
-    bundle_selection_ok = /matched|pinned/.test(why);
+    bundle_selection_ok = /^matched/.test(why);   // a pin means detection failed
     const bundleRes = await fetch(chrome.runtime.getURL("data/" + chosen.file));
     const b = await bundleRes.json();
     b.__selection = why;

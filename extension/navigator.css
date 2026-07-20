@@ -164,3 +164,12 @@
   stroke-width: 1.2;
   stroke-dasharray: 5 3;
 }
+
+/* The four assumptions behind every alignment, stated permanently. Each
+   misalignment so far was one of these being quietly wrong and invisible. */
+.tn-diag {
+  margin-top: 4px; font-size: 10px; color: #7e8794;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.tn-root.tn-collapsed .tn-diag { display: none; }
