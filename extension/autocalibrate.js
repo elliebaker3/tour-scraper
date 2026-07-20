@@ -147,6 +147,67 @@
 
   function resetHistory() { pairHistory = []; }
 
+  /* Strategy 2: the broadcast's own start timestamp.
+   *
+   * DRM players usually withhold captions but still leave the asset's airing
+   * time in page state. That pins the OFFSET exactly; rate has to be assumed
+   * 1.0, so anything spliced in (ads) accumulates as drift later in the
+   * recording. Good enough to place markers roughly, and a solid base for the
+   * viewer to refine with one manual anchor. */
+  function calibrateFromBroadcastStart(video, bundle) {
+    const probe = window.TourNavigatorProbe;
+    if (!probe) return null;
+    let report;
+    try { report = probe.runProbe(); } catch (_) { return null; }
+
+    const raceStartMs = Date.parse(
+      (bundle.coverage && bundle.coverage.leader_first_seen_utc) || "");
+    const raceEndMs = Date.parse(
+      (bundle.coverage && bundle.coverage.leader_last_seen_utc) || "");
+    if (!raceStartMs || !raceEndMs) return null;
+
+    const parse = (v) => {
+      if (/^\d{13}$/.test(v)) return Number(v);
+      if (/^\d{10}$/.test(v)) return Number(v) * 1000;
+      const ms = Date.parse(v);
+      return isNaN(ms) ? null : ms;
+    };
+
+    let best = null;
+    for (const c of report.startTimeCandidates || []) {
+      const ms = parse(String(c.value));
+      if (ms == null) continue;
+      // A broadcast starts before the racing we have data for, and not more
+      // than a few hours before; anything else is some unrelated timestamp.
+      const lead = raceStartMs - ms;
+      if (lead < 0 || lead > 5 * 3600e3) continue;
+      // The whole observed race must fit inside the recording at rate 1.0.
+      const endSec = (raceEndMs - ms) / 1000;
+      if (!video.duration || endSec > video.duration + 900) continue;
+      if (!best || c.rank < best.rank || (c.rank === best.rank && ms > best.ms)) {
+        best = { ms, rank: c.rank, source: c.source };
+      }
+    }
+    if (!best) return null;
+
+    const secAt = (tMs) => (tMs - best.ms) / 1000;
+    return {
+      ok: true,
+      strategy: "broadcast-start",
+      confidence: "medium",
+      rate: 1.0,
+      inliers: 1,
+      total: 1,
+      medianResidual: 0,
+      spanMin: Math.round((raceEndMs - raceStartMs) / 60000),
+      note: `from ${best.source}; rate assumed 1.00x (ads will drift)`,
+      anchors: [
+        { tUtcMs: raceStartMs, videoSec: secAt(raceStartMs), label: "auto (broadcast start)" },
+        { tUtcMs: raceEndMs, videoSec: secAt(raceEndMs), label: "auto (broadcast start)" },
+      ],
+    };
+  }
+
   /** Full attempt. Returns a result object; never throws into the caller. */
   function autoCalibrate(video, bundle) {
     if (!video || !bundle) return { ok: false, reason: "not ready" };
@@ -156,19 +217,26 @@
     }
     const cues = collectCues(video);
     if (!cues.length) {
+      // Captions withheld (normal for DRM). Fall back to the airing time.
+      const viaStart = calibrateFromBroadcastStart(video, bundle);
+      if (viaStart) return viaStart;
       return {
         ok: false,
-        reason: "no caption cues available (turn on subtitles, or the player " +
-                "may not expose them to extensions)",
+        reason: "no captions exposed and no broadcast start time found — " +
+                "click Diagnose and share the report",
       };
     }
     const pairs = mergePairs(candidatePairs(cues, idx));
     if (pairs.length < 3) {
+      const viaStart = calibrateFromBroadcastStart(video, bundle);
+      if (viaStart) return viaStart;
       return { ok: false, reason: `only ${pairs.length} usable "km to go" mentions found`,
                cues: cues.length };
     }
     const fit = theilSen(pairs);
     if (!fit) {
+      const viaStart = calibrateFromBroadcastStart(video, bundle);
+      if (viaStart) return viaStart;
       return { ok: false, reason: "mentions found but no consistent fit", pairs: pairs.length };
     }
 
@@ -188,6 +256,7 @@
 
     return {
       ok: true,
+      strategy: "captions",
       confidence,
       rate: fit.rate,
       inliers: fit.inliers,
@@ -203,5 +272,6 @@
 
   window.TourNavigatorAutoCal = {
     autoCalibrate, buildKmIndex, kmToGoToUtc, theilSen, candidatePairs, resetHistory,
+    calibrateFromBroadcastStart,
   };
 })();

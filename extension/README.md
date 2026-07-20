@@ -42,8 +42,30 @@ confidence) widen. **reset** clears both anchors and accumulated cues.
 Caption text is scanned in memory for a number and discarded; nothing from the
 broadcast is stored or copied. The only output is offset and rate.
 
-If auto-calibration reports no cues, the player isn't exposing captions to
-extensions — use the manual method below.
+### If captions aren't exposed
+
+DRM players commonly withhold caption cues from extensions. Auto-calibrate then
+falls back to **the broadcast's own start time**, which streaming sites usually
+leave in page state even when they hide everything else. That pins the offset
+exactly; rate is assumed 1.00×, so any ad breaks accumulate as drift later in
+the recording. The fix is one manual anchor near the finish — offset comes from
+the metadata, rate from your single anchor.
+
+Candidate timestamps are sanity-checked before use: one must sit *before* the
+racing we have data for, by no more than a few hours, and the whole race has to
+fit inside the recording. An unrelated timestamp elsewhere in page state is
+rejected rather than silently believed.
+
+### If neither works: Diagnose
+
+Click **Diagnose**. It reports what this player actually exposes — video
+timing, `getStartDate()`, app-state objects, inline JSON, `data-*` attributes —
+ranks any timestamps that could serve as a clock, copies the report to your
+clipboard and logs it to the console. Share it and the calibration can be built
+against what is really there rather than guessed at.
+
+It reads metadata only: element properties, timing ranges and state objects the
+page already created. No frames are read and no stream content is touched.
 
 ## Calibrate manually (fallback, ~20 seconds)
 

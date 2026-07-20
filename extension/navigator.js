@@ -185,6 +185,7 @@
           <select class="tn-anchor-pick"><option value="">pick a moment…</option></select>
           <button class="tn-anchor-add">Anchor here</button>
           <button class="tn-auto">Auto-calibrate</button>
+          <button class="tn-probe" title="Report what this player exposes">Diagnose</button>
           <button class="tn-anchor-clear" title="Clear anchors">reset</button>
           <span class="tn-anchor-state"></span>
         </div>
@@ -216,6 +217,7 @@
     });
     root.querySelector(".tn-anchor-add").addEventListener("click", addAnchor);
     root.querySelector(".tn-auto").addEventListener("click", runAutoCalibrate);
+    root.querySelector(".tn-probe").addEventListener("click", runProbe);
     root.querySelector(".tn-anchor-clear").addEventListener("click", () => {
       anchors = [];
       window.TourNavigatorAutoCal?.resetHistory?.();
@@ -288,14 +290,37 @@
       anchors = res.anchors;
       persist();
       render();
-      el.textContent =
-        `auto · ${res.rate.toFixed(3)}× · ${res.confidence} confidence ` +
-        `(${res.inliers}/${res.total} mentions over ${res.spanMin}min, ` +
-        `±${Math.round(res.medianResidual)}s)`;
-      if (res.confidence !== "high") {
-        el.textContent += " — scrub elsewhere and run again to widen the span";
+      if (res.strategy === "broadcast-start") {
+        el.textContent = `auto (broadcast start) · ${res.confidence} · ${res.note}` +
+          " — add one manual anchor near the finish to correct drift";
+      } else {
+        el.textContent =
+          `auto (captions) · ${res.rate.toFixed(3)}× · ${res.confidence} confidence ` +
+          `(${res.inliers}/${res.total} mentions over ${res.spanMin}min, ` +
+          `±${Math.round(res.medianResidual)}s)`;
+        if (res.confidence !== "high") {
+          el.textContent += " — scrub elsewhere and run again to widen the span";
+        }
       }
     }, 0);
+  }
+
+  /** Dump what this player exposes, and copy it for pasting back. Captions are
+   *  not the only possible clock source; this finds out which others exist
+   *  here rather than guessing at them. */
+  function runProbe() {
+    const el = root.querySelector(".tn-anchor-state");
+    const api = window.TourNavigatorProbe;
+    if (!api) { el.textContent = "probe unavailable"; return; }
+    let report;
+    try { report = api.runProbe(); }
+    catch (e) { el.textContent = "probe failed: " + (e && e.message); return; }
+    const text = JSON.stringify(report, null, 2);
+    console.log("[TourNavigator] capability probe:\n" + text);
+    const n = report.startTimeCandidates.length;
+    navigator.clipboard?.writeText(text).then(
+      () => { el.textContent = `probe copied to clipboard · ${n} start-time candidate(s) · also in console`; },
+      () => { el.textContent = `probe in console (clipboard blocked) · ${n} candidate(s)`; });
   }
 
   function refreshAnchorState() {

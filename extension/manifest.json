@@ -15,6 +15,7 @@
         "https://www.peacocktv.com/*"
       ],
       "js": [
+        "probe.js",
         "autocalibrate.js",
         "navigator.js"
       ],
