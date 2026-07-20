@@ -106,3 +106,12 @@
 }
 .tn-anchors button:hover { background: #38404f; }
 .tn-anchor-state { color: #8f97a3; }
+
+/* Stage selection is the one thing that must never fail silently: wrong stage
+   means every marker is confidently wrong with nothing to reveal it. */
+.tn-stage-pick {
+  background: #1b1f26; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
+  border-radius: 5px; padding: 2px 5px; font-size: 11px; max-width: 190px;
+}
+.tn-root.tn-warn { border-color: #f5a524; box-shadow: 0 0 0 1px #f5a524 inset, 0 8px 28px rgba(0,0,0,.55); }
+.tn-root.tn-warn .tn-stage { color: #ffd479; }

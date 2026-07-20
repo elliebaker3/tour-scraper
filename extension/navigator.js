@@ -30,6 +30,8 @@
   };
 
   let bundle = null;
+  let bundle_index = null;
+  let bundle_selection_ok = false;
   let video = null;
   let anchors = [];           // [{ tUtcMs, videoSec, label }]
   let root = null;
@@ -174,6 +176,7 @@
     root.innerHTML = `
       <div class="tn-head">
         <strong>Tour Navigator</strong>
+        <select class="tn-stage-pick" title="Which stage this recording is"></select>
         <span class="tn-stage"></span>
         <span class="tn-clock"></span>
         <button class="tn-collapse" title="Hide">–</button>
@@ -224,6 +227,25 @@
       persist();
       refreshAnchorState();
       render();
+    });
+  }
+
+  /** Let the viewer state which stage this is when detection can't. */
+  function populateStagePicker() {
+    const sel = root.querySelector(".tn-stage-pick");
+    if (!sel || !bundle_index) return;
+    sel.innerHTML = "";
+    for (const s of bundle_index.stages) {
+      const o = document.createElement("option");
+      o.value = String(s.stage);
+      o.textContent = `Stage ${s.stage} (${s.date})`;
+      if (bundle.stage && s.stage === bundle.stage.stage) o.selected = true;
+      sel.appendChild(o);
+    }
+    sel.addEventListener("change", () => {
+      const n = Number(sel.value);
+      try { chrome.storage.local.set({ tnPinnedStage: n }, () => location.reload()); }
+      catch (_) { location.reload(); }
     });
   }
 
@@ -385,26 +407,49 @@
       throw new Error("no stage bundles shipped");
     }
 
-    let chosen = null, why = "";
-    try {
-      const report = await window.TourNavigatorProbe.runProbeFull();
-      const airing = assetAiringMs(report);
+    // A manual choice always wins and is remembered per browser.
+    const pinned = await new Promise((res) => {
+      try { chrome.storage.local.get(["tnPinnedStage"], (r) => res(r?.tnPinnedStage ?? null)); }
+      catch (_) { res(null); }
+    });
+
+    let chosen = null, why = "", airing = null;
+    if (pinned) {
+      chosen = index.stages.find((s) => s.stage === pinned) || null;
+      if (chosen) why = `pinned to stage ${pinned}`;
+    }
+
+    if (!chosen) {
+      // The page can still be booting at document_idle, so retry rather than
+      // let a single missed handshake silently pick the wrong stage.
+      for (let attempt = 1; attempt <= 3 && !airing; attempt++) {
+        try {
+          const report = await window.TourNavigatorProbe.runProbeFull();
+          airing = assetAiringMs(report);
+        } catch (_) { /* keep trying */ }
+        if (!airing) await new Promise((r) => setTimeout(r, 700 * attempt));
+      }
       if (airing) {
         const day = new Date(airing).toISOString().slice(0, 10);
         chosen = index.stages.find((s) => s.date === day) || null;
         why = chosen ? `matched airing date ${day}`
-                     : `airing date ${day} has no bundle`;
+                     : `airing date ${day} has no bundle — pick a stage`;
       } else {
-        why = "no airing date in page state";
+        why = "could not read airing date — pick a stage";
       }
-    } catch (e) {
-      why = "probe unavailable";
     }
 
+    // No silent fallback: guessing produces markers that are confidently wrong
+    // everywhere, with nothing on screen to reveal it.
     if (!chosen) {
       chosen = index.stages[index.stages.length - 1];
-      why += ` — defaulting to stage ${chosen.stage}`;
+      why += ` (showing stage ${chosen.stage})`;
     }
+    console.log("[TourNavigator] stage selection:", why,
+                "| airing:", airing ? new Date(airing).toISOString() : null,
+                "| available:", index.stages.map((s) => `${s.stage}@${s.date}`));
+    bundle_index = index;
+    bundle_selection_ok = /matched|pinned/.test(why);
     const bundleRes = await fetch(chrome.runtime.getURL("data/" + chosen.file));
     const b = await bundleRes.json();
     b.__selection = why;
@@ -412,6 +457,11 @@
   }
 
   async function start() {
+    // Only the top document gets a panel. With all_frames enabled a panel was
+    // being built in every iframe, and a subframe cannot see __PLAYBACK_STATE__
+    // -- so it fell back to the last bundle and showed the wrong stage while
+    // looking perfectly normal.
+    if (window.top !== window.self) return;
     try {
       bundle = await loadBundle();
     } catch (e) {
@@ -424,6 +474,11 @@
     root.querySelector(".tn-stage").textContent =
       `Stage ${s.stage ?? "?"} · ${s.departure ?? ""} → ${s.arrival ?? ""} · ${s.length_km ?? "?"}km`;
     root.querySelector(".tn-stage").title = bundle.__selection || "";
+    populateStagePicker();
+    if (!bundle_selection_ok) {
+      root.classList.add("tn-warn");
+      root.querySelector(".tn-stage").textContent += "  ⚠ " + (bundle.__selection || "");
+    }
     restore(() => {
       refreshAnchorState();
       render();
