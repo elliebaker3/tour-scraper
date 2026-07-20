@@ -20,10 +20,21 @@ The data is in UTC race time; the player only knows "seconds into this
 recording". Those differ by an unknown offset (pre-race build-up) *and* an
 unknown rate (ad breaks, a broadcast joining late). Two anchors solve both.
 
-1. Scrub to a moment you can identify on screen — a summit banner, the
-   intermediate sprint, the finish. Pause there.
+1. Scrub to a moment you can identify on screen. Pause there.
 2. In the dropdown, choose the matching moment. Click **Anchor here**.
 3. Repeat once more, far from the first (early + late is best).
+
+**Pick from the "Precise (GPS)" group.** Those are summits, the intermediate
+sprint and the finish, timed from GPS — the actual second the leader crossed
+that point — and they're the easiest to spot on screen thanks to the banner.
+The "Approximate (ticker)" group carries ASO's *publication* time, which lags
+the on-screen moment by seconds to a minute; fine as a fallback, worse as a
+reference point.
+
+**Put your two anchors far apart.** Rate is computed by dividing by the span
+between them, so a 10-second misjudgment across four hours is negligible, while
+the same error across twenty minutes gets multiplied into everything the tool
+extrapolates.
 
 The readout shows `calibrated · 1.000× real time`. Anchors persist per stage,
 so you only do this once. Two anchors far apart give a better rate fit than

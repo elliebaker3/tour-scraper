@@ -224,15 +224,29 @@
 
   function populatePicker() {
     const sel = root.querySelector(".tn-anchor-pick");
-    // Distinct, easy-to-spot-on-screen moments make the best anchors.
-    const candidates = bundle.guideposts.filter(
+    // Anchor quality is not uniform. Summits/sprint/finish come from GPS -- the
+    // second the leader physically crossed that point -- while ticker items
+    // carry ASO's publication time, which lags what's on screen. Group them so
+    // the precise ones are chosen by default.
+    const all = bundle.guideposts.filter(
       (g) => g.category === "route" || g.category === "scenic" ||
              g.category === "crash" || g.category === "breakaway_end");
-    for (const g of candidates) {
-      const o = document.createElement("option");
-      o.value = g.t_utc;
-      o.textContent = `${g.t_utc.slice(11, 16)}Z — ${g.label}`.slice(0, 70);
-      sel.appendChild(o);
+    const isPrecise = (g) => (g.source || "").startsWith("route:");
+    const groups = [
+      ["Precise (GPS) — best anchors", all.filter(isPrecise)],
+      ["Approximate (ticker, lags on-screen)", all.filter((g) => !isPrecise(g))],
+    ];
+    for (const [label, items] of groups) {
+      if (!items.length) continue;
+      const grp = document.createElement("optgroup");
+      grp.label = label;
+      for (const g of items) {
+        const o = document.createElement("option");
+        o.value = g.t_utc;
+        o.textContent = `${g.t_utc.slice(11, 16)}Z — ${g.label}`.slice(0, 70);
+        grp.appendChild(o);
+      }
+      sel.appendChild(grp);
     }
   }
 
