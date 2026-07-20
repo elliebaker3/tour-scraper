@@ -30,12 +30,17 @@ from __future__ import annotations
 import bisect
 import csv
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 # A lone rider reporting further up the road than this, with nobody near them,
 # is treated as a bad fix rather than as the race leader.
 LEADER_GAP_TOLERANCE_KM = 1.5
+
+# Above this, a "position" is a bad fix rather than a rider. Tour descents do
+# touch 90 km/h in bursts, so the limit sits above that deliberately: the job
+# here is rejecting the impossible, not second-guessing a fast descent.
+MAX_SPEED_KMH = 95.0
 
 
 def _parse_ts(text: str) -> datetime:
@@ -69,21 +74,53 @@ def load_profile(profile_csv: Path) -> list[dict]:
     return points
 
 
-def _riders_from_record(rec: dict):
-    """Yield rider dicts from either capture shape (REST snapshot or SSE row)."""
+# Sanity window for a feed-supplied epoch: 2020-09 .. 2033-05. A TimeStamp
+# outside it is some other kind of number and is not trusted as a clock.
+_EPOCH_MIN, _EPOCH_MAX = 1_600_000_000, 2_000_000_000
+
+
+def _sample_from_record(rec: dict):
+    """Return (timestamp, riders) from either capture shape.
+
+    The timestamp comes from the payload's own `TimeStamp` whenever it is
+    present, NOT from when we happened to receive it. Those are not the same
+    thing: the CDN in front of the telemetry API serves stale cached responses,
+    and on stage 14 it served a payload frozen at 12:25 right up to 13:01 --
+    by which point our capture clock said the leader was 30 minutes behind
+    where he actually was. Trusting `captured_at` put the field at km 31 at
+    12:50 (25 km/h) and then teleported it 24 km in 61 seconds when a fresh
+    response finally arrived. `TimeStamp` places both readings correctly.
+
+    It also removes a systematic error on every ordinary sample: the median
+    lag between the feed's timestamp and our receipt of it is 12 seconds,
+    which is ~130 m of road at racing speed.
+    """
     if "body" in rec:
         try:
             payload = json.loads(rec["body"])
         except (json.JSONDecodeError, TypeError):
-            return None
+            return None, None
         if isinstance(payload, list) and payload:
             payload = payload[0]
-        if isinstance(payload, dict):
-            return payload.get("Riders")
-        return None
+        if not isinstance(payload, dict):
+            return None, None
+        ts = payload.get("TimeStamp")
+        when = None
+        if isinstance(ts, (int, float)) and _EPOCH_MIN < ts < _EPOCH_MAX:
+            when = datetime.fromtimestamp(ts, tz=timezone.utc)
+        elif rec.get("captured_at"):
+            when = _parse_ts(rec["captured_at"])
+        return when, payload.get("Riders")
     if "kmToFinish" in rec:
-        return [rec]
-    return None
+        # SSE rows carry `feed_ts`, the moment the position was measured. It
+        # runs tens of seconds behind receipt (median 46s on stage 15, which is
+        # ~500 m of road), so receipt time is only the fallback.
+        ts = rec.get("feed_ts")
+        if isinstance(ts, (int, float)) and _EPOCH_MIN < ts < _EPOCH_MAX:
+            return datetime.fromtimestamp(ts, tz=timezone.utc), [rec]
+        when = _parse_ts(rec["captured_at"]) if rec.get("captured_at") else None
+        return when, [rec]
+    return None, None
 
 
 def _leader_km_to_finish(riders) -> float | None:
@@ -132,26 +169,37 @@ def leader_track(telemetry_paths) -> list[tuple[datetime, float]]:
                     rec = json.loads(line)
                 except json.JSONDecodeError:
                     continue
-                captured = rec.get("captured_at")
-                if not captured:
-                    continue
-                riders = _riders_from_record(rec)
-                if not riders:
+                when, riders = _sample_from_record(rec)
+                if when is None or not riders:
                     continue
                 km_to = _leader_km_to_finish(riders)
                 if km_to is None:
                     continue
-                samples.append((_parse_ts(captured), km_to))
+                samples.append((when, km_to))
 
-    samples.sort(key=lambda s: s[0])
+    # A stale cached response repeats a payload we already have, so identical
+    # (time, position) pairs collapse rather than being counted twice.
+    samples = sorted(set(samples), key=lambda s: s[0])
 
-    # Distance to the finish only ever decreases; anything else is noise.
+    # Distance to the finish only ever decreases -- but "only ever decreases"
+    # on its own is a trap. A single fix reporting half a kilometre too far up
+    # the road is accepted, and then every correct sample behind it is thrown
+    # away for going "backwards", so one bad reading biases the track forward
+    # until the race catches up with it. So a jump also has to be physically
+    # possible: faster than MAX_SPEED_KMH since the last accepted sample is a
+    # bad fix, not a decrease.
     cleaned: list[tuple[datetime, float]] = []
     best = float("inf")
+    last_ts = None
     for ts, km_to in samples:
-        if km_to <= best:
-            best = km_to
-            cleaned.append((ts, km_to))
+        if km_to > best:
+            continue
+        if last_ts is not None:
+            dt_h = (ts - last_ts).total_seconds() / 3600
+            if dt_h > 0 and (best - km_to) / dt_h > MAX_SPEED_KMH:
+                continue
+        best, last_ts = km_to, ts
+        cleaned.append((ts, km_to))
     return cleaned
 
 
