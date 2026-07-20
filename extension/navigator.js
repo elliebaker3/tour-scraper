@@ -184,6 +184,7 @@
         <div class="tn-anchors">
           <select class="tn-anchor-pick"><option value="">pick a moment…</option></select>
           <button class="tn-anchor-add">Anchor here</button>
+          <button class="tn-auto">Auto-calibrate</button>
           <button class="tn-anchor-clear" title="Clear anchors">reset</button>
           <span class="tn-anchor-state"></span>
         </div>
@@ -214,8 +215,10 @@
       }
     });
     root.querySelector(".tn-anchor-add").addEventListener("click", addAnchor);
+    root.querySelector(".tn-auto").addEventListener("click", runAutoCalibrate);
     root.querySelector(".tn-anchor-clear").addEventListener("click", () => {
       anchors = [];
+      window.TourNavigatorAutoCal?.resetHistory?.();
       persist();
       refreshAnchorState();
       render();
@@ -263,6 +266,36 @@
     persist();
     refreshAnchorState();
     render();
+  }
+
+  /** Derive anchors from caption "km to go" mentions (see autocalibrate.js).
+   *  Manual anchors always win: if the fit looks wrong the viewer can just
+   *  place their own, and we never silently overwrite them. */
+  function runAutoCalibrate() {
+    const el = root.querySelector(".tn-anchor-state");
+    const api = window.TourNavigatorAutoCal;
+    if (!api) { el.textContent = "auto-calibration unavailable"; return; }
+    el.textContent = "scanning captions…";
+    // Defer so the label paints before the (synchronous) scan runs.
+    setTimeout(() => {
+      let res;
+      try { res = api.autoCalibrate(video, bundle); }
+      catch (e) { res = { ok: false, reason: String(e && e.message || e) }; }
+      if (!res.ok) {
+        el.textContent = `auto-calibrate failed — ${res.reason}`;
+        return;
+      }
+      anchors = res.anchors;
+      persist();
+      render();
+      el.textContent =
+        `auto · ${res.rate.toFixed(3)}× · ${res.confidence} confidence ` +
+        `(${res.inliers}/${res.total} mentions over ${res.spanMin}min, ` +
+        `±${Math.round(res.medianResidual)}s)`;
+      if (res.confidence !== "high") {
+        el.textContent += " — scrub elsewhere and run again to widen the span";
+      }
+    }, 0);
   }
 
   function refreshAnchorState() {

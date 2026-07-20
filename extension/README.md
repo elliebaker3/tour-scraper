@@ -14,7 +14,38 @@ download or modify any stream.
 2. **Load unpacked** → select this `extension/` folder
 3. Open your stage recording. The panel pins to the bottom of the window.
 
-## Calibrate (once per recording, ~20 seconds)
+## Calibrate automatically (try this first)
+
+Click **Auto-calibrate**. It scans the caption track for "N kilometres to go"
+phrases; since the GPS data knows exactly when the leader was at any km-to-go,
+each mention is a candidate (recording second -> race time) pair. Dozens of
+them are fitted with Theil-Sen — a median-of-slopes fit that shrugs off the
+commentator rounding, referring to a chase group, or repeating a stale number —
+to recover offset *and* rate in one go.
+
+The status line reports what it found, e.g.
+`auto · 1.079× · high confidence (31/40 mentions over 229min, ±21s)`.
+
+* **rate** — 1.000× means the recording tracks race time; 1.079× means ~8% of
+  it is ads/breaks.
+* **span** — how far apart the mentions were. Rate is only as trustworthy as
+  the span it was fitted over, so this gates the confidence rating as hard as
+  the residual does.
+* **±Ns** — typical placement error. ~20-30s is normal and expected:
+  commentary rounds ("just over 40k") where the data is exact.
+
+Streaming players usually only expose cues for the *buffered* region, so a
+first scan may cover a narrow span. Pairs accumulate across scans — scrub to a
+different part of the recording, click Auto-calibrate again, and the span (and
+confidence) widen. **reset** clears both anchors and accumulated cues.
+
+Caption text is scanned in memory for a number and discarded; nothing from the
+broadcast is stored or copied. The only output is offset and rate.
+
+If auto-calibration reports no cues, the player isn't exposing captions to
+extensions — use the manual method below.
+
+## Calibrate manually (fallback, ~20 seconds)
 
 The data is in UTC race time; the player only knows "seconds into this
 recording". Those differ by an unknown offset (pre-race build-up) *and* an

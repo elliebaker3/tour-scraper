@@ -3,20 +3,35 @@
   "name": "Tour Navigator",
   "version": "0.1.0",
   "description": "Replaces a useless scrub bar with guideposts that matter: the stage elevation profile synced to race time, plus crashes, breakaways, scenery and race intensity.",
-  "permissions": ["storage"],
-  "host_permissions": ["https://www.peacocktv.com/*"],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.peacocktv.com/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://www.peacocktv.com/*"],
-      "js": ["navigator.js"],
-      "css": ["navigator.css"],
+      "matches": [
+        "https://www.peacocktv.com/*"
+      ],
+      "js": [
+        "autocalibrate.js",
+        "navigator.js"
+      ],
+      "css": [
+        "navigator.css"
+      ],
       "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["data/*.json"],
-      "matches": ["https://www.peacocktv.com/*"]
+      "resources": [
+        "data/*.json"
+      ],
+      "matches": [
+        "https://www.peacocktv.com/*"
+      ]
     }
   ]
 }
