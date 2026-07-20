@@ -7,14 +7,17 @@ The contract:
    positions off it that are not real, which is how every "the elevation
    doesn't line up" report began.
 
-2. There is exactly ONE way to calibrate: type the km-to-go the broadcast is
-   showing at the current moment, and press Calibrate.
+2. Calibration is km-to-go readings and nothing else. One reading sets the
+   offset (rate assumed 1.0); a second reading far away FITS the rate, which
+   this recording needs because it runs at 0.918x race time, not 1:1. With one
+   reading the clock drifts away from the anchor; with two it is accurate
+   across the whole stage.
 
 3. Once calibrated the bar appears, spans the full width (imputed where the
    recording is running but no race is), and every readout is in km remaining.
 
-Ground truth is the real stage 14 replay: runtime 5h20m26s, km 0 at 11:35:38Z
-observed at recording second 3549, so recording second 0 is 10:36:29Z.
+Ground truth is the real stage 14 replay: km 0 at 11:35:38Z, recording second 0
+at 10:36:29Z, and the recording advancing at 0.918x race time.
 """
 import json, re, shutil, subprocess, sys, time, urllib.request
 from datetime import datetime, timedelta
@@ -31,6 +34,13 @@ start_utc = datetime.fromisoformat(bundle["coverage"]["race_start_utc"])
 ZERO = start_utc - timedelta(seconds=KM0_REC)
 
 
+# The recording under test runs at 0.918x race time -- the real stage 14 value
+# derived from the flag-drop and finish pins. A recording second maps to race
+# time by:  race = ZERO + rec_sec / RATE_TRUE.  The extension must recover both
+# the origin and this rate from km-to-go readings alone.
+RATE_TRUE = 0.9178
+
+
 def time_at_kmto(km):
     pts = sorted((p for p in bundle["profile"] if p.get("t")), key=lambda p: p["kmto"])
     for i in range(1, len(pts)):
@@ -40,6 +50,11 @@ def time_at_kmto(km):
             span = b["kmto"] - a["kmto"]
             return ta + (tb - ta) * ((km - a["kmto"]) / span if span else 0)
     return None
+
+
+def rec_for_kmto(km):
+    """Recording second at which the broadcast shows this km-to-go."""
+    return (time_at_kmto(km) - ZERO).total_seconds() * RATE_TRUE
 
 
 harness = EXT / "_harness.html"
@@ -129,63 +144,68 @@ try:
         page.wait_for_selector(".tn-root", timeout=10000)
         page.wait_for_timeout(1500)
 
-        # --- 2: one reading calibrates ---------------------------------------
-        t = time_at_kmto(42.5)              # "42" on screen means [42, 43)
-        rec = (t - ZERO).total_seconds()
-        page.evaluate(f"() => document.querySelector('video').currentTime = {rec}")
+        # --- 2: one reading calibrates the offset (rate assumed 1.0) ----------
+        # Place the video where a 0.918x recording really shows "42 km to go".
+        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(42.5)}")
         page.fill(".tn-togo-km", "42")
         page.click(".tn-togo-set")
         page.wait_for_timeout(700)
         s = state()
-        print("\n--- after typing 42 km to go ---")
+        print("\n--- one reading (42 km to go) ---")
         print(f"  status  {s['status']}")
         print(f"  diag    {s['diag']}")
-        print(f"  clock   {s['clock']}")
         assert s["barShown"], "FAIL: bar still hidden after calibrating"
         assert not s["setupShown"], "FAIL: setup prompt still shown after calibrating"
         assert s["markers"] > 0, "FAIL: no guideposts after calibrating"
-        got = re.search(r"rec 0:00 = (\d\d:\d\d:\d\d)Z", s["diag"])
-        assert got, f"FAIL: no origin in diag: {s['diag']}"
-        delta = abs((datetime.strptime(got.group(1), "%H:%M:%S")
-                     - datetime.strptime(ZERO.strftime("%H:%M:%S"), "%H:%M:%S")).total_seconds())
-        print(f"  origin  {got.group(1)}Z vs expected {ZERO:%H:%M:%S}Z -> {delta:.0f}s off")
-        assert delta <= 20, f"FAIL: origin off by {delta:.0f}s"
+        assert "rate 1.0" in s["diag"] or "rate 1.000" in s["diag"], \
+            f"FAIL: one reading should assume rate 1.0, got: {s['diag']}"
 
-        # --- 3: the bar spans the whole recording ----------------------------
+        # The bar spans the whole recording.
         segs = {k: s[k] for k in ("obs", "est", "imp") if s[k]}
         lo = min(v["min"] for v in segs.values())
         hi = max(v["max"] for v in segs.values())
-        print("\n--- coverage ---")
-        for k, v in segs.items():
-            print(f"  {k:4} x {v['min']:7.1f} -> {v['max']:7.1f}")
-        print(f"  total x {lo:.1f} -> {hi:.1f} of {s['width']}px")
         assert lo <= 1 and hi >= s["width"] - 1, "FAIL: bar does not span the recording"
         assert s["imp"], "FAIL: nothing imputed outside the race"
 
-        # --- 4: readouts count down to the line ------------------------------
-        for pt, want in [(p, "climbing") for p in [max(
-            (q for q in bundle["profile"] if q.get("t") and not q.get("est")),
-            key=lambda q: q["alt"])]]:
-            sec = (datetime.fromisoformat(pt["t"]) - ZERO).total_seconds()
-            page.evaluate(f"() => document.querySelector('video').currentTime = {sec}")
-            page.wait_for_timeout(700)
-            c = state()["clock"]
-            print(f"\n  summit km {pt['km']} ({pt['alt']}m) -> {c}")
-            m = re.search(r"([\d.]+) km to go", c)
-            assert m, f"FAIL: clock not in km-to-go: {c}"
-            assert abs(float(m.group(1)) - pt["kmto"]) <= 1.0, \
-                f"FAIL: expected ~{pt['kmto']} km to go, got {m.group(1)}"
+        # --- 3: the SINGLE-reading clock DRIFTS far from the anchor -----------
+        # This is the bug the user reported: rate 1.0 is right at 42 km to go
+        # and wrong elsewhere. Near the finish it should be badly off.
+        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(5.5)}")
+        page.wait_for_timeout(700)
+        c = state()["clock"]
+        m = re.search(r"([\d.]+) km to go", c)
+        drift = abs(float(m.group(1)) - 5.5)
+        print(f"\n--- one reading, seeked to true 5 km to go ---")
+        print(f"  clock says {m.group(1)} km to go (truth 5.5) -> {drift:.1f} km drift")
+        assert drift > 2, \
+            f"FAIL: expected single-reading drift near the finish, got {drift:.1f} km"
 
-        # --- 5: a second reading refines via the median ----------------------
-        t2 = time_at_kmto(95.5)
-        rec2 = (t2 - ZERO).total_seconds()
-        page.evaluate(f"() => document.querySelector('video').currentTime = {rec2}")
-        page.fill(".tn-togo-km2", "95")
+        # --- 4: a SECOND reading far away fits the rate and kills the drift ---
+        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(150.5)}")
+        page.fill(".tn-togo-km2", "150")
         page.click(".tn-togo-set2")
         page.wait_for_timeout(700)
         s = state()
-        print(f"\n  second reading -> {s['status']}")
-        assert "2 readings" in s["status"], f"FAIL: readings not combined: {s['status']}"
+        print(f"\n--- two readings (42 and 150 km to go) ---")
+        print(f"  status  {s['status']}")
+        print(f"  diag    {s['diag']}")
+        rate_m = re.search(r"rate (\d\.\d+)", s["diag"])
+        assert rate_m, f"FAIL: no fitted rate in diag: {s['diag']}"
+        got_rate = float(rate_m.group(1))
+        print(f"  fitted rate {got_rate} vs true {RATE_TRUE}")
+        assert abs(got_rate - RATE_TRUE) <= 0.01, \
+            f"FAIL: rate not recovered: {got_rate} vs {RATE_TRUE}"
+
+        # Now the clock must be accurate EVERYWHERE, including near the finish.
+        print("\n--- two readings: km-to-go accurate across the stage ---")
+        for shown in (130, 90, 50, 20, 8):
+            page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(shown + 0.5)}")
+            page.wait_for_timeout(500)
+            c = state()["clock"]
+            m = re.search(r"([\d.]+) km to go", c)
+            off = abs(float(m.group(1)) - (shown + 0.5))
+            print(f"  screen {shown} km to go -> bar says {m.group(1)} ({off:.1f} km off)")
+            assert off <= 1.5, f"FAIL: {off:.1f} km gap at {shown} km to go after rate fit"
 
         # --- 6: reset returns to the prompt ----------------------------------
         page.click(".tn-anchor-clear")

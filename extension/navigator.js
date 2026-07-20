@@ -61,34 +61,52 @@
    * "20 minutes of racing missing" -- from what is really a single mis-click.
    *
    * km 0 is the one input, and it is enough. */
-  const RATE = 1.0;
-
   function pins() { return anchors.filter((a) => a.kind); }
 
-  /* With rate fixed at 1.0 every pin says exactly one thing: the race time at
-   * recording second 0. Expressing pins that way makes them combinable -- the
-   * MEDIAN across them is the calibration, so a single misread graphic gets
-   * outvoted instead of moving the whole timeline. */
+  // Below this baseline between two readings, rate cannot be fitted reliably:
+  // each km-to-go reading carries ~45s of rounding, and dividing that by a
+  // short span turns it into a wild slope. Under it, offset only.
+  const MIN_RATE_BASELINE_SEC = 20 * 60;
   const impliedZeroMs = (a) => a.tUtcMs - a.videoSec * 1000;
 
-  function medianZeroMs(p) {
-    const z = p.map(impliedZeroMs).sort((x, y) => x - y);
-    const m = z.length >> 1;
-    return z.length % 2 ? z[m] : (z[m - 1] + z[m]) / 2;
-  }
-
+  /* One reading gives the OFFSET at rate 1.0 -- the best a single point can do.
+   * Two or more readings, far enough apart, also give the RATE: this recording
+   * runs at ~0.918x race time (about 20 min of racing is not in it), so a rate
+   * of exactly 1.0 is right only at the calibration point and drifts several km
+   * either side of it. rate comes from a least-squares fit of recording-second
+   * against race-time across all readings, which averages out their rounding. */
   function calFromAnchors() {
     const p = pins();
-    if (p.length) {
-      return { refMs: medianZeroMs(p), offsetSec: 0, rate: RATE };
+    if (!p.length) return null;
+    if (p.length === 1) {
+      return { refMs: p[0].tUtcMs, offsetSec: p[0].videoSec, rate: 1.0 };
     }
-    if (!anchors.length) return null;
-    const a = anchors[0];
-    if (anchors.length === 1) return { refMs: a.tUtcMs, offsetSec: a.videoSec, rate: RATE };
-    const b = anchors[anchors.length - 1];
-    const spanSec = (b.tUtcMs - a.tUtcMs) / 1000;
-    const rate = spanSec ? (b.videoSec - a.videoSec) / spanSec : RATE;
-    return { refMs: a.tUtcMs, offsetSec: a.videoSec, rate };
+    const xs = p.map((a) => a.tUtcMs / 1000);      // race seconds
+    const ys = p.map((a) => a.videoSec);           // recording seconds
+    const baseline = Math.max(...xs) - Math.min(...xs);
+    const refMs = p[0].tUtcMs;
+    if (baseline < MIN_RATE_BASELINE_SEC) {
+      // Too close to trust a slope: hold rate at 1.0, offset from the median.
+      const z = p.map(impliedZeroMs).sort((a, b) => a - b);
+      return { refMs: z[z.length >> 1], offsetSec: 0, rate: 1.0 };
+    }
+    const n = xs.length;
+    const mx = xs.reduce((s, v) => s + v, 0) / n;
+    const my = ys.reduce((s, v) => s + v, 0) / n;
+    let num = 0, den = 0;
+    for (let i = 0; i < n; i++) { num += (xs[i] - mx) * (ys[i] - my); den += (xs[i] - mx) ** 2; }
+    let rate = den ? num / den : 1.0;
+    rate = Math.max(0.5, Math.min(1.5, rate));     // reject nonsense slopes
+    const offsetSec = my - rate * (mx - refMs / 1000);
+    return { refMs, offsetSec, rate };
+  }
+
+  /** Recording-second error of each reading against the fitted line -- how much
+   *  the readings disagree once rate is accounted for. */
+  function pinResidualsSec() {
+    const p = pins();
+    if (p.length < 2 || !cal) return [];
+    return p.map((a) => a.videoSec - utcToVideo(a.tUtcMs));
   }
 
 
@@ -425,7 +443,8 @@
       </div>
       <div class="tn-setup">
         <span class="tn-setup-ask">Pause where the broadcast shows
-          <strong>km to go</strong>, type it here:</span>
+          <strong>km to go</strong> and type it here (then add a second reading
+          far away, for accuracy):</span>
         <input class="tn-togo-km" size="5" placeholder="42" inputmode="decimal">
         <span class="tn-setup-unit">km to go</span>
         <button class="tn-togo-set">Calibrate</button>
@@ -587,18 +606,36 @@ the stage. The median of all readings is used.">
     render();
 
     const p = pins();
-    const zeros = p.map(impliedZeroMs);
-    const spread = (Math.max(...zeros) - Math.min(...zeros)) / 1000;
     const parts = [
       `${km} km to go at rec ${fmt(at)} = race ` +
       `${new Date(hit.tMs).toISOString().slice(11, 19)}Z`,
-      `rec 0:00 = ${new Date(cal.refMs).toISOString().slice(11, 19)}Z`,
     ];
-    if (Number.isInteger(km)) parts.push("±~45s (graphic rounds to whole km)");
     if (hit.est) parts.push("⚠ that stretch has no GPS — pace is inferred there");
-    parts.push(p.length === 1
-      ? "add another reading from elsewhere to average out the rounding"
-      : `${p.length} readings · median used · spread ${spread.toFixed(0)}s`);
+
+    if (p.length === 1) {
+      // One reading fixes the offset but assumes the recording tracks race time
+      // 1:1 -- which this one does NOT (~0.918x). So the profile is right here
+      // and drifts several km either side. A second reading FAR from this one
+      // is what corrects it, so ask for it plainly.
+      parts.push("offset set, rate assumed 1.0×");
+      parts.push("▶ now add a reading from far away (near the finish is ideal) " +
+                 "to fix the drift");
+    } else {
+      const xs = p.map((a) => a.tUtcMs / 1000);
+      const baselineMin = (Math.max(...xs) - Math.min(...xs)) / 60;
+      const res = pinResidualsSec().map(Math.abs);
+      const worst = res.length ? Math.max(...res) : 0;
+      parts.push(`${p.length} readings over ${baselineMin.toFixed(0)} min`);
+      if (baselineMin < 20) {
+        parts.push("⚠ readings too close to fix rate — spread them out, " +
+                   "one early one late");
+      } else {
+        parts.push(`rate ${cal.rate.toFixed(3)}× · fits to ±${worst.toFixed(0)}s`);
+        if (worst > 90) {
+          parts.push("⚠ readings disagree — re-check one, or reset and redo");
+        }
+      }
+    }
     el.textContent = parts.join(" · ");
     console.log("[TourNavigator] km-to-go sync:", el.textContent);
   }
@@ -613,11 +650,14 @@ the stage. The median of all readings is used.">
     const el = root.querySelector(".tn-anchor-state");
     const p = pins();
     if (!p.length) { el.textContent = "not calibrated"; return; }
-    const zeros = p.map(impliedZeroMs);
-    const spread = (Math.max(...zeros) - Math.min(...zeros)) / 1000;
-    el.textContent = p.length === 1
-      ? `calibrated from 1 reading (${p[0].label})`
-      : `calibrated from ${p.length} readings · median · spread ${spread.toFixed(0)}s`;
+    if (p.length === 1) {
+      el.textContent = "1 reading · rate 1.0× assumed — add one far away to fix drift";
+      return;
+    }
+    const res = pinResidualsSec().map(Math.abs);
+    const worst = res.length ? Math.max(...res) : 0;
+    el.textContent =
+      `${p.length} readings · rate ${cal.rate.toFixed(3)}× · fits to ±${worst.toFixed(0)}s`;
   }
 
 

@@ -14,35 +14,36 @@ download or modify any stream.
 2. **Load unpacked** → select this `extension/` folder
 3. Open your stage recording. The panel pins to the bottom of the window.
 
-## Calibrate: one reading
+## Calibrate: two "km to go" readings
 
-Pause anywhere the broadcast is showing **km to go**, type that number in, and
-press **Calibrate**. That is the entire setup.
+Pause where the broadcast shows **km to go**, type that number in and press
+**Calibrate**. Then do it once more from a point **far away** -- near the finish
+is ideal -- with the **Add reading** field. Two readings is the accurate setup.
 
-Until you do, the panel shows the prompt and nothing else — no bar, no markers.
-A profile with no clock invites reading positions off it that are not real,
-which is how every "the elevation doesn't line up" problem started.
+Until the first reading the panel shows the prompt and nothing else -- no bar,
+no markers. A profile with no clock invites reading positions off it that are
+not real, which is how every "the elevation doesn't line up" problem started.
 
-One reading is enough because the broadcast has no inserted breaks, so race
-time and recording time differ by an offset alone. The profile knows when the
-leader was at any km-to-go, so your recording position paired with that race
-time fixes the offset, and everything else follows.
+**Why two, not one.** The recording does *not* run 1:1 with race time. On stage
+14 it advances at **0.918x** -- about 20 minutes of racing is not in the
+recording, spread across the stage. One reading fixes where the profile sits
+(the offset) but has to *assume* the 1:1 rate, so it is exact at that one point
+and drifts as you move away: a few kilometres of gap within an hour, more toward
+the ends. That drift is the "large gaps between the bar and the screen" symptom.
+A second reading far from the first supplies the **rate** -- the extension fits
+recording-second against race-time across both -- and the gap closes over the
+whole stage. The status line then shows the fitted rate (`rate 0.918x`) and how
+well the readings agree (`fits to +/-3s`).
 
-**Accuracy is bounded by the graphic, not the data.** It counts in whole
-kilometres, so "42" means somewhere in [42, 43); the midpoint is used, leaving
-about ±45 s at racing speed. Type a decimal if the graphic shows one and that
-uncertainty disappears.
-
-**Add readings to refine.** After calibrating, a compact field takes more
-readings from elsewhere in the stage. The **median** is used, so rounding that
-falls either way cancels and one misread number cannot move the timeline. The
-status line reports how many readings are in play and how far apart they
-disagree — a spread under a minute across the whole stage means the
-calibration is sound end to end.
+**Accuracy is bounded by the graphic.** It counts in whole kilometres, so "42"
+means somewhere in [42, 43); the midpoint is used. Two readings far apart divide
+that rounding across a long baseline, so it barely affects the rate -- but two
+readings *close together* cannot fix the rate, and the panel says so and falls
+back to offset-only.
 
 **reset** clears it and returns to the prompt. Calibration is not remembered
-across reloads — it is one number, and every load starts by asking for the
-current km-to-go rather than restoring a stale one.
+across reloads -- every load asks for the current km-to-go rather than restoring
+a stale one.
 
 ## What the bar shows
 
