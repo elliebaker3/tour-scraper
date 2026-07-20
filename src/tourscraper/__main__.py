@@ -20,6 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .archive_stage import archive_stage
+from .navigator.build_bundle import build as build_navigator
 from .autodiscover import run_autodiscover
 from .backfill import reparse_backfill, run_backfill
 from .events_parse import write_events
@@ -92,6 +93,15 @@ def main() -> None:
     p = sub.add_parser("events")
     p.add_argument("stage_dir", help="e.g. data/2026/stage-14_2026-07-18")
 
+    p = sub.add_parser("navigator")
+    p.add_argument("--stage", type=int, required=True)
+    p.add_argument("--stage-dir", required=True,
+                   help="e.g. data/2026/stage-15_2026-07-19")
+    p.add_argument("--telemetry", required=True,
+                   help="GPS log; full-resolution captures live outside git "
+                        "(see ~/tour-archive) because they exceed GitHub's 100MB cap")
+    p.add_argument("--out", default=None)
+
     p = sub.add_parser("archive")
     p.add_argument("--stage", type=int, required=True)
     p.add_argument("--date", default=None, help="YYYY-MM-DD of the stage folder")
@@ -117,6 +127,10 @@ def main() -> None:
         reparse(Path(args.stage_dir), cfg.year)
     elif args.command == "events":
         write_events(Path(args.stage_dir))
+    elif args.command == "navigator":
+        build_navigator(Path(args.stage_dir), Path(args.telemetry).expanduser(),
+                        cfg.year_dir, args.stage,
+                        Path(args.out) if args.out else None)
     elif args.command == "archive":
         archive_stage(cfg, args.stage, args.date)
     else:

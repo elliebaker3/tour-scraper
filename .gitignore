@@ -5,3 +5,8 @@ __pycache__/
 # Radio audio can get large; commit it via Git LFS or keep it out of git.
 # Comment the next line out if you've set up LFS (see README).
 data/**/radio/*.mp3
+
+# Full-resolution captures exceed GitHub's 100MB per-file cap; they live in
+# ~/tour-archive and in each CI run's artifact. The repo keeps the compact
+# derived bundles the Navigator actually reads.
+data/**/live-stream.raw.jsonl
