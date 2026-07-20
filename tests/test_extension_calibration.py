@@ -19,7 +19,7 @@ The contract, after a long run of alignment bugs:
 Ground truth is the real stage 14 replay: runtime 5h20m26s, km 0 at 11:35:38Z,
 finish at 15:37:46Z.
 """
-import json, shutil, subprocess, sys, time, urllib.request
+import json, re, shutil, subprocess, sys, time, urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
 from playwright.sync_api import sync_playwright
@@ -133,6 +133,12 @@ try:
             print(f"  clock   {c}")
             word = "climbing" if g > 0 else "descending"
             assert word in c, f"FAIL: expected '{word}' at km {pt['km']}, got: {c}"
+            # Distance is reported as remaining to the line, not travelled.
+            want_togo = pt["kmto"]
+            m = re.search(r"([\d.]+) km to go", c)
+            assert m, f"FAIL: no 'km to go' readout, got: {c}"
+            assert abs(float(m.group(1)) - want_togo) <= 1.0, \
+                f"FAIL: expected ~{want_togo} km to go, got {m.group(1)}"
 
         # --- 4: the trace spans the entire bar, imputed where it must --------
         s = state()

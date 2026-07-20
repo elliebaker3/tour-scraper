@@ -103,6 +103,15 @@
     bundle.coverage?.route_length_km ||
     Math.max(...bundle.profile.map((p) => p.km)) || 1;
 
+  /* Distance is reported as km REMAINING, which is how a bike race is actually
+   * called and how the riders' own numbers run. Read the profile's `kmto`
+   * column rather than subtracting from a stage length: stages.json says 155.5
+   * for stage 14 where the route file says 155.2, and adopting that 0.3 km
+   * would reintroduce the constant offset the sync was built to remove. */
+  const kmToGo = (p) =>
+    typeof p?.kmto === "number" ? p.kmto : routeLength() - (p?.km ?? 0);
+  const fmtToGo = (v) => `${v.toFixed(1)} km to go`;
+
   /** Which axis the bar is drawn against.
    *
    *  Time is what makes the bar *navigable* — but it needs both a calibration
@@ -118,7 +127,8 @@
     if (_series) return _series;
     _series = bundle.profile
       .filter((p) => p.t)
-      .map((p) => ({ t: Date.parse(p.t), alt: p.alt, km: p.km, est: !!p.est }))
+      .map((p) => ({ t: Date.parse(p.t), alt: p.alt, km: p.km,
+                     kmto: p.kmto, est: !!p.est }))
       .sort((a, b) => a.t - b.t);
     return _series;
   }
@@ -261,7 +271,7 @@
         const km = guidepostKm(g);
         if (km == null) continue;
         x = (km / len) * width;
-        tip = `km ${km.toFixed(1)} — ${g.label}`;
+        tip = `${fmtToGo(routeLength() - km)} — ${g.label}`;
       }
       const c = CATEGORIES[g.category]?.color || "#fff";
       markers.push(
@@ -290,7 +300,7 @@
     if (mode === "dist") {
       for (const frac of [0.25, 0.5, 0.75]) {
         ticks += `<div class="tn-tick" style="left:${(frac * width).toFixed(1)}px">
-                    <span>${Math.round(frac * len)}km</span></div>`;
+                    <span>${Math.round((1 - frac) * len)}km to go</span></div>`;
       }
     }
 
@@ -335,10 +345,11 @@
       // State the claim the alignment is making, in the terms you can check it
       // against: if the screen shows a climb and this says descending, the
       // calibration is wrong -- and by roughly how much becomes findable.
-      const km = playheadKm();
+      const here = playheadPoint();
+      const km = here ? here.km : 0;
       const g = gradientAt(km);
       const slope = g == null ? ""
-        : ` · km ${km.toFixed(1)} · ${
+        : ` · ${fmtToGo(kmToGo(here))} · ${
             g > 1.5 ? `climbing ${g.toFixed(1)}%`
           : g < -1.5 ? `descending ${Math.abs(g).toFixed(1)}%`
           : "flat"}`;
@@ -401,7 +412,7 @@
     }
     if (!best) return null;
     return {
-      km: best.km, alt: best.alt, t: best.t, est: best.est,
+      km: best.km, kmto: kmToGo(best), alt: best.alt, t: best.t, est: best.est,
       sec: best.t ? utcToVideo(Date.parse(best.t)) : null,
     };
   }
@@ -419,17 +430,20 @@
 
   /** The playhead in distance mode: where the leader was at the current race
    *  time. Without a calibration there is no race time, so it parks at km 0. */
-  function playheadKm() {
+  function playheadPoint() {
     const ms = videoToUtc(video.currentTime);
-    if (ms == null) return 0;
+    if (ms == null) return null;
     let prev = null;
     for (const p of bundle.profile) {
       if (!p.t) continue;
-      if (Date.parse(p.t) >= ms) return prev ? prev.km : p.km;
+      if (Date.parse(p.t) >= ms) return prev || p;
       prev = p;
     }
-    return prev ? prev.km : 0;
+    return prev;
   }
+  // The x axis still runs start -> finish left to right, so POSITION uses
+  // distance travelled even though every LABEL counts down to the line.
+  const playheadKm = () => (playheadPoint()?.km ?? 0);
 
   const escapeHtml = (s) => String(s).replace(/[&<>"']/g,
     (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -515,7 +529,7 @@ everything.">Km 0 is NOW</button>
       const frac = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
       const s = sampleAt(frac);
       if (!s) { hoverEl.style.display = "none"; return; }
-      const bits = [`km ${s.km.toFixed(1)}`, `${Math.round(s.alt)}m`];
+      const bits = [fmtToGo(s.kmto), `${Math.round(s.alt)}m`];
       if (s.t) bits.push(`${s.t.slice(11, 16)}Z`);
       if (s.sec != null) bits.push(`rec ${fmt(s.sec)}`);
       if (s.est) bits.push("est");

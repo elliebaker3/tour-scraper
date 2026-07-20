@@ -30,7 +30,7 @@ The panel always states what it is assuming:
     stage 14 (2026-07-18) · rec 0:00 = 10:36:29Z · rate 1.000× · matched airing date
 
 and once calibrated the clock names the gradient under the playhead
-(`km 148.7 · climbing 9.0%`). If the screen shows a climb and that says
+(`6.5 km to go · climbing 9.0%`). If the screen shows a climb and that says
 descending, the km-0 pin is off.
 
 ## Install
@@ -108,8 +108,17 @@ ones by their own km, ticker ones by interpolating the time-synced profile.
 Seeking is *declined* rather than approximated while uncalibrated: a
 plausible-looking wrong seek is worse than none.
 
-Hovering anywhere on the bar reads out `km · altitude · race time · rec time`,
-so the scraped numbers behind the shape are one mouse-move away.
+Hovering anywhere on the bar reads out
+`77.8 km to go · 677m · 13:34Z · rec 2:14:07`, so the scraped numbers behind
+the shape are one mouse-move away.
+
+**Distance is always km remaining to the line**, never km travelled — that is
+how a race is called and how the riders' own numbers run. It comes from the
+profile's `kmto` column rather than `stage_length - km`: stages.json says 155.5
+for stage 14 where the route file says 155.2, and adopting that 0.3 km would
+reintroduce the constant offset the sync exists to remove. The x axis still
+runs start → finish left to right, so the shape matches a published profile
+while every label counts down (`116km to go`, `78km to go`, `39km to go`).
 
 Collapsing (**–**) hides the controls but keeps the profile as a slim strip.
 The controls are only how it gets calibrated; the profile is the thing you read.

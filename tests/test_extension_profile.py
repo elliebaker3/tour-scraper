@@ -102,6 +102,17 @@ try:
         }""")
         print(f"\n  hover at 50%   {hov}")
         assert hov and hov["shown"] != "none", "FAIL: hover readout not shown"
+        assert "km to go" in hov["text"], \
+            f"FAIL: hover should report distance remaining, got: {hov['text']}"
+
+        # Ticks must count DOWN toward the line, left to right.
+        ticks = page.evaluate(
+            "() => [...document.querySelectorAll('.tn-tick span')].map(e => e.textContent)")
+        print(f"  ticks          {ticks}")
+        nums = [float(t.split("km")[0]) for t in ticks]
+        assert all("to go" in t for t in ticks), f"FAIL: ticks not in km-to-go: {ticks}"
+        assert nums == sorted(nums, reverse=True), \
+            f"FAIL: km-to-go ticks should decrease left to right: {nums}"
 
         # Collapsed must keep the profile on screen.
         page.click(".tn-collapse")
