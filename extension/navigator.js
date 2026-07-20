@@ -381,6 +381,11 @@
         <div class="tn-anchors">
           <select class="tn-anchor-pick"><option value="">pick a moment…</option></select>
           <button class="tn-anchor-add">Anchor here</button>
+          <button class="tn-sync-finish" title="Click at the exact moment the
+winner crosses the line. Two unmistakable moments (this and the flag drop)
+pin offset and rate exactly.">Finish is NOW</button>
+          <button class="tn-sync-start" title="Click at the exact moment the
+stage rolls out from km 0.">Km 0 is NOW</button>
           <button class="tn-align" title="Drag the profile to line it up with what is on screen">Align</button>
           <button class="tn-auto">Auto-calibrate</button>
           <button class="tn-probe" title="Report what this player exposes">Diagnose</button>
@@ -494,6 +499,10 @@
       updateAlignReadout();
     });
     root.querySelector(".tn-anchor-add").addEventListener("click", addAnchor);
+    root.querySelector(".tn-sync-finish")
+        .addEventListener("click", () => syncAt("finish"));
+    root.querySelector(".tn-sync-start")
+        .addEventListener("click", () => syncAt("start"));
     root.querySelector(".tn-auto").addEventListener("click", runAutoCalibrate);
     root.querySelector(".tn-probe").addEventListener("click", runProbe);
     root.querySelector(".tn-anchor-clear").addEventListener("click", () => {
@@ -567,6 +576,49 @@
     persist();
     refreshAnchorState();
     render();
+  }
+
+  /** Pin the clock against a moment nobody can misidentify.
+   *
+   *  Everything automatic here infers where recording second 0 sits from the
+   *  player's own metadata, and that inference has been wrong. Two moments in
+   *  a bike race are unmistakable on screen -- the flag drop and the winner
+   *  crossing the line -- and we know both to the second from GPS. Clicking at
+   *  one fixes the offset; clicking at both fixes the rate too, which nothing
+   *  automatic can supply because ad breaks are unreadable.
+   *
+   *  This beats the dropdown for the same reason it beats the metadata: no
+   *  judgement about WHICH moment you are looking at is involved. */
+  function syncAt(kind) {
+    const el = root.querySelector(".tn-anchor-state");
+    if (!video?.duration) { el.textContent = "no video"; return; }
+    const cov = bundle.coverage || {};
+    const tUtc = kind === "finish"
+      ? cov.leader_last_seen_utc
+      : (cov.race_start_utc || cov.leader_first_seen_utc);
+    if (!tUtc) { el.textContent = `no ${kind} time in this bundle`; return; }
+
+    const at = video.currentTime;
+    anchors = anchors.filter((a) => a.kind !== kind);
+    anchors.push({ tUtcMs: Date.parse(tUtc), videoSec: at, kind,
+                   label: kind === "finish" ? "finish line" : "km 0" });
+    anchors.sort((a, b) => a.tUtcMs - b.tUtcMs);
+    cal = calFromAnchors();
+    persist();
+    render();
+
+    // Report what the click implies about the recording, because that is the
+    // number that explains why the automatic guess was off.
+    const zero = videoToUtc(0);
+    const parts = [`${kind} pinned at rec ${fmt(at)}`];
+    if (zero != null) {
+      parts.push(`=> rec 0:00 = ${new Date(zero).toISOString().slice(11, 19)}Z`);
+    }
+    parts.push(anchors.length >= 2
+      ? `rate ${cal.rate.toFixed(4)}× (both moments pinned)`
+      : "rate assumed 1.000× — pin the other moment to fix it");
+    el.textContent = parts.join(" · ");
+    console.log("[TourNavigator] manual sync:", el.textContent);
   }
 
   /** Derive anchors from caption "km to go" mentions (see autocalibrate.js).

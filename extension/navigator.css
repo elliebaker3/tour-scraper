@@ -173,3 +173,12 @@
   overflow: hidden; text-overflow: ellipsis;
 }
 .tn-root.tn-collapsed .tn-diag { display: none; }
+
+/* The two unmistakable moments. Given for prominence over the dropdown: no
+   judgement about which moment you're looking at is involved, which is exactly
+   why they're more reliable than anything inferred from player metadata. */
+.tn-sync-finish, .tn-sync-start {
+  background: #1f6f4a; color: #eafff4; border: 1px solid #2c9c68;
+  border-radius: 5px; padding: 3px 8px; cursor: pointer; font-weight: 600;
+}
+.tn-sync-finish:hover, .tn-sync-start:hover { background: #2c9c68; }
