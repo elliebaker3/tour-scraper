@@ -32,12 +32,15 @@
 
   /** Sorted [kmToGo -> race-time ms] index built from the synced profile. */
   function buildKmIndex(bundle) {
-    const total = Number(bundle?.stage?.length_km) || 0;
-    if (!total) return [];
     const idx = [];
     for (const p of bundle.profile || []) {
       if (!p.t || p.interp) continue;          // observed points only
-      idx.push({ kmToGo: total - p.km, tMs: Date.parse(p.t) });
+      // Use the profile's own km-to-finish, never (stage_length - km). The two
+      // disagree: stages.json says 155.5 km for stage 14 while the route file
+      // says 155.2, and that 0.3 km is ~27s of systematic error at racing
+      // speed -- the same bug already removed from the elevation sync.
+      if (typeof p.kmto !== "number") continue;
+      idx.push({ kmToGo: p.kmto, tMs: Date.parse(p.t) });
     }
     idx.sort((a, b) => a.kmToGo - b.kmToGo);
     return idx;
@@ -187,11 +190,19 @@
    * 1.0, so anything spliced in (ads) accumulates as drift later in the
    * recording. Good enough to place markers roughly, and a solid base for the
    * viewer to refine with one manual anchor. */
-  function calibrateFromBroadcastStart(video, bundle) {
+  async function calibrateFromBroadcastStart(video, bundle) {
     const probe = window.TourNavigatorProbe;
     if (!probe) return null;
-    let report;
-    try { report = probe.lastFullReport || probe.runProbe(); } catch (_) { return null; }
+    // Only the FULL report includes the MAIN-world sweep, and the broadcast
+    // start time lives in __PLAYBACK_STATE__, which is invisible to a content
+    // script. The synchronous probe always reports zero candidates here, which
+    // reads as "no start time exists" when it really means "we never looked in
+    // the one place it lives" -- so run the full probe rather than settle.
+    let report = probe.lastFullReport;
+    if (!report && probe.runProbeFull) {
+      try { report = await probe.runProbeFull(); } catch (_) { /* fall through */ }
+    }
+    if (!report) return null;
 
     const raceStartMs = Date.parse(
       (bundle.coverage && bundle.coverage.leader_first_seen_utc) || "");
@@ -251,7 +262,7 @@
   }
 
   /** Full attempt. Returns a result object; never throws into the caller. */
-  function autoCalibrate(video, bundle) {
+  async function autoCalibrate(video, bundle) {
     if (!video || !bundle) return { ok: false, reason: "not ready" };
     const idx = buildKmIndex(bundle);
     if (idx.length < 20) {
@@ -260,7 +271,7 @@
     const cues = collectCues(video);
     if (!cues.length) {
       // Captions withheld (normal for DRM). Fall back to the airing time.
-      const viaStart = calibrateFromBroadcastStart(video, bundle);
+      const viaStart = await calibrateFromBroadcastStart(video, bundle);
       if (viaStart) return viaStart;
       return {
         ok: false,
@@ -270,14 +281,14 @@
     }
     const pairs = mergePairs(candidatePairs(cues, idx));
     if (pairs.length < 3) {
-      const viaStart = calibrateFromBroadcastStart(video, bundle);
+      const viaStart = await calibrateFromBroadcastStart(video, bundle);
       if (viaStart) return viaStart;
       return { ok: false, reason: `only ${pairs.length} usable "km to go" mentions found`,
                cues: cues.length };
     }
     const fit = theilSen(pairs);
     if (!fit) {
-      const viaStart = calibrateFromBroadcastStart(video, bundle);
+      const viaStart = await calibrateFromBroadcastStart(video, bundle);
       if (viaStart) return viaStart;
       return { ok: false, reason: "mentions found but no consistent fit", pairs: pairs.length };
     }

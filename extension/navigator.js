@@ -220,7 +220,11 @@
       }
     }
 
-    const playhead = dur
+    // The playhead is only drawn when it means something. In distance mode
+    // without a calibration there is no way to know where on the road the
+    // video is, and a playhead parked at km 0 reads as "the race is at the
+    // start" rather than "unknown".
+    const playhead = (dur && (mode === "time" || cal))
       ? `<div class="tn-playhead" style="left:${
            ((mode === "time" ? video.currentTime / dur : playheadKm() / len) * width).toFixed(1)
          }px"></div>`
@@ -238,8 +242,10 @@
       ${playhead}
       ${d || dEst ? `<span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
              <span class="tn-alt tn-alt-lo">${Math.round(loA)}m</span>` : ""}
-      ${mode === "dist" ? `<span class="tn-axis">distance · ${len.toFixed(0)}km${
-             cal ? "" : " · not calibrated"}</span>` : ""}
+      ${mode === "dist"
+          ? `<span class="tn-axis tn-axis-warn">✕ NOT aligned to the video — x is
+               distance (0–${len.toFixed(0)}km), not time</span>`
+          : `<span class="tn-axis">time · aligned to recording</span>`}
     `;
 
     bar.querySelectorAll(".tn-marker[data-sec]").forEach((el) => {
@@ -251,10 +257,36 @@
     bar.appendChild(hoverEl);          // survives the innerHTML rewrite
 
     const utcNow = dur ? videoToUtc(video.currentTime) : null;
-    root.querySelector(".tn-clock").textContent = utcNow
-      ? `race ${new Date(utcNow).toISOString().slice(11, 19)}Z · rec ${fmt(video.currentTime)}`
-      : dur ? `rec ${fmt(video.currentTime)} · not calibrated`
-            : "profile only · no video detected";
+    const clock = root.querySelector(".tn-clock");
+    if (utcNow) {
+      // State the claim the alignment is making, in the terms you can check it
+      // against: if the screen shows a climb and this says descending, the
+      // calibration is wrong -- and by roughly how much becomes findable.
+      const km = playheadKm();
+      const g = gradientAt(km);
+      const slope = g == null ? ""
+        : ` · km ${km.toFixed(1)} · ${
+            g > 1.5 ? `climbing ${g.toFixed(1)}%`
+          : g < -1.5 ? `descending ${Math.abs(g).toFixed(1)}%`
+          : "flat"}`;
+      clock.textContent =
+        `race ${new Date(utcNow).toISOString().slice(11, 19)}Z · rec ${fmt(video.currentTime)}${slope}`;
+      clock.className = "tn-clock" + (g == null ? "" : g > 1.5 ? " tn-up" : g < -1.5 ? " tn-down" : "");
+    } else {
+      clock.className = "tn-clock";
+      clock.textContent = dur ? `rec ${fmt(video.currentTime)} · not calibrated`
+                              : "profile only · no video detected";
+    }
+  }
+
+  /** Gradient at a point on the route, in percent, averaged over ~1km so it
+   *  reflects the climb rather than one noisy pair of samples. */
+  function gradientAt(km) {
+    const near = bundle.profile.filter((p) => Math.abs(p.km - km) <= 0.5);
+    if (near.length < 2) return null;
+    const a = near[0], b = near[near.length - 1];
+    const d = b.km - a.km;
+    return d > 0 ? (b.alt - a.alt) / (d * 10) : null;
   }
 
   /** Nearest profile point to a fractional position along the bar, resolved on
@@ -529,14 +561,17 @@
     const el = root.querySelector(".tn-anchor-state");
     const api = window.TourNavigatorAutoCal;
     if (!api) { el.textContent = "auto-calibration unavailable"; return; }
-    el.textContent = "scanning captions…";
-    // Defer so the label paints before the (synchronous) scan runs.
-    setTimeout(() => {
+    if (!video) { el.textContent = "auto-calibrate: no video found yet"; return; }
+    el.textContent = "calibrating…";
+    // autoCalibrate is async: it may have to run the MAIN-world probe before it
+    // can see the broadcast's start time.
+    (async () => {
       let res;
-      try { res = api.autoCalibrate(video, bundle); }
+      try { res = await api.autoCalibrate(video, bundle); }
       catch (e) { res = { ok: false, reason: String(e && e.message || e) }; }
       if (!res.ok) {
         el.textContent = `auto-calibrate failed — ${res.reason}`;
+        render();          // repaint so the uncalibrated warning is visible
         return;
       }
       anchors = res.anchors;
@@ -555,7 +590,7 @@
           el.textContent += " — scrub elsewhere and run again to widen the span";
         }
       }
-    }, 0);
+    })();
   }
 
   /** Dump what this player exposes, and copy it for pasting back. Captions are
@@ -675,7 +710,13 @@
       if (chosen) why = `pinned to stage ${pinned}`;
     }
 
-    if (!chosen) {
+    // The full probe runs unconditionally, even when the stage is pinned.
+    // It is the ONLY thing that executes the MAIN-world script, and the
+    // broadcast's start time lives in __PLAYBACK_STATE__, which a content
+    // script cannot see. Skipping it for pinned stages meant auto-calibration
+    // fell back to the content-script-only probe, found no start time, and
+    // silently gave up -- so pinning a stage quietly disabled calibration.
+    {
       // The page can still be booting at document_idle, so retry rather than
       // let a single missed handshake silently pick the wrong stage.
       for (let attempt = 1; attempt <= 3 && !airing; attempt++) {
@@ -685,7 +726,9 @@
         } catch (_) { /* keep trying */ }
         if (!airing) await new Promise((r) => setTimeout(r, 700 * attempt));
       }
-      if (airing) {
+      if (chosen) {
+        why += airing ? "" : " (no airing time found — calibration may fail)";
+      } else if (airing) {
         const day = new Date(airing).toISOString().slice(0, 10);
         chosen = index.stages.find((s) => s.date === day) || null;
         why = chosen ? `matched airing date ${day}`

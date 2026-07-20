@@ -126,8 +126,8 @@ altitude are intrinsic to the scraped route. The bar switches axis instead.
 | **Calibrated** | recording time | a calibration + a loaded video | seeks |
 | **Otherwise** | route distance, km 0 → finish | nothing | declined |
 
-Distance mode is labelled (`distance · 155km · not calibrated`) and carries km
-ticks, so the shape always has scale. Guideposts are placed on it too — route
+Distance mode carries km ticks, so the shape always has scale. Guideposts are
+placed on it too — route
 ones by their own km, ticker ones by interpolating the time-synced profile.
 Seeking is *declined* rather than approximated while uncalibrated: a
 plausible-looking wrong seek is worse than none.
@@ -138,9 +138,20 @@ so the scraped numbers behind the shape are one mouse-move away.
 Collapsing (**–**) hides the controls but keeps the profile as a slim strip.
 The controls are only how it gets calibrated; the profile is the thing you read.
 
-Test it with `python tests/test_extension_profile.py` (needs Playwright): it
-loads the real extension in headless Chromium and asserts the profile spans the
-full bar with no video and no calibration.
+**The bar states which axis it is on.** Time mode says `time · aligned to
+recording`; distance mode carries an amber `NOT aligned to the video` badge and
+draws no playhead. An uncalibrated bar looks identical to a calibrated one, so
+reading distance as time is the most misleading failure available here — the
+shape is right and the position means nothing.
+
+Once calibrated the clock also reports the gradient under the playhead
+(`km 148.7 · climbing 9.0%`). If the screen shows a climb and this says
+descending, the calibration is wrong — and Align mode is how to fix it.
+
+Tests (need Playwright):
+
+    python tests/test_extension_profile.py      # profile always drawn, full span
+    python tests/test_extension_calibration.py  # alignment against real numbers
 
 ## Making the elevation line up exactly
 

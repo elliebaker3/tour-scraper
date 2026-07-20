@@ -100,6 +100,15 @@
   position: absolute; left: 6px; top: 3px; font-size: 10px;
   color: #93a0b3; pointer-events: none; text-shadow: 0 1px 2px #000;
 }
+/* An uncalibrated bar looks exactly like a calibrated one, so it has to say so
+   loudly. Reading distance-as-time is the single most misleading failure here:
+   the shape is right, the position means nothing. */
+.tn-axis-warn {
+  color: #0e1014; background: #f5a524; font-weight: 600;
+  padding: 1px 6px; border-radius: 3px; text-shadow: none;
+}
+.tn-clock.tn-up { color: #ff9b7a; }
+.tn-clock.tn-down { color: #7cc0ff; }
 
 /* Hover readout: the numbers behind the shape, without needing to seek. */
 .tn-hover {
