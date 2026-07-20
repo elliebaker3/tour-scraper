@@ -98,7 +98,7 @@ try:
         s = state()
         print("--- on load ---")
         print(f"  axis    {' '.join(s['axis'].split())}")
-        assert "Set km 0" in s["axis"], f"FAIL: expected a km-0 prompt, got: {s['axis']}"
+        assert "Calibrate" in s["axis"], f"FAIL: expected a calibrate prompt, got: {s['axis']}"
 
         # --- 2: km 0 typed into the box calibrates ---------------------------
         page.fill(".tn-km0-time", "0:59:09")
@@ -165,9 +165,78 @@ try:
         print("\n--- reload with a stale saved calibration ---")
         print(f"  axis    {' '.join(s['axis'].split())}")
         print(f"  diag    {s['diag']}")
-        assert "Set km 0" in s["axis"], \
+        assert "Calibrate" in s["axis"], \
             f"FAIL: stale calibration was restored instead of prompting: {s['axis']}"
         assert "0.918" not in s["diag"], f"FAIL: stale rate survived: {s['diag']}"
+
+        # --- 6: calibrate from the broadcast's own "km to go" graphic --------
+        # The graphic counts in whole kilometres, so "42" means [42, 43) and
+        # the midpoint 42.5 is the best reading of it. Placing the video at the
+        # moment the leader really was at 42.5 to go must recover the same
+        # origin the km-0 pin gave.
+        def time_at_kmto(km):
+            pts = sorted((p for p in bundle["profile"] if p.get("t")),
+                         key=lambda p: p["kmto"])
+            for i in range(1, len(pts)):
+                a, b = pts[i - 1], pts[i]
+                if a["kmto"] <= km <= b["kmto"]:
+                    ta = datetime.fromisoformat(a["t"])
+                    tb = datetime.fromisoformat(b["t"])
+                    span = b["kmto"] - a["kmto"]
+                    f = (km - a["kmto"]) / span if span else 0
+                    return ta + (tb - ta) * f
+            return None
+
+        zero = start_utc - timedelta(seconds=KM0_REC)
+        page.goto(base)
+        page.wait_for_selector(".tn-root .tn-axis", timeout=10000)
+        page.wait_for_timeout(2500)
+
+        print("\n--- calibrate from \"km to go\" ---")
+        for shown, expect_exact in [(42, 42.5), (95, 95.5)]:
+            t = time_at_kmto(expect_exact)
+            rec = (t - zero).total_seconds()
+            page.evaluate(f"() => document.querySelector('video').currentTime = {rec}")
+            page.fill(".tn-togo-at", "")
+            page.fill(".tn-togo-km", str(shown))
+            page.click(".tn-togo-set")
+            page.wait_for_timeout(600)
+            st = state()
+            print(f"  typed {shown} at rec {rec:.0f}s ({t:%H:%M:%S}Z)")
+            print(f"    {st['status']}")
+            got = re.search(r"rec 0:00 = (\d\d:\d\d:\d\d)Z", st["diag"])
+            assert got, f"FAIL: no origin in diag: {st['diag']}"
+            got_t = datetime.strptime(got.group(1), "%H:%M:%S").time()
+            delta = abs((datetime.combine(zero.date(), got_t)
+                         - zero.replace(tzinfo=None)).total_seconds())
+            print(f"    origin {got.group(1)}Z vs expected {zero:%H:%M:%S}Z "
+                  f"-> {delta:.0f}s off")
+            assert delta <= 20, f"FAIL: origin off by {delta:.0f}s"
+
+        # Two pins now: the median is used, and it must still agree.
+        assert "2 pins" in state()["status"], \
+            f"FAIL: expected 2 pins to combine, got: {state()['status']}"
+
+        # A time can also be typed rather than scrubbed to.
+        t = time_at_kmto(42.5)
+        rec = (t - zero).total_seconds()
+        hhmmss = f"{int(rec//3600)}:{int(rec%3600//60):02d}:{int(rec%60):02d}"
+        page.click(".tn-anchor-clear")
+        page.wait_for_timeout(300)
+        page.fill(".tn-togo-at", hhmmss)
+        page.fill(".tn-togo-km", "42")
+        page.click(".tn-togo-set")
+        page.wait_for_timeout(600)
+        st = state()
+        print(f"\n  typed time {hhmmss} + 42 km to go")
+        print(f"    {st['status']}")
+        assert f"rec {hhmmss}" in st["status"] or "rec 0:00" in st["diag"], \
+            f"FAIL: typed time ignored: {st['status']}"
+        got = re.search(r"rec 0:00 = (\d\d:\d\d:\d\d)Z", st["diag"])
+        got_t = datetime.strptime(got.group(1), "%H:%M:%S").time()
+        delta = abs((datetime.combine(zero.date(), got_t)
+                     - zero.replace(tzinfo=None)).total_seconds())
+        assert delta <= 20, f"FAIL: typed-time origin off by {delta:.0f}s"
 
         print(f"\n  page errors: {errs or 'none'}")
         assert not errs, f"FAIL: page errors {errs}"

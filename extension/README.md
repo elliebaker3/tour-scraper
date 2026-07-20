@@ -8,11 +8,27 @@ history, and a strip showing where the race got intense.
 It reads `video.currentTime` and sets it to seek. It does not capture,
 download or modify any stream.
 
-## Calibrate: one input, km 0
+## Calibrate from the "km to go" on screen
 
-Scrub to the flag drop — the moment the stage rolls out from km 0 — and click
-**"Km 0 is NOW"**. Or type the recording time straight in (`0:59:09`) and press
-**Set**. That is the whole calibration.
+Pause anywhere, read the kilometres-to-go off the broadcast graphic, type it in
+and press **km to go**. That is the whole calibration. Optionally put a
+recording time in the box before it (`3:46:30`) to calibrate at a moment other
+than where you are.
+
+This is the primary route because the graphic is on screen almost continuously,
+where km 0 and the finish each happen once and have to be hunted for. The
+profile knows when the leader was at any km-to-go, so the pair — your recording
+time, its race time — is an anchor.
+
+**Accuracy is bounded by the graphic, not by the data.** It counts in whole
+kilometres, so "42" means somewhere in [42, 43); the midpoint is used, leaving
+about ±45 s at racing speed. Add pins from several points in the stage and the
+**median** is used, so rounding that falls either way cancels and one misread
+number cannot move the timeline. The status line reports how many pins are in
+play and how far apart they disagree.
+
+Alternatively pin the flag drop: scrub to it and click **"Km 0 is NOW"**, or
+type its recording time and press **Set**.
 
 One moment is enough because the broadcast has no inserted breaks, so rate is
 1.0 by construction. Fitting a rate from two pins was worse than not fitting
@@ -31,7 +47,7 @@ The panel always states what it is assuming:
 
 and once calibrated the clock names the gradient under the playhead
 (`6.5 km to go · climbing 9.0%`). If the screen shows a climb and that says
-descending, the km-0 pin is off.
+descending, the pins are off.
 
 ## Install
 

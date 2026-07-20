@@ -63,11 +63,22 @@
 
   function pins() { return anchors.filter((a) => a.kind); }
 
+  /* With rate fixed at 1.0 every pin says exactly one thing: the race time at
+   * recording second 0. Expressing pins that way makes them combinable -- the
+   * MEDIAN across them is the calibration, so a single misread graphic gets
+   * outvoted instead of moving the whole timeline. */
+  const impliedZeroMs = (a) => a.tUtcMs - a.videoSec * 1000;
+
+  function medianZeroMs(p) {
+    const z = p.map(impliedZeroMs).sort((x, y) => x - y);
+    const m = z.length >> 1;
+    return z.length % 2 ? z[m] : (z[m - 1] + z[m]) / 2;
+  }
+
   function calFromAnchors() {
     const p = pins();
     if (p.length) {
-      const primary = p.find((x) => x.kind === "start") || p[0];
-      return { refMs: primary.tUtcMs, offsetSec: primary.videoSec, rate: RATE };
+      return { refMs: medianZeroMs(p), offsetSec: 0, rate: RATE };
     }
     if (!anchors.length) return null;
     const a = anchors[0];
@@ -131,6 +142,32 @@
                      kmto: p.kmto, est: !!p.est }))
       .sort((a, b) => a.t - b.t);
     return _series;
+  }
+
+  /** Race time at which the leader had `km` left to race.
+   *
+   *  This is what makes the broadcast's own "N km to go" graphic usable as a
+   *  calibration: the graphic gives km, the profile gives the time the leader
+   *  was there, and the pair is an anchor. Interpolated, so accuracy is not
+   *  limited by the downsampled point spacing.
+   *
+   *  Returns null outside the covered range, and flags the estimated head --
+   *  where pace was inferred rather than observed, so a pin there inherits
+   *  that uncertainty. */
+  let _byKmTo = null;
+  function timeAtKmToGo(km) {
+    if (!_byKmTo) _byKmTo = [...series()].sort((a, b) => a.kmto - b.kmto);
+    const s = _byKmTo;
+    if (!s.length || km < s[0].kmto || km > s[s.length - 1].kmto) return null;
+    let lo = 0, hi = s.length - 1;
+    while (hi - lo > 1) {
+      const mid = (lo + hi) >> 1;
+      if (s[mid].kmto <= km) lo = mid; else hi = mid;
+    }
+    const a = s[lo], b = s[hi];
+    const span = b.kmto - a.kmto;
+    const f = span > 0 ? (km - a.kmto) / span : 0;
+    return { tMs: a.t + (b.t - a.t) * f, est: a.est || b.est };
   }
 
   /** Elevation at a race time, with how it was arrived at.
@@ -326,8 +363,8 @@
       ${hasProfile ? `<span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
              <span class="tn-alt tn-alt-lo">${Math.round(loA)}m</span>` : ""}
       ${mode === "dist"
-          ? `<span class="tn-axis tn-axis-warn">Set km 0 to calibrate — scrub to
-               the flag drop, then click "Km 0 is NOW"</span>`
+          ? `<span class="tn-axis tn-axis-warn">Calibrate: type the "km to go"
+               the broadcast is showing, or set km 0</span>`
           : `<span class="tn-axis">time · aligned to recording</span>`}
     `;
 
@@ -474,6 +511,14 @@ everything.">Km 0 is NOW</button>
           <input class="tn-km0-time" size="7" placeholder="0:59:09"
                  title="Or type the recording time at km 0 (h:mm:ss)">
           <button class="tn-km0-set">Set</button>
+          <span class="tn-sep">or</span>
+          <input class="tn-togo-at" size="7" placeholder="now"
+                 title="Recording time to calibrate at (blank = wherever you are now)">
+          <input class="tn-togo-km" size="5" placeholder="42"
+                 title="What the broadcast graphic says: kilometres to go">
+          <button class="tn-togo-set" title="Calibrate from the km-to-go the
+broadcast is showing. Add several from different points — the median is used,
+so one misread number cannot move the timeline.">km to go</button>
           <button class="tn-align" title="Drag the profile to line it up with what is on screen">Align</button>
           <button class="tn-auto">Auto-calibrate</button>
           <button class="tn-probe" title="Report what this player exposes">Diagnose</button>
@@ -600,6 +645,26 @@ everything.">Km 0 is NOW</button>
       syncAt("start", sec);
     };
     root.querySelector(".tn-km0-set").addEventListener("click", applyTyped);
+
+    const togoKm = root.querySelector(".tn-togo-km");
+    const togoAt = root.querySelector(".tn-togo-at");
+    const applyToGo = () => {
+      const km = parseFloat(String(togoKm.value).replace(",", "."));
+      const at = togoAt.value.trim() ? parseClock(togoAt.value) : null;
+      if (togoAt.value.trim() && at == null) {
+        root.querySelector(".tn-anchor-state").textContent =
+          `could not read the time "${togoAt.value}" — use h:mm:ss, m:ss or seconds`;
+        return;
+      }
+      syncKmToGo(km, at);
+    };
+    root.querySelector(".tn-togo-set").addEventListener("click", applyToGo);
+    for (const el of [togoKm, togoAt]) {
+      el.addEventListener("keydown", (ev) => {
+        ev.stopPropagation();
+        if (ev.key === "Enter") applyToGo();
+      });
+    }
     km0.addEventListener("keydown", (ev) => {
       ev.stopPropagation();                 // don't let align-mode keys steal it
       if (ev.key === "Enter") applyTyped();
@@ -690,6 +755,62 @@ everything.">Km 0 is NOW</button>
    *
    *  This beats the dropdown for the same reason it beats the metadata: no
    *  judgement about WHICH moment you are looking at is involved. */
+  /** Calibrate from the km-to-go the broadcast is showing.
+   *
+   *  The most available anchor there is: the graphic is on screen almost
+   *  continuously, so any moment works, where km 0 and the finish each happen
+   *  once and have to be hunted for.
+   *
+   *  Accuracy is bounded by the graphic, not by us. It counts in whole
+   *  kilometres, so "42" means somewhere in [42, 43) -- half a kilometre of
+   *  ambiguity, which at racing speed is around 45 seconds. That is reported
+   *  rather than hidden, and it is why several pins are better than one: the
+   *  median cancels rounding that falls either way. */
+  function syncKmToGo(km, atSec) {
+    const el = root.querySelector(".tn-anchor-state");
+    if (!video?.duration) { el.textContent = "no video"; return; }
+    if (!isFinite(km)) { el.textContent = "enter the kilometres to go, e.g. 42"; return; }
+
+    const len = routeLength();
+    if (km < 0 || km > len) {
+      el.textContent = `${km} km to go is outside this stage (0–${len.toFixed(1)} km)`;
+      return;
+    }
+    // A whole-kilometre graphic reads "42" from 42.0 down to 43.0, so the
+    // midpoint is the best single estimate of what it meant.
+    const exact = Number.isInteger(km) ? km + 0.5 : km;
+    const hit = timeAtKmToGo(exact);
+    if (!hit) {
+      el.textContent = `no GPS coverage at ${km} km to go — try another point`;
+      return;
+    }
+
+    const at = (atSec == null) ? video.currentTime
+                               : Math.max(0, Math.min(video.duration, atSec));
+    anchors = anchors.filter((a) => a.kind);
+    anchors.push({ tUtcMs: hit.tMs, videoSec: at, kind: "kmtogo", km,
+                   label: `${km} km to go` });
+    cal = calFromAnchors();
+    persist();
+    render();
+
+    const p = pins();
+    const zeros = p.map(impliedZeroMs);
+    const spread = (Math.max(...zeros) - Math.min(...zeros)) / 1000;
+    const parts = [
+      `${km} km to go at rec ${fmt(at)} = race ` +
+      `${new Date(hit.tMs).toISOString().slice(11, 19)}Z`,
+      `rec 0:00 = ${new Date(cal.refMs).toISOString().slice(11, 19)}Z`,
+    ];
+    if (Number.isInteger(km)) parts.push("±~45s (graphic rounds to whole km)");
+    if (hit.est) parts.push("⚠ that stretch has no GPS — pace is inferred there");
+    parts.push(p.length === 1
+      ? "add more from elsewhere to average out the rounding"
+      : `${p.length} pins, median used, spread ${spread.toFixed(0)}s`);
+    el.textContent = parts.join(" · ");
+    console.log("[TourNavigator] km-to-go sync:", el.textContent);
+  }
+
   /** "1:02:03" / "62:03" / "3723" -> seconds. */
   function parseClock(text) {
     const s = String(text || "").trim();

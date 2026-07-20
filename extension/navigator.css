@@ -193,3 +193,17 @@
   stroke-width: 1;
   stroke-dasharray: 2 4;
 }
+
+/* Calibration inputs. The km-to-go pair is the primary route now — the
+   broadcast shows that number almost continuously, where km 0 happens once. */
+.tn-km0-time, .tn-togo-at, .tn-togo-km {
+  background: #1b1f26; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
+  border-radius: 5px; padding: 3px 5px; font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+.tn-togo-set {
+  background: #1f6f4a; color: #eafff4; border: 1px solid #2c9c68;
+  border-radius: 5px; padding: 3px 8px; cursor: pointer; font-weight: 600;
+}
+.tn-togo-set:hover { background: #2c9c68; }
+.tn-sep { color: #6f7784; }
