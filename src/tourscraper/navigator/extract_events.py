@@ -177,26 +177,11 @@ def classify_ticker(items: list[dict]) -> list[dict]:
     return guideposts
 
 
-def summit_guideposts(synced_points: list[dict]) -> list[dict]:
-    """Summits and marked checkpoints, timed by when the leader crossed them.
-
-    Emitted as scenic because a col crossing is the most reliable moment the
-    world feed shows the panorama, and it doubles as a route landmark.
-    """
-    out = []
-    for p in synced_points:
-        if not p.get("time_utc"):
-            continue
-        cat, cptype = p.get("climb_category"), p.get("checkpoint_type")
-        if cat:
-            out.append(_mk(p["time_utc"], "scenic", f"Summit (cat {cat}) - {p['altitude']:.0f}m",
-                           f"km {p['km']:.1f}", "route:summit",
-                           km=p["km"], altitude=p["altitude"]))
-        elif cptype in ("sprint", "arrival"):
-            label = "Intermediate sprint" if cptype == "sprint" else "Finish"
-            out.append(_mk(p["time_utc"], "route", f"{label} - km {p['km']:.1f}",
-                           "", f"route:{cptype}", km=p["km"], altitude=p["altitude"]))
-    return out
+# Sprints and categorized climbs used to be emitted here as scenic/route
+# guideposts. They now have their own first-class channel -- route_markers in
+# build_bundle, straight from ASO's route data -- which is exact, carries the
+# climb category, and is drawn on the elevation curve. Keeping them here too
+# would double-mark every summit, so this step is gone.
 
 
 def intensity_curve(items: list[dict], synced_points: list[dict],
@@ -245,7 +230,7 @@ def intensity_curve(items: list[dict], synced_points: list[dict],
 
 def build_guideposts(stage_dir: Path, synced_points: list[dict]) -> dict:
     items = load_ticker(stage_dir)
-    guideposts = classify_ticker(items) + summit_guideposts(synced_points)
+    guideposts = classify_ticker(items)
     guideposts.sort(key=lambda g: g["t_utc"])
     counts: dict[str, int] = {}
     for g in guideposts:

@@ -96,6 +96,10 @@ try:
                 barShown: vis('.tn-bar'),
                 controlsShown: vis('.tn-controls'),
                 markers: bar.querySelectorAll('.tn-marker').length,
+                sprints: bar.querySelectorAll('.tn-rm-sprint').length,
+                koms: bar.querySelectorAll('.tn-rm-kom').length,
+                komBadges: [...bar.querySelectorAll('.tn-rm-kom .tn-rm-badge')]
+                            .map(e => e.textContent),
                 clock: document.querySelector('.tn-clock').textContent,
                 status: document.querySelector('.tn-anchor-state').textContent,
                 diag: document.querySelector('.tn-diag').textContent,
@@ -159,6 +163,19 @@ try:
         assert s["markers"] > 0, "FAIL: no guideposts after calibrating"
         assert "rate 1.0" in s["diag"] or "rate 1.000" in s["diag"], \
             f"FAIL: one reading should assume rate 1.0, got: {s['diag']}"
+
+        # Sprint and climb markers are on the profile, from the route data.
+        n_sprint = sum(1 for m in bundle["route_markers"] if m["kind"] == "sprint")
+        n_kom = sum(1 for m in bundle["route_markers"]
+                    if m["kind"] == "kom" and m.get("t"))
+        print(f"\n  route markers drawn: {s['sprints']} sprint, {s['koms']} climb "
+              f"(bundle has {n_sprint} sprint, {n_kom} timed climb)")
+        print(f"  climb badges: {s['komBadges']}")
+        assert s["sprints"] == n_sprint, "FAIL: sprint markers not all drawn"
+        assert s["koms"] == n_kom, "FAIL: climb markers not all drawn"
+        # Categories are labelled (HC / 1-4), not generic.
+        assert any(b in ("1", "2", "3") for b in s["komBadges"]), \
+            f"FAIL: climb badges not category-labelled: {s['komBadges']}"
 
         # The bar spans the whole recording.
         segs = {k: s[k] for k in ("obs", "est", "imp") if s[k]}

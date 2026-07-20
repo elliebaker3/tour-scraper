@@ -109,6 +109,55 @@ def scheduled_start_utc(meta: dict):
         return None
 
 
+# ASO's climb grades, hardest first. "H" is hors catégorie.
+_KOM_LABEL = {"H": "HC", "1": "Cat 1", "2": "Cat 2", "3": "Cat 3", "4": "Cat 4"}
+
+
+def route_markers(sync_points: list[dict]) -> list[dict]:
+    """Intermediate sprints and categorized climbs, from the official profile.
+
+    These come straight from ASO's route data (the same public source as the
+    printed stage profile), not from the ticker, so they are always present and
+    exactly placed. Each is timed by when the leader reached it and carries its
+    own km / km-to-go / altitude, so the renderer can pin it on the elevation
+    curve regardless of how the profile is downsampled -- which on stage 15 had
+    dropped every one of them.
+    """
+    # A summit finish sits at km-to-go 0, which can fall just past GPS coverage
+    # and so carry no leader time of its own; the finish time is simply when the
+    # leader last had a fix, i.e. crossed the line.
+    finish_t = next((p["time_utc"] for p in reversed(sync_points)
+                     if p.get("time_utc")), None)
+
+    out = []
+    for p in sync_points:
+        cptype = (p.get("checkpoint_type") or "")
+        cat = p.get("climb_category")
+        km, kmto, alt = p.get("km"), p.get("km_to_finish"), p.get("altitude")
+        t = p.get("time_utc")
+        common = {"km": round(km, 1) if km is not None else None,
+                  "kmto": round(kmto, 1) if kmto is not None else None,
+                  "alt": round(alt) if alt is not None else None,
+                  "t": t}
+        if "sprint" in cptype:
+            out.append({**common, "kind": "sprint", "label": "Intermediate sprint"})
+        if cat in _KOM_LABEL:
+            summit_finish = "arrival" in cptype
+            out.append({**common, "t": common["t"] or (finish_t if summit_finish else None),
+                        "kind": "kom", "cat": _KOM_LABEL[cat],
+                        "label": ("Summit finish" if summit_finish
+                                  else f"Climb — {_KOM_LABEL[cat]}"),
+                        "finish": summit_finish})
+    # One row per (kind, km); the profile can list a checkpoint on adjacent points.
+    seen, dedup = set(), []
+    for m in sorted(out, key=lambda m: (m["km"] if m["km"] is not None else 1e9)):
+        key = (m["kind"], m["km"])
+        if key not in seen:
+            seen.add(key)
+            dedup.append(m)
+    return dedup
+
+
 def build(stage_dir: Path, telemetry_paths, year_dir: Path,
           stage_number: int, out_path: Path | None = None) -> Path:
     meta = stage_meta(year_dir, stage_number)
@@ -123,6 +172,7 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     sync = build_sync(stage_dir, telemetry_paths, length_km, race_start_utc=race_start)
     events = build_guideposts(stage_dir, sync["points"])
     profile = [_slim(p) for p in downsample_profile(sync["points"])]
+    markers = route_markers(sync["points"])
 
     bundle = {
         "schema": 1,
@@ -141,6 +191,7 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
             "ticker_items": events["ticker_items"],
         },
         "profile": profile,
+        "route_markers": markers,
         "guideposts": events["guideposts"],
         "intensity": events["intensity"],
     }
@@ -152,4 +203,7 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     print(f"[navigator]   profile {len(profile)} pts (of {sync['profile_points']}), "
           f"{sync['observed_points']} time-observed")
     print(f"[navigator]   guideposts {events['counts']}")
+    sprints = sum(1 for m in markers if m["kind"] == "sprint")
+    koms = sum(1 for m in markers if m["kind"] == "kom")
+    print(f"[navigator]   route markers: {sprints} sprint(s), {koms} climb(s)")
     return out_path

@@ -51,6 +51,14 @@ The stage elevation profile against **recording time**, so every position on it
 is a moment you can seek to. Click anywhere to jump there; click a marker to
 jump to that event.
 
+**Sprints and climbs are marked on the curve itself**, the way a printed stage
+profile flags them: a green **S** at each intermediate sprint, and at every
+categorized climb a badge with its grade (`HC`, `1`–`4`, or 🏁 for a summit
+finish), coloured hardest-red to easiest-yellow, sitting at the summit's real
+altitude. These come from ASO's own route data (`route_markers` in the bundle),
+so they are exact and independent of the ticker — and of the downsampling that
+had been dropping them. Click one to seek to when the leader reached it.
+
 Distances are always **km remaining to the line**, never km travelled — that is
 how a race is called. They come from the profile's `kmto` column rather than
 `stage_length - km`: stages.json says 155.5 for stage 14 where the route file

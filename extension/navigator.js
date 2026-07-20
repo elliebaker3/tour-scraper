@@ -23,14 +23,20 @@
 
   const STORAGE_KEY = "tourNavigatorAnchors";
   const CATEGORIES = {
+    sprint:          { label: "Sprints",    color: "#22c55e", on: true },
+    kom:             { label: "Climbs",     color: "#ef4444", on: true },
     crash:           { label: "Crashes",    color: "#e5484d", on: true },
     breakaway_start: { label: "Attacks",    color: "#f5a524", on: true },
     breakaway_end:   { label: "Caught",     color: "#8b7cf6", on: true },
     scenic:          { label: "Scenery",    color: "#30a46c", on: true },
     history:         { label: "History",    color: "#0091ff", on: true },
-    route:           { label: "Sprint/Fin", color: "#e0e0e0", on: true },
     stat:            { label: "Stats",      color: "#8b8b8b", on: false },
   };
+
+  // Climb grades shade from yellow (cat 4) to deep red (HC), the way a stage
+  // profile prints them. Sprints are green, the sprinters' jersey colour.
+  const KOM_COLOR = { HC: "#b91c1c", "Cat 1": "#ef4444", "Cat 2": "#f97316",
+                      "Cat 3": "#eab308", "Cat 4": "#a3e635" };
 
   let bundle = null;
   let bundle_index = null;
@@ -319,6 +325,32 @@
                   imp: "tn-profile tn-profile-imp" };
     const paths = segs.filter((g) => g.d)
       .map((g) => `<path d="${g.d}" class="${CLS[g.cls]}"/>`).join("");
+    const rangeA = Math.max(1, hiA - loA);
+    const yForAlt = (alt) => height - ((alt - loA) / rangeA) * (height - 4) - 2;
+
+    // Sprints and climbs sit ON the elevation curve, at their own altitude, the
+    // way a printed stage profile marks them. Drawn from route_markers, which
+    // comes straight from ASO's route data, so they are exact and never lost to
+    // downsampling. Climbs are flagged with their category (HC / 1-4).
+    const routeMarks = [];
+    for (const m of bundle.route_markers || []) {
+      if (!m.t || !enabled[m.kind]) continue;
+      const sec = utcToVideo(Date.parse(m.t));
+      if (sec == null || sec < 0 || sec > dur) continue;
+      const x = (sec / dur) * width;
+      const y = m.alt != null ? yForAlt(m.alt) : height / 2;
+      const isKom = m.kind === "kom";
+      const color = isKom ? (KOM_COLOR[m.cat] || "#ef4444") : CATEGORIES.sprint.color;
+      const badge = isKom ? (m.finish ? "🏁" : (m.cat || "").replace("Cat ", "")) : "S";
+      const tip = `${fmt(sec)} — ${m.label}` +
+                  (m.kmto != null ? ` · ${m.kmto} km to go · ${m.alt}m` : "");
+      routeMarks.push(
+        `<div class="tn-rm tn-rm-${m.kind}${m.finish ? " tn-rm-finish" : ""}"
+              style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;--rm:${color}"
+              data-sec="${sec.toFixed(1)}" title="${escapeHtml(tip)}">
+           <span class="tn-rm-badge">${escapeHtml(badge)}</span>
+         </div>`);
+    }
 
     const markers = [];
     for (const g of bundle.guideposts) {
@@ -351,11 +383,12 @@
         ${paths}
       </svg>
       <div class="tn-markers">${markers.join("")}</div>
+      <div class="tn-routemarks">${routeMarks.join("")}</div>
       <div class="tn-playhead" style="left:${playX.toFixed(1)}px"></div>
       ${paths ? `<span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
              <span class="tn-alt tn-alt-lo">${Math.round(loA)}m</span>` : ""}
     `;
-    bar.querySelectorAll(".tn-marker").forEach((el) => {
+    bar.querySelectorAll(".tn-marker, .tn-rm").forEach((el) => {
       el.addEventListener("click", (ev) => {
         ev.stopPropagation();
         video.currentTime = parseFloat(el.dataset.sec);
