@@ -70,10 +70,78 @@
     return report;
   }
 
+  /* Peacock's playback state carries the asset's airing times, and shaka is
+   * present as a global. Both are far better clocks than anything guessed at,
+   * so surface them explicitly rather than leaving them buried in the generic
+   * timestamp sweep. All read-only: no player methods that change state. */
+  function playbackState() {
+    const out = {};
+    try {
+      const ps = window.__PLAYBACK_STATE__;
+      const attrs = ps && ps.assetData && ps.assetData.attributes;
+      if (attrs) {
+        out.displayStartTime = attrs.displayStartTime ?? null;
+        out.eventPlayableStartDate = attrs.eventDetails?.eventPlayableStartDate ?? null;
+        out.eventDisplayStartDate = attrs.eventDetails?.eventDisplayStartDate ?? null;
+        out.eventDisplayEndDate = attrs.eventDetails?.eventDisplayEndDate ?? null;
+        out.title = String(attrs.title || attrs.name || "").slice(0, 120);
+      }
+      if (ps && ps.assetMetadata) {
+        out.assetMetadataDisplayStartTime = ps.assetMetadata.displayStartTime ?? null;
+      }
+    } catch (e) { out.error = String(e).slice(0, 80); }
+    return out;
+  }
+
+  /** A shaka Player instance can report the stream's wall clock directly,
+   *  which beats inferring offset from scheduling metadata. Find one by duck
+   *  typing rather than assuming where the app stored it. */
+  function shakaClock() {
+    const isPlayer = (o) => o && typeof o === "object" &&
+      typeof o.getPresentationStartTimeAsDate === "function";
+    const found = [];
+    const seen = new WeakSet();
+    const visit = (o, path, depth) => {
+      if (found.length || !o || typeof o !== "object" || depth > 4 || seen.has(o)) return;
+      seen.add(o);
+      if (isPlayer(o)) { found.push({ o, path }); return; }
+      let keys; try { keys = Object.keys(o); } catch (_) { return; }
+      for (const k of keys.slice(0, 200)) {
+        let v; try { v = o[k]; } catch (_) { continue; }
+        if (v && typeof v === "object") visit(v, path + "." + k, depth + 1);
+        if (found.length) return;
+      }
+    };
+    let roots = [];
+    try { roots = Object.keys(window).filter((k) => /shaka|player|cvsdk|CVSDK|video/i.test(k)); }
+    catch (_) {}
+    for (const k of roots) {
+      let v; try { v = window[k]; } catch (_) { continue; }
+      if (v && typeof v === "object") visit(v, k, 0);
+      if (found.length) break;
+    }
+    if (!found.length) return { available: false };
+    const { o, path } = found[0];
+    const res = { available: true, path };
+    try {
+      const d = o.getPresentationStartTimeAsDate();
+      res.presentationStart = d && !isNaN(d.getTime()) ? d.toISOString() : null;
+    } catch (e) { res.presentationStartError = String(e).slice(0, 60); }
+    try {
+      const d = o.getPlayheadTimeAsDate && o.getPlayheadTimeAsDate();
+      res.playheadTime = d && !isNaN(d.getTime()) ? d.toISOString() : null;
+    } catch (e) { res.playheadError = String(e).slice(0, 60); }
+    return res;
+  }
+
   window.addEventListener("message", (ev) => {
     if (ev.source !== window || !ev.data || ev.data.__tn !== "probe-request") return;
     let payload;
-    try { payload = run(); }
+    try {
+      payload = run();
+      payload.playbackState = playbackState();
+      payload.shakaClock = shakaClock();
+    }
     catch (e) { payload = { globalHits: [], scannedKeys: [], errors: [String(e)] }; }
     window.postMessage({ __tn: "probe-response", payload }, "*");
   });

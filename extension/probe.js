@@ -251,6 +251,7 @@
     }
     report.startTimeCandidates = report.startTimeCandidates
       .sort((a, b) => a.rank - b.rank).slice(0, 30);
+    window.TourNavigatorProbe.lastFullReport = report;
     return report;
   }
 

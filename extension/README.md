@@ -14,7 +14,30 @@ download or modify any stream.
 2. **Load unpacked** → select this `extension/` folder
 3. Open your stage recording. The panel pins to the bottom of the window.
 
-## Calibrate automatically (try this first)
+## It calibrates itself
+
+On load the panel reads the asset's airing time from the page's playback state,
+picks the matching stage bundle, and derives the offset. No clicks needed.
+
+**The stage is chosen by airing date, not by guesswork.** Peacock URLs are
+opaque asset ids, so the date in `__PLAYBACK_STATE__` is what identifies which
+stage you're watching. This matters more than it sounds: stage 15 data over a
+stage 14 recording lines up with nothing, and the failure is silent — every
+marker is simply wrong, with no error to tell you so.
+
+What it cannot get is **rate**. Ad breaks aren't enumerated anywhere readable
+(the player's metadata cues arrive with empty bodies), so rate is assumed
+1.00×, and markers drift progressively later in the recording as inserted ads
+accumulate. If you notice that drift, add **one** manual anchor near the finish:
+offset comes from the metadata, rate from your single click.
+
+Strategies are tried in order, best clock first:
+
+1. `shaka.getPresentationStartTimeAsDate()` — the stream's own wall clock, when reachable
+2. `__PLAYBACK_STATE__.displayStartTime` — the asset's airing time (what works on Peacock today)
+3. Caption "km to go" mentions — offset *and* rate, when captions are exposed (they aren't on Peacock)
+
+## Calibrate automatically from captions (other players)
 
 Click **Auto-calibrate**. It scans the caption track for "N kilometres to go"
 phrases; since the GPS data knows exactly when the leader was at any km-to-go,
@@ -109,15 +132,17 @@ wrong place.
 Checkboxes filter categories, so you can navigate by only what you care about
 — e.g. scenery and summits, with attacks and stats off.
 
-## Swapping stages
+## Adding stages
 
-The panel loads `data/stage.json`. Regenerate it from the repo root:
+`data/index.json` lists the shipped bundles and their dates; the panel matches
+the asset's airing date against it. To add a stage:
 
 ```bash
-python -m tourscraper navigator --stage 15 \
-  --stage-dir data/2026/stage-15_2026-07-19 \
-  --telemetry ~/tour-archive/2026/stage-15_2026-07-19/polls/telemetry.jsonl
-cp data/2026/stage-15_2026-07-19/navigator.json extension/data/stage.json
+python -m tourscraper navigator --stage 16 \
+  --stage-dir data/2026/stage-16_2026-07-21 \
+  --telemetry data/2026/stage-16_2026-07-21/polls/telemetry.jsonl
+cp data/2026/stage-16_2026-07-21/navigator.json extension/data/stage-16.json
+# then append it to extension/data/index.json
 ```
 
 Then hit reload on the extension card.

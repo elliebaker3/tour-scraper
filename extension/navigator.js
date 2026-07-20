@@ -364,12 +364,51 @@
     return vids[0] || null;
   }
 
+  /** Ask the page which asset is playing, so the right stage is chosen for us.
+   *  The Peacock URL is an opaque asset id, but __PLAYBACK_STATE__ carries the
+   *  airing date -- which is exactly what identifies a stage. Getting this
+   *  wrong is silent and total: stage 15 data over a stage 14 recording lines
+   *  up with nothing, so match on the date rather than assume. */
+  function assetAiringMs(report) {
+    const ps = (report && report.mainWorld && report.mainWorld.playbackState) || {};
+    for (const k of ["displayStartTime", "assetMetadataDisplayStartTime",
+                     "eventDisplayStartDate", "eventPlayableStartDate"]) {
+      if (typeof ps[k] === "number" && ps[k] > 1e12) return ps[k];
+    }
+    return null;
+  }
+
   async function loadBundle() {
-    // Which stage is on screen isn't knowable from the Peacock URL, so the
-    // bundle is selected by what's shipped; swap the file to change stages.
-    const url = chrome.runtime.getURL("data/stage.json");
-    const res = await fetch(url);
-    return res.json();
+    const index = await fetch(chrome.runtime.getURL("data/index.json"))
+      .then((r) => r.json()).catch(() => null);
+    if (!index || !index.stages || !index.stages.length) {
+      throw new Error("no stage bundles shipped");
+    }
+
+    let chosen = null, why = "";
+    try {
+      const report = await window.TourNavigatorProbe.runProbeFull();
+      const airing = assetAiringMs(report);
+      if (airing) {
+        const day = new Date(airing).toISOString().slice(0, 10);
+        chosen = index.stages.find((s) => s.date === day) || null;
+        why = chosen ? `matched airing date ${day}`
+                     : `airing date ${day} has no bundle`;
+      } else {
+        why = "no airing date in page state";
+      }
+    } catch (e) {
+      why = "probe unavailable";
+    }
+
+    if (!chosen) {
+      chosen = index.stages[index.stages.length - 1];
+      why += ` — defaulting to stage ${chosen.stage}`;
+    }
+    const bundleRes = await fetch(chrome.runtime.getURL("data/" + chosen.file));
+    const b = await bundleRes.json();
+    b.__selection = why;
+    return b;
   }
 
   async function start() {
@@ -384,7 +423,14 @@
     const s = bundle.stage || {};
     root.querySelector(".tn-stage").textContent =
       `Stage ${s.stage ?? "?"} · ${s.departure ?? ""} → ${s.arrival ?? ""} · ${s.length_km ?? "?"}km`;
-    restore(() => { refreshAnchorState(); render(); });
+    root.querySelector(".tn-stage").title = bundle.__selection || "";
+    restore(() => {
+      refreshAnchorState();
+      render();
+      // Nothing stored for this stage yet: try to calibrate unprompted, since
+      // the airing time alone is usually enough to place markers.
+      if (!anchors.length) setTimeout(runAutoCalibrate, 800);
+    });
 
     setInterval(() => {
       const v = findVideo();

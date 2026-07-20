@@ -147,6 +147,39 @@
 
   function resetHistory() { pairHistory = []; }
 
+  /* Strategy 1b: the player's own wall clock, or the asset's airing time.
+   *
+   * Peacock exposes __PLAYBACK_STATE__ with the asset's scheduling metadata,
+   * and (when reachable) a shaka Player that can report the presentation's
+   * wall-clock origin. Verified against stage 14: displayStartTime was 10:30
+   * UTC, exactly one hour before the 11:30 race start, with the 5h20m runtime
+   * ending twelve minutes past the finish. That pins offset directly.
+   *
+   * Rate still has to be assumed 1.0 -- ad breaks are not enumerated anywhere
+   * we can read, since the metadata cues come through with empty bodies -- so
+   * later markers drift until the viewer adds one manual anchor. */
+  function broadcastStartFromPlayer(report) {
+    const mw = report && report.mainWorld;
+    if (!mw) return null;
+    const shaka = mw.shakaClock;
+    if (shaka && shaka.available && shaka.presentationStart) {
+      const ms = Date.parse(shaka.presentationStart);
+      if (ms) return { ms, source: "shaka.getPresentationStartTimeAsDate()", rank: 0 };
+    }
+    const ps = mw.playbackState || {};
+    // displayStartTime is when the programme is presented as starting, which
+    // matches the recording's first frame better than the playable window
+    // (that opens earlier, for pre-event availability).
+    for (const key of ["displayStartTime", "assetMetadataDisplayStartTime",
+                       "eventDisplayStartDate", "eventPlayableStartDate"]) {
+      const v = ps[key];
+      if (typeof v === "number" && v > 1e12) {
+        return { ms: v, source: "__PLAYBACK_STATE__." + key, rank: 1 };
+      }
+    }
+    return null;
+  }
+
   /* Strategy 2: the broadcast's own start timestamp.
    *
    * DRM players usually withhold captions but still leave the asset's airing
@@ -158,7 +191,7 @@
     const probe = window.TourNavigatorProbe;
     if (!probe) return null;
     let report;
-    try { report = probe.runProbe(); } catch (_) { return null; }
+    try { report = probe.lastFullReport || probe.runProbe(); } catch (_) { return null; }
 
     const raceStartMs = Date.parse(
       (bundle.coverage && bundle.coverage.leader_first_seen_utc) || "");
@@ -173,8 +206,17 @@
       return isNaN(ms) ? null : ms;
     };
 
-    let best = null;
-    for (const c of report.startTimeCandidates || []) {
+    let best = broadcastStartFromPlayer(report);
+    if (best) {
+      // Still sanity-check it: the racing we have data for must fit inside the
+      // recording at rate 1.0, otherwise this is the wrong asset entirely.
+      const endSec = (raceEndMs - best.ms) / 1000;
+      const startSec = (raceStartMs - best.ms) / 1000;
+      if (startSec < -60 || (video.duration && endSec > video.duration + 1800)) {
+        best = null;   // wrong stage loaded, or an unrelated timestamp
+      }
+    }
+    for (const c of best ? [] : (report.startTimeCandidates || [])) {
       const ms = parse(String(c.value));
       if (ms == null) continue;
       // A broadcast starts before the racing we have data for, and not more
