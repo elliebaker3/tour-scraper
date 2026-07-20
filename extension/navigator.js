@@ -599,7 +599,13 @@ stage rolls out from km 0.">Km 0 is NOW</button>
     if (!tUtc) { el.textContent = `no ${kind} time in this bundle`; return; }
 
     const at = video.currentTime;
-    anchors = anchors.filter((a) => a.kind !== kind);
+    // Drop every automatic anchor, not just a previous pin of this kind.
+    // Auto anchors carry no `kind`, so filtering on kind alone left them in --
+    // and since calFromAnchors reads only the FIRST and LAST anchor by race
+    // time, the auto pair (which brackets the whole race) stayed in charge and
+    // the manual pin sat harmlessly in the middle, changing nothing. An
+    // observation of the broadcast always beats an inference about it.
+    anchors = anchors.filter((a) => a.kind && a.kind !== kind);
     anchors.push({ tUtcMs: Date.parse(tUtc), videoSec: at, kind,
                    label: kind === "finish" ? "finish line" : "km 0" });
     anchors.sort((a, b) => a.tUtcMs - b.tUtcMs);
@@ -639,6 +645,13 @@ stage rolls out from km 0.">Km 0 is NOW</button>
       if (!res.ok) {
         el.textContent = `auto-calibrate failed — ${res.reason}`;
         render();          // repaint so the uncalibrated warning is visible
+        return;
+      }
+      // Never overwrite a manual pin. Those come from watching the broadcast;
+      // this comes from guessing at metadata, and the guess has been wrong.
+      if (anchors.some((a) => a.kind)) {
+        el.textContent = "keeping your manual sync (auto-calibrate would be " +
+                         "less accurate) — press reset to discard it";
         return;
       }
       anchors = res.anchors;

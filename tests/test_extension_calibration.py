@@ -17,7 +17,7 @@ Ground truth is the real stage 14 replay: displayStartTime 2026-07-18T10:30:00Z,
 runtime 5h20m26s, race rolling at 11:35:38Z -> 3938s into the recording.
 """
 import re, shutil, subprocess, sys, time, urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import json
 from playwright.sync_api import sync_playwright
@@ -148,6 +148,32 @@ try:
         print(f"  status  {s['anchorState']}")
         assert "NOT aligned" in s["axis"], "FAIL: uncalibrated bar did not say so"
         assert not s["playhead"], "FAIL: meaningless playhead drawn when uncalibrated"
+
+        # --- regression 3: a manual pin must WIN over the auto anchors -------
+        # Auto anchors carry no `kind`, so a filter on kind alone left them in
+        # place; calFromAnchors reads only the first and last anchor by race
+        # time, so the auto pair kept control and the pin changed nothing --
+        # while the panel confidently reported the unchanged value back.
+        page.goto(base)
+        page.wait_for_selector(".tn-root", timeout=10000)
+        page.wait_for_function(
+            "() => { const e = document.querySelector('.tn-axis');"
+            "        return e && !e.textContent.includes('NOT aligned'); }",
+            timeout=15000)
+        PIN_SEC = 4 * 3600 + 40 * 60 + 53          # the real observed finish
+        page.evaluate(f"() => document.querySelector('video').currentTime = {PIN_SEC}")
+        page.wait_for_timeout(300)
+        page.click(".tn-sync-finish")
+        page.wait_for_timeout(600)
+        status = page.evaluate(
+            "() => document.querySelector('.tn-anchor-state').textContent")
+        print("\n--- manual pin overrides auto anchors ---")
+        print(f"  status  {status}")
+        fin = datetime.fromisoformat(bundle["coverage"]["leader_last_seen_utc"])
+        want = (fin - timedelta(seconds=PIN_SEC)).strftime("%H:%M:%S")
+        print(f"  finish {fin:%H:%M:%S}Z pinned at rec {PIN_SEC}s => rec 0:00 must be {want}Z")
+        assert f"rec 0:00 = {want}Z" in status, \
+            f"FAIL: pin ignored; expected rec 0:00 = {want}Z, got: {status}"
 
         print(f"\n  page errors: {errs or 'none'}")
         assert not errs, f"FAIL: page errors {errs}"
