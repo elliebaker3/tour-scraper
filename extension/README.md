@@ -40,7 +40,9 @@ status line reports how many readings are in play and how far apart they
 disagree — a spread under a minute across the whole stage means the
 calibration is sound end to end.
 
-**reset** clears it and returns to the prompt.
+**reset** clears it and returns to the prompt. Calibration is not remembered
+across reloads — it is one number, and every load starts by asking for the
+current km-to-go rather than restoring a stale one.
 
 ## What the bar shows
 

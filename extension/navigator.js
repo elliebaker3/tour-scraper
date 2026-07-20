@@ -511,7 +511,7 @@ the stage. The median of all readings is used.">
     root.querySelector(".tn-anchor-clear").addEventListener("click", () => {
       anchors = [];
       cal = null;
-      persist();
+      clearStored();
       refreshAnchorState();
       render();
     });
@@ -584,7 +584,6 @@ the stage. The median of all readings is used.">
     anchors.push({ tUtcMs: hit.tMs, videoSec: at, kind: "kmtogo", km,
                    label: `${km} km to go` });
     cal = calFromAnchors();
-    persist();
     render();
 
     const p = pins();
@@ -622,41 +621,15 @@ the stage. The median of all readings is used.">
   }
 
 
-  /* Calibrations are saved per stage, which means a bad one outlives the bug
-   * that produced it: reloading the extension restores it, you see the same
-   * misalignment and no prompt, and conclude nothing changed. So the stored
-   * shape is versioned. Bump this whenever the meaning of a saved calibration
-   * changes and older entries are dropped rather than honoured. v2 is
-   * "derived from a km-0 pin at rate 1.0" -- which the metadata-derived and
-   * rate-fitted calibrations before it were not. */
-  const CAL_SCHEMA = 2;
-
-  function persist() {
+  /* Calibration is deliberately NOT persisted. It only ever takes one number,
+   * and restoring a saved one across reloads is what made the panel flash the
+   * prompt and then snap back to a stale bar. Every load starts uncalibrated
+   * and asks for the current km-to-go. clearStored() also wipes anything an
+   * older, persisting version left behind, so a stale entry can never resurface. */
+  function clearStored() {
     try {
-      chrome.storage?.local?.set({
-        [STORAGE_KEY + ":" + stageKey()]: { v: CAL_SCHEMA, anchors, cal },
-      });
+      chrome.storage?.local?.remove(STORAGE_KEY + ":" + stageKey());
     } catch (_) { /* storage is a convenience, not a requirement */ }
-  }
-
-  function restore(cb) {
-    try {
-      chrome.storage.local.get([STORAGE_KEY + ":" + stageKey()], (r) => {
-        const saved = r?.[STORAGE_KEY + ":" + stageKey()];
-        if (saved && saved.v === CAL_SCHEMA && saved.cal) {
-          anchors = saved.anchors || [];
-          cal = saved.cal;
-        } else {
-          if (saved) {
-            console.log("[TourNavigator] discarded a calibration saved by an " +
-                        "older version — set km 0 again");
-          }
-          anchors = [];
-          cal = null;
-        }
-        cb();
-      });
-    } catch (_) { cb(); }
   }
 
   const stageKey = () => `stage-${bundle?.stage?.stage ?? "?"}`;
@@ -781,16 +754,14 @@ the stage. The median of all readings is used.">
       root.classList.add("tn-warn");
       root.querySelector(".tn-stage").textContent += "  ⚠ " + (bundle.__selection || "");
     }
-    restore(() => {
-      refreshAnchorState();
-      render();
-      // No automatic calibration on load. The broadcast's start metadata was
-      // 27 minutes adrift of the recording's real origin on stage 14, and a
-      // confidently wrong clock is worse than an obviously absent one -- it
-      // puts every summit on a descent with nothing on screen to say so.
-      // One observed moment, km 0, is exact and is all a rate-1.0 broadcast
-      // needs, so ask for it instead of guessing.
-    });
+    // Start uncalibrated, every load. One km-to-go reading is the whole setup,
+    // and NOT carrying a saved one over is deliberate: restoring it is what
+    // made the prompt flash and then revert to a stale bar.
+    clearStored();
+    anchors = [];
+    cal = null;
+    refreshAnchorState();
+    render();
 
     setInterval(() => {
       const v = findVideo();

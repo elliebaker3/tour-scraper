@@ -17,9 +17,10 @@
         // no `v`, and the rate-fitted 0.9178x that a two-pin fit produced.
         if (qs.get("stalecal") === "1") {
           out["tourNavigatorAnchors:stage-" + (pinned || 14)] = {
-            anchors: [{ tUtcMs: Date.parse("2026-07-18T11:35:38Z"), videoSec: 3938 }],
-            cal: { refMs: Date.parse("2026-07-18T11:35:38Z"),
-                   offsetSec: 3938, rate: 0.9178 },
+            v: 2,
+            anchors: [{ tUtcMs: Date.parse("2026-07-18T11:35:38Z"), videoSec: 3549,
+                        kind: "kmtogo", km: 0 }],
+            cal: { refMs: Date.parse("2026-07-18T10:36:29Z"), offsetSec: 0, rate: 1 },
           };
         }
         cb(out);

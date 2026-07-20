@@ -114,6 +114,21 @@ try:
             assert gone not in s["buttons"], f"FAIL: {gone!r} still offered"
         assert "Calibrate" in s["buttons"], f"FAIL: no Calibrate button: {s['buttons']}"
 
+        # A saved calibration must NOT be restored: it is the flash-then-revert
+        # bug. Even a current-shape entry is ignored and the prompt stays.
+        page.goto(base + "&stalecal=1")
+        page.wait_for_selector(".tn-root", timeout=10000)
+        page.wait_for_timeout(3000)     # let the load settle and any restore fire
+        s2 = state()
+        print("\n--- load with a saved calibration present ---")
+        print(f"  setup shown {s2['setupShown']} · bar shown {s2['barShown']}")
+        assert s2["setupShown"] and not s2["barShown"], \
+            "FAIL: a saved calibration was restored instead of prompting"
+
+        page.goto(base)               # back to the clean page for the rest
+        page.wait_for_selector(".tn-root", timeout=10000)
+        page.wait_for_timeout(1500)
+
         # --- 2: one reading calibrates ---------------------------------------
         t = time_at_kmto(42.5)              # "42" on screen means [42, 43)
         rec = (t - ZERO).total_seconds()
