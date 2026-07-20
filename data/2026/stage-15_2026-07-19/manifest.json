@@ -27,5 +27,15 @@
     "kind": "profile",
     "source": "https://racecenter.letour.fr/profils/2026/profile-15-tiny-54b7914e99a730bd711ee25d9403278b.csv",
     "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-20T15:19:18.746+00:00",
+    "kind": "archive-backfill",
+    "stage": 15,
+    "endpoints": {
+      "publication": 164,
+      "checkpointList": 102,
+      "pack_final": 138
+    }
   }
 ]

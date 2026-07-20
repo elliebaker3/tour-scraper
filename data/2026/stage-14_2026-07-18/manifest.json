@@ -31,5 +31,15 @@
       "flashInfoLive",
       "checkpointList"
     ]
+  },
+  {
+    "recorded_at": "2026-07-20T15:19:18.424+00:00",
+    "kind": "archive-backfill",
+    "stage": 14,
+    "endpoints": {
+      "publication": 177,
+      "checkpointList": 76,
+      "pack_final": 157
+    }
   }
 ]

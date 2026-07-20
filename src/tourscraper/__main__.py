@@ -19,6 +19,7 @@ import threading
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .archive_stage import archive_stage
 from .autodiscover import run_autodiscover
 from .backfill import reparse_backfill, run_backfill
 from .events_parse import write_events
@@ -91,6 +92,10 @@ def main() -> None:
     p = sub.add_parser("events")
     p.add_argument("stage_dir", help="e.g. data/2026/stage-14_2026-07-18")
 
+    p = sub.add_parser("archive")
+    p.add_argument("--stage", type=int, required=True)
+    p.add_argument("--date", default=None, help="YYYY-MM-DD of the stage folder")
+
     args = parser.parse_args()
     cfg = load_config(args.config)
 
@@ -112,6 +117,8 @@ def main() -> None:
         reparse(Path(args.stage_dir), cfg.year)
     elif args.command == "events":
         write_events(Path(args.stage_dir))
+    elif args.command == "archive":
+        archive_stage(cfg, args.stage, args.date)
     else:
         store_needed = args.command in ("live", "poll", "radio")
         stop_after = int(args.max_hours * 3600)

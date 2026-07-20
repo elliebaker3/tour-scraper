@@ -24,7 +24,7 @@
 #   route changes mid-Tour (it has before -- stage 9 was shortened for heat),
 #   re-check data/2026/reference/stages.json and adjust the affected day's two
 #   crons. To add a stage: one discover cron at start-90min, one scrape cron at
-#   start-35min (both UTC), and add each to the matching job's `if:` below.
+#   start-25min (both UTC), and add each to the matching job's `if:` below.
 # - GitHub-hosted jobs are hard-capped at 6 hours; that's why `scrape` starts
 #   close to the actual race start rather than hours early.
 # - Radio audio is uploaded as an artifact rather than committed (repo bloat);
@@ -43,11 +43,16 @@ on:
   # start time in data/2026/reference/stages.json:
   #   discover = start - 90min   (grabs that stage's elevation-profile CSV +
   #                               refreshes reference data; works pre-race)
-  #   scrape   = start - 35min   (starts the capture; scrape auto-detects the
+  #   scrape   = start - 25min   (starts the capture; scrape auto-detects the
   #                               stage number from today's UTC date, and
-  #                               5.75h of capture from 35min-early comfortably
-  #                               reaches the finish of every remaining stage,
-  #                               which are all <=5h long)
+  #                               5.5h of capture from 25min-early reaches the
+  #                               finish of every remaining stage -- all are
+  #                               <=5h -- while ENDING with ~20min of margin
+  #                               under GitHub's hard 6h job cap. That margin
+  #                               matters: on 2026-07-19 the job ran to the cap,
+  #                               was cancelled, and cancellation SKIPS the
+  #                               final commit step, losing ~5h50m of stage 15
+  #                               data that had been captured but never pushed.)
   # GitHub cron often fires late (observed ~55min on 2026-07-18); if that
   # happens the window just shifts later and still catches the high-value
   # finish -- only the low-value neutralized rollout at the very start is at
@@ -55,22 +60,22 @@ on:
   schedule:
     # Stage 16 - Mon Jul 21, start 11:00 UTC
     - cron: "30 9 21 7 *"    # discover
-    - cron: "25 10 21 7 *"   # scrape
+    - cron: "35 10 21 7 *"   # scrape
     # Stage 17 - Wed Jul 22, start 11:35 UTC
     - cron: "5 10 22 7 *"    # discover
-    - cron: "0 11 22 7 *"    # scrape
+    - cron: "10 11 22 7 *"    # scrape
     # Stage 18 - Thu Jul 23, start 10:50 UTC
     - cron: "20 9 23 7 *"    # discover
-    - cron: "15 10 23 7 *"   # scrape
+    - cron: "25 10 23 7 *"   # scrape
     # Stage 19 - Fri Jul 24, start 12:15 UTC
     - cron: "45 10 24 7 *"   # discover
-    - cron: "40 11 24 7 *"   # scrape
+    - cron: "50 11 24 7 *"   # scrape
     # Stage 20 - Sat Jul 25, start 09:30 UTC
     - cron: "0 8 25 7 *"     # discover
-    - cron: "55 8 25 7 *"    # scrape
+    - cron: "5 9 25 7 *"    # scrape
     # Stage 21 - Sun Jul 26, start 14:25 UTC (Champs-Elysees, late start)
     - cron: "55 12 26 7 *"   # discover
-    - cron: "50 13 26 7 *"   # scrape
+    - cron: "0 14 26 7 *"   # scrape
   workflow_dispatch:
     inputs:
       stage:
@@ -78,7 +83,7 @@ on:
         required: false
       max_hours:
         description: "Hours to record"
-        default: "5.75"
+        default: "5.5"
       run_discover:
         description: "Also run the discover job"
         type: boolean
@@ -137,14 +142,14 @@ jobs:
   scrape:
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.event.schedule == '25 10 21 7 *' ||
-      github.event.schedule == '0 11 22 7 *' ||
-      github.event.schedule == '15 10 23 7 *' ||
-      github.event.schedule == '40 11 24 7 *' ||
-      github.event.schedule == '55 8 25 7 *' ||
-      github.event.schedule == '50 13 26 7 *'
+      github.event.schedule == '35 10 21 7 *' ||
+      github.event.schedule == '10 11 22 7 *' ||
+      github.event.schedule == '25 10 23 7 *' ||
+      github.event.schedule == '50 11 24 7 *' ||
+      github.event.schedule == '5 9 25 7 *' ||
+      github.event.schedule == '0 14 26 7 *'
     runs-on: ubuntu-latest
-    timeout-minutes: 355
+    timeout-minutes: 350
     permissions:
       contents: write
     steps:
@@ -189,7 +194,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           python -m tourscraper stage \
             --stage "${{ steps.stage.outputs.number }}" \
-            --max-hours "${{ github.event.inputs.max_hours || '5.75' }}" &
+            --max-hours "${{ github.event.inputs.max_hours || '5.5' }}" &
           CAPTURE_PID=$!
           # Push captured data incrementally so the repo stays fresh during the
           # stage and nothing is lost if the runner dies mid-capture. Audio
@@ -199,12 +204,19 @@ jobs:
             kill -0 $CAPTURE_PID 2>/dev/null || break
             git add data/
             if git commit -m "data: incremental capture $(date -u +%H:%M) UTC" >/dev/null 2>&1; then
-              if git pull --rebase origin "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
-                git push >/dev/null 2>&1 && echo "pushed incremental at $(date -u +%H:%M)"
-              else
+              # -X theirs: during a rebase this favours OUR replayed capture
+              # commits, so an append-only data file never deadlocks the push.
+              # Retry a couple of times rather than aborting into a state that
+              # can never push again (this is what lost stage 15's data).
+              for attempt in 1 2 3; do
+                if git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" >/dev/null 2>&1 \
+                   && git push >/dev/null 2>&1; then
+                  echo "pushed incremental at $(date -u +%H:%M)"; break
+                fi
                 git rebase --abort 2>/dev/null || true
-                echo "incremental push skipped (conflict); final commit will retry"
-              fi
+                echo "incremental push attempt $attempt failed; retrying"
+                sleep 10
+              done
             fi
           done
           wait $CAPTURE_PID
