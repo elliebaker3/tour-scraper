@@ -97,9 +97,10 @@ def main() -> None:
     p.add_argument("--stage", type=int, required=True)
     p.add_argument("--stage-dir", required=True,
                    help="e.g. data/2026/stage-15_2026-07-19")
-    p.add_argument("--telemetry", required=True,
-                   help="GPS log; full-resolution captures live outside git "
-                        "(see ~/tour-archive) because they exceed GitHub's 100MB cap")
+    p.add_argument("--telemetry", required=True, action="append",
+                   help="GPS log; repeat to merge several captures (denser "
+                        "sampling = better interpolation). Full-resolution logs "
+                        "live outside git (~/tour-archive), over GitHub's 100MB cap")
     p.add_argument("--out", default=None)
 
     p = sub.add_parser("archive")
@@ -128,7 +129,8 @@ def main() -> None:
     elif args.command == "events":
         write_events(Path(args.stage_dir))
     elif args.command == "navigator":
-        build_navigator(Path(args.stage_dir), Path(args.telemetry).expanduser(),
+        build_navigator(Path(args.stage_dir),
+                        [Path(x).expanduser() for x in args.telemetry],
                         cfg.year_dir, args.stage,
                         Path(args.out) if args.out else None)
     elif args.command == "archive":

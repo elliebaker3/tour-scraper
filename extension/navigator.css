@@ -115,3 +115,10 @@
 }
 .tn-root.tn-warn { border-color: #f5a524; box-shadow: 0 0 0 1px #f5a524 inset, 0 8px 28px rgba(0,0,0,.55); }
 .tn-root.tn-warn .tn-stage { color: #ffd479; }
+
+/* Align mode: make it obvious the bar is now a control, not a seek target. */
+.tn-root.tn-aligning .tn-bar { cursor: ew-resize; outline: 1px dashed #7cc0ff; }
+.tn-root.tn-aligning .tn-marker { pointer-events: none; }
+.tn-align { background: #2b3140; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
+            border-radius: 5px; padding: 3px 8px; cursor: pointer; }
+.tn-root.tn-aligning .tn-align { background: #7cc0ff; color: #0e1014; border-color: #7cc0ff; }

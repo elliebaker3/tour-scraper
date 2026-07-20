@@ -43,29 +43,32 @@
   /** Map race UTC (ms) -> seconds into the recording, from the anchors.
    *  0 anchors: unusable. 1 anchor: assume real time (rate 1.0). 2+: fit both
    *  offset and rate, which absorbs ad breaks and a late broadcast join. */
+  /* Calibration is a single explicit transform:
+   *     videoSec = offsetSec + rate * (tUtcMs - refMs)/1000
+   * Anchors are one way to derive it; dragging the bar is another. Keeping it
+   * as one object means a manual nudge is exact and inspectable rather than a
+   * fudge layered on top of an anchor pair. */
+  let cal = null;   // {refMs, offsetSec, rate}
+  let alignMode = false;
+
+  function calFromAnchors() {
+    if (!anchors.length) return null;
+    const a = anchors[0];
+    if (anchors.length === 1) return { refMs: a.tUtcMs, offsetSec: a.videoSec, rate: 1 };
+    const b = anchors[anchors.length - 1];
+    const spanSec = (b.tUtcMs - a.tUtcMs) / 1000;
+    const rate = spanSec ? (b.videoSec - a.videoSec) / spanSec : 1;
+    return { refMs: a.tUtcMs, offsetSec: a.videoSec, rate };
+  }
+
   function utcToVideo(tUtcMs) {
-    if (anchors.length === 0) return null;
-    if (anchors.length === 1) {
-      const a = anchors[0];
-      return a.videoSec + (tUtcMs - a.tUtcMs) / 1000;
-    }
-    const [a, b] = [anchors[0], anchors[anchors.length - 1]];
-    const spanMs = b.tUtcMs - a.tUtcMs;
-    if (spanMs === 0) return a.videoSec;
-    const rate = (b.videoSec - a.videoSec) / (spanMs / 1000);
-    return a.videoSec + ((tUtcMs - a.tUtcMs) / 1000) * rate;
+    if (!cal) return null;
+    return cal.offsetSec + cal.rate * (tUtcMs - cal.refMs) / 1000;
   }
 
   function videoToUtc(sec) {
-    if (anchors.length === 0) return null;
-    if (anchors.length === 1) {
-      const a = anchors[0];
-      return a.tUtcMs + (sec - a.videoSec) * 1000;
-    }
-    const [a, b] = [anchors[0], anchors[anchors.length - 1]];
-    const rate = (b.videoSec - a.videoSec) / ((b.tUtcMs - a.tUtcMs) / 1000);
-    if (!rate) return a.tUtcMs;
-    return a.tUtcMs + ((sec - a.videoSec) / rate) * 1000;
+    if (!cal || !cal.rate) return null;
+    return cal.refMs + ((sec - cal.offsetSec) / cal.rate) * 1000;
   }
 
   const fmt = (sec) => {
@@ -108,7 +111,7 @@
     const height = 54;
 
     const { d, loA, hiA } = profilePath(width, height);
-    const needsAnchors = anchors.length === 0;
+    const needsAnchors = !cal;
 
     const markers = [];
     if (!needsAnchors) {
@@ -187,6 +190,7 @@
         <div class="tn-anchors">
           <select class="tn-anchor-pick"><option value="">pick a moment…</option></select>
           <button class="tn-anchor-add">Anchor here</button>
+          <button class="tn-align" title="Drag the profile to line it up with what is on screen">Align</button>
           <button class="tn-auto">Auto-calibrate</button>
           <button class="tn-probe" title="Report what this player exposes">Diagnose</button>
           <button class="tn-anchor-clear" title="Clear anchors">reset</button>
@@ -212,17 +216,66 @@
     root.querySelector(".tn-collapse").addEventListener("click", () => {
       root.classList.toggle("tn-collapsed");
     });
-    root.querySelector(".tn-bar").addEventListener("click", (ev) => {
+    const bar = root.querySelector(".tn-bar");
+
+    bar.addEventListener("click", (ev) => {
+      if (alignMode) return;                 // in align mode a click is a drag
       const rect = ev.currentTarget.getBoundingClientRect();
       if (video?.duration) {
         video.currentTime = ((ev.clientX - rect.left) / rect.width) * video.duration;
       }
+    });
+
+    /* Align mode: drag the profile until a summit sits where the video shows
+     * it. Plain drag shifts (offset); shift-drag stretches about the left edge
+     * (rate). Both update live, so alignment is judged against the picture
+     * rather than trusted from metadata. */
+    let drag = null;
+    bar.addEventListener("mousedown", (ev) => {
+      if (!alignMode || !cal || !video?.duration) return;
+      ev.preventDefault();
+      drag = {
+        x: ev.clientX,
+        width: bar.getBoundingClientRect().width,
+        offsetSec: cal.offsetSec,
+        rate: cal.rate,
+        stretch: ev.shiftKey,
+      };
+    });
+    window.addEventListener("mousemove", (ev) => {
+      if (!drag) return;
+      const dxFrac = (ev.clientX - drag.x) / drag.width;
+      const dSec = dxFrac * video.duration;
+      if (drag.stretch) {
+        // Pivot on the left edge so the early part stays put while the tail
+        // stretches -- that is how ad-break drift actually accumulates.
+        const spanSec = video.duration;
+        cal.rate = Math.max(0.5, Math.min(2.5, drag.rate * (1 + dSec / spanSec)));
+      } else {
+        cal.offsetSec = drag.offsetSec + dSec;
+      }
+      updateAlignReadout();
+      render();
+    });
+    window.addEventListener("mouseup", () => {
+      if (!drag) return;
+      drag = null;
+      persist();
+      updateAlignReadout();
+    });
+
+    root.querySelector(".tn-align").addEventListener("click", () => {
+      alignMode = !alignMode;
+      root.classList.toggle("tn-aligning", alignMode);
+      root.querySelector(".tn-align").textContent = alignMode ? "Done" : "Align";
+      updateAlignReadout();
     });
     root.querySelector(".tn-anchor-add").addEventListener("click", addAnchor);
     root.querySelector(".tn-auto").addEventListener("click", runAutoCalibrate);
     root.querySelector(".tn-probe").addEventListener("click", runProbe);
     root.querySelector(".tn-anchor-clear").addEventListener("click", () => {
       anchors = [];
+      cal = null;
       window.TourNavigatorAutoCal?.resetHistory?.();
       persist();
       refreshAnchorState();
@@ -287,6 +340,7 @@
     });
     anchors.sort((a, b) => a.tUtcMs - b.tUtcMs);
     if (anchors.length > 2) anchors = [anchors[0], anchors[anchors.length - 1]];
+    cal = calFromAnchors();
     persist();
     refreshAnchorState();
     render();
@@ -310,6 +364,7 @@
         return;
       }
       anchors = res.anchors;
+      cal = calFromAnchors();
       persist();
       render();
       if (res.strategy === "broadcast-start") {
@@ -350,6 +405,29 @@
       .catch((e) => { el.textContent = "probe failed: " + (e && e.message); });
   }
 
+  function updateAlignReadout() {
+    const el = root.querySelector(".tn-anchor-state");
+    if (!alignMode) { refreshAnchorState(); return; }
+    if (!cal) { el.textContent = "align: calibrate first"; return; }
+    el.textContent =
+      `align · drag = shift, shift-drag = stretch · rate ${cal.rate.toFixed(3)}×` +
+      ` · nudge ←/→ 1s, ↑/↓ 10s`;
+  }
+
+  /* Keyboard nudging, because the last few seconds of alignment are easier to
+   * judge by tapping than by dragging. */
+  function onAlignKey(ev) {
+    if (!alignMode || !cal) return;
+    const step = { ArrowLeft: -1, ArrowRight: 1, ArrowDown: -10, ArrowUp: 10 }[ev.key];
+    if (step === undefined) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    cal.offsetSec += step;
+    persist();
+    updateAlignReadout();
+    render();
+  }
+
   function refreshAnchorState() {
     const el = root.querySelector(".tn-anchor-state");
     if (anchors.length === 0) el.textContent = "no anchors — guideposts hidden";
@@ -363,14 +441,16 @@
 
   function persist() {
     try {
-      chrome.storage?.local?.set({ [STORAGE_KEY + ":" + stageKey()]: anchors });
+      chrome.storage?.local?.set({ [STORAGE_KEY + ":" + stageKey()]: { anchors, cal } });
     } catch (_) { /* storage is a convenience, not a requirement */ }
   }
 
   function restore(cb) {
     try {
       chrome.storage.local.get([STORAGE_KEY + ":" + stageKey()], (r) => {
-        anchors = r?.[STORAGE_KEY + ":" + stageKey()] || [];
+        const saved = r?.[STORAGE_KEY + ":" + stageKey()];
+        if (saved && saved.cal) { anchors = saved.anchors || []; cal = saved.cal; }
+        else { anchors = saved || []; cal = calFromAnchors(); }
         cb();
       });
     } catch (_) { cb(); }
@@ -493,6 +573,7 @@
       else if (video) render();
     }, 500);
     window.addEventListener("resize", render);
+    window.addEventListener("keydown", onAlignKey, true);
   }
 
   start();

@@ -53,6 +53,7 @@ def _slim(p: dict) -> dict:
     """Only the fields the renderer reads, rounded to keep the bundle small."""
     return {
         "km": round(p["km"], 2),
+        "kmto": round(p["km_to_finish"], 2),
         "alt": round(p["altitude"]),
         "t": p["time_utc"],
         "interp": bool(p.get("interpolated")),
@@ -82,14 +83,14 @@ def stage_meta(cfg_year_dir: Path, stage_number: int) -> dict:
     return {}
 
 
-def build(stage_dir: Path, telemetry_path: Path, year_dir: Path,
+def build(stage_dir: Path, telemetry_paths, year_dir: Path,
           stage_number: int, out_path: Path | None = None) -> Path:
     meta = stage_meta(year_dir, stage_number)
     length_km = float(meta.get("length_km") or 0) or None
     if not length_km:
         raise SystemExit(f"stage {stage_number}: no length in stages.json; run bootstrap first")
 
-    sync = build_sync(stage_dir, telemetry_path, length_km)
+    sync = build_sync(stage_dir, telemetry_paths, length_km)
     events = build_guideposts(stage_dir, sync["points"])
     profile = [_slim(p) for p in downsample_profile(sync["points"])]
 
@@ -98,6 +99,8 @@ def build(stage_dir: Path, telemetry_path: Path, year_dir: Path,
         "stage": meta,
         "coverage": {
             "gps_samples": sync["gps_samples"],
+            "route_length_km": sync.get("route_length_km"),
+            "leader_km_to_finish_range": sync.get("leader_km_to_finish_range"),
             "profile_points_total": sync["profile_points"],
             "profile_points_observed": sync["observed_points"],
             "leader_first_seen_utc": sync["leader_first_seen"],

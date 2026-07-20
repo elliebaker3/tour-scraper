@@ -119,6 +119,39 @@ two close together; with only one anchor it assumes real time.
 Until you set anchors, guideposts stay hidden rather than being drawn in the
 wrong place.
 
+## Making the elevation line up exactly
+
+Metadata gives a good offset but cannot give **rate** — ad breaks aren't
+readable anywhere — so alignment starts close and drifts later in the
+recording. Click **Align** to fix it against the picture:
+
+| Action | Effect |
+|---|---|
+| Drag the bar | Shifts the whole profile (offset) |
+| **Shift**-drag | Stretches it about the left edge (rate) — this is what ad drift needs |
+| ← / → | Nudge 1 second |
+| ↑ / ↓ | Nudge 10 seconds |
+
+Everything updates live, so you judge alignment against what's on screen rather
+than trusting a number. The reliable method: scrub to a summit, drag until the
+profile's peak sits under the playhead, then jump to a summit near the *other*
+end and shift-drag until that one lines up too. Two summits far apart pin
+offset and rate together. Click **Done** to leave align mode; the calibration is
+saved per stage.
+
+### Why it was off before
+
+Two real errors, both now fixed:
+
+* The time mapping converted GPS `kmToFinish` into distance-covered using the
+  stage length from `stages.json` — 155.5 km for stage 14, where the route file
+  says 155.2. That 0.3 km is a **systematic ~27 second error** at racing speed.
+  The profile ships its own `kmto` column, so matching km-to-finish directly
+  removes the constant and the error with it.
+* Only one GPS capture was read. Merging every capture for a stage raised
+  stage 15 from 1,711 to 1,805 time-observed route points, which tightens the
+  interpolation between them.
+
 ## Reading the bar
 
 | Element | Meaning |
