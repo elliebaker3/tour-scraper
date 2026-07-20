@@ -312,15 +312,20 @@
     const el = root.querySelector(".tn-anchor-state");
     const api = window.TourNavigatorProbe;
     if (!api) { el.textContent = "probe unavailable"; return; }
-    let report;
-    try { report = api.runProbe(); }
-    catch (e) { el.textContent = "probe failed: " + (e && e.message); return; }
-    const text = JSON.stringify(report, null, 2);
-    console.log("[TourNavigator] capability probe:\n" + text);
-    const n = report.startTimeCandidates.length;
-    navigator.clipboard?.writeText(text).then(
-      () => { el.textContent = `probe copied to clipboard · ${n} start-time candidate(s) · also in console`; },
-      () => { el.textContent = `probe in console (clipboard blocked) · ${n} candidate(s)`; });
+    el.textContent = "probing…";
+    const finish = (report) => {
+      const text = JSON.stringify(report, null, 2);
+      console.log("[TourNavigator] capability probe:\n" + text);
+      const n = report.startTimeCandidates.length;
+      const cues = (report.video?.[0]?.timedSamples || [])
+        .reduce((a, t) => a + (t.cueCount || 0), 0);
+      navigator.clipboard?.writeText(text).then(
+        () => { el.textContent = `probe copied · ${n} start-time candidate(s), ${cues} timed cues · also in console`; },
+        () => { el.textContent = `probe in console (clipboard blocked) · ${n} candidate(s), ${cues} cues`; });
+    };
+    (api.runProbeFull ? api.runProbeFull() : Promise.resolve(api.runProbe()))
+      .then(finish)
+      .catch((e) => { el.textContent = "probe failed: " + (e && e.message); });
   }
 
   function refreshAnchorState() {

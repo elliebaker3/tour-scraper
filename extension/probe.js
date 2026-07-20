@@ -39,6 +39,46 @@
     return out;
   }
 
+  /** Read cues from every timed track, whatever its kind, and sample them.
+   *  Metadata cues may be DataCue (.value/.data) rather than VTTCue (.text),
+   *  and .value can be a structured object, so all shapes are flattened. */
+  function sampleTimedTracks(video) {
+    const out = [];
+    for (const track of video.textTracks || []) {
+      const prior = track.mode;
+      // Cues are only populated once a track is at least "hidden".
+      try { if (track.mode === "disabled") track.mode = "hidden"; } catch (_) {}
+      const cues = track.cues ? [...track.cues] : [];
+      const describe = (cue) => {
+        let body = "";
+        try {
+          if (typeof cue.text === "string" && cue.text) body = cue.text;
+          else if (cue.value !== undefined) body = JSON.stringify(cue.value);
+          else if (cue.data) body = "[binary " + (cue.data.byteLength || "?") + "B]";
+        } catch (e) { body = "[unreadable]"; }
+        return { t: +cue.startTime.toFixed(2), end: +(cue.endTime || 0).toFixed(2),
+                 body: String(body).replace(/\s+/g, " ").slice(0, 220) };
+      };
+      // First few, last few, plus anything containing a timestamp or ad marker.
+      const head = cues.slice(0, 6).map(describe);
+      const tail = cues.slice(-4).map(describe);
+      const interesting = [];
+      for (const c of cues) {
+        const d = describe(c);
+        if (/20\d{2}-\d{2}-\d{2}|\b1[6-9]\d{11}\b|\b1[6-9]\d{8}\b|ad(break|_break|start|end)|cue(in|out)|slate|SCTE/i.test(d.body)) {
+          interesting.push(d);
+          if (interesting.length >= 14) break;
+        }
+      }
+      out.push({
+        kind: track.kind, label: track.label, cueCount: cues.length,
+        head, tail, interesting,
+      });
+      try { if (prior === "disabled") track.mode = prior; } catch (_) {}
+    }
+    return out;
+  }
+
   function probeVideo() {
     const vids = [...document.querySelectorAll("video")];
     return vids.map((v) => {
@@ -55,6 +95,9 @@
         textTracks: [...(v.textTracks || [])].map((t) => ({
           kind: t.kind, label: t.label, mode: t.mode, cues: t.cues ? t.cues.length : null,
         })),
+        // Metadata tracks (e.g. an analytics SDK's event track) are where ad
+        // markers and timed timestamps hide once captions are withheld.
+        timedSamples: sampleTimedTracks(v),
         datasetKeys: Object.keys(v.dataset || {}),
       };
       try {
@@ -150,6 +193,27 @@
     return hits.slice(0, 25);
   }
 
+  /** Ask the MAIN-world half for page globals and merge its answer in. */
+  function requestMainWorld(timeoutMs = 900) {
+    return new Promise((resolve) => {
+      let done = false;
+      const onMsg = (ev) => {
+        if (ev.source !== window || !ev.data || ev.data.__tn !== "probe-response") return;
+        done = true;
+        window.removeEventListener("message", onMsg);
+        resolve(ev.data.payload);
+      };
+      window.addEventListener("message", onMsg);
+      window.postMessage({ __tn: "probe-request" }, "*");
+      setTimeout(() => {
+        if (!done) {
+          window.removeEventListener("message", onMsg);
+          resolve({ unavailable: "MAIN-world probe did not respond" });
+        }
+      }, timeoutMs);
+    });
+  }
+
   function runProbe() {
     const report = {
       url: location.href.split("?")[0],
@@ -178,5 +242,17 @@
     return report;
   }
 
-  window.TourNavigatorProbe = { runProbe };
+  /** Async variant: same report plus whatever the MAIN world could see. */
+  async function runProbeFull() {
+    const report = runProbe();
+    report.mainWorld = await requestMainWorld();
+    for (const h of (report.mainWorld && report.mainWorld.globalHits) || []) {
+      report.startTimeCandidates.push({ source: "page." + h.path, value: h.value, rank: 2 });
+    }
+    report.startTimeCandidates = report.startTimeCandidates
+      .sort((a, b) => a.rank - b.rank).slice(0, 30);
+    return report;
+  }
+
+  window.TourNavigatorProbe = { runProbe, runProbeFull };
 })();
