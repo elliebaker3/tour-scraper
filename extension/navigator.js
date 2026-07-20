@@ -623,6 +623,22 @@ stage rolls out from km 0.">Km 0 is NOW</button>
     parts.push(anchors.length >= 2
       ? `rate ${cal.rate.toFixed(4)}× (both moments pinned)`
       : "rate assumed 1.000× — pin the other moment to fix it");
+
+    // A broadcast's rate lives very close to 1. Ads push it slightly ABOVE 1
+    // (recording longer than the race); nothing normal pushes it below, since
+    // that would mean racing is missing from the recording. So a rate far from
+    // 1 almost always means a pin landed on the wrong moment -- and worse, if
+    // footage really is cut, that is a discrete jump which a linear rate
+    // cannot model anyway: it would only be correct at the two pins.
+    if (anchors.length >= 2 && Math.abs(cal.rate - 1) > 0.03) {
+      const lost = (1 - cal.rate) * (anchors[anchors.length - 1].tUtcMs -
+                                     anchors[0].tUtcMs) / 60000;
+      parts.push(lost > 0
+        ? `⚠ implies ${lost.toFixed(0)} min of racing missing from the ` +
+          `recording — more likely one pin is on the wrong moment. ` +
+          `Press reset and pin ONLY the finish.`
+        : `⚠ implies ${(-lost).toFixed(0)} min of inserted breaks — check the pins.`);
+    }
     el.textContent = parts.join(" · ");
     console.log("[TourNavigator] manual sync:", el.textContent);
   }
