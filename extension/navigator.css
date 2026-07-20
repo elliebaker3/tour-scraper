@@ -87,26 +87,14 @@
 /* Distance-axis furniture. Deliberately quiet: it is scale for the profile,
    not a competing signal. The old full-bar "calibrate first" scrim is gone —
    it blacked out the very thing it was explaining. */
-.tn-ticks { position: absolute; inset: 0; pointer-events: none; }
-.tn-tick {
-  position: absolute; top: 0; bottom: 0; width: 1px;
-  background: rgba(255,255,255,.10);
-}
-.tn-tick span {
-  position: absolute; bottom: 2px; left: 3px;
-  font-size: 9px; color: #6f7784; text-shadow: 0 1px 2px #000;
-}
-.tn-axis {
-  position: absolute; left: 6px; top: 3px; font-size: 10px;
-  color: #93a0b3; pointer-events: none; text-shadow: 0 1px 2px #000;
-}
+
+
+
+
 /* An uncalibrated bar looks exactly like a calibrated one, so it has to say so
    loudly. Reading distance-as-time is the single most misleading failure here:
    the shape is right, the position means nothing. */
-.tn-axis-warn {
-  color: #0e1014; background: #f5a524; font-weight: 600;
-  padding: 1px 6px; border-radius: 3px; text-shadow: none;
-}
+
 .tn-clock.tn-up { color: #ff9b7a; }
 .tn-clock.tn-down { color: #7cc0ff; }
 
@@ -129,10 +117,7 @@
 .tn-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
 .tn-anchors { display: flex; align-items: center; gap: 6px; margin-left: auto; }
-.tn-anchor-pick {
-  max-width: 260px; background: #1b1f26; color: #e6e9ee;
-  border: 1px solid rgba(255,255,255,.16); border-radius: 5px; padding: 3px 5px;
-}
+
 .tn-anchors button {
   background: #2b3140; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
   border-radius: 5px; padding: 3px 8px; cursor: pointer;
@@ -150,11 +135,10 @@
 .tn-root.tn-warn .tn-stage { color: #ffd479; }
 
 /* Align mode: make it obvious the bar is now a control, not a seek target. */
-.tn-root.tn-aligning .tn-bar { cursor: ew-resize; outline: 1px dashed #7cc0ff; }
-.tn-root.tn-aligning .tn-marker { pointer-events: none; }
-.tn-align { background: #2b3140; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
-            border-radius: 5px; padding: 3px 8px; cursor: pointer; }
-.tn-root.tn-aligning .tn-align { background: #7cc0ff; color: #0e1014; border-color: #7cc0ff; }
+
+
+
+
 
 /* Estimated stretch: full stage is shown, but inferred pacing is visibly not
    the same claim as observed GPS. */
@@ -177,11 +161,8 @@
 /* The two unmistakable moments. Given for prominence over the dropdown: no
    judgement about which moment you're looking at is involved, which is exactly
    why they're more reliable than anything inferred from player metadata. */
-.tn-sync-finish, .tn-sync-start {
-  background: #1f6f4a; color: #eafff4; border: 1px solid #2c9c68;
-  border-radius: 5px; padding: 3px 8px; cursor: pointer; font-weight: 600;
-}
-.tn-sync-finish:hover, .tn-sync-start:hover { background: #2c9c68; }
+
+
 
 /* Imputed stretches: the recording runs before km 0 and past the finish, where
    there is no elevation because nobody is racing. Held flat at the start and
@@ -196,14 +177,34 @@
 
 /* Calibration inputs. The km-to-go pair is the primary route now — the
    broadcast shows that number almost continuously, where km 0 happens once. */
-.tn-km0-time, .tn-togo-at, .tn-togo-km {
-  background: #1b1f26; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
-  border-radius: 5px; padding: 3px 5px; font: inherit;
-  font-variant-numeric: tabular-nums;
-}
+
 .tn-togo-set {
   background: #1f6f4a; color: #eafff4; border: 1px solid #2c9c68;
   border-radius: 5px; padding: 3px 8px; cursor: pointer; font-weight: 600;
 }
 .tn-togo-set:hover { background: #2c9c68; }
-.tn-sep { color: #6f7784; }
+
+
+/* Setup panel: the only thing on screen before calibration. The bar stays
+   hidden because a profile with no clock invites reading positions off it
+   that are not real -- which is how "the elevation doesn't line up" kept
+   arising. One input, one button, nothing else to get wrong. */
+.tn-setup { display: none; align-items: center; gap: 8px; padding: 2px 0 4px; }
+.tn-root.tn-needs-setup .tn-setup { display: flex; }
+.tn-root.tn-needs-setup .tn-bar,
+.tn-root.tn-needs-setup .tn-controls { display: none; }
+.tn-setup-ask { color: #d7dce4; }
+.tn-setup-ask strong { color: #fff; }
+.tn-setup-unit { color: #8f97a3; }
+.tn-setup-note { color: #8f97a3; }
+
+.tn-togo-km, .tn-togo-km2 {
+  background: #1b1f26; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
+  border-radius: 5px; padding: 3px 6px; font: inherit; text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.tn-togo-set, .tn-togo-set2 {
+  background: #1f6f4a; color: #eafff4; border: 1px solid #2c9c68;
+  border-radius: 5px; padding: 3px 10px; cursor: pointer; font-weight: 600;
+}
+.tn-togo-set:hover, .tn-togo-set2:hover { background: #2c9c68; }

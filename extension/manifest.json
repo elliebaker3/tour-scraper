@@ -27,7 +27,6 @@
       ],
       "js": [
         "probe.js",
-        "autocalibrate.js",
         "navigator.js"
       ],
       "css": [
