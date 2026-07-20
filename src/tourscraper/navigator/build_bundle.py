@@ -19,10 +19,11 @@ Two deliberate choices:
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 from .elevation_sync import build as build_sync
-from .extract_events import build_guideposts
+from .extract_events import build_guideposts, load_ticker
 
 
 def downsample_profile(points: list[dict], target: int = 500) -> list[dict]:
@@ -32,7 +33,7 @@ def downsample_profile(points: list[dict], target: int = 500) -> list[dict]:
     each bucket contributes its highest and lowest point; summits and valley
     floors therefore survive at any target size.
     """
-    timed = [p for p in points if p.get("time_utc")]
+    timed = [p for p in points if p.get("time_utc")]   # includes estimated head
     if len(timed) <= target:
         return timed
     bucket = max(1, len(timed) // (target // 2))
@@ -57,6 +58,7 @@ def _slim(p: dict) -> dict:
         "alt": round(p["altitude"]),
         "t": p["time_utc"],
         "interp": bool(p.get("interpolated")),
+        "est": bool(p.get("estimated")),
         "cat": p.get("climb_category") or None,
         "cp": p.get("checkpoint_type") or None,
     }
@@ -83,6 +85,30 @@ def stage_meta(cfg_year_dir: Path, stage_number: int) -> dict:
     return {}
 
 
+def actual_start_utc(stage_dir: Path):
+    """Time the stage actually rolled, from the ticker's own start marker."""
+    for item in load_ticker(stage_dir):
+        if item.get("picto") == "liv_actual_start" and item.get("t"):
+            try:
+                return datetime.fromisoformat(item["t"]).astimezone(timezone.utc)
+            except ValueError:
+                return None
+    return None
+
+
+def scheduled_start_utc(meta: dict):
+    """Fallback: the published start time, if the ticker never marked one."""
+    date, start, tz = meta.get("date"), meta.get("start_local"), meta.get("timezone")
+    if not (date and start):
+        return None
+    try:
+        from zoneinfo import ZoneInfo
+        naive = datetime.fromisoformat(f"{date}T{start}")
+        return naive.replace(tzinfo=ZoneInfo(tz or "UTC")).astimezone(timezone.utc)
+    except Exception:
+        return None
+
+
 def build(stage_dir: Path, telemetry_paths, year_dir: Path,
           stage_number: int, out_path: Path | None = None) -> Path:
     meta = stage_meta(year_dir, stage_number)
@@ -90,7 +116,11 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     if not length_km:
         raise SystemExit(f"stage {stage_number}: no length in stages.json; run bootstrap first")
 
-    sync = build_sync(stage_dir, telemetry_paths, length_km)
+    # The real km-0 moment. The ticker tags it (liv_actual_start) and it can
+    # differ from the schedule by minutes -- stage 14 rolled 5m38s late -- so
+    # prefer it over stages.json for extending the profile to the start line.
+    race_start = actual_start_utc(stage_dir) or scheduled_start_utc(meta)
+    sync = build_sync(stage_dir, telemetry_paths, length_km, race_start_utc=race_start)
     events = build_guideposts(stage_dir, sync["points"])
     profile = [_slim(p) for p in downsample_profile(sync["points"])]
 
@@ -103,6 +133,9 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
             "leader_km_to_finish_range": sync.get("leader_km_to_finish_range"),
             "profile_points_total": sync["profile_points"],
             "profile_points_observed": sync["observed_points"],
+            "profile_points_estimated": sync.get("estimated_points"),
+            "profile_points_timed": sync.get("timed_points"),
+            "race_start_utc": race_start.isoformat(timespec="seconds") if race_start else None,
             "leader_first_seen_utc": sync["leader_first_seen"],
             "leader_last_seen_utc": sync["leader_last_seen"],
             "ticker_items": events["ticker_items"],

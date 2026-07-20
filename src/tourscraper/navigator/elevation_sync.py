@@ -155,8 +155,33 @@ def leader_track(telemetry_paths) -> list[tuple[datetime, float]]:
     return cleaned
 
 
+def extend_track_to_start(track: list[tuple[datetime, float]],
+                          route_length_km: float,
+                          race_start: datetime | None):
+    """Prepend a synthetic km-0 sample so the whole stage can be drawn.
+
+    GPS often only comes online partway through (stage 14's first fix is 31 km
+    in), which would otherwise truncate a third of the profile off the bar. The
+    race's actual start time is known from the ticker, so the uncovered head can
+    be spanned by interpolating between it and the first real fix.
+
+    This is an estimate and is flagged as one: the leader's true pace over that
+    stretch was not observed, only its average. Returns the extended track plus
+    the km-to-finish above which points should be marked estimated.
+    """
+    if not track or race_start is None:
+        return track, None
+    first_ts, first_km_to = track[0]
+    if first_km_to >= route_length_km - 0.05:
+        return track, None                    # already covered from the gun
+    if race_start >= first_ts:
+        return track, None                    # start time is not before the fix
+    return [(race_start, route_length_km)] + track, first_km_to
+
+
 def sync_profile_to_time(profile: list[dict], track: list[tuple[datetime, float]],
-                         max_gap_km: float = 2.0) -> list[dict]:
+                         max_gap_km: float = 2.0,
+                         estimated_above_km_to: float | None = None) -> list[dict]:
     """Attach the leader's arrival time to each profile point.
 
     `track` descends in km-to-finish, so it is reversed into ascending order
@@ -164,7 +189,7 @@ def sync_profile_to_time(profile: list[dict], track: list[tuple[datetime, float]
     no stage-length constant is involved anywhere.
     """
     if not track:
-        return [dict(p, time_utc=None, interpolated=None) for p in profile]
+        return [dict(p, time_utc=None, interpolated=None, estimated=None) for p in profile]
 
     asc = sorted(track, key=lambda s: s[1])          # ascending km-to-finish
     kms = [km for _, km in asc]
@@ -174,7 +199,7 @@ def sync_profile_to_time(profile: list[dict], track: list[tuple[datetime, float]
     for point in profile:
         km_to = point["km_to_finish"]
         if km_to < lo_km or km_to > hi_km:
-            out.append(dict(point, time_utc=None, interpolated=None))
+            out.append(dict(point, time_utc=None, interpolated=None, estimated=None))
             continue
         idx = bisect.bisect_left(kms, km_to)
         if idx == 0:
@@ -190,25 +215,38 @@ def sync_profile_to_time(profile: list[dict], track: list[tuple[datetime, float]
                 frac = (km_to - km0) / span
                 ts = t0 + (t1 - t0) * frac
                 interpolated = span > max_gap_km
+        estimated = (estimated_above_km_to is not None
+                     and km_to > estimated_above_km_to)
         out.append(dict(point,
                         time_utc=ts.isoformat(timespec="seconds"),
-                        interpolated=interpolated))
+                        interpolated=interpolated,
+                        estimated=estimated))
     return out
 
 
-def build(stage_dir: Path, telemetry_paths, stage_length_km: float | None = None) -> dict:
+def build(stage_dir: Path, telemetry_paths, stage_length_km: float | None = None,
+          race_start_utc: datetime | None = None) -> dict:
     """`stage_length_km` is accepted for reporting only; it is not used in the
-    time mapping, which works purely in km-to-finish."""
+    time mapping, which works purely in km-to-finish.
+
+    `race_start_utc` lets the profile span the whole stage even when GPS came
+    online late; the unobserved head is marked estimated rather than dropped.
+    """
     profile = load_profile(stage_dir / "profile.csv")
     track = leader_track(telemetry_paths)
-    synced = sync_profile_to_time(profile, track)
-    observed = [p for p in synced if p["time_utc"] and not p["interpolated"]]
+    route_len = max((p["km"] for p in profile), default=0)
+    track, est_above = extend_track_to_start(track, route_len, race_start_utc)
+    synced = sync_profile_to_time(profile, track, estimated_above_km_to=est_above)
+    observed = [p for p in synced
+                if p["time_utc"] and not p["interpolated"] and not p.get("estimated")]
     return {
         "stage_length_km": stage_length_km,
         "route_length_km": round(max((p["km"] for p in profile), default=0), 2),
         "profile_points": len(synced),
         "gps_samples": len(track),
         "observed_points": len(observed),
+        "estimated_points": sum(1 for p in synced if p.get("estimated")),
+        "timed_points": sum(1 for p in synced if p.get("time_utc")),
         "leader_first_seen": track[0][0].isoformat(timespec="seconds") if track else None,
         "leader_last_seen": track[-1][0].isoformat(timespec="seconds") if track else None,
         "leader_km_to_finish_range": [round(track[0][1], 2), round(track[-1][1], 2)] if track else None,

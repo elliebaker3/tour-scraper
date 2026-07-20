@@ -88,20 +88,31 @@
     const loA = Math.min(...alts), hiA = Math.max(...alts);
     const rangeA = Math.max(1, hiA - loA);
 
-    const xy = [];
+    // Estimated points (GPS came online late, so the head is spanned from the
+    // known start time) are drawn as a separate, dimmer shape. The whole stage
+    // is shown, but "we saw this" and "we inferred this" stay distinguishable.
+    const xy = [], xyEst = [];
     for (const p of pts) {
       const sec = utcToVideo(Date.parse(p.t));
       if (sec == null || sec < 0 || sec > video.duration) continue;
-      xy.push([
+      const pt = [
         (sec / video.duration) * width,
         height - ((p.alt - loA) / rangeA) * (height - 4) - 2,
-      ]);
+      ];
+      (p.est ? xyEst : xy).push(pt);
+      // Bridge the seam so the two shapes meet instead of leaving a notch.
+      if (p.est && xyEst.length && xy.length === 0) { /* still in the head */ }
     }
-    if (!xy.length) return { d: "", pts: [] };
-    let d = `M ${xy[0][0].toFixed(1)} ${height} L `;
-    d += xy.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L ");
-    d += ` L ${xy[xy.length - 1][0].toFixed(1)} ${height} Z`;
-    return { d, pts: xy, loA, hiA };
+    if (xyEst.length && xy.length) xyEst.push(xy[0]);
+    const area = (arr) => {
+      if (arr.length < 2) return "";
+      let s = `M ${arr[0][0].toFixed(1)} ${height} L `;
+      s += arr.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L ");
+      s += ` L ${arr[arr.length - 1][0].toFixed(1)} ${height} Z`;
+      return s;
+    };
+    if (!xy.length && !xyEst.length) return { d: "", dEst: "", pts: [] };
+    return { d: area(xy), dEst: area(xyEst), pts: xy, loA, hiA };
   }
 
   function render() {
@@ -110,7 +121,7 @@
     const width = bar.clientWidth || 900;
     const height = 54;
 
-    const { d, loA, hiA } = profilePath(width, height);
+    const { d, dEst, loA, hiA } = profilePath(width, height);
     const needsAnchors = !cal;
 
     const markers = [];
@@ -146,6 +157,7 @@
     bar.innerHTML = `
       <div class="tn-heatwrap">${heat}</div>
       <svg class="tn-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+        <path d="${dEst || ""}" class="tn-profile tn-profile-est"/>
         <path d="${d}" class="tn-profile"/>
       </svg>
       <div class="tn-markers">${markers.join("")}</div>

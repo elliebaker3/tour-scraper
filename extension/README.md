@@ -139,6 +139,23 @@ end and shift-drag until that one lines up too. Two summits far apart pin
 offset and rate together. Click **Done** to leave align mode; the calibration is
 saved per stage.
 
+### The profile spans the whole stage
+
+GPS often comes online partway through a stage — stage 14's first fix is 31 km
+in, a fifth of the route. Rather than truncate that off the bar, the head is
+spanned using the stage's *actual* start time, which the ticker marks
+(`liv_actual_start`). Stage 14 rolled at 11:35:38 UTC, 5m38s later than the
+published schedule, so the ticker's marker matters.
+
+That stretch is drawn **dashed and dimmer**: the whole stage is visible, but
+inferred pacing is not presented as the same claim as observed GPS. Only the
+average speed across the gap is known, not how it varied.
+
+| Stage | Route drawn | Observed | Estimated |
+|---|---|---|---|
+| 14 | km 0.0 → 155.1 of 155.2 | 494 pts | 311 pts (dashed head) |
+| 15 | km 0.1 → 183.7 of 183.8 | 1,805 pts | none — GPS covered it all |
+
 ### Why it was off before
 
 Two real errors, both now fixed:

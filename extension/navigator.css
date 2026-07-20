@@ -122,3 +122,12 @@
 .tn-align { background: #2b3140; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
             border-radius: 5px; padding: 3px 8px; cursor: pointer; }
 .tn-root.tn-aligning .tn-align { background: #7cc0ff; color: #0e1014; border-color: #7cc0ff; }
+
+/* Estimated stretch: full stage is shown, but inferred pacing is visibly not
+   the same claim as observed GPS. */
+.tn-profile-est {
+  fill: rgba(120, 190, 255, 0.30);
+  stroke: rgba(158, 210, 255, 0.85);
+  stroke-width: 1.2;
+  stroke-dasharray: 5 3;
+}
