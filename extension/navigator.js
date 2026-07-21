@@ -608,8 +608,8 @@ exposes — including ad-break cue times. Copies to the clipboard.">Diagnose</bu
       </div>
       <div class="tn-setup">
         <span class="tn-setup-ask">Pause where the broadcast shows
-          <strong>km to go</strong> and type it here — one reading is usually all
-          it takes:</span>
+          <strong>km to go</strong> and type it here (best: one reading early,
+          one near the finish):</span>
         <input class="tn-togo-km" size="5" placeholder="42" inputmode="decimal">
         <span class="tn-setup-unit">km to go</span>
         <button class="tn-togo-set">Calibrate</button>
@@ -799,14 +799,24 @@ the stage. The median of all readings is used.">
     if (hit.est) parts.push("⚠ that stretch has no GPS — pace is inferred there");
 
     if (cal.model === "adbreak") {
-      // Ad breaks located themselves from the player, so one reading fixes the
-      // origin and the whole stage is placed (each break assumed to cost its own
-      // length of race). A second reading only refines that if it's not exact.
-      parts.push(`calibrated · ${cal.breaks.length} ad breaks from the player`);
+      // Ad breaks locate themselves from the player. One reading fixes the
+      // origin but has to ASSUME how much race each break costs (its own
+      // length); if that's off, the error grows with every later break -- the
+      // drift-toward-the-end. A second reading NEAR THE FINISH fixes it: the two
+      // readings, far apart, fit the per-break loss instead of assuming it.
+      parts.push(`${cal.breaks.length} ad breaks from the player`);
       if (p.length === 1) {
-        parts.push("that's it — add a 2nd reading past a break only if it looks off");
+        parts.push("origin set — ▶ add a reading NEAR THE FINISH so it stays " +
+                   "accurate to the end");
       } else {
-        parts.push(`${p.length} readings · ~${Math.round(cal.k * 100)}% of each break lost to race`);
+        // The wider the spread in ad-time between readings, the better k is
+        // pinned; two close-together readings can't fit it.
+        const xs = pins().map((a) => cumAd(a.videoSec, cal.breaks));
+        const spanMin = (Math.max(...xs) - Math.min(...xs)) / 60;
+        parts.push(`${p.length} readings · ~${Math.round(cal.k * 100)}% of each break lost`);
+        if (spanMin < 3) {
+          parts.push("⚠ readings too close together — put one near the finish");
+        }
         const worst = Math.max(0, ...pinResidualsSec().map(Math.abs));
         if (worst > 90) parts.push("⚠ readings disagree — re-check one");
       }
@@ -838,8 +848,9 @@ the stage. The median of all readings is used.">
     const p = pins();
     if (!p.length) { el.textContent = "not calibrated"; return; }
     if (cal.model === "adbreak") {
-      el.textContent = `calibrated · ${p.length} reading${p.length === 1 ? "" : "s"} · ` +
-        `${cal.breaks.length} ad breaks from the player`;
+      el.textContent = `${p.length} reading${p.length === 1 ? "" : "s"} · ` +
+        `${cal.breaks.length} ad breaks from the player` +
+        (p.length === 1 ? " — add one near the finish for the end of the stage" : "");
       return;
     }
     if (p.length === 1) {
