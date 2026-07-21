@@ -344,7 +344,7 @@
       const isKom = m.kind === "kom";
       const color = isKom ? (KOM_COLOR[m.cat] || "#ef4444") : CATEGORIES.sprint.color;
       const badge = isKom ? (m.finish ? "🏁" : (m.cat || "").replace("Cat ", "")) : "S";
-      const tip = `${fmt(sec)} — ${m.label}` +
+      const tip = m.label +
                   (m.kmto != null ? ` · ${m.kmto} km to go · ${m.alt}m` : "");
       // Keep the badge fully inside the bar. It normally floats above the dot,
       // but summits sit near the top, so flip it below when there isn't room;
@@ -370,7 +370,7 @@
       markers.push(
         `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${c}"
               data-sec="${sec.toFixed(1)}"
-              title="${escapeHtml(`${fmt(sec)} — ${g.label}`)}"></div>`);
+              title="${escapeHtml(g.label)}"></div>`);
     }
 
     let heat = "";
@@ -404,17 +404,18 @@
     });
     bar.appendChild(hoverEl);
 
-    const utcNow = videoToUtc(video.currentTime);
+    // Playhead readout: km-to-go and gradient only. The wall-clock race time
+    // and the recording position were dropped -- they are machinery, not what
+    // a viewer navigates by.
     const clock = root.querySelector(".tn-clock");
     const here = playheadPoint();
     const g = here ? gradientAt(here.km) : null;
-    const slope = g == null ? ""
-      : ` · ${fmtToGo(kmToGo(here))} · ${
-          g > 1.5 ? `climbing ${g.toFixed(1)}%`
-        : g < -1.5 ? `descending ${Math.abs(g).toFixed(1)}%`
-        : "flat"}`;
-    clock.textContent =
-      `race ${new Date(utcNow).toISOString().slice(11, 19)}Z · rec ${fmt(video.currentTime)}${slope}`;
+    const bits = [];
+    if (here) bits.push(fmtToGo(kmToGo(here)));
+    if (g != null) bits.push(g > 1.5 ? `climbing ${g.toFixed(1)}%`
+                           : g < -1.5 ? `descending ${Math.abs(g).toFixed(1)}%`
+                           : "flat");
+    clock.textContent = bits.join(" · ");
     clock.className = "tn-clock" +
       (g == null ? "" : g > 1.5 ? " tn-up" : g < -1.5 ? " tn-down" : "");
 
@@ -541,8 +542,6 @@ the stage. The median of all readings is used.">
       const s = sampleAt(frac);
       if (!s) { hoverEl.style.display = "none"; return; }
       const bits = [fmtToGo(s.kmto), `${Math.round(s.alt)}m`];
-      if (s.t) bits.push(`${s.t.slice(11, 16)}Z`);
-      if (s.sec != null) bits.push(`rec ${fmt(s.sec)}`);
       if (s.est) bits.push("est");
       hoverEl.textContent = bits.join(" · ");
       hoverEl.style.display = "block";
@@ -851,27 +850,96 @@ the stage. The median of all readings is used.">
     }, 500);
     window.addEventListener("resize", render);
 
-    // The panel rides with the player's own controls: it shows on mouse
-    // movement and fades out after a few seconds of stillness, so it is present
-    // exactly when Peacock's scrub bar is and gone when the picture is clean.
-    // Hovering the panel itself keeps it up, so it never vanishes mid-use.
+    installChrome();
+  }
+
+  /* Appearance timing and position. The panel is meant to ride with the
+   * player's own control bar: sit just above it, and appear/disappear with it.
+   *
+   * The reliable anchor is the native bar ITSELF. We look for it in the DOM
+   * every ~200ms; when it is visible we park the panel just above its top edge
+   * (so it never overlaps it) and show the panel, and when it fades we hide.
+   * That ties both position AND timing to the real control bar regardless of
+   * how tall it is or when the player decides to show it.
+   *
+   * If the native bar can't be found (Peacock reshuffles its markup), we fall
+   * back to mouse-movement timing and a safe fixed offset, so the panel still
+   * behaves rather than sticking or covering the controls. */
+  function nativeControlBar() {
+    // The native scrub/seek bar or its controls cluster: a wide element low in
+    // the viewport that is currently visible.
+    // Deliberately the SEEK BAR itself, not the controls container: the seek
+    // bar fades in and out with the controls, so it doubles as a visibility
+    // signal, whereas a persistent container would never let the panel hide.
+    // It also sits at the TOP of the control cluster (buttons beneath it), so
+    // parking above its top edge clears the whole cluster.
+    const SEL = [
+      '[role="slider"]', 'input[type="range"]',
+      '[aria-label*="seek" i]', '[aria-label*="scrubber" i]',
+      '[aria-label*="progress bar" i]',
+      '[class*="scrubber" i]', '[class*="seekbar" i]', '[class*="seek-bar" i]',
+      '[class*="progress-bar" i]', '[class*="progressBar"]',
+      '[data-testid*="scrubber" i]', '[data-testid*="seek" i]',
+    ].join(",");
+    let top = null;
+    let els;
+    try { els = document.querySelectorAll(SEL); } catch (_) { return null; }
+    for (const el of els) {
+      const r = el.getBoundingClientRect();
+      if (r.width < window.innerWidth * 0.4) continue;      // must be a wide bar
+      if (r.top < window.innerHeight * 0.55) continue;      // low in the frame
+      if (r.width === 0 || r.height === 0) continue;
+      const st = getComputedStyle(el);
+      if (st.visibility === "hidden" || st.display === "none" ||
+          parseFloat(st.opacity) < 0.05) continue;          // faded out = hidden
+      if (top == null || r.top < top) top = r.top;          // the cluster's top
+    }
+    return top;
+  }
+
+  function installChrome() {
     let hideTimer = null;
-    const HIDE_AFTER_MS = 3000;
+    let usingNative = false;        // have we ever located the native bar?
+    let nativeMiss = 0;             // consecutive polls with no native bar
+    const GAP = 12;                 // px to float above the native bar
+
+    const show = () => root.classList.remove("tn-hidden");
+    const hide = () => { if (!root.matches(":hover")) root.classList.add("tn-hidden"); };
+
+    // Fallback (no native bar found): mouse movement shows, idle hides.
     const showTransiently = () => {
-      root.classList.remove("tn-hidden");
+      if (usingNative) return;      // native poll is in charge
+      show();
       clearTimeout(hideTimer);
-      hideTimer = setTimeout(() => {
-        if (!root.matches(":hover")) root.classList.add("tn-hidden");
-      }, HIDE_AFTER_MS);
+      hideTimer = setTimeout(hide, 3000);
     };
-    root.classList.add("tn-hidden");
     document.addEventListener("mousemove", showTransiently, { passive: true });
     document.addEventListener("keydown", showTransiently, true);
-    root.addEventListener("mouseenter", () => {
-      clearTimeout(hideTimer);
-      root.classList.remove("tn-hidden");
-    });
+    root.addEventListener("mouseenter", () => { clearTimeout(hideTimer); show(); });
     root.addEventListener("mouseleave", showTransiently);
+
+    root.classList.add("tn-hidden");
+    setInterval(() => {
+      const top = nativeControlBar();
+      if (top != null) {
+        if (!usingNative) {
+          console.log("[TourNavigator] anchored to the native control bar " +
+                      `(top ${Math.round(top)}px of ${window.innerHeight}px)`);
+        }
+        usingNative = true;
+        nativeMiss = 0;
+        // Park just above the native bar; never let it drop over the controls.
+        root.style.bottom = Math.max(GAP, window.innerHeight - top + GAP) + "px";
+        show();
+      } else if (usingNative) {
+        // Native bar was there and is now gone (faded out) -> mirror it.
+        // A few misses of grace so a reflow mid-frame doesn't flicker us.
+        if (++nativeMiss >= 2) hide();
+        // If it stays missing a long while, the markup probably changed;
+        // hand back to the mouse-movement fallback rather than stay stuck.
+        if (nativeMiss > 25) { usingNative = false; root.style.bottom = ""; }
+      }
+    }, 200);
   }
 
   start();

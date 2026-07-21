@@ -9,9 +9,11 @@
 .tn-root {
   position: fixed;
   left: 50%;
-  /* Sit just above the player's own control bar rather than at the very
-     bottom, so the graphic hovers over the visible scrubber. */
-  bottom: 96px;
+  /* Fallback position, used only when the native control bar can't be located
+     in the DOM. When it can, JS parks the panel just above it (see
+     installChrome). Kept high enough to clear a typical fullscreen control
+     cluster so it never obscures the built-in bar. */
+  bottom: 140px;
   transform: translateX(-50%);
   width: min(1180px, 94vw);
   background: rgba(14, 16, 20, 0.94);
