@@ -59,6 +59,7 @@
   let anchors = [];           // [{ tUtcMs, videoSec, label }]
   let root = null;
   let hoverEl = null;         // readout element, re-attached after each render
+  const measureLog = [];      // data-collection pass: {rec, kmToGo, raceUtc}
   const enabled = Object.fromEntries(
     Object.entries(CATEGORIES).map(([k, v]) => [k, v.on]));
 
@@ -603,9 +604,19 @@
         <select class="tn-stage-pick" title="Which stage this recording is"></select>
         <span class="tn-stage"></span>
         <span class="tn-clock"></span>
+        <button class="tn-measure-btn" title="Collect km-to-go readings around ad
+breaks so the exact race-time loss at each can be worked out.">Measure</button>
         <button class="tn-probe" title="Report what timing data the player
 exposes — including ad-break cue times. Copies to the clipboard.">Diagnose</button>
         <button class="tn-collapse" title="Hide">–</button>
+      </div>
+      <div class="tn-measure">
+        <span class="tn-measure-ask">Measuring ad-break losses — pause just
+          before/after each ad break, read the <strong>km to go</strong>, log it:</span>
+        <input class="tn-measure-km" size="5" placeholder="42" inputmode="decimal">
+        <button class="tn-measure-log">Log this spot</button>
+        <button class="tn-measure-copy">Copy data</button>
+        <span class="tn-measure-state">0 logged</span>
       </div>
       <div class="tn-setup">
         <span class="tn-setup-ask">Pause where the broadcast shows
@@ -699,6 +710,50 @@ the stage. The median of all readings is used.">
       render();
     });
     root.querySelector(".tn-probe").addEventListener("click", runProbe);
+
+    // Measure mode: a data-collection pass, independent of calibration. Each log
+    // is a raw (recording position, km-to-go the broadcast shows) pair; with the
+    // ad-break locations from the cues, the race-time lost at each break can be
+    // computed from pairs bracketing it.
+    root.querySelector(".tn-measure-btn").addEventListener("click", () => {
+      root.classList.toggle("tn-measuring");
+    });
+    const logKm = root.querySelector(".tn-measure-km");
+    const logOne = () => {
+      const st = root.querySelector(".tn-measure-state");
+      if (!video?.duration) { st.textContent = "no video"; return; }
+      const km = parseFloat(String(logKm.value).replace(",", "."));
+      const hit = isFinite(km) ? timeAtKmToGo(Number.isInteger(km) ? km + 0.5 : km) : null;
+      if (!hit) { st.textContent = `“${logKm.value}” — not a km-to-go on this stage`; return; }
+      measureLog.push({
+        rec: +video.currentTime.toFixed(2),
+        kmToGo: km,
+        raceUtc: new Date(hit.tMs).toISOString(),
+        est: !!hit.est,
+      });
+      logKm.value = "";
+      st.textContent = `${measureLog.length} logged (last: ${km} km to go)`;
+      console.log("[TourNavigator] measure log:", measureLog[measureLog.length - 1]);
+    };
+    root.querySelector(".tn-measure-log").addEventListener("click", logOne);
+    logKm.addEventListener("keydown", (ev) => {
+      ev.stopPropagation();
+      if (ev.key === "Enter") logOne();
+    });
+    root.querySelector(".tn-measure-copy").addEventListener("click", () => {
+      const st = root.querySelector(".tn-measure-state");
+      const payload = {
+        stage: bundle.stage?.stage, date: bundle.stage?.date,
+        recordingDuration: video?.duration ? +video.duration.toFixed(1) : null,
+        adBreaks: adBreaksFromPlayer().map((b) => ({ t: +b.t.toFixed(1), e: +b.e.toFixed(1) })),
+        readings: measureLog,
+      };
+      const text = JSON.stringify(payload, null, 2);
+      console.log("[TourNavigator] measure export:\n" + text);
+      navigator.clipboard?.writeText(text).then(
+        () => { st.textContent = `copied ${measureLog.length} readings + ${payload.adBreaks.length} breaks`; },
+        () => { st.textContent = `in console (clipboard blocked) · ${measureLog.length} readings`; });
+    });
   }
 
   /** Dump what timing data this player exposes -- video timing, app-state
