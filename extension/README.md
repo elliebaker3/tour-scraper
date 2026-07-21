@@ -14,35 +14,36 @@ download or modify any stream.
 2. **Load unpacked** → select this `extension/` folder
 3. Open your stage recording. The panel pins to the bottom of the window.
 
-## Calibrate: a "km to go" reading in each ad-break-free stretch
+## Calibrate: usually one "km to go" reading
 
 Pause where the broadcast shows **km to go**, type that number in and press
-**Calibrate**. Then add one more reading (with **Add reading**) in each other
-part of the stage — anywhere separated from your other readings by an ad break.
+**Calibrate**. On Peacock that is normally the whole setup.
 
-**Why this works.** The recording runs at true 1:1 with the race *between* ad
-breaks — no drift in the stretch around a reading. The only discontinuities are
-the chunks of race the ad breaks cut out. So each reading pins its own stretch
-exactly, and where two readings disagree the difference is a detected cut. On
-stage 14 that's about 20 minutes removed across two breaks.
+**Why one reading is enough.** The recording plays the race at true 1:1; the
+only discontinuities are the ad breaks, where a chunk of race is missing (it
+happened live while ads played). Peacock exposes every ad break on a metadata
+track (`cvsdk::ad-break-*`), and the extension reads their exact positions
+straight from the player. So the breaks locate themselves — the one thing a
+reading supplies is the origin (where the race sits against the recording).
+Each break is assumed to cost its own length of race, which is the physical
+case, so a single reading places the entire stage. The panel shows how many
+breaks it found (`21 ad breaks from the player`).
 
-- **One reading** is exact within its own stretch and drifts across any cut.
-- **Two readings with a cut between them** recover that cut automatically; the
-  panel reports it (e.g. `2 ad-break cuts (8m, 12m) removed`).
-- **More readings** each sharpen their own stretch — all of them are used.
+**A second reading only refines.** If a break costs a bit more or less than its
+length, add one reading on the far side of a break with **Add reading** and the
+extension fits that factor across all of them. The status shows it
+(`~80% of each break lost to race`). More readings least-squares it further.
 
-Near a reading the alignment is exact. The one place it can be slightly off is
-right at a cut, where — with only readings to go on — the seam is guessed at the
-midpoint between the two bracketing readings. Placing a reading on each side of
-an ad break, reasonably close to it, keeps that tight.
+**If the ad-break track isn't there** (a non-Peacock player, or Peacock changes
+its markup), it falls back to locating cuts from the readings themselves: rate 1
+between breaks, a step wherever two readings disagree — so you place one reading
+per ad-break-free stretch. The panel says which mode it's in.
 
 **Accuracy is bounded by the graphic.** It counts in whole kilometres, so "42"
-means somewhere in [42, 43); the midpoint is used. Readings that land in the
-same stretch are averaged, so extra readings cancel that rounding.
+means [42, 43); the midpoint is used. Readings in the same stretch are averaged.
 
-**reset** clears it and returns to the prompt. Calibration is not remembered
-across reloads — every load asks for the current km-to-go rather than restoring
-a stale one.
+**reset** clears it. Calibration is not remembered across reloads — every load
+asks for the current km-to-go rather than restoring a stale one.
 
 ## What the bar shows
 

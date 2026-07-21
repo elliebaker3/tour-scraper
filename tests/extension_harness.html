@@ -54,6 +54,19 @@
     Object.defineProperty(v, "currentTime", {
       get: () => ct, set: (x) => { ct = x; }, configurable: true,
     });
+    // ?adbreaks=t1-d1,t2-d2,... injects a cvsdk-event-track with ad-break cues,
+    // the way Peacock exposes them, so the ad-break calibration path is tested.
+    if (qs.get("adbreaks")) {
+      const track = v.addTextTrack("metadata", "cvsdk-event-track");
+      track.mode = "hidden";
+      let n = 0;
+      for (const spec of qs.get("adbreaks").split(",")) {
+        const [t, d] = spec.split("-").map(Number);
+        const cue = new VTTCue(t, t + d, "");
+        cue.id = "cvsdk::ad-break-" + (++n);
+        track.addCue(cue);
+      }
+    }
     document.body.appendChild(v);
   }
 </script>
