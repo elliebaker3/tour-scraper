@@ -92,15 +92,18 @@
     "lastname": "CRAPS",
     "idUCI": "BEL20011017",
     "_id": "2d6ce0a76cc8466f6ec15c6d68e030756f63af1eeb7b7135fb8e3d0a27f99fdc",
+    "_updatedAt": 1784632595525,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-LOI",
-    "_updatedAt": 1783077577928,
     "_parent": "team-2026:862996f67abb3b12b6fc76cc8e20b5e84010cda8916cb6a138cbfa5fa3433f31",
-    "_key": "_id",
     "_virtual": "LOI-154-CRAPS",
     "$team": "team-2026:862996f67abb3b12b6fc76cc8e20b5e84010cda8916cb6a138cbfa5fa3433f31",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 16,
+      "code": -4
     }
   },
   {
@@ -2571,15 +2574,18 @@
     },
     "bib": 138,
     "_id": "836f76c4fe56aa1f68bb6b8bf729412d7c224726b97393793bb013183eb85f13",
+    "_updatedAt": 1784478553474,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-NSN",
-    "_updatedAt": 1783091867370,
     "_parent": "team-2026:87968404d2d9f02477987c9c58cdf27baf2866a310edbf232ac3c6fcaa8525b3",
-    "_key": "_id",
     "_virtual": "NSN-138-VAN ASBROECK",
     "$team": "team-2026:87968404d2d9f02477987c9c58cdf27baf2866a310edbf232ac3c6fcaa8525b3",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 15,
+      "code": -1
     }
   },
   {
@@ -5281,15 +5287,18 @@
       "en": "/rider/11/team-visma-lease-a-bike/vingegaard-hansen-jonas"
     },
     "_id": "5ddfa1f926292eacfdb0c43e648088703edb07a2b18d82ec91dee031b3f79b93",
+    "_updatedAt": 1784478553474,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TVL",
-    "_updatedAt": 1783082489118,
     "_parent": "team-2026:58c4faf080bb352fad62ec06627f2c64da293e753f2fc4589f682522f234742a",
-    "_key": "_id",
     "_virtual": "TVL-11-VINGEGAARD",
     "$team": "team-2026:58c4faf080bb352fad62ec06627f2c64da293e753f2fc4589f682522f234742a",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 15,
+      "code": -1
     }
   },
   {
@@ -6251,15 +6260,18 @@
     "sex": "M",
     "header": null,
     "_id": "df254b9081eb764c18356614cd97b337ee0c149dc9c1e82b3d8e6c97d4e4b2c5",
+    "_updatedAt": 1784478553475,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-SOQ",
-    "_updatedAt": 1783091865493,
     "_parent": "team-2026:cececa8fb48690a94182666c9e2759f4ad542398dd4dcd2ceba9dc95dc5e8a2b",
-    "_key": "_id",
     "_virtual": "SOQ-91-MERLIER",
     "$team": "team-2026:cececa8fb48690a94182666c9e2759f4ad542398dd4dcd2ceba9dc95dc5e8a2b",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 15,
+      "code": -1
     }
   },
   {

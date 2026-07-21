@@ -1690,7 +1690,57 @@
     "_key": "stage"
   },
   {
+    "timezone": "Europe/Paris",
+    "showGroups": true,
+    "podiumDisplayMode": "instantpodium",
+    "endTime": "17:28:00",
+    "length": 174.7,
+    "id": 25337,
+    "isCancelled": false,
+    "arrivalCity": {
+      "label": "Voiron",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et17-voiron-fetes-de-la-chartreuse-cville-de-voiron/69796/735:0,4740:4005-0-0-70/8b716",
+        "texts": [
+          {
+            "locale": "fr",
+            "text": [
+              "<br />\nVille-étape pour la 2e fois<br />\nCommune de l’Isère (38)<br />\nHabitants 21 900 (Voironnais et Voironnaises)<br />\n<br />\n La commune iséroise est connue pour la célèbre liqueur des Pères Chartreux dont le secret de fabrication est gardé depuis plusieurs siècles, et presque autant pour avoir accueilli au monde la discobole médaillée olympique et mondiale Melina Robert-Michon, ainsi que la handballeuse championne du monde (2003) Véronique Pecqueux-Rolland. Voisine de Grenoble, Voiron a vu triompher à l’occasion du Critérium du Dauphiné deux très sérieux coureurs de classiques belges : Stan Ockers en 1956 et Wout van Aert en 2019."
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nStage town for the second time<br />\nCommune in Isère (38)<br />\nPopulation: 21,900 (Voironnais and Voironnaises)<br />\n<br />\nThis commune in Isère is primarily renowned for the famous Chartreuse liqueur made by the Carthusian monks, whose secret recipe has been kept for several centuries, but it’s also the birthplace of Olympic and world discus champion Melina Robert-Michon, as well as 2003 world handball champion Véronique Pecqueux-Rolland. Set close to Grenoble, Voiron has witnessed victories by two very significant Belgian Classics riders in the Critérium du Dauphiné: Stan Ockers in 1956 and Wout van Aert in 2019."
+            ]
+          },
+          {
+            "locale": "de",
+            "text": [
+              "<br />\nZum 2. Mal Etappenort<br />\nGemeinde im Departement Isère (38)<br />\nEinwohner*innen 21 900<br />\n<br />\n Voiron ist doppelt berühmt: Zum einen für den Likör der Kartäusermönche, dessen Rezept seit Jahrhunderten geheim gehalten wird, und zum anderen für große Sportlerinnen wie die Diskuswerferin Mélina Robert-Michon, mehrfache Olympia- und WM-Medaillengewinnerin, sowie die Handball-Weltmeisterin von 2003, Véronique Pecqueux-Rolland. Als Nachbarstadt von Grenoble hat Voiron auch im Radsport Spuren hinterlassen: Beim Critérium du Dauphiné triumphierten hier zwei belgische Klassiker-Spezialisten – Stan Ockers 1956 und Wout van Aert 2019."
+            ]
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nCiudad etapa por 2ª vez<br />\nMunicipio del departamento de Isère (38)<br />\nHabitantes 21.900 (Voironnais y Voironnaises)<br />\n<br />\n Este municipio del departamento de Isère es conocido por el famoso licor de los monjes cartujos, cuya fórmula se ha mantenido secreta durante siglos, y también por haber visto nacer a la lanzadora de disco y medallista olímpica y mundial Melina Robert-Michon, así como a la jugadora de balonmano campeona del mundo (2003) Véronique Pecqueux-Rolland. Vecina de Grenoble, Voiron ha sido testigo del triunfo en la Critérium del Dauphiné de dos importantes ciclistas clásicos belgas: Stan Ockers en 1956 y Wout van Aert en 2019."
+            ]
+          }
+        ]
+      },
+      "code": "voiron",
+      "id": 29344,
+      "cityLangs": []
+    },
+    "startTime": "13:35:00",
+    "lengthDisplay": 175,
+    "date": "2026-07-22T00:00:00+02:00",
+    "stage": 17,
+    "type": "PLN",
     "departureCity": {
+      "cityLangs": [],
+      "id": 29334,
+      "code": "chambery",
       "content": {
         "texts": [
           {
@@ -1712,70 +1762,20 @@
             ]
           },
           {
+            "locale": "es",
             "text": [
               "<br />\nCiudad etapa por 4ª vez<br />\nPrefectura del departamento de Saboya (73)<br />\nHabitantes 60.300 (Chambériens y Chambériennes)<br />\n<br />\n Puerta de entrada privilegiada a todos los valles de Saboya, la prefectura del departamento ha visto desfilar al pelotón del Tour casi por defecto. Sin embargo, la llamada Ciudad de los Duques solo ha acogido una llegada de etapa, concretamente durante el verano de 2017. El final fue especialmente agitado tras la ascensión al Mont du Chat: caída y abandono en el descenso de Richie Porte, ofensiva de Romain Bardet por detrás del superviviente de la escapada Warren Barguil, reagrupamiento de una élite de seis favoritos, entre ellos el maillot amarillo Chris Froome, y un esprint decidido en la foto finish a favor de Rigoberto Urán por delante del escalador bretón, recompensado por sus esfuerzos ese día con el maillot de lunares."
-            ],
-            "locale": "es"
+            ]
           }
         ],
         "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et17-chambery-gettyimages-177006887-11zon/69807/608:0,2648:2040-0-0-70/38c8f"
       },
-      "label": "Chambery",
-      "cityLangs": [],
-      "id": 29334,
-      "code": "chambery"
+      "label": "Chambery"
     },
-    "lengthDisplay": 175,
-    "endTime": "17:28:00",
-    "podiumDisplayMode": "instantpodium",
-    "showGroups": true,
-    "timezone": "Europe/Paris",
-    "length": 174.7,
-    "isCancelled": false,
-    "id": 25337,
-    "stage": 17,
-    "type": "PLN",
-    "arrivalCity": {
-      "label": "Voiron",
-      "cityLangs": [],
-      "code": "voiron",
-      "id": 29344,
-      "content": {
-        "texts": [
-          {
-            "locale": "fr",
-            "text": [
-              "<br />\nVille-étape pour la 2e fois<br />\nCommune de l’Isère (38)<br />\nHabitants 21 900 (Voironnais et Voironnaises)<br />\n<br />\n La commune iséroise est connue pour la célèbre liqueur des Pères Chartreux dont le secret de fabrication est gardé depuis plusieurs siècles, et presque autant pour avoir accueilli au monde la discobole médaillée olympique et mondiale Melina Robert-Michon, ainsi que la handballeuse championne du monde (2003) Véronique Pecqueux-Rolland. Voisine de Grenoble, Voiron a vu triompher à l’occasion du Critérium du Dauphiné deux très sérieux coureurs de classiques belges : Stan Ockers en 1956 et Wout van Aert en 2019."
-            ]
-          },
-          {
-            "text": [
-              "<br />\nStage town for the second time<br />\nCommune in Isère (38)<br />\nPopulation: 21,900 (Voironnais and Voironnaises)<br />\n<br />\nThis commune in Isère is primarily renowned for the famous Chartreuse liqueur made by the Carthusian monks, whose secret recipe has been kept for several centuries, but it’s also the birthplace of Olympic and world discus champion Melina Robert-Michon, as well as 2003 world handball champion Véronique Pecqueux-Rolland. Set close to Grenoble, Voiron has witnessed victories by two very significant Belgian Classics riders in the Critérium du Dauphiné: Stan Ockers in 1956 and Wout van Aert in 2019."
-            ],
-            "locale": "en"
-          },
-          {
-            "locale": "de",
-            "text": [
-              "<br />\nZum 2. Mal Etappenort<br />\nGemeinde im Departement Isère (38)<br />\nEinwohner*innen 21 900<br />\n<br />\n Voiron ist doppelt berühmt: Zum einen für den Likör der Kartäusermönche, dessen Rezept seit Jahrhunderten geheim gehalten wird, und zum anderen für große Sportlerinnen wie die Diskuswerferin Mélina Robert-Michon, mehrfache Olympia- und WM-Medaillengewinnerin, sowie die Handball-Weltmeisterin von 2003, Véronique Pecqueux-Rolland. Als Nachbarstadt von Grenoble hat Voiron auch im Radsport Spuren hinterlassen: Beim Critérium du Dauphiné triumphierten hier zwei belgische Klassiker-Spezialisten – Stan Ockers 1956 und Wout van Aert 2019."
-            ]
-          },
-          {
-            "locale": "es",
-            "text": [
-              "<br />\nCiudad etapa por 2ª vez<br />\nMunicipio del departamento de Isère (38)<br />\nHabitantes 21.900 (Voironnais y Voironnaises)<br />\n<br />\n Este municipio del departamento de Isère es conocido por el famoso licor de los monjes cartujos, cuya fórmula se ha mantenido secreta durante siglos, y también por haber visto nacer a la lanzadora de disco y medallista olímpica y mundial Melina Robert-Michon, así como a la jugadora de balonmano campeona del mundo (2003) Véronique Pecqueux-Rolland. Vecina de Grenoble, Voiron ha sido testigo del triunfo en la Critérium del Dauphiné de dos importantes ciclistas clásicos belgas: Stan Ockers en 1956 y Wout van Aert en 2019."
-            ]
-          }
-        ],
-        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/et17-voiron-fetes-de-la-chartreuse-cville-de-voiron/69796/735:0,4740:4005-0-0-70/8b716"
-      }
-    },
-    "startTime": "13:35:00",
-    "date": "2026-07-22T00:00:00+02:00",
     "_id": "0cd1639487e7086115459614e40423e7b928c28644ba27c13a841786d67f6106",
     "_bind": "stage-2026",
     "_origin": "stage-2026",
-    "_updatedAt": 1781012317926,
+    "_updatedAt": 1784622891512,
     "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
     "_key": "stage"
   },
