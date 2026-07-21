@@ -393,13 +393,17 @@
     for (const g of bundle.guideposts) {
       const word = SIGNIFICANT_WORD[g.category];
       if (!word) continue;                         // not a race-event kind
-      // Shown by its own switch (crash/attack/catch) or the umbrella.
-      if (!enabled[g.category] && !enabled.significant) continue;
+      // Shown by its own switch (crash/attack/catch) or the umbrella. Its own
+      // switch colours it by kind; the umbrella alone shows it in one neutral
+      // colour -- the umbrella isn't a colour-coded view.
+      const own = enabled[g.category];
+      if (!own && !enabled.significant) continue;
+      const color = own ? EVENT_COLOR[g.category] : CATEGORIES.significant.color;
       const sec = utcToVideo(Date.parse(g.t_utc));
       if (sec == null || sec < 0 || sec > dur) continue;
       const x = (sec / dur) * width;
       markers.push(
-        `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${EVENT_COLOR[g.category]}"
+        `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${color}"
               data-sec="${sec.toFixed(1)}" title="${word}"></div>`);
     }
 
