@@ -26,22 +26,31 @@
   // The race-event markers all default OFF -- an empty bar is the calm default,
   // and the viewer opts into whichever kind they want to see. History and stats
   // were dropped entirely.
-  // Filter toggles. The four race-event categories are collapsed into one
-  // "Significant event" switch -- a crash, attack, catch or scenic beat all read
-  // as "something worth jumping to". Contenders (persons of interest) are their
-  // own switch, marked with a star.
+  // Filter toggles. Crashes, attacks and catches each have their own switch;
+  // "Significant event" is an umbrella that shows any race-event beat (those
+  // three plus scenery) in one go. A marker shown by either its own switch or
+  // the umbrella keeps its category colour. Contenders (persons of interest) are
+  // their own switch, marked with a star.
   const CATEGORIES = {
-    sprint:      { label: "Sprints",           color: "#22c55e", on: true },
-    kom:         { label: "Climbs",            color: "#ef4444", on: true },
-    poi:         { label: "Contenders",        color: "#facc15", on: true },
-    significant: { label: "Significant event", color: "#f5a524", on: false },
+    sprint:          { label: "Sprints",           color: "#22c55e", on: true },
+    kom:             { label: "Climbs",            color: "#ef4444", on: true },
+    poi:             { label: "Contenders",        color: "#facc15", on: true },
+    crash:           { label: "Crashes",           color: "#e5484d", on: false },
+    breakaway_start: { label: "Attacks",           color: "#f5a524", on: false },
+    breakaway_end:   { label: "Catches",           color: "#8b7cf6", on: false },
+    significant:     { label: "Significant event", color: "#cbd5e1", on: false },
   };
 
-  // Which guidepost categories a "significant event" covers, and the word shown
-  // for each (the KIND of moment, never who -- staying spoiler-light).
+  // The race-event guidepost kinds, the word shown for each (the KIND of moment,
+  // never who -- spoiler-light) and its colour. Scenery has no switch of its
+  // own; it only appears under the Significant-event umbrella.
   const SIGNIFICANT_WORD = {
     crash: "crash", breakaway_start: "attack",
     breakaway_end: "caught", scenic: "scenery",
+  };
+  const EVENT_COLOR = {
+    crash: "#e5484d", breakaway_start: "#f5a524",
+    breakaway_end: "#8b7cf6", scenic: "#30a46c",
   };
 
   // Climb grades shade from yellow (cat 4) to deep red (HC), the way a stage
@@ -381,17 +390,17 @@
     }
 
     const markers = [];
-    if (enabled.significant) {
-      for (const g of bundle.guideposts) {
-        const word = SIGNIFICANT_WORD[g.category];
-        if (!word) continue;                       // not a significant-event kind
-        const sec = utcToVideo(Date.parse(g.t_utc));
-        if (sec == null || sec < 0 || sec > dur) continue;
-        const x = (sec / dur) * width;
-        markers.push(
-          `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${CATEGORIES.significant.color}"
-                data-sec="${sec.toFixed(1)}" title="${word}"></div>`);
-      }
+    for (const g of bundle.guideposts) {
+      const word = SIGNIFICANT_WORD[g.category];
+      if (!word) continue;                         // not a race-event kind
+      // Shown by its own switch (crash/attack/catch) or the umbrella.
+      if (!enabled[g.category] && !enabled.significant) continue;
+      const sec = utcToVideo(Date.parse(g.t_utc));
+      if (sec == null || sec < 0 || sec > dur) continue;
+      const x = (sec / dur) * width;
+      markers.push(
+        `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${EVENT_COLOR[g.category]}"
+              data-sec="${sec.toFixed(1)}" title="${word}"></div>`);
     }
 
     // Contenders: a STAR on the elevation curve, formatted like the climb
