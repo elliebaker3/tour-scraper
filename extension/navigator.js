@@ -113,26 +113,29 @@
     return kept;
   }
 
-  /** Ad-break seconds fully before a recording second. */
-  function cumAd(sec, breaks) {
-    let s = 0;
-    for (const b of breaks) { if (b.e <= sec) s += b.d; else break; }
-    return s;
+  /** Number of ad breaks fully before a recording second. */
+  function breaksBefore(sec, breaks) {
+    let n = 0;
+    for (const b of breaks) { if (b.e <= sec) n++; else break; }
+    return n;
   }
 
   /* Calibration model.
    *
-   * With the ad breaks known, race time maps to recording time as:
-   *     race = R0 + rec + k * cumAd(rec)
-   * -- rate 1 through content, plus the race lost so far to ad breaks. cumAd is
-   * exact from the cues; R0 (origin) and k (race lost per ad-second) are the
-   * only unknowns, so TWO readings across at least one break fit the whole
-   * stage, however many breaks there are. One reading fits R0 with k assumed 1
-   * (each break lost about its own length); more readings least-squares both.
+   * Each ad break costs the SAME amount of race time (broadcast ad breaks are
+   * fixed-length), so with the breaks known:
+   *     race = R0 + rec + delta * (number of breaks before rec)
+   * -- rate 1 through content, plus a constant delta of race lost at each break.
+   * The break COUNT is exact from the cues; R0 (origin) and delta (race lost per
+   * break) are the only unknowns. A reading just BEFORE and just AFTER one ad
+   * break differ by exactly one in count, so they measure delta directly -- and
+   * it then applies to every break, near or far. More readings least-squares it.
+   * One reading alone can't measure delta, so it falls back to delta = the
+   * break's own length (a rough guess) until a second reading is added.
    *
    * With no cue track (not Peacock, or markup changed) it falls back to the
-   * previous cue-less piecewise model: rate 1, offset stepped at the midpoint
-   * between readings that disagree. */
+   * cue-less piecewise model: rate 1, offset stepped at the midpoint between
+   * readings that disagree. */
   const CUT_EPS_SEC = 25;
 
   function calFromAnchors() {
@@ -143,29 +146,27 @@
     const breaks = adBreaksFromPlayer();
 
     if (breaks.length) {
-      const xs = reads.map((r) => cumAd(r.rec, breaks));   // ad-secs before it
-      const ys = reads.map((r) => r.race - r.rec);         // = R0 + k*x
-      let k, R0;
-      if (reads.length >= 2 && Math.max(...xs) - Math.min(...xs) > 30) {
+      const xs = reads.map((r) => breaksBefore(r.rec, breaks));   // break count
+      const ys = reads.map((r) => r.race - r.rec);                // = R0 + delta*x
+      let delta, R0;
+      if (reads.length >= 2 && Math.max(...xs) - Math.min(...xs) >= 1) {
         const n = xs.length, mx = xs.reduce((a, b) => a + b, 0) / n,
               my = ys.reduce((a, b) => a + b, 0) / n;
         let num = 0, den = 0;
         for (let i = 0; i < n; i++) { num += (xs[i] - mx) * (ys[i] - my); den += (xs[i] - mx) ** 2; }
-        k = Math.max(0, Math.min(2, den ? num / den : 1));
-        R0 = my - k * mx;
+        delta = Math.max(0, den ? num / den : 0);
+        R0 = my - delta * mx;
       } else {
-        k = 1;                                             // one reading: assume full loss
-        R0 = _median(ys.map((y, i) => y - k * xs[i]));
+        delta = _median(breaks.map((b) => b.d));    // one reading: guess = break length
+        R0 = _median(ys.map((y, i) => y - delta * xs[i]));
       }
-      // Content regions between breaks, each with its cumulative ad-time.
-      const regions = [{ recLo: -Infinity, recHi: breaks[0].t, C: 0 }];
-      let cum = 0;
+      // Content regions between breaks, each carrying the break count before it.
+      const regions = [{ recLo: -Infinity, recHi: breaks[0].t, n: 0 }];
       for (let i = 0; i < breaks.length; i++) {
-        cum += breaks[i].d;
-        regions.push({ recLo: breaks[i].e, C: cum,
+        regions.push({ recLo: breaks[i].e, n: i + 1,
                        recHi: i + 1 < breaks.length ? breaks[i + 1].t : Infinity });
       }
-      return { model: "adbreak", breaks, R0, k, regions, readings: reads.length };
+      return { model: "adbreak", breaks, R0, delta, regions, readings: reads.length };
     }
 
     // ---- fallback: cue-less piecewise (midpoint seams) ----
@@ -193,7 +194,7 @@
   function videoToUtc(sec) {
     if (!cal) return null;
     if (cal.model === "adbreak") {
-      return (cal.R0 + sec + cal.k * cumAd(sec, cal.breaks)) * 1000;
+      return (cal.R0 + sec + cal.delta * breaksBefore(sec, cal.breaks)) * 1000;
     }
     let s = cal.segs[cal.segs.length - 1];
     for (const g of cal.segs) if (sec < g.vHi) { s = g; break; }
@@ -207,15 +208,15 @@
     const R = tUtcMs / 1000;
     if (cal.model === "adbreak") {
       for (const g of cal.regions) {
-        const rec = R - cal.R0 - cal.k * g.C;
+        const rec = R - cal.R0 - cal.delta * g.n;
         if (rec >= g.recLo && rec < g.recHi) return rec;
       }
       for (const g of cal.regions) {                       // in a lost gap
         const lo = g.recLo === -Infinity ? 0 : g.recLo;
-        if (cal.R0 + lo + cal.k * g.C > R) return lo;
+        if (cal.R0 + lo + cal.delta * g.n > R) return lo;
       }
       const last = cal.regions[cal.regions.length - 1];
-      return R - cal.R0 - cal.k * last.C;
+      return R - cal.R0 - cal.delta * last.n;
     }
     const S = cal.segs;
     for (const s of S) if (R >= s.zero + s.vLo && R < s.zero + s.vHi) return R - s.zero;
@@ -608,8 +609,8 @@ exposes — including ad-break cue times. Copies to the clipboard.">Diagnose</bu
       </div>
       <div class="tn-setup">
         <span class="tn-setup-ask">Pause where the broadcast shows
-          <strong>km to go</strong> and type it here (best: one reading early,
-          one near the finish):</span>
+          <strong>km to go</strong> and type it here (best: one reading, then one
+          just after an ad break):</span>
         <input class="tn-togo-km" size="5" placeholder="42" inputmode="decimal">
         <span class="tn-setup-unit">km to go</span>
         <button class="tn-togo-set">Calibrate</button>
@@ -802,23 +803,24 @@ the stage. The median of all readings is used.">
       // Ad breaks locate themselves from the player. One reading fixes the
       // origin but has to ASSUME how much race each break costs (its own
       // length); if that's off, the error grows with every later break -- the
-      // drift-toward-the-end. A second reading NEAR THE FINISH fixes it: the two
-      // readings, far apart, fit the per-break loss instead of assuming it.
+      // drift-toward-the-end. A reading just before and just after ONE ad break
+      // measures that per-break cost directly, and it applies to every break.
       parts.push(`${cal.breaks.length} ad breaks from the player`);
       if (p.length === 1) {
-        parts.push("origin set — ▶ add a reading NEAR THE FINISH so it stays " +
-                   "accurate to the end");
+        parts.push("origin set — ▶ add a reading just AFTER the next ad break " +
+                   "to measure its cost");
       } else {
-        // The wider the spread in ad-time between readings, the better k is
-        // pinned; two close-together readings can't fit it.
-        const xs = pins().map((a) => cumAd(a.videoSec, cal.breaks));
-        const spanMin = (Math.max(...xs) - Math.min(...xs)) / 60;
-        parts.push(`${p.length} readings · ~${Math.round(cal.k * 100)}% of each break lost`);
-        if (spanMin < 3) {
-          parts.push("⚠ readings too close together — put one near the finish");
+        // Readings must straddle at least one break (different break counts) to
+        // measure the per-break cost.
+        const xs = pins().map((a) => breaksBefore(a.videoSec, cal.breaks));
+        if (Math.max(...xs) - Math.min(...xs) < 1) {
+          parts.push(`${p.length} readings, but none straddle an ad break — ` +
+                     "put one before and one after a break");
+        } else {
+          parts.push(`${p.length} readings · each break costs ~${Math.round(cal.delta)}s of race`);
+          const worst = Math.max(0, ...pinResidualsSec().map(Math.abs));
+          if (worst > 90) parts.push("⚠ readings disagree — re-check one");
         }
-        const worst = Math.max(0, ...pinResidualsSec().map(Math.abs));
-        if (worst > 90) parts.push("⚠ readings disagree — re-check one");
       }
     } else {
       const cuts = cal.cuts || [];
@@ -850,7 +852,7 @@ the stage. The median of all readings is used.">
     if (cal.model === "adbreak") {
       el.textContent = `${p.length} reading${p.length === 1 ? "" : "s"} · ` +
         `${cal.breaks.length} ad breaks from the player` +
-        (p.length === 1 ? " — add one near the finish for the end of the stage" : "");
+        (p.length === 1 ? " — add one just after an ad break" : "");
       return;
     }
     if (p.length === 1) {

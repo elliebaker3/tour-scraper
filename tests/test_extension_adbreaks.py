@@ -1,13 +1,16 @@
 """Ad-break-aware calibration.
 
-The recording runs at rate 1 through content; at each ad break the race jumps
-forward by K x (break duration) -- the live race that played out under the ads
-and is missing from the recording. The extension reads the break LOCATIONS from
-an injected cvsdk-event-track, so:
+The recording runs at rate 1 through content; at each ad break a CONSTANT amount
+of race is lost (the live race under the ads), regardless of that break's length
+-- broadcast ad breaks are fixed-length. The breaks here deliberately DIFFER in
+length (90 / 60 / 120s) to prove the loss is treated as per-break, not
+per-second. The extension reads the break locations from an injected
+cvsdk-event-track, so:
 
-  * with K = 1 (each break loses exactly its own length -- the physical case),
-    ONE reading fixes the origin and the whole stage is placed accurately;
-  * with K != 1, a SECOND reading past a break recovers K.
+  * one reading fixes the origin, with the per-break loss assumed (the whole
+    stage is then exact if that assumption matches);
+  * a reading just before and just after ONE ad break measures the per-break
+    loss directly, and it extrapolates to every other break, whatever its length.
 
 Accuracy is checked across every region, including breaks no reading bracketed.
 """
@@ -26,7 +29,7 @@ first_obs = min(datetime.fromisoformat(p["t"]).timestamp() for p in obs)
 obs_max = max(p["kmto"] for p in obs) - 2
 obs_min = min(p["kmto"] for p in obs) + 2
 
-BREAKS = [(3000.0, 90.0), (6000.0, 90.0), (10000.0, 90.0)]   # (rec start, duration)
+BREAKS = [(3000.0, 90.0), (6000.0, 60.0), (10000.0, 120.0)]  # varying durations
 R0_TRUE = first_obs - 300                                    # race-sec at rec 0
 
 _REG = [(-1e9, BREAKS[0][0], 0.0)]
@@ -48,27 +51,28 @@ def time_at_kmto(km):
     return None
 
 
-def rec_for_kmto(km, k):
+def rec_for_kmto(km, delta):
+    # recording model: race = R0 + rec + delta * (breaks before rec)
     R = time_at_kmto(km + 0.5)
-    for lo, hi, C in _REG:
-        rec = R - R0_TRUE - k * C
+    for i, (lo, hi, _C) in enumerate(_REG):
+        rec = R - R0_TRUE - delta * i     # region i has i breaks before it
         if lo <= rec < hi:
-            return rec, _REG.index((lo, hi, C))
+            return rec, i
     return None, None
 
 
 usable = lambda km: obs_min <= km + 0.5 <= obs_max and time_at_kmto(km + 0.5) is not None
 
 
-def run(page, show, k, readings):
+def run(page, show, delta, readings):
     """Calibrate with `readings` readings for a recording with loss factor k,
     then return the worst km-to-go error across the whole stage."""
     def set_rec(km):
-        rec, _ = rec_for_kmto(km, k)
+        rec, _ = rec_for_kmto(km, delta)
         page.evaluate(f"() => document.querySelector('video').currentTime = {rec}")
 
     def region(km):
-        return rec_for_kmto(km, k)[1]
+        return rec_for_kmto(km, delta)[1]
 
     r0 = next(km for km in range(int(obs_max), 0, -1) if usable(km) and region(km) == 0)
     set_rec(r0); page.fill(".tn-togo-km", str(r0)); page.click(".tn-togo-set")
@@ -85,7 +89,7 @@ def run(page, show, k, readings):
     for km in range(int(obs_max), int(obs_min), -12):
         if not usable(km):
             continue
-        rec, reg = rec_for_kmto(km, k)
+        rec, reg = rec_for_kmto(km, delta)
         if rec is None or rec < 0 or rec > 19225:
             continue
         page.evaluate(f"() => document.querySelector('video').currentTime = {rec}")
@@ -96,7 +100,7 @@ def run(page, show, k, readings):
             continue
         off = abs(float(m.group(1)) - (km + 0.5))
         worst = max(worst, off)
-        assert off <= 1.5, f"FAIL: {off:.1f} km off at {km} km to go (region {reg}, k={k})"
+        assert off <= 1.5, f"FAIL: {off:.1f} km off at {km} km to go (region {reg}, delta={delta})"
     return worst, diag
 
 
@@ -127,15 +131,17 @@ try:
             "() => document.querySelector('.tn-root').classList.remove('tn-hidden')")
         show()
 
-        # ONE reading, k = 1 (the physical case): whole stage accurate.
-        worst1, d1 = run(page, show, k=1.0, readings=1)
-        print(f"one reading,  k=1.0: worst {worst1:.2f} km · {d1.split(' · ',2)[1]}")
+        # ONE reading, loss per break = the assumed default (median duration 90s):
+        # exact across all breaks even though the breaks differ in length.
+        worst1, d1 = run(page, show, delta=90.0, readings=1)
+        print(f"one reading,  delta=90s: worst {worst1:.2f} km · {d1.split(' · ',2)[1]}")
 
         page.click(".tn-anchor-clear"); page.wait_for_timeout(400); show()
 
-        # TWO readings recover a non-unit loss factor (k = 0.8).
-        worst2, d2 = run(page, show, k=0.8, readings=2)
-        print(f"two readings, k=0.8: worst {worst2:.2f} km · {d2.split(' · ',2)[1]}")
+        # TWO readings straddling ONE break measure a different per-break loss
+        # (72s) and it extrapolates to the other, differently-sized breaks.
+        worst2, d2 = run(page, show, delta=72.0, readings=2)
+        print(f"two readings, delta=72s: worst {worst2:.2f} km · {d2.split(' · ',2)[1]}")
 
         print(f"\npage errors: {errs or 'none'}")
         assert not errs, f"FAIL: page errors {errs}"
