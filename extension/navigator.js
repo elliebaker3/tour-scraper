@@ -83,61 +83,92 @@
    * km 0 is the one input, and it is enough. */
   function pins() { return anchors.filter((a) => a.kind); }
 
-  // Below this baseline between two readings, rate cannot be fitted reliably:
-  // each km-to-go reading carries ~45s of rounding, and dividing that by a
-  // short span turns it into a wild slope. Under it, offset only.
-  const MIN_RATE_BASELINE_SEC = 20 * 60;
-  const impliedZeroMs = (a) => a.tUtcMs - a.videoSec * 1000;
+  /* The recording tracks race time 1:1 EXCEPT where ad breaks cut a chunk out.
+   * Between two ad breaks there is no drift, so a reading pins its whole span
+   * exactly (rate 1); the only discontinuities are the chunks removed at the
+   * breaks. So the calibration is piecewise: one offset per span, with a step
+   * wherever consecutive readings disagree by more than rounding -- that step
+   * is a detected ad-break cut.
+   *
+   * A span's offset is `zero` = raceSec - videoSec: within it, raceSec =
+   * videoSec + zero. Readings that land in the same span (their zero agrees to
+   * within CUT_EPS_SEC) are averaged, so extra readings sharpen a span rather
+   * than being discarded. Every reading is used. */
+  const CUT_EPS_SEC = 25;   // a bigger zero-gap than this is a real cut, not rounding
 
-  /* One reading gives the OFFSET at rate 1.0 -- the best a single point can do.
-   * Two or more readings, far enough apart, also give the RATE: this recording
-   * runs at ~0.918x race time (about 20 min of racing is not in it), so a rate
-   * of exactly 1.0 is right only at the calibration point and drifts several km
-   * either side of it. rate comes from a least-squares fit of recording-second
-   * against race-time across all readings, which averages out their rounding. */
+  function _median(xs) {
+    const s = [...xs].sort((a, b) => a - b);
+    const m = s.length >> 1;
+    return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+  }
+
   function calFromAnchors() {
     const p = pins();
     if (!p.length) return null;
-    if (p.length === 1) {
-      return { refMs: p[0].tUtcMs, offsetSec: p[0].videoSec, rate: 1.0 };
+    const reads = p.map((a) => ({ v: a.videoSec, zero: a.tUtcMs / 1000 - a.videoSec }))
+                   .sort((a, b) => a.v - b.v);
+
+    // Group consecutive readings into spans, splitting where the offset jumps.
+    const groups = [[reads[0]]];
+    for (let i = 1; i < reads.length; i++) {
+      if (Math.abs(reads[i].zero - reads[i - 1].zero) > CUT_EPS_SEC) groups.push([]);
+      groups[groups.length - 1].push(reads[i]);
     }
-    const xs = p.map((a) => a.tUtcMs / 1000);      // race seconds
-    const ys = p.map((a) => a.videoSec);           // recording seconds
-    const baseline = Math.max(...xs) - Math.min(...xs);
-    const refMs = p[0].tUtcMs;
-    if (baseline < MIN_RATE_BASELINE_SEC) {
-      // Too close to trust a slope: hold rate at 1.0, offset from the median.
-      const z = p.map(impliedZeroMs).sort((a, b) => a - b);
-      return { refMs: z[z.length >> 1], offsetSec: 0, rate: 1.0 };
+
+    const segs = groups.map((g) => ({
+      zero: _median(g.map((r) => r.zero)),   // robust to per-reading rounding
+      vFirst: g[0].v,
+      vLast: g[g.length - 1].v,
+    }));
+    // Domain boundaries: midpoint (in recording time) between adjacent spans;
+    // ±∞ at the ends. Race time in the gap between two spans' ranges is what
+    // the ad break removed, and has no recording position.
+    for (let i = 0; i < segs.length; i++) {
+      segs[i].vLo = i === 0 ? -Infinity : (segs[i - 1].vLast + segs[i].vFirst) / 2;
+      segs[i].vHi = i === segs.length - 1 ? Infinity : (segs[i].vLast + segs[i + 1].vFirst) / 2;
     }
-    const n = xs.length;
-    const mx = xs.reduce((s, v) => s + v, 0) / n;
-    const my = ys.reduce((s, v) => s + v, 0) / n;
-    let num = 0, den = 0;
-    for (let i = 0; i < n; i++) { num += (xs[i] - mx) * (ys[i] - my); den += (xs[i] - mx) ** 2; }
-    let rate = den ? num / den : 1.0;
-    rate = Math.max(0.5, Math.min(1.5, rate));     // reject nonsense slopes
-    const offsetSec = my - rate * (mx - refMs / 1000);
-    return { refMs, offsetSec, rate };
+    const cuts = [];
+    for (let i = 1; i < segs.length; i++) {
+      cuts.push({ atVideoSec: segs[i].vLo, removedSec: segs[i].zero - segs[i - 1].zero });
+    }
+    return { segs, cuts, readings: reads.length };
   }
 
-  /** Recording-second error of each reading against the fitted line -- how much
-   *  the readings disagree once rate is accounted for. */
-  function pinResidualsSec() {
-    const p = pins();
-    if (p.length < 2 || !cal) return [];
-    return p.map((a) => a.videoSec - utcToVideo(a.tUtcMs));
+  function _segForVideo(sec) {
+    const S = cal.segs;
+    for (const s of S) if (sec < s.vHi) return s;
+    return S[S.length - 1];
   }
 
+  /** recording second -> race UTC (ms). Rate 1 within the span. */
+  function videoToUtc(sec) {
+    if (!cal) return null;
+    return (sec + _segForVideo(sec).zero) * 1000;
+  }
 
+  /** race UTC (ms) -> recording second. Rate 1 within the span; race time that
+   *  fell inside an ad break has no recording position, so it snaps to the
+   *  seam (the cut point on the bar). */
   function utcToVideo(tUtcMs) {
     if (!cal) return null;
-    return cal.offsetSec + cal.rate * (tUtcMs - cal.refMs) / 1000;
+    const S = cal.segs, R = tUtcMs / 1000;
+    for (const s of S) {
+      if (R >= s.zero + s.vLo && R < s.zero + s.vHi) return R - s.zero;
+    }
+    for (let i = 1; i < S.length; i++) {           // in a cut gap -> the seam
+      if (S[i].zero + S[i].vLo > R) return S[i].vLo;
+    }
+    return R - S[S.length - 1].zero;               // beyond the last span
   }
 
-  function videoToUtc(sec) {
-    if (!cal || !cal.rate) return null;
-    return cal.refMs + ((sec - cal.offsetSec) / cal.rate) * 1000;
+  /** How far each reading sits from its span's fitted offset (rounding scatter),
+   *  in recording seconds. Near zero once ad-break cuts are modelled. */
+  function pinResidualsSec() {
+    if (!cal) return [];
+    return pins().map((a) => {
+      const s = _segForVideo(a.videoSec);
+      return (a.tUtcMs / 1000 - a.videoSec) - s.zero;
+    });
   }
 
   const fmt = (sec) => {
@@ -448,9 +479,12 @@
     clock.className = "tn-clock" +
       (g == null ? "" : g > 1.5 ? " tn-up" : g < -1.5 ? " tn-down" : "");
 
+    const nCuts = (cal.cuts || []).length;
     root.querySelector(".tn-diag").textContent =
       `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
-      `rate ${cal.rate.toFixed(3)}× · ${bundle.__selection || ""}`;
+      `${cal.readings} reading${cal.readings === 1 ? "" : "s"}` +
+      (nCuts ? ` · ${nCuts} cut${nCuts > 1 ? "s" : ""}` : "") +
+      ` · ${bundle.__selection || ""}`;
   }
 
   /** Gradient at a point on the route, in percent, averaged over ~1km so it
@@ -677,28 +711,20 @@ the stage. The median of all readings is used.">
     const parts = [`${km} km to go — reading added`];
     if (hit.est) parts.push("⚠ that stretch has no GPS — pace is inferred there");
 
+    const cuts = cal.cuts || [];
     if (p.length === 1) {
-      // One reading fixes the offset but assumes the recording tracks race time
-      // 1:1 -- which this one does NOT (~0.918x). So the profile is right here
-      // and drifts several km either side. A second reading FAR from this one
-      // is what corrects it, so ask for it plainly.
-      parts.push("offset set, rate assumed 1.0×");
-      parts.push("▶ now add a reading from far away (near the finish is ideal) " +
-                 "to fix the drift");
+      parts.push("this span is exact");
+      parts.push("▶ add a reading in each other part of the stage — anywhere an " +
+                 "ad break falls between readings is corrected automatically");
     } else {
-      const xs = p.map((a) => a.tUtcMs / 1000);
-      const baselineMin = (Math.max(...xs) - Math.min(...xs)) / 60;
-      const res = pinResidualsSec().map(Math.abs);
-      const worst = res.length ? Math.max(...res) : 0;
-      parts.push(`${p.length} readings over ${baselineMin.toFixed(0)} min`);
-      if (baselineMin < 20) {
-        parts.push("⚠ readings too close to fix rate — spread them out, " +
-                   "one early one late");
-      } else {
-        parts.push(`rate ${cal.rate.toFixed(3)}× · fits to ±${worst.toFixed(0)}s`);
-        if (worst > 90) {
-          parts.push("⚠ readings disagree — re-check one, or reset and redo");
-        }
+      parts.push(`${p.length} readings`);
+      parts.push(cuts.length
+        ? `${cuts.length} ad-break cut${cuts.length > 1 ? "s" : ""} ` +
+          `(${cuts.map((c) => `${Math.round(c.removedSec / 60)}m`).join(", ")}) removed`
+        : "no cuts between them");
+      const worst = Math.max(0, ...pinResidualsSec().map(Math.abs));
+      if (worst > 90) {
+        parts.push("⚠ two readings in one span disagree — re-check one");
       }
     }
     el.textContent = parts.join(" · ");
@@ -716,13 +742,12 @@ the stage. The median of all readings is used.">
     const p = pins();
     if (!p.length) { el.textContent = "not calibrated"; return; }
     if (p.length === 1) {
-      el.textContent = "1 reading · rate 1.0× assumed — add one far away to fix drift";
+      el.textContent = "1 reading · exact in this span — add one in each other part of the stage";
       return;
     }
-    const res = pinResidualsSec().map(Math.abs);
-    const worst = res.length ? Math.max(...res) : 0;
-    el.textContent =
-      `${p.length} readings · rate ${cal.rate.toFixed(3)}× · fits to ±${worst.toFixed(0)}s`;
+    const nCuts = (cal.cuts || []).length;
+    el.textContent = `${p.length} readings · ` +
+      (nCuts ? `${nCuts} ad-break cut${nCuts > 1 ? "s" : ""} modelled` : "no cuts");
   }
 
 
