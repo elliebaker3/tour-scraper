@@ -26,14 +26,22 @@
   // The race-event markers all default OFF -- an empty bar is the calm default,
   // and the viewer opts into whichever kind they want to see. History and stats
   // were dropped entirely.
+  // Filter toggles. The four race-event categories are collapsed into one
+  // "Significant event" switch -- a crash, attack, catch or scenic beat all read
+  // as "something worth jumping to". Contenders (persons of interest) are their
+  // own switch, marked with a star.
   const CATEGORIES = {
-    sprint:          { label: "Sprints",    color: "#22c55e", on: true },
-    kom:             { label: "Climbs",     color: "#ef4444", on: true },
-    poi:             { label: "★ Contenders", color: "#facc15", on: true },
-    crash:           { label: "Crashes",    color: "#e5484d", on: false },
-    breakaway_start: { label: "Attacks",    color: "#f5a524", on: false },
-    breakaway_end:   { label: "Caught",     color: "#8b7cf6", on: false },
-    scenic:          { label: "Scenery",    color: "#30a46c", on: false },
+    sprint:      { label: "Sprints",           color: "#22c55e", on: true },
+    kom:         { label: "Climbs",            color: "#ef4444", on: true },
+    poi:         { label: "Contenders",        color: "#facc15", on: true },
+    significant: { label: "Significant event", color: "#f5a524", on: false },
+  };
+
+  // Which guidepost categories a "significant event" covers, and the word shown
+  // for each (the KIND of moment, never who -- staying spoiler-light).
+  const SIGNIFICANT_WORD = {
+    crash: "crash", breakaway_start: "attack",
+    breakaway_end: "caught", scenic: "scenery",
   };
 
   // Climb grades shade from yellow (cat 4) to deep red (HC), the way a stage
@@ -373,31 +381,39 @@
     }
 
     const markers = [];
-    for (const g of bundle.guideposts) {
-      if (!enabled[g.category]) continue;
-      const sec = utcToVideo(Date.parse(g.t_utc));
-      if (sec == null || sec < 0 || sec > dur) continue;
-      const x = (sec / dur) * width;
-      const c = CATEGORIES[g.category]?.color || "#fff";
-      markers.push(
-        `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${c}"
-              data-sec="${sec.toFixed(1)}"
-              title="${escapeHtml(g.label)}"></div>`);
+    if (enabled.significant) {
+      for (const g of bundle.guideposts) {
+        const word = SIGNIFICANT_WORD[g.category];
+        if (!word) continue;                       // not a significant-event kind
+        const sec = utcToVideo(Date.parse(g.t_utc));
+        if (sec == null || sec < 0 || sec > dur) continue;
+        const x = (sec / dur) * width;
+        markers.push(
+          `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${CATEGORIES.significant.color}"
+                data-sec="${sec.toFixed(1)}" title="${word}"></div>`);
+      }
     }
 
-    // One uniform marker for ANY person-of-interest event -- same for every
-    // rider and every event kind. Deliberately NO tooltip: revealing who or
-    // what happens would be a spoiler. It only says "a contender moment is
-    // here", and clicking seeks to it so you can watch it unfold yourself.
+    // Contenders: a STAR on the elevation curve, formatted like the climb
+    // markers (a dot on the line with a badge), for any person-of-interest
+    // event. Deliberately NO tooltip: revealing who or what happens is a
+    // spoiler. Clicking seeks to it so you can watch it unfold yourself.
     const poiMarks = [];
     if (enabled.poi) {
       for (const m of bundle.special_markers || []) {
         const sec = utcToVideo(Date.parse(m.t_utc));
         if (sec == null || sec < 0 || sec > dur) continue;
         const x = (sec / dur) * width;
+        const alt = altAtRaceMs(Date.parse(m.t_utc));
+        const y = alt != null ? yForAlt(alt) : height / 2;
+        const place =
+          (y < 20 ? " tn-rm-below" : "") +
+          (x < 16 ? " tn-rm-atleft" : x > width - 16 ? " tn-rm-atright" : "");
         poiMarks.push(
-          `<div class="tn-poi" style="left:${x.toFixed(1)}px"
-                data-sec="${sec.toFixed(1)}"><span class="tn-poi-dot"></span></div>`);
+          `<div class="tn-poi tn-rm${place}" data-sec="${sec.toFixed(1)}"
+                style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;--rm:${CATEGORIES.poi.color}">
+             <span class="tn-rm-badge">★</span>
+           </div>`);
       }
     }
 
@@ -451,6 +467,18 @@
     root.querySelector(".tn-diag").textContent =
       `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
       `rate ${cal.rate.toFixed(3)}× · ${bundle.__selection || ""}`;
+  }
+
+  /** Altitude at a race time (ms), from the nearest timed profile point -- so a
+   *  contender marker can sit on the elevation curve, like the climb markers. */
+  function altAtRaceMs(ms) {
+    let best = null, gap = Infinity;
+    for (const p of bundle.profile) {
+      if (!p.t) continue;
+      const g = Math.abs(Date.parse(p.t) - ms);
+      if (g < gap) { best = p; gap = g; }
+    }
+    return best ? best.alt : null;
   }
 
   /** Gradient at a point on the route, in percent, averaged over ~1km so it

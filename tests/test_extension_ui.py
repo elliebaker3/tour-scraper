@@ -225,10 +225,12 @@ try:
                         if m.get("t_utc"))
         print(f"\n  POI markers drawn: {s['poiMarks']} (bundle has {n_special})")
         assert s["poiMarks"] == n_special, "FAIL: POI markers not all drawn"
+        # The only text allowed on a contender marker is the star glyph itself;
+        # no rider name, no event description, no tooltip.
         leak = page.evaluate("""() => {
           const out = [];
           for (const el of document.querySelectorAll('.tn-poi, .tn-poi *')) {
-            const t = (el.textContent || '').trim();
+            const t = (el.textContent || '').replace('\\u2605', '').trim();
             const title = el.getAttribute('title');
             const aria = el.getAttribute('aria-label');
             if (t) out.push('text:' + t);
@@ -237,7 +239,7 @@ try:
           }
           return out;
         }""")
-        assert not leak, f"FAIL: POI marker leaks who/what: {leak}"
+        assert not leak, f"FAIL: contender marker leaks who/what: {leak}"
         surnames = {p["name"].split()[-1]
                     for j in ("yellow", "green", "white")
                     for p in (bundle.get("persons_of_interest") or {}).get(j, [])}
@@ -264,11 +266,12 @@ try:
         print(f"  badges clipped by the bar edge: {clip or 'none'}")
         assert not clip, f"FAIL: route badges cut off: {clip}"
 
-        # Toggling a race-event category on still makes its markers appear.
-        page.click(".tn-filter:has-text('Attacks') input")
+        # The one "Significant event" toggle covers all the race-event kinds.
+        assert state()["markers"] == 0, "FAIL: significant events should default off"
+        page.click(".tn-filter:has-text('Significant event') input")
         page.wait_for_timeout(400)
-        assert state()["markers"] > 0, "FAIL: enabling Attacks drew no markers"
-        page.click(".tn-filter:has-text('Attacks') input")   # back off
+        assert state()["markers"] > 0, "FAIL: enabling Significant event drew no markers"
+        page.click(".tn-filter:has-text('Significant event') input")   # back off
         page.wait_for_timeout(300)
 
         # The bar spans the whole recording.
