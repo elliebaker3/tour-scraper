@@ -82,7 +82,15 @@ The panel always states what it is assuming:
 
     stage 14 (2026-07-18) · rec 0:00 = 10:36:29Z · rate 1.000× · matched airing date
 
-Collapsing (**–**) keeps the profile as a slim strip and hides the controls.
+The panel **rides with the player's controls**: it fades in when you move the
+mouse and out after a few seconds of stillness, sitting just above the player's
+own scrub bar, so it is there when you're scrubbing and gone when you're
+watching. Hovering it keeps it up.
+
+**Sprints and climbs are shown by default; race events are not.** The elevation
+graphic (profile + sprint/climb markers) is always on; crashes, attacks,
+catches and scenery each have a checkbox that starts off, so the bar is calm
+until you opt into a kind. Collapsing (**–**) keeps the profile as a slim strip.
 
 Tests (need Playwright):
 

@@ -22,15 +22,17 @@
   "use strict";
 
   const STORAGE_KEY = "tourNavigatorAnchors";
+  // Sprints and climbs are part of the elevation graphic, so they default on.
+  // The race-event markers all default OFF -- an empty bar is the calm default,
+  // and the viewer opts into whichever kind they want to see. History and stats
+  // were dropped entirely.
   const CATEGORIES = {
     sprint:          { label: "Sprints",    color: "#22c55e", on: true },
     kom:             { label: "Climbs",     color: "#ef4444", on: true },
-    crash:           { label: "Crashes",    color: "#e5484d", on: true },
-    breakaway_start: { label: "Attacks",    color: "#f5a524", on: true },
-    breakaway_end:   { label: "Caught",     color: "#8b7cf6", on: true },
-    scenic:          { label: "Scenery",    color: "#30a46c", on: true },
-    history:         { label: "History",    color: "#0091ff", on: true },
-    stat:            { label: "Stats",      color: "#8b8b8b", on: false },
+    crash:           { label: "Crashes",    color: "#e5484d", on: false },
+    breakaway_start: { label: "Attacks",    color: "#f5a524", on: false },
+    breakaway_end:   { label: "Caught",     color: "#8b7cf6", on: false },
+    scenic:          { label: "Scenery",    color: "#30a46c", on: false },
   };
 
   // Climb grades shade from yellow (cat 4) to deep red (HC), the way a stage
@@ -344,8 +346,14 @@
       const badge = isKom ? (m.finish ? "🏁" : (m.cat || "").replace("Cat ", "")) : "S";
       const tip = `${fmt(sec)} — ${m.label}` +
                   (m.kmto != null ? ` · ${m.kmto} km to go · ${m.alt}m` : "");
+      // Keep the badge fully inside the bar. It normally floats above the dot,
+      // but summits sit near the top, so flip it below when there isn't room;
+      // and shift it inward at the very edges so it is never clipped.
+      const place =
+        (y < 20 ? " tn-rm-below" : "") +
+        (x < 16 ? " tn-rm-atleft" : x > width - 16 ? " tn-rm-atright" : "");
       routeMarks.push(
-        `<div class="tn-rm tn-rm-${m.kind}${m.finish ? " tn-rm-finish" : ""}"
+        `<div class="tn-rm tn-rm-${m.kind}${m.finish ? " tn-rm-finish" : ""}${place}"
               style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;--rm:${color}"
               data-sec="${sec.toFixed(1)}" title="${escapeHtml(tip)}">
            <span class="tn-rm-badge">${escapeHtml(badge)}</span>
@@ -842,6 +850,28 @@ the stage. The median of all readings is used.">
       render();          // unconditional: the profile draws with or without video
     }, 500);
     window.addEventListener("resize", render);
+
+    // The panel rides with the player's own controls: it shows on mouse
+    // movement and fades out after a few seconds of stillness, so it is present
+    // exactly when Peacock's scrub bar is and gone when the picture is clean.
+    // Hovering the panel itself keeps it up, so it never vanishes mid-use.
+    let hideTimer = null;
+    const HIDE_AFTER_MS = 3000;
+    const showTransiently = () => {
+      root.classList.remove("tn-hidden");
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => {
+        if (!root.matches(":hover")) root.classList.add("tn-hidden");
+      }, HIDE_AFTER_MS);
+    };
+    root.classList.add("tn-hidden");
+    document.addEventListener("mousemove", showTransiently, { passive: true });
+    document.addEventListener("keydown", showTransiently, true);
+    root.addEventListener("mouseenter", () => {
+      clearTimeout(hideTimer);
+      root.classList.remove("tn-hidden");
+    });
+    root.addEventListener("mouseleave", showTransiently);
   }
 
   start();

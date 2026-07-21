@@ -9,7 +9,9 @@
 .tn-root {
   position: fixed;
   left: 50%;
-  bottom: 14px;
+  /* Sit just above the player's own control bar rather than at the very
+     bottom, so the graphic hovers over the visible scrubber. */
+  bottom: 96px;
   transform: translateX(-50%);
   width: min(1180px, 94vw);
   background: rgba(14, 16, 20, 0.94);
@@ -21,6 +23,16 @@
   z-index: 2147483647;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(6px);
+  /* Appears/disappears with the player controls (see .tn-hidden). */
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+/* Hidden state: fades out and lifts slightly, matching how player controls
+   retract. Non-interactive while hidden so it never eats a click on the video. */
+.tn-root.tn-hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+  pointer-events: none;
 }
 
 /* Collapsing hides the controls but never the profile — the profile is the
@@ -233,3 +245,12 @@
 }
 .tn-rm-finish .tn-rm-badge { background: transparent; box-shadow: none; font-size: 11px; }
 .tn-rm:hover .tn-rm-badge { transform: translateX(-50%) scale(1.25); }
+
+/* Keep every badge fully inside the bar. Summits sit near the top, so their
+   badge flips below the dot; markers at the extreme edges anchor to the dot
+   instead of centring, so nothing is clipped by the bar's overflow. */
+.tn-rm-below .tn-rm-badge { bottom: auto; top: 6px; }
+.tn-rm-atleft  .tn-rm-badge { left: 0; right: auto; transform: none; }
+.tn-rm-atright .tn-rm-badge { left: auto; right: 0; transform: none; }
+.tn-rm-atleft:hover  .tn-rm-badge,
+.tn-rm-atright:hover .tn-rm-badge { transform: scale(1.25); }

@@ -92,12 +92,17 @@ try:
                 return { min: Math.min(...xs), max: Math.max(...xs) };
               };
               return {
+                hidden: document.querySelector('.tn-root').classList.contains('tn-hidden'),
                 setupShown: vis('.tn-setup'),
                 barShown: vis('.tn-bar'),
                 controlsShown: vis('.tn-controls'),
                 markers: bar.querySelectorAll('.tn-marker').length,
                 sprints: bar.querySelectorAll('.tn-rm-sprint').length,
                 koms: bar.querySelectorAll('.tn-rm-kom').length,
+                filters: [...document.querySelectorAll('.tn-filter')]
+                          .map(f => f.textContent.trim()),
+                checkedFilters: [...document.querySelectorAll('.tn-filter input:checked')]
+                          .length,
                 komBadges: [...bar.querySelectorAll('.tn-rm-kom .tn-rm-badge')]
                             .map(e => e.textContent),
                 clock: document.querySelector('.tn-clock').textContent,
@@ -112,10 +117,28 @@ try:
               };
             }""")
 
+        # The panel hides itself until the mouse moves (it rides with the
+        # player controls). Every interaction below needs it shown, so reveal it
+        # after each load. Since the test never fires a mousemove, it then stays.
+        def show():
+            page.evaluate(
+                "() => document.querySelector('.tn-root').classList.remove('tn-hidden')")
+
+        # --- 0: hidden on load, shown on mouse move --------------------------
+        page.goto(base)
+        page.wait_for_selector(".tn-root", timeout=10000)
+        page.wait_for_timeout(500)
+        assert state()["hidden"], "FAIL: panel should start hidden until the mouse moves"
+        page.mouse.move(700, 300)
+        page.wait_for_timeout(200)
+        assert not state()["hidden"], "FAIL: panel should appear on mouse move"
+        print("--- visibility: hidden on load, shown on mouse move ✓")
+
         # --- 1: nothing before calibration -----------------------------------
         page.goto(base)
         page.wait_for_selector(".tn-root", timeout=10000)
         page.wait_for_timeout(3000)
+        show()
         s = state()
         print("--- before calibration ---")
         print(f"  setup shown    {s['setupShown']}")
@@ -133,11 +156,20 @@ try:
             assert gone not in s["buttons"], f"FAIL: {gone!r} still offered"
         assert "Calibrate" in s["buttons"], f"FAIL: no Calibrate button: {s['buttons']}"
 
+        # History and Stats are gone; race events default off; sprint/climb on.
+        joined = " ".join(s["filters"])
+        assert "History" not in joined and "Stats" not in joined, \
+            f"FAIL: History/Stats still offered: {s['filters']}"
+        print(f"  filters        {s['filters']}  ({s['checkedFilters']} on)")
+        assert s["checkedFilters"] == 2, \
+            f"FAIL: expected only Sprints+Climbs on by default, got {s['checkedFilters']}"
+
         # A saved calibration must NOT be restored: it is the flash-then-revert
         # bug. Even a current-shape entry is ignored and the prompt stays.
         page.goto(base + "&stalecal=1")
         page.wait_for_selector(".tn-root", timeout=10000)
         page.wait_for_timeout(3000)     # let the load settle and any restore fire
+        show()
         s2 = state()
         print("\n--- load with a saved calibration present ---")
         print(f"  setup shown {s2['setupShown']} · bar shown {s2['barShown']}")
@@ -147,6 +179,7 @@ try:
         page.goto(base)               # back to the clean page for the rest
         page.wait_for_selector(".tn-root", timeout=10000)
         page.wait_for_timeout(1500)
+        show()
 
         # --- 2: one reading calibrates the offset (rate assumed 1.0) ----------
         # Place the video where a 0.918x recording really shows "42 km to go".
@@ -160,7 +193,8 @@ try:
         print(f"  diag    {s['diag']}")
         assert s["barShown"], "FAIL: bar still hidden after calibrating"
         assert not s["setupShown"], "FAIL: setup prompt still shown after calibrating"
-        assert s["markers"] > 0, "FAIL: no guideposts after calibrating"
+        # Race-event markers default off, so the bar is uncluttered until asked.
+        assert s["markers"] == 0, "FAIL: event markers should default off"
         assert "rate 1.0" in s["diag"] or "rate 1.000" in s["diag"], \
             f"FAIL: one reading should assume rate 1.0, got: {s['diag']}"
 
@@ -176,6 +210,31 @@ try:
         # Categories are labelled (HC / 1-4), not generic.
         assert any(b in ("1", "2", "3") for b in s["komBadges"]), \
             f"FAIL: climb badges not category-labelled: {s['komBadges']}"
+
+        # No sprint/climb badge may spill outside the bar (the reported clipping).
+        clip = page.evaluate("""() => {
+          const bar = document.querySelector('.tn-bar').getBoundingClientRect();
+          const out = [];
+          for (const b of document.querySelectorAll('.tn-rm-badge')) {
+            const r = b.getBoundingClientRect();
+            if (r.left < bar.left - 0.5 || r.right > bar.right + 0.5 ||
+                r.top < bar.top - 0.5 || r.bottom > bar.bottom + 0.5) {
+              out.push({ txt: b.textContent,
+                         dx: Math.round(Math.min(r.left - bar.left, bar.right - r.right)),
+                         dy: Math.round(Math.min(r.top - bar.top, bar.bottom - r.bottom)) });
+            }
+          }
+          return out;
+        }""")
+        print(f"  badges clipped by the bar edge: {clip or 'none'}")
+        assert not clip, f"FAIL: route badges cut off: {clip}"
+
+        # Toggling a race-event category on still makes its markers appear.
+        page.click(".tn-filter:has-text('Attacks') input")
+        page.wait_for_timeout(400)
+        assert state()["markers"] > 0, "FAIL: enabling Attacks drew no markers"
+        page.click(".tn-filter:has-text('Attacks') input")   # back off
+        page.wait_for_timeout(300)
 
         # The bar spans the whole recording.
         segs = {k: s[k] for k in ("obs", "est", "imp") if s[k]}
