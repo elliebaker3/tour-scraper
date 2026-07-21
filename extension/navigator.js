@@ -543,6 +543,8 @@
         <select class="tn-stage-pick" title="Which stage this recording is"></select>
         <span class="tn-stage"></span>
         <span class="tn-clock"></span>
+        <button class="tn-probe" title="Report what timing data the player
+exposes — including ad-break cue times. Copies to the clipboard.">Diagnose</button>
         <button class="tn-collapse" title="Hide">–</button>
       </div>
       <div class="tn-setup">
@@ -636,6 +638,32 @@ the stage. The median of all readings is used.">
       refreshAnchorState();
       render();
     });
+    root.querySelector(".tn-probe").addEventListener("click", runProbe);
+  }
+
+  /** Dump what timing data this player exposes -- video timing, app-state
+   *  timestamps, and every metadata-track cue (where ad-break markers hide) --
+   *  and copy it to the clipboard so it can be shared back. Read-only. */
+  function runProbe() {
+    // Feedback goes wherever is visible: the setup note before calibration, the
+    // status line after (the controls are hidden until then).
+    const el = cal ? root.querySelector(".tn-anchor-state")
+                   : root.querySelector(".tn-setup-note");
+    const api = window.TourNavigatorProbe;
+    if (!api) { el.textContent = "probe unavailable"; return; }
+    el.textContent = "probing…";
+    const finish = (report) => {
+      const text = JSON.stringify(report, null, 2);
+      console.log("[TourNavigator] capability probe:\n" + text);
+      const cues = (report.video?.[0]?.timedSamples || [])
+        .reduce((a, t) => a + (t.cueCount || 0), 0);
+      navigator.clipboard?.writeText(text).then(
+        () => { el.textContent = `probe copied · ${cues} metadata cues · also in the console`; },
+        () => { el.textContent = `probe in the console (clipboard blocked) · ${cues} cues`; });
+    };
+    (api.runProbeFull ? api.runProbeFull() : Promise.resolve(api.runProbe()))
+      .then(finish)
+      .catch((e) => { el.textContent = "probe failed: " + (e && e.message); });
   }
 
   /** Let the viewer state which stage this is when detection can't. */

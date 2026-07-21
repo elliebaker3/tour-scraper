@@ -171,7 +171,7 @@ try:
         assert s["markers"] == 0, "FAIL: markers drawn before calibration"
 
         # Only one calibration route is offered.
-        for gone in ("Km 0 is NOW", "Anchor here", "Auto-calibrate", "Diagnose", "Align"):
+        for gone in ("Km 0 is NOW", "Anchor here", "Auto-calibrate", "Align"):
             assert gone not in s["buttons"], f"FAIL: {gone!r} still offered"
         assert "Calibrate" in s["buttons"], f"FAIL: no Calibrate button: {s['buttons']}"
 

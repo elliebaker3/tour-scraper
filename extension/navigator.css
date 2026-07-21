@@ -271,3 +271,11 @@
 }
 .tn-poi:hover { z-index: 6; }
 .tn-poi:hover .tn-poi-dot { width: 12px; height: 12px; }
+
+/* Diagnose lives in the header so it is reachable before calibrating (to
+   capture ad-break cue times) as well as after. */
+.tn-probe {
+  background: #2b3140; color: #cdd3dd; border: 1px solid rgba(255,255,255,.16);
+  border-radius: 5px; padding: 2px 8px; font-size: 11px; cursor: pointer;
+}
+.tn-probe:hover { background: #38404f; }
