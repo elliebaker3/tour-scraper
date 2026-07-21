@@ -271,36 +271,3 @@
 }
 .tn-poi:hover { z-index: 6; }
 .tn-poi:hover .tn-poi-dot { width: 12px; height: 12px; }
-
-/* Diagnose lives in the header so it is reachable before calibrating (to
-   capture ad-break cue times) as well as after. */
-.tn-probe {
-  background: #2b3140; color: #cdd3dd; border: 1px solid rgba(255,255,255,.16);
-  border-radius: 5px; padding: 2px 8px; font-size: 11px; cursor: pointer;
-}
-.tn-probe:hover { background: #38404f; }
-
-/* Measure mode: a one-off data-collection row, hidden until "Measure" is
-   clicked. Independent of calibration -- it just logs (recording position,
-   km-to-go) pairs to work out the race-time lost at each ad break. */
-.tn-measure { display: none; align-items: center; gap: 8px; margin: 4px 0 2px;
-  flex-wrap: wrap; }
-.tn-root.tn-measuring .tn-measure { display: flex; }
-.tn-measure-ask { color: #d7dce4; }
-.tn-measure-ask strong { color: #fff; }
-.tn-measure-km {
-  background: #1b1f26; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
-  border-radius: 5px; padding: 3px 6px; font: inherit; text-align: right;
-}
-.tn-measure button {
-  background: #2b3140; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
-  border-radius: 5px; padding: 3px 8px; cursor: pointer;
-}
-.tn-measure button:hover { background: #38404f; }
-.tn-measure-state { color: #8f97a3; }
-.tn-measure-btn {
-  background: #2b3140; color: #cdd3dd; border: 1px solid rgba(255,255,255,.16);
-  border-radius: 5px; padding: 2px 8px; font-size: 11px; cursor: pointer;
-}
-.tn-measure-btn:hover { background: #38404f; }
-.tn-root.tn-measuring .tn-measure-btn { background: #7cc0ff; color: #0e1014; border-color: #7cc0ff; }

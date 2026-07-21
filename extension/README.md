@@ -14,36 +14,36 @@ download or modify any stream.
 2. **Load unpacked** → select this `extension/` folder
 3. Open your stage recording. The panel pins to the bottom of the window.
 
-## Calibrate: usually one "km to go" reading
+## Calibrate: two "km to go" readings
 
 Pause where the broadcast shows **km to go**, type that number in and press
-**Calibrate**. On Peacock that is normally the whole setup.
+**Calibrate**. Then do it once more from a point **far away** -- near the finish
+is ideal -- with the **Add reading** field. Two readings is the accurate setup.
 
-**Why one reading is enough.** The recording plays the race at true 1:1; the
-only discontinuities are the ad breaks, where a chunk of race is missing (it
-happened live while ads played). Peacock exposes every ad break on a metadata
-track (`cvsdk::ad-break-*`), and the extension reads their exact positions
-straight from the player. So the breaks locate themselves — the one thing a
-reading supplies is the origin (where the race sits against the recording).
-Each break is assumed to cost its own length of race, which is the physical
-case, so a single reading places the entire stage. The panel shows how many
-breaks it found (`21 ad breaks from the player`).
+Until the first reading the panel shows the prompt and nothing else -- no bar,
+no markers. A profile with no clock invites reading positions off it that are
+not real, which is how every "the elevation doesn't line up" problem started.
 
-**A second reading only refines.** If a break costs a bit more or less than its
-length, add one reading on the far side of a break with **Add reading** and the
-extension fits that factor across all of them. The status shows it
-(`~80% of each break lost to race`). More readings least-squares it further.
-
-**If the ad-break track isn't there** (a non-Peacock player, or Peacock changes
-its markup), it falls back to locating cuts from the readings themselves: rate 1
-between breaks, a step wherever two readings disagree — so you place one reading
-per ad-break-free stretch. The panel says which mode it's in.
+**Why two, not one.** The recording does *not* run 1:1 with race time. On stage
+14 it advances at **0.918x** -- about 20 minutes of racing is not in the
+recording, spread across the stage. One reading fixes where the profile sits
+(the offset) but has to *assume* the 1:1 rate, so it is exact at that one point
+and drifts as you move away: a few kilometres of gap within an hour, more toward
+the ends. That drift is the "large gaps between the bar and the screen" symptom.
+A second reading far from the first supplies the **rate** -- the extension fits
+recording-second against race-time across both -- and the gap closes over the
+whole stage. The status line then shows the fitted rate (`rate 0.918x`) and how
+well the readings agree (`fits to +/-3s`).
 
 **Accuracy is bounded by the graphic.** It counts in whole kilometres, so "42"
-means [42, 43); the midpoint is used. Readings in the same stretch are averaged.
+means somewhere in [42, 43); the midpoint is used. Two readings far apart divide
+that rounding across a long baseline, so it barely affects the rate -- but two
+readings *close together* cannot fix the rate, and the panel says so and falls
+back to offset-only.
 
-**reset** clears it. Calibration is not remembered across reloads — every load
-asks for the current km-to-go rather than restoring a stale one.
+**reset** clears it and returns to the prompt. Calibration is not remembered
+across reloads -- every load asks for the current km-to-go rather than restoring
+a stale one.
 
 ## What the bar shows
 

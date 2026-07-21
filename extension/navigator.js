@@ -59,7 +59,6 @@
   let anchors = [];           // [{ tUtcMs, videoSec, label }]
   let root = null;
   let hoverEl = null;         // readout element, re-attached after each render
-  const measureLog = [];      // data-collection pass: {rec, kmToGo, raceUtc}
   const enabled = Object.fromEntries(
     Object.entries(CATEGORIES).map(([k, v]) => [k, v.on]));
 
@@ -84,151 +83,61 @@
    * km 0 is the one input, and it is enough. */
   function pins() { return anchors.filter((a) => a.kind); }
 
-  function _median(xs) {
-    const s = [...xs].sort((a, b) => a - b);
-    const m = s.length >> 1;
-    return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-  }
+  // Below this baseline between two readings, rate cannot be fitted reliably:
+  // each km-to-go reading carries ~45s of rounding, and dividing that by a
+  // short span turns it into a wild slope. Under it, offset only.
+  const MIN_RATE_BASELINE_SEC = 20 * 60;
+  const impliedZeroMs = (a) => a.tUtcMs - a.videoSec * 1000;
 
-  /* Ad breaks read straight from the player. Peacock's cvsdk-event-track carries
-   * a cue per ad break, id'd `cvsdk::ad-break-N`; its [start,end] is the break's
-   * position and length in the recording. This is exact, so the break locations
-   * never have to be guessed from readings. */
-  function adBreaksFromPlayer() {
-    const v = video;
-    if (!v || !v.textTracks) return [];
-    const out = [];
-    for (const tr of v.textTracks) {
-      if (!/metadata/i.test(tr.kind || "")) continue;
-      try { if (tr.mode === "disabled") tr.mode = "hidden"; } catch (_) {}
-      for (const c of tr.cues || []) {
-        if (c.id && /ad-break/i.test(c.id) && isFinite(c.startTime) && isFinite(c.endTime)) {
-          out.push({ t: c.startTime, e: c.endTime, d: c.endTime - c.startTime });
-        }
-      }
-    }
-    out.sort((a, b) => a.t - b.t);
-    // Drop any that overlap a kept one (defensive; ad-break cues don't nest).
-    const kept = [];
-    for (const b of out) if (!kept.length || b.t >= kept[kept.length - 1].e) kept.push(b);
-    return kept;
-  }
-
-  /** Number of ad breaks fully before a recording second. */
-  function breaksBefore(sec, breaks) {
-    let n = 0;
-    for (const b of breaks) { if (b.e <= sec) n++; else break; }
-    return n;
-  }
-
-  /* Calibration model.
-   *
-   * Each ad break costs the SAME amount of race time (broadcast ad breaks are
-   * fixed-length), so with the breaks known:
-   *     race = R0 + rec + delta * (number of breaks before rec)
-   * -- rate 1 through content, plus a constant delta of race lost at each break.
-   * The break COUNT is exact from the cues; R0 (origin) and delta (race lost per
-   * break) are the only unknowns. A reading just BEFORE and just AFTER one ad
-   * break differ by exactly one in count, so they measure delta directly -- and
-   * it then applies to every break, near or far. More readings least-squares it.
-   * One reading alone can't measure delta, so it falls back to delta = the
-   * break's own length (a rough guess) until a second reading is added.
-   *
-   * With no cue track (not Peacock, or markup changed) it falls back to the
-   * cue-less piecewise model: rate 1, offset stepped at the midpoint between
-   * readings that disagree. */
-  const CUT_EPS_SEC = 25;
-
+  /* One reading gives the OFFSET at rate 1.0 -- the best a single point can do.
+   * Two or more readings, far enough apart, also give the RATE: this recording
+   * runs at ~0.918x race time (about 20 min of racing is not in it), so a rate
+   * of exactly 1.0 is right only at the calibration point and drifts several km
+   * either side of it. rate comes from a least-squares fit of recording-second
+   * against race-time across all readings, which averages out their rounding. */
   function calFromAnchors() {
     const p = pins();
     if (!p.length) return null;
-    const reads = p.map((a) => ({ rec: a.videoSec, race: a.tUtcMs / 1000 }))
-                   .sort((a, b) => a.rec - b.rec);
-    const breaks = adBreaksFromPlayer();
-
-    if (breaks.length) {
-      const xs = reads.map((r) => breaksBefore(r.rec, breaks));   // break count
-      const ys = reads.map((r) => r.race - r.rec);                // = R0 + delta*x
-      let delta, R0;
-      if (reads.length >= 2 && Math.max(...xs) - Math.min(...xs) >= 1) {
-        const n = xs.length, mx = xs.reduce((a, b) => a + b, 0) / n,
-              my = ys.reduce((a, b) => a + b, 0) / n;
-        let num = 0, den = 0;
-        for (let i = 0; i < n; i++) { num += (xs[i] - mx) * (ys[i] - my); den += (xs[i] - mx) ** 2; }
-        delta = Math.max(0, den ? num / den : 0);
-        R0 = my - delta * mx;
-      } else {
-        delta = _median(breaks.map((b) => b.d));    // one reading: guess = break length
-        R0 = _median(ys.map((y, i) => y - delta * xs[i]));
-      }
-      // Content regions between breaks, each carrying the break count before it.
-      const regions = [{ recLo: -Infinity, recHi: breaks[0].t, n: 0 }];
-      for (let i = 0; i < breaks.length; i++) {
-        regions.push({ recLo: breaks[i].e, n: i + 1,
-                       recHi: i + 1 < breaks.length ? breaks[i + 1].t : Infinity });
-      }
-      return { model: "adbreak", breaks, R0, delta, regions, readings: reads.length };
+    if (p.length === 1) {
+      return { refMs: p[0].tUtcMs, offsetSec: p[0].videoSec, rate: 1.0 };
     }
-
-    // ---- fallback: cue-less piecewise (midpoint seams) ----
-    const rd = reads.map((r) => ({ v: r.rec, zero: r.race - r.rec }));
-    const groups = [[rd[0]]];
-    for (let i = 1; i < rd.length; i++) {
-      if (Math.abs(rd[i].zero - rd[i - 1].zero) > CUT_EPS_SEC) groups.push([]);
-      groups[groups.length - 1].push(rd[i]);
+    const xs = p.map((a) => a.tUtcMs / 1000);      // race seconds
+    const ys = p.map((a) => a.videoSec);           // recording seconds
+    const baseline = Math.max(...xs) - Math.min(...xs);
+    const refMs = p[0].tUtcMs;
+    if (baseline < MIN_RATE_BASELINE_SEC) {
+      // Too close to trust a slope: hold rate at 1.0, offset from the median.
+      const z = p.map(impliedZeroMs).sort((a, b) => a - b);
+      return { refMs: z[z.length >> 1], offsetSec: 0, rate: 1.0 };
     }
-    const segs = groups.map((g) => ({
-      zero: _median(g.map((r) => r.zero)), vFirst: g[0].v, vLast: g[g.length - 1].v,
-    }));
-    for (let i = 0; i < segs.length; i++) {
-      segs[i].vLo = i === 0 ? -Infinity : (segs[i - 1].vLast + segs[i].vFirst) / 2;
-      segs[i].vHi = i === segs.length - 1 ? Infinity : (segs[i].vLast + segs[i + 1].vFirst) / 2;
-    }
-    const cuts = [];
-    for (let i = 1; i < segs.length; i++) {
-      cuts.push({ atVideoSec: segs[i].vLo, removedSec: segs[i].zero - segs[i - 1].zero });
-    }
-    return { model: "piecewise", segs, cuts, readings: reads.length };
+    const n = xs.length;
+    const mx = xs.reduce((s, v) => s + v, 0) / n;
+    const my = ys.reduce((s, v) => s + v, 0) / n;
+    let num = 0, den = 0;
+    for (let i = 0; i < n; i++) { num += (xs[i] - mx) * (ys[i] - my); den += (xs[i] - mx) ** 2; }
+    let rate = den ? num / den : 1.0;
+    rate = Math.max(0.5, Math.min(1.5, rate));     // reject nonsense slopes
+    const offsetSec = my - rate * (mx - refMs / 1000);
+    return { refMs, offsetSec, rate };
   }
 
-  /** recording second -> race UTC (ms). */
-  function videoToUtc(sec) {
-    if (!cal) return null;
-    if (cal.model === "adbreak") {
-      return (cal.R0 + sec + cal.delta * breaksBefore(sec, cal.breaks)) * 1000;
-    }
-    let s = cal.segs[cal.segs.length - 1];
-    for (const g of cal.segs) if (sec < g.vHi) { s = g; break; }
-    return (sec + s.zero) * 1000;
+  /** Recording-second error of each reading against the fitted line -- how much
+   *  the readings disagree once rate is accounted for. */
+  function pinResidualsSec() {
+    const p = pins();
+    if (p.length < 2 || !cal) return [];
+    return p.map((a) => a.videoSec - utcToVideo(a.tUtcMs));
   }
 
-  /** race UTC (ms) -> recording second. Race time lost inside an ad break has
-   *  no recording position, so it snaps to where content resumes. */
+
   function utcToVideo(tUtcMs) {
     if (!cal) return null;
-    const R = tUtcMs / 1000;
-    if (cal.model === "adbreak") {
-      for (const g of cal.regions) {
-        const rec = R - cal.R0 - cal.delta * g.n;
-        if (rec >= g.recLo && rec < g.recHi) return rec;
-      }
-      for (const g of cal.regions) {                       // in a lost gap
-        const lo = g.recLo === -Infinity ? 0 : g.recLo;
-        if (cal.R0 + lo + cal.delta * g.n > R) return lo;
-      }
-      const last = cal.regions[cal.regions.length - 1];
-      return R - cal.R0 - cal.delta * last.n;
-    }
-    const S = cal.segs;
-    for (const s of S) if (R >= s.zero + s.vLo && R < s.zero + s.vHi) return R - s.zero;
-    for (let i = 1; i < S.length; i++) if (S[i].zero + S[i].vLo > R) return S[i].vLo;
-    return R - S[S.length - 1].zero;
+    return cal.offsetSec + cal.rate * (tUtcMs - cal.refMs) / 1000;
   }
 
-  /** Recording-second error of each reading against the model (rounding scatter). */
-  function pinResidualsSec() {
-    if (!cal) return [];
-    return pins().map((a) => a.videoSec - utcToVideo(a.tUtcMs));
+  function videoToUtc(sec) {
+    if (!cal || !cal.rate) return null;
+    return cal.refMs + ((sec - cal.offsetSec) / cal.rate) * 1000;
   }
 
   const fmt = (sec) => {
@@ -539,13 +448,9 @@
     clock.className = "tn-clock" +
       (g == null ? "" : g > 1.5 ? " tn-up" : g < -1.5 ? " tn-down" : "");
 
-    const model = cal.model === "adbreak"
-      ? `${cal.breaks.length} ad breaks (from player)`
-      : `${(cal.cuts || []).length} cut${(cal.cuts || []).length === 1 ? "" : "s"}`;
     root.querySelector(".tn-diag").textContent =
       `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
-      `${cal.readings} reading${cal.readings === 1 ? "" : "s"} · ${model}` +
-      ` · ${bundle.__selection || ""}`;
+      `rate ${cal.rate.toFixed(3)}× · ${bundle.__selection || ""}`;
   }
 
   /** Gradient at a point on the route, in percent, averaged over ~1km so it
@@ -604,24 +509,12 @@
         <select class="tn-stage-pick" title="Which stage this recording is"></select>
         <span class="tn-stage"></span>
         <span class="tn-clock"></span>
-        <button class="tn-measure-btn" title="Collect km-to-go readings around ad
-breaks so the exact race-time loss at each can be worked out.">Measure</button>
-        <button class="tn-probe" title="Report what timing data the player
-exposes — including ad-break cue times. Copies to the clipboard.">Diagnose</button>
         <button class="tn-collapse" title="Hide">–</button>
-      </div>
-      <div class="tn-measure">
-        <span class="tn-measure-ask">Measuring ad-break losses — pause just
-          before/after each ad break, read the <strong>km to go</strong>, log it:</span>
-        <input class="tn-measure-km" size="5" placeholder="42" inputmode="decimal">
-        <button class="tn-measure-log">Log this spot</button>
-        <button class="tn-measure-copy">Copy data</button>
-        <span class="tn-measure-state">0 logged</span>
       </div>
       <div class="tn-setup">
         <span class="tn-setup-ask">Pause where the broadcast shows
-          <strong>km to go</strong> and type it here (best: one reading, then one
-          just after an ad break):</span>
+          <strong>km to go</strong> and type it here (then add a second reading
+          far away, for accuracy):</span>
         <input class="tn-togo-km" size="5" placeholder="42" inputmode="decimal">
         <span class="tn-setup-unit">km to go</span>
         <button class="tn-togo-set">Calibrate</button>
@@ -709,76 +602,6 @@ the stage. The median of all readings is used.">
       refreshAnchorState();
       render();
     });
-    root.querySelector(".tn-probe").addEventListener("click", runProbe);
-
-    // Measure mode: a data-collection pass, independent of calibration. Each log
-    // is a raw (recording position, km-to-go the broadcast shows) pair; with the
-    // ad-break locations from the cues, the race-time lost at each break can be
-    // computed from pairs bracketing it.
-    root.querySelector(".tn-measure-btn").addEventListener("click", () => {
-      root.classList.toggle("tn-measuring");
-    });
-    const logKm = root.querySelector(".tn-measure-km");
-    const logOne = () => {
-      const st = root.querySelector(".tn-measure-state");
-      if (!video?.duration) { st.textContent = "no video"; return; }
-      const km = parseFloat(String(logKm.value).replace(",", "."));
-      const hit = isFinite(km) ? timeAtKmToGo(Number.isInteger(km) ? km + 0.5 : km) : null;
-      if (!hit) { st.textContent = `“${logKm.value}” — not a km-to-go on this stage`; return; }
-      measureLog.push({
-        rec: +video.currentTime.toFixed(2),
-        kmToGo: km,
-        raceUtc: new Date(hit.tMs).toISOString(),
-        est: !!hit.est,
-      });
-      logKm.value = "";
-      st.textContent = `${measureLog.length} logged (last: ${km} km to go)`;
-      console.log("[TourNavigator] measure log:", measureLog[measureLog.length - 1]);
-    };
-    root.querySelector(".tn-measure-log").addEventListener("click", logOne);
-    logKm.addEventListener("keydown", (ev) => {
-      ev.stopPropagation();
-      if (ev.key === "Enter") logOne();
-    });
-    root.querySelector(".tn-measure-copy").addEventListener("click", () => {
-      const st = root.querySelector(".tn-measure-state");
-      const payload = {
-        stage: bundle.stage?.stage, date: bundle.stage?.date,
-        recordingDuration: video?.duration ? +video.duration.toFixed(1) : null,
-        adBreaks: adBreaksFromPlayer().map((b) => ({ t: +b.t.toFixed(1), e: +b.e.toFixed(1) })),
-        readings: measureLog,
-      };
-      const text = JSON.stringify(payload, null, 2);
-      console.log("[TourNavigator] measure export:\n" + text);
-      navigator.clipboard?.writeText(text).then(
-        () => { st.textContent = `copied ${measureLog.length} readings + ${payload.adBreaks.length} breaks`; },
-        () => { st.textContent = `in console (clipboard blocked) · ${measureLog.length} readings`; });
-    });
-  }
-
-  /** Dump what timing data this player exposes -- video timing, app-state
-   *  timestamps, and every metadata-track cue (where ad-break markers hide) --
-   *  and copy it to the clipboard so it can be shared back. Read-only. */
-  function runProbe() {
-    // Feedback goes wherever is visible: the setup note before calibration, the
-    // status line after (the controls are hidden until then).
-    const el = cal ? root.querySelector(".tn-anchor-state")
-                   : root.querySelector(".tn-setup-note");
-    const api = window.TourNavigatorProbe;
-    if (!api) { el.textContent = "probe unavailable"; return; }
-    el.textContent = "probing…";
-    const finish = (report) => {
-      const text = JSON.stringify(report, null, 2);
-      console.log("[TourNavigator] capability probe:\n" + text);
-      const cues = (report.video?.[0]?.timedSamples || [])
-        .reduce((a, t) => a + (t.cueCount || 0), 0);
-      navigator.clipboard?.writeText(text).then(
-        () => { el.textContent = `probe copied · ${cues} metadata cues · also in the console`; },
-        () => { el.textContent = `probe in the console (clipboard blocked) · ${cues} cues`; });
-    };
-    (api.runProbeFull ? api.runProbeFull() : Promise.resolve(api.runProbe()))
-      .then(finish)
-      .catch((e) => { el.textContent = "probe failed: " + (e && e.message); });
   }
 
   /** Let the viewer state which stage this is when detection can't. */
@@ -854,40 +677,28 @@ the stage. The median of all readings is used.">
     const parts = [`${km} km to go — reading added`];
     if (hit.est) parts.push("⚠ that stretch has no GPS — pace is inferred there");
 
-    if (cal.model === "adbreak") {
-      // Ad breaks locate themselves from the player. One reading fixes the
-      // origin but has to ASSUME how much race each break costs (its own
-      // length); if that's off, the error grows with every later break -- the
-      // drift-toward-the-end. A reading just before and just after ONE ad break
-      // measures that per-break cost directly, and it applies to every break.
-      parts.push(`${cal.breaks.length} ad breaks from the player`);
-      if (p.length === 1) {
-        parts.push("origin set — ▶ add a reading just AFTER the next ad break " +
-                   "to measure its cost");
-      } else {
-        // Readings must straddle at least one break (different break counts) to
-        // measure the per-break cost.
-        const xs = pins().map((a) => breaksBefore(a.videoSec, cal.breaks));
-        if (Math.max(...xs) - Math.min(...xs) < 1) {
-          parts.push(`${p.length} readings, but none straddle an ad break — ` +
-                     "put one before and one after a break");
-        } else {
-          parts.push(`${p.length} readings · each break costs ~${Math.round(cal.delta)}s of race`);
-          const worst = Math.max(0, ...pinResidualsSec().map(Math.abs));
-          if (worst > 90) parts.push("⚠ readings disagree — re-check one");
-        }
-      }
+    if (p.length === 1) {
+      // One reading fixes the offset but assumes the recording tracks race time
+      // 1:1 -- which this one does NOT (~0.918x). So the profile is right here
+      // and drifts several km either side. A second reading FAR from this one
+      // is what corrects it, so ask for it plainly.
+      parts.push("offset set, rate assumed 1.0×");
+      parts.push("▶ now add a reading from far away (near the finish is ideal) " +
+                 "to fix the drift");
     } else {
-      const cuts = cal.cuts || [];
-      if (p.length === 1) {
-        parts.push("this span is exact");
-        parts.push("▶ add a reading in each other part of the stage");
+      const xs = p.map((a) => a.tUtcMs / 1000);
+      const baselineMin = (Math.max(...xs) - Math.min(...xs)) / 60;
+      const res = pinResidualsSec().map(Math.abs);
+      const worst = res.length ? Math.max(...res) : 0;
+      parts.push(`${p.length} readings over ${baselineMin.toFixed(0)} min`);
+      if (baselineMin < 20) {
+        parts.push("⚠ readings too close to fix rate — spread them out, " +
+                   "one early one late");
       } else {
-        parts.push(`${p.length} readings`);
-        parts.push(cuts.length
-          ? `${cuts.length} cut${cuts.length > 1 ? "s" : ""} ` +
-            `(${cuts.map((c) => `${Math.round(c.removedSec / 60)}m`).join(", ")})`
-          : "no cuts between them");
+        parts.push(`rate ${cal.rate.toFixed(3)}× · fits to ±${worst.toFixed(0)}s`);
+        if (worst > 90) {
+          parts.push("⚠ readings disagree — re-check one, or reset and redo");
+        }
       }
     }
     el.textContent = parts.join(" · ");
@@ -904,19 +715,14 @@ the stage. The median of all readings is used.">
     const el = root.querySelector(".tn-anchor-state");
     const p = pins();
     if (!p.length) { el.textContent = "not calibrated"; return; }
-    if (cal.model === "adbreak") {
-      el.textContent = `${p.length} reading${p.length === 1 ? "" : "s"} · ` +
-        `${cal.breaks.length} ad breaks from the player` +
-        (p.length === 1 ? " — add one just after an ad break" : "");
-      return;
-    }
     if (p.length === 1) {
-      el.textContent = "1 reading · exact in this span — add one in each other part of the stage";
+      el.textContent = "1 reading · rate 1.0× assumed — add one far away to fix drift";
       return;
     }
-    const nCuts = (cal.cuts || []).length;
-    el.textContent = `${p.length} readings · ` +
-      (nCuts ? `${nCuts} cut${nCuts > 1 ? "s" : ""} modelled` : "no cuts");
+    const res = pinResidualsSec().map(Math.abs);
+    const worst = res.length ? Math.max(...res) : 0;
+    el.textContent =
+      `${p.length} readings · rate ${cal.rate.toFixed(3)}× · fits to ±${worst.toFixed(0)}s`;
   }
 
 
@@ -1118,7 +924,7 @@ the stage. The median of all readings is used.">
 
   function installChrome() {
     const GAP = 12;                 // px to float above the native bar
-    const HIDE_AFTER_MS = 1000;
+    const HIDE_AFTER_MS = 3000;
     let hideTimer = null;
 
     const show = () => root.classList.remove("tn-hidden");

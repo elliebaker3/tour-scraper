@@ -70,27 +70,9 @@
           if (interesting.length >= 14) break;
         }
       }
-      // The cue BODIES are empty on this track, but the cue TIMES are exactly
-      // what we're after: ad breaks show up as their own cues. So dump every
-      // cue's [start, end] compactly, plus whatever weak type signal each
-      // carries (id / constructor / the keys of a structured .value), so the
-      // break cues can be told apart from content markers.
-      const allCues = cues.map((c) => {
-        const o = { t: +c.startTime.toFixed(2), e: +(c.endTime || 0).toFixed(2) };
-        try {
-          if (c.id) o.id = String(c.id).slice(0, 40);
-          const cls = c.constructor && c.constructor.name;
-          if (cls && cls !== "VTTCue") o.cls = cls;
-          if (c.value && typeof c.value === "object") o.vk = Object.keys(c.value).slice(0, 8);
-          else if (c.value !== undefined && c.value !== null) o.v = String(c.value).slice(0, 60);
-          if (c.type) o.ct = String(c.type).slice(0, 24);
-        } catch (_) { /* best effort */ }
-        return o;
-      });
-
       out.push({
         kind: track.kind, label: track.label, cueCount: cues.length,
-        head, tail, interesting, allCues,
+        head, tail, interesting,
       });
       try { if (prior === "disabled") track.mode = prior; } catch (_) {}
     }
