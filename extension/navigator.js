@@ -450,7 +450,6 @@
 
     root.querySelector(".tn-diag").textContent =
       `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
-      `rec 0:00 = ${new Date(videoToUtc(0)).toISOString().slice(11, 19)}Z · ` +
       `rate ${cal.rate.toFixed(3)}× · ${bundle.__selection || ""}`;
   }
 
@@ -675,10 +674,7 @@ the stage. The median of all readings is used.">
     render();
 
     const p = pins();
-    const parts = [
-      `${km} km to go at rec ${fmt(at)} = race ` +
-      `${new Date(hit.tMs).toISOString().slice(11, 19)}Z`,
-    ];
+    const parts = [`${km} km to go — reading added`];
     if (hit.est) parts.push("⚠ that stretch has no GPS — pace is inferred there");
 
     if (p.length === 1) {
