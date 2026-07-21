@@ -29,6 +29,7 @@
   const CATEGORIES = {
     sprint:          { label: "Sprints",    color: "#22c55e", on: true },
     kom:             { label: "Climbs",     color: "#ef4444", on: true },
+    poi:             { label: "★ Contenders", color: "#facc15", on: true },
     crash:           { label: "Crashes",    color: "#e5484d", on: false },
     breakaway_start: { label: "Attacks",    color: "#f5a524", on: false },
     breakaway_end:   { label: "Caught",     color: "#8b7cf6", on: false },
@@ -39,6 +40,17 @@
   // profile prints them. Sprints are green, the sprinters' jersey colour.
   const KOM_COLOR = { HC: "#b91c1c", "Cat 1": "#ef4444", "Cat 2": "#f97316",
                       "Cat 3": "#eab308", "Cat 4": "#a3e635" };
+
+  // Persons of interest (contenders for each jersey) are marked when involved
+  // in an event, but the rider's identity is NEVER shown -- that would spoil
+  // what's about to happen. The names live in the data only to place the
+  // markers; nothing about who or what is rendered anywhere in the UI.
+
+  // Vertical padding inside the bar, in px: headroom above the highest point so
+  // the peak doesn't jam against the top edge (and leaves room for the markers
+  // that sit up there), and a sliver below the lowest.
+  const PROFILE_TOP_PAD = 12;
+  const PROFILE_BOT_PAD = 2;
 
   let bundle = null;
   let bundle_index = null;
@@ -223,7 +235,7 @@
     const alts = bundle.profile.map((p) => p.alt);
     const loA = Math.min(...alts), hiA = Math.max(...alts);
     const rangeA = Math.max(1, hiA - loA);
-    const y = (alt) => height - ((alt - loA) / rangeA) * (height - 4) - 2;
+    const y = (alt) => height - ((alt - loA) / rangeA) * (height - PROFILE_TOP_PAD - PROFILE_BOT_PAD) - PROFILE_BOT_PAD;
     const area = (arr) => {
       if (arr.length < 2) return "";
       let s = `M ${arr[0][0].toFixed(1)} ${height} L `;
@@ -264,7 +276,7 @@
     const alts = bundle.profile.map((p) => p.alt);
     const loA = Math.min(...alts), hiA = Math.max(...alts);
     const rangeA = Math.max(1, hiA - loA);
-    const y = (alt) => height - ((alt - loA) / rangeA) * (height - 4) - 2;
+    const y = (alt) => height - ((alt - loA) / rangeA) * (height - PROFILE_TOP_PAD - PROFILE_BOT_PAD) - PROFILE_BOT_PAD;
     const area = (arr) => {
       if (arr.length < 2) return "";
       let s = `M ${arr[0][0].toFixed(1)} ${height} L `;
@@ -328,7 +340,7 @@
     const paths = segs.filter((g) => g.d)
       .map((g) => `<path d="${g.d}" class="${CLS[g.cls]}"/>`).join("");
     const rangeA = Math.max(1, hiA - loA);
-    const yForAlt = (alt) => height - ((alt - loA) / rangeA) * (height - 4) - 2;
+    const yForAlt = (alt) => height - ((alt - loA) / rangeA) * (height - PROFILE_TOP_PAD - PROFILE_BOT_PAD) - PROFILE_BOT_PAD;
 
     // Sprints and climbs sit ON the elevation curve, at their own altitude, the
     // way a printed stage profile marks them. Drawn from route_markers, which
@@ -373,6 +385,22 @@
               title="${escapeHtml(g.label)}"></div>`);
     }
 
+    // One uniform marker for ANY person-of-interest event -- same for every
+    // rider and every event kind. Deliberately NO tooltip: revealing who or
+    // what happens would be a spoiler. It only says "a contender moment is
+    // here", and clicking seeks to it so you can watch it unfold yourself.
+    const poiMarks = [];
+    if (enabled.poi) {
+      for (const m of bundle.special_markers || []) {
+        const sec = utcToVideo(Date.parse(m.t_utc));
+        if (sec == null || sec < 0 || sec > dur) continue;
+        const x = (sec / dur) * width;
+        poiMarks.push(
+          `<div class="tn-poi" style="left:${x.toFixed(1)}px"
+                data-sec="${sec.toFixed(1)}"><span class="tn-poi-dot"></span></div>`);
+      }
+    }
+
     let heat = "";
     for (const s of bundle.intensity || []) {
       const sec = utcToVideo(Date.parse(s.t_utc));
@@ -392,11 +420,12 @@
       </svg>
       <div class="tn-markers">${markers.join("")}</div>
       <div class="tn-routemarks">${routeMarks.join("")}</div>
+      <div class="tn-poimarks">${poiMarks.join("")}</div>
       <div class="tn-playhead" style="left:${playX.toFixed(1)}px"></div>
       ${paths ? `<span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
              <span class="tn-alt tn-alt-lo">${Math.round(loA)}m</span>` : ""}
     `;
-    bar.querySelectorAll(".tn-marker, .tn-rm").forEach((el) => {
+    bar.querySelectorAll(".tn-marker, .tn-rm, .tn-poi").forEach((el) => {
       el.addEventListener("click", (ev) => {
         ev.stopPropagation();
         video.currentTime = parseFloat(el.dataset.sec);
@@ -898,48 +927,37 @@ the stage. The median of all readings is used.">
   }
 
   function installChrome() {
-    let hideTimer = null;
-    let usingNative = false;        // have we ever located the native bar?
-    let nativeMiss = 0;             // consecutive polls with no native bar
     const GAP = 12;                 // px to float above the native bar
+    const HIDE_AFTER_MS = 3000;
+    let hideTimer = null;
 
     const show = () => root.classList.remove("tn-hidden");
     const hide = () => { if (!root.matches(":hover")) root.classList.add("tn-hidden"); };
 
-    // Fallback (no native bar found): mouse movement shows, idle hides.
-    const showTransiently = () => {
-      if (usingNative) return;      // native poll is in charge
+    // Visibility is driven by mouse movement, plain and reliable: any movement
+    // shows the panel and (re)arms a timer that hides it after a few idle
+    // seconds -- the same gesture that shows/hides the player's own controls,
+    // so the two track each other. An earlier attempt tied hiding to detecting
+    // the native bar in the DOM; when that detection latched onto a persistent
+    // element the panel never hid, so hiding no longer depends on it.
+    const kick = () => {
       show();
       clearTimeout(hideTimer);
-      hideTimer = setTimeout(hide, 3000);
+      hideTimer = setTimeout(hide, HIDE_AFTER_MS);
     };
-    document.addEventListener("mousemove", showTransiently, { passive: true });
-    document.addEventListener("keydown", showTransiently, true);
+    document.addEventListener("mousemove", kick, { passive: true });
+    document.addEventListener("keydown", kick, true);
     root.addEventListener("mouseenter", () => { clearTimeout(hideTimer); show(); });
-    root.addEventListener("mouseleave", showTransiently);
+    root.addEventListener("mouseleave", kick);
 
+    // Positioning ONLY: park the panel just above the native control bar when it
+    // can be found, so it hovers over the scrubber rather than covering it.
+    // This never affects whether the panel is shown -- that is the timer's job.
     root.classList.add("tn-hidden");
     setInterval(() => {
       const top = nativeControlBar();
-      if (top != null) {
-        if (!usingNative) {
-          console.log("[TourNavigator] anchored to the native control bar " +
-                      `(top ${Math.round(top)}px of ${window.innerHeight}px)`);
-        }
-        usingNative = true;
-        nativeMiss = 0;
-        // Park just above the native bar; never let it drop over the controls.
-        root.style.bottom = Math.max(GAP, window.innerHeight - top + GAP) + "px";
-        show();
-      } else if (usingNative) {
-        // Native bar was there and is now gone (faded out) -> mirror it.
-        // A few misses of grace so a reflow mid-frame doesn't flicker us.
-        if (++nativeMiss >= 2) hide();
-        // If it stays missing a long while, the markup probably changed;
-        // hand back to the mouse-movement fallback rather than stay stuck.
-        if (nativeMiss > 25) { usingNative = false; root.style.bottom = ""; }
-      }
-    }, 200);
+      if (top != null) root.style.bottom = Math.max(GAP, window.innerHeight - top + GAP) + "px";
+    }, 300);
   }
 
   start();

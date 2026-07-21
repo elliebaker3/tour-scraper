@@ -158,8 +158,22 @@ def route_markers(sync_points: list[dict]) -> list[dict]:
     return dedup
 
 
+def _persons_of_interest(stage_number, year, year_dir, guideposts, markers):
+    """Contenders per jersey + POI x event markers. Best-effort: this reaches
+    the network (race API + letour.fr), so a failure degrades to empty rather
+    than breaking the whole bundle."""
+    try:
+        from . import persons_of_interest as poi_mod
+        poi = poi_mod.build(stage_number, year, year_dir)
+        specials = poi_mod.special_markers(guideposts, markers, poi)
+        return poi, specials, None
+    except Exception as e:                                   # network/parse/etc
+        return None, [], str(e)
+
+
 def build(stage_dir: Path, telemetry_paths, year_dir: Path,
-          stage_number: int, out_path: Path | None = None) -> Path:
+          stage_number: int, out_path: Path | None = None,
+          fetch_poi: bool = True) -> Path:
     meta = stage_meta(year_dir, stage_number)
     length_km = float(meta.get("length_km") or 0) or None
     if not length_km:
@@ -173,6 +187,11 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     events = build_guideposts(stage_dir, sync["points"])
     profile = [_slim(p) for p in downsample_profile(sync["points"])]
     markers = route_markers(sync["points"])
+
+    year = int(year_dir.name) if year_dir.name.isdigit() else int(str(meta.get("date"))[:4])
+    poi, specials, poi_err = (
+        _persons_of_interest(stage_number, year, year_dir, events["guideposts"], markers)
+        if fetch_poi else (None, [], "skipped"))
 
     bundle = {
         "schema": 1,
@@ -194,6 +213,8 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
         "route_markers": markers,
         "guideposts": events["guideposts"],
         "intensity": events["intensity"],
+        "persons_of_interest": poi,
+        "special_markers": specials,
     }
 
     out_path = out_path or (stage_dir / "navigator.json")
@@ -206,4 +227,10 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     sprints = sum(1 for m in markers if m["kind"] == "sprint")
     koms = sum(1 for m in markers if m["kind"] == "kom")
     print(f"[navigator]   route markers: {sprints} sprint(s), {koms} climb(s)")
+    if poi:
+        print(f"[navigator]   persons of interest: {len(poi['yellow'])} yellow, "
+              f"{len(poi['green'])} green, {len(poi['white'])} white · "
+              f"{len(specials)} POI×event marker(s)")
+    else:
+        print(f"[navigator]   persons of interest: unavailable ({poi_err})")
     return out_path

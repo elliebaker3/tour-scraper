@@ -99,6 +99,7 @@ try:
                 markers: bar.querySelectorAll('.tn-marker').length,
                 sprints: bar.querySelectorAll('.tn-rm-sprint').length,
                 koms: bar.querySelectorAll('.tn-rm-kom').length,
+                poiMarks: bar.querySelectorAll('.tn-poi').length,
                 filters: [...document.querySelectorAll('.tn-filter')]
                           .map(f => f.textContent.trim()),
                 checkedFilters: [...document.querySelectorAll('.tn-filter input:checked')]
@@ -132,7 +133,10 @@ try:
         page.mouse.move(700, 300)
         page.wait_for_timeout(200)
         assert not state()["hidden"], "FAIL: panel should appear on mouse move"
-        print("--- visibility: hidden on load, shown on mouse move ✓")
+        # ...and hide again after the mouse sits still past the idle timeout.
+        page.wait_for_timeout(3600)
+        assert state()["hidden"], "FAIL: panel should hide after the mouse is idle"
+        print("--- visibility: hidden on load, shown on move, hidden when idle ✓")
 
         # --- 1: nothing before calibration -----------------------------------
         page.goto(base)
@@ -156,13 +160,15 @@ try:
             assert gone not in s["buttons"], f"FAIL: {gone!r} still offered"
         assert "Calibrate" in s["buttons"], f"FAIL: no Calibrate button: {s['buttons']}"
 
-        # History and Stats are gone; race events default off; sprint/climb on.
+        # History and Stats are gone; race events default off; sprint/climb and
+        # the contenders (POI) markers default on.
         joined = " ".join(s["filters"])
         assert "History" not in joined and "Stats" not in joined, \
             f"FAIL: History/Stats still offered: {s['filters']}"
+        assert "Contenders" in joined, f"FAIL: no contenders toggle: {s['filters']}"
         print(f"  filters        {s['filters']}  ({s['checkedFilters']} on)")
-        assert s["checkedFilters"] == 2, \
-            f"FAIL: expected only Sprints+Climbs on by default, got {s['checkedFilters']}"
+        assert s["checkedFilters"] == 3, \
+            f"FAIL: expected Sprints+Climbs+Contenders on by default, got {s['checkedFilters']}"
 
         # A saved calibration must NOT be restored: it is the flash-then-revert
         # bug. Even a current-shape entry is ignored and the prompt stays.
@@ -210,6 +216,35 @@ try:
         # Categories are labelled (HC / 1-4), not generic.
         assert any(b in ("1", "2", "3") for b in s["komBadges"]), \
             f"FAIL: climb badges not category-labelled: {s['komBadges']}"
+
+        # Persons-of-interest markers: present, but NEVER reveal a name or event
+        # (that would spoil what's coming). Assert the marker carries no text and
+        # no title/aria anywhere, and that no rider surname from the bundle's POI
+        # data appears in the whole panel's rendered text.
+        n_special = sum(1 for m in bundle.get("special_markers", [])
+                        if m.get("t_utc"))
+        print(f"\n  POI markers drawn: {s['poiMarks']} (bundle has {n_special})")
+        assert s["poiMarks"] == n_special, "FAIL: POI markers not all drawn"
+        leak = page.evaluate("""() => {
+          const out = [];
+          for (const el of document.querySelectorAll('.tn-poi, .tn-poi *')) {
+            const t = (el.textContent || '').trim();
+            const title = el.getAttribute('title');
+            const aria = el.getAttribute('aria-label');
+            if (t) out.push('text:' + t);
+            if (title) out.push('title:' + title);
+            if (aria) out.push('aria:' + aria);
+          }
+          return out;
+        }""")
+        assert not leak, f"FAIL: POI marker leaks who/what: {leak}"
+        surnames = {p["name"].split()[-1]
+                    for j in ("yellow", "green", "white")
+                    for p in (bundle.get("persons_of_interest") or {}).get(j, [])}
+        panel_text = page.evaluate("() => document.querySelector('.tn-root').innerText")
+        shown = sorted(n for n in surnames if n and n in panel_text)
+        print(f"  contender surnames visible in the panel: {shown or 'none'}")
+        assert not shown, f"FAIL: contender names visible in UI: {shown}"
 
         # No sprint/climb badge may spill outside the bar (the reported clipping).
         clip = page.evaluate("""() => {

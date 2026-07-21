@@ -256,3 +256,18 @@
 .tn-rm-atright .tn-rm-badge { left: auto; right: 0; transform: none; }
 .tn-rm-atleft:hover  .tn-rm-badge,
 .tn-rm-atright:hover .tn-rm-badge { transform: scale(1.25); }
+
+/* Persons of interest × event: ONE uniform diamond for any such event, in a
+   single colour -- it doesn't matter which rider or how many; the tooltip
+   names them. Sits above the profile at the moment of the event. */
+.tn-poimarks { position: absolute; inset: 0; pointer-events: none; }
+.tn-poi {
+  position: absolute; top: 2px; transform: translateX(-50%);
+  pointer-events: auto; cursor: pointer;
+}
+.tn-poi-dot {
+  display: block; width: 9px; height: 9px; background: #facc15;
+  transform: rotate(45deg); box-shadow: 0 0 0 1.4px rgba(0,0,0,.75);
+}
+.tn-poi:hover { z-index: 6; }
+.tn-poi:hover .tn-poi-dot { width: 12px; height: 12px; }
