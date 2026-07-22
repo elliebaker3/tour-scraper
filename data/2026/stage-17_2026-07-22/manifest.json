@@ -1,0 +1,14 @@
+[
+  {
+    "recorded_at": "2026-07-22T12:02:57.664+00:00",
+    "kind": "profile",
+    "source": "https://racecenter.letour.fr/profils/2026/profile-17-05ce7ae8ba8932390258ef92bd732dc2.csv",
+    "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-22T12:02:57.668+00:00",
+    "kind": "profile",
+    "source": "https://racecenter.letour.fr/profils/2026/profile-17-tiny-af44cbfd05520574646f7de8ec4de99f.csv",
+    "via": "autodiscover"
+  }
+]
