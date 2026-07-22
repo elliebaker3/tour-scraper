@@ -92,7 +92,7 @@
     "lastname": "CRAPS",
     "idUCI": "BEL20011017",
     "_id": "2d6ce0a76cc8466f6ec15c6d68e030756f63af1eeb7b7135fb8e3d0a27f99fdc",
-    "_updatedAt": 1784632595525,
+    "_updatedAt": 1784649210098,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-LOI",
     "_parent": "team-2026:862996f67abb3b12b6fc76cc8e20b5e84010cda8916cb6a138cbfa5fa3433f31",
@@ -1678,15 +1678,18 @@
     "header": null,
     "sex": "M",
     "_id": "61020ffaaa091a00754640de823403f992d3c6cf38320e1e166e6af4954d73e5",
+    "_updatedAt": 1784649430968,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-RBH",
-    "_updatedAt": 1783091749174,
     "_parent": "team-2026:9f17dfb1cd0a0d17985b555fb33c37c9cfae8a03d86321e0a175cd8ed8781f7a",
-    "_key": "_id",
     "_virtual": "RBH-25-LIPOWITZ",
     "$team": "team-2026:9f17dfb1cd0a0d17985b555fb33c37c9cfae8a03d86321e0a175cd8ed8781f7a",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 16,
+      "code": -1
     }
   },
   {
