@@ -82,7 +82,7 @@
   // ---------------------------------------------------------------- clock
 
   /** Map race UTC (ms) -> seconds into the recording, from the anchors.
-   *  0 anchors: unusable. 1 anchor: assume real time (rate 1.0). 2+: fit both
+   *  0 anchors: unusable. 1 anchor: offset at the default rate. 2+: fit both
    *  offset and rate, which absorbs ad breaks and a late broadcast join. */
   /* Calibration is a single explicit transform:
    *     videoSec = offsetSec + rate * (tUtcMs - refMs)/1000
@@ -91,41 +91,45 @@
    * fudge layered on top of an anchor pair. */
   let cal = null;   // {refMs, offsetSec, rate}
 
-  /* The broadcast contains no inserted breaks, so rate is 1.0 by construction
-   * and ONE known moment is a complete calibration. Fitting a rate from two
-   * pins was actively harmful: it turned a few seconds of click imprecision
-   * into a slope applied across four hours, and on stage 14 produced 0.918x --
-   * "20 minutes of racing missing" -- from what is really a single mis-click.
-   *
-   * km 0 is the one input, and it is enough. */
+  /* Readings the viewer has given (km-to-go pinned against a recording spot).
+   * One sets the offset at the default rate; two far enough apart fit the rate
+   * itself, which is the accurate end state. */
   function pins() { return anchors.filter((a) => a.kind); }
 
   // Below this baseline between two readings, rate cannot be fitted reliably:
   // each km-to-go reading carries ~45s of rounding, and dividing that by a
   // short span turns it into a wild slope. Under it, offset only.
   const MIN_RATE_BASELINE_SEC = 20 * 60;
-  const impliedZeroMs = (a) => a.tUtcMs - a.videoSec * 1000;
 
-  /* One reading gives the OFFSET at rate 1.0 -- the best a single point can do.
-   * Two or more readings, far enough apart, also give the RATE: this recording
-   * runs at ~0.918x race time (about 20 min of racing is not in it), so a rate
-   * of exactly 1.0 is right only at the calibration point and drifts several km
-   * either side of it. rate comes from a least-squares fit of recording-second
-   * against race-time across all readings, which averages out their rounding. */
+  /* Rate used until two readings far enough apart can fit one. Not 1.0: the
+   * recording runs SLOWER than race time (roughly 20 min of racing is missing
+   * across a stage to ad breaks), and 0.92 is what the flag-drop and finish
+   * pins measured. Starting there means a single reading is already close
+   * across the whole stage instead of drifting worse toward the finish. */
+  const DEFAULT_RATE = 0.92;
+
+  /** Race time (ms) that a reading implies sits at recording second 0, for a
+   *  given rate: videoSec = rate * (t - zero)/1000. */
+  const impliedZeroMs = (a, rate) => a.tUtcMs - (a.videoSec * 1000) / rate;
+
+  /* One reading gives the OFFSET at the default rate -- the best a single point
+   * can do. Two or more readings, far enough apart, also give the RATE, from a
+   * least-squares fit of recording-second against race-time across all
+   * readings, which averages out their rounding. */
   function calFromAnchors() {
     const p = pins();
     if (!p.length) return null;
     if (p.length === 1) {
-      return { refMs: p[0].tUtcMs, offsetSec: p[0].videoSec, rate: 1.0 };
+      return { refMs: p[0].tUtcMs, offsetSec: p[0].videoSec, rate: DEFAULT_RATE };
     }
     const xs = p.map((a) => a.tUtcMs / 1000);      // race seconds
     const ys = p.map((a) => a.videoSec);           // recording seconds
     const baseline = Math.max(...xs) - Math.min(...xs);
     const refMs = p[0].tUtcMs;
     if (baseline < MIN_RATE_BASELINE_SEC) {
-      // Too close to trust a slope: hold rate at 1.0, offset from the median.
-      const z = p.map(impliedZeroMs).sort((a, b) => a - b);
-      return { refMs: z[z.length >> 1], offsetSec: 0, rate: 1.0 };
+      // Too close to trust a slope: hold the default rate, offset from median.
+      const z = p.map((a) => impliedZeroMs(a, DEFAULT_RATE)).sort((a, b) => a - b);
+      return { refMs: z[z.length >> 1], offsetSec: 0, rate: DEFAULT_RATE };
     }
     const n = xs.length;
     const mx = xs.reduce((s, v) => s + v, 0) / n;
@@ -719,13 +723,12 @@ the stage. The median of all readings is used.">
     if (hit.est) parts.push("⚠ that stretch has no GPS — pace is inferred there");
 
     if (p.length === 1) {
-      // One reading fixes the offset but assumes the recording tracks race time
-      // 1:1 -- which this one does NOT (~0.918x). So the profile is right here
-      // and drifts several km either side. A second reading FAR from this one
-      // is what corrects it, so ask for it plainly.
-      parts.push("offset set, rate assumed 1.0×");
-      parts.push("▶ now add a reading from far away (near the finish is ideal) " +
-                 "to fix the drift");
+      // One reading fixes the offset and takes the default rate. That is close
+      // across the stage, but the true rate varies by recording, so a second
+      // reading far from this one is what pins it exactly.
+      parts.push(`offset set, rate assumed ${DEFAULT_RATE.toFixed(2)}×`);
+      parts.push("▶ add a reading from far away (near the finish is ideal) " +
+                 "to fit the rate exactly");
     } else {
       const xs = p.map((a) => a.tUtcMs / 1000);
       const baselineMin = (Math.max(...xs) - Math.min(...xs)) / 60;
@@ -757,7 +760,8 @@ the stage. The median of all readings is used.">
     const p = pins();
     if (!p.length) { el.textContent = "not calibrated"; return; }
     if (p.length === 1) {
-      el.textContent = "1 reading · rate 1.0× assumed — add one far away to fix drift";
+      el.textContent = `1 reading · rate ${DEFAULT_RATE.toFixed(2)}× assumed — ` +
+        "add one far away to fit it exactly";
       return;
     }
     const res = pinResidualsSec().map(Math.abs);

@@ -201,8 +201,10 @@ try:
         assert not s["setupShown"], "FAIL: setup prompt still shown after calibrating"
         # Race-event markers default off, so the bar is uncluttered until asked.
         assert s["markers"] == 0, "FAIL: event markers should default off"
-        assert "rate 1.0" in s["diag"] or "rate 1.000" in s["diag"], \
-            f"FAIL: one reading should assume rate 1.0, got: {s['diag']}"
+        # One reading takes the DEFAULT rate (0.92 -- recordings run slower than
+        # race time), not 1.0.
+        assert "rate 0.92" in s["diag"], \
+            f"FAIL: one reading should assume the 0.92 default, got: {s['diag']}"
 
         # Sprint and climb markers are on the profile, from the route data.
         n_sprint = sum(1 for m in bundle["route_markers"] if m["kind"] == "sprint")
@@ -281,18 +283,18 @@ try:
         assert lo <= 1 and hi >= s["width"] - 1, "FAIL: bar does not span the recording"
         assert s["imp"], "FAIL: nothing imputed outside the race"
 
-        # --- 3: the SINGLE-reading clock DRIFTS far from the anchor -----------
-        # This is the bug the user reported: rate 1.0 is right at 42 km to go
-        # and wrong elsewhere. Near the finish it should be badly off.
+        # --- 3: ONE reading already lands close, thanks to the 0.92 default ----
+        # Rate 1.0 used to drift ~13 km by the finish on a 0.918x recording;
+        # starting from 0.92 keeps a single reading usable the whole way.
         page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(5.5)}")
         page.wait_for_timeout(700)
         c = state()["clock"]
         m = re.search(r"([\d.]+) km to go", c)
         drift = abs(float(m.group(1)) - 5.5)
         print(f"\n--- one reading, seeked to true 5 km to go ---")
-        print(f"  clock says {m.group(1)} km to go (truth 5.5) -> {drift:.1f} km drift")
-        assert drift > 2, \
-            f"FAIL: expected single-reading drift near the finish, got {drift:.1f} km"
+        print(f"  clock says {m.group(1)} km to go (truth 5.5) -> {drift:.1f} km off")
+        assert drift <= 1.5, \
+            f"FAIL: one reading at the 0.92 default should stay close, got {drift:.1f} km"
 
         # --- 4: a SECOND reading far away fits the rate and kills the drift ---
         page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(150.5)}")
