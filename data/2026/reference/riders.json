@@ -1749,15 +1749,18 @@
     "idUCI": "ESP19970116",
     "nationality": "esp",
     "_id": "08aa23979f9da402d4b490651fcd074b031ab5b88d268b8473e0577ecf1a5e5c",
+    "_updatedAt": 1784822859927,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-CJR",
-    "_updatedAt": 1783091868144,
     "_parent": "team-2026:4c3e3ce0a6965f7ee92ba3a735c38260bfd19f419f0765d5420bd888dbe4674e",
-    "_key": "_id",
     "_virtual": "CJR-228-PARRA",
     "$team": "team-2026:4c3e3ce0a6965f7ee92ba3a735c38260bfd19f419f0765d5420bd888dbe4674e",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 18,
+      "code": -4
     }
   },
   {
@@ -2056,15 +2059,18 @@
     "idUCI": "USA19980402",
     "bib": 4,
     "_id": "39bea88e077d5d4729864f3f3f04ff109bf50dc663fba0563163e3846f959769",
+    "_updatedAt": 1784822859927,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-UEX",
-    "_updatedAt": 1783091749106,
     "_parent": "team-2026:f31540c4f6a150f29a50c4a991c762ec83e2963267f8fb058d65be57cdb7521c",
-    "_key": "_id",
     "_virtual": "UEX-4-MCNULTY",
     "$team": "team-2026:f31540c4f6a150f29a50c4a991c762ec83e2963267f8fb058d65be57cdb7521c",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 18,
+      "code": -1
     }
   },
   {
