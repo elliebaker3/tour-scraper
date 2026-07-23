@@ -1,0 +1,12 @@
+[
+  {
+    "recorded_at": "2026-07-23T19:48:36.335+00:00",
+    "kind": "archive-backfill",
+    "stage": 18,
+    "endpoints": {
+      "publication": 160,
+      "checkpointList": 101,
+      "pack_final": 179
+    }
+  }
+]
