@@ -10,5 +10,27 @@
     "kind": "profile",
     "source": "https://racecenter.letour.fr/profils/2026/profile-19-tiny-2741edbc69061a6ff764e0351e83b3d6.csv",
     "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-24T13:07:29.609+00:00",
+    "kind": "live-stream",
+    "action": "start"
+  },
+  {
+    "recorded_at": "2026-07-24T13:07:29.610+00:00",
+    "kind": "radio",
+    "source": "https://ice.creacast.com/lequipe-au1"
+  },
+  {
+    "recorded_at": "2026-07-24T13:07:29.611+00:00",
+    "kind": "poll",
+    "endpoints": [
+      "publication",
+      "insights",
+      "pack",
+      "telemetry",
+      "flashInfoLive",
+      "checkpointList"
+    ]
   }
 ]
