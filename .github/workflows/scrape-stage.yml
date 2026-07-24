@@ -199,8 +199,16 @@ jobs:
           # Push captured data incrementally so the repo stays fresh during the
           # stage and nothing is lost if the runner dies mid-capture. Audio
           # stays out (gitignored); it lands in the artifact at the end.
+          #
+          # 300s, not 600: stage 19 (2026-07-24) lost the runner to a GitHub-
+          # side "lost communication with the server" about 2h in, and
+          # everything captured since the last push -- up to the old 10min
+          # window -- died with the VM. Halving the window halves that
+          # worst-case loss. It doesn't address the cause (that's GitHub
+          # infra, not this workflow -- see salvage-backfill.yml for the
+          # actual safety net), just the blast radius.
           while kill -0 $CAPTURE_PID 2>/dev/null; do
-            sleep 600
+            sleep 300
             kill -0 $CAPTURE_PID 2>/dev/null || break
             git add data/
             if git commit -m "data: incremental capture $(date -u +%H:%M) UTC" >/dev/null 2>&1; then

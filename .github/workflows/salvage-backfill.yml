@@ -1,0 +1,77 @@
+# Safety net for scrape-stage: whenever that workflow finishes without
+# succeeding -- GitHub refusing the job outright (stage 18: an account
+# billing hold), a runner dying mid-capture (stage 19: "lost communication
+# with the server"), a timeout, anything -- this runs the same retroactive
+# recovery that was done by hand for both of those: `tourscraper archive`
+# pulls the cumulative feeds (publication/checkpointList/pack_final), which
+# racecenter keeps available even after the stage is long over.
+#
+# What this does NOT recover: per-second GPS telemetry and radio audio are
+# live-only streams with no "replay" endpoint, so a scrape that dies mid-
+# capture still loses whatever telemetry it hadn't pushed yet. See the
+# shortened incremental-push interval in scrape-stage.yml for the mitigation
+# on that side -- this job only guarantees the event/results history survives.
+name: salvage-backfill
+
+on:
+  workflow_run:
+    workflows: ["scrape-stage"]
+    types: [completed]
+
+jobs:
+  salvage:
+    # Only when the watched run did NOT succeed -- a normal successful scrape
+    # already has everything archive_stage.py would fetch, and that fetch
+    # isn't hash-deduped like poll_loop's, so running it after every success
+    # would just pile up redundant records in polls/*.jsonl for no benefit.
+    if: github.event.workflow_run.conclusion != 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -e .
+
+      - name: Determine today's stage
+        id: stage
+        run: |
+          python -m tourscraper bootstrap
+          STAGE=$(python3 -c "
+          import json, datetime
+          data = json.load(open('data/2026/reference/stages.json'))
+          today = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d')
+          matches = [s for s in data if str(s.get('date','')).startswith(today)]
+          print(matches[0]['stage'] if matches else '')
+          ")
+          if [ -z "$STAGE" ]; then
+            echo "::warning::no stage in stages.json matches today's date ($(date -u +%F)); nothing to salvage"
+          fi
+          echo "number=$STAGE" >> "$GITHUB_OUTPUT"
+
+      - name: Archive-backfill cumulative feeds
+        if: steps.stage.outputs.number != ''
+        run: python -m tourscraper archive --stage "${{ steps.stage.outputs.number }}"
+
+      - name: Commit recovered data
+        if: steps.stage.outputs.number != ''
+        run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git commit -m "salvage: archive-backfill stage ${{ steps.stage.outputs.number }} (scrape-stage run did not succeed)" \
+            || echo "nothing to commit"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break
+            echo "push attempt $i failed (concurrent write?), retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done || echo "push failed after retries"
