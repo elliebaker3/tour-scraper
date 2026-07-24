@@ -2,48 +2,48 @@
   "http_by_kind": {
     "event-stream": [
       {
-        "captured_at": "2026-07-22T12:00:19.799+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOMlJoWkdFd01qQXlNalprIiwiaWF0IjoxNzg0NzIxNjE5fQoaZr5_nCBxYfIGx5Z_XhIntnD6QMB8b7hOSeftH5c2I",
+        "captured_at": "2026-07-24T12:07:07.424+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZelF6WlRJNU56Vm1aVGd4IiwiaWF0IjoxNzg0ODk0ODI3fQt9mBilDi1PvARJWhGZKcRBThMu6x7qYeR4jtiDTtKUM",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-22T12:00:35.476+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNemRsWkdNMVpETmxPV0k1IiwiaWF0IjoxNzg0NzIxNjM1fQjT4skKOtKmlsQAjR2ctsS0PKTrZABlsCLu3R8Gf3FS0",
+        "captured_at": "2026-07-24T12:07:19.938+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOMkl5WkdZd1ltSTJZV1E1IiwiaWF0IjoxNzg0ODk0ODM5fQvCeq0lsy4i4fyLK02K78tHvausp4LQ23t0daB79Twks",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-22T12:01:04.509+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOMkU0TkRVeFlUTmlOREZtIiwiaWF0IjoxNzg0NzIxNjY0fQtlPHe00TlPS5vI6twUTvtPW1ZhNPb8ONCsa2ii1NVw8",
+        "captured_at": "2026-07-24T12:07:48.979+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaREkxWXpFNVpESXpZamM0IiwiaWF0IjoxNzg0ODk0ODY4fQY1ZT7KsmxNhl92Hva8OQpFNE31KnIYSYuCsYaC39UlA",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-22T12:01:33.591+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZamN6TnpZd01tWXdOalZpIiwiaWF0IjoxNzg0NzIxNjkzfQ8HFus0kcB57jl-bFZltf8Zrw1heBuZSnfLdKKE6VQ84",
+        "captured_at": "2026-07-24T12:08:18.004+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOelkyWXpBME5tRTBNbUUxIiwiaWF0IjoxNzg0ODk0ODk3fQZXt-8Q0a8WNj4ZmrcQSsq6t3qLpz-88XHCZMDH08eZs",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-22T12:02:02.650+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZMlUxTlRrM1kySXhPV1V6IiwiaWF0IjoxNzg0NzIxNzIyfQzcbx1v8tc3opGVDfm8cexAgjLcM0HIaNPPCO2_a2A3I",
+        "captured_at": "2026-07-24T12:08:47.069+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZVFk0WVRNNE16azFZMlJsIiwiaWF0IjoxNzg0ODk0OTI2fQbEJkqa9TRJzZ-icN7A9C6UbKsE5tM8ASiH-FSbuuTwU",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-22T12:02:31.683+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZekZtWkRjd1pqZ3pOalUzIiwiaWF0IjoxNzg0NzIxNzUxfQhLTVgQSjMpnx_VRuzvyTYhKLOY91Xryfm_jJ0alRPBg",
+        "captured_at": "2026-07-24T12:09:16.118+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZemxpWm1NME1ESmxOemhtIiwiaWF0IjoxNzg0ODk0OTU1fQUfbi44xFu3R9d0SBJH46ZeZcMRj2SijO3td5vWHsG_0",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
@@ -52,339 +52,330 @@
     ],
     "json": [
       {
-        "captured_at": "2026-07-22T12:00:19.874+00:00",
-        "url": "https://syndication.twitter.com/settings?session_id=c364905d9ee2f0b0b0839bb58d7f8c51a98329a3",
+        "captured_at": "2026-07-24T12:07:07.864+00:00",
+        "url": "https://racecenter.letour.fr/api/publication_fr-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaV1F5WlRkbE5EWTRPVFF3IiwiaWF0IjoxNzg0ODk0ODI3fQXLws6cMN50aH-or0zyMJzWGtWRWuv2cPx1dyoxHPv6o",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"url\":\"https://x.com/LeTour/status/2080587523827306702\",\"createdAt\":\"2026-07-24T13:31:50+02:00\",\"id\":8587,\"updatedBy\":\"ganz\",\"pinned\":false,\"type\":\"twitter\",\"publicationAt\":\"2026-07-24T13:31:50+02:00\",\"socialContentLangs\":[{\"createdBy\":\"ganz\",\"createdAt\":\"2026-07-24T13:31:50+02:00\",\"updatedAt\":\"2026-07-24T13:31:50+02:00\",\"title\":\"Respectez les coureurs\",\"updatedBy\":\"ganz\",\"locale\":\"fr\"},{\"create"
+      },
+      {
+        "captured_at": "2026-07-24T12:07:07.865+00:00",
+        "url": "https://racecenter.letour.fr/api/publication_de-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaRFV5T0dGalpESmtZamN6IiwiaWF0IjoxNzg0ODk0ODI3fQe0VIzbU799MbnmEEa3UiBYm6qtT0CFTGZfwtIwtxHl8",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"type\":\"twitter\",\"publicationAt\":\"2026-07-24T13:31:53+02:00\",\"updatedBy\":\"ganz\",\"pinned\":false,\"id\":8588,\"createdAt\":\"2026-07-24T13:31:53+02:00\",\"url\":\"https://x.com/letour_de/status/2080596264467550667\",\"onlyClubTab\":false,\"createdBy\":\"ganz\",\"highlight\":false,\"onlyDataTab\":false,\"updatedAt\":\"2026-07-24T13:31:53+02:00\",\"stage\":{\"showGroups\":true,\"timezone\":\"Europe/Paris\",\"lengthDisplay\":128,\"len"
+      },
+      {
+        "captured_at": "2026-07-24T12:07:07.866+00:00",
+        "url": "https://racecenter.letour.fr/api/publication_en-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaV1kxTmpjMlpEa3dZV05sIiwiaWF0IjoxNzg0ODk0ODI3fQIrASNs40JiQ0IIXVrQkbve9qGPcurolheZ3KdIOIjcQ",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"sm_url\":\"https://img.aso.fr/core_app/img-cycling-tdf-jpg/visma-19-01/75968/0-840-0-70/a7c2a\",\"copyright\":\"A.S.O./Charly Lopez\",\"createdAt\":\"2026-07-24T13:58:01+02:00\",\"publicationAt\":\"2026-07-24T13:52:00+02:00\",\"isData\":false,\"id\":78850,\"imageLangs\":[{\"id\":78849,\"legend\":\"A.S.O./Charly Lopez\",\"locale\":\"fr\",\"title\":\"Team Visma I Lease a Bike\"},{\"locale\":\"en\",\"legend\":\"A.S.O./Charly Lopez\",\"id\":7"
+      },
+      {
+        "captured_at": "2026-07-24T12:07:07.869+00:00",
+        "url": "https://racecenter.letour.fr/api/publication_es-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJORFZsWkRFMk16bGpOakpsIiwiaWF0IjoxNzg0ODk0ODI3fQSB839haMMaoz91Wzdhx2pt0eReZ4byxV-lcpeqCkAe8",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"image\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/tdf-gd-club-logo-white-background-rgb/63249/0:105,1179:1284-0-0-70/6a069\",\"locale\":\"es\",\"id\":1252,\"text\":[\"Each day before the stage starts, pick your favourite for victory from among all the riders still in the race with the Stage Winner Predictor thanks to the Tour de France Club!\"],\"updatedAt\":\"2026-07-24T09:09:58+02:00\",\"title\":\"Vote f"
+      },
+      {
+        "captured_at": "2026-07-24T12:07:07.869+00:00",
+        "url": "https://syndication.twitter.com/settings?session_id=1b878ccd7b6d72e1ceef0014d41edc4f43b5e20d",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "{\"should_obtain_cookie_consent\":true,\"features\":{\"tfw_timeline_list\":{\"bucket\":[],\"version\":null},\"tfw_follower_count_sunset\":{\"bucket\":true,\"version\":null},\"tfw_tweet_edit_backend\":{\"bucket\":\"on\",\"version\":null},\"tfw_refsrc_session\":{\"bucket\":\"on\",\"version\":null},\"tfw_fosnr_soft_interventions_enabled\":{\"bucket\":\"on\",\"version\":null},\"tfw_mixed_media_15897\":{\"bucket\":\"treatment\",\"version\":null},\"tf"
       },
       {
-        "captured_at": "2026-07-22T12:00:19.931+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_en-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNamt5TlRZNE1EY3hZak16IiwiaWF0IjoxNzg0NzIxNjE5fQQPTakLKTgOkmkY5aBLbgr_vkybprzzOIIYHFlE_zL0s",
+        "captured_at": "2026-07-24T12:07:07.869+00:00",
+        "url": "https://racecenter.letour.fr/api/checkpointList-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaV1EzWkRCaVl6ZG1ZVGd6IiwiaWF0IjoxNzg0ODk0ODI3fQPBT-JErKzuE1zh530c5oXUfSy8WNmLYkxGNxOli0qVo",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[{\"locale\":\"en\",\"pinned\":false,\"stage\":17,\"highlight\":false,\"year\":2026,\"type\":\"liv\",\"updatedAt\":\"2026-07-22T13:46:17+02:00\",\"createdAt\":\"2026-07-22T13:46:17+02:00\",\"title\":\"The race is in Aix-les-Bains\",\"slug\":\"the-race-is-in-aix-les-bains\",\"id\":1350851,\"updatedBy\":\"bvittek\",\"stageType\":\"PLN\",\"createdBy\":\"bvittek\",\"picto\":\"liv_story\",\"text\":[\"At the bottom of the Alps, Aix-les-Bains has hosted 21"
+        "sample": "[{\"length\":25.12,\"checkpointTypes\":[],\"longitude\":5.984528,\"road\":\"D17 Col du Noyer (1664 m)\",\"highSchedule\":\"14:56:00\",\"caravanSchedule\":\"12:40:00\",\"checkpointSummits\":[{\"id\":4231,\"length\":7200,\"number\":2,\"imageVersion\":\"https://img.aso.fr/core_app/img-cycling-tdf-jpg/et19a-pp-col-du-noyer/71208/0:0,980:1401-0-0-70/78359\",\"summit\":{\"name\":\"Col du Noyer (1664 m)\",\"altitude\":1664},\"state\":\"8.5\",\"co"
       },
       {
-        "captured_at": "2026-07-22T12:00:19.936+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_fr-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNalUyTlRVMU1qRXpOalZtIiwiaWF0IjoxNzg0NzIxNjE5fQI-x631IZ2jzc3qy-QeH2uzHC3ZHf7ie-G2NRAx5Lajs",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"year\":2026,\"highlight\":false,\"type\":\"liv\",\"locale\":\"fr\",\"pinned\":false,\"stage\":17,\"createdBy\":\"dramadier\",\"stageType\":\"PLN\",\"text\":[\"Le peloton est baigné par un soleil radieux à Chambéry, où le thermomètre affiche 27 degrés. Les températures vont grimper durant la journée jusqu'à atteindre 31 degrés à Voiron. Pas de pluie à l'horizon, et un vent relativement faible (10 km/h, annonce Météo Fran"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:19.941+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_de-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNRGxpT1Rjek1UYzRNRGc1IiwiaWF0IjoxNzg0NzIxNjE5fQWOSLCxZnxrHJWFg5_EMYjAdEJ5OCi87-2c3b-F7OzDE",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"imageLangs\":[{\"title\":\"Jasper Philipsen (Alpecin-Premier Tech)\",\"id\":78305,\"legend\":\"22/07/2026 - Tour de France 2026 - Étape 17 - Chambéry / Voiron (174,7 km) - Jasper PHILIPSEN (ALPECIN-PREMIER TECH)\",\"locale\":\"fr\"},{\"locale\":\"en\",\"legend\":\"22/07/2026 - Tour de France 2026 - Étape 17 - Chambéry / Voiron (174,7 km) - Jasper PHILIPSEN (ALPECIN-PREMIER TECH)\",\"id\":78306,\"title\":\"Jasper Philipsen"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:19.941+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_sk-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZMk0zTWpGaE56azFPVGN6IiwiaWF0IjoxNzg0NzIxNjE5fQjvNXRgzAzLDljE7um4IXIew1vOFwXRB7HOGmYF5jmeI",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"slug\":\"veduca-dvojica-a-mnohi-prenasledovatelia\",\"id\":1350841,\"updatedBy\":\"console\",\"updatedAt\":\"2026-07-22T13:45:00+02:00\",\"title\":\"Vedúca dvojica a mnohí prenasledovatelia\",\"createdAt\":\"2026-07-22T13:45:00+02:00\",\"text\":[\"Prvými útočníkmi dňa sú Baptiste Veistroffer (Lotto Intermarché) a Jonas Abrahamsen (Uno-X Mobility), ktorí stále vedú na km 6.<br />\\nKasper Asgreen (EF Education-EasyPost)"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:19.945+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_es-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOekV6TURKbE9EUTJPRGxsIiwiaWF0IjoxNzg0NzIxNjE5fQCFo_sGrChYxcmOeX0r6aGeOQLMlxqw-TF4Pt7wMKajY",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"id\":1350671,\"slug\":\"bienvenidos-al-directo-de-la-17a-etapa-del-tour-de-francia-2026\",\"updatedBy\":\"franreyesf\",\"updatedAt\":\"2026-07-22T12:56:52+02:00\",\"createdAt\":\"2026-07-22T12:56:52+02:00\",\"title\":\"Bienvenidos al directo de la 17ª etapa del Tour de Francia 2026\",\"picto\":\"liv_start\",\"text\":[\"Bienvenidos a la narración en directo de la 17ª etapa de la edición número 113 del Tour de Francia. Hoy "
-      },
-      {
-        "captured_at": "2026-07-22T12:00:19.948+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_da-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOamc1WlRnd00ySTROemRsIiwiaWF0IjoxNzg0NzIxNjE5fQvfhK3mthSTMVclzuEdW1buYg-ezdUyrnfnxtuZq2wlk",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"updatedAt\":\"2026-07-22T13:37:36+02:00\",\"createdAt\":\"2026-07-22T13:37:36+02:00\",\"title\":\"Etape 17 af Tour de France 2026 er I GANG!\",\"slug\":\"etape-17-af-tour-de-france-2026-er-i-gang\",\"id\":1350812,\"updatedBy\":\"console\",\"createdBy\":\"console\",\"stageType\":\"PLN\",\"picto\":\"liv_actual_start\",\"text\":[\"Det 164-mand store peloton har lige passeret km 0.\"],\"publicationAt\":\"2026-07-22T13:37:33+02:00\",\"local"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:19.951+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_sl-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZbUU1WmpVNFptVXhNbU0yIiwiaWF0IjoxNzg0NzIxNjE5fQxnskVSoMAWNZwTqdGYBtGvzeyNnuRngcASVRJ9r6qYg",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"stageType\":\"PLN\",\"createdBy\":\"console\",\"publicationAt\":\"2026-07-22T12:50:04+02:00\",\"text\":[\"Po časovnem preizkusu, ki ga je obvladal Remco Evenepoel, se peloton vrača v akcijo z 174,7 km dolgo etapo od Chambéryja do Voirona po valovitem terenu. Ali bodo sprinterji zdržali pritisk baroudeurjev? Ali bodo napadalci prevladali? Etapa prinaša 2.200 metrov višinske razlike, vendar so večina vzponov v"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:19.953+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_cs-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNemRqTUdVM1pXRTFNVGsyIiwiaWF0IjoxNzg0NzIxNjE5fQiLVj5lA_1aqRlhJiTR2okNMHn4f5tZ98C_chrN3JjC8",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"type\":\"liv\",\"year\":2026,\"highlight\":true,\"stage\":17,\"pinned\":false,\"locale\":\"cs\",\"publicationAt\":\"2026-07-22T12:50:04+02:00\",\"text\":[\"Po časovce, kterou ovládl Remco Evenepoel, se peloton vrací do akce s etapou dlouhou 174,7 km z Chambéry do Voiron na zvlněném terénu. Dokážou sprinteři odolat baroudeurům? Nebo zvítězí útočníci? Etapa obsahuje 2 200 metrů převýšení, ale většina stoupání se nachá"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:19.956+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_nl-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZMlEyTUdFMU5XSmpPREUwIiwiaWF0IjoxNzg0NzIxNjE5fQ1MYp84kZXX4fuk1QJ79MVGCct_MW11iPcdbWkUJRmO8",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"id\":1350844,\"slug\":\"een-leidend-duo-en-veel-achtervolgers\",\"updatedBy\":\"console\",\"updatedAt\":\"2026-07-22T13:45:03+02:00\",\"title\":\"Een leidend duo en veel achtervolgers\",\"createdAt\":\"2026-07-22T13:45:03+02:00\",\"picto\":\"liv_breakaway\",\"text\":[\"De eerste aanvallers van de dag, Baptiste Veistroffer (Lotto Intermarché) en Jonas Abrahamsen (Uno-X Mobility), leiden nog steeds de weg bij km 6.<br />\\nK"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:19.957+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_it-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaR1V4TmpjeVkySXhaR0l5IiwiaWF0IjoxNzg0NzIxNjE5fQYoYA14dtvqV9dAlZoqZyZY37tGLgjM-pHaPirKbNHNE",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"createdAt\":\"2026-07-22T13:26:50+02:00\",\"title\":\"Maglia bianca\",\"updatedAt\":\"2026-07-22T13:26:50+02:00\",\"updatedBy\":\"console\",\"id\":1350775,\"slug\":\"maglia-bianca-15\",\"createdBy\":\"console\",\"stageType\":\"PLN\",\"publicationAt\":\"2026-07-22T13:26:40+02:00\",\"picto\":\"liv_white_jersey\",\"text\":[\"Isaac del Toro ha mantenuto il comando della classifica dei giovani, con 20 secondi di vantaggio su Paul Seixas. "
-      },
-      {
-        "captured_at": "2026-07-22T12:00:19.961+00:00",
-        "url": "https://racecenter.letour.fr/api/checkpointList-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOems0TURrME56Z3lOakl6IiwiaWF0IjoxNzg0NzIxNjE5fQqJjQ_twb4G0ho5cDxdoR_JnmBmjyky9wuUX3rJxly44",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"checkpointSummits\":[],\"country\":\"FRANCE\",\"lowSchedule\":\"13:20:00\",\"latitude\":45.56832,\"countryCode\":\"FRA\",\"updatedAt\":\"2026-06-09T15:38:37+02:00\",\"checkpointTypes\":[],\"length\":0,\"caravanSchedule\":\"10:55:00\",\"longitude\":5.92103,\"checkpoint\":1,\"highSchedule\":\"13:20:00\",\"middleSchedule\":\"13:20:00\",\"_id\":\"0cd1639487e7086115459614e40423e7b928c28644ba27c13a841786d67f6106-1\",\"_updatedAt\":1784721606547"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:20.493+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_pt-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVEk1TkRZeE9URmxOR1ExIiwiaWF0IjoxNzg0NzIxNjE5fQCkbcrGLXfIi5BVb5SbJPUIwj7t-L_LIZ37-dHT6fsiA",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"highlight\":true,\"year\":2026,\"type\":\"liv\",\"locale\":\"pt\",\"pinned\":false,\"stage\":17,\"stageType\":\"PLN\",\"createdBy\":\"console\",\"text\":[\"O pelotão de 164 ciclistas acaba de passar pelo km 0.\"],\"picto\":\"liv_actual_start\",\"publicationAt\":\"2026-07-22T13:37:33+02:00\",\"updatedAt\":\"2026-07-22T13:37:44+02:00\",\"title\":\"A Etapa 17 do Tour de France 2026 COMEÇOU!\",\"createdAt\":\"2026-07-22T13:37:44+02:00\",\"slug\":"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:20.494+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_sv-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaRGMzWmpaallUSTNZakUyIiwiaWF0IjoxNzg0NzIxNjE5fQtcU2zO_L0VJ0dqNWS-PqXcJag5Tvdaeayy480-JP0f0",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"year\":2026,\"highlight\":false,\"type\":\"liv\",\"stage\":17,\"locale\":\"sv\",\"pinned\":false,\"picto\":\"liv_yellow_jersey\",\"text\":[\"Tadej Pogacar (UAE Emirates XRG) tappade tid till Remco Evenepoel (Red Bull-Bora-Hansgrohe) vid Plateau de Solaison och i Thonon-les-Bains, men slovenern ligger fortfarande överlägset före sina rivaler i den totala ställningen, med ett avstånd på 4’32’’ till den belgiska stjärn"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:20.494+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_nb-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNekJrWVRrek5tRTVZV0UyIiwiaWF0IjoxNzg0NzIxNjE5fQl0JHerHK2vB6G0oua8v5RC5c7ejJqA896MC9HH5MG-w",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"locale\":\"nb\",\"pinned\":false,\"stage\":17,\"year\":2026,\"highlight\":false,\"type\":\"liv\",\"updatedAt\":\"2026-07-22T13:46:39+02:00\",\"title\":\"Rittet er i Aix-les-Bains\",\"createdAt\":\"2026-07-22T13:46:39+02:00\",\"id\":1350860,\"slug\":\"rittet-er-i-aix-les-bains\",\"updatedBy\":\"console\",\"stageType\":\"PLN\",\"createdBy\":\"console\",\"picto\":\"liv_story\",\"text\":[\"Ved foten av Alpene har Aix-les-Bains vært vert for 21 etapp"
-      },
-      {
-        "captured_at": "2026-07-22T12:00:20.671+00:00",
-        "url": "https://racecenter.letour.fr/api/event?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOakV4TjJFeU5HWm1aREF6IiwiaWF0IjoxNzg0NzIxNjIwfQwxqplqe2H1pt3EZFcuwBdvC1qyJZvpq6sFrLm7xgVpo",
+        "captured_at": "2026-07-24T12:07:08.039+00:00",
+        "url": "https://racecenter.letour.fr/api/event?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZalJpTVdRMFkyUTNOalV6IiwiaWF0IjoxNzg0ODk0ODI3fQ6VP2THfX4IWub_ulfSmDHcDdebpSyQbAoLGybvym_7o",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"extras\":{\"radioUrl\":\"https://ice.creacast.com/lequipe-au1\",\"hideTemperature\":true,\"hideInsideRace\":false,\"hideRidersPage\":false},\"adUnit\":\"/366560878/ASO/TOUR-DE-FRANCE\",\"_id\":\"dbfa6e3d5e33f66d138af5594b40fd1b5521af9063d2ff77d524978bf9dc7500\",\"_bind\":\"event\",\"_origin\":\"event\",\"_updatedAt\":1784650142949,\"_parent\":\":tdf\",\"_key\":\"_id\",\"_virtual\":\"/366560878/ASO/TOUR-DE-FRANCE\"}]"
       },
       {
-        "captured_at": "2026-07-22T12:00:20.671+00:00",
-        "url": "https://racecenter.letour.fr/api/flashInfoLive-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOMlJqWkRnNFpEVmpOelF3IiwiaWF0IjoxNzg0NzIxNjIwfQ-e4B-RflQyKK8vvIJomLGOP3LPPn5VT-Goti8ERTKnk",
+        "captured_at": "2026-07-24T12:07:08.039+00:00",
+        "url": "https://racecenter.letour.fr/api/flashInfoLive-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaamN4TWprelpEaGhOV1ppIiwiaWF0IjoxNzg0ODk0ODI3fQSaN6fh4k3LBN54rT-34cTGY6xwhvPPRxtYu0J2iSYfc",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-07-22T12:00:20.672+00:00",
-        "url": "https://racecenter.letour.fr/api/social?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNak5rTldSa09UWm1NelJqIiwiaWF0IjoxNzg0NzIxNjIwfQgKU5Vft1Ltx-HDzVy7cVeFOoFuxvSFzvzt1tb4h6ZyU",
+        "captured_at": "2026-07-24T12:07:08.039+00:00",
+        "url": "https://racecenter.letour.fr/api/social?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOR05rTVdObFlqVTVZbVl3IiwiaWF0IjoxNzg0ODk0ODI3fQfmFekjyyHY5AYjt7fnKHDgppdGjh1LqjalFevu3WcyY",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-07-22T12:00:20.672+00:00",
-        "url": "https://racecenter.letour.fr/api/team-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJabU0zTVdaaFptSTFaRFExIiwiaWF0IjoxNzg0NzIxNjIwfQMNM3cNiPY_joGAJA6nO2pz3kl4dh0Okm3NgNQi9n2eo",
+        "captured_at": "2026-07-24T12:07:08.040+00:00",
+        "url": "https://racecenter.letour.fr/api/pack-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaVEJrTlRVME5EQmpNRFU1IiwiaWF0IjoxNzg0ODk0ODI3fQPBgKZNjHcx2bpIG5JmDw25bVWSVs8HZNeagAaplihP0",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-07-24T12:07:08.040+00:00",
+        "url": "https://racecenter.letour.fr/api/telemetryCompetitor-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZekpsTTJObE16RmhPR1V4IiwiaWF0IjoxNzg0ODk0ODI3fQxWDniG07MCaR9Lzv9_RT4pLZ3cfFFIMNeAZ_7sllRbQ",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"Riders\":[],\"Year\":2026,\"RaceStatus\":false,\"TimeStamp\":1784822905,\"StageId\":\"1800\",\"StageIndex\":18,\"RaceName\":\"TDF\",\"Date\":\"2026-07-23T18:08:25.7771758+02:00\",\"YGPW\":[1,33,93,2],\"Visible\":true,\"_id\":\"telemetry\",\"_bind\":\"telemetryCompetitor-2026\",\"_origin\":\"telemetryCompetitor-2026\",\"_updatedAt\":1784822909893,\"_parent\":\"millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c\",\""
+      },
+      {
+        "captured_at": "2026-07-24T12:07:08.097+00:00",
+        "url": "https://racecenter.letour.fr/api/stage-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaRGt6TlRNeVlqRXlNVGd4IiwiaWF0IjoxNzg0ODk0ODI3fQkIBa_X2JWOFizh1ICdj9yzNkXI1M8rhQQw1aQpXnR3k",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"departureCity\":{\"label\":\"Carcassonne\",\"cityLangs\":[],\"id\":29595,\"code\":\"carcassonne\",\"content\":{\"texts\":[{\"locale\":\"fr\",\"text\":[\"<br />\\nVille-étape pour la 14e fois<br />\\nPréfecture de l’Aude (11)<br />\\nHabitants : 46 500 (Carcassonnais et Carcassonnaises)<br />\\n<br />\\nLa première visite du Tour à Carcassonne date de 1947 et la cité a d’emblée marqué l’histoire puisque c’est en la quittant"
+      },
+      {
+        "captured_at": "2026-07-24T12:07:08.097+00:00",
+        "url": "https://racecenter.letour.fr/api/team-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNelUwWkdGalpqWXlOV0ppIiwiaWF0IjoxNzg0ODk0ODI3fQu1bqR1AwRJlmmUSGbD2Ir8JYZd0MB6HhMXhAQuxviAE",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"nameShort\":\"COFIDIS\",\"logo_live\":null,\"jersey_sm\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/cof/71492/0:0,400:400-60-0-70/ffc36\",\"logo\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/cof/70177/0:0,284:284-0-0-70/12750\",\"jersey\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/cof/71492/0:0,400:400-0-0-70/67ae0\",\"nationality\":\"fra\",\"header\":null,\"color\":\"#000000\",\"banner\":null,\"code\":\"C"
       },
       {
-        "captured_at": "2026-07-22T12:00:20.702+00:00",
-        "url": "https://racecenter.letour.fr/api/stage-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOMkUzWm1JeFlUYzBaV00zIiwiaWF0IjoxNzg0NzIxNjIwfQMRx8wap9C5-tq0abWO8PIOOT6lxqkxyvkUOU4L0Gx4M",
+        "captured_at": "2026-07-24T12:07:08.238+00:00",
+        "url": "https://racecenter.letour.fr/api/allCompetitors-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOVEExTVRjME1XSXlPRFUyIiwiaWF0IjoxNzg0ODk0ODI3fQu3w26f5vE7Bm_cxXaw3SY4rl7KdFE3Twd1fRpzbyTBg",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[{\"departureCity\":{\"label\":\"Carcassonne\",\"cityLangs\":[],\"id\":29595,\"code\":\"carcassonne\",\"content\":{\"texts\":[{\"locale\":\"fr\",\"text\":[\"<br />\\nVille-étape pour la 14e fois<br />\\nPréfecture de l’Aude (11)<br />\\nHabitants : 46 500 (Carcassonnais et Carcassonnaises)<br />\\n<br />\\nLa première visite du Tour à Carcassonne date de 1947 et la cité a d’emblée marqué l’histoire puisque c’est en la quittant"
-      }
-    ],
-    "csv": [
-      {
-        "captured_at": "2026-07-22T12:00:21.629+00:00",
-        "url": "https://racecenter.letour.fr/profils/2026/profile-17-05ce7ae8ba8932390258ef92bd732dc2.csv",
-        "status": 200,
-        "mime": "text/csv; charset=UTF-8",
-        "kind": "csv",
-        "sample": ""
+        "sample": "[{\"bib\":34,\"siteLinks\":{\"fr\":\"/coureur/34/lidl-trek/simmons-quinn\",\"en\":\"/rider/34/lidl-trek/simmons-quinn\",\"es\":\"/corredor/34/lidl-trek/simmons-quinn\",\"de\":\"/rennfahrer/34/lidl-trek/simmons-quinn\"},\"nationality\":\"usa\",\"sex\":\"M\",\"lastname\":\"SIMMONS\",\"idUCI\":\"USA20010508\",\"profile\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/34/71864/0:0,400:400-0-0-70/267bf\",\"profile_sm\":\"https://img.aso.fr/c"
       },
       {
-        "captured_at": "2026-07-22T12:00:21.635+00:00",
-        "url": "https://racecenter.letour.fr/profils/2026/profile-17-05ce7ae8ba8932390258ef92bd732dc2.csv",
+        "captured_at": "2026-07-24T12:07:08.238+00:00",
+        "url": "https://racecenter.letour.fr/api/checkpoint-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVFprWWpaak56TTFOMkUyIiwiaWF0IjoxNzg0ODk0ODI3fQnb6xeMl22UsXuGyF39wxC1ThdSKPl7MXQxETVm5pjUU",
         "status": 200,
-        "mime": "text/csv; charset=UTF-8",
-        "kind": "csv",
-        "sample": ""
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"0\":{\"length\":0,\"longitude\":6.06034,\"checkpointTypes\":[],\"caravanSchedule\":\"11:35:00\",\"highSchedule\":\"14:00:00\",\"checkpointSummits\":[],\"updatedAt\":\"2026-06-09T15:40:46+02:00\",\"checkpoint\":1,\"middleSchedule\":\"14:00:00\",\"country\":\"FRANCE\",\"countryCode\":\"FRA\",\"lowSchedule\":\"14:00:00\",\"latitude\":44.54231},\"1\":{\"department\":\"HAUTES-ALPES (05)\",\"latitude\":44.54231,\"checkpointSummits\":[],\"lowSchedule\":"
       },
       {
-        "captured_at": "2026-07-22T12:00:22.081+00:00",
-        "url": "https://racecenter.letour.fr/profils/2026/profile-17-tiny-af44cbfd05520574646f7de8ec4de99f.csv",
+        "captured_at": "2026-07-24T12:07:08.238+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeJerseys-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVGc0WVRsa1pqbGxNekE1IiwiaWF0IjoxNzg0ODk0ODI3fQ56_BCRBJ8uzyK4gKWiHTACNP7-yGzpqQcE2FvOEbaSU",
         "status": 200,
-        "mime": "text/csv; charset=UTF-8",
-        "kind": "csv",
-        "sample": ""
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"length\":0,\"status\":\"0\",\"type\":\"pmj\",\"checkpoint\":101,\"rankings\":[{\"bib\":2,\"position\":1,\"absolute\":232924000,\"relative\":0,\"$rider\":\"allCompetitors-2026:995117aa9014c38237475313d9654bdef1ec0761b24178bf580e519c5540babf\"}],\"_id\":\"75013ef0dfa2547098a92858b8ef629c6957235f0600488644ea912a80b1c584\",\"_updatedAt\":1784822860101,\"_bind\":\"rankingTypeJerseys-2026-19\",\"_origin\":\"rankingType-2026-18\",\"_parent\""
+      },
+      {
+        "captured_at": "2026-07-24T12:07:08.238+00:00",
+        "url": "https://racecenter.letour.fr/api/extraVehicle-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZVGM0TVdZNFkySXpPV0poIiwiaWF0IjoxNzg0ODk0ODI3fQ2QrhDCvuHooRwDU1y7bOpekW0qyB5-Up4mg2STh0l0M",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"contents\":[{\"label\":\"C\",\"title\":\"Caravane\",\"locale\":\"fr\"},{\"title\":\"Caravan\",\"locale\":\"en\",\"label\":\"C\"},{\"label\":\"C\",\"title\":\"Caravana\",\"locale\":\"es\"},{\"title\":\"Caravan\",\"locale\":\"de\",\"label\":\"C\"}],\"longitude\":5.857099,\"link\":null,\"raceStatus\":null,\"isVisible\":true,\"latitude\":44.892953,\"timestamp\":\"2026-07-24 14:07:05\",\"color\":{\"circle\":\"#d0378d\",\"text\":\"#fff\"},\"total\":127870,\"fromStart\":75800,"
+      },
+      {
+        "captured_at": "2026-07-24T12:07:08.238+00:00",
+        "url": "https://racecenter.letour.fr/api/insights-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZV0UzWkdWbE1UZ3hPVGcxIiwiaWF0IjoxNzg0ODk0ODI3fQr7d11x9sEcWVsWqjwVHID63bBsDTwCIBIKulopjC3_4",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-07-24T12:07:08.353+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingType-2026-18?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaREpqWXpGallXUmxNR0V6IiwiaWF0IjoxNzg0ODk0ODI3fQbZ--d3E4PBzlATyvd8vz_WnMRuG0UUYrhNx5aGOL6ss",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"rankings\":[{\"position\":1,\"bonus\":0,\"absolute\":10,\"bib\":41,\"penality\":0,\"relative\":0,\"$rider\":\"allCompetitors-2026:473172c3f0db2f7ea6b03f3ef73eb46591c5016c211775b8c5d697cb615e4282\"},{\"position\":2,\"bonus\":0,\"absolute\":8,\"bib\":118,\"penality\":0,\"relative\":0,\"$rider\":\"allCompetitors-2026:57107879f3a5db1e87f287b8b66c3d03dac79a36f011106f53ceafa1c0b3bb28\"},{\"bib\":16,\"relative\":0,\"penality\":0,\"position\""
+      },
+      {
+        "captured_at": "2026-07-24T12:07:08.354+00:00",
+        "url": "https://racecenter.letour.fr/api/telemetryPack-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOVEkxTXpneU1ETTRNR1UwIiwiaWF0IjoxNzg0ODk0ODI3fQCcpvyLAH5EqJ6rvyRyFLpACuJzxZTGrehJ5pbj6goHU",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
       }
     ],
     "api-path": [
       {
-        "captured_at": "2026-07-22T12:00:21.684+00:00",
-        "url": "https://racecenter.letour.fr/api/rankingTypeTrial-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNMk00TXpZeE5XWmtaalkwIiwiaWF0IjoxNzg0NzIxNjIwfQH0zxx_UvqczlnX-gwzGA0hLVb8gnffrqxb3sA4CuJKY",
+        "captured_at": "2026-07-24T12:07:08.374+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeWidget-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNR1JtTldOa1kySTVOV016IiwiaWF0IjoxNzg0ODk0ODI3fQds3elQEWAdXMAIhLN6JXNq2NWWgRF8lNxcUNEkG0oY8",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-22T12:00:21.685+00:00",
-        "url": "https://racecenter.letour.fr/api/rankingTypeWidget-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaREZpTjJRek9XVTBNalJrIiwiaWF0IjoxNzg0NzIxNjIwfQoi7IH8eLx_tTMSkLEx0VNTG3xziMJ5fIQR0dh201bdc",
+        "captured_at": "2026-07-24T12:07:08.388+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeTrial-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOREkzT0RkaU5tUmtORFprIiwiaWF0IjoxNzg0ODk0ODI3fQlBWRjtvLQiEhEqfCBdZ8Fe6GEZa7C5INBSk841u9aP0",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-22T12:00:21.722+00:00",
-        "url": "https://racecenter.letour.fr/api/rankingTypeArrival-2026-17?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaVEF3WlRZMk0yVXdZemd6IiwiaWF0IjoxNzg0NzIxNjIwfQ9fYqe4lZMPIx_HBAt-0tLC7vnsTOszvedqGnQVPJjgo",
+        "captured_at": "2026-07-24T12:07:21.836+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeArrival-2026-19?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaREl5TmpRM1pXTTVORFEyIiwiaWF0IjoxNzg0ODk0ODI3fQ8LmRq2sLfxAn3xs6xznLIQ_t6mJ1FmWmaBpjJPT1wZQ",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-22T12:00:23.703+00:00",
-        "url": "https://racecenter.letour.fr/api/rankingTypeJerseys-2026-18?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPRFprWldReU1XUmhObU5qIiwiaWF0IjoxNzg0NzIxNjIwfQuUSxwWq00tPVbeZRdTapDeOxh_TlX1salYXd8_5p28Y",
+        "captured_at": "2026-07-24T12:08:15.901+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeJerseys-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaV1ZoWldFeFpqUTRZakZpIiwiaWF0IjoxNzg0ODk0ODI3fQbTurUavbNj1RyZGsXfcFlLkE9raLTFQnLg0tQ01P86E",
         "status": 204,
         "mime": "",
         "kind": "api-path",
+        "sample": ""
+      }
+    ],
+    "csv": [
+      {
+        "captured_at": "2026-07-24T12:07:08.426+00:00",
+        "url": "https://racecenter.letour.fr/profils/2026/profile-19-3444ea9859210b11faeeb80df8c4b7f8.csv",
+        "status": 200,
+        "mime": "text/csv; charset=UTF-8",
+        "kind": "csv",
+        "sample": ""
+      },
+      {
+        "captured_at": "2026-07-24T12:07:08.426+00:00",
+        "url": "https://racecenter.letour.fr/profils/2026/profile-19-3444ea9859210b11faeeb80df8c4b7f8.csv",
+        "status": 200,
+        "mime": "text/csv; charset=UTF-8",
+        "kind": "csv",
+        "sample": ""
+      },
+      {
+        "captured_at": "2026-07-24T12:07:08.616+00:00",
+        "url": "https://racecenter.letour.fr/profils/2026/profile-19-tiny-2741edbc69061a6ff764e0351e83b3d6.csv",
+        "status": 200,
+        "mime": "text/csv; charset=UTF-8",
+        "kind": "csv",
         "sample": ""
       }
     ]
   },
   "sse_binds_seen": {
-    "(unparseable)": 51,
+    "(unparseable)": 52,
+    "fantasy": 6,
     "video": 18,
-    "rankingType": 45,
-    "rankingTypeJerseys": 18,
-    "stageWithdrawals": 8,
-    "rankingTypeWidget": 8,
-    "rankingTypeArrival": 8,
-    "socialContent": 76,
-    "image": 6,
-    "checkpoint": 8,
-    "fantasy": 8,
-    "extraVehicle": 84,
-    "telemetryPack": 62,
-    "telemetryCompetitor": 62,
-    "pack": 62,
-    "insights": 62,
-    "(unknown)": 6,
-    "publication_sk": 4,
-    "publication_cs": 4,
-    "publication_nl": 4,
-    "publication_it": 4,
-    "publication_sv": 4,
-    "publication_pt": 4,
-    "publication_nb": 4,
-    "publication_fr": 5,
-    "publication_de": 2,
-    "publication_en": 3,
-    "publication_es": 4,
-    "publication_da": 2,
-    "publication_sl": 2
+    "publication_fr": 12,
+    "publication_en": 12,
+    "publication_de": 7,
+    "publication_es": 8,
+    "publication_da": 42,
+    "publication_sl": 42,
+    "publication_sk": 42,
+    "publication_cs": 42,
+    "publication_nl": 42,
+    "publication_it": 42,
+    "publication_sv": 42,
+    "publication_pt": 42,
+    "publication_nb": 42,
+    "socialContent": 53,
+    "checkpoint": 6,
+    "image": 12,
+    "extraVehicle": 82,
+    "(unknown)": 6
   },
   "sse_sample_events": [
     {
-      "captured_at": "2026-07-22T12:00:19.734+00:00",
-      "requestId": "2841.252",
-      "timestamp": 71.997769,
+      "captured_at": "2026-07-24T12:07:07.396+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.407358,
       "eventName": "uid",
       "eventId": "",
-      "data": "fc687a8c-0318-462d-9bbe-adda5303b8c2"
+      "data": "c547dcd6-babc-476b-a673-1e1096563005"
     },
     {
-      "captured_at": "2026-07-22T12:00:19.734+00:00",
-      "requestId": "2841.252",
-      "timestamp": 71.997992,
+      "captured_at": "2026-07-24T12:07:07.396+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.407551,
       "eventName": "stage",
       "eventId": "",
-      "data": "0cd1639487e7086115459614e40423e7b928c28644ba27c13a841786d67f6106"
+      "data": "f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d"
     },
     {
-      "captured_at": "2026-07-22T12:00:19.734+00:00",
-      "requestId": "2841.252",
-      "timestamp": 72.000328,
+      "captured_at": "2026-07-24T12:07:07.396+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.40811,
+      "eventName": "update",
+      "eventId": "2",
+      "data": "{\"bind\":\"fantasy-2026-19\",\"app\":\"tdf\",\"origin\":\"fantasy-2026-19\",\"change\":\"added\",\"id\":\"riders-data\",\"data\":{\"points_definitive\":false,\"status\":\"success\",\"stage\":{\"name\":\"19 - Gap &gt; Alpe d&#039;Huez\",\"id\":19,\"deadline_UTC\":\"2026-07-24 12:15\"},\"riders\":[{\"points\":0,\"points_captain\":0,\"category\":\"Leaders\",\"number\":1},{\"points_captain\":0,\"category\":\"Climbers\",\"points\":0,\"number\":2},{\"points_captain\":0,\"points\":0,\"category\":\"Climbers\",\"number\":3},{\"number\":4,\"category\":\"Climbers\",\"points_captain\":0,\"points\":0},{\"number\":5,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":6,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\",\"number\":7},{\"number\":8,\"category\":\"Leaders\",\"points_captain\":0,\"points\":0},{\"points\":0,\"points_captain\":0,\"category\":\"Leaders\",\"number\":11},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":12},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":13},{\"number\":14,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":15,\"category\":\"Climbers\",\"points\":0,\"points_captain\":0},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":16},{\"points_captain\":0,\"category\":\"Climbers\",\"points\":0,\"number\":17},{\"number\":18,\"points\":0,\"category\":\"Climbers\",\"points_captain\":0},{\"category\":\"Leaders\",\"points_captain\":0,\"points\":0,\"number\":21},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":22},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":23},{\"number\":24,\"category\":\"Climbers\",\"points\":0,\"points_captain\":0},{\"number\":25,\"category\":\"Leaders\",\"points_captain\":0,\"points\":0},{\"number\":26,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"number\":27,\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\"},{\"number\":28,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":31,\"category\":\"Leaders\",\"points\":0,\"points_captain\":0},{\"category\":\"Leaders\",\"points\":0,\"points_captain\":0,\"number\":32},{\"category\":\"Sprinters\",\"points\":0,\"points_captain\":0,\"number\":33},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":34},{\"number\":35,\"category\":\"Climbers\",\"points_captain\":0,\"points\":0},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":36},{\"number\":37,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":38,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"number\":41,\"category\":\"Leaders\",\"points\":0,\"points_captain\":0},{\"number\":42,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":43,\"category\":\"Climbers\",\"points\":0,\"points_captain\":0},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":44},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":45},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":46},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":47},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":48},{\"number\":51,\"category\":\"Leaders\",\"points_captain\":0,\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":52},{\"number\":53,\"category\":\"Sprinters\",\"points_captain\":0,\"points\":0},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":54},{\"number\":55,\"points_captain\":0,\"points\":0,\"category\":\"Sprinters\"},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":56},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":57},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":58},{\"number\":61,\"category\":\"Climbers\",\"points_captain\":0,\"points\":0},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":62},{\"number\":63,\"category\":\"Sprinters\",\"points_captain\":0,\"points\":0},{\"category\":\"Sprinters\",\"points\":0,\"points_captain\":0,\"number\":64},{\"number\":65,\"points_captain\":0,\"points\":0,\"category\":\"Climbers\"},{\"points_captain\":0,\"category\":\"Sprinters\",\"points\":0,\"number\":66},{\"number\":67,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":68,\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0},{\"category\":\"Climbers\",\"points_captain\":0,\"points\":0,\"number\":71},{\"number\":72,\"category\":\"Sprinters\",\"points_captain\":0,\"points\":0},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":73},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":74},{\"number\":75,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":76,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"category\":\"Leaders\",\"points\":0,\"points_captain\":0,\"number\":77},{\"number\":78,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"points\":0,\"category\":\"Leaders\",\"points_captain\":0,\"number\":81},{\"number\":82,\"points\":0,\"category\":\"Leaders\",\"points_captain\":0},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":83},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":84},{\"category\":\"Sprinters\",\"points_captain\":0,\"points\":0,\"number\":85},{\"number\":86,\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\"},{\"number\":87,\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\"},{\"number\":88,\"points_captain\":0,\"category\":\"Leaders\",\"points\":0},{\"number\":91,\"category\":\"Sprinters\",\"points\":0,\"points_captain\":0},{\"number\":92,\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":93},{\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0,\"number\":94},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":95},{\"number\":96,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":97,\"category\":\"Climbers\",\"points\":0,\"points_captain\":0},{\"number\":98,\"points\":0,\"category\":\"Climbers\",\"points_captain\":0},{\"number\":101,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":102,\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\"},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":103},{\"number\":104,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":105,\"category\":\"Sprinters\",\"points\":0,\"points_captain\":0},{\"number\":106,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"number\":107,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"number\":108,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"category\":\"Leaders\",\"points_captain\":0,\"points\":0,\"number\":111},{\"points\":0,\"category\":\"Sprinters\",\"points_captain\":0,\"number\":112},{\"number\":113,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0,\"number\":114},{\"number\":115,\"category\":\"Sprinters\",\"points\":0,\"points_captain\":0},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":116},{\"number\":117,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":118},{\"number\":121,\"category\":\"Leaders\",\"points\":0,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":122},{\"category\":\"Climbers\",\"points_captain\":0,\"points\":0,\"number\":123},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":124},{\"number\":125,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"number\":126,\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\"},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":127},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":128},{\"category\":\"Sprinters\",\"points_captain\":0,\"points\":0,\"number\":131},{\"number\":132,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"points_captain\":0,\"points\":0,\"category\":\"Climbers\",\"number\":133},{\"points\":0,\"points_captain\":0,\"category\":\"Climbers\",\"number\":134},{\"number\":135,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":136},{\"category\":\"Sprinters\",\"points\":0,\"points_captain\":0,\"number\":137},{\"number\":138,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":141,\"points\":0,\"points_captain\":0,\"category\":\"Leaders\"},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":142},{\"points_captain\":0,\"category\":\"Climbers\",\"points\":0,\"number\":143},{\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\",\"number\":144},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":145},{\"number\":146,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0,\"number\":147},{\"number\":148,\"points\":0,\"category\":\"Climbers\",\"points_captain\":0},{\"points\":0,\"category\":\"Sprinters\",\"points_captain\":0,\"number\":151},{\"number\":152,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":153,\"category\":\"Sprinters\",\"points_captain\":0,\"points\":0},{\"number\":154,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":155},{\"points_captain\":0,\"points\":0,\"category\":\"Climbers\",\"number\":156},{\"number\":157,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"points_captain\":0,\"points\":0,\"category\":\"Climbers\",\"number\":158},{\"number\":161,\"category\":\"Climbers\",\"points_captain\":0,\"points\":0},{\"number\":162,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"number\":163,\"category\":\"Sprinters\",\"points\":0,\"points_captain\":0},{\"number\":164,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"number\":165,\"points\":0,\"category\":\"Sprinters\",\"points_captain\":0},{\"number\":166,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":167,\"points_captain\":0,\"category\":\"Sprinters\",\"points\":0},{\"number\":168,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":171,\"category\":\"Leaders\",\"points_captain\":0,\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":172},{\"number\":173,\"category\":\"Climbers\",\"points\":0,\"points_captain\":0},{\"number\":174,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"category\":\"Climbers\",\"points_captain\":0,\"points\":0,\"number\":175},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":176},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":177},{\"number\":178,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"number\":181,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"number\":182,\"points_captain\":0,\"category\":\"Climbers\",\"points\":0},{\"category\":\"Climbers\",\"points_captain\":0,\"points\":0,\"number\":183},{\"number\":184,\"category\":\"Climbers\",\"points\":0,\"points_captain\":0},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":185},{\"category\":\"Leaders\",\"points\":0,\"points_captain\":0,\"number\":186},{\"number\":187,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":188},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":191},{\"number\":192,\"points\":0,\"points_captain\":0,\"category\":\"Sprinters\"},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":193},{\"number\":194,\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0},{\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\",\"number\":195},{\"category\":\"Leaders\",\"points\":0,\"points_captain\":0,\"number\":196},{\"category\":\"Sprinters\",\"points\":0,\"points_captain\":0,\"number\":197},{\"number\":198,\"points_captain\":0,\"category\":\"Climbers\",\"points\":0},{\"number\":201,\"category\":\"Leaders\",\"points_captain\":0,\"points\":0},{\"number\":202,\"points_captain\":0,\"category\":\"Climbers\",\"points\":0},{\"number\":203,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"number\":204,\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0},{\"number\":205,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":206},{\"number\":207,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\",\"number\":208},{\"points_captain\":0,\"points\":0,\"category\":\"Climbers\",\"number\":211},{\"number\":212,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"number\":213,\"category\":\"Sprinters\",\"points\":0,\"points_captain\":0},{\"number\":214,\"points\":0,\"points_captain\":0,\"category\":\"Sprinters\"},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":215},{\"number\":216,\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0},{\"category\":\"All-rounders\",\"points_captain\":0,\"points\":0,\"number\":217},{\"points\":0,\"points_captain\":0,\"category\":\"All-rounders\",\"number\":218},{\"points\":0,\"points_captain\":0,\"category\":\"Sprinters\",\"number\":221},{\"points_captain\":0,\"category\":\"Leaders\",\"points\":0,\"number\":222},{\"category\":\"Climbers\",\"points_captain\":0,\"points\":0,\"number\":223},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":224},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":225},{\"category\":\"Sprinters\",\"points_captain\":0,\"points\":0,\"number\":226},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":227},{\"number\":228,\"category\":\"Leaders\",\"points\":0,\"points_captain\":0}],\"_id\":\"riders-data\",\"_bind\":\"fantasy-2026-19\",\"_origin\":\"fantasy-2026-19\",\"_updatedAt\":1784862000898,\"_parent\":\"stage-2026:f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d\",\"_key\":\"_id\",\"_refs\":[]}}"
+    },
+    {
+      "captured_at": "2026-07-24T12:07:07.396+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.409275,
       "eventName": "update",
       "eventId": "8",
-      "data": "{\"bind\":\"video-2026-17\",\"app\":\"tdf\",\"origin\":\"video-2026-17\",\"change\":\"added\",\"id\":\"bd03b614ecb2ba8952a002fbf8513dc8a279a8b08f416d02b0888da04d4b7c34\",\"data\":{\"isData\":false,\"videoLangs\":[{\"locale\":\"fr\",\"title\":\"Découvrez le parcours de Étape 17\"},{\"locale\":\"en\",\"title\":\"Discover the route of Stage 17\"},{\"title\":\"Discover the route of Etappe 17\",\"locale\":\"de\"},{\"locale\":\"es\",\"title\":\"Descubra el recorrido de la Etapa 17\"}],\"onlyDataTab\":false,\"name\":\"Découvrez le parcours de l'Étape 17\",\"createdAt\":\"2026-07-22T09:00:00+02:00\",\"id\":11450,\"onlyClubTab\":false,\"isClub\":false,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=x9sikj8\",\"_id\":\"bd03b614ecb2ba8952a002fbf8513dc8a279a8b08f416d02b0888da04d4b7c34\",\"_bind\":\"video-2026-17\",\"_origin\":\"video-2026-17\",\"_updatedAt\":1784707478936,\"_parent\":\"stage-2026:0cd1639487e7086115459614e40423e7b928c28644ba27c13a841786d67f6106\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Découvrez le parcours de l'Étape 17\",\"model\":\"video\"}}"
+      "data": "{\"bind\":\"video-2026-19\",\"app\":\"tdf\",\"origin\":\"video-2026-19\",\"change\":\"added\",\"id\":\"83cbe3b2a4e6aca43f6c157600b46b91f7349b6caada92669daf6a19e5e11d4c\",\"data\":{\"videoLangs\":[{\"locale\":\"fr\",\"title\":\"Découvrez le parcours de l'Étape 19\"},{\"title\":\"Discover the route of Stage 19\",\"locale\":\"en\"},{\"locale\":\"de\",\"title\":\"Discover the route of Etappe 19\"},{\"title\":\"Descubra el recorrido de la Etapa 19\",\"locale\":\"es\"}],\"id\":11514,\"createdAt\":\"2026-07-24T08:15:00+02:00\",\"isData\":false,\"isClub\":false,\"onlyClubTab\":false,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=x9sikn0\",\"onlyDataTab\":false,\"name\":\"Découvrez le parcours de l'Étape 19\",\"_id\":\"83cbe3b2a4e6aca43f6c157600b46b91f7349b6caada92669daf6a19e5e11d4c\",\"_bind\":\"video-2026-19\",\"_origin\":\"video-2026-19\",\"_updatedAt\":1784875478877,\"_parent\":\"stage-2026:f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Découvrez le parcours de l'Étape 19\",\"model\":\"video\"}}"
     },
     {
-      "captured_at": "2026-07-22T12:00:19.734+00:00",
-      "requestId": "2841.252",
-      "timestamp": 72.002328,
+      "captured_at": "2026-07-24T12:07:07.397+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.409481,
       "eventName": "update",
-      "eventId": "14",
-      "data": "{\"bind\":\"video-2026-17\",\"app\":\"tdf\",\"origin\":\"video-2026-17\",\"change\":\"added\",\"id\":\"486e29299c74493b99933d6a1d954771cc62d46b52e4df15d64d140dcc0f7675\",\"data\":{\"videoLangs\":[{\"id\":21706,\"title\":\"Briefing Étape 17\",\"locale\":\"fr\"},{\"title\":\"Briefing Stage 17\",\"locale\":\"en\",\"id\":21707},{\"locale\":\"de\",\"title\":\"Briefing Etappe 17\",\"id\":21708},{\"id\":21709,\"locale\":\"es\",\"title\":\"Briefing Etapa 17\"}],\"onlyDataTab\":false,\"isData\":false,\"name\":\"Briefing Étape 17\",\"createdAt\":\"2026-06-30T17:15:00+02:00\",\"id\":10849,\"onlyClubTab\":false,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6r9u\",\"isClub\":true,\"_id\":\"486e29299c74493b99933d6a1d954771cc62d46b52e4df15d64d140dcc0f7675\",\"_bind\":\"video-2026-17\",\"_origin\":\"video-2026-17\",\"_updatedAt\":1784707524458,\"_parent\":\"stage-2026:0cd1639487e7086115459614e40423e7b928c28644ba27c13a841786d67f6106\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 17\",\"model\":\"video\"}}"
+      "eventId": "24",
+      "data": "{\"bind\":\"publication_fr-2026-18\",\"app\":\"tdf\",\"origin\":\"video-2026-18\",\"change\":\"modified\",\"id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"data\":{\"videoLangs\":[{\"title\":\"Briefing Étape 18\",\"id\":21710,\"locale\":\"fr\"},{\"id\":21711,\"title\":\"Briefing Stage 18\",\"locale\":\"en\"},{\"id\":21712,\"title\":\"Briefing Etappe 18\",\"locale\":\"de\"},{\"title\":\"Briefing Etapa 18\",\"id\":21713,\"locale\":\"es\"}],\"onlyClubTab\":false,\"createdAt\":\"2026-06-30T16:52:00+02:00\",\"isData\":false,\"onlyDataTab\":false,\"id\":21710,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rhq\",\"isClub\":true,\"name\":\"Briefing Étape 18\",\"_id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"_bind\":\"publication_fr-2026-18\",\"_origin\":\"video-2026-18\",\"_updatedAt\":1784877211914,\"_parent\":\"stage-2026:61a088208454d11b5835d7365674eefeb2e52d650542e11100b87883d32391bd\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 18\",\"model\":\"video\",\"title\":\"Briefing Étape 18\",\"locale\":\"fr\"}}"
     },
     {
-      "captured_at": "2026-07-22T12:00:19.735+00:00",
-      "requestId": "2841.252",
-      "timestamp": 72.002793,
+      "captured_at": "2026-07-24T12:07:07.397+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.409659,
       "eventName": "update",
-      "eventId": "1187",
-      "data": "{\"bind\":\"rankingType-2026-8\",\"app\":\"tdf\",\"origin\":\"rankingType-2026-8\",\"change\":\"modified\",\"id\":\"e94af8ee317409c3d3b54a47c7a63b00755c13a0d5291b6df4ebb3bea081e519\",\"data\":{\"rankings\":[{\"bonus\":0,\"position\":1,\"penality\":0,\"bib\":1,\"absolute\":28,\"relative\":0,\"$rider\":\"allCompetitors-2026:98ebdbb15aee1eca149591765648fe98b7cf74b3ad2555f48c35b01e902e3777\"},{\"position\":2,\"bonus\":0,\"relative\":9,\"penality\":0,\"absolute\":19,\"bib\":11,\"$rider\":\"allCompetitors-2026:5ddfa1f926292eacfdb0c43e648088703edb07a2b18d82ec91dee031b3f79b93\"},{\"bonus\":0,\"position\":3,\"relative\":12,\"absolute\":16,\"bib\":71,\"penality\":0,\"$rider\":\"allCompetitors-2026:49927acd9d7f061f38799676b48d95fd3b7e49d594ffa4fcbcadb19ab2660984\"},{\"absolute\":13,\"bib\":43,\"penality\":0,\"relative\":15,\"bonus\":0,\"position\":4,\"$rider\":\"allCompetitors-2026:9ead4b3441417f0682eba82449e1fa076dee6cb12ea9b96b6f3ee89ca15651d0\"},{\"relative\":16,\"absolute\":12,\"bib\":51,\"penality\":0,\"bonus\":0,\"position\":5,\"$rider\":\"allCompetitors-2026:56de42d1db9a4c398bddbaf134730c53468ea7bc72c5feee8b108898f06f892d\"},{\"bib\":93,\"absolute\":10,\"penality\":0,\"relative\":18,\"bonus\":0,\"position\":6,\"$rider\":\"allCompetitors-2026:56e318508be746d55e57ca1330088078cba5e8635eda31c45b442b57df46bd4d\"},{\"bonus\":0,\"position\":7,\"bib\":2,\"absolute\":10,\"penality\":0,\"relative\":18,\"$rider\":\"allCompetitors-2026:995117aa9014c38237475313d9654bdef1ec0761b24178bf580e519c5540babf\"},{\"bib\":25,\"penality\":0,\"absolute\":10,\"relative\":18,\"bonus\":0,\"position\":8,\"$rider\":\"allCompetitors-2026:61020ffaaa091a00754640de823403f992d3c6cf38320e1e166e6af4954d73e5\"},{\"relative\":19,\"bib\":57,\"absolute\":9,\"penality\":0,\"position\":9,\"bonus\":0,\"$rider\":\"allCompetitors-2026:7829477959110d08e7607dbe44933415eeacff7c57a1d85e033c7fcca32da587\"},{\"position\":10,\"bonus\":0,\"bib\":144,\"absolute\":7,\"penality\":0,\"relative\":21,\"$rider\":\"allCompetitors-2026:6ce0651a303c4a144f07f3d85fa0616115722c1d2cd7b8ec712ab07744c3c0d4\"},{\"bonus\":0,\"position\":11,\"relative\":22,\"bib\":4,\"penality\":0,\"absolute\":6,\"$rider\":\"allCompetitors-2026:39bea88e077d5d4729864f3f3f04ff109bf50dc663fba0563163e3846f959769\"},{\"bonus\":0,\"position\":12,\"relative\":22,\"bib\":7,\"penality\":0,\"absolute\":6,\"$rider\":\"allCompetitors-2026:825dcb219985c122236a7281fcaa7734ade3ece7bb04546f2f5dbc1f24636883\"},{\"bonus\":0,\"position\":13,\"relative\":23,\"penality\":0,\"bib\":134,\"absolute\":5,\"$rider\":\"allCompetitors-2026:d715f33ab5fc5da3b6907879f76ffeeda2dd6116e539f9915e94e2b1920a560e\"},{\"absolute\":5,\"penality\":0,\"bib\":26,\"relative\":23,\"position\":14,\"bonus\":0,\"$rider\":\"allCompetitors-2026:2ef389652346279fadf9b0aa5aa3bd3b0fff03cef740d9ec24c5e79de3a5539b\"},{\"bib\":21,\"penality\":0,\"absolute\":5,\"relative\":23,\"bonus\":0,\"position\":15,\"$rider\":\"allCompetitors-2026:8fbe978af4131081bf7f0663ae20a7d8b437a4787a09bce93154d06aa065f9b8\"},{\"position\":16,\"bonus\":0,\"relative\":24,\"bib\":3,\"penality\":0,\"absolute\":4,\"$rider\":\"allCompetitors-2026:3239af294a3772d31b03d20f44766be7a4a0cd002cdd2cb4ba567aec243ef6e3\"},{\"position\":17,\"bonus\":0,\"penality\":0,\"bib\":78,\"absolute\":4,\"relative\":24,\"$rider\":\"allCompetitors-2026:7879d609e4a7ead8abc54a4d7b630193f81c3510de84d1c8a2b9c9b75e241390\"},{\"bonus\":0,\"position\":18,\"penality\":0,\"bib\":157,\"absolute\":3,\"relative\":25,\"$rider\":\"allCompetitors-2026:cc76e2e5481b6e235f76afeabcb5ae8d669dcdbf4a279331461ee69456390484\"},{\"bonus\":0,\"position\":19,\"penality\":0,\"bib\":37,\"absolute\":3,\"relative\":25,\"$rider\":\"allCompetitors-2026:d5d7474704c71eed93b8217e2a6f7f0ae5658fa399acadde5257a8c08976987e\"},{\"position\":20,\"bonus\":0,\"penality\":0,\"absolute\":3,\"bib\":142,\"relative\":25,\"$rider\":\"allCompetitors-2026:1349d80410080c809ad7f4eee8d6e57990f83a9630ca36b411fdfb53c7383bb2\"},{\"absolute\":3,\"penality\":0,\"bib\":114,\"relative\":25,\"position\":21,\"bonus\":0,\"$rider\":\"allCompetitors-2026:6cae78ab80d37ab8970a5530bedc0397700c872cfc76083f8e03b5bc529381da\"},{\"bonus\":0,\"position\":22,\"penality\":0,\"absolute\":2,\"bib\":121,\"relative\":26,\"$rider\":\"allCompetitors-2026:92c46c60ded4a1ffce66a51297d5903ccd6df671171aebc967aa239168331a2f\"},{\"absolute\":2,\"bib\":111,\"penality\":0,\"relative\":26,\"bonus\":0,\"position\":23,\"$rider\":\"allCompetitors-2026:95f43262301ec311532d00709dc1e850e35a8c72e68f4ae407091942ff674201\"},{\"relative\":26,\"penality\":0,\"bib\":155,\"absolute\":2,\"bonus\":0,\"position\":24,\"$rider\":\"allCompetitors-2026:661c60e85aeee375d1d1211d7d424c265fa0982e7a49d0145309fd8faad75c6d\"},{\"relative\":26,\"absolute\":2,\"penality\":0,\"bib\":35,\"bonus\":0,\"position\":25,\"$rider\":\"allCompetitors-2026:88d376bdc90babb7d1c7d488adf9b9d012d356b9b884cc385854aa84548c93c7\"},{\"absolute\":2,\"bib\":102,\"penality\":0,\"relative\":26,\"position\":26,\"bonus\":0,\"$rider\":\"allCompetitors-2026:0362886d32acef891645378daf58ea74574256ec5673a767b69fb371f212962f\"},{\"bib\":208,\"absolute\":2,\"penality\":0,\"relative\":26,\"bonus\":0,\"position\":27,\"$rider\":\"allCompetitors-2026:28ba8cc4e3615909679444b8892acf2a141a209f32f44be009239a90a8a4e2f4\"},{\"position\":28,\"bonus\":0,\"bib\":218,\"absolute\":2,\"penality\":0,\"relative\":26,\"$rider\":\"allCompetitors-2026:74975d4d416ba82c095bc7050fb3dc8116104cb2c60e5432fa4116e7e5b54b8a\"},{\"absolute\":1,\"bib\":33,\"penality\":0,\"relative\":27,\"position\":29,\"bonus\":0,\"$rider\":\"allCompetitors-2026:6cc1261ec26fa5d171edb5185005a5bbffd8c38482b1cd623fdb1d223fcc00ac\"},{\"relative\":27,\"bib\":8,\"penality\":0,\"absolute\":1,\"bonus\":0,\"position\":30,\"$rider\":\"allCompetitors-2026:1e2ab12ae3c35a686768852d38a865fbd5c9c2c48015ed7f5007a5636fdad69f\"},{\"absolute\":1,\"bib\":41,\"penality\":0,\"relative\":27,\"bonus\":0,\"position\":31,\"$rider\":\"allCompetitors-2026:473172c3f0db2f7ea6b03f3ef73eb46591c5016c211775b8c5d697cb615e4282\"},{\"relative\":27,\"bib\":16,\"absolute\":1,\"penality\":0,\"bonus\":0,\"position\":32,\"$rider\":\"allCompetitors-2026:17e139f45f3ba3a7a96cdefafa9a8ecbd81d0a415c1e6af673c6525c95a05943\"},{\"bonus\":0,\"position\":33,\"relative\":27,\"penality\":0,\"absolute\":1,\"bib\":147,\"$rider\":\"allCompetitors-2026:977717d8b35468a8a4bc386cbc2daac229a05d842341609761fefc0bf86f4dd1\"},{\"bonus\":0,\"position\":34,\"relative\":27,\"penality\":0,\"absolute\":1,\"bib\":133,\"$rider\":\"allCompetitors-2026:4e549282660fae7aa16cafc031aef3fe74ff39f22cb79cc964918d9886892e21\"},{\"position\":35,\"bonus\":0,\"relative\":27,\"penality\":0,\"bib\":46,\"absolute\":1,\"$rider\":\"allCompetitors-2026:87f60f8a2fdc3ff637d32a7a26a94f2c5bae6411e480c7c245a8da40612abc71\"},{\"relative\":27,\"penality\":0,\"bib\":172,\"absolute\":1,\"bonus\":0,\"position\":36,\"$rider\":\"allCompetitors-2026:7ad55791adb33c378bd4716d94accc0135376dd67d1ff2a1e8766d0c6812d5c9\"},{\"bib\":87,\"penality\":0,\"absolute\":1,\"relative\":27,\"position\":37,\"bonus\":0,\"$rider\":\"allCompetitors-2026:b4624b066ada26750bdcc53e521f329f04ad62bb112519d9b6ea634d374f0008\"}],\"checkpoint\":75,\"status\":\"0\",\"length\":1265.9,\"type\":\"img\",\"timeLimit\":0,\"_id\":\"e94af8ee317409c3d3b54a47c7a63b00755c13a0d5291b6df4ebb3bea081e519\",\"_bind\":\"rankingType-2026-8\",\"_origin\":\"rankingType-2026-8\",\"_updatedAt\":1784714651770,\"_parent\":\"stage-2026:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518\",\"_key\":\"_id\",\"_refs\":[\"allCompetitors-2026:98ebdbb15aee1eca149591765648fe98b7cf74b3ad2555f48c35b01e902e3777\",\"allCompetitors-2026:5ddfa1f926292eacfdb0c43e648088703edb07a2b18d82ec91dee031b3f79b93\",\"allCompetitors-2026:49927acd9d7f061f38799676b48d95fd3b7e49d594ffa4fcbcadb19ab2660984\",\"allCompetitors-2026:9ead4b3441417f0682eba82449e1fa076dee6cb12ea9b96b6f3ee89ca15651d0\",\"allCompetitors-2026:56de42d1db9a4c398bddbaf134730c53468ea7bc72c5feee8b108898f06f892d\",\"allCompetitors-2026:56e318508be746d55e57ca1330088078cba5e8635eda31c45b442b57df46bd4d\",\"allCompetitors-2026:995117aa9014c38237475313d9654bdef1ec0761b24178bf580e519c5540babf\",\"allCompetitors-2026:61020ffaaa091a00754640de823403f992d3c6cf38320e1e166e6af4954d73e5\",\"allCompetitors-2026:7829477959110d08e7607dbe44933415eeacff7c57a1d85e033c7fcca32da587\",\"allCompetitors-2026:6ce0651a303c4a144f07f3d85fa0616115722c1d2cd7b8ec712ab07744c3c0d4\",\"allCompetitors-2026:39bea88e077d5d4729864f3f3f04ff109bf50dc663fba0563163e3846f959769\",\"allCompetitors-2026:825dcb219985c122236a7281fcaa7734ade3ece7bb04546f2f5dbc1f24636883\",\"allCompetitors-2026:d715f33ab5fc5da3b6907879f76ffeeda2dd6116e539f9915e94e2b1920a560e\",\"allCompetitors-2026:2ef389652346279fadf9b0aa5aa3bd3b0fff03cef740d9ec24c5e79de3a5539b\",\"allCompetitors-2026:8fbe978af4131081bf7f0663ae20a7d8b437a4787a09bce93154d06aa065f9b8\",\"allCompetitors-2026:3239af294a3772d31b03d20f44766be7a4a0cd002cdd2cb4ba567aec243ef6e3\",\"allCompetitors-2026:7879d609e4a7ead8abc54a4d7b630193f81c3510de84d1c8a2b9c9b75e241390\",\"allCompetitors-2026:cc76e2e5481b6e235f76afeabcb5ae8d669dcdbf4a279331461ee69456390484\",\"allCompetitors-2026:d5d7474704c71eed93b8217e2a6f7f0ae5658fa399acadde5257a8c08976987e\",\"allCompetitors-2026:1349d80410080c809ad7f4eee8d6e57990f83a9630ca36b411fdfb53c7383bb2\",\"allCompetitors-2026:6cae78ab80d37ab8970a5530bedc0397700c872cfc76083f8e03b5bc529381da\",\"allCompetitors-2026:92c46c60ded4a1ffce66a51297d5903ccd6df671171aebc967aa239168331a2f\",\"allCompetitors-2026:95f43262301ec311532d00709dc1e850e35a8c72e68f4ae407091942ff674201\",\"allCompetitors-2026:661c60e85aeee375d1d1211d7d424c265fa0982e7a49d0145309fd8faad75c6d\",\"allCompetitors-2026:88d376bdc90babb7d1c7d488adf9b9d012d356b9b884cc385854aa84548c93c7\",\"allCompetitors-2026:0362886d32acef891645378daf58ea74574256ec5673a767b69fb371f212962f\",\"allCompetitors-2026:28ba8cc4e3615909679444b8892acf2a141a209f32f44be009239a90a8a4e2f4\",\"allCompetitors-2026:74975d4d416ba82c095bc7050fb3dc8116104cb2c60e5432fa4116e7e5b54b8a\",\"allCompetitors-2026:6cc1261ec26fa5d171edb5185005a5bbffd8c38482b1cd623fdb1d223fcc00ac\",\"allCompetitors-2026:1e2ab12ae3c35a686768852d38a865fbd5c9c2c48015ed7f5007a5636fdad69f\",\"allCompetitors-2026:473172c3f0db2f7ea6b03f3ef73eb46591c5016c211775b8c5d697cb615e4282\",\"allCompetitors-2026:17e139f45f3ba3a7a96cdefafa9a8ecbd81d0a415c1e6af673c6525c95a05943\",\"allCompetitors-2026:977717d8b35468a8a4bc386cbc2daac229a05d842341609761fefc0bf86f4dd1\",\"allCompetitors-2026:4e549282660fae7aa16cafc031aef3fe74ff39f22cb79cc964918d9886892e21\",\"allCompetitors-2026:87f60f8a2fdc3ff637d32a7a26a94f2c5bae6411e480c7c245a8da40612abc71\",\"allCompetitors-2026:7ad55791adb33c378bd4716d94accc0135376dd67d1ff2a1e8766d0c6812d5c9\",\"allCompetitors-2026:b4624b066ada26750bdcc53e521f329f04ad62bb112519d9b6ea634d374f0008\",\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"],\"_virtual\":\"75-img-N-A\",\"_gets\":{\"rankings.rider\":\"$rider\",\"cp\":\"$cp\"},\"types\":[\"N\",\"A\"],\"$cp\":\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"}}"
+      "eventId": "25",
+      "data": "{\"bind\":\"publication_en-2026-18\",\"app\":\"tdf\",\"origin\":\"video-2026-18\",\"change\":\"modified\",\"id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"data\":{\"videoLangs\":[{\"title\":\"Briefing Étape 18\",\"id\":21710,\"locale\":\"fr\"},{\"id\":21711,\"title\":\"Briefing Stage 18\",\"locale\":\"en\"},{\"id\":21712,\"title\":\"Briefing Etappe 18\",\"locale\":\"de\"},{\"title\":\"Briefing Etapa 18\",\"id\":21713,\"locale\":\"es\"}],\"onlyClubTab\":false,\"createdAt\":\"2026-06-30T16:52:00+02:00\",\"isData\":false,\"onlyDataTab\":false,\"id\":21711,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rhq\",\"isClub\":true,\"name\":\"Briefing Étape 18\",\"_id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"_bind\":\"publication_en-2026-18\",\"_origin\":\"video-2026-18\",\"_updatedAt\":1784877211914,\"_parent\":\"stage-2026:61a088208454d11b5835d7365674eefeb2e52d650542e11100b87883d32391bd\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 18\",\"model\":\"video\",\"title\":\"Briefing Stage 18\",\"locale\":\"en\"}}"
     },
     {
-      "captured_at": "2026-07-22T12:00:19.735+00:00",
-      "requestId": "2841.252",
-      "timestamp": 72.003238,
+      "captured_at": "2026-07-24T12:07:07.397+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.409771,
       "eventName": "update",
-      "eventId": "1189",
-      "data": "{\"bind\":\"rankingTypeJerseys-2026-9\",\"app\":\"tdf\",\"origin\":\"rankingType-2026-8\",\"id\":\"3b9b1893ad7233ae42d524dd7be78aef6ba72ada81ce59a9e83fe1bfe40502a2\",\"data\":{\"status\":\"0\",\"rankings\":[{\"position\":1,\"bib\":11,\"absolute\":19,\"relative\":0,\"$rider\":\"allCompetitors-2026:5ddfa1f926292eacfdb0c43e648088703edb07a2b18d82ec91dee031b3f79b93\"},{\"bonus\":0,\"position\":1,\"penality\":999,\"bib\":1,\"absolute\":28,\"relative\":0,\"$rider\":\"allCompetitors-2026:98ebdbb15aee1eca149591765648fe98b7cf74b3ad2555f48c35b01e902e3777\"}],\"length\":0,\"checkpoint\":75,\"type\":\"pmm\",\"_id\":\"3b9b1893ad7233ae42d524dd7be78aef6ba72ada81ce59a9e83fe1bfe40502a2\",\"_updatedAt\":1784714651809,\"_bind\":\"rankingTypeJerseys-2026-9\",\"_origin\":\"rankingType-2026-8\",\"_parent\":\"stage-2026:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518\",\"_refs\":[\"allCompetitors-2026:5ddfa1f926292eacfdb0c43e648088703edb07a2b18d82ec91dee031b3f79b93\",\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\",\"allCompetitors-2026:98ebdbb15aee1eca149591765648fe98b7cf74b3ad2555f48c35b01e902e3777\"],\"_virtual\":\"75-pmm-N-A\",\"_gets\":{\"rankings.rider\":\"$rider\",\"cp\":\"$cp\"},\"types\":[\"N\",\"A\"],\"$cp\":\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"},\"change\":\"modified\"}"
+      "eventId": "26",
+      "data": "{\"bind\":\"publication_de-2026-18\",\"app\":\"tdf\",\"origin\":\"video-2026-18\",\"change\":\"modified\",\"id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"data\":{\"videoLangs\":[{\"title\":\"Briefing Étape 18\",\"id\":21710,\"locale\":\"fr\"},{\"id\":21711,\"title\":\"Briefing Stage 18\",\"locale\":\"en\"},{\"id\":21712,\"title\":\"Briefing Etappe 18\",\"locale\":\"de\"},{\"title\":\"Briefing Etapa 18\",\"id\":21713,\"locale\":\"es\"}],\"onlyClubTab\":false,\"createdAt\":\"2026-06-30T16:52:00+02:00\",\"isData\":false,\"onlyDataTab\":false,\"id\":21712,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rhq\",\"isClub\":true,\"name\":\"Briefing Étape 18\",\"_id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"_bind\":\"publication_de-2026-18\",\"_origin\":\"video-2026-18\",\"_updatedAt\":1784877211914,\"_parent\":\"stage-2026:61a088208454d11b5835d7365674eefeb2e52d650542e11100b87883d32391bd\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 18\",\"model\":\"video\",\"title\":\"Briefing Etappe 18\",\"locale\":\"de\"}}"
     },
     {
-      "captured_at": "2026-07-22T12:00:19.735+00:00",
-      "requestId": "2841.252",
-      "timestamp": 72.003572,
+      "captured_at": "2026-07-24T12:07:07.397+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.409911,
       "eventName": "update",
-      "eventId": "1193",
-      "data": "{\"bind\":\"rankingType-2026-8\",\"app\":\"tdf\",\"origin\":\"rankingType-2026-8\",\"change\":\"modified\",\"id\":\"9626e2af8c066181b3b8fa3195f430c42690cd827df046903983101e738c34d0\",\"data\":{\"rankings\":[{\"bib\":33,\"absolute\":228,\"penality\":0,\"relative\":0,\"bonus\":0,\"position\":1,\"$rider\":\"allCompetitors-2026:6cc1261ec26fa5d171edb5185005a5bbffd8c38482b1cd623fdb1d223fcc00ac\"},{\"position\":2,\"bonus\":0,\"absolute\":213,\"bib\":91,\"penality\":0,\"relative\":15,\"$rider\":\"allCompetitors-2026:df254b9081eb764c18356614cd97b337ee0c149dc9c1e82b3d8e6c97d4e4b2c5\"},{\"position\":3,\"bonus\":0,\"bib\":131,\"absolute\":203,\"penality\":0,\"relative\":25,\"$rider\":\"allCompetitors-2026:0ef80d8452236d0dea6004984fda777c24cb24824f9d0f55692a98975c8d4d2f\"},{\"absolute\":175,\"penality\":0,\"bib\":105,\"relative\":53,\"bonus\":0,\"position\":4,\"$rider\":\"allCompetitors-2026:fee944ccd7176d0d176d5f9c07bfa14cd3fecb349f3d0d5d2e823ce6b4f5f83c\"},{\"bonus\":0,\"position\":5,\"relative\":56,\"penality\":0,\"absolute\":172,\"bib\":64,\"$rider\":\"allCompetitors-2026:444cf91f27ba405a94a51a62bf79a2f1907a615a84e2a60acf87446b26a731b6\"},{\"relative\":118,\"absolute\":110,\"penality\":0,\"bib\":55,\"bonus\":0,\"position\":6,\"$rider\":\"allCompetitors-2026:bc57258fed5b6c24e62100f70d1c8744f12df4336b37e572d9462fe73b254e00\"},{\"relative\":139,\"absolute\":89,\"bib\":128,\"penality\":0,\"position\":7,\"bonus\":0,\"$rider\":\"allCompetitors-2026:74c4650a9d1c6e96a2996fcac630e245810f39bd1395e510eab1430bce8c8683\"},{\"relative\":149,\"absolute\":79,\"bib\":207,\"penality\":0,\"bonus\":0,\"position\":8,\"$rider\":\"allCompetitors-2026:6d7538ea59760583bb13ba84430639c9dc00275066df276fe30d67b945527527\"},{\"relative\":153,\"bib\":1,\"penality\":0,\"absolute\":75,\"position\":9,\"bonus\":0,\"$rider\":\"allCompetitors-2026:98ebdbb15aee1eca149591765648fe98b7cf74b3ad2555f48c35b01e902e3777\"},{\"penality\":0,\"absolute\":61,\"bib\":11,\"relative\":167,\"position\":10,\"bonus\":0,\"$rider\":\"allCompetitors-2026:5ddfa1f926292eacfdb0c43e648088703edb07a2b18d82ec91dee031b3f79b93\"},{\"position\":11,\"bonus\":0,\"relative\":169,\"penality\":0,\"absolute\":59,\"bib\":152,\"$rider\":\"allCompetitors-2026:f53d9aa5a51412b7db751a89a722b96c62a301e532adb9408f0b167ca7fe5925\"},{\"absolute\":55,\"penality\":0,\"bib\":34,\"relative\":173,\"position\":12,\"bonus\":0,\"$rider\":\"allCompetitors-2026:d258964dd312fce2e1d2fe66c4bd3aada2cfa88233c0673f0b4116c9a8ba557e\"},{\"bonus\":0,\"position\":13,\"bib\":2,\"absolute\":54,\"penality\":0,\"relative\":174,\"$rider\":\"allCompetitors-2026:995117aa9014c38237475313d9654bdef1ec0761b24178bf580e519c5540babf\"},{\"position\":14,\"bonus\":0,\"absolute\":53,\"bib\":157,\"penality\":0,\"relative\":175,\"$rider\":\"allCompetitors-2026:cc76e2e5481b6e235f76afeabcb5ae8d669dcdbf4a279331461ee69456390484\"},{\"relative\":176,\"penality\":0,\"bib\":213,\"absolute\":52,\"bonus\":0,\"position\":15,\"$rider\":\"allCompetitors-2026:8d0c6c06e1e2f111fd2820734671cb4f1da609897088f27f1b0ddef9da948e8a\"},{\"bonus\":0,\"position\":16,\"relative\":176,\"absolute\":52,\"penality\":0,\"bib\":165,\"$rider\":\"allCompetitors-2026:6ef305ed0a5f601068ea7dc78736ced55316ddebb1a14fa783a173d02d5d0a91\"},{\"bonus\":0,\"position\":17,\"bib\":112,\"penality\":0,\"absolute\":52,\"relative\":176,\"$rider\":\"allCompetitors-2026:b160a422c22ae0bbbf2e957f5325ed9d4777b313bb1e74b6ef243f480a1bcd58\"},{\"bib\":21,\"penality\":0,\"absolute\":46,\"relative\":182,\"bonus\":0,\"position\":18,\"$rider\":\"allCompetitors-2026:8fbe978af4131081bf7f0663ae20a7d8b437a4787a09bce93154d06aa065f9b8\"},{\"penality\":0,\"absolute\":45,\"bib\":227,\"relative\":183,\"bonus\":0,\"position\":19,\"$rider\":\"allCompetitors-2026:0f08212d01eaa5637b89fcbe9f22ae11560cab5720059f0144f4326d6d9f61f3\"},{\"bonus\":0,\"position\":20,\"bib\":188,\"absolute\":40,\"penality\":0,\"relative\":188,\"$rider\":\"allCompetitors-2026:2eec2db72c2d2b063f26cbd7cf0fc00b048304762918310f6e2d94dd3d24bb70\"},{\"bib\":85,\"absolute\":40,\"penality\":0,\"relative\":188,\"position\":21,\"bonus\":0,\"$rider\":\"allCompetitors-2026:c9806805b093eb7429eff2749c8924e4419e741ffbb19eaf1c8d68e294e4cbb6\"},{\"bib\":221,\"penality\":0,\"absolute\":40,\"relative\":188,\"position\":22,\"bonus\":0,\"$rider\":\"allCompetitors-2026:f13808679a2a0d30b9751968da42cb5fccc52fc6809e2bb270d2eb160f0716ac\"},{\"relative\":189,\"penality\":0,\"bib\":51,\"absolute\":39,\"bonus\":0,\"position\":23,\"$rider\":\"allCompetitors-2026:56de42d1db9a4c398bddbaf134730c53468ea7bc72c5feee8b108898f06f892d\"},{\"relative\":190,\"bib\":195,\"penality\":0,\"absolute\":38,\"position\":24,\"bonus\":0,\"$rider\":\"allCompetitors-2026:ef82e3a2b525ea26a7560a44fd7393f592d3e420f20d5d5d6f025493fe7698d1\"},{\"position\":25,\"bonus\":0,\"bib\":121,\"absolute\":32,\"penality\":0,\"relative\":196,\"$rider\":\"allCompetitors-2026:92c46c60ded4a1ffce66a51297d5903ccd6df671171aebc967aa239168331a2f\"},{\"bonus\":0,\"position\":26,\"bib\":72,\"absolute\":32,\"penality\":0,\"relative\":196,\"$rider\":\"allCompetitors-2026:8fe5248682c4dd014849f722c39127af7632bd706fe9967329d77b2c364e505f\"},{\"penality\":0,\"bib\":35,\"absolute\":31,\"relative\":197,\"position\":27,\"bonus\":0,\"$rider\":\"allCompetitors-2026:88d376bdc90babb7d1c7d488adf9b9d012d356b9b884cc385854aa84548c93c7\"},{\"absolute\":31,\"bib\":138,\"penality\":0,\"relative\":197,\"position\":28,\"bonus\":0,\"$rider\":\"allCompetitors-2026:836f76c4fe56aa1f68bb6b8bf729412d7c224726b97393793bb013183eb85f13\"},{\"position\":29,\"bonus\":0,\"bib\":115,\"absolute\":30,\"penality\":0,\"relative\":198,\"$rider\":\"allCompetitors-2026:b2707f55e75764d243a56f858f0089c2874cd2e268651b035954400e5614799f\"},{\"relative\":203,\"penality\":0,\"bib\":41,\"absolute\":25,\"position\":30,\"bonus\":0,\"$rider\":\"allCompetitors-2026:473172c3f0db2f7ea6b03f3ef73eb46591c5016c211775b8c5d697cb615e4282\"},{\"bib\":25,\"absolute\":23,\"penality\":0,\"relative\":205,\"bonus\":0,\"position\":31,\"$rider\":\"allCompetitors-2026:61020ffaaa091a00754640de823403f992d3c6cf38320e1e166e6af4954d73e5\"},{\"bonus\":0,\"position\":32,\"relative\":205,\"bib\":137,\"absolute\":23,\"penality\":0,\"$rider\":\"allCompetitors-2026:cfdc6b982472aed1ebaf20af06e19afacf6727e93b47bae8deabfc0dc3dcf4b9\"},{\"penality\":0,\"bib\":71,\"absolute\":22,\"relative\":206,\"bonus\":0,\"position\":33,\"$rider\":\"allCompetitors-2026:49927acd9d7f061f38799676b48d95fd3b7e49d594ffa4fcbcadb19ab2660984\"},{\"position\":34,\"bonus\":0,\"absolute\":22,\"bib\":153,\"penality\":0,\"relative\":206,\"$rider\":\"allCompetitors-2026:2ba04324e83cffd8de35878c87065745cdc2ad09de18a9cc1c9d5bdfc6eb737b\"},{\"position\":35,\"bonus\":0,\"relative\":207,\"penality\":0,\"bib\":31,\"absolute\":21,\"$rider\":\"allCompetitors-2026:efea26cfee7cede0b7c5b93573d42681af696d9cd0a6f290c0d32cb5a6cd66cc\"},{\"penality\":0,\"absolute\":21,\"bib\":156,\"relative\":207,\"position\":36,\"bonus\":0,\"$rider\":\"allCompetitors-2026:b80e91aa9ed563b59a6e28ec1993df3cbd1882bfb6216ec8b9d8a0a6ea3426a9\"},{\"position\":37,\"bonus\":0,\"absolute\":20,\"bib\":144,\"penality\":0,\"relative\":208,\"$rider\":\"allCompetitors-2026:6ce0651a303c4a144f07f3d85fa0616115722c1d2cd7b8ec712ab07744c3c0d4\"},{\"bonus\":0,\"position\":38,\"bib\":203,\"absolute\":20,\"penality\":0,\"relative\":208,\"$rider\":\"allCompetitors-2026:71bf96cdafa76b0039989b836c69156c5d3657d1b8c58ed5a1008de0862fa367\"},{\"position\":39,\"bonus\":0,\"absolute\":20,\"penality\":0,\"bib\":14,\"relative\":208,\"$rider\":\"allCompetitors-2026:112866ddc596557b9b9b1e8e05cc0c9ba8616afb3c78e5c82442075888703436\"},{\"relative\":208,\"bib\":114,\"absolute\":20,\"penality\":0,\"bonus\":0,\"position\":40,\"$rider\":\"allCompetitors-2026:6cae78ab80d37ab8970a5530bedc0397700c872cfc76083f8e03b5bc529381da\"},{\"relative\":208,\"bib\":155,\"penality\":0,\"absolute\":20,\"position\":41,\"bonus\":0,\"$rider\":\"allCompetitors-2026:661c60e85aeee375d1d1211d7d424c265fa0982e7a49d0145309fd8faad75c6d\"},{\"relative\":210,\"penality\":0,\"bib\":142,\"absolute\":18,\"position\":42,\"bonus\":0,\"$rider\":\"allCompetitors-2026:1349d80410080c809ad7f4eee8d6e57990f83a9630ca36b411fdfb53c7383bb2\"},{\"relative\":210,\"penality\":0,\"absolute\":18,\"bib\":43,\"bonus\":0,\"position\":43,\"$rider\":\"allCompetitors-2026:9ead4b3441417f0682eba82449e1fa076dee6cb12ea9b96b6f3ee89ca15651d0\"},{\"penality\":0,\"absolute\":18,\"bib\":134,\"relative\":210,\"bonus\":0,\"position\":44,\"$rider\":\"allCompetitors-2026:d715f33ab5fc5da3b6907879f76ffeeda2dd6116e539f9915e94e2b1920a560e\"},{\"relative\":212,\"penality\":0,\"bib\":37,\"absolute\":16,\"position\":45,\"bonus\":0,\"$rider\":\"allCompetitors-2026:d5d7474704c71eed93b8217e2a6f7f0ae5658fa399acadde5257a8c08976987e\"},{\"relative\":212,\"bib\":102,\"absolute\":16,\"penality\":0,\"bonus\":0,\"position\":46,\"$rider\":\"allCompetitors-2026:0362886d32acef891645378daf58ea74574256ec5673a767b69fb371f212962f\"},{\"position\":47,\"bonus\":0,\"absolute\":16,\"penality\":0,\"bib\":88,\"relative\":212,\"$rider\":\"allCompetitors-2026:c1e2fe248f5b317abc3840564ccf26dda794afc4fdefc8290afacf6de3440b1d\"},{\"absolute\":16,\"penality\":0,\"bib\":218,\"relative\":212,\"bonus\":0,\"position\":48,\"$rider\":\"allCompetitors-2026:74975d4d416ba82c095bc7050fb3dc8116104cb2c60e5432fa4116e7e5b54b8a\"},{\"bonus\":0,\"position\":49,\"absolute\":16,\"bib\":63,\"penality\":0,\"relative\":212,\"$rider\":\"allCompetitors-2026:49f6a6ba180430e7d71893af21aa2e381978fadb66cad70b21cb474c008eb75f\"},{\"bib\":205,\"absolute\":16,\"penality\":0,\"relative\":212,\"bonus\":0,\"position\":50,\"$rider\":\"allCompetitors-2026:b4d9cc7c3121d35561c5aea67686f15137dbdb6f6ca1b7750527c25a1a8af1e3\"},{\"penality\":0,\"bib\":62,\"absolute\":15,\"relative\":213,\"position\":51,\"bonus\":0,\"$rider\":\"allCompetitors-2026:45871203a852d933b9a2ca453ebaa8270440d28e94193b3ea904eaa3ca281a24\"},{\"bonus\":0,\"position\":52,\"relative\":214,\"penality\":0,\"absolute\":14,\"bib\":181,\"$rider\":\"allCompetitors-2026:38be85912a5132ea5dd32d651ae4bc9d68ec708b9188d9e98d13f326d5746ad4\"},{\"penality\":0,\"bib\":196,\"absolute\":14,\"relative\":214,\"position\":53,\"bonus\":0,\"$rider\":\"allCompetitors-2026:3273683f968bde33efa0f13bc3abdb4b8a444e3d796ac0d5a1a6c4f3f2b11dd5\"},{\"position\":54,\"bonus\":0,\"relative\":214,\"absolute\":14,\"bib\":106,\"penality\":0,\"$rider\":\"allCompetitors-2026:c5fcb906aec9248a28f68909838e23acd78d3a8869557ffe41b2a65a479be0ea\"},{\"bonus\":0,\"position\":55,\"relative\":215,\"penality\":0,\"bib\":65,\"absolute\":13,\"$rider\":\"allCompetitors-2026:3144940bf76eb2996658f29f63a448d7738d2f9aec99b385bcd9c4d1f535c17c\"},{\"position\":56,\"bonus\":0,\"bib\":45,\"penality\":0,\"absolute\":12,\"relative\":216,\"$rider\":\"allCompetitors-2026:060f40ca9c481bca0fabd27c59775bf337e68c50b17c1829fed6d77a852befd5\"},{\"bonus\":0,\"position\":57,\"absolute\":12,\"bib\":208,\"penality\":0,\"relative\":216,\"$rider\":\"allCompetitors-2026:28ba8cc4e3615909679444b8892acf2a141a209f32f44be009239a90a8a4e2f4\"},{\"relative\":217,\"bib\":97,\"absolute\":11,\"penality\":0,\"bonus\":0,\"position\":58,\"$rider\":\"allCompetitors-2026:43c9f39795786aa224085f29332e9038895351cbebfae01d1e913c690732bb91\"},{\"bonus\":0,\"position\":59,\"absolute\":10,\"bib\":66,\"penality\":0,\"relative\":218,\"$rider\":\"allCompetitors-2026:b5305a26bc50977c4473158acf493850e6607713ce4b8427a9845c94d4bae9db\"},{\"position\":60,\"bonus\":0,\"relative\":219,\"bib\":101,\"penality\":0,\"absolute\":9,\"$rider\":\"allCompetitors-2026:14b4361639d2ef1ed9bc19a65a3c9b26c7be0f629c93c50bf72f3ffb9fd22343\"},{\"bonus\":0,\"position\":61,\"relative\":219,\"bib\":124,\"absolute\":9,\"penality\":0,\"$rider\":\"allCompetitors-2026:cbbe78609809f56f1bf339c2b0be4b4fc44a46fead04d90bed7e884db1c6c48a\"},{\"position\":62,\"bonus\":0,\"relative\":219,\"bib\":117,\"penality\":0,\"absolute\":9,\"$rider\":\"allCompetitors-2026:adc5022e42db341df0e81a22c09e7239fa316b3382d81a9ac384ffadd21c36eb\"},{\"relative\":220,\"penality\":0,\"absolute\":8,\"bib\":171,\"bonus\":0,\"position\":63,\"$rider\":\"allCompetitors-2026:54559c995b2a3d21707a3008990c09a2999f56b8534b9b8d5ada6aed7b95fb61\"},{\"relative\":220,\"bib\":78,\"penality\":0,\"absolute\":8,\"position\":64,\"bonus\":0,\"$rider\":\"allCompetitors-2026:7879d609e4a7ead8abc54a4d7b630193f81c3510de84d1c8a2b9c9b75e241390\"},{\"bonus\":0,\"position\":65,\"absolute\":7,\"bib\":201,\"penality\":0,\"relative\":221,\"$rider\":\"allCompetitors-2026:7d2c373cdbafb7bc38053d656a3d5e454247f9a1f14ff8da1605686ef22d7d9f\"},{\"bonus\":0,\"position\":66,\"relative\":221,\"penality\":0,\"bib\":146,\"absolute\":7,\"$rider\":\"allCompetitors-2026:a6ff822168fb06ec4e17c51aecac8c0cf4420649553483ee5bb604a9893163f5\"},{\"relative\":221,\"bib\":23,\"absolute\":7,\"penality\":0,\"position\":67,\"bonus\":0,\"$rider\":\"allCompetitors-2026:c8e5c77d278d3451f824516218a31a7b378eeaad7bb63f34f8ac77bc48c12dde\"},{\"relative\":222,\"penality\":0,\"absolute\":6,\"bib\":17,\"position\":68,\"bonus\":0,\"$rider\":\"allCompetitors-2026:297e5ddbc47e1f2de5f6a0bddb25f2603b4aaebaa0761a524640883b3235937e\"},{\"relative\":222,\"absolute\":6,\"bib\":222,\"penality\":0,\"bonus\":0,\"position\":69,\"$rider\":\"allCompetitors-2026:20572caac92725f01c44c8e68291d686d46505857d909e87bd4102d6dfedf46e\"},{\"bonus\":0,\"position\":70,\"relative\":222,\"bib\":118,\"penality\":0,\"absolute\":6,\"$rider\":\"allCompetitors-2026:57107879f3a5db1e87f287b8b66c3d03dac79a36f011106f53ceafa1c0b3bb28\"},{\"relative\":222,\"bib\":166,\"penality\":0,\"absolute\":6,\"bonus\":0,\"position\":71,\"$rider\":\"allCompetitors-2026:38632d595620ead38f6f213eebf216561c05577cc026e8bb30f48044c672c287\"},{\"relative\":223,\"penality\":0,\"absolute\":5,\"bib\":81,\"bonus\":0,\"position\":72,\"$rider\":\"allCompetitors-2026:26b79b9ec3a2d7dc813ac77f417bf8581e906a49aeb1ade0ba024a049f7be051\"},{\"absolute\":5,\"bib\":204,\"penality\":0,\"relative\":223,\"bonus\":0,\"position\":73,\"$rider\":\"allCompetitors-2026:cce79df1237f75d2d0f19ab5ebe0bac534111e846b280470490037cb741783fb\"},{\"bonus\":0,\"position\":74,\"penality\":0,\"bib\":94,\"absolute\":5,\"relative\":223,\"$rider\":\"allCompetitors-2026:b5c2d42ffd7a40f75027ffec0b627777c42108703cdaeb3a49731c832a9d0c5d\"},{\"bonus\":0,\"position\":75,\"relative\":223,\"absolute\":5,\"penality\":0,\"bib\":184,\"$rider\":\"allCompetitors-2026:16e97ece2762e7e146bfb66b30a4ad39c7b4d92d4721ea418edba4741562f019\"},{\"bonus\":0,\"position\":76,\"relative\":223,\"penality\":0,\"absolute\":5,\"bib\":191,\"$rider\":\"allCompetitors-2026:12b51a84c2024882c9dc1e3538f9cbaa74fe347c7ee82b5fbb54931d98455f99\"},{\"position\":77,\"bonus\":0,\"relative\":223,\"penality\":0,\"absolute\":5,\"bib\":104,\"$rider\":\"allCompetitors-2026:6161c2559565c9b8927c963468d41656a4527cdd40588516472d3139887bd744\"},{\"position\":78,\"bonus\":0,\"relative\":224,\"penality\":0,\"absolute\":4,\"bib\":225,\"$rider\":\"allCompetitors-2026:c2f6d4d5ecae2918f405b62df640b4ce34a24fa01b82831b9e196e6bd18b87cf\"},{\"position\":79,\"bonus\":0,\"bib\":7,\"absolute\":3,\"penality\":0,\"relative\":225,\"$rider\":\"allCompetitors-2026:825dcb219985c122236a7281fcaa7734ade3ece7bb04546f2f5dbc1f24636883\"},{\"position\":80,\"bonus\":0,\"penality\":0,\"bib\":183,\"absolute\":3,\"relative\":225,\"$rider\":\"allCompetitors-2026:493673e3c0487c52bcae2b9610601fcec03e953778d555858f4494230e1036e8\"},{\"relative\":225,\"bib\":26,\"absolute\":3,\"penality\":0,\"position\":81,\"bonus\":0,\"$rider\":\"allCompetitors-2026:2ef389652346279fadf9b0aa5aa3bd3b0fff03cef740d9ec24c5e79de3a5539b\"},{\"bonus\":0,\"position\":82,\"penality\":0,\"bib\":6,\"absolute\":3,\"relative\":225,\"$rider\":\"allCompetitors-2026:ddf3c47b80bd0bce449b4a2ca2631aac95306c82bc72ba9e194a2e8a119fb2f6\"},{\"bib\":61,\"absolute\":2,\"penality\":0,\"relative\":226,\"bonus\":0,\"position\":83,\"$rider\":\"allCompetitors-2026:763620e7e8f3d3ed975427ffc95941bd432a0b8303767bb30480d7419583daa8\"},{\"absolute\":2,\"bib\":57,\"penality\":0,\"relative\":226,\"position\":84,\"bonus\":0,\"$rider\":\"allCompetitors-2026:7829477959110d08e7607dbe44933415eeacff7c57a1d85e033c7fcca32da587\"},{\"penality\":0,\"absolute\":2,\"bib\":206,\"relative\":226,\"position\":85,\"bonus\":0,\"$rider\":\"allCompetitors-2026:a51f09315d2181962eeb0e5d625a3827d60c90b46b12d261deda7bd7cd6303d1\"},{\"bonus\":0,\"position\":86,\"absolute\":1,\"bib\":133,\"penality\":0,\"relative\":227,\"$rider\":\"allCompetitors-2026:4e549282660fae7aa16cafc031aef3fe74ff39f22cb79cc964918d9886892e21\"},{\"bonus\":0,\"position\":87,\"penality\":0,\"absolute\":1,\"bib\":95,\"relative\":227,\"$rider\":\"allCompetitors-2026:8ab0a33ab37005a4054c4e7925e226c56c437378e2f260228a63c2cd1508dbc8\"}],\"checkpoint\":75,\"length\":1265.9,\"status\":\"0\",\"timeLimit\":0,\"type\":\"ipg\",\"_id\":\"9626e2af8c066181b3b8fa3195f430c42690cd827df046903983101e738c34d0\",\"_bind\":\"rankingType-2026-8\",\"_origin\":\"rankingType-2026-8\",\"_updatedAt\":1784714657561,\"_parent\":\"stage-2026:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518\",\"_key\":\"_id\",\"_refs\":[\"allCompetitors-2026:6cc1261ec26fa5d171edb5185005a5bbffd8c38482b1cd623fdb1d223fcc00ac\",\"allCompetitors-2026:df254b9081eb764c18356614cd97b337ee0c149dc9c1e82b3d8e6c97d4e4b2c5\",\"allCompetitors-2026:0ef80d8452236d0dea6004984fda777c24cb24824f9d0f55692a98975c8d4d2f\",\"allCompetitors-2026:fee944ccd7176d0d176d5f9c07bfa14cd3fecb349f3d0d5d2e823ce6b4f5f83c\",\"allCompetitors-2026:444cf91f27ba405a94a51a62bf79a2f1907a615a84e2a60acf87446b26a731b6\",\"allCompetitors-2026:bc57258fed5b6c24e62100f70d1c8744f12df4336b37e572d9462fe73b254e00\",\"allCompetitors-2026:74c4650a9d1c6e96a2996fcac630e245810f39bd1395e510eab1430bce8c8683\",\"allCompetitors-2026:6d7538ea59760583bb13ba84430639c9dc00275066df276fe30d67b945527527\",\"allCompetitors-2026:98ebdbb15aee1eca149591765648fe98b7cf74b3ad2555f48c35b01e902e3777\",\"allCompetitors-2026:5ddfa1f926292eacfdb0c43e648088703edb07a2b18d82ec91dee031b3f79b93\",\"allCompetitors-2026:f53d9aa5a51412b7db751a89a722b96c62a301e532adb9408f0b167ca7fe5925\",\"allCompetitors-2026:d258964dd312fce2e1d2fe66c4bd3aada2cfa88233c0673f0b4116c9a8ba557e\",\"allCompetitors-2026:995117aa9014c38237475313d9654bdef1ec0761b24178bf580e519c5540babf\",\"allCompetitors-2026:cc76e2e5481b6e235f76afeabcb5ae8d669dcdbf4a279331461ee69456390484\",\"allCompetitors-2026:8d0c6c06e1e2f111fd2820734671cb4f1da609897088f27f1b0ddef9da948e8a\",\"allCompetitors-2026:6ef305ed0a5f601068ea7dc78736ced55316ddebb1a14fa783a173d02d5d0a91\",\"allCompetitors-2026:b160a422c22ae0bbbf2e957f5325ed9d4777b313bb1e74b6ef243f480a1bcd58\",\"allCompetitors-2026:8fbe978af4131081bf7f0663ae20a7d8b437a4787a09bce93154d06aa065f9b8\",\"allCompetitors-2026:0f08212d01eaa5637b89fcbe9f22ae11560cab5720059f0144f4326d6d9f61f3\",\"allCompetitors-2026:2eec2db72c2d2b063f26cbd7cf0fc00b048304762918310f6e2d94dd3d24bb70\",\"allCompetitors-2026:c9806805b093eb7429eff2749c8924e4419e741ffbb19eaf1c8d68e294e4cbb6\",\"allCompetitors-2026:f13808679a2a0d30b9751968da42cb5fccc52fc6809e2bb270d2eb160f0716ac\",\"allCompetitors-2026:56de42d1db9a4c398bddbaf134730c53468ea7bc72c5feee8b108898f06f892d\",\"allCompetitors-2026:ef82e3a2b525ea26a7560a44fd7393f592d3e420f20d5d5d6f025493fe7698d1\",\"allCompetitors-2026:92c46c60ded4a1ffce66a51297d5903ccd6df671171aebc967aa239168331a2f\",\"allCompetitors-2026:8fe5248682c4dd014849f722c39127af7632bd706fe9967329d77b2c364e505f\",\"allCompetitors-2026:88d376bdc90babb7d1c7d488adf9b9d012d356b9b884cc385854aa84548c93c7\",\"allCompetitors-2026:836f76c4fe56aa1f68bb6b8bf729412d7c224726b97393793bb013183eb85f13\",\"allCompetitors-2026:b2707f55e75764d243a56f858f0089c2874cd2e268651b035954400e5614799f\",\"allCompetitors-2026:473172c3f0db2f7ea6b03f3ef73eb46591c5016c211775b8c5d697cb615e4282\",\"allCompetitors-2026:61020ffaaa091a00754640de823403f992d3c6cf38320e1e166e6af4954d73e5\",\"allCompetitors-2026:cfdc6b982472aed1ebaf20af06e19afacf6727e93b47bae8deabfc0dc3dcf4b9\",\"allCompetitors-2026:49927acd9d7f061f38799676b48d95fd3b7e49d594ffa4fcbcadb19ab2660984\",\"allCompetitors-2026:2ba04324e83cffd8de35878c87065745cdc2ad09de18a9cc1c9d5bdfc6eb737b\",\"allCompetitors-2026:efea26cfee7cede0b7c5b93573d42681af696d9cd0a6f290c0d32cb5a6cd66cc\",\"allCompetitors-2026:b80e91aa9ed563b59a6e28ec1993df3cbd1882bfb6216ec8b9d8a0a6ea3426a9\",\"allCompetitors-2026:6ce0651a303c4a144f07f3d85fa0616115722c1d2cd7b8ec712ab07744c3c0d4\",\"allCompetitors-2026:71bf96cdafa76b0039989b836c69156c5d3657d1b8c58ed5a1008de0862fa367\",\"allCompetitors-2026:112866ddc596557b9b9b1e8e05cc0c9ba8616afb3c78e5c82442075888703436\",\"allCompetitors-2026:6cae78ab80d37ab8970a5530bedc0397700c872cfc76083f8e03b5bc529381da\",\"allCompetitors-2026:661c60e85aeee375d1d1211d7d424c265fa0982e7a49d0145309fd8faad75c6d\",\"allCompetitors-2026:1349d80410080c809ad7f4eee8d6e57990f83a9630ca36b411fdfb53c7383bb2\",\"allCompetitors-2026:9ead4b3441417f0682eba82449e1fa076dee6cb12ea9b96b6f3ee89ca15651d0\",\"allCompetitors-2026:d715f33ab5fc5da3b6907879f76ffeeda2dd6116e539f9915e94e2b1920a560e\",\"allCompetitors-2026:d5d7474704c71eed93b8217e2a6f7f0ae5658fa399acadde5257a8c08976987e\",\"allCompetitors-2026:0362886d32acef891645378daf58ea74574256ec5673a767b69fb371f212962f\",\"allCompetitors-2026:c1e2fe248f5b317abc3840564ccf26dda794afc4fdefc8290afacf6de3440b1d\",\"allCompetitors-2026:74975d4d416ba82c095bc7050fb3dc8116104cb2c60e5432fa4116e7e5b54b8a\",\"allCompetitors-2026:49f6a6ba180430e7d71893af21aa2e381978fadb66cad70b21cb474c008eb75f\",\"allCompetitors-2026:b4d9cc7c3121d35561c5aea67686f15137dbdb6f6ca1b7750527c25a1a8af1e3\",\"allCompetitors-2026:45871203a852d933b9a2ca453ebaa8270440d28e94193b3ea904eaa3ca281a24\",\"allCompetitors-2026:38be85912a5132ea5dd32d651ae4bc9d68ec708b9188d9e98d13f326d5746ad4\",\"allCompetitors-2026:3273683f968bde33efa0f13bc3abdb4b8a444e3d796ac0d5a1a6c4f3f2b11dd5\",\"allCompetitors-2026:c5fcb906aec9248a28f68909838e23acd78d3a8869557ffe41b2a65a479be0ea\",\"allCompetitors-2026:3144940bf76eb2996658f29f63a448d7738d2f9aec99b385bcd9c4d1f535c17c\",\"allCompetitors-2026:060f40ca9c481bca0fabd27c59775bf337e68c50b17c1829fed6d77a852befd5\",\"allCompetitors-2026:28ba8cc4e3615909679444b8892acf2a141a209f32f44be009239a90a8a4e2f4\",\"allCompetitors-2026:43c9f39795786aa224085f29332e9038895351cbebfae01d1e913c690732bb91\",\"allCompetitors-2026:b5305a26bc50977c4473158acf493850e6607713ce4b8427a9845c94d4bae9db\",\"allCompetitors-2026:14b4361639d2ef1ed9bc19a65a3c9b26c7be0f629c93c50bf72f3ffb9fd22343\",\"allCompetitors-2026:cbbe78609809f56f1bf339c2b0be4b4fc44a46fead04d90bed7e884db1c6c48a\",\"allCompetitors-2026:adc5022e42db341df0e81a22c09e7239fa316b3382d81a9ac384ffadd21c36eb\",\"allCompetitors-2026:54559c995b2a3d21707a3008990c09a2999f56b8534b9b8d5ada6aed7b95fb61\",\"allCompetitors-2026:7879d609e4a7ead8abc54a4d7b630193f81c3510de84d1c8a2b9c9b75e241390\",\"allCompetitors-2026:7d2c373cdbafb7bc38053d656a3d5e454247f9a1f14ff8da1605686ef22d7d9f\",\"allCompetitors-2026:a6ff822168fb06ec4e17c51aecac8c0cf4420649553483ee5bb604a9893163f5\",\"allCompetitors-2026:c8e5c77d278d3451f824516218a31a7b378eeaad7bb63f34f8ac77bc48c12dde\",\"allCompetitors-2026:297e5ddbc47e1f2de5f6a0bddb25f2603b4aaebaa0761a524640883b3235937e\",\"allCompetitors-2026:20572caac92725f01c44c8e68291d686d46505857d909e87bd4102d6dfedf46e\",\"allCompetitors-2026:57107879f3a5db1e87f287b8b66c3d03dac79a36f011106f53ceafa1c0b3bb28\",\"allCompetitors-2026:38632d595620ead38f6f213eebf216561c05577cc026e8bb30f48044c672c287\",\"allCompetitors-2026:26b79b9ec3a2d7dc813ac77f417bf8581e906a49aeb1ade0ba024a049f7be051\",\"allCompetitors-2026:cce79df1237f75d2d0f19ab5ebe0bac534111e846b280470490037cb741783fb\",\"allCompetitors-2026:b5c2d42ffd7a40f75027ffec0b627777c42108703cdaeb3a49731c832a9d0c5d\",\"allCompetitors-2026:16e97ece2762e7e146bfb66b30a4ad39c7b4d92d4721ea418edba4741562f019\",\"allCompetitors-2026:12b51a84c2024882c9dc1e3538f9cbaa74fe347c7ee82b5fbb54931d98455f99\",\"allCompetitors-2026:6161c2559565c9b8927c963468d41656a4527cdd40588516472d3139887bd744\",\"allCompetitors-2026:c2f6d4d5ecae2918f405b62df640b4ce34a24fa01b82831b9e196e6bd18b87cf\",\"allCompetitors-2026:825dcb219985c122236a7281fcaa7734ade3ece7bb04546f2f5dbc1f24636883\",\"allCompetitors-2026:493673e3c0487c52bcae2b9610601fcec03e953778d555858f4494230e1036e8\",\"allCompetitors-2026:2ef389652346279fadf9b0aa5aa3bd3b0fff03cef740d9ec24c5e79de3a5539b\",\"allCompetitors-2026:ddf3c47b80bd0bce449b4a2ca2631aac95306c82bc72ba9e194a2e8a119fb2f6\",\"allCompetitors-2026:763620e7e8f3d3ed975427ffc95941bd432a0b8303767bb30480d7419583daa8\",\"allCompetitors-2026:7829477959110d08e7607dbe44933415eeacff7c57a1d85e033c7fcca32da587\",\"allCompetitors-2026:a51f09315d2181962eeb0e5d625a3827d60c90b46b12d261deda7bd7cd6303d1\",\"allCompetitors-2026:4e549282660fae7aa16cafc031aef3fe74ff39f22cb79cc964918d9886892e21\",\"allCompetitors-2026:8ab0a33ab37005a4054c4e7925e226c56c437378e2f260228a63c2cd1508dbc8\",\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"],\"_virtual\":\"75-ipg-N-A\",\"_gets\":{\"rankings.rider\":\"$rider\",\"cp\":\"$cp\"},\"types\":[\"N\",\"A\"],\"$cp\":\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"}}"
+      "eventId": "27",
+      "data": "{\"bind\":\"publication_es-2026-18\",\"app\":\"tdf\",\"origin\":\"video-2026-18\",\"change\":\"modified\",\"id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"data\":{\"videoLangs\":[{\"title\":\"Briefing Étape 18\",\"id\":21710,\"locale\":\"fr\"},{\"id\":21711,\"title\":\"Briefing Stage 18\",\"locale\":\"en\"},{\"id\":21712,\"title\":\"Briefing Etappe 18\",\"locale\":\"de\"},{\"title\":\"Briefing Etapa 18\",\"id\":21713,\"locale\":\"es\"}],\"onlyClubTab\":false,\"createdAt\":\"2026-06-30T16:52:00+02:00\",\"isData\":false,\"onlyDataTab\":false,\"id\":21713,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rhq\",\"isClub\":true,\"name\":\"Briefing Étape 18\",\"_id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"_bind\":\"publication_es-2026-18\",\"_origin\":\"video-2026-18\",\"_updatedAt\":1784877211914,\"_parent\":\"stage-2026:61a088208454d11b5835d7365674eefeb2e52d650542e11100b87883d32391bd\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 18\",\"model\":\"video\",\"title\":\"Briefing Etapa 18\",\"locale\":\"es\"}}"
     },
     {
-      "captured_at": "2026-07-22T12:00:19.735+00:00",
-      "requestId": "2841.252",
-      "timestamp": 72.003981,
+      "captured_at": "2026-07-24T12:07:07.397+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.410027,
       "eventName": "update",
-      "eventId": "1195",
-      "data": "{\"bind\":\"rankingTypeJerseys-2026-9\",\"app\":\"tdf\",\"origin\":\"rankingType-2026-8\",\"id\":\"852a0d0bbb832049bec782907479f3d670855aad28faa327aa1dc35bb4e99f55\",\"data\":{\"type\":\"pmp\",\"checkpoint\":75,\"length\":0,\"rankings\":[{\"absolute\":228,\"position\":1,\"bib\":33,\"relative\":0,\"$rider\":\"allCompetitors-2026:6cc1261ec26fa5d171edb5185005a5bbffd8c38482b1cd623fdb1d223fcc00ac\"}],\"status\":\"0\",\"_id\":\"852a0d0bbb832049bec782907479f3d670855aad28faa327aa1dc35bb4e99f55\",\"_updatedAt\":1784714657574,\"_bind\":\"rankingTypeJerseys-2026-9\",\"_origin\":\"rankingType-2026-8\",\"_parent\":\"stage-2026:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518\",\"_refs\":[\"allCompetitors-2026:6cc1261ec26fa5d171edb5185005a5bbffd8c38482b1cd623fdb1d223fcc00ac\",\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"],\"_virtual\":\"75-pmp-N-A\",\"_gets\":{\"rankings.rider\":\"$rider\",\"cp\":\"$cp\"},\"types\":[\"N\",\"A\"],\"$cp\":\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"},\"change\":\"modified\"}"
+      "eventId": "28",
+      "data": "{\"bind\":\"video-2026-18\",\"app\":\"tdf\",\"origin\":\"video-2026-18\",\"change\":\"modified\",\"id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"data\":{\"videoLangs\":[{\"title\":\"Briefing Étape 18\",\"id\":21710,\"locale\":\"fr\"},{\"id\":21711,\"title\":\"Briefing Stage 18\",\"locale\":\"en\"},{\"id\":21712,\"title\":\"Briefing Etappe 18\",\"locale\":\"de\"},{\"title\":\"Briefing Etapa 18\",\"id\":21713,\"locale\":\"es\"}],\"onlyClubTab\":false,\"createdAt\":\"2026-06-30T16:52:00+02:00\",\"isData\":false,\"onlyDataTab\":false,\"id\":10850,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rhq\",\"isClub\":true,\"name\":\"Briefing Étape 18\",\"_id\":\"c18901fe3d03483358160289b33b4cd593c223f4c3f458a455c4a8e1e482453f\",\"_bind\":\"video-2026-18\",\"_origin\":\"video-2026-18\",\"_updatedAt\":1784877211914,\"_parent\":\"stage-2026:61a088208454d11b5835d7365674eefeb2e52d650542e11100b87883d32391bd\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 18\",\"model\":\"video\"}}"
     },
     {
-      "captured_at": "2026-07-22T12:00:19.735+00:00",
-      "requestId": "2841.252",
-      "timestamp": 72.004148,
+      "captured_at": "2026-07-24T12:07:07.397+00:00",
+      "requestId": "3052.251",
+      "timestamp": 144.410126,
       "eventName": "update",
-      "eventId": "1197",
-      "data": "{\"bind\":\"stageWithdrawals-2026-8\",\"app\":\"tdf\",\"origin\":\"rankingType-2026-8\",\"change\":\"modified\",\"id\":\"db4a6e6da1f087bdc14640a2aa94678ab38c8d5b34980c31fa6a5b50996d185e\",\"data\":{\"checkpoint\":75,\"rankings\":[],\"type\":\"ije\",\"timeLimit\":0,\"status\":\"0\",\"length\":180.4,\"_id\":\"db4a6e6da1f087bdc14640a2aa94678ab38c8d5b34980c31fa6a5b50996d185e\",\"_bind\":\"stageWithdrawals-2026-8\",\"_origin\":\"rankingType-2026-8\",\"_updatedAt\":1784714662259,\"_parent\":\"stage-2026:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518\",\"_key\":\"_id\",\"_refs\":[\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"],\"_virtual\":\"75-ije-N-A\",\"_gets\":{\"rankings.rider\":\"$rider\",\"cp\":\"$cp\"},\"types\":[\"N\",\"A\"],\"$cp\":\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"}}"
-    },
-    {
-      "captured_at": "2026-07-22T12:00:19.736+00:00",
-      "requestId": "2841.252",
-      "timestamp": 72.004254,
-      "eventName": "update",
-      "eventId": "1198",
-      "data": "{\"bind\":\"rankingType-2026-8\",\"app\":\"tdf\",\"origin\":\"rankingType-2026-8\",\"change\":\"modified\",\"id\":\"db4a6e6da1f087bdc14640a2aa94678ab38c8d5b34980c31fa6a5b50996d185e\",\"data\":{\"checkpoint\":75,\"rankings\":[{\"relative\":0,\"bib\":55,\"absolute\":13970000,\"penality\":0,\"bonus\":4000,\"position\":1,\"$rider\":\"allCompetitors-2026:bc57258fed5b6c24e62100f70d1c8744f12df4336b37e572d9462fe73b254e00\"},{\"relative\":0,\"penality\":0,\"bib\":213,\"absolute\":13970000,\"position\":2,\"bonus\":0,\"$rider\":\"allCompetitors-2026:8d0c6c06e1e2f111fd2820734671cb4f1da609897088f27f1b0ddef9da948e8a\"},{\"penality\":0,\"bib\":165,\"absolute\":13970000,\"relative\":0,\"bonus\":0,\"position\":3,\"$rider\":\"allCompetitors-2026:6ef305ed0a5f601068ea7dc78736ced55316ddebb1a14fa783a173d02d5d0a91\"},{\"bonus\":0,\"position\":4,\"penality\":0,\"absolute\":13970000,\"bib\":153,\"relative\":0,\"$rider\":\"allCompetitors-2026:2ba04324e83cffd8de35878c87065745cdc2ad09de18a9cc1c9d5bdfc6eb737b\"},{\"position\":5,\"bonus\":0,\"relative\":0,\"absolute\":13970000,\"penality\":0,\"bib\":51,\"$rider\":\"allCompetitors-2026:56de42d1db9a4c398bddbaf134730c53468ea7bc72c5feee8b108898f06f892d\"},{\"relative\":0,\"penality\":0,\"absolute\":13970000,\"bib\":2,\"bonus\":0,\"position\":6,\"$rider\":\"allCompetitors-2026:995117aa9014c38237475313d9654bdef1ec0761b24178bf580e519c5540babf\"},{\"position\":7,\"bonus\":0,\"bib\":31,\"absolute\":13970000,\"penality\":0,\"relative\":0,\"$rider\":\"allCompetitors-2026:efea26cfee7cede0b7c5b93573d42681af696d9cd0a6f290c0d32cb5a6cd66cc\"},{\"position\":8,\"bonus\":0,\"relative\":0,\"bib\":15,\"absolute\":13970000,\"penality\":0,\"$rider\":\"allCompetitors-2026:6b2d54fed185f30fe89325400751c7866886ebcc9f41c4d9bc424a28e101c24f\"},{\"bonus\":0,\"position\":9,\"relative\":0,\"penality\":0,\"absolute\":13970000,\"bib\":152,\"$rider\":\"allCompetitors-2026:f53d9aa5a51412b7db751a89a722b96c62a301e532adb9408f0b167ca7fe5925\"},{\"bonus\":0,\"position\":10,\"relative\":0,\"absolute\":13970000,\"bib\":71,\"penality\":0,\"$rider\":\"allCompetitors-2026:49927acd9d7f061f38799676b48d95fd3b7e49d594ffa4fcbcadb19ab2660984\"},{\"bonus\":0,\"position\":11,\"bib\":37,\"absolute\":13970000,\"penality\":0,\"relative\":0,\"$rider\":\"allCompetitors-2026:d5d7474704c71eed93b8217e2a6f7f0ae5658fa399acadde5257a8c08976987e\"},{\"relative\":0,\"bib\":142,\"absolute\":13970000,\"penality\":0,\"bonus\":0,\"position\":12,\"$rider\":\"allCompetitors-2026:1349d80410080c809ad7f4eee8d6e57990f83a9630ca36b411fdfb53c7383bb2\"},{\"absolute\":13970000,\"bib\":18,\"penality\":0,\"relative\":0,\"position\":13,\"bonus\":0,\"$rider\":\"allCompetitors-2026:7f2d328ffb1d1e7b6d9148ff47496307f93fdfca5181d42cf910f27050e58fc5\"},{\"bonus\":0,\"position\":14,\"bib\":156,\"penality\":0,\"absolute\":13970000,\"relative\":0,\"$rider\":\"allCompetitors-2026:b80e91aa9ed563b59a6e28ec1993df3cbd1882bfb6216ec8b9d8a0a6ea3426a9\"},{\"position\":15,\"bonus\":0,\"relative\":0,\"bib\":88,\"penality\":0,\"absolute\":13970000,\"$rider\":\"allCompetitors-2026:c1e2fe248f5b317abc3840564ccf26dda794afc4fdefc8290afacf6de3440b1d\"},{\"position\":16,\"bonus\":0,\"relative\":0,\"bib\":77,\"absolute\":13970000,\"penality\":0,\"$rider\":\"allCompetitors-2026:afdc8441428cca2f6ae112fb6ef04732ce35e1a06ceb40500f752b0bf560c905\"},{\"position\":17,\"bonus\":0,\"relative\":0,\"penality\":0,\"absolute\":13970000,\"bib\":185,\"$rider\":\"allCompetitors-2026:43ea780c64b9718c0c543b1487fdfb7ee8bff5e7a68231c794727d82dc2cf352\"},{\"absolute\":13970000,\"bib\":132,\"penality\":0,\"relative\":0,\"position\":18,\"bonus\":0,\"$rider\":\"allCompetitors-2026:d88017ff77cede61327def77941fa41d0fee53a4d8e19aad670a1bc3e854a237\"},{\"penality\":0,\"absolute\":13970000,\"bib\":145,\"relative\":0,\"position\":19,\"bonus\":0,\"$rider\":\"allCompetitors-2026:6ef51c3165ca5e30e8452786946274a422f3b6b792f89a51d073689c68742b06\"},{\"bonus\":0,\"position\":20,\"relative\":0,\"penality\":0,\"bib\":78,\"absolute\":13970000,\"$rider\":\"allCompetitors-2026:7879d609e4a7ead8abc54a4d7b630193f81c3510de84d1c8a2b9c9b75e241390\"},{\"relative\":0,\"bib\":206,\"penality\":0,\"absolute\":13970000,\"bonus\":0,\"position\":21,\"$rider\":\"allCompetitors-2026:a51f09315d2181962eeb0e5d625a3827d60c90b46b12d261deda7bd7cd6303d1\"},{\"absolute\":14005000,\"penality\":0,\"bib\":181,\"relative\":35000,\"position\":22,\"bonus\":0,\"$rider\":\"allCompetitors-2026:38be85912a5132ea5dd32d651ae4bc9d68ec708b9188d9e98d13f326d5746ad4\"},{\"relative\":35000,\"absolute\":14005000,\"penality\":0,\"bib\":212,\"position\":23,\"bonus\":0,\"$rider\":\"allCompetitors-2026:afbeb469b6f298b5f635041a069dc7cbc2084b668f8e2d59d4973aa365296fb8\"},{\"relative\":48000,\"bib\":167,\"penality\":0,\"absolute\":14018000,\"bonus\":0,\"position\":24,\"$rider\":\"allCompetitors-2026:529d587995e4c30a49035c37b1512f8b15251e9fcc43a96d816f4196d0494522\"},{\"relative\":48000,\"bib\":154,\"absolute\":14018000,\"penality\":0,\"bonus\":0,\"position\":25,\"$rider\":\"allCompetitors-2026:2d6ce0a76cc8466f6ec15c6d68e030756f63af1eeb7b7135fb8e3d0a27f99fdc\"},{\"bonus\":0,\"position\":26,\"bib\":34,\"absolute\":14041000,\"penality\":0,\"relative\":71000,\"$rider\":\"allCompetitors-2026:d258964dd312fce2e1d2fe66c4bd3aada2cfa88233c0673f0b4116c9a8ba557e\"},{\"bonus\":0,\"position\":27,\"relative\":109000,\"bib\":144,\"penality\":0,\"absolute\":14079000,\"$rider\":\"allCompetitors-2026:6ce0651a303c4a144f07f3d85fa0616115722c1d2cd7b8ec712ab07744c3c0d4\"},{\"bib\":58,\"absolute\":14079000,\"penality\":0,\"relative\":109000,\"bonus\":0,\"position\":28,\"$rider\":\"allCompetitors-2026:9046927d2f5db2f1b7a4206c8e70568de1d8fe6f649c1dd20bac810c86dd158c\"},{\"penality\":0,\"absolute\":14079000,\"bib\":215,\"relative\":109000,\"position\":29,\"bonus\":0,\"$rider\":\"allCompetitors-2026:a50427aa412f84906a53ab5fc243e1cfa4e42d6863f2ed15fad2a0bbc9df788b\"},{\"bonus\":0,\"position\":30,\"relative\":109000,\"penality\":0,\"absolute\":14079000,\"bib\":87,\"$rider\":\"allCompetitors-2026:b4624b066ada26750bdcc53e521f329f04ad62bb112519d9b6ea634d374f0008\"},{\"bonus\":0,\"position\":31,\"penality\":0,\"bib\":43,\"absolute\":14079000,\"relative\":109000,\"$rider\":\"allCompetitors-2026:9ead4b3441417f0682eba82449e1fa076dee6cb12ea9b96b6f3ee89ca15651d0\"},{\"position\":32,\"bonus\":0,\"relative\":109000,\"penality\":0,\"absolute\":14079000,\"bib\":208,\"$rider\":\"allCompetitors-2026:28ba8cc4e3615909679444b8892acf2a141a209f32f44be009239a90a8a4e2f4\"},{\"bonus\":0,\"position\":33,\"bib\":48,\"absolute\":14079000,\"penality\":0,\"relative\":109000,\"$rider\":\"allCompetitors-2026:2c20be5365bcb4e877e5488f763fae782d819f2e7f2abedfccc07b2edf9144fe\"},{\"relative\":109000,\"absolute\":14079000,\"bib\":46,\"penality\":0,\"bonus\":0,\"position\":34,\"$rider\":\"allCompetitors-2026:87f60f8a2fdc3ff637d32a7a26a94f2c5bae6411e480c7c245a8da40612abc71\"},{\"bonus\":0,\"position\":35,\"absolute\":14079000,\"penality\":0,\"bib\":184,\"relative\":109000,\"$rider\":\"allCompetitors-2026:16e97ece2762e7e146bfb66b30a4ad39c7b4d92d4721ea418edba4741562f019\"},{\"position\":36,\"bonus\":0,\"bib\":102,\"penality\":0,\"absolute\":14079000,\"relative\":109000,\"$rider\":\"allCompetitors-2026:0362886d32acef891645378daf58ea74574256ec5673a767b69fb371f212962f\"},{\"position\":37,\"bonus\":0,\"penality\":0,\"bib\":93,\"absolute\":14131000,\"relative\":161000,\"$rider\":\"allCompetitors-2026:56e318508be746d55e57ca1330088078cba5e8635eda31c45b442b57df46bd4d\"},{\"position\":38,\"bonus\":0,\"relative\":206000,\"absolute\":14176000,\"penality\":0,\"bib\":68,\"$rider\":\"allCompetitors-2026:69748ec751280eb759ca055fe3458a1bd2df3afbfa8746879403d76381167e05\"},{\"bonus\":0,\"position\":39,\"relative\":372000,\"bib\":108,\"penality\":0,\"absolute\":14342000,\"$rider\":\"allCompetitors-2026:62186e80f764ed75c7bb8cc42c7788e9dba76fa898575914b7a2f5c0467d2ee7\"}],\"type\":\"ije\",\"timeLimit\":0,\"status\":\"0\",\"length\":180.4,\"_id\":\"db4a6e6da1f087bdc14640a2aa94678ab38c8d5b34980c31fa6a5b50996d185e\",\"_bind\":\"rankingType-2026-8\",\"_origin\":\"rankingType-2026-8\",\"_updatedAt\":1784714662259,\"_parent\":\"stage-2026:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518\",\"_key\":\"_id\",\"_refs\":[\"allCompetitors-2026:bc57258fed5b6c24e62100f70d1c8744f12df4336b37e572d9462fe73b254e00\",\"allCompetitors-2026:8d0c6c06e1e2f111fd2820734671cb4f1da609897088f27f1b0ddef9da948e8a\",\"allCompetitors-2026:6ef305ed0a5f601068ea7dc78736ced55316ddebb1a14fa783a173d02d5d0a91\",\"allCompetitors-2026:2ba04324e83cffd8de35878c87065745cdc2ad09de18a9cc1c9d5bdfc6eb737b\",\"allCompetitors-2026:56de42d1db9a4c398bddbaf134730c53468ea7bc72c5feee8b108898f06f892d\",\"allCompetitors-2026:995117aa9014c38237475313d9654bdef1ec0761b24178bf580e519c5540babf\",\"allCompetitors-2026:efea26cfee7cede0b7c5b93573d42681af696d9cd0a6f290c0d32cb5a6cd66cc\",\"allCompetitors-2026:6b2d54fed185f30fe89325400751c7866886ebcc9f41c4d9bc424a28e101c24f\",\"allCompetitors-2026:f53d9aa5a51412b7db751a89a722b96c62a301e532adb9408f0b167ca7fe5925\",\"allCompetitors-2026:49927acd9d7f061f38799676b48d95fd3b7e49d594ffa4fcbcadb19ab2660984\",\"allCompetitors-2026:d5d7474704c71eed93b8217e2a6f7f0ae5658fa399acadde5257a8c08976987e\",\"allCompetitors-2026:1349d80410080c809ad7f4eee8d6e57990f83a9630ca36b411fdfb53c7383bb2\",\"allCompetitors-2026:7f2d328ffb1d1e7b6d9148ff47496307f93fdfca5181d42cf910f27050e58fc5\",\"allCompetitors-2026:b80e91aa9ed563b59a6e28ec1993df3cbd1882bfb6216ec8b9d8a0a6ea3426a9\",\"allCompetitors-2026:c1e2fe248f5b317abc3840564ccf26dda794afc4fdefc8290afacf6de3440b1d\",\"allCompetitors-2026:afdc8441428cca2f6ae112fb6ef04732ce35e1a06ceb40500f752b0bf560c905\",\"allCompetitors-2026:43ea780c64b9718c0c543b1487fdfb7ee8bff5e7a68231c794727d82dc2cf352\",\"allCompetitors-2026:d88017ff77cede61327def77941fa41d0fee53a4d8e19aad670a1bc3e854a237\",\"allCompetitors-2026:6ef51c3165ca5e30e8452786946274a422f3b6b792f89a51d073689c68742b06\",\"allCompetitors-2026:7879d609e4a7ead8abc54a4d7b630193f81c3510de84d1c8a2b9c9b75e241390\",\"allCompetitors-2026:a51f09315d2181962eeb0e5d625a3827d60c90b46b12d261deda7bd7cd6303d1\",\"allCompetitors-2026:38be85912a5132ea5dd32d651ae4bc9d68ec708b9188d9e98d13f326d5746ad4\",\"allCompetitors-2026:afbeb469b6f298b5f635041a069dc7cbc2084b668f8e2d59d4973aa365296fb8\",\"allCompetitors-2026:529d587995e4c30a49035c37b1512f8b15251e9fcc43a96d816f4196d0494522\",\"allCompetitors-2026:2d6ce0a76cc8466f6ec15c6d68e030756f63af1eeb7b7135fb8e3d0a27f99fdc\",\"allCompetitors-2026:d258964dd312fce2e1d2fe66c4bd3aada2cfa88233c0673f0b4116c9a8ba557e\",\"allCompetitors-2026:6ce0651a303c4a144f07f3d85fa0616115722c1d2cd7b8ec712ab07744c3c0d4\",\"allCompetitors-2026:9046927d2f5db2f1b7a4206c8e70568de1d8fe6f649c1dd20bac810c86dd158c\",\"allCompetitors-2026:a50427aa412f84906a53ab5fc243e1cfa4e42d6863f2ed15fad2a0bbc9df788b\",\"allCompetitors-2026:b4624b066ada26750bdcc53e521f329f04ad62bb112519d9b6ea634d374f0008\",\"allCompetitors-2026:9ead4b3441417f0682eba82449e1fa076dee6cb12ea9b96b6f3ee89ca15651d0\",\"allCompetitors-2026:28ba8cc4e3615909679444b8892acf2a141a209f32f44be009239a90a8a4e2f4\",\"allCompetitors-2026:2c20be5365bcb4e877e5488f763fae782d819f2e7f2abedfccc07b2edf9144fe\",\"allCompetitors-2026:87f60f8a2fdc3ff637d32a7a26a94f2c5bae6411e480c7c245a8da40612abc71\",\"allCompetitors-2026:16e97ece2762e7e146bfb66b30a4ad39c7b4d92d4721ea418edba4741562f019\",\"allCompetitors-2026:0362886d32acef891645378daf58ea74574256ec5673a767b69fb371f212962f\",\"allCompetitors-2026:56e318508be746d55e57ca1330088078cba5e8635eda31c45b442b57df46bd4d\",\"allCompetitors-2026:69748ec751280eb759ca055fe3458a1bd2df3afbfa8746879403d76381167e05\",\"allCompetitors-2026:62186e80f764ed75c7bb8cc42c7788e9dba76fa898575914b7a2f5c0467d2ee7\",\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"],\"_virtual\":\"75-ije-N-A\",\"_gets\":{\"rankings.rider\":\"$rider\",\"cp\":\"$cp\"},\"types\":[\"N\",\"A\"],\"$cp\":\"checkpointList-2026-8:81c52c6ce94085da96d1f11c691ad1ffe6938feacb1024ed762474ab77f83518-75\"}}"
+      "eventId": "40",
+      "data": "{\"bind\":\"video-2026-19\",\"app\":\"tdf\",\"origin\":\"video-2026-19\",\"change\":\"modified\",\"id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"data\":{\"onlyDataTab\":false,\"isData\":false,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rne\",\"name\":\"Briefing Étape 19\",\"onlyClubTab\":false,\"createdAt\":\"2026-06-30T17:13:00+02:00\",\"isClub\":true,\"id\":10851,\"videoLangs\":[{\"locale\":\"fr\",\"title\":\"Briefing Étape 19\",\"id\":21714},{\"id\":21715,\"locale\":\"en\",\"title\":\"Briefing Stage 19\"},{\"title\":\"Briefing Etappe 19\",\"locale\":\"de\",\"id\":21716},{\"title\":\"Briefing Etapa 19\",\"locale\":\"es\",\"id\":21717}],\"_id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"_bind\":\"video-2026-19\",\"_origin\":\"video-2026-19\",\"_updatedAt\":1784877944862,\"_parent\":\"stage-2026:f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 19\",\"model\":\"video\"}}"
     }
   ]
 }
