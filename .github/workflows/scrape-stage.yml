@@ -214,6 +214,8 @@ jobs:
     needs: determine-stage
     if: needs.determine-stage.outputs.number != ''
     uses: ./.github/workflows/scrape-chunk.yml
+    permissions:
+      contents: write
     secrets: inherit
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
@@ -223,6 +225,8 @@ jobs:
     needs: [determine-stage, scrape-1]
     if: always() && needs.determine-stage.outputs.number != ''
     uses: ./.github/workflows/scrape-chunk.yml
+    permissions:
+      contents: write
     secrets: inherit
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
@@ -232,6 +236,8 @@ jobs:
     needs: [determine-stage, scrape-2]
     if: always() && needs.determine-stage.outputs.number != ''
     uses: ./.github/workflows/scrape-chunk.yml
+    permissions:
+      contents: write
     secrets: inherit
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
@@ -241,6 +247,8 @@ jobs:
     needs: [determine-stage, scrape-3]
     if: always() && needs.determine-stage.outputs.number != ''
     uses: ./.github/workflows/scrape-chunk.yml
+    permissions:
+      contents: write
     secrets: inherit
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
@@ -250,6 +258,8 @@ jobs:
     needs: [determine-stage, scrape-4]
     if: always() && needs.determine-stage.outputs.number != ''
     uses: ./.github/workflows/scrape-chunk.yml
+    permissions:
+      contents: write
     secrets: inherit
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
