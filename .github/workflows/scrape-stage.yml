@@ -16,7 +16,16 @@
 #               a failure.
 #   scrape    - the actual capture: SSE live-stream + the confirmed 2026 REST
 #               poll endpoints (flashInfoLive = the event feed, checkpointList
-#               = checkpoint pass data) + radio. Commits data/ back when done.
+#               = checkpoint pass data) + radio. Runs as FIVE chained ~66min
+#               chunks (determine-stage -> scrape-1 -> ... -> scrape-5, see
+#               scrape-chunk.yml) rather than one long job -- stage 19 lost
+#               its runner to GitHub-side "lost communication with the
+#               server" 2h into a single 5.5h job, which is exactly the kind
+#               of long-job flakiness chunking is meant to bound. Each chunk
+#               gets a fresh runner and only depends on the previous chunk
+#               having been ATTEMPTED (`if: always()`), not succeeded, so one
+#               dead runner costs at most one chunk, not the rest of the
+#               stage.
 #
 # Notes:
 # - The schedule below has explicit per-stage crons for stages 16-21 (the rest
@@ -25,12 +34,19 @@
 #   re-check data/2026/reference/stages.json and adjust the affected day's two
 #   crons. To add a stage: one discover cron at start-90min, one scrape cron at
 #   start-25min (both UTC), and add each to the matching job's `if:` below.
-# - GitHub-hosted jobs are hard-capped at 6 hours; that's why `scrape` starts
-#   close to the actual race start rather than hours early.
+# - GitHub-hosted jobs are hard-capped at 6 hours; each chunk (~66min) stays
+#   nowhere near it, which is the point -- the old single job started close to
+#   race time specifically to avoid that cap, and still hit stage 19's
+#   incident anyway.
 # - Radio audio is uploaded as an artifact rather than committed (repo bloat);
-#   flip the LFS section in the README if you'd rather commit it.
+#   flip the LFS section in the README if you'd rather commit it. Each chunk
+#   boundary costs a few seconds of radio to ffmpeg's reconnect -- see
+#   scrape-chunk.yml's header for why that trade is worth it.
 # - GitHub cron often fires late (observed ~55min on 2026-07-18); a late fire
 #   just shifts the capture window later and still catches the finish.
+# - If a scrape run doesn't succeed outright (not just a slow chunk chain),
+#   salvage-backfill.yml automatically recovers the cumulative event/results
+#   feeds afterward -- see that file for what it can and can't rescue.
 
 name: scrape-stage
 
@@ -139,7 +155,7 @@ jobs:
           path: data/*/reference/autodiscover-endpoints.json
           retention-days: 30
 
-  scrape:
+  determine-stage:
     if: >-
       github.event_name == 'workflow_dispatch' ||
       github.event.schedule == '35 10 21 7 *' ||
@@ -149,9 +165,11 @@ jobs:
       github.event.schedule == '5 9 25 7 *' ||
       github.event.schedule == '0 14 26 7 *'
     runs-on: ubuntu-latest
-    timeout-minutes: 350
-    permissions:
-      contents: write
+    timeout-minutes: 15
+    outputs:
+      number: ${{ steps.stage.outputs.number }}
+      # Total budget split five ways -- see scrape-chunk.yml for why chunked.
+      chunk_hours: ${{ steps.stage.outputs.chunk_hours }}
     steps:
       - uses: actions/checkout@v4
 
@@ -160,11 +178,9 @@ jobs:
           python-version: "3.12"
 
       - name: Install
-        run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          pip install -e .
+        run: pip install -e .
 
-      - name: Determine today's stage number (unless one was given explicitly)
+      - name: Determine today's stage number and per-chunk hours
         id: stage
         run: |
           python -m tourscraper bootstrap
@@ -185,68 +201,56 @@ jobs:
             fi
             echo "number=$STAGE" >> "$GITHUB_OUTPUT"
           fi
+          TOTAL="${{ github.event.inputs.max_hours || '5.5' }}"
+          echo "chunk_hours=$(python3 -c "print(round(float('$TOTAL') / 5, 3))")" >> "$GITHUB_OUTPUT"
 
-      - name: Run capture (with incremental pushes every 10 min)
-        env:
-          TOUR_RADIO_URL: ${{ secrets.TOUR_RADIO_URL }}
-        run: |
-          git config user.name "tour-scraper-bot"
-          git config user.email "actions@users.noreply.github.com"
-          python -m tourscraper stage \
-            --stage "${{ steps.stage.outputs.number }}" \
-            --max-hours "${{ github.event.inputs.max_hours || '5.5' }}" &
-          CAPTURE_PID=$!
-          # Push captured data incrementally so the repo stays fresh during the
-          # stage and nothing is lost if the runner dies mid-capture. Audio
-          # stays out (gitignored); it lands in the artifact at the end.
-          #
-          # 300s, not 600: stage 19 (2026-07-24) lost the runner to a GitHub-
-          # side "lost communication with the server" about 2h in, and
-          # everything captured since the last push -- up to the old 10min
-          # window -- died with the VM. Halving the window halves that
-          # worst-case loss. It doesn't address the cause (that's GitHub
-          # infra, not this workflow -- see salvage-backfill.yml for the
-          # actual safety net), just the blast radius.
-          while kill -0 $CAPTURE_PID 2>/dev/null; do
-            sleep 300
-            kill -0 $CAPTURE_PID 2>/dev/null || break
-            git add data/
-            if git commit -m "data: incremental capture $(date -u +%H:%M) UTC" >/dev/null 2>&1; then
-              # -X theirs: during a rebase this favours OUR replayed capture
-              # commits, so an append-only data file never deadlocks the push.
-              # Retry a couple of times rather than aborting into a state that
-              # can never push again (this is what lost stage 15's data).
-              for attempt in 1 2 3; do
-                if git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" >/dev/null 2>&1 \
-                   && git push >/dev/null 2>&1; then
-                  echo "pushed incremental at $(date -u +%H:%M)"; break
-                fi
-                git rebase --abort 2>/dev/null || true
-                echo "incremental push attempt $attempt failed; retrying"
-                sleep 10
-              done
-            fi
-          done
-          wait $CAPTURE_PID
+  # Five chained chunks instead of one long job. Each `needs` the previous
+  # chunk but runs `if: always()` on it -- so scrape-2 starts on a fresh
+  # runner whether scrape-1 succeeded, failed, or got orphaned by a runner
+  # that stopped responding, which is exactly what happened to stage 19's
+  # single 5.5h job. A chunk is only skipped outright if determine-stage
+  # itself found no stage to capture.
+  scrape-1:
+    needs: determine-stage
+    if: needs.determine-stage.outputs.number != ''
+    uses: ./.github/workflows/scrape-chunk.yml
+    secrets: inherit
+    with:
+      stage: ${{ needs.determine-stage.outputs.number }}
+      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
 
-      - name: Upload everything as artifact (belt and suspenders)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: stage-data-${{ github.run_id }}
-          path: data/
-          retention-days: 30
+  scrape-2:
+    needs: [determine-stage, scrape-1]
+    if: always() && needs.determine-stage.outputs.number != ''
+    uses: ./.github/workflows/scrape-chunk.yml
+    secrets: inherit
+    with:
+      stage: ${{ needs.determine-stage.outputs.number }}
+      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
 
-      - name: Commit data back to repo (excluding audio)
-        if: always()
-        run: |
-          git config user.name "tour-scraper-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data/
-          git commit -m "data: capture $(date -u +%F)" || echo "nothing to commit"
-          for i in 1 2 3; do
-            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
-            echo "push attempt $i failed (concurrent write?), retrying..."
-            git rebase --abort 2>/dev/null || true
-            sleep $((i * 5))
-          done || echo "push failed after retries; data still in the uploaded artifact"
+  scrape-3:
+    needs: [determine-stage, scrape-2]
+    if: always() && needs.determine-stage.outputs.number != ''
+    uses: ./.github/workflows/scrape-chunk.yml
+    secrets: inherit
+    with:
+      stage: ${{ needs.determine-stage.outputs.number }}
+      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+
+  scrape-4:
+    needs: [determine-stage, scrape-3]
+    if: always() && needs.determine-stage.outputs.number != ''
+    uses: ./.github/workflows/scrape-chunk.yml
+    secrets: inherit
+    with:
+      stage: ${{ needs.determine-stage.outputs.number }}
+      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+
+  scrape-5:
+    needs: [determine-stage, scrape-4]
+    if: always() && needs.determine-stage.outputs.number != ''
+    uses: ./.github/workflows/scrape-chunk.yml
+    secrets: inherit
+    with:
+      stage: ${{ needs.determine-stage.outputs.number }}
+      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}

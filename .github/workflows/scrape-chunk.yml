@@ -1,0 +1,104 @@
+# One bounded-length capture session, called repeatedly (chained via `needs`)
+# by scrape-stage.yml instead of running the whole stage as a single job.
+#
+# Why: stage 19 (2026-07-24) lost its runner to a GitHub-side "lost
+# communication with the server" about 2h into a single 5.5h job, and
+# everything since the last incremental push -- potentially hours -- died
+# with the VM. That class of hosted-runner flakiness correlates with job
+# duration; a 5.5h job has far more exposure than five ~66min ones. Splitting
+# the capture into several short, independent jobs means a dead runner in
+# chunk 3 costs at most one chunk (bounded further by the 300s incremental
+# push inside it) -- chunk 4 starts on a FRESH runner regardless, because it
+# only depends on chunk 3 having been attempted, not having succeeded.
+#
+# Trade-off accepted for this: record_radio's whole design is one persistent
+# ffmpeg connection so no audio is dropped at hour boundaries (see its
+# docstring). Each new chunk job starts a fresh ffmpeg process, so a few
+# seconds of radio are genuinely lost at every chunk boundary -- the same
+# small cost the docstring describes for an ffmpeg restart, just paid every
+# ~66min instead of never. Losing a few seconds of audio five times is a much
+# better trade than losing the rest of a stage's telemetry outright.
+name: scrape-chunk
+
+on:
+  workflow_call:
+    inputs:
+      stage:
+        required: true
+        type: string
+      max_hours:
+        required: true
+        type: string
+
+jobs:
+  chunk:
+    runs-on: ubuntu-latest
+    # Comfortably above max_hours (chunks are ~1.1h) with room for setup and
+    # the final commit, but nowhere near GitHub's 6h hard cap -- the whole
+    # point is not needing to run anywhere close to it anymore.
+    timeout-minutes: 100
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -e .
+
+      - name: Run capture chunk (with incremental pushes every 5 min)
+        env:
+          TOUR_RADIO_URL: ${{ secrets.TOUR_RADIO_URL }}
+        run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
+          python -m tourscraper stage \
+            --stage "${{ inputs.stage }}" \
+            --max-hours "${{ inputs.max_hours }}" &
+          CAPTURE_PID=$!
+          while kill -0 $CAPTURE_PID 2>/dev/null; do
+            sleep 300
+            kill -0 $CAPTURE_PID 2>/dev/null || break
+            git add data/
+            if git commit -m "data: incremental capture $(date -u +%H:%M) UTC" >/dev/null 2>&1; then
+              # -X theirs: during a rebase this favours OUR replayed capture
+              # commits, so an append-only data file never deadlocks the push.
+              for attempt in 1 2 3; do
+                if git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" >/dev/null 2>&1 \
+                   && git push >/dev/null 2>&1; then
+                  echo "pushed incremental at $(date -u +%H:%M)"; break
+                fi
+                git rebase --abort 2>/dev/null || true
+                echo "incremental push attempt $attempt failed; retrying"
+                sleep 10
+              done
+            fi
+          done
+          wait $CAPTURE_PID
+
+      - name: Upload chunk as artifact (belt and suspenders)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stage-${{ inputs.stage }}-chunk-${{ github.run_id }}
+          path: data/
+          retention-days: 30
+
+      - name: Commit data back to repo (excluding audio)
+        if: always()
+        run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git commit -m "data: chunk capture $(date -u +%H:%M) UTC" || echo "nothing to commit"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
+            echo "push attempt $i failed (concurrent write?), retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done || echo "push failed after retries; data still in the uploaded artifact"
