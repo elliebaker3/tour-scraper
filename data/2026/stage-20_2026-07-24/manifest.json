@@ -1,0 +1,35 @@
+[
+  {
+    "recorded_at": "2026-07-24T23:45:27.361+00:00",
+    "kind": "live-stream",
+    "action": "start"
+  },
+  {
+    "recorded_at": "2026-07-24T23:45:27.362+00:00",
+    "kind": "poll",
+    "endpoints": [
+      "publication",
+      "insights",
+      "pack",
+      "telemetry",
+      "flashInfoLive",
+      "checkpointList"
+    ]
+  },
+  {
+    "recorded_at": "2026-07-24T23:45:27.363+00:00",
+    "kind": "radio",
+    "source": "https://ice.creacast.com/lequipe-au1"
+  },
+  {
+    "recorded_at": "2026-07-24T23:46:10.311+00:00",
+    "kind": "live-stream",
+    "action": "stop",
+    "counts": {
+      "telemetry": 0,
+      "groups": 0,
+      "events": 0,
+      "raw-only": 0
+    }
+  }
+]

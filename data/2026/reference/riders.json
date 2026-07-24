@@ -1335,15 +1335,18 @@
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-tdf-png/148/71792/0:0,400:400-70-0-70/29f8b",
     "idUCI": "COL19980222",
     "_id": "d2bfbdaf0c8f121566b5939309d69636df68c088c3b83825679a6e88057c17e1",
+    "_updatedAt": 1784909310992,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-MOV",
-    "_updatedAt": 1783077577828,
     "_parent": "team-2026:61a694b922b7f2bf86ad22c1e21c60776a57fe7c7c4540060dd4f99acc2a908d",
-    "_key": "_id",
     "_virtual": "MOV-148-RUBIO",
     "$team": "team-2026:61a694b922b7f2bf86ad22c1e21c60776a57fe7c7c4540060dd4f99acc2a908d",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 19,
+      "code": -1
     }
   },
   {
@@ -1922,15 +1925,18 @@
     "header": null,
     "podiums": 37,
     "_id": "63a715e9633d85942e58e848373747a7948b460604849c00c028de2fc3f2a31d",
+    "_updatedAt": 1784909310993,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TVL",
-    "_updatedAt": 1783082488960,
     "_parent": "team-2026:58c4faf080bb352fad62ec06627f2c64da293e753f2fc4589f682522f234742a",
-    "_key": "_id",
     "_virtual": "TVL-12-AFFINI",
     "$team": "team-2026:58c4faf080bb352fad62ec06627f2c64da293e753f2fc4589f682522f234742a",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 19,
+      "code": -1
     }
   },
   {
