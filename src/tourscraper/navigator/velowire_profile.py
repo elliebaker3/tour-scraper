@@ -82,6 +82,14 @@ def _parse_marker_name(name: str) -> dict | None:
     if base.startswith("sprint"):
         return {"kind": "sprint", "label": base.split("-", 1)[-1].strip()}
     if cat in _KOM_CATS:
+        # velowire prefixes a marker with the race format it belongs to on
+        # time-trial stages ("chrono - Côte de Larringes"). That is their
+        # annotation, not part of the climb's name, and it would read oddly
+        # on a bar that already knows which stage it is showing.
+        for prefix in ("chrono -", "chrono-"):
+            if base.lower().startswith(prefix):
+                base = base[len(prefix):].strip()
+                break
         return {"kind": "kom", "cat": cat, "label": base}
     return None  # départ / km 0 / anything unclassified
 
@@ -227,6 +235,79 @@ def build(year_dir: Path, out_dir: Path | None = None) -> list[Path]:
     tmp_kmz.unlink(missing_ok=True)
     kml_path.unlink(missing_ok=True)
     return written
+
+
+def _aso_kind(m: dict) -> str:
+    return "finish" if m.get("finish") else m.get("kind")
+
+
+def _aso_cat(m: dict):
+    c = m.get("cat")
+    return None if not c else str(c).replace("Cat ", "")
+
+
+# Beyond this, a matched pair is not the same landmark and the whole
+# alignment is suspect. velowire's trace runs a few km long because it starts
+# at the départ fictif where ASO's km 0 is the real start (stage 15: +3.4 km
+# at the first sprint, shrinking to +0.1 at the line), so a few km of drift is
+# expected and 15 km is not.
+MAX_MARKER_DRIFT_KM = 15.0
+
+
+def name_route_markers(route_markers: list[dict], velowire_dir: Path,
+                       stage_number: int) -> tuple[list[dict], str]:
+    """Attach velowire's real climb names to ASO's route markers.
+
+    ASO's route data places every climb and sprint exactly but labels them
+    only by grade -- "Climb — Cat 2", "Summit finish". velowire names them
+    (Col Bayard, Col du Noyer, Alpe d'Huez), which is what a viewer actually
+    recognises. This takes the names and nothing else: position, altitude and
+    timing stay ASO's, because the two disagree on distance and ASO's is the
+    scale everything else in the bundle already uses.
+
+    Matching is therefore by ORDER, never by km. The two lists differ in two
+    predictable ways, both handled here rather than papered over:
+
+      * velowire always ends with an arrival marker; ASO emits one only when
+        the finish is a categorized summit. A trailing velowire finish with
+        no ASO counterpart is dropped.
+      * velowire leaves the arrival ungraded where ASO grades it (stage 19:
+        HC). The finish pair is therefore matched on position alone.
+
+    Everything else must line up exactly on (kind, category). If it does not,
+    the stage is left unnamed and the reason returned: a climb labelled with
+    the wrong name is far worse than one labelled only by its grade.
+    """
+    src = velowire_dir / f"stage-{stage_number:02d}.json"
+    if not route_markers or not src.exists():
+        return route_markers, "no velowire profile"
+
+    vw = json.loads(src.read_text(encoding="utf-8"))["markers"]
+    aso_rest = [m for m in route_markers if _aso_kind(m) != "finish"]
+    aso_fin = [m for m in route_markers if _aso_kind(m) == "finish"]
+    vw_rest = [m for m in vw if m["kind"] != "finish"]
+    vw_fin = [m for m in vw if m["kind"] == "finish"]
+
+    seq_a = [(_aso_kind(m), _aso_cat(m)) for m in aso_rest]
+    seq_v = [(m["kind"], m.get("cat")) for m in vw_rest]
+    if seq_a != seq_v:
+        return route_markers, f"sequence mismatch ({seq_a} vs {seq_v})"
+
+    pairs = list(zip(aso_rest, vw_rest))
+    if aso_fin and vw_fin:
+        pairs.append((aso_fin[0], vw_fin[0]))
+
+    drift = [abs((w.get("km") or 0) - (a.get("km") or 0)) for a, w in pairs]
+    if drift and max(drift) > MAX_MARKER_DRIFT_KM:
+        return route_markers, f"drift {max(drift):.1f} km exceeds tolerance"
+
+    named = 0
+    for a, w in pairs:
+        label = (w.get("label") or "").strip()
+        if label:
+            a["name"] = label
+            named += 1
+    return route_markers, f"named {named}/{len(route_markers)}"
 
 
 def publish_lite_bundles(velowire_dir: Path, extension_data_dir: Path) -> None:

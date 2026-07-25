@@ -24,6 +24,7 @@ from pathlib import Path
 
 from .elevation_sync import build as build_sync
 from .extract_events import build_guideposts, load_ticker
+from .velowire_profile import name_route_markers
 
 
 def downsample_profile(points: list[dict], target: int = 500) -> list[dict]:
@@ -209,6 +210,10 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     events = build_guideposts(stage_dir, sync["points"])
     profile = [_slim(p) for p in downsample_profile(sync["points"])]
     markers = route_markers(sync["points"])
+    # ASO places the climbs; velowire names them. Positions stay ASO's -- see
+    # name_route_markers for why the two distance scales are not interchanged.
+    markers, naming = name_route_markers(
+        markers, year_dir / "profiles" / "velowire", stage_number)
 
     year = int(year_dir.name) if year_dir.name.isdigit() else int(str(meta.get("date"))[:4])
     poi, specials, poi_err = (
@@ -249,7 +254,7 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     print(f"[navigator]   guideposts {events['counts']}")
     sprints = sum(1 for m in markers if m["kind"] == "sprint")
     koms = sum(1 for m in markers if m["kind"] == "kom")
-    print(f"[navigator]   route markers: {sprints} sprint(s), {koms} climb(s)")
+    print(f"[navigator]   route markers: {sprints} sprint(s), {koms} climb(s) · {naming}")
     if poi:
         print(f"[navigator]   persons of interest: {len(poi['yellow'])} yellow, "
               f"{len(poi['green'])} green, {len(poi['white'])} white · "

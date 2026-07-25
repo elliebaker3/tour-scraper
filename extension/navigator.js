@@ -551,7 +551,10 @@
       const isKom = m.kind === "kom";
       const color = isKom ? (KOM_COLOR[m.cat] || "#ef4444") : CATEGORIES.sprint.color;
       const badge = isKom ? (m.finish ? "🏁" : (m.cat || "").replace("Cat ", "")) : "S";
-      const tip = m.label +
+      // Prefer the real name where one is known (velowire supplies "Col du
+      // Noyer" where ASO's route data only grades it "Climb — Cat 1"), with
+      // the grade kept alongside since that is what the badge shows.
+      const tip = (m.name ? `${m.name} · ${m.label}` : m.label) +
                   (m.kmto != null ? ` · ${m.kmto} km to go · ${m.alt}m` : "");
       // Keep the badge fully inside the bar. It normally floats above the dot,
       // but summits sit near the top, so flip it below when there isn't room;
