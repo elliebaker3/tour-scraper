@@ -89,6 +89,21 @@ function validate(rec) {
       return "cal.rate is out of range";
     }
   }
+  // Ad-break boundaries, in recording seconds. These carry the LOCAL layer:
+  // without them a restored reading can only refit the global rate, so they
+  // are as much a part of the contribution as the readings themselves. A
+  // stage carries roughly 8-12 breaks, so a list in the hundreds is not a
+  // break map.
+  if (rec.ad_breaks != null) {
+    if (!Array.isArray(rec.ad_breaks) || rec.ad_breaks.length > 60) {
+      return "ad_breaks must be a list of at most 60 positions";
+    }
+    for (const b of rec.ad_breaks) {
+      if (typeof b !== "number" || !isFinite(b) || b < 0 || b > dur) {
+        return "each ad break must sit inside the recording";
+      }
+    }
+  }
   return null;
 }
 
@@ -109,6 +124,9 @@ function clean(rec, ip) {
       return o;
     }),
     cal: rec.cal ?? null,
+    ad_breaks: Array.isArray(rec.ad_breaks)
+      ? [...new Set(rec.ad_breaks.map((b) => Math.round(b)))].sort((a, b) => a - b)
+      : [],
     saved_at: typeof rec.saved_at === "string" ? rec.saved_at.slice(0, 32) : null,
     extension_version: typeof rec.extension_version === "string"
       ? rec.extension_version.slice(0, 24) : null,

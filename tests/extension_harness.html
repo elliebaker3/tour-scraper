@@ -77,6 +77,32 @@
     } } };
   }
 
+  // A stand-in for the player's own scrub bar, with ad markers ticked along
+  // it the way Peacock draws them. ?adbreaks=1800,3600 places them at those
+  // recording seconds. This is what detectAdBreaks() reads, so it exercises
+  // the DOM scan and the local calibration layer together rather than
+  // injecting the boundaries behind it.
+  if (qs.get("adbreaks")) {
+    const at = qs.get("adbreaks").split(",").map(Number).filter(n => n > 0);
+    const dur = Number(qs.get("dur") || 19225.94);
+    const bar = document.createElement("div");
+    bar.className = "seekbar";
+    Object.assign(bar.style, {
+      position: "fixed", left: "0", bottom: "40px",
+      width: "100vw", height: "6px", background: "#333",
+    });
+    for (const sec of at) {
+      const m = document.createElement("div");
+      m.className = "ad-marker";
+      Object.assign(m.style, {
+        position: "absolute", top: "0", height: "6px", width: "3px",
+        background: "#ff0", left: `calc(${(sec / dur) * 100}% - 1.5px)`,
+      });
+      bar.appendChild(m);
+    }
+    document.addEventListener("DOMContentLoaded", () => document.body.appendChild(bar));
+  }
+
   // Fake player: duration/currentTime are readonly on a real element, so they
   // are redefined here. Enabled only when ?video=1 so the no-video path is
   // exercised too.

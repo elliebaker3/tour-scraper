@@ -70,6 +70,16 @@ jobs:
                   fail("every anchor needs a numeric videoSec")
               if not isinstance(a.get("km"), (int, float)):
                   fail("every anchor needs a numeric km")
+          # Ad-break boundaries carry the LOCAL calibration layer; without
+          # them a restored reading can only refit the global rate.
+          breaks = rec.get("ad_breaks") or []
+          if not isinstance(breaks, list) or len(breaks) > 60:
+              fail("ad_breaks must be a list of at most 60 positions")
+          for b in breaks:
+              if not isinstance(b, (int, float)) or not (0 <= b <= dur):
+                  fail("each ad break must sit inside the recording")
+          breaks = sorted({round(b) for b in breaks})
+
           # Keep only known fields, dropping anything unexpected the issue
           # might have carried.
           keep_anchor = ("tUtcMs", "videoSec", "kind", "km", "kmto", "label")
@@ -82,6 +92,7 @@ jobs:
               "airing_ms": rec.get("airing_ms"),
               "anchors": [{k: a[k] for k in keep_anchor if k in a} for a in anchors],
               "cal": rec.get("cal") if isinstance(rec.get("cal"), dict) else None,
+              "ad_breaks": breaks,
               "saved_at": rec.get("saved_at"),
               "extension_version": rec.get("extension_version"),
               "ingested_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),

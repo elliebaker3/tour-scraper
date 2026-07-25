@@ -240,12 +240,16 @@ try:
         assert not s["setupShown"], "FAIL: prompt still shown after a reading"
         # Race-event markers default off, so the bar is uncluttered until asked.
         assert s["markers"] == 0, "FAIL: event markers should default off"
-        # A reading replaces the 0.92 AVERAGE with real time either side of it.
-        # 0.92 describes a whole broadcast including its ad breaks; between
-        # them the feed runs 1:1, and a reading says which side of a break you
-        # are on. So one reading means rate 1, not the average.
-        assert "rate 1.00" in s["diag"], \
-            f"FAIL: a reading should hold real time either side, got: {s['diag']}"
+        # A reading refines the GLOBAL rate, which still governs everywhere
+        # outside an ad-bracketed interval. With no breaks detected there is
+        # no interval to override it, so one reading keeps the 0.92 default
+        # rather than switching the whole clock to real time. (The local
+        # layer's own behaviour is asserted in section 5b, with markers
+        # present.)
+        assert "rate 0.92" in s["diag"], \
+            f"FAIL: one reading should refine the global 0.92 model, got: {s['diag']}"
+        assert "no ad breaks found" in s["diag"], \
+            f"FAIL: the panel should say the local layer is dormant: {s['diag']}"
 
         # Sprint and climb markers are on the profile, from the route data.
         n_sprint = sum(1 for m in bundle["route_markers"] if m["kind"] == "sprint")
@@ -324,32 +328,20 @@ try:
         assert lo <= 1 and hi >= s["width"] - 1, "FAIL: bar does not span the recording"
         assert s["imp"], "FAIL: nothing imputed outside the race"
 
-        # --- 3: a reading is exact WHERE IT IS, and decays with distance ------
-        # This is the deliberate trade in the local model. Real time either
-        # side of a reading is right until an ad break intervenes, so accuracy
-        # is a function of how far you are from a reading -- not of how many
-        # readings exist. Near it, near-perfect; an hour of racing away, the
-        # unaccounted breaks have added up. Both halves are asserted, because
-        # the decay is a property to keep honest about rather than hide: it is
-        # the reason the panel tells you to add a reading near what you care
-        # about instead of "one far away".
-        for kmto, tol, label in ((41.0, 0.8, "close to the reading"),
-                                 (35.0, 2.0, "a few km away")):
+        # --- 3: ONE reading already lands close, thanks to the 0.92 default ---
+        # The global layer is what makes a single reading usable across the
+        # whole stage: rate 1.0 would drift ~13 km by the finish on a 0.918x
+        # recording, where starting from 0.92 keeps it within a kilometre
+        # everywhere. (The local layer sharpens one interval on top of this;
+        # it does not replace it -- section 5b.)
+        for kmto in (41.0, 35.0, 5.5):
             page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(kmto)}")
             page.wait_for_timeout(600)
             m = re.search(r"([\d.]+) km to go", state()["clock"])
             off = abs(float(m.group(1)) - kmto)
-            print(f"  {label}: truth {kmto} -> bar says {m.group(1)} ({off:.1f} km off)")
-            assert off <= tol, f"FAIL: {off:.1f} km off {label} (tol {tol})"
-
-        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(5.5)}")
-        page.wait_for_timeout(700)
-        m = re.search(r"([\d.]+) km to go", state()["clock"])
-        far = abs(float(m.group(1)) - 5.5)
-        print(f"  an hour of racing away: truth 5.5 -> bar says {m.group(1)} ({far:.1f} km off)")
-        assert far > 1.0, \
-            ("FAIL: extrapolating at real time over an hour should visibly drift; "
-             f"only {far:.1f} km off suggests the local model is not in use")
+            print(f"  truth {kmto} km to go -> bar says {m.group(1)} ({off:.1f} km off)")
+            assert off <= 1.5, \
+                f"FAIL: one reading at the 0.92 default should stay close, got {off:.1f} km"
 
         # --- 4: a second reading brackets the gap and removes that drift ------
         page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(150.5)}")
@@ -371,44 +363,87 @@ try:
         assert abs(got_rate - RATE_TRUE) <= 0.01, \
             f"FAIL: span average not recovered: {got_rate} vs {RATE_TRUE}"
 
-        # Accuracy is BRACKETED, not global. Between two readings the line is
-        # pinned at both ends and the ad breaks in that span are absorbed
-        # exactly; past the outermost reading it is real-time extrapolation
-        # again and the unaccounted breaks resume accumulating. So the readings
-        # want to straddle what you are watching -- which is why the panel asks
-        # for one "near anything else you want to be exact at" rather than
-        # "far away".
-        print("\n--- between the two readings (150 and 42 km to go) ---")
-        for shown in (130, 90, 50):
+        # With the rate fitted, the global layer is accurate across the whole
+        # stage -- including past the outermost reading, which is exactly what
+        # the unbounded-real-time experiment got wrong.
+        print("\n--- two readings: km-to-go accurate across the stage ---")
+        for shown in (130, 90, 50, 20, 8):
             page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(shown + 0.5)}")
             page.wait_for_timeout(500)
             m = re.search(r"([\d.]+) km to go", state()["clock"])
             off = abs(float(m.group(1)) - (shown + 0.5))
             print(f"  screen {shown} km to go -> bar says {m.group(1)} ({off:.1f} km off)")
-            assert off <= 1.0, f"FAIL: {off:.1f} km gap at {shown} km to go, inside the bracket"
+            assert off <= 1.5, f"FAIL: {off:.1f} km gap at {shown} km to go after rate fit"
 
-        print("--- past the last reading, drift resumes (expected) ---")
-        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(20.5)}")
-        page.wait_for_timeout(500)
-        m = re.search(r"([\d.]+) km to go", state()["clock"])
-        outside = abs(float(m.group(1)) - 20.5)
-        print(f"  screen 20 km to go -> bar says {m.group(1)} ({outside:.1f} km off)")
-        assert outside > 1.0, \
-            ("FAIL: outside the bracket should extrapolate at real time and drift; "
-             f"{outside:.1f} km off suggests a global rate is still being applied")
+        # --- 5b: the local layer, inside an ad-bracketed interval ------------
+        # The two layers are meant to coexist: a universal rate everywhere,
+        # overridden by real time (1x) only inside the ad-break interval a
+        # reading was taken in. The decisive measurement is the SLOPE: over
+        # 600 recording seconds inside that interval the race clock must
+        # advance 600s, where the global 0.92x model would advance ~652s.
+        page.goto(base + "&adbreaks=3000,6000,9000,12000")
+        page.wait_for_selector(".tn-root", timeout=10000)
+        page.wait_for_timeout(2500)
+        show()
+        found = re.search(r"(\d+) ad breaks", state()["diag"])
+        assert found and int(found.group(1)) == 4, \
+            f"FAIL: ad markers not detected from the scrub bar: {state()['diag']}"
 
-        # ...and a third reading there brackets it too, which is the fix.
-        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(8.5)}")
-        page.fill(".tn-togo-km2", "8")
+        def kmto_now():
+            m = re.search(r"([\d.]+) km to go", state()["clock"])
+            return float(m.group(1)) if m else None
+
+        def race_seconds_between(a_km, b_km):
+            return abs((time_at_kmto(b_km) - time_at_kmto(a_km)).total_seconds())
+
+        # Anchor a reading in the middle of the interval [3000, 6000].
+        page.evaluate("() => document.querySelector('video').currentTime = 4500")
+        page.wait_for_timeout(600)
+        here = kmto_now()
+        page.fill(".tn-togo-km2", str(int(here)))
         page.click(".tn-togo-set2")
         page.wait_for_timeout(700)
-        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(20.5)}")
-        page.wait_for_timeout(500)
-        m = re.search(r"([\d.]+) km to go", state()["clock"])
-        fixed = abs(float(m.group(1)) - 20.5)
-        print(f"  after a reading at 8 km to go -> 20 km reads {m.group(1)} ({fixed:.1f} km off)")
-        assert fixed <= 1.0, \
-            f"FAIL: bracketing 20 km should fix it, still {fixed:.1f} km off"
+
+        # Re-read the baseline AFTER the reading: entering a whole number
+        # applies the midpoint convention ("42" means 42.0-43.0), so the
+        # anchored position differs from the pre-reading estimate by up to a
+        # kilometre. Measuring the slope against the stale value would charge
+        # that offset to the slope.
+        page.evaluate("() => document.querySelector('video').currentTime = 4500")
+        page.wait_for_timeout(600)
+        base_km = kmto_now()
+
+        # Step forward 600s, staying inside the same interval.
+        page.evaluate("() => document.querySelector('video').currentTime = 5100")
+        page.wait_for_timeout(600)
+        inside = race_seconds_between(kmto_now(), base_km)
+        print(f"\n--- local layer, inside the bracket [3000s, 6000s] ---")
+        print(f"  600 recording seconds advanced the race clock {inside:.0f}s "
+              f"(1x would be 600, the 0.92x global would be ~652)")
+        assert abs(inside - 600) < 45, \
+            f"FAIL: inside the bracket should run 1x, got {inside:.0f}s per 600s"
+
+        # Now step well past the interval's far edge; the global rate resumes,
+        # so the same 600 recording seconds must cover MORE race time again.
+        page.evaluate("() => document.querySelector('video').currentTime = 9500")
+        page.wait_for_timeout(600)
+        far_a = kmto_now()
+        page.evaluate("() => document.querySelector('video').currentTime = 10100")
+        page.wait_for_timeout(600)
+        outside = race_seconds_between(kmto_now(), far_a)
+        print(f"  outside it, the same 600s covered {outside:.0f}s of race time")
+        assert outside > inside + 20, \
+            ("FAIL: outside the bracket the global rate should resume, "
+             f"but {outside:.0f}s is not meaningfully more than {inside:.0f}s")
+
+        page.goto(base)            # back to the plain page for the rest
+        page.wait_for_selector(".tn-root", timeout=10000)
+        page.wait_for_timeout(2000)
+        show()
+        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(42.5)}")
+        page.fill(".tn-togo-km2", "42")
+        page.click(".tn-togo-set2")
+        page.wait_for_timeout(700)
 
         # --- 6: reset returns to the prompt ----------------------------------
         page.click(".tn-anchor-clear")

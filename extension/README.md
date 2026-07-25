@@ -97,6 +97,31 @@ Tests (need Playwright):
     python tests/test_extension_ui.py
     python tests/test_calibration_persist.py
 
+## The clock: two layers
+
+**Global** — one universal rate across the whole race. With no readings it is
+the broadcast's own shape: about an hour of build-up before the flag, then
+0.92x, since roughly 8% of race time goes to ad breaks. Readings refine that
+rate by least-squares fit. This governs everywhere by default, and it is what
+keeps a single reading usable across a whole stage.
+
+**Local** — inside one ad-bracketed interval only. Between two breaks the
+broadcast runs at real time, so a reading taken in that interval is an exact
+anchor and time runs 1x from it to the interval's edges. At those edges the
+global rate resumes. Local wins wherever it applies, so readings in different
+intervals each govern their own, and every reading still refits the global
+rate on top.
+
+The local layer is only as real as the break boundaries, so it stays dormant
+until they are actually detected — an interval with invented edges would drift
+silently, which is the failure the whole model exists to avoid. Boundaries
+come from the player's own scrub bar, which ticks where the breaks are
+(`detectAdBreaks`). With none found the panel says so and behaves exactly as
+the global model alone.
+
+The break positions are stored and shared alongside the readings, so the next
+viewer of the same recording inherits both layers, not just the rate.
+
 ## Calibration is remembered, per recording
 
 Calibrate once and that's it: the readings are saved and reapplied

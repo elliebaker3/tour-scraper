@@ -186,29 +186,25 @@
   }
 
 
-  /* The clock, in two layers.
+  /* The clock, in two layers that coexist rather than replace each other.
    *
-   * LAYER 1 -- the broadcast's shape, with no readings at all. A Peacock
-   * recording opens with roughly an hour of build-up before the flag drops,
-   * and thereafter loses about 8% of race time to ad breaks. Those two
-   * constants alone (BROADCAST_PREROLL_SEC, DEFAULT_RATE) place the whole
-   * stage well enough to draw, which is why the bar no longer waits for a
-   * reading before showing anything.
+   * GLOBAL -- one universal rate across the whole race. With no readings it
+   * is the broadcast's own shape: about an hour of build-up before the flag,
+   * then 0.92x, since roughly 8% of race time goes to ad breaks. Readings
+   * refine that rate by least-squares fit (calFromAnchors), exactly as they
+   * always did. This governs everywhere by default.
    *
-   * LAYER 2 -- readings. Between ad breaks the broadcast runs at real time,
-   * so a reading is exact at its own moment and stays exact either side of
-   * it at RATE 1 until an ad break intervenes. That is the local model:
+   * LOCAL -- inside one ad-bracketed interval only. Between two ad breaks the
+   * broadcast runs at real time, so a reading taken in that interval is an
+   * exact anchor and time runs 1x FROM IT to the interval's edges. At those
+   * edges the global rate resumes.
    *
-   *   before the first reading   rate 1 backwards from it
-   *   between two readings       straight line between them, which absorbs
-   *                              whatever ad breaks fall in that span
-   *   after the last reading     rate 1 forwards from it
-   *
-   * The straight line between two readings is the honest choice: we cannot
-   * see where the ad breaks are, only their aggregate effect between two
-   * known points, so the error is spread evenly rather than guessed at.
-   * Accuracy therefore comes from readings NEAR what you are looking at, not
-   * from more readings in total.
+   * The local layer is therefore only as real as the break boundaries, and it
+   * stays dormant until they are actually detected (see adBreaks /
+   * detectAdBreaks). That is deliberate: an interval with invented edges
+   * would drift silently, which is the failure this whole model exists to
+   * avoid. With no breaks detected the panel behaves exactly as the global
+   * model alone -- no worse than before, and never speculatively better.
    */
   const BROADCAST_PREROLL_SEC = 3600;
 
@@ -220,69 +216,66 @@
              rate: DEFAULT_RATE, source: "default" };
   }
 
-  /** Readings sorted along the recording, which is the axis both maps walk. */
-  function ordered() {
-    return pins().filter((a) => isFinite(a.tUtcMs) && isFinite(a.videoSec))
-                 .sort((a, b) => a.videoSec - b.videoSec);
+  /* Ad-break boundaries, in recording seconds, ascending. Empty until the
+   * player's own scrub bar yields them (detectAdBreaks). Everything local
+   * keys off this list, so an empty list means the global model runs alone --
+   * which is the point: no invented intervals. */
+  let adBreaks = [];
+
+  /** The ad-bracketed interval containing a recording second: [lo, hi].
+   *  Null when there are no breaks, so callers fall through to global. */
+  function intervalAt(sec) {
+    if (!adBreaks.length || !isFinite(sec)) return null;
+    let lo = 0, hi = video?.duration || Infinity;
+    for (const b of adBreaks) {
+      if (b <= sec) lo = b;
+      else { hi = b; break; }
+    }
+    return { lo, hi };
   }
 
+  /** The reading that governs an interval, if one was taken inside it. Where
+   *  several were, the nearest to the interval wins -- they should agree, and
+   *  picking deterministically beats averaging anchors that each claim to be
+   *  exact. */
+  function localAnchor(sec) {
+    const iv = intervalAt(sec);
+    if (!iv) return null;
+    const inside = pins().filter((a) => a.videoSec >= iv.lo && a.videoSec <= iv.hi);
+    if (!inside.length) return null;
+    inside.sort((a, b) => Math.abs(a.videoSec - sec) - Math.abs(b.videoSec - sec));
+    return { anchor: inside[0], ...iv };
+  }
+
+  const globalUtcToVideo = (tUtcMs) =>
+    cal ? cal.offsetSec + cal.rate * (tUtcMs - cal.refMs) / 1000 : null;
+  const globalVideoToUtc = (sec) =>
+    cal && cal.rate ? cal.refMs + ((sec - cal.offsetSec) / cal.rate) * 1000 : null;
+
   function utcToVideo(tUtcMs) {
-    const p = ordered();
-    if (!p.length) {
-      if (!cal) return null;
-      return cal.offsetSec + cal.rate * (tUtcMs - cal.refMs) / 1000;
+    const g = globalUtcToVideo(tUtcMs);
+    if (g == null) return null;
+    // Does a reading's own interval claim this moment? Ask where the global
+    // model puts it, then check that interval for an anchor; if one governs,
+    // 1x from the anchor wins inside the interval's edges.
+    const loc = localAnchor(g);
+    if (loc) {
+      const v = loc.anchor.videoSec + (tUtcMs - loc.anchor.tUtcMs) / 1000;
+      if (v >= loc.lo && v <= loc.hi) return v;
     }
-    if (tUtcMs <= p[0].tUtcMs) {                       // before: rate 1 back
-      return p[0].videoSec + (tUtcMs - p[0].tUtcMs) / 1000;
-    }
-    const last = p[p.length - 1];
-    if (tUtcMs >= last.tUtcMs) {                       // after: rate 1 forward
-      return last.videoSec + (tUtcMs - last.tUtcMs) / 1000;
-    }
-    for (let i = 1; i < p.length; i++) {               // between: interpolate
-      const a = p[i - 1], b = p[i];
-      if (tUtcMs <= b.tUtcMs) {
-        const span = b.tUtcMs - a.tUtcMs;
-        if (span <= 0) return a.videoSec;
-        return a.videoSec + (b.videoSec - a.videoSec) * ((tUtcMs - a.tUtcMs) / span);
-      }
-    }
-    return last.videoSec;
+    return g;
   }
 
   function videoToUtc(sec) {
-    const p = ordered();
-    if (!p.length) {
-      if (!cal || !cal.rate) return null;
-      return cal.refMs + ((sec - cal.offsetSec) / cal.rate) * 1000;
-    }
-    if (sec <= p[0].videoSec) {
-      return p[0].tUtcMs + (sec - p[0].videoSec) * 1000;
-    }
-    const last = p[p.length - 1];
-    if (sec >= last.videoSec) {
-      return last.tUtcMs + (sec - last.videoSec) * 1000;
-    }
-    for (let i = 1; i < p.length; i++) {
-      const a = p[i - 1], b = p[i];
-      if (sec <= b.videoSec) {
-        const span = b.videoSec - a.videoSec;
-        if (span <= 0) return a.tUtcMs;
-        return a.tUtcMs + (b.tUtcMs - a.tUtcMs) * ((sec - a.videoSec) / span);
-      }
-    }
-    return last.tUtcMs;
+    const loc = localAnchor(sec);
+    if (loc) return loc.anchor.tUtcMs + (sec - loc.anchor.videoSec) * 1000;
+    return globalVideoToUtc(sec);
   }
 
-  /** What the panel should say the current rate is: the local slope actually
-   *  in use, not a single global number that no longer exists once there are
-   *  readings. */
+  /** The rate the panel reports: the global one, since that is what governs
+   *  everywhere outside a bracketed interval. */
   function effectiveRate() {
-    const p = ordered();
-    if (p.length < 2) return p.length === 1 ? 1 : (cal ? cal.rate : DEFAULT_RATE);
-    const dv = p[p.length - 1].videoSec - p[0].videoSec;
-    const dt = (p[p.length - 1].tUtcMs - p[0].tUtcMs) / 1000;
-    return dt > 0 ? dv / dt : 1;
+    return cal ? cal.rate : DEFAULT_RATE;
   }
 
   const fmt = (sec) => {
@@ -765,7 +758,11 @@
 
     root.querySelector(".tn-diag").textContent =
       `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
-      `rate ${effectiveRate().toFixed(3)}× · ${bundle.__selection || ""}`;
+      `rate ${effectiveRate().toFixed(3)}× · ` +
+      (adBreaks.length
+         ? `${adBreaks.length} ad breaks · 1× inside the one you calibrated in · `
+         : "no ad breaks found — global rate only · ") +
+      `${bundle.__selection || ""}`;
   }
 
   /** Altitude at a race time (ms), from the nearest timed profile point -- so a
@@ -1083,14 +1080,26 @@ watch.">Add reading</button>
     // fit the rate" -- that belonged to the single-global-rate model and is
     // actively misleading now.)
     if (p.length === 1) {
-      parts.push("exact here, real time either side");
-      parts.push("▶ add another near anything else you want to be exact at");
+      parts.push(`offset set, rate assumed ${DEFAULT_RATE.toFixed(2)}×`);
+      parts.push("▶ add a reading from far away (near the finish is ideal) " +
+                 "to fit the rate exactly");
     } else {
-      const around = p.map((a) => a.km).sort((a, b) => b - a)
-                      .map((k) => `${k}`).join(", ");
-      parts.push(`${p.length} readings (at ${around} km to go)`);
-      parts.push(`${effectiveRate().toFixed(3)}× average across them`);
+      const xs = p.map((a) => a.tUtcMs / 1000);
+      const baselineMin = (Math.max(...xs) - Math.min(...xs)) / 60;
+      const res = pinResidualsSec().map(Math.abs);
+      const worst = res.length ? Math.max(...res) : 0;
+      parts.push(`${p.length} readings over ${baselineMin.toFixed(0)} min`);
+      if (baselineMin < 20) {
+        parts.push("⚠ readings too close to fix rate — spread them out, " +
+                   "one early one late");
+      } else {
+        parts.push(`rate ${effectiveRate().toFixed(3)}× · fits to ±${worst.toFixed(0)}s`);
+        if (worst > 90) {
+          parts.push("⚠ readings disagree — re-check one, or reset and redo");
+        }
+      }
     }
+    if (localAnchor(at)) parts.push("1× inside this ad break interval");
     el.textContent = parts.join(" · ");
     console.log("[TourNavigator] km-to-go sync:", el.textContent);
   }
@@ -1118,8 +1127,8 @@ watch.">Add reading</button>
       return;
     }
     if (p.length === 1) {
-      el.textContent = "1 reading · exact there, real-time either side — " +
-        "add another near anything else you care about";
+      el.textContent = `1 reading · rate ${DEFAULT_RATE.toFixed(2)}× assumed — ` +
+        "add one far away to fit it exactly";
       return;
     }
     const res = pinResidualsSec().map(Math.abs);
@@ -1165,6 +1174,12 @@ watch.">Add reading</button>
       anchors: pins().map((a) => ({ tUtcMs: a.tUtcMs, videoSec: a.videoSec,
                                     kind: a.kind, km: a.km, kmto: a.kmto,
                                     label: a.label })),
+      // The interval edges travel WITH the readings. A reading alone restores
+      // only the global rate; without the breaks that bracket it there is no
+      // interval for it to govern, and the local layer silently would not
+      // exist for the next viewer. They are a property of the recording, so
+      // everyone watching this same cut shares them.
+      ad_breaks: adBreaks.slice(),
       cal,
       saved_at: new Date().toISOString(),
       extension_version: version,
@@ -1225,6 +1240,11 @@ watch.">Add reading</button>
   function applyRecord(rec, from) {
     if (!rec || !Array.isArray(rec.anchors) || !rec.anchors.length) return false;
     anchors = rec.anchors.map((a) => ({ ...a }));
+    // Take the contributor's breaks unless this player has already shown us
+    // its own -- live markers beat remembered ones for the same recording.
+    if (!adBreaks.length && Array.isArray(rec.ad_breaks)) {
+      adBreaks = rec.ad_breaks.filter((n) => isFinite(n)).sort((a, b) => a - b);
+    }
     if (bundle?.__kind === "profile") {
       // Lite: the anchors ARE the calibration (liteMap derives from them);
       // there is no clock transform to refit. Even a single saved reading is
@@ -1239,7 +1259,9 @@ watch.">Add reading</button>
     if (el) {
       el.textContent = `calibration restored (${from}, ` +
         `${pins().length} reading${pins().length === 1 ? "" : "s"}` +
-        `${cal ? `, rate ${effectiveRate().toFixed(3)}×` : ""}) — reset if it looks off`;
+        `${cal ? `, rate ${effectiveRate().toFixed(3)}×` : ""}` +
+        `${adBreaks.length ? `, ${adBreaks.length} ad breaks` : ""}` +
+        `) — reset if it looks off`;
     }
     render();
     return true;
@@ -1472,6 +1494,10 @@ watch.">Add reading</button>
         triedRestore = true;
         restoreCalibration();
       }
+      // Markers only exist in the DOM while the player's own bar is up, and
+      // it comes and goes with the mouse -- so this keeps looking rather than
+      // checking once at load and concluding there are none.
+      refreshAdBreaks();
       render();          // unconditional: the profile draws with or without video
     }, 500);
     window.addEventListener("resize", render);
@@ -1521,6 +1547,92 @@ watch.">Add reading</button>
       if (top == null || r.top < top) top = r.top;          // the cluster's top
     }
     return top;
+  }
+
+  /** The seek bar element itself, not just its top edge -- ad markers are
+   *  drawn inside it, so the local model needs the box, not the y. */
+  function nativeSeekBarEl() {
+    const SEL = [
+      '[role="slider"]', 'input[type="range"]',
+      '[aria-label*="seek" i]', '[aria-label*="scrubber" i]',
+      '[aria-label*="progress bar" i]',
+      '[class*="scrubber" i]', '[class*="seekbar" i]', '[class*="seek-bar" i]',
+      '[class*="progress-bar" i]', '[class*="progressBar"]',
+      '[data-testid*="scrubber" i]', '[data-testid*="seek" i]',
+    ].join(",");
+    let best = null, bestTop = Infinity;
+    let els;
+    try { els = document.querySelectorAll(SEL); } catch (_) { return null; }
+    for (const el of els) {
+      const r = el.getBoundingClientRect();
+      if (r.width < window.innerWidth * 0.4) continue;
+      if (r.top < window.innerHeight * 0.55) continue;
+      if (!r.width || !r.height) continue;
+      if (r.top < bestTop) { best = el; bestTop = r.top; }
+    }
+    return best;
+  }
+
+  /* Ad markers as the player itself draws them.
+   *
+   * Peacock ticks its own scrub bar where the breaks are, which makes the bar
+   * the one place those boundaries are stated rather than guessed. Each tick
+   * is a small element positioned along the bar's width, so its centre as a
+   * fraction of the bar IS its position in the recording.
+   *
+   * Written defensively, because their markup is not an API and this cannot
+   * be verified without a real session: anything that fails a sanity check is
+   * dropped, and finding nothing simply leaves adBreaks empty, which the
+   * clock already treats as "global model only". A wrong marker would place a
+   * false interval boundary and drift silently, so the bar is set high --
+   * better no local layer than an invented one. */
+  function detectAdBreaks() {
+    const bar = nativeSeekBarEl();
+    const dur = video?.duration;
+    if (!bar || !dur || !isFinite(dur)) return [];
+    const rect = bar.getBoundingClientRect();
+    if (!rect.width) return [];
+
+    const MARK_SEL = [
+      '[class*="ad-marker" i]', '[class*="admarker" i]', '[class*="ad_marker" i]',
+      '[class*="cue" i]', '[class*="marker" i]', '[class*="chapter" i]',
+      '[data-testid*="ad" i]', '[data-testid*="marker" i]',
+      '[aria-label*="advertisement" i]', '[aria-label*="ad break" i]',
+    ].join(",");
+    let marks;
+    try { marks = bar.querySelectorAll(MARK_SEL); } catch (_) { return []; }
+
+    const out = [];
+    for (const m of marks) {
+      const r = m.getBoundingClientRect();
+      if (!r.width || !r.height) continue;
+      // A tick, not a track: anything spanning much of the bar is the
+      // progress fill or the bar itself, not a break marker.
+      if (r.width > rect.width * 0.1) continue;
+      const frac = ((r.left + r.width / 2) - rect.left) / rect.width;
+      if (!(frac > 0.001 && frac < 0.999)) continue;   // ends are not breaks
+      out.push(Math.round(frac * dur));
+    }
+
+    // Collapse duplicates (a marker often nests a child that also matches)
+    // and reject an implausible haul -- a stage carries roughly 8-12 breaks,
+    // so dozens of hits means the selector caught furniture, not markers.
+    const uniq = [...new Set(out)].sort((a, b) => a - b)
+      .filter((s, i, arr) => i === 0 || s - arr[i - 1] > 30);
+    if (uniq.length > 40) return [];
+    return uniq;
+  }
+
+  function refreshAdBreaks() {
+    const found = detectAdBreaks();
+    const changed = found.length !== adBreaks.length ||
+                    found.some((s, i) => s !== adBreaks[i]);
+    if (changed) {
+      adBreaks = found;
+      console.log("[TourNavigator] ad breaks detected:", adBreaks.length,
+                  adBreaks.map((s) => fmt(s)).join(", ") || "(none)");
+      render();
+    }
   }
 
   function installChrome() {

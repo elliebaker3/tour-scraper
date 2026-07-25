@@ -32,6 +32,7 @@ const good = () => ({
     { tUtcMs: 1784910000000, videoSec: 10200, kind: "kmtogo", km: 20, kmto: 20.5 },
   ],
   cal: { refMs: 1784900000000, offsetSec: 1200, rate: 0.92 },
+  ad_breaks: [1800, 3600, 5400, 7200],
   saved_at: "2026-07-24T23:00:00.000Z",
   extension_version: "0.2.0",
 });
@@ -70,6 +71,12 @@ rejects("anchor km out of range", (r) => { r.anchors[0].km = 5000; }, "km");
 rejects("anchor km not a number", (r) => { r.anchors[0].km = "100"; }, "km");
 rejects("NaN smuggled in", (r) => { r.anchors[0].videoSec = NaN; }, "videoSec");
 rejects("nonsense rate", (r) => { r.cal.rate = 99; }, "rate");
+rejects("ad break beyond the recording",
+        (r) => { r.ad_breaks = [999999]; }, "inside the recording");
+rejects("negative ad break", (r) => { r.ad_breaks = [-5]; }, "inside the recording");
+rejects("ad breaks not a list", (r) => { r.ad_breaks = "many"; }, "ad_breaks");
+rejects("absurdly many ad breaks",
+        (r) => { r.ad_breaks = Array(500).fill(100); }, "ad_breaks");
 check("null body rejected", validate(null) !== null);
 check("array body rejected", validate([1, 2, 3]) !== null);
 
@@ -87,6 +94,9 @@ check("known anchor fields kept",
 check("date truncated to a plain day", c.date === "2026-07-24");
 check("duration rounded to 0.1s", c.duration_sec === 19225.9);
 check("marked as worker-ingested", c.via === "worker");
+check("ad breaks kept, deduped and sorted",
+      JSON.stringify(c.ad_breaks) === JSON.stringify([1800, 3600, 5400, 7200]),
+      JSON.stringify(c.ad_breaks));
 check("submitter is not the raw IP", !String(c.submitter).includes("203.0.113.9"));
 check("ingested_at stamped", typeof c.ingested_at === "string" && c.ingested_at.length > 10);
 
