@@ -44,6 +44,7 @@ from xml.etree import ElementTree as ET
 import requests
 
 from .gpx_profile import downsample as gpx_downsample
+from .gpx_profile import km_at_coords as gpx_km_at_coords
 from .gpx_profile import load_stage as gpx_load
 
 KMZ_URL = "https://short.thover.com/?ID=1263"  # velowire's own short-link for the season's KMZ
@@ -136,6 +137,11 @@ def parse_stage(folder: ET.Element, official_length_km: float | None) -> dict:
             marker = _parse_marker_name(name)
             if marker:
                 lo, la, _alt = (float(v) for v in pt.find("k:coordinates", KML_NS).text.strip().split(","))
+                # Keep the coordinates, not just the derived km. They are the
+                # only scale-independent handle on where a marker actually is,
+                # which is what lets it be re-placed onto a different trace of
+                # the same route (see gpx_profile.km_at_coords).
+                marker["lon"], marker["lat"] = round(lo, 6), round(la, 6)
                 markers_raw.append((lo, la, marker))
 
     if not coords:
@@ -348,12 +354,39 @@ def publish_lite_bundles(velowire_dir: Path, extension_data_dir: Path,
         # which the GPX has none of, and the fallback shape for the handful of
         # stages whose GPX never downloaded (3, 4 and 5 came back as 404s).
         profile, elev_src = data["profile"], "velowire"
+        markers = data["markers"]
         if gpx_dir:
-            g = gpx_load(gpx_dir, n, data.get("length_km"))
+            g = gpx_load(gpx_dir, n, data.get("length_km"), with_points=True)
             if g and g["profile"]:
                 profile, elev_src = gpx_downsample(g["profile"]), "gpx"
                 if g.get("note"):
                     print(f"[velowire] stage {n}: {g['note']}")
+                # The markers were measured on velowire's trace, so their km
+                # means nothing on this one -- the two disagree by kilometres
+                # and not by a constant. Re-place each by its coordinates,
+                # which both traces agree on. A marker that cannot be placed
+                # is dropped rather than left at a distance that refers to a
+                # profile no longer being drawn.
+                moved, placed = [], 0
+                for m in markers:
+                    if m.get("lon") is None or m.get("lat") is None:
+                        continue
+                    km = gpx_km_at_coords(g["points"], g["profile"], m["lon"], m["lat"])
+                    if km is None:
+                        continue
+                    shift = km - m["km"]
+                    m = {**m, "km": round(km, 2)}
+                    moved.append(m)
+                    placed += 1
+                    if abs(shift) > 1.0:
+                        print(f"[velowire] stage {n}: {m['label']} moved "
+                              f"{shift:+.1f} km onto the gpx trace")
+                if placed == len(markers):
+                    markers = sorted(moved, key=lambda m: m["km"])
+                else:
+                    print(f"[velowire] stage {n}: only {placed}/{len(markers)} markers "
+                          f"could be placed on the gpx trace — keeping velowire elevation")
+                    profile, elev_src = data["profile"], "velowire"
 
         bundle = {
             "schema": "profile-1",
@@ -361,7 +394,7 @@ def publish_lite_bundles(velowire_dir: Path, extension_data_dir: Path,
                      "arrival": arr, "length_km": data.get("length_km")},
             "elevation_source": elev_src,
             "profile": profile,
-            "markers": data["markers"],
+            "markers": markers,
         }
         fname = f"profile-stage-{n:02d}.json"
         (extension_data_dir / fname).write_text(

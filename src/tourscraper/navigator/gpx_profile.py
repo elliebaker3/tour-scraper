@@ -126,6 +126,36 @@ def altitude_at_km(profile: list[dict], km: float):
     return a["alt"] + (b["alt"] - a["alt"]) * ((km - a["km"]) / span)
 
 
+def km_at_coords(pts, profile: list[dict], lon: float, lat: float):
+    """Distance along the GPX track of the point nearest a coordinate.
+
+    Two traces of one route disagree on distance -- velowire's starts at the
+    départ fictif, so its km runs several kilometres ahead of the GPX's -- and
+    the disagreement is not a constant offset, so no single shift reconciles
+    them. Geography does: the same col is at the same latitude and longitude
+    on both, whatever either calls its distance.
+
+    This is what stops a marker drawn from one source landing in the wrong
+    place on a profile drawn from the other -- stage 20 had an HC summit
+    marked 5.2 km and 400 m off its own peak.
+
+    `profile` must be the full-resolution output of profile_from_track for
+    `pts`, so index i lines up in both.
+    """
+    if not pts or not profile:
+        return None
+    best_i, best_d = 0, float("inf")
+    for i, (plo, pla, _e) in enumerate(pts):
+        # Squared degrees is monotonic with real distance over the few hundred
+        # metres that matter here, and avoids a haversine per track point.
+        d = (plo - lon) ** 2 + (pla - lat) ** 2
+        if d < best_d:
+            best_d, best_i = d, i
+    if best_i >= len(profile):
+        return None
+    return profile[best_i]["km"]
+
+
 def downsample(points: list[dict], target: int = 400) -> list[dict]:
     """Thin for drawing, keeping each bucket's high and low so summits and
     valley floors survive -- same rule as the other profile builders."""
@@ -145,7 +175,8 @@ def downsample(points: list[dict], target: int = 400) -> list[dict]:
     return out
 
 
-def load_stage(gpx_dir: Path, stage_number: int, official_length_km=None):
+def load_stage(gpx_dir: Path, stage_number: int, official_length_km=None,
+               with_points: bool = False):
     """Full-resolution profile for one stage, or None when no GPX exists.
 
     Some stages simply have no usable file -- 3, 4 and 5 downloaded as 404
@@ -161,7 +192,10 @@ def load_stage(gpx_dir: Path, stage_number: int, official_length_km=None):
         return None
     if not pts:
         return None
-    return profile_from_track(pts, official_length_km)
+    out = profile_from_track(pts, official_length_km)
+    if with_points:
+        out["points"] = pts          # needed to re-place markers by coordinate
+    return out
 
 
 def stage_lengths(year_dir: Path) -> dict[int, float]:
