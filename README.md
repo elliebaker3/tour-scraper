@@ -5,7 +5,7 @@ Data collection layer for the **Tour Tools** project — specifically feeding th
 non-video data sources. This repo scrapes those sources as they happen live and
 deposits them, organized per stage, into `data/`.
 
-## The four data sources and where they land
+## The five data sources and where they land
 
 | # | Source | How it's captured | Lands in |
 |---|--------|-------------------|----------|
@@ -13,6 +13,7 @@ deposits them, organized per stage, into `data/`.
 | 2 | Per-second speed + distance-to-finish for every rider | SSE `telemetryCompetitor-{year}` / `pack-{year}` (per-rider GPS/speed, groups/gaps/remaining distance), cross-checked against the confirmed `checkpointList-{year}-{stage}` poll endpoint, which keys checkpoint passes the same way (`cpnumero`) as the elevation profile CSV — this is the join that lets the Navigator place the leader on the profile | `telemetry.jsonl`, `groups.jsonl`, `polls/checkpointList.jsonl` |
 | 3 | Live radio feed | `ffmpeg`, one persistent connection for the whole session, segmented into hourly files on the *output* side (`-f segment`) so nothing is dropped at hour boundaries. URL still needs discovery — see `autodiscover` below | `radio/*.mp3` |
 | 4 | Elevation profile of each stage | The old static-HTML/JS-bundle regex scan (`fetch_profiles`) no longer finds it — 2026 loads it dynamically with an unpredictable content hash in the filename. `autodiscover` (headless browser) finds and downloads it automatically instead | `profile.csv` |
+| 5 | Reference elevation profile, **every** stage | velowire.com's season KMZ — their Google Earth export, one traced route per stage with per-vertex altitude plus climb/sprint/finish waypoints. `python -m tourscraper velowire-profiles` downloads it once, converts each stage to distance/elevation JSON (rescaled to the official stage length; the raw trace runs a few % long), and publishes "profile-only" bundles to the extension for every stage without a live capture. This is the coverage floor: source 4 only exists for stages the scraper ran during, this one exists for all 21. Uses only the KMZ, which velowire distributes for exactly this kind of import — never their profile images | `profiles/velowire/stage-NN.json`, `extension/data/profile-stage-NN.json` |
 
 Everything on the SSE stream is *also* written verbatim to
 `live-stream.raw.jsonl` before any parsing. If A.S.O. changed a field name for

@@ -106,10 +106,20 @@ python -m tourscraper navigator --stage 16 \
   --stage-dir data/2026/stage-16_2026-07-21 \
   --telemetry data/2026/stage-16_2026-07-21/polls/telemetry.jsonl
 cp data/2026/stage-16_2026-07-21/navigator.json extension/data/stage-16.json
-# then append it to extension/data/index.json
+# then append it to extension/data/index.json (with "kind": "full")
 ```
 
 Then hit reload on the extension card.
+
+Every stage WITHOUT a full bundle appears in the picker anyway, marked
+"— profile only": a distance/elevation reference card built from
+velowire.com's KMZ (see the repo README, source 5), with climb/sprint/finish
+markers but no clock, no calibration and no seeking — there is no telemetry
+to place the leader anywhere in the recording. Those lite bundles are
+`data/profile-stage-NN.json` (`"kind": "profile"` in the index), regenerated
+with `python -m tourscraper velowire-profiles`, which leaves every full
+bundle's index entry alone. When a stage later gets a real capture, add its
+full bundle as above and the picker upgrades it.
 
 ## Honest limits
 

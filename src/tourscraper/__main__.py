@@ -21,6 +21,8 @@ from pathlib import Path
 
 from .archive_stage import archive_stage
 from .navigator.build_bundle import build as build_navigator
+from .navigator.velowire_profile import build as build_velowire_profiles
+from .navigator.velowire_profile import publish_lite_bundles
 from .autodiscover import run_autodiscover
 from .backfill import reparse_backfill, run_backfill
 from .events_parse import write_events
@@ -107,6 +109,8 @@ def main() -> None:
     p.add_argument("--stage", type=int, required=True)
     p.add_argument("--date", default=None, help="YYYY-MM-DD of the stage folder")
 
+    sub.add_parser("velowire-profiles")
+
     args = parser.parse_args()
     cfg = load_config(args.config)
 
@@ -135,6 +139,10 @@ def main() -> None:
                         Path(args.out) if args.out else None)
     elif args.command == "archive":
         archive_stage(cfg, args.stage, args.date)
+    elif args.command == "velowire-profiles":
+        build_velowire_profiles(cfg.year_dir)
+        publish_lite_bundles(cfg.year_dir / "profiles" / "velowire",
+                             cfg.year_dir.parent.parent / "extension" / "data")
     else:
         store_needed = args.command in ("live", "poll", "radio")
         stop_after = int(args.max_hours * 3600)

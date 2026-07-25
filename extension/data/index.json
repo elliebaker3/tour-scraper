@@ -2,44 +2,161 @@
   "schema": 1,
   "stages": [
     {
+      "file": "profile-stage-01.json",
+      "stage": 1,
+      "date": "2026-07-04",
+      "route": "Barcelone → Barcelone",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-02.json",
+      "stage": 2,
+      "date": "2026-07-05",
+      "route": "Tarragone → Barcelone",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-03.json",
+      "stage": 3,
+      "date": "2026-07-06",
+      "route": "Granollers → Les Angles",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-04.json",
+      "stage": 4,
+      "date": "2026-07-07",
+      "route": "Carcassonne → Foix",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-05.json",
+      "stage": 5,
+      "date": "2026-07-08",
+      "route": "Lannemezan → Pau",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-06.json",
+      "stage": 6,
+      "date": "2026-07-09",
+      "route": "Pau → Gavarnie-Gèdre",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-07.json",
+      "stage": 7,
+      "date": "2026-07-10",
+      "route": "Hagetmau → Bordeaux",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-08.json",
+      "stage": 8,
+      "date": "2026-07-11",
+      "route": "Périgueux → Bergerac",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-09.json",
+      "stage": 9,
+      "date": "2026-07-12",
+      "route": "Malemort → Ussel",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-10.json",
+      "stage": 10,
+      "date": "2026-07-14",
+      "route": "Aurillac → Le Lioran",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-11.json",
+      "stage": 11,
+      "date": "2026-07-15",
+      "route": "Vichy → Nevers",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-12.json",
+      "stage": 12,
+      "date": "2026-07-16",
+      "route": "Circuit Nevers Magny-Cours → Chalon-sur-Saône",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-13.json",
+      "stage": 13,
+      "date": "2026-07-17",
+      "route": "Dole → Belfort",
+      "kind": "profile"
+    },
+    {
       "file": "stage-14.json",
       "stage": 14,
       "date": "2026-07-18",
-      "route": "Mulhouse \u2192 Le Markstein Fellering",
+      "route": "Mulhouse → Le Markstein Fellering",
       "leader_first_utc": "2026-07-18T11:35:38+00:00",
-      "leader_last_utc": "2026-07-18T15:37:55+00:00"
+      "leader_last_utc": "2026-07-18T15:37:55+00:00",
+      "kind": "full"
     },
     {
       "file": "stage-15.json",
       "stage": 15,
       "date": "2026-07-19",
-      "route": "Champagnole \u2192 Plateau de Solaison",
+      "route": "Champagnole → Plateau de Solaison",
       "leader_first_utc": "2026-07-19T11:19:24+00:00",
-      "leader_last_utc": "2026-07-19T15:51:39+00:00"
+      "leader_last_utc": "2026-07-19T15:51:39+00:00",
+      "kind": "full"
     },
     {
       "file": "stage-16.json",
       "stage": 16,
       "date": "2026-07-21",
-      "route": "\u00c9vian-les-Bains \u2192 Thonon-les-Bains",
+      "route": "Évian-les-Bains → Thonon-les-Bains",
       "leader_first_utc": "2026-07-21T11:00:47+00:00",
-      "leader_last_utc": "2026-07-21T15:26:55+00:00"
+      "leader_last_utc": "2026-07-21T15:26:55+00:00",
+      "kind": "full"
     },
     {
       "file": "stage-17.json",
       "stage": 17,
       "date": "2026-07-22",
-      "route": "Chambery \u2192 Voiron",
+      "route": "Chambery → Voiron",
       "leader_first_utc": "2026-07-22T11:37:33+00:00",
-      "leader_last_utc": "2026-07-22T14:07:33+00:00"
+      "leader_last_utc": "2026-07-22T14:07:33+00:00",
+      "kind": "full"
+    },
+    {
+      "file": "profile-stage-18.json",
+      "stage": 18,
+      "date": "2026-07-23",
+      "route": "Voiron → Orcières-Merlette",
+      "kind": "profile"
     },
     {
       "file": "stage-19.json",
       "stage": 19,
       "date": "2026-07-24",
-      "route": "Gap \u2192 Alpe d'Huez",
+      "route": "Gap → Alpe d'Huez",
       "leader_first_utc": "2026-07-24T12:15:34+00:00",
-      "leader_last_utc": "2026-07-24T14:06:49+00:00"
+      "leader_last_utc": "2026-07-24T14:06:49+00:00",
+      "kind": "full"
+    },
+    {
+      "file": "profile-stage-20.json",
+      "stage": 20,
+      "date": "2026-07-25",
+      "route": "Le Bourg d'Oisans → Alpe d'Huez",
+      "kind": "profile"
+    },
+    {
+      "file": "profile-stage-21.json",
+      "stage": 21,
+      "date": "2026-07-26",
+      "route": "Thoiry → Paris Champs-Élysées",
+      "kind": "profile"
     }
   ]
 }

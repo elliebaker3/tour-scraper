@@ -257,6 +257,15 @@
 .tn-rm-atleft:hover  .tn-rm-badge,
 .tn-rm-atright:hover .tn-rm-badge { transform: scale(1.25); }
 
+/* Lite stages (kind: "profile" in index.json): a velowire distance/elevation
+   reference card, no live capture behind it. Everything that implies a clock
+   -- the calibration setup, the filters, the refine inputs -- hides, because
+   none of it can mean anything without telemetry. The bar, the stage line and
+   the diag (which says exactly what this is) stay. */
+.tn-root.tn-lite .tn-setup,
+.tn-root.tn-lite .tn-controls { display: none; }
+.tn-root.tn-lite .tn-bar { cursor: default; }
+
 /* Contenders (persons of interest × event): a STAR on the elevation curve,
    formatted like the climb markers -- a dot on the line (from .tn-rm) with a
    badge above, here the star glyph in the contenders' gold. No tooltip: the

@@ -330,8 +330,72 @@
   }
 
 
+  /** Lite stages: a velowire distance/elevation profile and route markers,
+   *  nothing else. The x-axis is DISTANCE, not recording time -- there is no
+   *  telemetry to know when the leader was anywhere, so none of the clock
+   *  machinery applies: no calibration prompt, no seeking, no playhead. The
+   *  bar is a reference card of the stage, not a navigator, and the CSS
+   *  (.tn-lite) hides everything that would imply otherwise. */
+  function renderLite() {
+    const bar = root.querySelector(".tn-bar");
+    const width = bar.clientWidth || 900;
+    const height = bar.clientHeight || 54;
+    const prof = bundle.profile;
+    const len = bundle.stage?.length_km || Math.max(...prof.map((p) => p.km)) || 1;
+
+    const alts = prof.map((p) => p.alt);
+    const loA = Math.min(...alts), hiA = Math.max(...alts);
+    const rangeA = Math.max(1, hiA - loA);
+    const y = (alt) => height - ((alt - loA) / rangeA) * (height - PROFILE_TOP_PAD - PROFILE_BOT_PAD) - PROFILE_BOT_PAD;
+    const x = (km) => (km / len) * width;
+
+    let d = `M 0 ${height} L `;
+    d += prof.map((p) => `${x(p.km).toFixed(1)} ${y(p.alt).toFixed(1)}`).join(" L ");
+    d += ` L ${width} ${height} Z`;
+
+    const routeMarks = [];
+    for (const m of bundle.markers || []) {
+      const mx = x(m.km);
+      const altAt = prof.reduce((best, p) =>
+        Math.abs(p.km - m.km) < Math.abs(best.km - m.km) ? p : best, prof[0]);
+      const my = y(altAt.alt);
+      const isKom = m.kind === "kom" || (m.kind === "finish" && m.cat);
+      const catLabel = m.cat === "HC" ? "HC" : m.cat ? `Cat ${m.cat}` : null;
+      const color = isKom ? (KOM_COLOR[catLabel] || "#ef4444")
+                  : m.kind === "sprint" ? CATEGORIES.sprint.color : "#cbd5e1";
+      const badge = m.kind === "finish" ? "🏁" : isKom ? (m.cat || "") : "S";
+      const tip = `${m.label} · km ${m.km}`;
+      const place =
+        (my < 20 ? " tn-rm-below" : "") +
+        (mx < 16 ? " tn-rm-atleft" : mx > width - 16 ? " tn-rm-atright" : "");
+      routeMarks.push(
+        `<div class="tn-rm tn-rm-${m.kind}${m.kind === "finish" ? " tn-rm-finish" : ""}${place}"
+              style="left:${mx.toFixed(1)}px;top:${my.toFixed(1)}px;--rm:${color}"
+              title="${escapeHtml(tip)}">
+           <span class="tn-rm-badge">${escapeHtml(badge)}</span>
+         </div>`);
+    }
+
+    bar.innerHTML = `
+      <svg class="tn-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"
+           preserveAspectRatio="none">
+        <path d="${d}" class="tn-profile"/>
+      </svg>
+      <div class="tn-routemarks">${routeMarks.join("")}</div>
+      <span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
+      <span class="tn-alt tn-alt-lo">${Math.round(loA)}m</span>
+    `;
+    bar.appendChild(hoverEl);
+
+    root.querySelector(".tn-clock").textContent = `${len} km`;
+    root.querySelector(".tn-diag").textContent =
+      `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
+      `profile only (no live capture) · elevation: velowire.com · ${bundle.__selection || ""}`;
+  }
+
   function render() {
     if (!root || !bundle) return;
+    if (bundle.__kind === "profile") { renderLite(); return; }
     const dur = video?.duration || 0;
 
     // Until it is calibrated there is nothing honest to draw: the profile only
@@ -609,13 +673,23 @@ the stage. The median of all readings is used.">
     });
 
     bar.addEventListener("mousemove", (ev) => {
-      if (!cal) return;
       const rect = bar.getBoundingClientRect();
       const frac = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
-      const s = sampleAt(frac);
-      if (!s) { hoverEl.style.display = "none"; return; }
-      const bits = [fmtToGo(s.kmto), `${Math.round(s.alt)}m`];
-      if (s.est) bits.push("est");
+      let bits = null;
+      if (bundle.__kind === "profile") {
+        // Lite: x is distance, so the readout is direct -- no clock involved.
+        const len = bundle.stage?.length_km || 1;
+        const km = frac * len;
+        const near = bundle.profile.reduce((best, p) =>
+          Math.abs(p.km - km) < Math.abs(best.km - km) ? p : best, bundle.profile[0]);
+        bits = [`km ${km.toFixed(1)}`, `${fmtToGo(len - km)}`, `${Math.round(near.alt)}m`];
+      } else {
+        if (!cal) return;
+        const s = sampleAt(frac);
+        if (!s) { hoverEl.style.display = "none"; return; }
+        bits = [fmtToGo(s.kmto), `${Math.round(s.alt)}m`];
+        if (s.est) bits.push("est");
+      }
       hoverEl.textContent = bits.join(" · ");
       hoverEl.style.display = "block";
       const x = frac * rect.width;
@@ -657,7 +731,8 @@ the stage. The median of all readings is used.">
     for (const s of bundle_index.stages) {
       const o = document.createElement("option");
       o.value = String(s.stage);
-      o.textContent = `Stage ${s.stage} (${s.date})`;
+      o.textContent = `Stage ${s.stage} (${s.date})` +
+        (s.kind === "profile" ? " — profile only" : "");
       if (bundle.stage && s.stage === bundle.stage.stage) o.selected = true;
       sel.appendChild(o);
     }
@@ -879,6 +954,7 @@ the stage. The median of all readings is used.">
     const bundleRes = await fetch(chrome.runtime.getURL("data/" + chosen.file));
     const b = await bundleRes.json();
     b.__selection = why;
+    b.__kind = chosen.kind || "full";
     return b;
   }
 
@@ -895,6 +971,9 @@ the stage. The median of all readings is used.">
       return;
     }
     buildUi();
+    // Lite stages (no live capture -- see renderLite) have no calibration to
+    // do and nothing to filter, so the setup prompt and controls just hide.
+    if (bundle.__kind === "profile") root.classList.add("tn-lite");
     const s = bundle.stage || {};
     root.querySelector(".tn-stage").textContent =
       `Stage ${s.stage ?? "?"} · ${s.departure ?? ""} → ${s.arrival ?? ""} · ${s.length_km ?? "?"}km`;
