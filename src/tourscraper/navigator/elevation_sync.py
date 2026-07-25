@@ -42,6 +42,17 @@ LEADER_GAP_TOLERANCE_KM = 1.5
 # here is rejecting the impossible, not second-guessing a fast descent.
 MAX_SPEED_KMH = 95.0
 
+# Floor on the elapsed time used for that speed check. Two samples can share a
+# timestamp legitimately -- one snapshot yields several riders, and the feed's
+# resolution is whole seconds -- and those differ by metres. Dividing by a
+# literal zero-second gap, though, makes any jump look instantaneous rather
+# than impossible, so a bad fix sails through the very check meant to stop it.
+# Treating a zero gap as one second bounds a same-timestamp move to ~26 m:
+# far above real jitter, far below a teleport. (Stage 19, 2026-07-24: a final
+# fix jumped 47.7 km to the finish line in 0 s, which collapsed the last 47 km
+# of the profile onto one instant and erased Alpe d'Huez from the bar.)
+MIN_SPEED_CHECK_SECONDS = 1.0
+
 
 def _parse_ts(text: str) -> datetime:
     return datetime.fromisoformat(text)
@@ -195,8 +206,11 @@ def leader_track(telemetry_paths) -> list[tuple[datetime, float]]:
         if km_to > best:
             continue
         if last_ts is not None:
-            dt_h = (ts - last_ts).total_seconds() / 3600
-            if dt_h > 0 and (best - km_to) / dt_h > MAX_SPEED_KMH:
+            # Never divide by a literal zero gap -- see MIN_SPEED_CHECK_SECONDS.
+            # A same-timestamp pair is held to one second's worth of movement,
+            # so ordinary jitter passes and a teleport does not.
+            secs = max((ts - last_ts).total_seconds(), MIN_SPEED_CHECK_SECONDS)
+            if (best - km_to) / (secs / 3600) > MAX_SPEED_KMH:
                 continue
         best, last_ts = km_to, ts
         cleaned.append((ts, km_to))
@@ -227,9 +241,39 @@ def extend_track_to_start(track: list[tuple[datetime, float]],
     return [(race_start, route_length_km)] + track, first_km_to
 
 
+def extend_track_to_finish(track: list[tuple[datetime, float]],
+                           finish: datetime | None):
+    """Span the tail the same way `extend_track_to_start` spans the head.
+
+    Capture can stop before the line -- stage 19's runner died with 40 km left,
+    taking the whole Alpe d'Huez climb with it. Those route points then carry
+    no time at all, so the bar simply ends mid-stage and the decisive climb is
+    missing from the very tool built to navigate to it.
+
+    The finish time is known independently of GPS: the ticker stamps it
+    (`liv_finish`). Anchoring to it lets the remaining points be spanned
+    instead of dropped -- and they are flagged estimated, so the renderer draws
+    them dashed rather than passing inference off as measurement.
+
+    The estimate is a straight line between the last fix and the line, which
+    on a summit finish understates how much the leader slowed. That is why it
+    is marked, not hidden: a dashed stretch says "roughly here", and the
+    viewer's own km-to-go calibration is what makes positions exact.
+    """
+    if not track or finish is None:
+        return track, None
+    last_ts, last_km_to = track[-1]
+    if last_km_to <= 0.05:
+        return track, None                    # already covered to the line
+    if finish <= last_ts:
+        return track, None                    # finish is not after the last fix
+    return track + [(finish, 0.0)], last_km_to
+
+
 def sync_profile_to_time(profile: list[dict], track: list[tuple[datetime, float]],
                          max_gap_km: float = 2.0,
-                         estimated_above_km_to: float | None = None) -> list[dict]:
+                         estimated_above_km_to: float | None = None,
+                         estimated_below_km_to: float | None = None) -> list[dict]:
     """Attach the leader's arrival time to each profile point.
 
     `track` descends in km-to-finish, so it is reversed into ascending order
@@ -263,8 +307,10 @@ def sync_profile_to_time(profile: list[dict], track: list[tuple[datetime, float]
                 frac = (km_to - km0) / span
                 ts = t0 + (t1 - t0) * frac
                 interpolated = span > max_gap_km
-        estimated = (estimated_above_km_to is not None
-                     and km_to > estimated_above_km_to)
+        estimated = ((estimated_above_km_to is not None
+                      and km_to > estimated_above_km_to)
+                     or (estimated_below_km_to is not None
+                         and km_to < estimated_below_km_to))
         out.append(dict(point,
                         time_utc=ts.isoformat(timespec="seconds"),
                         interpolated=interpolated,
@@ -273,18 +319,23 @@ def sync_profile_to_time(profile: list[dict], track: list[tuple[datetime, float]
 
 
 def build(stage_dir: Path, telemetry_paths, stage_length_km: float | None = None,
-          race_start_utc: datetime | None = None) -> dict:
+          race_start_utc: datetime | None = None,
+          race_finish_utc: datetime | None = None) -> dict:
     """`stage_length_km` is accepted for reporting only; it is not used in the
     time mapping, which works purely in km-to-finish.
 
-    `race_start_utc` lets the profile span the whole stage even when GPS came
-    online late; the unobserved head is marked estimated rather than dropped.
+    `race_start_utc` and `race_finish_utc` let the profile span the whole stage
+    even when GPS came online late or stopped early; the unobserved head and
+    tail are marked estimated rather than dropped.
     """
     profile = load_profile(stage_dir / "profile.csv")
     track = leader_track(telemetry_paths)
     route_len = max((p["km"] for p in profile), default=0)
     track, est_above = extend_track_to_start(track, route_len, race_start_utc)
-    synced = sync_profile_to_time(profile, track, estimated_above_km_to=est_above)
+    track, est_below = extend_track_to_finish(track, race_finish_utc)
+    synced = sync_profile_to_time(profile, track,
+                                  estimated_above_km_to=est_above,
+                                  estimated_below_km_to=est_below)
     observed = [p for p in synced
                 if p["time_utc"] and not p["interpolated"] and not p.get("estimated")]
     return {

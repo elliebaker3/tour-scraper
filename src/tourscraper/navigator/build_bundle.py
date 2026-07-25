@@ -96,6 +96,26 @@ def actual_start_utc(stage_dir: Path):
     return None
 
 
+def actual_finish_utc(stage_dir: Path):
+    """Time the stage was won, from the ticker's own finish marker.
+
+    Independent of GPS, which matters when capture stops before the line: it
+    is the anchor that lets the remaining route be spanned instead of dropped
+    (see elevation_sync.extend_track_to_finish).
+
+    This is a *publication* time, so it trails the actual crossing by however
+    long the editor took -- fine for anchoring an explicitly estimated
+    stretch, which is the only thing it is used for.
+    """
+    for item in load_ticker(stage_dir):
+        if item.get("picto") == "liv_finish" and item.get("t"):
+            try:
+                return datetime.fromisoformat(item["t"]).astimezone(timezone.utc)
+            except ValueError:
+                return None
+    return None
+
+
 def scheduled_start_utc(meta: dict):
     """Fallback: the published start time, if the ticker never marked one."""
     date, start, tz = meta.get("date"), meta.get("start_local"), meta.get("timezone")
@@ -183,7 +203,9 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     # differ from the schedule by minutes -- stage 14 rolled 5m38s late -- so
     # prefer it over stages.json for extending the profile to the start line.
     race_start = actual_start_utc(stage_dir) or scheduled_start_utc(meta)
-    sync = build_sync(stage_dir, telemetry_paths, length_km, race_start_utc=race_start)
+    race_finish = actual_finish_utc(stage_dir)
+    sync = build_sync(stage_dir, telemetry_paths, length_km,
+                      race_start_utc=race_start, race_finish_utc=race_finish)
     events = build_guideposts(stage_dir, sync["points"])
     profile = [_slim(p) for p in downsample_profile(sync["points"])]
     markers = route_markers(sync["points"])
@@ -205,6 +227,7 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
             "profile_points_estimated": sync.get("estimated_points"),
             "profile_points_timed": sync.get("timed_points"),
             "race_start_utc": race_start.isoformat(timespec="seconds") if race_start else None,
+            "race_finish_utc": race_finish.isoformat(timespec="seconds") if race_finish else None,
             "leader_first_seen_utc": sync["leader_first_seen"],
             "leader_last_seen_utc": sync["leader_last_seen"],
             "ticker_items": events["ticker_items"],

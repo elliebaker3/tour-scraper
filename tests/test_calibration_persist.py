@@ -81,6 +81,15 @@ try:
         errs = []
         page.on("pageerror", lambda e: errs.append(str(e)))
 
+        # The shared store is fetched from GitHub and auto-applied on a match,
+        # so leaving it live would let whatever is published for this stage
+        # decide whether a recording looks calibrated -- and it did exactly
+        # that: harness submissions reached the real store and then restored
+        # themselves back into this suite, surviving even a reset. Blocked
+        # here so every assertion below is about the local tier only; the
+        # shared tier is exercised with a stub in section 5.
+        page.route("https://raw.githubusercontent.com/**", lambda r: r.abort())
+
         def state():
             return page.evaluate("""() => {
               const vis = (sel) => {
@@ -223,21 +232,52 @@ try:
         t = page.evaluate("() => document.querySelector('video').currentTime")
         check("clicking a lite bar seeks the recording", t > 0, f"currentTime={t:.0f}s")
 
-        # --- 5. adding a reading also offers the contribution --------------
+        # --- 5. adding a reading also contributes --------------------------
+        # Two routes, and which one runs depends on the collector being
+        # reachable -- so both are driven here rather than whichever the
+        # shipped COLLECTOR_URL happens to select. The collector is never
+        # really contacted: it is intercepted, so the suite neither depends on
+        # the Worker being up nor writes anything to the live store.
         print("\n--- sharing rides on Add reading (no separate button) ---")
         check("there is no separate share button",
               not page.evaluate("() => !!document.querySelector('.tn-share')"))
+
+        posted = []
+        page.route("**/tour-calibrations*.workers.dev/**", lambda route: (
+            posted.append(route.request.post_data),
+            route.fulfill(status=200, content_type="application/json",
+                          body='{"ok":true}')))
         load()
         calibrate(150, rec_for_kmto(150.5))
         calibrate(20, rec_for_kmto(20.5), ".tn-togo-km2", ".tn-togo-set2")
+        check("a reading POSTs to the collector", len(posted) >= 1,
+              f"{len(posted)} submission(s)")
+        if posted:
+            rec = json.loads(posted[-1])
+            check("the payload is the calibration record",
+                  rec.get("stage") == 14 and len(rec.get("anchors", [])) == 2
+                  and rec.get("duration_sec", 0) > 0,
+                  f"stage={rec.get('stage')} anchors={len(rec.get('anchors', []))}")
+        check("no tab is opened when the collector accepts",
+              not page.evaluate("() => window.__opens || []"))
+        check("the panel says it shared",
+              "shared" in state()["anchorState"], state()["anchorState"][-40:])
+
+        # Collector unreachable -> the issue form has to take over, or an
+        # offline viewer's calibration would be silently dropped.
+        page.unroute("**/tour-calibrations*.workers.dev/**")
+        page.route("**/tour-calibrations*.workers.dev/**", lambda route: route.abort())
+        load(dur=11000)
+        calibrate(150, 1500)
         opens = page.evaluate("() => window.__opens || []")
-        check("a reading offers the contribution", len(opens) >= 1)
-        check("every share reuses ONE named tab, never stacking",
-              {t for _, t in opens} == {"tn-share"}, str({t for _, t in opens}))
-        url = opens[-1][0] if opens else ""
-        check("it points at the repo's issue form",
-              "/tour-scraper/issues/new" in url)
-        check("payload carries the record", "%60%60%60json" in url or "```json" in url)
+        check("a dead collector falls back to the issue form", len(opens) >= 1)
+        if opens:
+            check("fallback reuses ONE named tab, never stacking",
+                  {t for _, t in opens} == {"tn-share"}, str({t for _, t in opens}))
+            check("it points at the repo's issue form",
+                  "/tour-scraper/issues/new" in opens[-1][0])
+            check("payload carries the record",
+                  "%60%60%60json" in opens[-1][0] or "```json" in opens[-1][0])
         page.click(".tn-togo-set2")   # empty input: nothing new to share
         page.wait_for_timeout(400)
         check("a no-op click does not re-offer it",

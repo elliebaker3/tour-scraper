@@ -76,6 +76,20 @@ try:
         errs = []
         page.on("pageerror", lambda e: errs.append(str(e)))
 
+        # Cut the panel off from both live network dependencies. The shared
+        # calibration store is fetched from GitHub at load and auto-applied on
+        # a match, so whatever anyone has contributed for this stage would
+        # decide whether the setup prompt appears -- making the outcome depend
+        # on the state of a public file rather than on the code. The collector
+        # is blocked for the same reason in reverse: a calibration entered here
+        # must never be published from a test run. (Both of these bit for real:
+        # harness records reached the live store and then restored themselves
+        # back into this suite.) Calibration persistence has its own suite,
+        # tests/test_calibration_persist.py, which drives those paths
+        # deliberately with stubs.
+        page.route("https://raw.githubusercontent.com/**", lambda r: r.abort())
+        page.route("**/tour-calibrations*.workers.dev/**", lambda r: r.abort())
+
         def state():
             return page.evaluate("""() => {
               const vis = (sel) => {

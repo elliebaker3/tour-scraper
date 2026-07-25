@@ -58,6 +58,13 @@ function validate(rec) {
   if (typeof rec.site !== "string" || !/^[a-z0-9.-]{4,64}$/.test(rec.site)) {
     return "site must be a plain hostname";
   }
+  // A loopback or private host is a development harness, not a broadcaster.
+  // Nobody watches a stage on 127.0.0.1, so such a record can only be a test
+  // -- and letting one in means every real viewer then fetches it. (This
+  // repo's own extension test suite POSTed several before it was added.)
+  if (/^(127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|0\.0\.0\.0$|localhost$)/.test(rec.site)) {
+    return "site looks like a local test host, not a broadcaster";
+  }
   const dur = rec.duration_sec;
   if (typeof dur !== "number" || !isFinite(dur) || dur <= 600 || dur >= 12 * 3600) {
     return "duration_sec must be a plausible recording length";
