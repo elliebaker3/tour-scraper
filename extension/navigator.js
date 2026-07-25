@@ -728,7 +728,10 @@
           far away, for accuracy):</span>
         <input class="tn-togo-km" size="5" placeholder="42" inputmode="decimal">
         <span class="tn-setup-unit">km to go</span>
-        <button class="tn-togo-set">Calibrate</button>
+        <button class="tn-togo-set" title="Calibrate — and contribute the result to
+the shared store, so anyone watching this same recording gets it automatically.
+Opens a prefilled GitHub issue in a tab; submitting it needs a GitHub login,
+and closing the tab shares nothing.">Calibrate</button>
         <span class="tn-setup-note"></span>
       </div>
       <div class="tn-bar"></div>
@@ -739,11 +742,11 @@
           <input class="tn-togo-km2" size="5" placeholder="42" inputmode="decimal"
                  title="Refine: type another km-to-go reading from elsewhere in
 the stage. The median of all readings is used.">
-          <button class="tn-togo-set2">Add reading</button>
+          <button class="tn-togo-set2" title="Add this reading — and contribute the
+calibration to the shared store, so anyone watching this same recording gets it
+automatically. Opens a prefilled GitHub issue in a tab; submitting it needs a
+GitHub login, and closing the tab shares nothing.">Add reading</button>
           <button class="tn-anchor-clear" title="Clear the calibration">reset</button>
-          <button class="tn-share" title="Contribute this calibration to the shared
-store on GitHub, so every viewer of this same recording gets it automatically.
-Opens a prefilled issue — submitting needs a GitHub login.">share</button>
           <span class="tn-anchor-state"></span>
         </div>
       </div>`;
@@ -851,8 +854,6 @@ Opens a prefilled issue — submitting needs a GitHub login.">share</button>
       refreshAnchorState();
       render();
     });
-
-    root.querySelector(".tn-share").addEventListener("click", shareCalibration);
   }
 
   /** Let the viewer state which stage this is when detection can't. */
@@ -924,6 +925,7 @@ Opens a prefilled issue — submitting needs a GitHub login.">share</button>
       anchors.push({ videoSec: video.currentTime, kind: "kmtogo", km,
                      kmto: exact, label: `${km} km to go` });
       saveCalibration();
+      shareCalibration();
       render();
       const n = pins().length;
       el.textContent = `${km} km to go — reading added · ${n} reading${n === 1 ? "" : "s"}` +
@@ -946,6 +948,7 @@ Opens a prefilled issue — submitting needs a GitHub login.">share</button>
                    label: `${km} km to go` });
     cal = calFromAnchors();
     saveCalibration();
+    shareCalibration();
     render();
 
     const p = pins();
@@ -1145,19 +1148,31 @@ Opens a prefilled issue — submitting needs a GitHub login.">share</button>
 
   /** Contribute this recording's calibration to the shared store: a prefilled
    *  GitHub issue the ingest Action merges into calibrations.json. A browser
-   *  extension holds no credentials, so this one click (plus being signed in
-   *  to GitHub) is the cheapest honest write path there is. */
+   *  extension holds no credentials, so this (plus being signed in to GitHub)
+   *  is the cheapest honest write path there is.
+   *
+   *  Fired by the same button that adds a reading -- there is no separate
+   *  share control. Two things keep that from being obnoxious: the tab is
+   *  NAMED, so a second reading reuses it instead of stacking tabs, and an
+   *  identical payload never reopens it. Nothing is published by opening the
+   *  tab; the viewer still has to submit the issue. */
+  let lastSharedPayload = "";
   function shareCalibration() {
     const rec = calRecord();
     if (!rec.anchors.length) return;
+    const payload = JSON.stringify(rec.anchors) + rec.duration_sec + rec.site;
+    if (payload === lastSharedPayload) return;
+    lastSharedPayload = payload;
     const title = `[calibration] stage ${rec.stage} · ${rec.site} · ` +
                   `${Math.round(rec.duration_sec)}s`;
     const body =
       "Automated calibration contribution from the Tour Navigator extension.\n" +
       "The ingest workflow merges the block below into extension/data/calibrations.json.\n\n" +
       "```json\n" + JSON.stringify(rec, null, 2) + "\n```\n";
-    window.open(`${SHARE_ISSUE_URL}?title=${encodeURIComponent(title)}` +
-                `&body=${encodeURIComponent(body)}`, "_blank");
+    try {
+      window.open(`${SHARE_ISSUE_URL}?title=${encodeURIComponent(title)}` +
+                  `&body=${encodeURIComponent(body)}`, "tn-share");
+    } catch (_) { /* popup blocked: the calibration is still saved locally */ }
   }
 
   // --------------------------------------------------------------- bootstrap

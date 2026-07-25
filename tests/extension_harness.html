@@ -56,6 +56,13 @@
     } },
   };
 
+  // Adding a reading also opens the prefilled share issue. Record the calls
+  // instead of opening tabs, so a test can assert what would be contributed
+  // (and that it isn't opened twice for the same payload) without leaving
+  // github.com tabs behind every run.
+  window.__opens = [];
+  window.open = (u, target) => { window.__opens.push([u, target]); return null; };
+
   // Real values captured from the live Peacock player on the stage 14 replay:
   // displayStartTime 2026-07-18T10:30:00Z, runtime 5h20m26s. probe_main.js runs
   // in the page world here, which is the world the manifest gives it too.

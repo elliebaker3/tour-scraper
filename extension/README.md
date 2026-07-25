@@ -121,13 +121,21 @@ Two tiers are consulted, local first:
 | shared store | `data/calibrations.json`, fetched live from the repo | someone else already calibrated this same recording |
 
 The shared store is what makes a stage self-calibrating for everyone watching
-the same broadcast. **share** opens a prefilled GitHub issue holding the
-record; the `ingest-calibration` workflow validates it, merges it into
+the same broadcast. There is no separate share control: **Add reading**
+contributes as it calibrates, opening a prefilled GitHub issue holding the
+record. The `ingest-calibration` workflow validates it, merges it into
 `calibrations.json` and closes the issue. Because the extension fetches that
 file fresh from `raw.githubusercontent.com` on every load (the bundled copy is
 only the offline fallback), a merged calibration reaches every viewer without
 an extension update. An extension has no credentials to push with, which is
 why contributing routes through an issue rather than a direct write.
+
+The share tab is **named**, so a second reading reuses it rather than stacking
+tabs, and an identical payload never reopens it. Opening the tab publishes
+nothing — the issue still has to be submitted, which needs a GitHub login, so
+contributors without an account simply close it and keep the calibration
+locally. Both buttons say so in their tooltip; anyone but you running this
+should know a click offers to publish.
 
 Each stored record carries the stage, date, site, duration fingerprint, the
 airing timestamp, every km-to-go reading, the fitted transform, and the

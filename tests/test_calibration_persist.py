@@ -223,6 +223,26 @@ try:
         t = page.evaluate("() => document.querySelector('video').currentTime")
         check("clicking a lite bar seeks the recording", t > 0, f"currentTime={t:.0f}s")
 
+        # --- 5. adding a reading also offers the contribution --------------
+        print("\n--- sharing rides on Add reading (no separate button) ---")
+        check("there is no separate share button",
+              not page.evaluate("() => !!document.querySelector('.tn-share')"))
+        load()
+        calibrate(150, rec_for_kmto(150.5))
+        calibrate(20, rec_for_kmto(20.5), ".tn-togo-km2", ".tn-togo-set2")
+        opens = page.evaluate("() => window.__opens || []")
+        check("a reading offers the contribution", len(opens) >= 1)
+        check("every share reuses ONE named tab, never stacking",
+              {t for _, t in opens} == {"tn-share"}, str({t for _, t in opens}))
+        url = opens[-1][0] if opens else ""
+        check("it points at the repo's issue form",
+              "/tour-scraper/issues/new" in url)
+        check("payload carries the record", "%60%60%60json" in url or "```json" in url)
+        page.click(".tn-togo-set2")   # empty input: nothing new to share
+        page.wait_for_timeout(400)
+        check("a no-op click does not re-offer it",
+              len(page.evaluate("() => window.__opens || []")) == len(opens))
+
         check("no page errors", not errs, "; ".join(errs[:2]))
         br.close()
 finally:
