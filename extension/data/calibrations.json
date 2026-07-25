@@ -63,7 +63,7 @@
         "extension_version": "0.0.0-harness",
         "ingested_at": "2026-07-25T21:38:06.299Z",
         "via": "worker",
-        "submitter": "sha:260ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦"
+        "submitter": "sha:260ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦"
       }
     ],
     "stage-14|127.0.0.1": [
@@ -99,7 +99,7 @@
         "extension_version": "0.0.0-harness",
         "ingested_at": "2026-07-25T21:39:09.328Z",
         "via": "worker",
-        "submitter": "sha:260â¦"
+        "submitter": "sha:260Ã¢ÂÂ¦"
       },
       {
         "schema": 1,
@@ -125,6 +125,31 @@
         "saved_at": "2026-07-25T21:39:13.501Z",
         "extension_version": "0.0.0-harness",
         "ingested_at": "2026-07-25T21:39:13.553Z",
+        "via": "worker",
+        "submitter": "sha:260â¦"
+      }
+    ],
+    "stage-6|127.0.0.1": [
+      {
+        "schema": 1,
+        "stage": 6,
+        "date": "2026-07-09",
+        "site": "127.0.0.1",
+        "duration_sec": 19225.9,
+        "airing_ms": null,
+        "anchors": [
+          {
+            "videoSec": 600,
+            "kind": "kmtogo",
+            "km": 150,
+            "kmto": 150.5,
+            "label": "150 km to go"
+          }
+        ],
+        "cal": null,
+        "saved_at": "2026-07-25T21:39:28.202Z",
+        "extension_version": "0.0.0-harness",
+        "ingested_at": "2026-07-25T21:39:28.252Z",
         "via": "worker",
         "submitter": "sha:260…"
       }
