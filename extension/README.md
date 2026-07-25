@@ -122,20 +122,30 @@ Two tiers are consulted, local first:
 
 The shared store is what makes a stage self-calibrating for everyone watching
 the same broadcast. There is no separate share control: **Add reading**
-contributes as it calibrates, opening a prefilled GitHub issue holding the
-record. The `ingest-calibration` workflow validates it, merges it into
-`calibrations.json` and closes the issue. Because the extension fetches that
-file fresh from `raw.githubusercontent.com` on every load (the bundled copy is
-only the offline fallback), a merged calibration reaches every viewer without
-an extension update. An extension has no credentials to push with, which is
-why contributing routes through an issue rather than a direct write.
+contributes as it calibrates. Because the extension re-fetches
+`calibrations.json` from `raw.githubusercontent.com` on every load (the bundled
+copy is only the offline fallback), a merged calibration reaches every viewer
+without an extension update.
 
-The share tab is **named**, so a second reading reuses it rather than stacking
-tabs, and an identical payload never reopens it. Opening the tab publishes
-nothing — the issue still has to be submitted, which needs a GitHub login, so
-contributors without an account simply close it and keep the calibration
-locally. Both buttons say so in their tooltip; anyone but you running this
-should know a click offers to publish.
+An extension can't hold a GitHub token — anyone who unpacks it could read it
+and write to the repo — so contributing goes one of two ways:
+
+| route | needs an account? | when |
+|---|---|---|
+| `COLLECTOR_URL` → the Worker in [`worker/`](../worker) | no | whenever it's deployed. One silent POST; the Worker holds the token and commits. Status line says `· shared`. |
+| prefilled GitHub issue | yes | fallback, when no collector is set or it's unreachable. `ingest-calibration.yml` validates and merges it. |
+
+`COLLECTOR_URL` is empty until you deploy the Worker — see
+[worker/README.md](../worker/README.md), it's about ten minutes and free. Until
+then the issue route is used: its tab is **named**, so a second reading reuses
+it rather than stacking tabs, and an identical payload never reopens it.
+Opening that tab publishes nothing on its own, so someone without an account
+just closes it and keeps the calibration locally, which still works fully.
+
+Either way a contribution carries the stage, the site's hostname, the recording
+length, the readings and the fitted transform — no identity, no account, no
+viewing history. Both buttons say so in their tooltip, since a control labelled
+"Add reading" that also publishes should not be a surprise to anyone but you.
 
 Each stored record carries the stage, date, site, duration fingerprint, the
 airing timestamp, every km-to-go reading, the fitted transform, and the

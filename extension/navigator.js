@@ -36,11 +36,19 @@
   //   2. calibrations.json -- the SHARED store, crowdsourced from every
   //      viewer: fetched fresh from the repo (so new contributions arrive
   //      without an extension update), falling back to the bundled snapshot.
-  //      Contributions travel as prefilled GitHub issues (the "share" button)
-  //      that an Action ingests -- an extension has no credentials to push.
   const SITE = location.hostname;
   const SHARED_CAL_URL =
     "https://raw.githubusercontent.com/elliebaker3/tour-scraper/main/extension/data/calibrations.json";
+  // Contributing back, in preference order:
+  //   1. COLLECTOR_URL -- the Cloudflare Worker in worker/. It holds the
+  //      GitHub token (a token shipped inside an extension is readable by
+  //      anyone who unpacks it, so it can never live here) and commits on the
+  //      viewer's behalf: no account, no tab, nothing to click through.
+  //   2. the issue form -- used when no collector is deployed or it can't be
+  //      reached. Needs a GitHub login, which is the barrier the collector
+  //      exists to remove.
+  // Empty until `wrangler deploy` prints the URL; blank = fallback only.
+  const COLLECTOR_URL = "";
   const SHARE_ISSUE_URL = "https://github.com/elliebaker3/tour-scraper/issues/new";
   // Same asset re-opened: duration identical to within ~2s. Different cut:
   // minutes apart. 30s splits those cleanly.
@@ -728,10 +736,10 @@
           far away, for accuracy):</span>
         <input class="tn-togo-km" size="5" placeholder="42" inputmode="decimal">
         <span class="tn-setup-unit">km to go</span>
-        <button class="tn-togo-set" title="Calibrate — and contribute the result to
-the shared store, so anyone watching this same recording gets it automatically.
-Opens a prefilled GitHub issue in a tab; submitting it needs a GitHub login,
-and closing the tab shares nothing.">Calibrate</button>
+        <button class="tn-togo-set" title="Calibrate — and contribute this reading
+to the shared store, so anyone watching this same recording gets it
+automatically. Sent anonymously: the stage, this site's name, the recording
+length and the reading itself — never who you are or what else you watch.">Calibrate</button>
         <span class="tn-setup-note"></span>
       </div>
       <div class="tn-bar"></div>
@@ -744,8 +752,9 @@ and closing the tab shares nothing.">Calibrate</button>
 the stage. The median of all readings is used.">
           <button class="tn-togo-set2" title="Add this reading — and contribute the
 calibration to the shared store, so anyone watching this same recording gets it
-automatically. Opens a prefilled GitHub issue in a tab; submitting it needs a
-GitHub login, and closing the tab shares nothing.">Add reading</button>
+automatically. Sent anonymously: the stage, this site's name, the recording
+length and the readings themselves — never who you are or what else you
+watch.">Add reading</button>
           <button class="tn-anchor-clear" title="Clear the calibration">reset</button>
           <span class="tn-anchor-state"></span>
         </div>
@@ -1146,23 +1155,45 @@ GitHub login, and closing the tab shares nothing.">Add reading</button>
     }
   }
 
-  /** Contribute this recording's calibration to the shared store: a prefilled
-   *  GitHub issue the ingest Action merges into calibrations.json. A browser
-   *  extension holds no credentials, so this (plus being signed in to GitHub)
-   *  is the cheapest honest write path there is.
+  /** Contribute this recording's calibration to the shared store, so the next
+   *  person watching the same broadcast gets it for free.
    *
    *  Fired by the same button that adds a reading -- there is no separate
-   *  share control. Two things keep that from being obnoxious: the tab is
-   *  NAMED, so a second reading reuses it instead of stacking tabs, and an
-   *  identical payload never reopens it. Nothing is published by opening the
-   *  tab; the viewer still has to submit the issue. */
+   *  share control. With a collector deployed this is silent: one POST, no
+   *  account, no tab. Without one it falls back to the prefilled issue, whose
+   *  tab is NAMED so a second reading reuses it rather than stacking tabs.
+   *  Either way an identical payload is never sent twice, and failing to
+   *  share never costs the viewer their calibration -- that is already saved
+   *  locally by the time this runs. */
   let lastSharedPayload = "";
-  function shareCalibration() {
+  async function shareCalibration() {
     const rec = calRecord();
     if (!rec.anchors.length) return;
     const payload = JSON.stringify(rec.anchors) + rec.duration_sec + rec.site;
     if (payload === lastSharedPayload) return;
     lastSharedPayload = payload;
+
+    const note = (msg) => {
+      const el = root?.querySelector(".tn-anchor-state");
+      if (el) el.textContent += ` · ${msg}`;
+    };
+
+    if (COLLECTOR_URL) {
+      try {
+        const r = await fetch(COLLECTOR_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(rec),
+        });
+        if (r.ok) { note("shared"); return; }
+        console.warn("[TourNavigator] collector rejected the calibration", r.status);
+      } catch (e) {
+        console.warn("[TourNavigator] collector unreachable", e);
+      }
+      // Fall through: a rejected or unreachable collector shouldn't silently
+      // swallow a contribution the viewer is willing to make by hand.
+    }
+
     const title = `[calibration] stage ${rec.stage} · ${rec.site} · ` +
                   `${Math.round(rec.duration_sec)}s`;
     const body =

@@ -1,0 +1,11 @@
+name = "tour-calibrations"
+main = "src/index.js"
+compatibility_date = "2026-07-01"
+
+# Per-IP rate limiting. The Worker runs without this binding (it just skips
+# the limit), so you can deploy first and add the namespace after:
+#   npx wrangler kv namespace create RATE
+# then paste the printed id below and redeploy.
+# [[kv_namespaces]]
+# binding = "RATE"
+# id = "<paste the id wrangler prints>"
