@@ -321,12 +321,24 @@ try:
         page.click(".tn-filter:has-text('Significant event') input")   # back off
         page.wait_for_timeout(300)
 
-        # The bar spans the whole recording.
+        # The profile occupies the part of the recording the RACE occupies,
+        # not the whole bar. The build-up before the flag and the coverage
+        # after the line used to be filled flat at the start/finish altitudes,
+        # which made the silhouette span everything and read as though the
+        # race did too. Now they are simply empty, so where the shape begins
+        # is where the race begins.
         segs = {k: s[k] for k in ("obs", "est", "imp") if s[k]}
+        assert segs, "FAIL: no profile drawn at all"
         lo = min(v["min"] for v in segs.values())
         hi = max(v["max"] for v in segs.values())
-        assert lo <= 1 and hi >= s["width"] - 1, "FAIL: bar does not span the recording"
-        assert s["imp"], "FAIL: nothing imputed outside the race"
+        print(f"\n  profile spans px {lo:.0f}-{hi:.0f} of {s['width']} "
+              f"(starts {lo / s['width'] * 100:.0f}% in)")
+        assert lo > s["width"] * 0.02, \
+            ("FAIL: profile starts at the very left edge, so the pre-race "
+             "build-up is still being filled in")
+        assert hi <= s["width"], "FAIL: profile runs past the end of the bar"
+        assert not s["imp"], \
+            "FAIL: stretches outside the race should be empty, not imputed"
 
         # --- 3: ONE reading already lands close, thanks to the 0.92 default ---
         # The global layer is what makes a single reading usable across the

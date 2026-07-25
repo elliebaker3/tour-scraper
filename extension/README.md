@@ -63,13 +63,22 @@ says 155.2, and adopting that 0.3 km would reintroduce the constant offset the
 sync exists to remove. The x axis still runs start → finish left to right, so
 the silhouette matches a published profile while the labels count down.
 
-Three weights, three different claims:
+Two weights, two different claims:
 
 | | meaning |
 |---|---|
 | solid | GPS-observed |
 | dashed, dimmer | estimated — GPS was offline, pace inferred from the known start |
-| faint, fine dashes | imputed — no race happening then (build-up, post-finish) |
+
+The profile covers the part of the recording the **race** covers, not the whole
+bar. The build-up before the flag and the coverage after the line are left
+empty rather than filled flat, so where the silhouette begins is where the race
+begins — and the playhead lines up with the player's own position.
+
+Every climb is drawn in the same deep red whatever its grade; the grade is on
+the badge, so colouring by it was saying the same thing twice at the cost of
+the climbs reading as one kind of thing. Badges and names always sit above the
+line.
 
 Hovering reads out `77.8 km to go · 677m · 13:34Z · rec 2:14:07`. The clock
 names the gradient under the playhead (`6.5 km to go · climbing 9.0%`); if the

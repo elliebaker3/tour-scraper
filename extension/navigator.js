@@ -62,9 +62,13 @@
   // three plus scenery) in one go. A marker shown by either its own switch or
   // the umbrella keeps its category colour. Contenders (persons of interest) are
   // their own switch, marked with a star.
+  const KOM_RED = "#b91c1c";
+  const KOM_COLOR = { HC: KOM_RED, "Cat 1": KOM_RED, "Cat 2": KOM_RED,
+                      "Cat 3": KOM_RED, "Cat 4": KOM_RED };
+
   const CATEGORIES = {
     sprint:          { label: "Sprints",           color: "#22c55e", on: true },
-    kom:             { label: "Climbs",            color: "#ef4444", on: true },
+    kom:             { label: "Climbs",            color: KOM_RED,   on: true },
     poi:             { label: "Contenders",        color: "#facc15", on: true },
     crash:           { label: "Crashes",           color: "#e5484d", on: false },
     breakaway_start: { label: "Attacks",           color: "#f5a524", on: false },
@@ -84,10 +88,11 @@
     breakaway_end: "#8b7cf6", scenic: "#30a46c",
   };
 
-  // Climb grades shade from yellow (cat 4) to deep red (HC), the way a stage
-  // profile prints them. Sprints are green, the sprinters' jersey colour.
-  const KOM_COLOR = { HC: "#b91c1c", "Cat 1": "#ef4444", "Cat 2": "#f97316",
-                      "Cat 3": "#eab308", "Cat 4": "#a3e635" };
+  // Every climb is the same deep red, whatever its grade. Shading by category
+  // put four more colours on a bar that already carries sprints, contenders
+  // and event markers, and the grade is on the badge anyway -- the colour was
+  // saying a second time what the label already said, at the cost of the
+  // climbs no longer reading as one kind of thing.
 
   // Persons of interest (contenders for each jersey) are marked when involved
   // in an event, but the rider's identity is NEVER shown -- that would spoil
@@ -97,7 +102,7 @@
   // Vertical padding inside the bar, in px: headroom above the highest point so
   // the peak doesn't jam against the top edge (and leaves room for the markers
   // that sit up there), and a sliver below the lowest.
-  const PROFILE_TOP_PAD = 12;
+  const PROFILE_TOP_PAD = 30;
   const PROFILE_BOT_PAD = 2;
 
   let bundle = null;
@@ -342,17 +347,20 @@
 
   /** Elevation at a race time, with how it was arrived at.
    *
-   *  The recording is longer than the race: there is build-up before km 0 and
-   *  coverage after the line, and those stretches have no elevation because
-   *  nobody was riding. Leaving them blank breaks the bar into fragments, so
-   *  they are imputed -- held at the start and finish altitudes, which is
-   *  where the race actually was -- and drawn faintly so an imputed stretch
-   *  never reads as measured. Gaps inside the race are bridged linearly. */
+   *  The recording is longer than the race: an hour or so of build-up before
+   *  km 0, and coverage past the line. Those stretches get NO elevation --
+   *  nobody was riding, so there is nothing to draw. They used to be filled
+   *  flat at the start and finish altitudes, which stretched the silhouette
+   *  across the whole bar and made the race look like it spanned the entire
+   *  broadcast. Leaving them empty is what puts the shape where the race
+   *  actually is, so the profile begins at the flag drop and the playhead
+   *  lines up with the player's own position. Gaps INSIDE the race are still
+   *  bridged linearly. */
   function elevationAt(tMs) {
     const s = series();
     if (!s.length) return null;
-    if (tMs <= s[0].t) return { alt: s[0].alt, cls: "imp" };
-    if (tMs >= s[s.length - 1].t) return { alt: s[s.length - 1].alt, cls: "imp" };
+    if (tMs <= s[0].t) return null;
+    if (tMs >= s[s.length - 1].t) return null;
     let lo = 0, hi = s.length - 1;
     while (hi - lo > 1) {
       const mid = (lo + hi) >> 1;
@@ -492,7 +500,7 @@
   function renderLite() {
     const bar = root.querySelector(".tn-bar");
     const width = bar.clientWidth || 900;
-    const height = bar.clientHeight || 54;
+    const height = bar.clientHeight || 78;
     const prof = bundle.profile;
     const len = bundle.stage?.length_km || Math.max(...prof.map((p) => p.km)) || 1;
 
@@ -525,7 +533,6 @@
       const badge = m.kind === "finish" ? "🏁" : isKom ? (m.cat || "") : "S";
       const tip = `${m.label} · km ${m.km}`;
       const place =
-        (my < 20 ? " tn-rm-below" : "") +
         (mx < 16 ? " tn-rm-atleft" : mx > width - 16 ? " tn-rm-atright" : "");
       const sec = lm && dur
         ? Math.max(0, Math.min(dur, lm.secAtKmto(len - m.km))) : null;
@@ -620,7 +627,7 @@
 
     const bar = root.querySelector(".tn-bar");
     const width = bar.clientWidth || 900;
-    const height = bar.clientHeight || 54;
+    const height = bar.clientHeight || 78;
 
     const { segs, loA, hiA } = profilePath(width, height);
     const CLS = { obs: "tn-profile", est: "tn-profile tn-profile-est",
@@ -652,8 +659,10 @@
       // Keep the badge fully inside the bar. It normally floats above the dot,
       // but summits sit near the top, so flip it below when there isn't room;
       // and shift it inward at the very edges so it is never clipped.
+      // Badge and name always sit ABOVE the dot -- alternating above and below
+      // made a row of climbs read as two staggered rows. The bar carries extra
+      // headroom (PROFILE_TOP_PAD) so even a summit near the top has room.
       const place =
-        (y < 20 ? " tn-rm-below" : "") +
         (x < 16 ? " tn-rm-atleft" : x > width - 16 ? " tn-rm-atright" : "");
       // The name is drawn ON the bar, not left in the tooltip: a tooltip that
       // needs a 6px dot hovered exactly is not a label you can read at a
@@ -699,7 +708,6 @@
         const alt = altAtRaceMs(Date.parse(m.t_utc));
         const y = alt != null ? yForAlt(alt) : height / 2;
         const place =
-          (y < 20 ? " tn-rm-below" : "") +
           (x < 16 ? " tn-rm-atleft" : x > width - 16 ? " tn-rm-atright" : "");
         poiMarks.push(
           `<div class="tn-poi tn-rm${place}" data-sec="${sec.toFixed(1)}"

@@ -41,7 +41,7 @@
    thing being read, the controls are only how it gets calibrated. Collapsed,
    it becomes a slim always-on strip. */
 .tn-root.tn-collapsed .tn-controls { display: none; }
-.tn-root.tn-collapsed .tn-bar { height: 30px; }
+.tn-root.tn-collapsed .tn-bar { height: 36px; }
 .tn-root.tn-collapsed { padding-bottom: 8px; }
 
 .tn-head {
@@ -63,7 +63,10 @@
 /* The bar itself: profile + heat + markers share one stacking context. */
 .tn-bar {
   position: relative;
-  height: 54px;
+  /* Tall enough for a row of climb names above the silhouette without them
+     crowding the trace. The extra height is headroom, not more profile --
+     PROFILE_TOP_PAD keeps the terrain in the lower part of the box. */
+  height: 78px;
   background: rgba(255, 255, 255, 0.045);
   border-radius: 6px;
   overflow: hidden;
@@ -262,7 +265,6 @@
   text-shadow: 0 1px 3px #000, 0 0 4px #000; pointer-events: none;
   letter-spacing: .1px;
 }
-.tn-rm-below .tn-rm-name { bottom: auto; top: 21px; }
 .tn-rm-atleft  .tn-rm-name { left: 0; transform: none; }
 .tn-rm-atright .tn-rm-name { left: auto; right: 0; transform: none; }
 /* The one being pointed at wins the stacking order, so an overlapped name is
@@ -270,10 +272,11 @@
 .tn-rm:hover .tn-rm-name { color: #fff; z-index: 3; }
 .tn-rm:hover { z-index: 3; }
 
-/* Keep every badge fully inside the bar. Summits sit near the top, so their
-   badge flips below the dot; markers at the extreme edges anchor to the dot
-   instead of centring, so nothing is clipped by the bar's overflow. */
-.tn-rm-below .tn-rm-badge { bottom: auto; top: 6px; }
+/* Keep every badge fully inside the bar. Badges and names always sit above
+   the dot -- alternating sides made a row of climbs look like two staggered
+   rows -- so the bar carries headroom for them instead. Markers at the
+   extreme edges anchor to the dot rather than centring, so nothing is
+   clipped by the bar's overflow. */
 .tn-rm-atleft  .tn-rm-badge { left: 0; right: auto; transform: none; }
 .tn-rm-atright .tn-rm-badge { left: auto; right: 0; transform: none; }
 .tn-rm-atleft:hover  .tn-rm-badge,
