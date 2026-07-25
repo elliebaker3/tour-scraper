@@ -15,5 +15,16 @@
     "recorded_at": "2026-07-25T15:20:48.320+00:00",
     "kind": "radio",
     "source": "https://ice.creacast.com/lequipe-au1"
+  },
+  {
+    "recorded_at": "2026-07-25T16:27:08.860+00:00",
+    "kind": "live-stream",
+    "action": "stop",
+    "counts": {
+      "telemetry": 137,
+      "groups": 145,
+      "events": 0,
+      "raw-only": 18396
+    }
   }
 ]
