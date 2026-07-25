@@ -33,5 +33,17 @@
     "kind": "profile",
     "source": "https://racecenter.letour.fr/profils/2026/profile-20-tiny-72b592232b304a20d16b9bc92f4d5526.csv",
     "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-25T10:42:28.714+00:00",
+    "kind": "poll",
+    "endpoints": [
+      "publication",
+      "insights",
+      "pack",
+      "telemetry",
+      "flashInfoLive",
+      "checkpointList"
+    ]
   }
 ]
