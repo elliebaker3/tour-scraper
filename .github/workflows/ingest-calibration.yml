@@ -1,0 +1,133 @@
+# The write half of the crowdsourced calibration store. The extension's
+# "share" button opens a prefilled issue titled "[calibration] ..." whose body
+# carries one JSON record (stage, site, recording duration fingerprint, the
+# km-to-go readings and the fitted transform). This workflow validates it,
+# merges it into extension/data/calibrations.json -- replacing an existing
+# entry for the same recording (same stage+site, duration within 30s),
+# appending otherwise -- commits, and closes the issue.
+#
+# Every extension fetches calibrations.json fresh from raw.githubusercontent
+# at load, so a merged calibration reaches all viewers of that recording
+# without any extension update.
+name: ingest-calibration
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  ingest:
+    if: startsWith(github.event.issue.title, '[calibration]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Merge the record into calibrations.json
+        id: merge
+        env:
+          # Both via env, never templated into the script body: an issue is
+          # attacker-controlled text and `${{ }}` substitution happens before
+          # the shell ever sees it, quoted heredoc or not.
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          python3 - <<'EOF'
+          import json, os, re, sys
+          from datetime import datetime, timezone
+
+          body = os.environ["ISSUE_BODY"]
+          m = re.search(r"```json\s*(\{.*?\})\s*```", body, re.S)
+          if not m:
+              print("::error::no JSON block found in issue body")
+              sys.exit(1)
+          try:
+              rec = json.loads(m.group(1))
+          except json.JSONDecodeError as e:
+              print(f"::error::invalid JSON: {e}")
+              sys.exit(1)
+
+          # Validate the shape strictly: this file is fetched and trusted by
+          # every extension, so nothing malformed may enter it.
+          def fail(msg):
+              print(f"::error::{msg}"); sys.exit(1)
+          if not isinstance(rec.get("stage"), int) or not (1 <= rec["stage"] <= 21):
+              fail("stage must be an int 1-21")
+          site = rec.get("site")
+          if not isinstance(site, str) or not re.fullmatch(r"[a-z0-9.-]{4,64}", site):
+              fail("site must be a plain hostname")
+          dur = rec.get("duration_sec")
+          if not isinstance(dur, (int, float)) or not (600 < dur < 12 * 3600):
+              fail("duration_sec must be a plausible recording length")
+          anchors = rec.get("anchors")
+          if not isinstance(anchors, list) or not (1 <= len(anchors) <= 20):
+              fail("anchors must be a non-empty list")
+          for a in anchors:
+              if not isinstance(a.get("videoSec"), (int, float)):
+                  fail("every anchor needs a numeric videoSec")
+              if not isinstance(a.get("km"), (int, float)):
+                  fail("every anchor needs a numeric km")
+          # Keep only known fields, dropping anything unexpected the issue
+          # might have carried.
+          keep_anchor = ("tUtcMs", "videoSec", "kind", "km", "kmto", "label")
+          clean = {
+              "schema": 1,
+              "stage": rec["stage"],
+              "date": rec.get("date"),
+              "site": site,
+              "duration_sec": round(float(dur), 1),
+              "airing_ms": rec.get("airing_ms"),
+              "anchors": [{k: a[k] for k in keep_anchor if k in a} for a in anchors],
+              "cal": rec.get("cal") if isinstance(rec.get("cal"), dict) else None,
+              "saved_at": rec.get("saved_at"),
+              "extension_version": rec.get("extension_version"),
+              "ingested_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+              "issue": int(os.environ["ISSUE_NUMBER"]),
+          }
+
+          path = "extension/data/calibrations.json"
+          store = json.load(open(path))
+          key = f"stage-{clean['stage']}|{site}"
+          lst = store.setdefault("recordings", {}).setdefault(key, [])
+          TOL = 30
+          for i, existing in enumerate(lst):
+              if abs(existing.get("duration_sec", 0) - clean["duration_sec"]) <= TOL:
+                  lst[i] = clean
+                  break
+          else:
+              lst.append(clean)
+          json.dump(store, open(path, "w"), ensure_ascii=False, indent=2)
+          print(f"merged calibration for {key} (duration {clean['duration_sec']}s)")
+          EOF
+
+      - name: Commit
+        run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add extension/data/calibrations.json
+          git commit -m "calibrations: ingest #${{ github.event.issue.number }} (${{ github.event.issue.title }})" \
+            || echo "nothing to commit"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push && break
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done
+
+      - name: Close the issue
+        if: success()
+        run: |
+          gh issue close ${{ github.event.issue.number }} \
+            --comment "Merged into extension/data/calibrations.json — every viewer of this recording now gets this calibration automatically. Thanks!"
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Explain a rejection
+        if: failure()
+        run: |
+          gh issue comment ${{ github.event.issue.number }} \
+            --body "This calibration couldn't be ingested automatically — the JSON block failed validation (see the action log). Nothing was merged."
+        env:
+          GH_TOKEN: ${{ github.token }}

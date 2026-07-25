@@ -8,11 +8,30 @@
 <script>
   const qs = new URLSearchParams(location.search);
   const pinned = qs.get("stage") ? Number(qs.get("stage")) : null;
+  // storage.local is backed by REAL localStorage so writes survive a reload --
+  // the calibration-persistence tests reload the page and assert the bar comes
+  // back calibrated, which a swallow-everything stub could not exercise.
+  const STUB_NS = "chromeStub:";
+  const stubRead = () => {
+    const out = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k.startsWith(STUB_NS)) {
+        try { out[k.slice(STUB_NS.length)] = JSON.parse(localStorage.getItem(k)); }
+        catch (_) {}
+      }
+    }
+    return out;
+  };
   window.chrome = {
-    runtime: { getURL: (p) => new URL(p, location.href).href },
+    runtime: {
+      getURL: (p) => new URL(p, location.href).href,
+      getManifest: () => ({ version: "0.0.0-harness" }),
+    },
     storage: { local: {
       get: (keys, cb) => {
-        const out = pinned ? { tnPinnedStage: pinned } : {};
+        const out = stubRead();
+        if (pinned) out.tnPinnedStage = pinned;
         // Simulate a calibration left behind by an older extension version:
         // no `v`, and the rate-fitted 0.9178x that a two-pin fit produced.
         if (qs.get("stalecal") === "1") {
@@ -25,8 +44,15 @@
         }
         cb(out);
       },
-      remove: () => {},
-      set: (obj, cb) => cb && cb(),
+      remove: (key) => {
+        for (const k of [].concat(key)) localStorage.removeItem(STUB_NS + k);
+      },
+      set: (obj, cb) => {
+        for (const [k, v] of Object.entries(obj)) {
+          localStorage.setItem(STUB_NS + k, JSON.stringify(v));
+        }
+        cb && cb();
+      },
     } },
   };
 
@@ -49,7 +75,11 @@
   // exercised too.
   if (qs.get("video") === "1") {
     const v = document.createElement("video");
-    Object.defineProperty(v, "duration", { value: 19225.94, configurable: true });
+    // ?dur= overrides the stage 14 replay's real runtime, so a test can pose
+    // as a DIFFERENT cut of the same stage and assert the fingerprint refuses
+    // to restore another recording's calibration onto it.
+    const dur = Number(qs.get("dur") || 19225.94);
+    Object.defineProperty(v, "duration", { value: dur, configurable: true });
     let ct = Number(qs.get("t") || 0);
     Object.defineProperty(v, "currentTime", {
       get: () => ct, set: (x) => { ct = x; }, configurable: true,

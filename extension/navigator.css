@@ -258,13 +258,15 @@
 .tn-rm-atright:hover .tn-rm-badge { transform: scale(1.25); }
 
 /* Lite stages (kind: "profile" in index.json): a velowire distance/elevation
-   reference card, no live capture behind it. Everything that implies a clock
-   -- the calibration setup, the filters, the refine inputs -- hides, because
-   none of it can mean anything without telemetry. The bar, the stage line and
-   the diag (which says exactly what this is) stay. */
-.tn-root.tn-lite .tn-setup,
-.tn-root.tn-lite .tn-controls { display: none; }
-.tn-root.tn-lite .tn-bar { cursor: default; }
+   profile with no live capture behind it. The event FILTERS hide -- there are
+   no events to filter -- but calibration stays: readings pin km-to-go straight
+   onto recording seconds (no race clock exists), and two of them give the bar
+   a playhead and click-to-seek. The bar itself always shows; the profile
+   shape is honest with or without a clock, so the setup prompt sits alongside
+   it (.tn-lite-setup) instead of replacing it the way .tn-needs-setup does. */
+.tn-root.tn-lite .tn-filters { display: none; }
+.tn-root.tn-lite.tn-lite-setup .tn-setup { display: flex; }
+.tn-root.tn-lite.tn-lite-setup .tn-bar { cursor: default; }
 
 /* Contenders (persons of interest × event): a STAR on the elevation curve,
    formatted like the climb markers -- a dot on the line (from .tn-rm) with a

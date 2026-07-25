@@ -22,6 +22,29 @@
   "use strict";
 
   const STORAGE_KEY = "tourNavigatorAnchors";
+
+  // ------------------------------------------------- calibration persistence
+  // A calibration belongs to ONE recording: the same stage on a different
+  // site, or a different cut on the same site, has a different timeline and
+  // the saved numbers mean nothing there. So everything is keyed by
+  // (stage, site) and fingerprinted by the recording's duration -- cheap,
+  // available before playback starts, and different cuts differ by minutes
+  // where the same asset re-opened differs by at most a second or two.
+  //
+  // Two tiers, local first:
+  //   1. chrome.storage.local -- this browser's own past calibrations.
+  //   2. calibrations.json -- the SHARED store, crowdsourced from every
+  //      viewer: fetched fresh from the repo (so new contributions arrive
+  //      without an extension update), falling back to the bundled snapshot.
+  //      Contributions travel as prefilled GitHub issues (the "share" button)
+  //      that an Action ingests -- an extension has no credentials to push.
+  const SITE = location.hostname;
+  const SHARED_CAL_URL =
+    "https://raw.githubusercontent.com/elliebaker3/tour-scraper/main/extension/data/calibrations.json";
+  const SHARE_ISSUE_URL = "https://github.com/elliebaker3/tour-scraper/issues/new";
+  // Same asset re-opened: duration identical to within ~2s. Different cut:
+  // minutes apart. 30s splits those cleanly.
+  const DUR_TOL_SEC = 30;
   // Sprints and climbs are part of the elevation graphic, so they default on.
   // The race-event markers all default OFF -- an empty bar is the calm default,
   // and the viewer opts into whichever kind they want to see. History and stats
@@ -76,6 +99,10 @@
   let anchors = [];           // [{ tUtcMs, videoSec, label }]
   let root = null;
   let hoverEl = null;         // readout element, re-attached after each render
+  let sharedCal = null;       // calibrations.json content, fetched once at start
+  let sharedCalReady = null;  // promise for that fetch, so restore can await it
+  let restoredFrom = "";      // "" | "this browser" | "shared store" -- for the note
+  let triedRestore = false;   // restore runs once, when the video first appears
   const enabled = Object.fromEntries(
     Object.entries(CATEGORIES).map(([k, v]) => [k, v.on]));
 
@@ -330,12 +357,48 @@
   }
 
 
-  /** Lite stages: a velowire distance/elevation profile and route markers,
-   *  nothing else. The x-axis is DISTANCE, not recording time -- there is no
-   *  telemetry to know when the leader was anywhere, so none of the clock
-   *  machinery applies: no calibration prompt, no seeking, no playhead. The
-   *  bar is a reference card of the stage, not a navigator, and the CSS
-   *  (.tn-lite) hides everything that would imply otherwise. */
+  /** Lite calibration: with no telemetry there is no race clock, so readings
+   *  pin km-to-go straight onto recording seconds. Two or more, far apart,
+   *  give a piecewise-linear map between distance and recording time --
+   *  linear between neighbouring readings, extrapolated at the ends with the
+   *  nearest segment's pace. One reading alone is NOT extrapolated: a lone
+   *  pin plus a guessed speed would put the playhead somewhere confidently
+   *  wrong, which is worse than not showing it. */
+  function liteMap() {
+    const p = pins()
+      // A record saved before kmto was persisted still reconstructs exactly:
+      // kmto is just the whole-kilometre midpoint correction applied to km.
+      .map((a) => (typeof a.kmto === "number" ? a
+        : { ...a, kmto: Number.isInteger(a.km) ? a.km + 0.5 : a.km }))
+      .filter((a) => typeof a.kmto === "number")
+      .sort((a, b) => a.videoSec - b.videoSec);
+    if (p.length < 2) return null;
+    return {
+      kmtoAtSec(sec) {
+        let i = 1;
+        while (i < p.length - 1 && p[i].videoSec < sec) i++;
+        const a = p[i - 1], b = p[i];
+        const span = b.videoSec - a.videoSec;
+        if (!span) return a.kmto;
+        return a.kmto + (b.kmto - a.kmto) * ((sec - a.videoSec) / span);
+      },
+      secAtKmto(kmto) {
+        const q = [...p].sort((a, b) => a.kmto - b.kmto);
+        let i = 1;
+        while (i < q.length - 1 && q[i].kmto < kmto) i++;
+        const a = q[i - 1], b = q[i];
+        const span = b.kmto - a.kmto;
+        if (!span) return a.videoSec;
+        return a.videoSec + (b.videoSec - a.videoSec) * ((kmto - a.kmto) / span);
+      },
+    };
+  }
+
+  /** Lite stages: a velowire distance/elevation profile and route markers.
+   *  The x-axis is DISTANCE, not recording time -- the profile shape is real
+   *  regardless of any clock. Uncalibrated it is a reference card; with two
+   *  or more km-to-go readings (liteMap) it gains a playhead, click-to-seek
+   *  and clickable markers, moving nonlinearly along the distance axis. */
   function renderLite() {
     const bar = root.querySelector(".tn-bar");
     const width = bar.clientWidth || 900;
@@ -353,6 +416,12 @@
     d += prof.map((p) => `${x(p.km).toFixed(1)} ${y(p.alt).toFixed(1)}`).join(" L ");
     d += ` L ${width} ${height} Z`;
 
+    const lm = liteMap();
+    const dur = video?.duration || 0;
+    // The setup prompt shows until the map exists; the bar always shows --
+    // the profile shape is honest with or without a clock.
+    root.classList.toggle("tn-lite-setup", !lm);
+
     const routeMarks = [];
     for (const m of bundle.markers || []) {
       const mx = x(m.km);
@@ -368,12 +437,22 @@
       const place =
         (my < 20 ? " tn-rm-below" : "") +
         (mx < 16 ? " tn-rm-atleft" : mx > width - 16 ? " tn-rm-atright" : "");
+      const sec = lm && dur
+        ? Math.max(0, Math.min(dur, lm.secAtKmto(len - m.km))) : null;
       routeMarks.push(
         `<div class="tn-rm tn-rm-${m.kind}${m.kind === "finish" ? " tn-rm-finish" : ""}${place}"
               style="left:${mx.toFixed(1)}px;top:${my.toFixed(1)}px;--rm:${color}"
-              title="${escapeHtml(tip)}">
+              ${sec != null ? `data-sec="${sec.toFixed(1)}"` : ""} title="${escapeHtml(tip)}">
            <span class="tn-rm-badge">${escapeHtml(badge)}</span>
          </div>`);
+    }
+
+    // Playhead only when the distance<->time map exists: its x is the km the
+    // map says the race is at now, so it moves nonlinearly along the bar.
+    let playhead = "";
+    if (lm && dur && video) {
+      const kmto = Math.max(0, Math.min(len, lm.kmtoAtSec(video.currentTime)));
+      playhead = `<div class="tn-playhead" style="left:${x(len - kmto).toFixed(1)}px"></div>`;
     }
 
     bar.innerHTML = `
@@ -382,15 +461,38 @@
         <path d="${d}" class="tn-profile"/>
       </svg>
       <div class="tn-routemarks">${routeMarks.join("")}</div>
+      ${playhead}
       <span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
       <span class="tn-alt tn-alt-lo">${Math.round(loA)}m</span>
     `;
+    bar.querySelectorAll(".tn-rm[data-sec]").forEach((el) => {
+      el.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        if (video) video.currentTime = parseFloat(el.dataset.sec);
+      });
+    });
     bar.appendChild(hoverEl);
 
-    root.querySelector(".tn-clock").textContent = `${len} km`;
+    const clock = root.querySelector(".tn-clock");
+    if (lm && dur && video) {
+      const kmto = Math.max(0, Math.min(len, lm.kmtoAtSec(video.currentTime)));
+      const g = gradientAt(len - kmto);
+      const bits = [fmtToGo(kmto)];
+      if (g != null) bits.push(g > 1.5 ? `climbing ${g.toFixed(1)}%`
+                             : g < -1.5 ? `descending ${Math.abs(g).toFixed(1)}%`
+                             : "flat");
+      clock.textContent = bits.join(" · ");
+      clock.className = "tn-clock" +
+        (g == null ? "" : g > 1.5 ? " tn-up" : g < -1.5 ? " tn-down" : "");
+    } else {
+      clock.textContent = `${len} km`;
+      clock.className = "tn-clock";
+    }
     root.querySelector(".tn-diag").textContent =
       `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
-      `profile only (no live capture) · elevation: velowire.com · ${bundle.__selection || ""}`;
+      `profile only (no live capture) · elevation: velowire.com · ` +
+      `${lm ? `${pins().length} readings, steady-pace interpolation` : "uncalibrated"} · ` +
+      `${bundle.__selection || ""}`;
   }
 
   function render() {
@@ -639,6 +741,9 @@
 the stage. The median of all readings is used.">
           <button class="tn-togo-set2">Add reading</button>
           <button class="tn-anchor-clear" title="Clear the calibration">reset</button>
+          <button class="tn-share" title="Contribute this calibration to the shared
+store on GitHub, so every viewer of this same recording gets it automatically.
+Opens a prefilled issue — submitting needs a GitHub login.">share</button>
           <span class="tn-anchor-state"></span>
         </div>
       </div>`;
@@ -665,11 +770,23 @@ the stage. The median of all readings is used.">
     hoverEl = document.createElement("div");
     hoverEl.className = "tn-hover";
 
-    // Every position on the bar is a recording time, so a click is just a seek.
+    // Full bundle: every position on the bar is a recording time, so a click
+    // is a seek. Lite bundle: x is distance, so the click goes through the
+    // readings' distance<->time map instead -- and only once that map exists.
     bar.addEventListener("click", (ev) => {
-      if (!cal || !video?.duration) return;
+      if (!video?.duration) return;
       const rect = ev.currentTarget.getBoundingClientRect();
-      video.currentTime = ((ev.clientX - rect.left) / rect.width) * video.duration;
+      const frac = (ev.clientX - rect.left) / rect.width;
+      if (bundle.__kind === "profile") {
+        const lm = liteMap();
+        if (!lm) return;
+        const len = bundle.stage?.length_km || 1;
+        const sec = lm.secAtKmto(len - frac * len);
+        video.currentTime = Math.max(0, Math.min(video.duration, sec));
+        return;
+      }
+      if (!cal) return;
+      video.currentTime = frac * video.duration;
     });
 
     bar.addEventListener("mousemove", (ev) => {
@@ -714,13 +831,28 @@ the stage. The median of all readings is used.">
       });
     }
 
+    // Reset clears the readings AND this recording's saved slot -- local
+    // only. The shared store is other people's data; a bad entry there gets
+    // superseded by the next share, not deleted from a viewer's browser.
     root.querySelector(".tn-anchor-clear").addEventListener("click", () => {
       anchors = [];
       cal = null;
-      clearStored();
+      restoredFrom = "";
+      clearLegacyStored();
+      try {
+        const key = calStoreKey();
+        const dur = video?.duration;
+        chrome.storage.local.get([key], (r) => {
+          const list = (r?.[key]?.recordings || []).filter((rec) =>
+            !dur || Math.abs((rec.duration_sec || 0) - dur) > DUR_TOL_SEC);
+          chrome.storage.local.set({ [key]: { v: 1, recordings: list } });
+        });
+      } catch (_) {}
       refreshAnchorState();
       render();
     });
+
+    root.querySelector(".tn-share").addEventListener("click", shareCalibration);
   }
 
   /** Let the viewer state which stage this is when detection can't. */
@@ -772,7 +904,8 @@ the stage. The median of all readings is used.">
     if (!video?.duration) { el.textContent = "no video"; return; }
     if (!isFinite(km)) { el.textContent = "enter the kilometres to go, e.g. 42"; return; }
 
-    const len = routeLength();
+    const lite = bundle.__kind === "profile";
+    const len = lite ? (bundle.stage?.length_km || 1) : routeLength();
     if (km < 0 || km > len) {
       el.textContent = `${km} km to go is outside this stage (0–${len.toFixed(1)} km)`;
       return;
@@ -780,6 +913,27 @@ the stage. The median of all readings is used.">
     // A whole-kilometre graphic reads "42" from 42.0 down to 43.0, so the
     // midpoint is the best single estimate of what it meant.
     const exact = Number.isInteger(km) ? km + 0.5 : km;
+
+    if (lite) {
+      // No telemetry -> no race clock to pin against. A reading here pins
+      // km-to-go DIRECTLY to a recording second; two or more, far apart,
+      // make a piecewise-linear distance<->time map (see liteMap). Constant
+      // speed between readings is crude on a mountain stage, so more
+      // readings near the terrain changes tighten it.
+      anchors = anchors.filter((a) => a.kind);
+      anchors.push({ videoSec: video.currentTime, kind: "kmtogo", km,
+                     kmto: exact, label: `${km} km to go` });
+      saveCalibration();
+      render();
+      const n = pins().length;
+      el.textContent = `${km} km to go — reading added · ${n} reading${n === 1 ? "" : "s"}` +
+        (n < 2 ? " · ▶ add one far away to place the playhead (assumes steady " +
+                 "pace between readings)"
+               : "");
+      console.log("[TourNavigator] lite km-to-go pin:", el.textContent);
+      return;
+    }
+
     const hit = timeAtKmToGo(exact);
     if (!hit) {
       el.textContent = `no GPS coverage at ${km} km to go — try another point`;
@@ -791,6 +945,7 @@ the stage. The median of all readings is used.">
     anchors.push({ tUtcMs: hit.tMs, videoSec: at, kind: "kmtogo", km,
                    label: `${km} km to go` });
     cal = calFromAnchors();
+    saveCalibration();
     render();
 
     const p = pins();
@@ -834,6 +989,12 @@ the stage. The median of all readings is used.">
     const el = root.querySelector(".tn-anchor-state");
     const p = pins();
     if (!p.length) { el.textContent = "not calibrated"; return; }
+    if (bundle?.__kind === "profile") {
+      el.textContent = p.length < 2
+        ? "1 reading — add one far away to place the playhead"
+        : `${p.length} readings · steady-pace interpolation between them`;
+      return;
+    }
     if (p.length === 1) {
       el.textContent = `1 reading · rate ${DEFAULT_RATE.toFixed(2)}× assumed — ` +
         "add one far away to fit it exactly";
@@ -846,18 +1007,158 @@ the stage. The median of all readings is used.">
   }
 
 
-  /* Calibration is deliberately NOT persisted. It only ever takes one number,
-   * and restoring a saved one across reloads is what made the panel flash the
-   * prompt and then snap back to a stale bar. Every load starts uncalibrated
-   * and asks for the current km-to-go. clearStored() also wipes anything an
-   * older, persisting version left behind, so a stale entry can never resurface. */
-  function clearStored() {
+  /* Persistence, second attempt. The first one was removed after stale
+   * restores kept producing a wrong-looking bar -- but the actual fault was
+   * the KEYING (one slot per stage number, shared across recordings), not
+   * persistence itself. A calibration now belongs to one (stage, site,
+   * duration-fingerprint) triple, so the failure mode "stage 15's numbers
+   * applied to a different recording" cannot key-collide any more. The old
+   * per-stage slot is still wiped on load so pre-rework leftovers never
+   * resurface. */
+  const stageKey = () => `stage-${bundle?.stage?.stage ?? "?"}`;
+  const calStoreKey = () =>
+    `tnCal:v1:${(bundle?.stage?.date || "").slice(0, 4)}|${stageKey()}|${SITE}`;
+
+  function clearLegacyStored() {
     try {
       chrome.storage?.local?.remove(STORAGE_KEY + ":" + stageKey());
     } catch (_) { /* storage is a convenience, not a requirement */ }
   }
 
-  const stageKey = () => `stage-${bundle?.stage?.stage ?? "?"}`;
+  /** Everything worth knowing about this calibration of this recording --
+   *  the anchors are what restore needs; the rest is context for the shared
+   *  store (who else can use this? which asset was it? how was it derived?). */
+  function calRecord() {
+    let version = null;
+    try { version = chrome.runtime.getManifest().version; } catch (_) {}
+    return {
+      schema: 1,
+      stage: bundle?.stage?.stage ?? null,
+      date: bundle?.stage?.date ?? null,
+      site: SITE,
+      duration_sec: Math.round((video?.duration || 0) * 10) / 10,
+      airing_ms: bundle?.__airingMs ?? null,
+      // kmto matters as much as km: it carries the whole-kilometre midpoint
+      // correction, and on lite stages it is the only thing liteMap reads.
+      anchors: pins().map((a) => ({ tUtcMs: a.tUtcMs, videoSec: a.videoSec,
+                                    kind: a.kind, km: a.km, kmto: a.kmto,
+                                    label: a.label })),
+      cal,
+      saved_at: new Date().toISOString(),
+      extension_version: version,
+    };
+  }
+
+  /** Store (or update) this recording's calibration in chrome.storage.local.
+   *  The value is a LIST of recordings for (stage, site): the same viewer may
+   *  have both the live airing and a replay cut. Fingerprint match replaces;
+   *  otherwise the new recording is appended. */
+  function saveCalibration() {
+    // Lite stages never have a `cal` -- their anchors ARE the calibration --
+    // so the readings, not the transform, are what makes this worth storing.
+    if (!video?.duration || !pins().length) return;
+    if (bundle?.__kind !== "profile" && !cal) return;
+    const key = calStoreKey();
+    try {
+      chrome.storage.local.get([key], (r) => {
+        const list = (r?.[key]?.recordings) || [];
+        const dur = video.duration;
+        const i = list.findIndex((rec) =>
+          Math.abs((rec.duration_sec || 0) - dur) <= DUR_TOL_SEC);
+        const rec = calRecord();
+        if (i >= 0) list[i] = rec; else list.push(rec);
+        chrome.storage.local.set({ [key]: { v: 1, recordings: list } });
+      });
+    } catch (_) { /* storage is a convenience, not a requirement */ }
+  }
+
+  function matchByDuration(list, dur) {
+    let best = null, gap = Infinity;
+    for (const rec of list || []) {
+      const g = Math.abs((rec.duration_sec || 0) - dur);
+      if (g <= DUR_TOL_SEC && g < gap) { best = rec; gap = g; }
+    }
+    return best;
+  }
+
+  /** The shared store is fetched fresh so contributions ingested since this
+   *  extension was installed still arrive; the bundled copy is the offline
+   *  fallback. Never fatal -- worst case the viewer just calibrates by hand. */
+  async function fetchSharedCalibrations() {
+    try {
+      const r = await fetch(SHARED_CAL_URL, { cache: "no-cache" });
+      if (r.ok) { sharedCal = await r.json(); return; }
+    } catch (_) { /* offline, or the host permission was declined */ }
+    try {
+      const r = await fetch(chrome.runtime.getURL("data/calibrations.json"));
+      if (r.ok) sharedCal = await r.json();
+    } catch (_) { sharedCal = null; }
+  }
+
+  /** Apply a saved calibration: local first (it is this viewer's own reading
+   *  of this exact recording), then the shared store. Anchors are the source
+   *  of truth -- the transform is refitted from them so a restore behaves
+   *  identically to having just typed the readings; the stored cal is only a
+   *  fallback for records whose anchors can't refit. */
+  function applyRecord(rec, from) {
+    if (!rec || !Array.isArray(rec.anchors) || !rec.anchors.length) return false;
+    anchors = rec.anchors.map((a) => ({ ...a }));
+    if (bundle?.__kind === "profile") {
+      // Lite: the anchors ARE the calibration (liteMap derives from them);
+      // there is no clock transform to refit. Even a single saved reading is
+      // restored -- it is half the setup the next viewer would otherwise redo.
+      cal = null;
+    } else {
+      cal = calFromAnchors() || rec.cal || null;
+      if (!cal) { anchors = []; return false; }
+    }
+    restoredFrom = from;
+    const el = root.querySelector(".tn-anchor-state");
+    if (el) {
+      el.textContent = `calibration restored (${from}, ` +
+        `${pins().length} reading${pins().length === 1 ? "" : "s"}` +
+        `${cal ? `, rate ${cal.rate.toFixed(3)}×` : ""}) — reset if it looks off`;
+    }
+    render();
+    return true;
+  }
+
+  function restoreCalibration() {
+    if (!video?.duration) return;
+    const dur = video.duration;
+    const key = calStoreKey();
+    const trySharedThenGiveUp = async () => {
+      try { await sharedCalReady; } catch (_) {}
+      const list = sharedCal?.recordings?.[`${stageKey()}|${SITE}`];
+      const rec = matchByDuration(list, dur);
+      if (rec) applyRecord(rec, "shared store");
+    };
+    try {
+      chrome.storage.local.get([key], (r) => {
+        const rec = matchByDuration(r?.[key]?.recordings, dur);
+        if (!applyRecord(rec, "this browser")) trySharedThenGiveUp();
+      });
+    } catch (_) {
+      trySharedThenGiveUp();
+    }
+  }
+
+  /** Contribute this recording's calibration to the shared store: a prefilled
+   *  GitHub issue the ingest Action merges into calibrations.json. A browser
+   *  extension holds no credentials, so this one click (plus being signed in
+   *  to GitHub) is the cheapest honest write path there is. */
+  function shareCalibration() {
+    const rec = calRecord();
+    if (!rec.anchors.length) return;
+    const title = `[calibration] stage ${rec.stage} · ${rec.site} · ` +
+                  `${Math.round(rec.duration_sec)}s`;
+    const body =
+      "Automated calibration contribution from the Tour Navigator extension.\n" +
+      "The ingest workflow merges the block below into extension/data/calibrations.json.\n\n" +
+      "```json\n" + JSON.stringify(rec, null, 2) + "\n```\n";
+    window.open(`${SHARE_ISSUE_URL}?title=${encodeURIComponent(title)}` +
+                `&body=${encodeURIComponent(body)}`, "_blank");
+  }
 
   // --------------------------------------------------------------- bootstrap
 
@@ -955,6 +1256,7 @@ the stage. The median of all readings is used.">
     const b = await bundleRes.json();
     b.__selection = why;
     b.__kind = chosen.kind || "full";
+    b.__airingMs = airing;
     return b;
   }
 
@@ -971,9 +1273,15 @@ the stage. The median of all readings is used.">
       return;
     }
     buildUi();
-    // Lite stages (no live capture -- see renderLite) have no calibration to
-    // do and nothing to filter, so the setup prompt and controls just hide.
-    if (bundle.__kind === "profile") root.classList.add("tn-lite");
+    // Lite stages (no live capture -- see renderLite): the event filters hide
+    // (there are no events), but calibration stays -- readings pin the profile
+    // straight onto the recording timeline instead of onto a race clock.
+    if (bundle.__kind === "profile") {
+      root.classList.add("tn-lite");
+      root.querySelector(".tn-setup-ask").innerHTML =
+        `Pause where the broadcast shows <strong>km to go</strong> and type it
+         (two readings, far apart, place this profile on your recording):`;
+    }
     const s = bundle.stage || {};
     root.querySelector(".tn-stage").textContent =
       `Stage ${s.stage ?? "?"} · ${s.departure ?? ""} → ${s.arrival ?? ""} · ${s.length_km ?? "?"}km`;
@@ -983,18 +1291,24 @@ the stage. The median of all readings is used.">
       root.classList.add("tn-warn");
       root.querySelector(".tn-stage").textContent += "  ⚠ " + (bundle.__selection || "");
     }
-    // Start uncalibrated, every load. One km-to-go reading is the whole setup,
-    // and NOT carrying a saved one over is deliberate: restoring it is what
-    // made the prompt flash and then revert to a stale bar.
-    clearStored();
+    // Wipe only the LEGACY per-stage slot (pre-rework, could be any
+    // recording's numbers). Properly-keyed calibrations are restored the
+    // moment the player exposes a duration -- silently, bar up straight away,
+    // with a note saying where the numbers came from and reset one click away.
+    clearLegacyStored();
     anchors = [];
     cal = null;
     refreshAnchorState();
     render();
+    sharedCalReady = fetchSharedCalibrations();
 
     setInterval(() => {
       const v = findVideo();
       if (v && v !== video) video = v;
+      if (video?.duration && !triedRestore) {
+        triedRestore = true;
+        restoreCalibration();
+      }
       render();          // unconditional: the profile draws with or without video
     }, 500);
     window.addEventListener("resize", render);

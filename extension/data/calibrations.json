@@ -1,0 +1,5 @@
+{
+  "schema": 1,
+  "_comment": "Crowdsourced calibrations, one list per (stage, site), each entry one unique recording fingerprinted by duration_sec. Extensions fetch this from raw.githubusercontent.com at load (this bundled copy is the offline fallback) and auto-apply the entry whose duration matches the recording being watched. Populated by the ingest-calibration workflow from '[calibration]' issues, which the extension's share button prefills.",
+  "recordings": {}
+}

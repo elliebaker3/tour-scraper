@@ -95,6 +95,43 @@ until you opt into a kind. Collapsing (**–**) keeps the profile as a slim stri
 Tests (need Playwright):
 
     python tests/test_extension_ui.py
+    python tests/test_calibration_persist.py
+
+## Calibration is remembered, per recording
+
+Calibrate once and that's it: the readings are saved and reapplied
+automatically next time, bar up immediately with a note saying where the
+numbers came from. Reset is one click if it ever looks wrong.
+
+The thing that makes this safe is **what it is keyed by**. A calibration
+belongs to one *recording* — `(stage, site, duration)` — not to a stage. Open
+a different cut, or the same stage on another site, and the saved numbers are
+correctly ignored: that recording gets the normal prompt and its own slot, and
+both are kept side by side. An earlier version keyed by stage alone, restored
+one recording's offset onto another, and that is why persistence had been
+removed entirely; keying it properly is the actual fix. Duration is the
+fingerprint — the same asset reopened matches within a second or two, where a
+different cut differs by minutes (30s tolerance).
+
+Two tiers are consulted, local first:
+
+| tier | where | when |
+|---|---|---|
+| this browser | `chrome.storage.local` | your own past calibration of this exact recording |
+| shared store | `data/calibrations.json`, fetched live from the repo | someone else already calibrated this same recording |
+
+The shared store is what makes a stage self-calibrating for everyone watching
+the same broadcast. **share** opens a prefilled GitHub issue holding the
+record; the `ingest-calibration` workflow validates it, merges it into
+`calibrations.json` and closes the issue. Because the extension fetches that
+file fresh from `raw.githubusercontent.com` on every load (the bundled copy is
+only the offline fallback), a merged calibration reaches every viewer without
+an extension update. An extension has no credentials to push with, which is
+why contributing routes through an issue rather than a direct write.
+
+Each stored record carries the stage, date, site, duration fingerprint, the
+airing timestamp, every km-to-go reading, the fitted transform, and the
+extension version that produced it — enough to audit or re-fit later.
 
 ## Adding stages
 
@@ -112,14 +149,22 @@ cp data/2026/stage-16_2026-07-21/navigator.json extension/data/stage-16.json
 Then hit reload on the extension card.
 
 Every stage WITHOUT a full bundle appears in the picker anyway, marked
-"— profile only": a distance/elevation reference card built from
-velowire.com's KMZ (see the repo README, source 5), with climb/sprint/finish
-markers but no clock, no calibration and no seeking — there is no telemetry
-to place the leader anywhere in the recording. Those lite bundles are
-`data/profile-stage-NN.json` (`"kind": "profile"` in the index), regenerated
-with `python -m tourscraper velowire-profiles`, which leaves every full
-bundle's index entry alone. When a stage later gets a real capture, add its
-full bundle as above and the picker upgrades it.
+"— profile only": a distance/elevation profile built from velowire.com's KMZ
+(see the repo README, source 5), with climb, sprint and finish markers. These
+lite bundles are `data/profile-stage-NN.json` (`"kind": "profile"` in the
+index), regenerated with `python -m tourscraper velowire-profiles`, which
+leaves every full bundle's index entry alone. When a stage later gets a real
+capture, add its full bundle as above and the picker upgrades it.
+
+**Lite stages calibrate too**, just against a different clock. With no
+telemetry there is no race time to map, so a km-to-go reading pins that
+distance straight onto a recording second. Two readings, far apart, give a
+piecewise-linear distance↔time map — and with it a playhead, click-to-seek,
+and clickable markers, the same as a full stage. What it cannot do is know
+the pace *between* readings: it assumes steady progress, which is crude on a
+mountain stage, so more readings around the terrain changes tighten it. One
+reading alone is stored but deliberately draws no playhead — a single pin
+plus a guessed speed would place it somewhere confidently wrong.
 
 ## Honest limits
 
