@@ -14,26 +14,23 @@ download or modify any stream.
 2. **Load unpacked** → select this `extension/` folder
 3. Open your stage recording. The panel pins to the bottom of the window.
 
-## Calibrate: two "km to go" readings
+## Calibrate: "km to go" readings
 
 Pause where the broadcast shows **km to go**, type that number in and press
-**Calibrate**. Then do it once more from a point **far away** -- near the finish
-is ideal -- with the **Add reading** field. Two readings is the accurate setup.
+**Add reading**. One reading is enough to be useful; a second one far away --
+near the finish is ideal -- fits the rate itself and is the accurate setup.
 
-Until the first reading the panel shows the prompt and nothing else -- no bar,
-no markers. A profile with no clock invites reading positions off it that are
-not real, which is how every "the elevation doesn't line up" problem started.
+The bar draws before any of that, from the broadcast's own shape (see *The
+clock: two layers* below), and says what it is assuming while it does. A
+reading refines that rather than unlocking it.
 
-**Why two, not one.** The recording does *not* run 1:1 with race time. On stage
-14 it advances at **0.918x** -- about 20 minutes of racing is not in the
-recording, spread across the stage. One reading fixes where the profile sits
-(the offset) but has to *assume* the 1:1 rate, so it is exact at that one point
-and drifts as you move away: a few kilometres of gap within an hour, more toward
-the ends. That drift is the "large gaps between the bar and the screen" symptom.
-A second reading far from the first supplies the **rate** -- the extension fits
-recording-second against race-time across both -- and the gap closes over the
-whole stage. The status line then shows the fitted rate (`rate 0.918x`) and how
-well the readings agree (`fits to +/-3s`).
+**Why a second one helps.** The recording does *not* run 1:1 with race time.
+On stage 14 it advances at **0.918x** -- about 20 minutes of racing is missing,
+spread across the stage as ad breaks. One reading fixes where the profile sits
+and keeps the assumed 0.92x rate, which is already close everywhere. A second
+reading far from the first supplies the measured **rate**: the extension fits
+recording-second against race-time across both, and the status line then shows
+it (`rate 0.918x`) with how well the readings agree (`fits to +/-3s`).
 
 **Accuracy is bounded by the graphic.** It counts in whole kilometres, so "42"
 means somewhere in [42, 43); the midpoint is used. Two readings far apart divide
@@ -41,9 +38,9 @@ that rounding across a long baseline, so it barely affects the rate -- but two
 readings *close together* cannot fix the rate, and the panel says so and falls
 back to offset-only.
 
-**reset** clears it and returns to the prompt. Calibration is not remembered
-across reloads -- every load asks for the current km-to-go rather than restoring
-a stale one.
+**reset** clears this recording's readings and returns to the stated default --
+it does not blank the bar, because the default is still a clock. Calibrations
+*are* remembered, per recording; see below.
 
 ## What the bar shows
 
@@ -80,7 +77,7 @@ screen shows a climb and that says descending, the reading was off.
 
 The panel always states what it is assuming:
 
-    stage 14 (2026-07-18) · rec 0:00 = 10:36:29Z · rate 1.000× · matched airing date
+    stage 14 (2026-07-18) · rate 0.918× · no ad breaks found — global rate only · matched airing date
 
 The panel **rides with the player's controls**: it fades in when you move the
 mouse and out after a few seconds of stillness, sitting just above the player's
