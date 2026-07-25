@@ -21,5 +21,17 @@
       "events": 0,
       "raw-only": 0
     }
+  },
+  {
+    "recorded_at": "2026-07-25T09:45:41.730+00:00",
+    "kind": "profile",
+    "source": "https://racecenter.letour.fr/profils/2026/profile-20-b7efb4f690263260c56062a24ce50688.csv",
+    "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-07-25T09:45:41.735+00:00",
+    "kind": "profile",
+    "source": "https://racecenter.letour.fr/profils/2026/profile-20-tiny-72b592232b304a20d16b9bc92f4d5526.csv",
+    "via": "autodiscover"
   }
 ]
