@@ -68,7 +68,7 @@
         "extension_version": "0.2.0",
         "ingested_at": "2026-07-25T22:30:54.812Z",
         "via": "worker",
-        "submitter": "sha:260ÃÂ¢ÃÂÃÂ¦"
+        "submitter": "sha:260ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¦"
       }
     ],
     "stage-20|www.peacocktv.com": [
@@ -100,13 +100,20 @@
             "km": 141.2,
             "kmto": 141.2,
             "label": "141.2 km to go"
+          },
+          {
+            "videoSec": 4732.728241,
+            "kind": "kmtogo",
+            "km": 147,
+            "kmto": 147.5,
+            "label": "147 km to go"
           }
         ],
         "cal": null,
         "ad_breaks": [],
-        "saved_at": "2026-07-25T23:39:50.453Z",
+        "saved_at": "2026-07-25T23:48:48.975Z",
         "extension_version": "0.2.0",
-        "ingested_at": "2026-07-25T23:39:50.554Z",
+        "ingested_at": "2026-07-25T23:48:49.189Z",
         "via": "worker",
         "submitter": "sha:260…"
       }
