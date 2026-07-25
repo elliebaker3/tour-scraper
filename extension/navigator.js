@@ -47,8 +47,8 @@
   //   2. the issue form -- used when no collector is deployed or it can't be
   //      reached. Needs a GitHub login, which is the barrier the collector
   //      exists to remove.
-  // Empty until `wrangler deploy` prints the URL; blank = fallback only.
-  const COLLECTOR_URL = "";
+  // Blank here would mean fallback-only; this is the deployed collector.
+  const COLLECTOR_URL = "https://tour-calibrations.tournavigator.workers.dev";
   const SHARE_ISSUE_URL = "https://github.com/elliebaker3/tour-scraper/issues/new";
   // Same asset re-opened: duration identical to within ~2s. Different cut:
   // minutes apart. 30s splits those cleanly.

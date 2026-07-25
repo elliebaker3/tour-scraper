@@ -9,7 +9,7 @@
   "host_permissions": [
     "https://www.peacocktv.com/*",
     "https://raw.githubusercontent.com/*",
-    "https://*.workers.dev/*"
+    "https://tour-calibrations.tournavigator.workers.dev/*"
   ],
   "content_scripts": [
     {
