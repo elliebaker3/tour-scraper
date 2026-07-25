@@ -205,8 +205,11 @@
    arising. One input, one button, nothing else to get wrong. */
 .tn-setup { display: none; align-items: center; gap: 8px; padding: 2px 0 4px; }
 .tn-root.tn-needs-setup .tn-setup { display: flex; }
-.tn-root.tn-needs-setup .tn-bar,
-.tn-root.tn-needs-setup .tn-controls { display: none; }
+/* Only a panel with NO clock at all hides the bar. Once there is a default
+   model there is always something honest to draw, so the prompt sits above
+   the bar instead of replacing it -- and retires as soon as a reading lands. */
+.tn-root.tn-no-clock .tn-bar,
+.tn-root.tn-no-clock .tn-controls { display: none; }
 .tn-setup-ask { color: #d7dce4; }
 .tn-setup-ask strong { color: #fff; }
 .tn-setup-unit { color: #8f97a3; }
@@ -247,6 +250,25 @@
 }
 .tn-rm-finish .tn-rm-badge { background: transparent; box-shadow: none; font-size: 11px; }
 .tn-rm:hover .tn-rm-badge { transform: translateX(-50%) scale(1.25); }
+
+/* The climb's actual name, drawn on the bar beneath its badge. A tooltip was
+   not enough: it needs a 6px dot hovered exactly, so in practice the names
+   went unread. Kept small and unobtrusive so a run of them never competes
+   with the elevation trace itself, and non-interactive so it can overhang a
+   neighbour without stealing its click. */
+.tn-rm-name {
+  position: absolute; left: 50%; bottom: 21px; transform: translateX(-50%);
+  font-size: 9px; line-height: 1; white-space: nowrap; color: #e8ecf2;
+  text-shadow: 0 1px 3px #000, 0 0 4px #000; pointer-events: none;
+  letter-spacing: .1px;
+}
+.tn-rm-below .tn-rm-name { bottom: auto; top: 21px; }
+.tn-rm-atleft  .tn-rm-name { left: 0; transform: none; }
+.tn-rm-atright .tn-rm-name { left: auto; right: 0; transform: none; }
+/* The one being pointed at wins the stacking order, so an overlapped name is
+   always readable on hover. */
+.tn-rm:hover .tn-rm-name { color: #fff; z-index: 3; }
+.tn-rm:hover { z-index: 3; }
 
 /* Keep every badge fully inside the bar. Summits sit near the top, so their
    badge flips below the dot; markers at the extreme edges anchor to the dot

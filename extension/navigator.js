@@ -186,14 +186,103 @@
   }
 
 
+  /* The clock, in two layers.
+   *
+   * LAYER 1 -- the broadcast's shape, with no readings at all. A Peacock
+   * recording opens with roughly an hour of build-up before the flag drops,
+   * and thereafter loses about 8% of race time to ad breaks. Those two
+   * constants alone (BROADCAST_PREROLL_SEC, DEFAULT_RATE) place the whole
+   * stage well enough to draw, which is why the bar no longer waits for a
+   * reading before showing anything.
+   *
+   * LAYER 2 -- readings. Between ad breaks the broadcast runs at real time,
+   * so a reading is exact at its own moment and stays exact either side of
+   * it at RATE 1 until an ad break intervenes. That is the local model:
+   *
+   *   before the first reading   rate 1 backwards from it
+   *   between two readings       straight line between them, which absorbs
+   *                              whatever ad breaks fall in that span
+   *   after the last reading     rate 1 forwards from it
+   *
+   * The straight line between two readings is the honest choice: we cannot
+   * see where the ad breaks are, only their aggregate effect between two
+   * known points, so the error is spread evenly rather than guessed at.
+   * Accuracy therefore comes from readings NEAR what you are looking at, not
+   * from more readings in total.
+   */
+  const BROADCAST_PREROLL_SEC = 3600;
+
+  /** The no-readings model: race start sits at the preroll, then 0.92x. */
+  function defaultCal() {
+    const startMs = Date.parse(bundle?.coverage?.race_start_utc || "");
+    if (!isFinite(startMs)) return null;
+    return { refMs: startMs, offsetSec: BROADCAST_PREROLL_SEC,
+             rate: DEFAULT_RATE, source: "default" };
+  }
+
+  /** Readings sorted along the recording, which is the axis both maps walk. */
+  function ordered() {
+    return pins().filter((a) => isFinite(a.tUtcMs) && isFinite(a.videoSec))
+                 .sort((a, b) => a.videoSec - b.videoSec);
+  }
+
   function utcToVideo(tUtcMs) {
-    if (!cal) return null;
-    return cal.offsetSec + cal.rate * (tUtcMs - cal.refMs) / 1000;
+    const p = ordered();
+    if (!p.length) {
+      if (!cal) return null;
+      return cal.offsetSec + cal.rate * (tUtcMs - cal.refMs) / 1000;
+    }
+    if (tUtcMs <= p[0].tUtcMs) {                       // before: rate 1 back
+      return p[0].videoSec + (tUtcMs - p[0].tUtcMs) / 1000;
+    }
+    const last = p[p.length - 1];
+    if (tUtcMs >= last.tUtcMs) {                       // after: rate 1 forward
+      return last.videoSec + (tUtcMs - last.tUtcMs) / 1000;
+    }
+    for (let i = 1; i < p.length; i++) {               // between: interpolate
+      const a = p[i - 1], b = p[i];
+      if (tUtcMs <= b.tUtcMs) {
+        const span = b.tUtcMs - a.tUtcMs;
+        if (span <= 0) return a.videoSec;
+        return a.videoSec + (b.videoSec - a.videoSec) * ((tUtcMs - a.tUtcMs) / span);
+      }
+    }
+    return last.videoSec;
   }
 
   function videoToUtc(sec) {
-    if (!cal || !cal.rate) return null;
-    return cal.refMs + ((sec - cal.offsetSec) / cal.rate) * 1000;
+    const p = ordered();
+    if (!p.length) {
+      if (!cal || !cal.rate) return null;
+      return cal.refMs + ((sec - cal.offsetSec) / cal.rate) * 1000;
+    }
+    if (sec <= p[0].videoSec) {
+      return p[0].tUtcMs + (sec - p[0].videoSec) * 1000;
+    }
+    const last = p[p.length - 1];
+    if (sec >= last.videoSec) {
+      return last.tUtcMs + (sec - last.videoSec) * 1000;
+    }
+    for (let i = 1; i < p.length; i++) {
+      const a = p[i - 1], b = p[i];
+      if (sec <= b.videoSec) {
+        const span = b.videoSec - a.videoSec;
+        if (span <= 0) return a.tUtcMs;
+        return a.tUtcMs + (b.tUtcMs - a.tUtcMs) * ((sec - a.videoSec) / span);
+      }
+    }
+    return last.tUtcMs;
+  }
+
+  /** What the panel should say the current rate is: the local slope actually
+   *  in use, not a single global number that no longer exists once there are
+   *  readings. */
+  function effectiveRate() {
+    const p = ordered();
+    if (p.length < 2) return p.length === 1 ? 1 : (cal ? cal.rate : DEFAULT_RATE);
+    const dv = p[p.length - 1].videoSec - p[0].videoSec;
+    const dt = (p[p.length - 1].tUtcMs - p[0].tUtcMs) / 1000;
+    return dt > 0 ? dv / dt : 1;
   }
 
   const fmt = (sec) => {
@@ -447,11 +536,15 @@
         (mx < 16 ? " tn-rm-atleft" : mx > width - 16 ? " tn-rm-atright" : "");
       const sec = lm && dur
         ? Math.max(0, Math.min(dur, lm.secAtKmto(len - m.km))) : null;
+      // Lite bundles come straight from velowire, whose label IS the name
+      // ("Col du Noyer"), so it goes on the bar the same way.
+      const nameTag = m.label
+        ? `<span class="tn-rm-name">${escapeHtml(m.label)}</span>` : "";
       routeMarks.push(
         `<div class="tn-rm tn-rm-${m.kind}${m.kind === "finish" ? " tn-rm-finish" : ""}${place}"
               style="left:${mx.toFixed(1)}px;top:${my.toFixed(1)}px;--rm:${color}"
               ${sec != null ? `data-sec="${sec.toFixed(1)}"` : ""} title="${escapeHtml(tip)}">
-           <span class="tn-rm-badge">${escapeHtml(badge)}</span>
+           <span class="tn-rm-badge">${escapeHtml(badge)}</span>${nameTag}
          </div>`);
     }
 
@@ -513,8 +606,14 @@
     // race. Showing a shape before then invites reading positions off it that
     // are not real, which is exactly how "the elevation doesn't line up" kept
     // happening. So the panel is the setup prompt and nothing else.
+    // The prompt now rides ALONGSIDE the bar rather than replacing it: with a
+    // stated default there is always something honest to draw, but the viewer
+    // still needs telling how to make it exact. It retires once a reading
+    // exists. Nothing can be drawn at all without a player or a race start,
+    // and that case still owns the panel.
     const ready = !!(cal && dur);
-    root.classList.toggle("tn-needs-setup", !ready);
+    root.classList.toggle("tn-needs-setup", !ready || !pins().length);
+    root.classList.toggle("tn-no-clock", !ready);
     const note = root.querySelector(".tn-setup-note");
     if (!ready) {
       note.textContent = dur ? "" : "waiting for the player…";
@@ -524,6 +623,7 @@
         `${bundle.__selection || ""}`;
       return;
     }
+    note.textContent = "";
 
     const bar = root.querySelector(".tn-bar");
     const width = bar.clientWidth || 900;
@@ -562,11 +662,16 @@
       const place =
         (y < 20 ? " tn-rm-below" : "") +
         (x < 16 ? " tn-rm-atleft" : x > width - 16 ? " tn-rm-atright" : "");
+      // The name is drawn ON the bar, not left in the tooltip: a tooltip that
+      // needs a 6px dot hovered exactly is not a label you can read at a
+      // glance, which is the whole point of naming a climb.
+      const nameTag = m.name
+        ? `<span class="tn-rm-name">${escapeHtml(m.name)}</span>` : "";
       routeMarks.push(
         `<div class="tn-rm tn-rm-${m.kind}${m.finish ? " tn-rm-finish" : ""}${place}"
               style="left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;--rm:${color}"
               data-sec="${sec.toFixed(1)}" title="${escapeHtml(tip)}">
-           <span class="tn-rm-badge">${escapeHtml(badge)}</span>
+           <span class="tn-rm-badge">${escapeHtml(badge)}</span>${nameTag}
          </div>`);
     }
 
@@ -660,7 +765,7 @@
 
     root.querySelector(".tn-diag").textContent =
       `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
-      `rate ${cal.rate.toFixed(3)}× · ${bundle.__selection || ""}`;
+      `rate ${effectiveRate().toFixed(3)}× · ${bundle.__selection || ""}`;
   }
 
   /** Altitude at a race time (ms), from the nearest timed profile point -- so a
@@ -851,7 +956,11 @@ watch.">Add reading</button>
     // superseded by the next share, not deleted from a viewer's browser.
     root.querySelector(".tn-anchor-clear").addEventListener("click", () => {
       anchors = [];
-      cal = null;
+      // Reset drops the READINGS, not the clock. The broadcast's stated
+      // default is still a clock, so the bar keeps drawing rather than
+      // blanking -- there is nothing to be gained by showing less than we
+      // honestly know.
+      cal = defaultCal();
       restoredFrom = "";
       clearLegacyStored();
       try {
@@ -958,7 +1067,7 @@ watch.">Add reading</button>
     anchors = anchors.filter((a) => a.kind);
     anchors.push({ tUtcMs: hit.tMs, videoSec: at, kind: "kmtogo", km,
                    label: `${km} km to go` });
-    cal = calFromAnchors();
+    cal = calFromAnchors() || defaultCal();
     saveCalibration();
     shareCalibration();
     render();
@@ -967,28 +1076,20 @@ watch.">Add reading</button>
     const parts = [`${km} km to go — reading added`];
     if (hit.est) parts.push("⚠ that stretch has no GPS — pace is inferred there");
 
+    // Accuracy is now LOCAL, so the advice is too. A reading is exact where it
+    // was taken and stays exact either side at real time until an ad break
+    // intervenes; the way to be right somewhere else is a reading near there,
+    // not more readings in general. (The old text asked for one "far away, to
+    // fit the rate" -- that belonged to the single-global-rate model and is
+    // actively misleading now.)
     if (p.length === 1) {
-      // One reading fixes the offset and takes the default rate. That is close
-      // across the stage, but the true rate varies by recording, so a second
-      // reading far from this one is what pins it exactly.
-      parts.push(`offset set, rate assumed ${DEFAULT_RATE.toFixed(2)}×`);
-      parts.push("▶ add a reading from far away (near the finish is ideal) " +
-                 "to fit the rate exactly");
+      parts.push("exact here, real time either side");
+      parts.push("▶ add another near anything else you want to be exact at");
     } else {
-      const xs = p.map((a) => a.tUtcMs / 1000);
-      const baselineMin = (Math.max(...xs) - Math.min(...xs)) / 60;
-      const res = pinResidualsSec().map(Math.abs);
-      const worst = res.length ? Math.max(...res) : 0;
-      parts.push(`${p.length} readings over ${baselineMin.toFixed(0)} min`);
-      if (baselineMin < 20) {
-        parts.push("⚠ readings too close to fix rate — spread them out, " +
-                   "one early one late");
-      } else {
-        parts.push(`rate ${cal.rate.toFixed(3)}× · fits to ±${worst.toFixed(0)}s`);
-        if (worst > 90) {
-          parts.push("⚠ readings disagree — re-check one, or reset and redo");
-        }
-      }
+      const around = p.map((a) => a.km).sort((a, b) => b - a)
+                      .map((k) => `${k}`).join(", ");
+      parts.push(`${p.length} readings (at ${around} km to go)`);
+      parts.push(`${effectiveRate().toFixed(3)}× average across them`);
     }
     el.textContent = parts.join(" · ");
     console.log("[TourNavigator] km-to-go sync:", el.textContent);
@@ -1003,7 +1104,13 @@ watch.">Add reading</button>
   function refreshAnchorState() {
     const el = root.querySelector(".tn-anchor-state");
     const p = pins();
-    if (!p.length) { el.textContent = "not calibrated"; return; }
+    if (!p.length) {
+      el.textContent = cal
+        ? `assuming ${BROADCAST_PREROLL_SEC / 60} min of build-up then ` +
+          `${DEFAULT_RATE.toFixed(2)}× — a reading makes it exact where you are`
+        : "not calibrated";
+      return;
+    }
     if (bundle?.__kind === "profile") {
       el.textContent = p.length < 2
         ? "1 reading — add one far away to place the playhead"
@@ -1011,14 +1118,14 @@ watch.">Add reading</button>
       return;
     }
     if (p.length === 1) {
-      el.textContent = `1 reading · rate ${DEFAULT_RATE.toFixed(2)}× assumed — ` +
-        "add one far away to fit it exactly";
+      el.textContent = "1 reading · exact there, real-time either side — " +
+        "add another near anything else you care about";
       return;
     }
     const res = pinResidualsSec().map(Math.abs);
     const worst = res.length ? Math.max(...res) : 0;
     el.textContent =
-      `${p.length} readings · rate ${cal.rate.toFixed(3)}× · fits to ±${worst.toFixed(0)}s`;
+      `${p.length} readings · rate ${effectiveRate().toFixed(3)}× · fits to ±${worst.toFixed(0)}s`;
   }
 
 
@@ -1132,7 +1239,7 @@ watch.">Add reading</button>
     if (el) {
       el.textContent = `calibration restored (${from}, ` +
         `${pins().length} reading${pins().length === 1 ? "" : "s"}` +
-        `${cal ? `, rate ${cal.rate.toFixed(3)}×` : ""}) — reset if it looks off`;
+        `${cal ? `, rate ${effectiveRate().toFixed(3)}×` : ""}) — reset if it looks off`;
     }
     render();
     return true;
@@ -1346,7 +1453,14 @@ watch.">Add reading</button>
     // with a note saying where the numbers came from and reset one click away.
     clearLegacyStored();
     anchors = [];
-    cal = null;
+    // Start from the broadcast's own shape rather than from nothing: an hour
+    // of build-up then 0.92x. That is already close enough to draw and to
+    // navigate roughly by, so the bar appears immediately and a reading
+    // becomes a refinement rather than a precondition. (It used to sit behind
+    // a setup gate on the grounds that an uncalibrated profile invites false
+    // readings -- but a stated, visible default is not the same thing as no
+    // clock at all, and the diag says which model is in use.)
+    cal = defaultCal();
     refreshAnchorState();
     render();
     sharedCalReady = fetchSharedCalibrations();

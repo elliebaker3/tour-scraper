@@ -1,20 +1,19 @@
-"""Assert the panel shows nothing until it is calibrated, then everything.
+"""Assert the panel draws from a stated default, then sharpens on readings.
 
 The contract:
 
-1. Before calibration the panel is the setup prompt and nothing else -- no
-   bar, no markers, no filters. A profile with no clock invites reading
-   positions off it that are not real, which is how every "the elevation
-   doesn't line up" report began.
+1. With no readings at all the bar still draws, from the broadcast's own
+   shape: about an hour of build-up before the flag, then ~0.92x race time.
+   The panel must SAY it is assuming that -- a silent default would be the
+   old "the elevation doesn't line up" problem wearing a disguise.
 
-2. Calibration is km-to-go readings and nothing else. One reading sets the
-   offset (rate assumed 1.0); a second reading far away FITS the rate, which
-   this recording needs because it runs at 0.918x race time, not 1:1. With one
-   reading the clock drifts away from the anchor; with two it is accurate
-   across the whole stage.
+2. Calibration is km-to-go readings and nothing else. A reading is exact
+   where it was taken and holds at real time either side of it, because
+   between ad breaks the broadcast runs 1:1. Accuracy is therefore local:
+   a reading near what you are watching, not more readings in general.
 
-3. Once calibrated the bar appears, spans the full width (imputed where the
-   recording is running but no race is), and every readout is in km remaining.
+3. The bar spans the full width, imputed where the recording is running but
+   no race is, and every readout is in km remaining.
 
 Ground truth is the real stage 14 replay: km 0 at 11:35:38Z, recording second 0
 at 10:36:29Z, and the recording advancing at 0.918x race time.
@@ -152,27 +151,48 @@ try:
         assert state()["hidden"], "FAIL: panel should hide after the mouse is idle"
         print("--- visibility: hidden on load, shown on move, hidden when idle ✓")
 
-        # --- 1: nothing before calibration -----------------------------------
+        # --- 1: the broadcast's own shape, before any reading ----------------
+        # The old contract here was the opposite -- nothing drawn until a
+        # reading existed, on the grounds that an uncalibrated profile invites
+        # reading false positions off it. That gate is gone: a Peacock
+        # recording opens with about an hour of build-up and then runs at
+        # ~0.92x, and stating those two assumptions places the stage well
+        # enough to draw. A visible, declared default is not the same thing as
+        # no clock at all, so the bar now appears immediately and a reading
+        # refines it rather than unlocking it.
         page.goto(base)
         page.wait_for_selector(".tn-root", timeout=10000)
         page.wait_for_timeout(3000)
         show()
         s = state()
-        print("--- before calibration ---")
+        print("--- before any reading ---")
         print(f"  setup shown    {s['setupShown']}")
         print(f"  bar shown      {s['barShown']}")
         print(f"  controls shown {s['controlsShown']}")
         print(f"  markers        {s['markers']}")
         print(f"  buttons        {s['buttons']}")
-        assert s["setupShown"], "FAIL: setup prompt not shown"
-        assert not s["barShown"], "FAIL: bar visible before calibration"
-        assert not s["controlsShown"], "FAIL: controls visible before calibration"
-        assert s["markers"] == 0, "FAIL: markers drawn before calibration"
+        assert s["barShown"], "FAIL: bar not drawn from the default model"
+        assert s["controlsShown"], "FAIL: controls hidden with the bar drawn"
+        # .tn-marker counts RACE EVENTS, which default off; the elevation
+        # graphic's own sprint/climb markers are what must be there.
+        assert s["sprints"] + s["koms"] > 0, \
+            "FAIL: no route markers drawn from the default model"
+        # The prompt stays -- it explains how to sharpen the default -- but it
+        # no longer REPLACES the bar, which was the old gate's whole effect.
+        assert s["setupShown"], "FAIL: no prompt telling the viewer how to refine"
+
+        # The default must SAY what it is assuming -- an unstated default is
+        # exactly the silent-wrong-position problem the old gate guarded against.
+        assumed = page.evaluate(
+            "() => document.querySelector('.tn-anchor-state').textContent")
+        print(f"  states default {assumed!r}")
+        assert "0.92" in assumed and "build-up" in assumed, \
+            f"FAIL: default model not declared to the viewer: {assumed!r}"
 
         # Only one calibration route is offered.
         for gone in ("Km 0 is NOW", "Anchor here", "Auto-calibrate", "Diagnose", "Align"):
             assert gone not in s["buttons"], f"FAIL: {gone!r} still offered"
-        assert "Calibrate" in s["buttons"], f"FAIL: no Calibrate button: {s['buttons']}"
+        assert "Add reading" in s["buttons"], f"FAIL: no Add reading button: {s['buttons']}"
 
         # History and Stats are gone; race events default off; sprint/climb and
         # the contenders (POI) markers default on.
@@ -184,17 +204,22 @@ try:
         assert s["checkedFilters"] == 3, \
             f"FAIL: expected Sprints+Climbs+Contenders on by default, got {s['checkedFilters']}"
 
-        # A saved calibration must NOT be restored: it is the flash-then-revert
-        # bug. Even a current-shape entry is ignored and the prompt stays.
+        # A calibration left behind by an OLDER extension version is keyed only
+        # by stage, so it could belong to any recording of it -- exactly the
+        # mixup that made persistence untrustworthy. It must never be adopted.
+        # (Properly keyed calibrations are restored, deliberately; that is
+        # tests/test_calibration_persist.py's subject.)
         page.goto(base + "&stalecal=1")
         page.wait_for_selector(".tn-root", timeout=10000)
         page.wait_for_timeout(3000)     # let the load settle and any restore fire
         show()
         s2 = state()
-        print("\n--- load with a saved calibration present ---")
-        print(f"  setup shown {s2['setupShown']} · bar shown {s2['barShown']}")
-        assert s2["setupShown"] and not s2["barShown"], \
-            "FAIL: a saved calibration was restored instead of prompting"
+        stale_state = page.evaluate(
+            "() => document.querySelector('.tn-anchor-state').textContent")
+        print("\n--- load with a legacy saved calibration present ---")
+        print(f"  bar shown {s2['barShown']} · state {stale_state!r}")
+        assert "restored" not in stale_state, \
+            f"FAIL: a legacy calibration was adopted: {stale_state!r}"
 
         page.goto(base)               # back to the clean page for the rest
         page.wait_for_selector(".tn-root", timeout=10000)
@@ -212,13 +237,15 @@ try:
         print(f"  status  {s['status']}")
         print(f"  diag    {s['diag']}")
         assert s["barShown"], "FAIL: bar still hidden after calibrating"
-        assert not s["setupShown"], "FAIL: setup prompt still shown after calibrating"
+        assert not s["setupShown"], "FAIL: prompt still shown after a reading"
         # Race-event markers default off, so the bar is uncluttered until asked.
         assert s["markers"] == 0, "FAIL: event markers should default off"
-        # One reading takes the DEFAULT rate (0.92 -- recordings run slower than
-        # race time), not 1.0.
-        assert "rate 0.92" in s["diag"], \
-            f"FAIL: one reading should assume the 0.92 default, got: {s['diag']}"
+        # A reading replaces the 0.92 AVERAGE with real time either side of it.
+        # 0.92 describes a whole broadcast including its ad breaks; between
+        # them the feed runs 1:1, and a reading says which side of a break you
+        # are on. So one reading means rate 1, not the average.
+        assert "rate 1.00" in s["diag"], \
+            f"FAIL: a reading should hold real time either side, got: {s['diag']}"
 
         # Sprint and climb markers are on the profile, from the route data.
         n_sprint = sum(1 for m in bundle["route_markers"] if m["kind"] == "sprint")
@@ -297,20 +324,34 @@ try:
         assert lo <= 1 and hi >= s["width"] - 1, "FAIL: bar does not span the recording"
         assert s["imp"], "FAIL: nothing imputed outside the race"
 
-        # --- 3: ONE reading already lands close, thanks to the 0.92 default ----
-        # Rate 1.0 used to drift ~13 km by the finish on a 0.918x recording;
-        # starting from 0.92 keeps a single reading usable the whole way.
+        # --- 3: a reading is exact WHERE IT IS, and decays with distance ------
+        # This is the deliberate trade in the local model. Real time either
+        # side of a reading is right until an ad break intervenes, so accuracy
+        # is a function of how far you are from a reading -- not of how many
+        # readings exist. Near it, near-perfect; an hour of racing away, the
+        # unaccounted breaks have added up. Both halves are asserted, because
+        # the decay is a property to keep honest about rather than hide: it is
+        # the reason the panel tells you to add a reading near what you care
+        # about instead of "one far away".
+        for kmto, tol, label in ((41.0, 0.8, "close to the reading"),
+                                 (35.0, 2.0, "a few km away")):
+            page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(kmto)}")
+            page.wait_for_timeout(600)
+            m = re.search(r"([\d.]+) km to go", state()["clock"])
+            off = abs(float(m.group(1)) - kmto)
+            print(f"  {label}: truth {kmto} -> bar says {m.group(1)} ({off:.1f} km off)")
+            assert off <= tol, f"FAIL: {off:.1f} km off {label} (tol {tol})"
+
         page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(5.5)}")
         page.wait_for_timeout(700)
-        c = state()["clock"]
-        m = re.search(r"([\d.]+) km to go", c)
-        drift = abs(float(m.group(1)) - 5.5)
-        print(f"\n--- one reading, seeked to true 5 km to go ---")
-        print(f"  clock says {m.group(1)} km to go (truth 5.5) -> {drift:.1f} km off")
-        assert drift <= 1.5, \
-            f"FAIL: one reading at the 0.92 default should stay close, got {drift:.1f} km"
+        m = re.search(r"([\d.]+) km to go", state()["clock"])
+        far = abs(float(m.group(1)) - 5.5)
+        print(f"  an hour of racing away: truth 5.5 -> bar says {m.group(1)} ({far:.1f} km off)")
+        assert far > 1.0, \
+            ("FAIL: extrapolating at real time over an hour should visibly drift; "
+             f"only {far:.1f} km off suggests the local model is not in use")
 
-        # --- 4: a SECOND reading far away fits the rate and kills the drift ---
+        # --- 4: a second reading brackets the gap and removes that drift ------
         page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(150.5)}")
         page.fill(".tn-togo-km2", "150")
         page.click(".tn-togo-set2")
@@ -320,29 +361,64 @@ try:
         print(f"  status  {s['status']}")
         print(f"  diag    {s['diag']}")
         rate_m = re.search(r"rate (\d\.\d+)", s["diag"])
-        assert rate_m, f"FAIL: no fitted rate in diag: {s['diag']}"
+        assert rate_m, f"FAIL: no rate in diag: {s['diag']}"
         got_rate = float(rate_m.group(1))
-        print(f"  fitted rate {got_rate} vs true {RATE_TRUE}")
+        # Between two readings the map is a straight line, so the slope it
+        # reports IS the recording's true average over that span -- ad breaks
+        # and all. Recovering 0.918x here is what proves the span is measured
+        # rather than assumed.
+        print(f"  average across the two readings {got_rate} vs true {RATE_TRUE}")
         assert abs(got_rate - RATE_TRUE) <= 0.01, \
-            f"FAIL: rate not recovered: {got_rate} vs {RATE_TRUE}"
+            f"FAIL: span average not recovered: {got_rate} vs {RATE_TRUE}"
 
-        # Now the clock must be accurate EVERYWHERE, including near the finish.
-        print("\n--- two readings: km-to-go accurate across the stage ---")
-        for shown in (130, 90, 50, 20, 8):
+        # Accuracy is BRACKETED, not global. Between two readings the line is
+        # pinned at both ends and the ad breaks in that span are absorbed
+        # exactly; past the outermost reading it is real-time extrapolation
+        # again and the unaccounted breaks resume accumulating. So the readings
+        # want to straddle what you are watching -- which is why the panel asks
+        # for one "near anything else you want to be exact at" rather than
+        # "far away".
+        print("\n--- between the two readings (150 and 42 km to go) ---")
+        for shown in (130, 90, 50):
             page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(shown + 0.5)}")
             page.wait_for_timeout(500)
-            c = state()["clock"]
-            m = re.search(r"([\d.]+) km to go", c)
+            m = re.search(r"([\d.]+) km to go", state()["clock"])
             off = abs(float(m.group(1)) - (shown + 0.5))
             print(f"  screen {shown} km to go -> bar says {m.group(1)} ({off:.1f} km off)")
-            assert off <= 1.5, f"FAIL: {off:.1f} km gap at {shown} km to go after rate fit"
+            assert off <= 1.0, f"FAIL: {off:.1f} km gap at {shown} km to go, inside the bracket"
+
+        print("--- past the last reading, drift resumes (expected) ---")
+        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(20.5)}")
+        page.wait_for_timeout(500)
+        m = re.search(r"([\d.]+) km to go", state()["clock"])
+        outside = abs(float(m.group(1)) - 20.5)
+        print(f"  screen 20 km to go -> bar says {m.group(1)} ({outside:.1f} km off)")
+        assert outside > 1.0, \
+            ("FAIL: outside the bracket should extrapolate at real time and drift; "
+             f"{outside:.1f} km off suggests a global rate is still being applied")
+
+        # ...and a third reading there brackets it too, which is the fix.
+        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(8.5)}")
+        page.fill(".tn-togo-km2", "8")
+        page.click(".tn-togo-set2")
+        page.wait_for_timeout(700)
+        page.evaluate(f"() => document.querySelector('video').currentTime = {rec_for_kmto(20.5)}")
+        page.wait_for_timeout(500)
+        m = re.search(r"([\d.]+) km to go", state()["clock"])
+        fixed = abs(float(m.group(1)) - 20.5)
+        print(f"  after a reading at 8 km to go -> 20 km reads {m.group(1)} ({fixed:.1f} km off)")
+        assert fixed <= 1.0, \
+            f"FAIL: bracketing 20 km should fix it, still {fixed:.1f} km off"
 
         # --- 6: reset returns to the prompt ----------------------------------
         page.click(".tn-anchor-clear")
         page.wait_for_timeout(700)
         s = state()
         print(f"\n  after reset: setup={s['setupShown']} bar={s['barShown']}")
-        assert s["setupShown"] and not s["barShown"], "FAIL: reset did not return to setup"
+        # Reset drops the readings, not the clock: the stated default is still
+        # a clock, so the bar keeps drawing and the prompt comes back with it.
+        assert s["setupShown"], "FAIL: reset did not bring the prompt back"
+        assert s["barShown"], "FAIL: reset should fall back to the default model, not blank"
 
         print(f"\n  page errors: {errs or 'none'}")
         assert not errs, f"FAIL: page errors {errs}"

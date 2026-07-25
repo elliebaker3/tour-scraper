@@ -43,6 +43,9 @@ from xml.etree import ElementTree as ET
 
 import requests
 
+from .gpx_profile import downsample as gpx_downsample
+from .gpx_profile import load_stage as gpx_load
+
 KMZ_URL = "https://short.thover.com/?ID=1263"  # velowire's own short-link for the season's KMZ
 KML_NS = {"k": "http://www.opengis.net/kml/2.2"}
 
@@ -310,7 +313,8 @@ def name_route_markers(route_markers: list[dict], velowire_dir: Path,
     return route_markers, f"named {named}/{len(route_markers)}"
 
 
-def publish_lite_bundles(velowire_dir: Path, extension_data_dir: Path) -> None:
+def publish_lite_bundles(velowire_dir: Path, extension_data_dir: Path,
+                         gpx_dir: Path | None = None) -> None:
     """Copy every velowire profile that ISN'T already covered by a real
     (time-synced) navigator bundle into extension/data/ as a lite bundle, and
     rewrite index.json so the stage picker offers all 21 stages.
@@ -336,11 +340,27 @@ def publish_lite_bundles(velowire_dir: Path, extension_data_dir: Path) -> None:
             continue
         data = json.loads(src.read_text(encoding="utf-8"))
         dep, arr = data.get("departure"), data.get("arrival")
+
+        # Elevation comes from the official GPX track where one exists: it is
+        # the surveyed route rather than a trace of it, and its own distance
+        # lands within a few tenths of the official length where velowire's
+        # runs kilometres long. velowire is still the source of the NAMES,
+        # which the GPX has none of, and the fallback shape for the handful of
+        # stages whose GPX never downloaded (3, 4 and 5 came back as 404s).
+        profile, elev_src = data["profile"], "velowire"
+        if gpx_dir:
+            g = gpx_load(gpx_dir, n, data.get("length_km"))
+            if g and g["profile"]:
+                profile, elev_src = gpx_downsample(g["profile"]), "gpx"
+                if g.get("note"):
+                    print(f"[velowire] stage {n}: {g['note']}")
+
         bundle = {
             "schema": "profile-1",
             "stage": {"stage": n, "date": data.get("date"), "departure": dep,
                      "arrival": arr, "length_km": data.get("length_km")},
-            "profile": data["profile"],
+            "elevation_source": elev_src,
+            "profile": profile,
             "markers": data["markers"],
         }
         fname = f"profile-stage-{n:02d}.json"

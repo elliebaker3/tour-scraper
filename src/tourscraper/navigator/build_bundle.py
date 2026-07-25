@@ -24,6 +24,8 @@ from pathlib import Path
 
 from .elevation_sync import build as build_sync
 from .extract_events import build_guideposts, load_ticker
+from .gpx_profile import altitude_at_km as gpx_alt_at_km
+from .gpx_profile import load_stage as gpx_load
 from .velowire_profile import name_route_markers
 
 
@@ -208,6 +210,27 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     sync = build_sync(stage_dir, telemetry_paths, length_km,
                       race_start_utc=race_start, race_finish_utc=race_finish)
     events = build_guideposts(stage_dir, sync["points"])
+
+    # Terrain from the official GPX track, positions from ASO. The GPX is the
+    # surveyed route -- denser than ASO's profile.csv and its own distance
+    # lands within a few tenths of the official length -- but it carries only
+    # track points: no km-to-finish column, no checkpoint types, no climb
+    # grades. So each of ASO's points keeps its km, its kmto, its checkpoint
+    # and its leader time, and only the ALTITUDE is re-read from the GPX at
+    # that same distance. One source for shape, one for structure, and the
+    # km scale stays ASO's throughout.
+    elevation_source = "aso"
+    gpx = gpx_load(year_dir / "gpx", stage_number, length_km)
+    if gpx and gpx["profile"]:
+        if gpx.get("note"):
+            print(f"[navigator]   gpx: {gpx['note']} -- keeping ASO elevation")
+        else:
+            for p in sync["points"]:
+                alt = gpx_alt_at_km(gpx["profile"], p["km"])
+                if alt is not None:
+                    p["altitude"] = alt
+            elevation_source = "gpx"
+
     profile = [_slim(p) for p in downsample_profile(sync["points"])]
     markers = route_markers(sync["points"])
     # ASO places the climbs; velowire names them. Positions stay ASO's -- see
@@ -236,6 +259,7 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
             "leader_first_seen_utc": sync["leader_first_seen"],
             "leader_last_seen_utc": sync["leader_last_seen"],
             "ticker_items": events["ticker_items"],
+            "elevation_source": elevation_source,
         },
         "profile": profile,
         "route_markers": markers,

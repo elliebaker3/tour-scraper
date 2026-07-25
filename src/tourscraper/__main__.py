@@ -142,7 +142,8 @@ def main() -> None:
     elif args.command == "velowire-profiles":
         build_velowire_profiles(cfg.year_dir)
         publish_lite_bundles(cfg.year_dir / "profiles" / "velowire",
-                             cfg.year_dir.parent.parent / "extension" / "data")
+                             cfg.year_dir.parent.parent / "extension" / "data",
+                             gpx_dir=cfg.year_dir / "gpx")
     else:
         store_needed = args.command in ("live", "poll", "radio")
         stop_after = int(args.max_hours * 3600)
