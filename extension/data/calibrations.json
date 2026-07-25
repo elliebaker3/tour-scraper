@@ -63,7 +63,7 @@
         "extension_version": "0.0.0-harness",
         "ingested_at": "2026-07-25T21:38:06.299Z",
         "via": "worker",
-        "submitter": "sha:260â¦"
+        "submitter": "sha:260Ã¢ÂÂ¦"
       }
     ],
     "stage-14|127.0.0.1": [
@@ -81,16 +81,23 @@
             "kind": "kmtogo",
             "km": 42,
             "label": "42 km to go"
+          },
+          {
+            "tUtcMs": 1784374988333.3333,
+            "videoSec": 3670.5881330273996,
+            "kind": "kmtogo",
+            "km": 150,
+            "label": "150 km to go"
           }
         ],
         "cal": {
           "refMs": 1784384579000,
-          "offsetSec": 12472.902,
-          "rate": 0.92
+          "offsetSec": 12472.90200010941,
+          "rate": 0.9178000000242936
         },
-        "saved_at": "2026-07-25T21:38:58.262Z",
+        "saved_at": "2026-07-25T21:39:00.470Z",
         "extension_version": "0.0.0-harness",
-        "ingested_at": "2026-07-25T21:38:58.396Z",
+        "ingested_at": "2026-07-25T21:39:00.522Z",
         "via": "worker",
         "submitter": "sha:260…"
       }
