@@ -35,7 +35,17 @@
     "via": "autodiscover"
   },
   {
-    "recorded_at": "2026-07-25T10:42:28.714+00:00",
+    "recorded_at": "2026-07-25T11:53:19.981+00:00",
+    "kind": "radio",
+    "source": "https://ice.creacast.com/lequipe-au1"
+  },
+  {
+    "recorded_at": "2026-07-25T11:53:19.982+00:00",
+    "kind": "live-stream",
+    "action": "start"
+  },
+  {
+    "recorded_at": "2026-07-25T11:53:19.983+00:00",
     "kind": "poll",
     "endpoints": [
       "publication",
@@ -45,16 +55,5 @@
       "flashInfoLive",
       "checkpointList"
     ]
-  },
-  {
-    "recorded_at": "2026-07-25T11:48:28.758+00:00",
-    "kind": "live-stream",
-    "action": "stop",
-    "counts": {
-      "telemetry": 1496,
-      "groups": 1498,
-      "events": 0,
-      "raw-only": 12161
-    }
   }
 ]

@@ -4639,15 +4639,18 @@
     "sex": "M",
     "profile": "https://img.aso.fr/core_app/img-cycling-tdf-png/112/71881/0:0,400:400-0-0-70/86e00",
     "_id": "b160a422c22ae0bbbf2e957f5325ed9d4777b313bb1e74b6ef243f480a1bcd58",
+    "_updatedAt": 1784976403530,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-JAY",
-    "_updatedAt": 1783091866266,
     "_parent": "team-2026:dabf7ac457d64c6b17325b2f20e4d2ac8722306bbdc506dd8bbfa5ace3c2cdf4",
-    "_key": "_id",
     "_virtual": "JAY-112-ACKERMANN",
     "$team": "team-2026:dabf7ac457d64c6b17325b2f20e4d2ac8722306bbdc506dd8bbfa5ace3c2cdf4",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 20,
+      "code": -1
     }
   },
   {
@@ -4994,15 +4997,18 @@
     "lastnameshort": "VAN WILDER",
     "lastname": "VAN WILDER",
     "_id": "43c9f39795786aa224085f29332e9038895351cbebfae01d1e913c690732bb91",
+    "_updatedAt": 1784977241375,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-SOQ",
-    "_updatedAt": 1783091864024,
     "_parent": "team-2026:cececa8fb48690a94182666c9e2759f4ad542398dd4dcd2ceba9dc95dc5e8a2b",
-    "_key": "_id",
     "_virtual": "SOQ-97-VAN WILDER",
     "$team": "team-2026:cececa8fb48690a94182666c9e2759f4ad542398dd4dcd2ceba9dc95dc5e8a2b",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 20,
+      "code": -1
     }
   },
   {
