@@ -1,6 +1,6 @@
 [
   {
-    "recorded_at": "2026-07-25T00:05:34.999+00:00",
+    "recorded_at": "2026-07-25T15:20:48.319+00:00",
     "kind": "poll",
     "endpoints": [
       "publication",
@@ -12,59 +12,8 @@
     ]
   },
   {
-    "recorded_at": "2026-07-25T00:06:13.458+00:00",
-    "kind": "live-stream",
-    "action": "stop",
-    "counts": {
-      "telemetry": 0,
-      "groups": 0,
-      "events": 0,
-      "raw-only": 0
-    }
-  },
-  {
-    "recorded_at": "2026-07-25T09:45:41.730+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-20-b7efb4f690263260c56062a24ce50688.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-25T09:45:41.735+00:00",
-    "kind": "profile",
-    "source": "https://racecenter.letour.fr/profils/2026/profile-20-tiny-72b592232b304a20d16b9bc92f4d5526.csv",
-    "via": "autodiscover"
-  },
-  {
-    "recorded_at": "2026-07-25T11:53:19.981+00:00",
+    "recorded_at": "2026-07-25T15:20:48.320+00:00",
     "kind": "radio",
     "source": "https://ice.creacast.com/lequipe-au1"
-  },
-  {
-    "recorded_at": "2026-07-25T11:53:19.982+00:00",
-    "kind": "live-stream",
-    "action": "start"
-  },
-  {
-    "recorded_at": "2026-07-25T11:53:19.983+00:00",
-    "kind": "poll",
-    "endpoints": [
-      "publication",
-      "insights",
-      "pack",
-      "telemetry",
-      "flashInfoLive",
-      "checkpointList"
-    ]
-  },
-  {
-    "recorded_at": "2026-07-25T12:59:22.763+00:00",
-    "kind": "live-stream",
-    "action": "stop",
-    "counts": {
-      "telemetry": 1499,
-      "groups": 1511,
-      "events": 0,
-      "raw-only": 14325
-    }
   }
 ]
