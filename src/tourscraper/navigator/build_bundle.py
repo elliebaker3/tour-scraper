@@ -110,13 +110,18 @@ def actual_finish_utc(stage_dir: Path):
     long the editor took -- fine for anchoring an explicitly estimated
     stretch, which is the only thing it is used for.
     """
+    # The ticker does not always spell the finish the same way: stage 19 got
+    # liv_finish, stage 20 only liv_winner_victory. Both mark the same moment,
+    # so either will do -- and taking the EARLIEST of whichever appear keeps
+    # the anchor as close to the actual crossing as the feed allows.
+    seen = []
     for item in load_ticker(stage_dir):
-        if item.get("picto") == "liv_finish" and item.get("t"):
+        if item.get("picto") in ("liv_finish", "liv_winner_victory") and item.get("t"):
             try:
-                return datetime.fromisoformat(item["t"]).astimezone(timezone.utc)
+                seen.append(datetime.fromisoformat(item["t"]).astimezone(timezone.utc))
             except ValueError:
-                return None
-    return None
+                continue
+    return min(seen) if seen else None
 
 
 def scheduled_start_utc(meta: dict):

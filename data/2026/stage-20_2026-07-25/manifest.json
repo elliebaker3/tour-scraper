@@ -26,5 +26,15 @@
       "events": 0,
       "raw-only": 18396
     }
+  },
+  {
+    "recorded_at": "2026-07-25T23:56:44.329+00:00",
+    "kind": "archive-backfill",
+    "stage": 20,
+    "endpoints": {
+      "publication": 192,
+      "checkpointList": 76,
+      "pack_final": 173
+    }
   }
 ]

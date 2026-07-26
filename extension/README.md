@@ -75,6 +75,11 @@ bar. The build-up before the flag and the coverage after the line are left
 empty rather than filled flat, so where the silhouette begins is where the race
 begins — and the playhead lines up with the player's own position.
 
+Profile-only stages do this too, once calibrated. Uncalibrated their bar is a
+distance axis spanning the full width, because nothing yet relates the route to
+the recording; two readings turn it into a recording timeline like a full
+bundle's, and the profile then occupies only the stretch the race does.
+
 Every climb is drawn in the same deep red whatever its grade; the grade is on
 the badge, so colouring by it was saying the same thing twice at the cost of
 the climbs reading as one kind of thing. Badges and names always sit above the

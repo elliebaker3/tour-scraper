@@ -216,6 +216,18 @@ try:
         lite2 = state()
         check("two readings give the lite stage a playhead", lite2["playhead"],
               lite2["clock"])
+        # ...and switch the bar from a distance axis to a RECORDING one, so
+        # the profile occupies only the stretch of recording the race does.
+        span = page.evaluate("""() => {
+          const bar = document.querySelector('.tn-bar');
+          const xs = d => [...d.matchAll(/([\\d.]+)\\s[\\d.]+/g)].map(m => parseFloat(m[1]));
+          const all = [...bar.querySelectorAll('path')].flatMap(s => xs(s.getAttribute('d') || ''));
+          return all.length ? { lo: Math.min(...all), hi: Math.max(...all),
+                                w: bar.clientWidth } : null;
+        }""")
+        check("calibrated lite bar spans the race, not the whole recording",
+              span and (span["lo"] > 1 or span["hi"] < span["w"] - 1),
+              f"px {span['lo']:.0f}-{span['hi']:.0f} of {span['w']}" if span else "no path")
         check("lite diag reports the interpolation",
               "steady-pace" in lite2["diag"], lite2["diag"][:90])
 

@@ -508,17 +508,37 @@
     const loA = Math.min(...alts), hiA = Math.max(...alts);
     const rangeA = Math.max(1, hiA - loA);
     const y = (alt) => height - ((alt - loA) / rangeA) * (height - PROFILE_TOP_PAD - PROFILE_BOT_PAD) - PROFILE_BOT_PAD;
-    const x = (km) => (km / len) * width;
-
-    let d = `M 0 ${height} L `;
-    d += prof.map((p) => `${x(p.km).toFixed(1)} ${y(p.alt).toFixed(1)}`).join(" L ");
-    d += ` L ${width} ${height} Z`;
 
     const lm = liteMap();
     const dur = video?.duration || 0;
     // The setup prompt shows until the map exists; the bar always shows --
     // the profile shape is honest with or without a clock.
     root.classList.toggle("tn-lite-setup", !lm);
+
+    /* Which axis the bar is drawn on.
+     *
+     * Uncalibrated there is only one honest choice: DISTANCE, spanning the
+     * whole bar, because nothing yet relates the route to the recording.
+     *
+     * Once readings give a distance<->time map the bar becomes a RECORDING
+     * timeline like a full bundle's, and the profile occupies only the part
+     * of the recording the race occupies -- the build-up before the flag and
+     * anything past the line stay empty. That is what makes the shape line up
+     * with the player's own position instead of merely being the right shape. */
+    const timeAxis = !!(lm && dur);
+    const x = timeAxis
+      ? (km) => (Math.max(0, Math.min(dur, lm.secAtKmto(len - km))) / dur) * width
+      : (km) => (km / len) * width;
+
+    // On a time axis the silhouette must not be closed back to the bar's
+    // corners, or it would stretch across the empty build-up; it closes at
+    // its own first and last column instead.
+    const pts = prof.map((p) => [x(p.km), y(p.alt)]);
+    const x0 = timeAxis ? pts[0][0] : 0;
+    const x1 = timeAxis ? pts[pts.length - 1][0] : width;
+    let d = `M ${x0.toFixed(1)} ${height} L `;
+    d += pts.map(([px, py]) => `${px.toFixed(1)} ${py.toFixed(1)}`).join(" L ");
+    d += ` L ${x1.toFixed(1)} ${height} Z`;
 
     const routeMarks = [];
     for (const m of bundle.markers || []) {
@@ -551,9 +571,11 @@
     // Playhead only when the distance<->time map exists: its x is the km the
     // map says the race is at now, so it moves nonlinearly along the bar.
     let playhead = "";
-    if (lm && dur && video) {
-      const kmto = Math.max(0, Math.min(len, lm.kmtoAtSec(video.currentTime)));
-      playhead = `<div class="tn-playhead" style="left:${x(len - kmto).toFixed(1)}px"></div>`;
+    if (timeAxis && video) {
+      // On a time axis the playhead is simply where the recording is -- no
+      // round trip through distance, so it lines up with the player's own
+      // position exactly rather than to within the map's resolution.
+      playhead = `<div class="tn-playhead" style="left:${((video.currentTime / dur) * width).toFixed(1)}px"></div>`;
     }
 
     bar.innerHTML = `
