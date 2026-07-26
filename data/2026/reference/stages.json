@@ -738,20 +738,63 @@
     "_key": "stage"
   },
   {
-    "podiumDisplayMode": "instantpodium",
+    "departureCity": {
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/21/69803/313:0,1729:1416-0-0-70/4b2de",
+        "texts": [
+          {
+            "text": [
+              "<br />\nSite-étape inédit<br />\nCommune des Yvelines (78)<br />\nHabitants 1 450 (Thoirysiens et Thoirysiennes)<br />\n<br />\n La petite commune des Yvelines bénéficie d’une renommée sans rapport avec sa densité démographique grâce à son château de style Renaissance et surtout à la faveur de son parc animalier qui s’étend sur 150 hectares. Ouvert au public depuis 1968 et rebaptisé Wow Safari Thoiry, le zoo attire plus de 600 000 visiteurs chaque année, qui se déplacent pour observer environ 1 500 animaux, dont une partie évolue en semi-liberté : éléphants, antilopes, girafes, zèbres, hippopotames et autruches dans la réserve africaine et ours noirs, coyotes ou encore bisons dans la réserve américaine."
+            ],
+            "locale": "fr"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "<br />\nA new stage town<br />\nCommune in Yvelines (78)<br />\nPopulation: 1,450 (Thoirysiens and Thoirysiennes)<br />\n<br />\nThis small commune in the department of Yvelines enjoys a renown belied by its population density thanks to its Renaissance-style château and, above all, its 150-hectare safari park. Opened in 1968 and subsequently renamed Wow Safari Thoiry, it attracts more than 600,000 visitors each year, who come to see around 1,500 animals, some of which live in semi-freedom, including elephants, antelopes, giraffes, zebras, hippopotamuses and ostriches in the African reserve, and black bears, coyotes and bison in the American reserve."
+            ]
+          },
+          {
+            "text": [
+              "<br />\nErstmalige Etappenstation<br />\nGemeinde im Departement Yvelines (78)<br />\nEinwohner*innen 1 450<br />\n<br />\n Die Gemeinde in den Yvelines zählt wahrlich nicht zu den größten im Land, ist aber nichtsdestotrotz für ihr Renaissance-Schloss und vor allem den 150 ha großen Tierpark weithin bekannt. Seit seiner Eröffnung im Jahr 1968 und der Umbenennung in Wow Safari Thoiry zieht der Zoo jährlich mehr als 600 000 Besucherinnen und Besucher an. Sie kommen, um rund 1 500 Tiere zu erleben, die in naturnahen Freigehegen leben: Elefanten, Antilopen, Giraffen, Zebras, Flusspferde und Strauße im Afrika-Bereich sowie Schwarzbären, Kojoten und Bisons im Amerika-Bereich."
+            ],
+            "locale": "de"
+          },
+          {
+            "locale": "es",
+            "text": [
+              "<br />\nLugar etapa inédito<br />\nMunicipio del departamento de Yvelines (78)<br />\nHabitantes 1.450 (Thoirysiens y Thoirysiennes)<br />\n<br />\n El pequeño municipio de Yvelines goza de una fama inversamente proporcional a su densidad demográfica gracias a su castillo renacentista y, sobre todo, a su parque zoológico, que se extiende sobre 150 hectáreas. Abierto al público desde 1968 y rebautizado como Wow Safari Thoiry, el zoológico atrae a más de 600.000 visitantes cada año, que acuden para admirar unos 1.500 animales, algunos de ellos en semilibertad: elefantes, antílopes, jirafas, cebras, hipopótamos y avestruces en la reserva africana, y osos negros, coyotes y bisontes en la reserva americana."
+            ]
+          }
+        ]
+      },
+      "createdAt": "2025-10-17T17:28:37+02:00",
+      "label": "Thoiry",
+      "cityLangs": [],
+      "country": {
+        "code": "fra",
+        "id": 1964
+      },
+      "createdBy": "malbarelli",
+      "code": "thoiry",
+      "id": 32677,
+      "updatedBy": "malbarelli",
+      "updatedAt": "2025-10-17T17:28:37+02:00"
+    },
     "id": 25341,
-    "timezone": "Europe/Paris",
-    "showGroups": true,
-    "type": "PLN",
-    "date": "2026-07-26T00:00:00+02:00",
+    "podiumDisplayMode": "instantpodium",
+    "lengthDisplay": 89,
+    "startTime": "17:50:00",
     "stage": 21,
-    "lengthDisplay": 132.5,
-    "endTime": "19:34:00",
+    "length": 88.7,
+    "date": "2026-07-26T00:00:00+02:00",
+    "showGroups": true,
     "isCancelled": false,
-    "length": 132.5,
+    "type": "PLN",
+    "timezone": "Europe/Paris",
     "arrivalCity": {
+      "cityLangs": [],
       "label": "Paris Champs-Élysées",
-      "id": 30113,
       "code": "paris-champs-elysees",
       "content": {
         "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/21/69793/366:0,1782:1416-0-0-70/d717a",
@@ -763,16 +806,16 @@
             ]
           },
           {
+            "locale": "en",
             "text": [
               "<br />\n51st finish on the Champs-Élysées<br />\nCapital of France and the Île-de-France region Commune-department and prefecture (75)<br />\nPopulation: 2,120,000 (Parisiens and Parisiennes)<br />\n<br />\nOver the centuries, the French capital has earned unrivalled prestige, making it the world’s leading tourist destination. Its success is due as much to the majesty of its monuments – from Cathedral of Notre-Dame to the Eiffel Tower, the Louvre Museum and the Arc de Triomphe – as to the cultural vibrancy that enlivens it and the elusive Parisian chic that continues to fascinate. The City of Light has also established itself as one of the world’s major sporting venues, thanks to regular events such as the Roland-Garros tennis tournament and the final stage of the Tour de France... and, of course, the organisation of the Olympic and Paralympic Games in the summer of 2024, when innovations such as the holding the opening ceremony in the heart of the city and having a marathon open to all helped to make sporting history."
-            ],
-            "locale": "en"
+            ]
           },
           {
+            "locale": "de",
             "text": [
               "<br />\n51. Zielankunft auf den Champs-Élysées<br />\nHauptstadt Frankreichs und Hauptort der Region Île-de-France<br />\nGebietskörperschaft mit Sonderstatus Ville de Paris (75C)<br />\nEinwohner*innen 2 120 000<br />\n<br />\n Die französische Hauptstadt hat sich im Laufe der Jahrhunderte ein unübertroffenes Prestige erworben. Heute zählt sie zu den beliebtesten Reisezielen der Welt. Ihr Erfolg beruht nicht nur auf den beeindruckenden Bauwerken – von Notre-Dame und dem Eiffelturm bis zum Louvre und dem Arc de Triomphe –, sondern auch auf dem pulsierenden kulturellen Leben und dem schwer fassbaren „Pariser Chic“, der bis heute fasziniert. Auch sportlich ist die Stadt der Lichter eine Weltmetropole: Roland-Garros, die Zielankunft der Tour de France und zuletzt die Olympischen und Paralympischen Spiele 2024 haben die Stadt ins Rampenlicht gerückt. Mit Innovationen wie einer Eröffnungsfeier im Herzen der Stadt und einem Marathon für alle schrieb Paris dabei Sportgeschichte."
-            ],
-            "locale": "de"
+            ]
           },
           {
             "locale": "es",
@@ -782,56 +825,13 @@
           }
         ]
       },
-      "cityLangs": []
+      "id": 30113
     },
-    "departureCity": {
-      "label": "Thoiry",
-      "id": 32677,
-      "createdBy": "malbarelli",
-      "country": {
-        "id": 1964,
-        "code": "fra"
-      },
-      "updatedBy": "malbarelli",
-      "createdAt": "2025-10-17T17:28:37+02:00",
-      "code": "thoiry",
-      "content": {
-        "texts": [
-          {
-            "locale": "fr",
-            "text": [
-              "<br />\nSite-étape inédit<br />\nCommune des Yvelines (78)<br />\nHabitants 1 450 (Thoirysiens et Thoirysiennes)<br />\n<br />\n La petite commune des Yvelines bénéficie d’une renommée sans rapport avec sa densité démographique grâce à son château de style Renaissance et surtout à la faveur de son parc animalier qui s’étend sur 150 hectares. Ouvert au public depuis 1968 et rebaptisé Wow Safari Thoiry, le zoo attire plus de 600 000 visiteurs chaque année, qui se déplacent pour observer environ 1 500 animaux, dont une partie évolue en semi-liberté : éléphants, antilopes, girafes, zèbres, hippopotames et autruches dans la réserve africaine et ours noirs, coyotes ou encore bisons dans la réserve américaine."
-            ]
-          },
-          {
-            "locale": "en",
-            "text": [
-              "<br />\nA new stage town<br />\nCommune in Yvelines (78)<br />\nPopulation: 1,450 (Thoirysiens and Thoirysiennes)<br />\n<br />\nThis small commune in the department of Yvelines enjoys a renown belied by its population density thanks to its Renaissance-style château and, above all, its 150-hectare safari park. Opened in 1968 and subsequently renamed Wow Safari Thoiry, it attracts more than 600,000 visitors each year, who come to see around 1,500 animals, some of which live in semi-freedom, including elephants, antelopes, giraffes, zebras, hippopotamuses and ostriches in the African reserve, and black bears, coyotes and bison in the American reserve."
-            ]
-          },
-          {
-            "locale": "de",
-            "text": [
-              "<br />\nErstmalige Etappenstation<br />\nGemeinde im Departement Yvelines (78)<br />\nEinwohner*innen 1 450<br />\n<br />\n Die Gemeinde in den Yvelines zählt wahrlich nicht zu den größten im Land, ist aber nichtsdestotrotz für ihr Renaissance-Schloss und vor allem den 150 ha großen Tierpark weithin bekannt. Seit seiner Eröffnung im Jahr 1968 und der Umbenennung in Wow Safari Thoiry zieht der Zoo jährlich mehr als 600 000 Besucherinnen und Besucher an. Sie kommen, um rund 1 500 Tiere zu erleben, die in naturnahen Freigehegen leben: Elefanten, Antilopen, Giraffen, Zebras, Flusspferde und Strauße im Afrika-Bereich sowie Schwarzbären, Kojoten und Bisons im Amerika-Bereich."
-            ]
-          },
-          {
-            "text": [
-              "<br />\nLugar etapa inédito<br />\nMunicipio del departamento de Yvelines (78)<br />\nHabitantes 1.450 (Thoirysiens y Thoirysiennes)<br />\n<br />\n El pequeño municipio de Yvelines goza de una fama inversamente proporcional a su densidad demográfica gracias a su castillo renacentista y, sobre todo, a su parque zoológico, que se extiende sobre 150 hectáreas. Abierto al público desde 1968 y rebautizado como Wow Safari Thoiry, el zoológico atrae a más de 600.000 visitantes cada año, que acuden para admirar unos 1.500 animales, algunos de ellos en semilibertad: elefantes, antílopes, jirafas, cebras, hipopótamos y avestruces en la reserva africana, y osos negros, coyotes y bisontes en la reserva americana."
-            ],
-            "locale": "es"
-          }
-        ],
-        "image": "https://img.aso.fr/core_app/img-cycling-tdf-jpg/21/69803/313:0,1729:1416-0-0-70/4b2de"
-      },
-      "cityLangs": [],
-      "updatedAt": "2025-10-17T17:28:37+02:00"
-    },
-    "startTime": "16:25:00",
+    "endTime": "19:46:00",
     "_id": "ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf",
     "_bind": "stage-2026",
     "_origin": "stage-2026",
-    "_updatedAt": 1784277694890,
+    "_updatedAt": 1785008232343,
     "_parent": "millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c",
     "_key": "stage"
   },
