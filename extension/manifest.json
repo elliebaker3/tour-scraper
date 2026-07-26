@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Tour Navigator",
   "version": "0.3.0",
-  "description": "Replaces a useless scrub bar with guideposts that matter: the stage elevation profile synced to race time, plus crashes, breakaways, scenery and race intensity.",
+  "description": "Replaces a useless navigation bar with guideposts that matter: the stage elevation profile including sprints and named climbs, plus crashes, breakaways, attacks and flags for events involving jersey contenders.",
   "icons": {
     "16": "icon-16.png",
     "32": "icon-32.png",
