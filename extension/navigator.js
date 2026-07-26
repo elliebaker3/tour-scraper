@@ -1696,14 +1696,27 @@ watch.">Add reading</button>
    * was considered and why each candidate was kept or dropped. */
   function breakCandidates(bar, rect, dur) {
     const considered = [];
+    // Look at the bar's SURROUNDINGS, not just its children. Players commonly
+    // draw markers in a sibling overlay laid across the track rather than
+    // inside it, and searching only descendants missed those entirely --
+    // which is why a recording with several breaks reported one. Anything in
+    // the neighbourhood that overlaps the bar's own band is a candidate; the
+    // shape tests below still decide.
     let els;
-    try { els = bar.querySelectorAll("*"); } catch (_) { return { positions: [], considered }; }
+    try {
+      const scope = bar.parentElement?.parentElement || bar.parentElement || bar;
+      els = scope.querySelectorAll("*");
+    } catch (_) { return { positions: [], considered }; }
 
     const playFrac = video && dur ? video.currentTime / dur : -1;
     const out = [];
     for (const el of els) {
       const r = el.getBoundingClientRect();
       if (!r.width || !r.height) continue;
+      // Must sit on the bar's own horizontal band, or it is some other part
+      // of the control cluster rather than something drawn on the track.
+      const midY = r.top + r.height / 2;
+      if (midY < rect.top - rect.height || midY > rect.bottom + rect.height) continue;
       const frac = ((r.left + r.width / 2) - rect.left) / rect.width;
       const rec = {
         cls: (el.className && el.className.baseVal !== undefined
@@ -1713,7 +1726,7 @@ watch.">Add reading</button>
         frac: +frac.toFixed(4), why: "",
       };
       if (r.width > Math.max(12, rect.width * 0.02)) rec.why = "too wide (track/fill)";
-      else if (r.height < rect.height * 0.4) rec.why = "too short to be a tick";
+      else if (r.height < Math.min(4, rect.height * 0.25)) rec.why = "too short to be a tick";
       else if (!(frac > 0.005 && frac < 0.995)) rec.why = "at an end";
       else if (playFrac >= 0 && Math.abs(frac - playFrac) < 0.01) rec.why = "at the playhead (thumb)";
       else { rec.why = "KEPT"; out.push(Math.round(frac * dur)); }
@@ -1764,11 +1777,26 @@ watch.">Add reading</button>
     });
     console.log("[TourNavigator] kept:", positions.map(fmt));
     console.table(considered.slice(0, 60));
-    console.log("[TourNavigator] if the real markers are in that table but " +
-                "dropped, paste it back. If the table is empty or has no ticks, " +
-                "the markers are drawn outside the seek bar element (or painted, " +
-                "not DOM) -- paste the seek bar line above instead.");
-    return { bar: String(bar.className || ""), positions, considered };
+    const report = {
+      bar: {
+        tag: bar.tagName.toLowerCase(), cls: String(bar.className || "").slice(0, 80),
+        testid: bar.getAttribute("data-testid"),
+        w: Math.round(rect.width), h: Math.round(rect.height),
+      },
+      duration: Math.round(video?.duration || 0),
+      kept: positions,
+      considered: considered.slice(0, 120),
+    };
+    const blob = JSON.stringify(report);
+    try {
+      navigator.clipboard.writeText(blob);
+      console.log("[TourNavigator] the whole report is now on your clipboard — " +
+                  "just paste it. (" + blob.length + " chars)");
+    } catch (_) {
+      console.log("[TourNavigator] copy the line below and paste it back:");
+      console.log(blob);
+    }
+    return report;
   };
 
   function refreshAdBreaks() {
