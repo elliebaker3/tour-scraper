@@ -109,7 +109,7 @@ function validate(rec) {
 
 /** Keep only known fields: whatever else the body carried never reaches the
  *  file every extension trusts. */
-function clean(rec, ip) {
+function clean(rec) {
   const keep = ["tUtcMs", "videoSec", "kind", "km", "kmto", "label"];
   return {
     schema: 1,
@@ -132,12 +132,13 @@ function clean(rec, ip) {
       ? rec.extension_version.slice(0, 24) : null,
     ingested_at: new Date().toISOString(),
     via: "worker",
-    // Not the IP itself -- only enough to spot one source flooding the file.
-    // ASCII only, deliberately. This string is re-read and re-written on
-    // every submission, so anything outside ASCII compounds if the round trip
-    // is ever lossy -- an ellipsis here grew to 4.7MB before the read path was
-    // fixed below, and took the whole file past GitHub's 1MB inline limit.
-    submitter: ip ? `sha:${ip.slice(0, 3)}` : null,
+    // Nothing derived from the submitter's IP is kept. A truncated prefix
+    // used to live here to spot one source flooding the file, but it earned
+    // very little -- the git history is the real audit trail -- and it wrote
+    // an IP-derived value into a PUBLIC repository, permanently. That is a
+    // poor trade for a diagnostic, and it made the extension's privacy
+    // disclosure harder to state honestly. The address is still read in
+    // memory for rate limiting and then discarded.
   };
 }
 
@@ -245,7 +246,7 @@ export default {
     if (bad) return json(400, { error: bad });
 
     try {
-      const res = await merge(env, clean(rec, ip));
+      const res = await merge(env, clean(rec));
       return res.ok
         ? json(200, { ok: true, replaced: res.replaced })
         : json(409, { error: res.reason });

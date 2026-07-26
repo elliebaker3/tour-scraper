@@ -97,7 +97,8 @@ check("marked as worker-ingested", c.via === "worker");
 check("ad breaks kept, deduped and sorted",
       JSON.stringify(c.ad_breaks) === JSON.stringify([1800, 3600, 5400, 7200]),
       JSON.stringify(c.ad_breaks));
-check("submitter is not the raw IP", !String(c.submitter).includes("203.0.113.9"));
+check("no IP-derived field is stored at all",
+      !("submitter" in c) && !JSON.stringify(c).includes("203.0.113.9"));
 check("ingested_at stamped", typeof c.ingested_at === "string" && c.ingested_at.length > 10);
 
 const longVer = good();
