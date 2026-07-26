@@ -133,6 +133,10 @@
     flashText = msg;
     flashUntil = Date.now() + ms;
     console.log("[TourNavigator]", msg);
+    // Draw it now rather than waiting for the next tick. The diag is rebuilt
+    // on a 500ms timer, so feedback on a reading -- including a refusal --
+    // could sit invisible for half a second after the click that caused it.
+    if (root && bundle) render();
   };
   const flashNow = () => (Date.now() < flashUntil ? flashText : "");
   let triedRestore = false;   // restore runs once, when the video first appears
@@ -1332,9 +1336,54 @@ watch.">Add reading</button>
    *  of truth -- the transform is refitted from them so a restore behaves
    *  identically to having just typed the readings; the stored cal is only a
    *  fallback for records whose anchors can't refit. */
+  /** Re-derive each reading's race time from the km that was actually typed.
+   *
+   *  An anchor stores two things: `km`, which the viewer read off the screen,
+   *  and `tUtcMs`, the race time the profile said that km corresponded to.
+   *  Only the first is input; the second is a DERIVED value, and it is only
+   *  as good as the bundle that produced it. Stage 20's readings were taken
+   *  against a bundle whose telemetry had been clobbered -- 53 observed
+   *  points, positions inferred across most of the stage -- and it put km
+   *  143.2 and 136.1 twenty-nine minutes apart where the repaired bundle puts
+   *  them seventeen. Restoring those stale times reapplied that error, fitting
+   *  a rate of 0.42 that clamped to the 0.5 floor and drew the whole race
+   *  squeezed into half the bar.
+   *
+   *  So the km is what is trusted on the way back in, and the race time is
+   *  recomputed against whatever bundle is loaded now. Every reading is kept
+   *  -- none of this discards information -- except one whose km no longer
+   *  falls in covered profile, which cannot be placed at all.
+   *
+   *  This also makes a shared calibration safe to adopt from someone whose
+   *  bundle differed from yours: what travels is what they read off the
+   *  screen, not their copy's idea of when that was. */
+  function rehomeAnchors(list) {
+    const out = [];
+    let moved = 0, dropped = 0;
+    for (const a of list) {
+      const copy = { ...a };
+      if (typeof a.km === "number" && bundle?.__kind !== "profile") {
+        const exact = typeof a.kmto === "number"
+          ? a.kmto : (Number.isInteger(a.km) ? a.km + 0.5 : a.km);
+        const hit = timeAtKmToGo(exact);
+        if (!hit) { dropped++; continue; }
+        if (Math.abs(hit.tMs - (a.tUtcMs ?? hit.tMs)) > 1000) moved++;
+        copy.tUtcMs = hit.tMs;
+      }
+      out.push(copy);
+    }
+    if (moved || dropped) {
+      console.log(`[TourNavigator] re-homed ${moved} reading(s) onto this ` +
+                  `bundle's timing` + (dropped ? `, dropped ${dropped} outside coverage` : ""));
+    }
+    return { list: out, moved, dropped };
+  }
+
   function applyRecord(rec, from) {
     if (!rec || !Array.isArray(rec.anchors) || !rec.anchors.length) return false;
-    anchors = rec.anchors.map((a) => ({ ...a }));
+    const re = rehomeAnchors(rec.anchors);
+    if (!re.list.length) return false;
+    anchors = re.list;
     // Take the contributor's breaks unless this player has already shown us
     // its own -- live markers beat remembered ones for the same recording.
     if (!adBreaks.length && Array.isArray(rec.ad_breaks)) {
@@ -1352,7 +1401,9 @@ watch.">Add reading</button>
     restoredFrom = from;
     flash(`calibration restored from ${from} ` +
           `(${pins().length} reading${pins().length === 1 ? "" : "s"}` +
-          `${adBreaks.length ? `, ${adBreaks.length} ad breaks` : ""})` +
+          `${adBreaks.length ? `, ${adBreaks.length} ad breaks` : ""}` +
+          `${re.moved ? `, ${re.moved} re-timed for this bundle` : ""}` +
+          `${re.dropped ? `, ${re.dropped} outside coverage` : ""})` +
           " — reset if it looks off");
     render();
     return true;
@@ -1875,9 +1926,14 @@ watch.">Add reading</button>
 
   function refreshAdBreaks() {
     const key = video ? String(Math.round(video.duration || 0)) : "";
-    if (key !== adBreakSource) {          // different recording: start over
+    if (key !== adBreakSource) {
+      // A different recording, so anything held belongs to the old one --
+      // EXCEPT breaks a restore just supplied for this one, which arrive
+      // asynchronously and could otherwise be wiped by whichever tick happens
+      // to notice the duration first. Claiming the key without clearing is
+      // right when the two already agree about the recording.
       adBreakSource = key;
-      adBreaks = [];
+      if (!restoredFrom) adBreaks = [];
     }
     const found = detectAdBreaks();
     if (!found.length) return;            // nothing on screen to read, not an answer

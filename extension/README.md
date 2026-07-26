@@ -228,8 +228,20 @@ viewing history. Both buttons say so in their tooltip, since a control labelled
 "Add reading" that also publishes should not be a surprise to anyone but you.
 
 Each stored record carries the stage, date, site, duration fingerprint, the
-airing timestamp, every km-to-go reading, the fitted transform, and the
-extension version that produced it — enough to audit or re-fit later.
+airing timestamp, every km-to-go reading, the ad-break positions, the fitted
+transform, and the extension version that produced it — enough to audit or
+re-fit later.
+
+**The km is what is trusted on the way back in.** A reading stores both the
+number you typed and the race time the profile said it meant, but only the
+first is input — the second is derived, and is only as good as the bundle that
+produced it. So it is recomputed against whatever bundle is loaded now. Stage
+20's readings were saved against a bundle whose telemetry had been clobbered,
+and restoring those stale times fitted a rate of 0.42 that clamped to the 0.5
+floor and drew the whole race squeezed into half the bar. Re-deriving keeps
+every reading and fixes the fit — and makes a shared calibration safe to adopt
+from someone whose bundle differed from yours, since what travels is what they
+read off the screen rather than their copy's idea of when that was.
 
 ## Adding stages
 

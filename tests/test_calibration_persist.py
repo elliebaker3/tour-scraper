@@ -156,6 +156,39 @@ try:
         check("says where it was restored from",
               "restored" in after["anchorState"] and "this browser" in after["anchorState"])
 
+        # --- 1b. a stale stored race time is re-derived, not trusted --------
+        # An anchor stores the km the viewer typed AND the race time the
+        # profile said it meant. Only the km is input; the race time is
+        # derived, and is only as good as the bundle that produced it. Stage
+        # 20's readings were saved against a bundle whose telemetry had been
+        # clobbered, so restoring them reapplied that bundle's timing, fitted
+        # 0.42, clamped to the 0.5 floor and drew the race squeezed into half
+        # the bar. The km is trusted on the way back in; the time is recomputed.
+        print("\n--- a calibration saved against different timing ---")
+        page.evaluate("""() => {
+          const key = 'chromeStub:tnCal:v1:2026|stage-14|127.0.0.1';
+          const cur = JSON.parse(localStorage.getItem(key));
+          // same readings, but race times from a bundle that had them only
+          // five minutes apart across 130km of racing
+          cur.recordings[0].anchors[0].tUtcMs = 1784374000000;
+          cur.recordings[0].anchors[1].tUtcMs = 1784374300000;
+          cur.recordings[0].cal = { refMs: 1784374000000, offsetSec: 3000, rate: 0.5 };
+          localStorage.setItem(key, JSON.stringify(cur));
+        }""")
+        load()
+        rate = page.evaluate(
+            "() => document.querySelector('.tn-diag').textContent.match(/rate ([\d.]+)/)?.[1]")
+        check("a stale stored rate is not adopted", rate not in (None, "0.500"),
+              f"rate now {rate}")
+        span = page.evaluate("""() => {
+          const bar = document.querySelector('.tn-bar');
+          const xs = d => [...d.matchAll(/([\\d.]+)\\s[\\d.]+/g)].map(m => parseFloat(m[1]));
+          const all = [...bar.querySelectorAll('path')].flatMap(s => xs(s.getAttribute('d') || ''));
+          return all.length ? (Math.max(...all) - Math.min(...all)) / bar.clientWidth : 0;
+        }""")
+        check("the profile is not squeezed into a fraction of the bar", span > 0.3,
+              f"spans {span*100:.0f}% of the bar")
+
         # --- 2. a different cut must NOT inherit it -------------------------
         print("\n--- same stage, different recording (duration 14400s) ---")
         load(dur=14400)
