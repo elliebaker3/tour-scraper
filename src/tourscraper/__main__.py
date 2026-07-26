@@ -44,7 +44,8 @@ def cmd_stage(cfg, args) -> None:
     live SSE + polling + radio concurrently until --max-hours elapses."""
     bootstrap(cfg)
     fetch_profiles(cfg)
-    store = StageStore(cfg.year_dir, args.stage or guess_stage_number(cfg))
+    store = StageStore(cfg.year_dir, args.stage or guess_stage_number(cfg),
+                       part=getattr(args, "part", None))
     stop_after = int(args.max_hours * 3600)
     threads = [
         threading.Thread(target=record_live, args=(cfg, store, stop_after), daemon=True),
@@ -74,6 +75,11 @@ def main() -> None:
         p.add_argument("--stage", default=None, help="stage number, e.g. 14")
         p.add_argument("--max-hours", type=float, default=6.5,
                        help="hard stop after this many hours (default 6.5)")
+        p.add_argument("--part", default=None,
+                       help="label this session's output files (telemetry.part-3.jsonl). "
+                            "Chained capture jobs each pass their own, so no two "
+                            "ever write the same file and a merge cannot pick a "
+                            "loser -- see StageStore.")
 
     p = sub.add_parser("backfill")
     p.add_argument("--stages", default="1-12", help="e.g. 1-12 or 3,5,9")
@@ -133,8 +139,12 @@ def main() -> None:
     elif args.command == "events":
         write_events(Path(args.stage_dir))
     elif args.command == "navigator":
-        build_navigator(Path(args.stage_dir),
-                        [Path(x).expanduser() for x in args.telemetry],
+        import glob as _glob
+        tele = []
+        for pat in args.telemetry:
+            hits = sorted(_glob.glob(str(Path(pat).expanduser())))
+            tele.extend(Path(h) for h in hits) if hits else tele.append(Path(pat).expanduser())
+        build_navigator(Path(args.stage_dir), tele,
                         cfg.year_dir, args.stage,
                         Path(args.out) if args.out else None)
     elif args.command == "archive":
@@ -150,7 +160,8 @@ def main() -> None:
         if args.command == "stage":
             cmd_stage(cfg, args)
         elif store_needed:
-            store = StageStore(cfg.year_dir, args.stage or guess_stage_number(cfg))
+            store = StageStore(cfg.year_dir, args.stage or guess_stage_number(cfg),
+                       part=getattr(args, "part", None))
             if args.command == "live":
                 record_live(cfg, store, stop_after)
             elif args.command == "poll":

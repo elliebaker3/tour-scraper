@@ -220,6 +220,7 @@ jobs:
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
       max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      part: "1"
 
   scrape-2:
     needs: [determine-stage, scrape-1]
@@ -231,6 +232,7 @@ jobs:
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
       max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      part: "2"
 
   scrape-3:
     needs: [determine-stage, scrape-2]
@@ -242,6 +244,7 @@ jobs:
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
       max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      part: "3"
 
   scrape-4:
     needs: [determine-stage, scrape-3]
@@ -253,6 +256,7 @@ jobs:
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
       max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      part: "4"
 
   scrape-5:
     needs: [determine-stage, scrape-4]
@@ -264,3 +268,4 @@ jobs:
     with:
       stage: ${{ needs.determine-stage.outputs.number }}
       max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      part: "5"

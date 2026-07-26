@@ -10,3 +10,7 @@ data/**/radio/*.mp3
 # ~/tour-archive and in each CI run's artifact. The repo keeps the compact
 # derived bundles the Navigator actually reads.
 data/**/live-stream.raw.jsonl
+
+# Per-chunk raw SSE logs, same reason as the unsuffixed one above: over
+# GitHub's 100MB cap. The derived parts (telemetry/groups/events) are kept.
+data/**/live-stream.part-*.raw.jsonl

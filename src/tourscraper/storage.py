@@ -55,8 +55,20 @@ class JsonlWriter:
 class StageStore:
     """Paths and writers for one stage's capture session."""
 
-    def __init__(self, year_dir: Path, stage_number: int | str, date: str | None = None):
+    def __init__(self, year_dir: Path, stage_number: int | str, date: str | None = None,
+                 part: str | None = None):
+        """`part` keeps concurrent capture sessions off each other's files.
+
+        The stage capture is run as several chained jobs, each committing to
+        the same repo. When they all append to one telemetry.jsonl, the git
+        merge between them decides which copy survives -- and on stage 20 the
+        shorter one won, destroying 2.5 hours of GPS. Naming each session's
+        output separately removes the question: no two writers ever touch the
+        same path, so there is no merge to get wrong. The bundle builder takes
+        several telemetry files already.
+        """
         date = date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        self.part = str(part) if part not in (None, "") else None
         try:
             label = f"stage-{int(stage_number):02d}_{date}"
         except (TypeError, ValueError):
@@ -66,11 +78,17 @@ class StageStore:
         (self.dir / "radio").mkdir(exist_ok=True)
         (self.dir / "polls").mkdir(exist_ok=True)
 
+    def _partname(self, name: str) -> str:
+        if not self.part:
+            return name
+        stem, dot, ext = name.partition(".")
+        return f"{stem}.part-{self.part}{dot}{ext}"
+
     def writer(self, name: str) -> JsonlWriter:
-        return JsonlWriter(self.dir / name)
+        return JsonlWriter(self.dir / self._partname(name))
 
     def poll_writer(self, name: str) -> JsonlWriter:
-        return JsonlWriter(self.dir / "polls" / f"{name}.jsonl")
+        return JsonlWriter(self.dir / "polls" / self._partname(f"{name}.jsonl"))
 
     def write_manifest(self, entry: dict) -> None:
         manifest_path = self.dir / "manifest.json"

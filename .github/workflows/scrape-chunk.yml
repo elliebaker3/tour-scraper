@@ -11,6 +11,14 @@
 # push inside it) -- chunk 4 starts on a FRESH runner regardless, because it
 # only depends on chunk 3 having been attempted, not having succeeded.
 #
+# Each chunk writes its OWN files -- telemetry.part-3.jsonl and so on -- via
+# --part. Sharing one append-only file across chunks meant the git merge
+# between their commits decided which copy survived, and on stage 20 the
+# shorter one won: 75MB of GPS became 5.9MB, losing 2.5 hours of the leader's
+# position. Separate paths remove the question entirely rather than relying on
+# a merge strategy to answer it correctly. The bundle builder already accepts
+# several telemetry files, and --telemetry takes a glob.
+#
 # Trade-off accepted for this: record_radio's whole design is one persistent
 # ffmpeg connection so no audio is dropped at hour boundaries (see its
 # docstring). Each new chunk job starts a fresh ffmpeg process, so a few
@@ -27,6 +35,10 @@ on:
         required: true
         type: string
       max_hours:
+        required: true
+        type: string
+      part:
+        description: "Which chunk this is; labels its output files so no two chunks write the same path"
         required: true
         type: string
 
@@ -59,7 +71,8 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           python -m tourscraper stage \
             --stage "${{ inputs.stage }}" \
-            --max-hours "${{ inputs.max_hours }}" &
+            --max-hours "${{ inputs.max_hours }}" \
+            --part "${{ inputs.part }}" &
           CAPTURE_PID=$!
           while kill -0 $CAPTURE_PID 2>/dev/null; do
             sleep 300
@@ -93,7 +106,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: stage-${{ inputs.stage }}-chunk-${{ github.run_id }}
+          name: stage-${{ inputs.stage }}-part-${{ inputs.part }}-${{ github.run_id }}
           path: data/
           retention-days: 30
 
