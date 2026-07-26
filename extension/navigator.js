@@ -189,6 +189,8 @@
     "www.peacocktv.com": { rate: 0.92, preroll: 3600, ads: true,  label: "Peacock" },
     "npo.nl":            { rate: 1.00, preroll: 0,    ads: false, label: "NPO" },
     "www.npo.nl":        { rate: 1.00, preroll: 0,    ads: false, label: "NPO" },
+    "nos.nl":            { rate: 1.00, preroll: 0,    ads: false, label: "NOS" },
+    "www.nos.nl":        { rate: 1.00, preroll: 0,    ads: false, label: "NOS" },
   };
   const SITE_PROFILE = SITE_PROFILES[SITE] ||
     { rate: 0.92, preroll: 3600, ads: true, label: SITE };

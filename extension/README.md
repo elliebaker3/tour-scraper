@@ -17,7 +17,16 @@ uncalibrated clock for that feed:
 | | rate | preroll | why |
 |---|---|---|---|
 | Peacock | 0.92 | 60 min | adverts take about 20 min of racing out of a stage, and replays open with build-up |
-| NPO | 1.00 | 0 | public broadcaster, no commercial breaks in live sport; a live stream has no build-up to skip |
+| NPO, NOS | 1.00 | 0 | public broadcasters, no commercial breaks in live sport; a live stream has no build-up to skip |
+
+**Calibrations never cross between sites.** Both tiers are keyed by hostname —
+local storage under `tnCal:v1:<year>|stage-N|<host>`, the shared store under
+`stage-N|<host>` — so a Peacock reading is never offered to NOS or the
+reverse, and each site autofills only from its own. The recording's duration
+fingerprints it within a site, so two cuts on the same broadcaster stay apart
+as well. That separation matters more than it looks: the feeds differ in rate
+and in where the race sits, so a calibration borrowed across them would be
+confidently wrong rather than merely absent.
 
 Assuming 0.92 on an advert-free feed would drift it by roughly an hour across
 a stage, so the numbers are per-site rather than global. Ad-break detection is

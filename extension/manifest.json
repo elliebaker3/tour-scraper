@@ -10,6 +10,8 @@
     "https://www.peacocktv.com/*",
     "https://npo.nl/*",
     "https://*.npo.nl/*",
+    "https://nos.nl/*",
+    "https://*.nos.nl/*",
     "https://raw.githubusercontent.com/*",
     "https://tour-calibrations.tournavigator.workers.dev/*"
   ],
@@ -18,7 +20,9 @@
       "matches": [
         "https://www.peacocktv.com/*",
         "https://npo.nl/*",
-        "https://*.npo.nl/*"
+        "https://*.npo.nl/*",
+        "https://nos.nl/*",
+        "https://*.nos.nl/*"
       ],
       "js": [
         "probe_main.js"
@@ -31,7 +35,9 @@
       "matches": [
         "https://www.peacocktv.com/*",
         "https://npo.nl/*",
-        "https://*.npo.nl/*"
+        "https://*.npo.nl/*",
+        "https://nos.nl/*",
+        "https://*.nos.nl/*"
       ],
       "js": [
         "probe.js",
@@ -53,7 +59,9 @@
       "matches": [
         "https://www.peacocktv.com/*",
         "https://npo.nl/*",
-        "https://*.npo.nl/*"
+        "https://*.npo.nl/*",
+        "https://nos.nl/*",
+        "https://*.nos.nl/*"
       ]
     }
   ]
