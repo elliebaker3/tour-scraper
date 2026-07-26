@@ -1672,36 +1672,104 @@ watch.">Add reading</button>
     if (!bar || !dur || !isFinite(dur)) return [];
     const rect = bar.getBoundingClientRect();
     if (!rect.width) return [];
+    return breakCandidates(bar, rect, dur).positions;
+  }
 
-    const MARK_SEL = [
-      '[class*="ad-marker" i]', '[class*="admarker" i]', '[class*="ad_marker" i]',
-      '[class*="cue" i]', '[class*="marker" i]', '[class*="chapter" i]',
-      '[data-testid*="ad" i]', '[data-testid*="marker" i]',
-      '[aria-label*="advertisement" i]', '[aria-label*="ad break" i]',
-    ].join(",");
-    let marks;
-    try { marks = bar.querySelectorAll(MARK_SEL); } catch (_) { return []; }
+  /* Candidate ad markers, found by SHAPE rather than by class name.
+   *
+   * The first version matched on names -- "ad-marker", "cue", "chapter" --
+   * and found nothing on the real player, which is the trouble with guessing
+   * at markup that is not an API. What a break marker actually IS, on every
+   * player that draws one, is a narrow tick sitting inside the seek bar at
+   * the position of the break. That is checkable without knowing what anyone
+   * chose to call it:
+   *
+   *   - narrow: a few pixels, never a meaningful share of the bar's width
+   *     (a wide element is the track, the buffered range or the played fill)
+   *   - tall: a decent share of the bar's height, so it reads as a tick
+   *   - inside: horizontally within the bar, and not pinned to either end
+   *
+   * The scrubber thumb fits that description too, so anything sitting at the
+   * current playback position is discarded -- it moves, and a break does not.
+   *
+   * Returns the diagnostic alongside the answer so __tnAdDebug can show what
+   * was considered and why each candidate was kept or dropped. */
+  function breakCandidates(bar, rect, dur) {
+    const considered = [];
+    let els;
+    try { els = bar.querySelectorAll("*"); } catch (_) { return { positions: [], considered }; }
 
+    const playFrac = video && dur ? video.currentTime / dur : -1;
     const out = [];
-    for (const m of marks) {
-      const r = m.getBoundingClientRect();
+    for (const el of els) {
+      const r = el.getBoundingClientRect();
       if (!r.width || !r.height) continue;
-      // A tick, not a track: anything spanning much of the bar is the
-      // progress fill or the bar itself, not a break marker.
-      if (r.width > rect.width * 0.1) continue;
       const frac = ((r.left + r.width / 2) - rect.left) / rect.width;
-      if (!(frac > 0.001 && frac < 0.999)) continue;   // ends are not breaks
-      out.push(Math.round(frac * dur));
+      const rec = {
+        cls: (el.className && el.className.baseVal !== undefined
+                ? el.className.baseVal : String(el.className || "")).slice(0, 60),
+        tag: el.tagName.toLowerCase(),
+        w: +r.width.toFixed(1), h: +r.height.toFixed(1),
+        frac: +frac.toFixed(4), why: "",
+      };
+      if (r.width > Math.max(12, rect.width * 0.02)) rec.why = "too wide (track/fill)";
+      else if (r.height < rect.height * 0.4) rec.why = "too short to be a tick";
+      else if (!(frac > 0.005 && frac < 0.995)) rec.why = "at an end";
+      else if (playFrac >= 0 && Math.abs(frac - playFrac) < 0.01) rec.why = "at the playhead (thumb)";
+      else { rec.why = "KEPT"; out.push(Math.round(frac * dur)); }
+      considered.push(rec);
     }
 
-    // Collapse duplicates (a marker often nests a child that also matches)
-    // and reject an implausible haul -- a stage carries roughly 8-12 breaks,
-    // so dozens of hits means the selector caught furniture, not markers.
-    const uniq = [...new Set(out)].sort((a, b) => a - b)
+    // A marker often nests a child that also qualifies, so collapse anything
+    // landing within half a minute, and refuse an implausible haul -- a stage
+    // carries roughly 8-12 breaks, not dozens.
+    const positions = [...new Set(out)].sort((a, b) => a - b)
       .filter((s, i, arr) => i === 0 || s - arr[i - 1] > 30);
-    if (uniq.length > 40) return [];
-    return uniq;
+    return { positions: positions.length > 40 ? [] : positions, considered };
   }
+
+  /* Paste-able diagnostic, for when detection finds nothing on a player whose
+   * markup we cannot see from here. Run __tnAdDebug() in the console with the
+   * controls showing. */
+  window.__tnAdDebug = function () {
+    const bar = nativeSeekBarEl();
+    if (!bar) {
+      console.log("[TourNavigator] no seek bar found. Is the player's control " +
+                  "bar visible? Move the mouse over the video, then re-run.");
+      const wide = [...document.querySelectorAll("*")].filter((el) => {
+        const r = el.getBoundingClientRect();
+        return r.width > window.innerWidth * 0.4 && r.height > 0 && r.height < 40 &&
+               r.top > window.innerHeight * 0.5;
+      }).slice(0, 25).map((el) => ({
+        tag: el.tagName.toLowerCase(),
+        cls: String(el.className || "").slice(0, 70),
+        testid: el.getAttribute("data-testid"),
+        aria: el.getAttribute("aria-label"),
+        role: el.getAttribute("role"),
+        top: Math.round(el.getBoundingClientRect().top),
+        w: Math.round(el.getBoundingClientRect().width),
+        h: Math.round(el.getBoundingClientRect().height),
+      }));
+      console.log("wide low elements that COULD be the bar:", wide);
+      return wide;
+    }
+    const rect = bar.getBoundingClientRect();
+    const { positions, considered } = breakCandidates(bar, rect, video?.duration || 0);
+    console.log("[TourNavigator] seek bar:", {
+      tag: bar.tagName.toLowerCase(),
+      cls: String(bar.className || "").slice(0, 80),
+      testid: bar.getAttribute("data-testid"),
+      w: Math.round(rect.width), h: Math.round(rect.height),
+      descendants: bar.querySelectorAll("*").length,
+    });
+    console.log("[TourNavigator] kept:", positions.map(fmt));
+    console.table(considered.slice(0, 60));
+    console.log("[TourNavigator] if the real markers are in that table but " +
+                "dropped, paste it back. If the table is empty or has no ticks, " +
+                "the markers are drawn outside the seek bar element (or painted, " +
+                "not DOM) -- paste the seek bar line above instead.");
+    return { bar: String(bar.className || ""), positions, considered };
+  };
 
   function refreshAdBreaks() {
     const found = detectAdBreaks();

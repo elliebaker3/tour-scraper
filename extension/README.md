@@ -136,6 +136,30 @@ global rate resumes. Local wins wherever it applies, so readings in different
 intervals each govern their own, and every reading still refits the global
 rate on top.
 
+### When it says "no ad breaks found"
+
+Detection looks for a narrow, full-height tick inside the player's own seek
+bar — that is what a break marker is on every player that draws one, and it
+does not depend on what anyone called the class. If the panel still reports
+none, run this in the console with the controls showing:
+
+    __tnAdDebug()
+
+It prints the seek bar it locked onto and a table of every element inside it,
+with why each was kept or dropped. Three outcomes:
+
+* **the real markers are in the table, marked dropped** — the shape test is
+  too strict; paste the table back and it can be widened.
+* **the table is empty or has no ticks** — the markers live outside the seek
+  bar element, or are painted rather than built from DOM. Paste the seek bar
+  line instead.
+* **"no seek bar found"** — it prints the wide, low elements that could be
+  one; paste those.
+
+In Chrome the content script runs in its own world, so pick **Tour Navigator**
+in the console's context dropdown (next to the filter box) before running it,
+or `__tnAdDebug` will be undefined.
+
 The local layer is only as real as the break boundaries, so it stays dormant
 until they are actually detected — an interval with invented edges would drift
 silently, which is the failure the whole model exists to avoid. Boundaries
