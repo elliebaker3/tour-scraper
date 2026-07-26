@@ -133,7 +133,11 @@ function clean(rec, ip) {
     ingested_at: new Date().toISOString(),
     via: "worker",
     // Not the IP itself -- only enough to spot one source flooding the file.
-    submitter: ip ? `sha:${ip.slice(0, 3)}…` : null,
+    // ASCII only, deliberately. This string is re-read and re-written on
+    // every submission, so anything outside ASCII compounds if the round trip
+    // is ever lossy -- an ellipsis here grew to 4.7MB before the read path was
+    // fixed below, and took the whole file past GitHub's 1MB inline limit.
+    submitter: ip ? `sha:${ip.slice(0, 3)}` : null,
   };
 }
 
@@ -167,7 +171,31 @@ async function merge(env, rec) {
     const cur = await gh(env, `contents/${FILE}?ref=${BRANCH}`);
     if (!cur.ok) throw new Error(`read ${FILE}: ${cur.status}`);
     const meta = await cur.json();
-    const store = JSON.parse(atob(meta.content.replace(/\n/g, "")));
+
+    /* Read the body as TEXT, not from the inline base64.
+     *
+     * Two things went wrong with `JSON.parse(atob(meta.content))`. Above 1MB
+     * the contents API stops inlining altogether -- it answers
+     * `encoding: "none"` with an empty content field -- so the parse got an
+     * empty string and every submission failed with a 502, which the
+     * extension correctly read as "collector unreachable" and fell back to
+     * opening a GitHub issue.
+     *
+     * Below that it was quietly corrupting instead: writes encode UTF-8
+     * (`btoa(unescape(encodeURIComponent(...)))`) but atob() alone does not
+     * decode it, so every non-ASCII character came back as mojibake and was
+     * re-encoded larger on the next write. One ellipsis reached 4.7MB that
+     * way, which is what pushed the file over the limit in the first place.
+     *
+     * Fetching download_url sidesteps both: proper text, any size. The blob
+     * sha still comes from the metadata, so the write precondition is
+     * unchanged.
+     */
+    const raw = await fetch(meta.download_url, {
+      headers: { "User-Agent": "tour-navigator-calibration-worker" },
+    });
+    if (!raw.ok) throw new Error(`read body ${FILE}: ${raw.status}`);
+    const store = JSON.parse(await raw.text());
 
     const key = `stage-${rec.stage}|${rec.site}`;
     store.recordings = store.recordings || {};
