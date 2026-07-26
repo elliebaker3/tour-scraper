@@ -68,7 +68,7 @@
         "extension_version": "0.2.0",
         "ingested_at": "2026-07-25T22:30:54.812Z",
         "via": "worker",
-        "submitter": "sha:260Ã"
+        "submitter": "sha:260Ã"
       }
     ],
     "stage-20|www.peacocktv.com": [
@@ -128,7 +128,7 @@
         "extension_version": "0.2.0",
         "ingested_at": "2026-07-26T00:47:36.677Z",
         "via": "worker",
-        "submitter": "sha:260Ã"
+        "submitter": "sha:260Ã"
       },
       {
         "schema": 1,
@@ -177,14 +177,14 @@
         "extension_version": "0.2.0",
         "ingested_at": "2026-07-26T00:40:29.954Z",
         "via": "worker",
-        "submitter": "sha:260Ã"
+        "submitter": "sha:260Ã"
       },
       {
         "schema": 1,
         "stage": 20,
         "date": "2026-07-25",
         "site": "www.peacocktv.com",
-        "duration_sec": 21684.0,
+        "duration_sec": 21684,
         "airing_ms": 1784970000000,
         "anchors": [
           {
@@ -274,91 +274,57 @@
         "stage": 20,
         "date": "2026-07-25",
         "site": "www.peacocktv.com",
-        "duration_sec": 21519,
-        "airing_ms": 1784970000000,
+        "duration_sec": 21519.4,
+        "airing_ms": 1785000000000,
         "anchors": [
           {
-            "tUtcMs": 1784977935200,
-            "videoSec": 6979.55138,
+            "tUtcMs": 1785010000000,
+            "videoSec": 4500,
             "kind": "kmtogo",
-            "km": 118.4,
-            "label": "118.4 km to go"
-          },
-          {
-            "tUtcMs": 1784981487000,
-            "videoSec": 10183.107128,
-            "kind": "kmtogo",
-            "km": 84.5,
-            "label": "84.5 km to go"
-          },
-          {
-            "tUtcMs": 1784975761000,
-            "videoSec": 5145.352026,
-            "kind": "kmtogo",
-            "km": 143.2,
-            "label": "143.2 km to go"
-          },
-          {
-            "tUtcMs": 1784975867666.6667,
-            "videoSec": 5185.750547,
-            "kind": "kmtogo",
-            "km": 142.4,
-            "label": "142.4 km to go"
-          },
-          {
-            "tUtcMs": 1784975947400,
-            "videoSec": 5225.499118,
-            "kind": "kmtogo",
-            "km": 141.8,
-            "label": "141.8 km to go"
-          },
-          {
-            "tUtcMs": 1784979811200,
-            "videoSec": 8616.093046,
-            "kind": "kmtogo",
-            "km": 94.4,
-            "label": "94.4 km to go"
+            "km": 60,
+            "kmto": 60.5,
+            "label": "60 km to go"
           }
         ],
         "cal": {
-          "refMs": 1784977935200,
-          "offsetSec": 7007.073401335412,
-          "rate": 0.8819480665334241
+          "refMs": 1785010000000,
+          "offsetSec": 4500,
+          "rate": 0.92
         },
         "ad_breaks": [
-          845,
-          1665,
-          2779,
-          3542,
-          5849,
-          6883,
-          8841,
-          8972,
-          11090,
-          11475,
-          11827,
-          12179,
-          12310,
-          12719,
-          13120,
-          13860,
-          14300,
-          14654,
-          14764,
-          14999,
-          15431,
-          16046,
-          16686,
-          19531,
-          19940,
-          20266,
-          21031
+          600,
+          1240,
+          1880,
+          2520,
+          3160,
+          3800,
+          4440,
+          5080,
+          5720,
+          6360,
+          7000,
+          7640,
+          8280,
+          8920,
+          9560,
+          10200,
+          10840,
+          11480,
+          12120,
+          12760,
+          13400,
+          14040,
+          14680,
+          15320,
+          15960,
+          16600,
+          17240
         ],
-        "saved_at": "2026-07-26T01:11:41.460Z",
+        "saved_at": "2026-07-26T00:00:00.000Z",
         "extension_version": "0.2.0",
-        "ingested_at": "2026-07-26T01:11:41.597Z",
+        "ingested_at": "2026-07-26T01:36:19.058Z",
         "via": "worker",
-        "submitter": "sha:260Ã¢ÂÂ¦"
+        "submitter": "sha:260…"
       }
     ]
   }
