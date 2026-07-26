@@ -1,16 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
   <!-- Source art for the toolbar icon. Edit this, then regenerate the PNGs:
          cd extension && ./make-icons.sh
-       A winding route on maillot yellow. Kept to one bold stroke because at
-       16px, the size seen most beside the address bar, nothing finer
-       survives; the switchbacks have to read as a path from the silhouette
-       alone. (No double hyphen anywhere in here: XML forbids it in a
-       comment, and rsvg-convert rejects the file outright.) -->
+       A route climbing from bottom left to top right. Two things keep it from
+       reading as a letter: it travels on a diagonal rather than stacking
+       vertically, and the bends are uneven. They are also kept open, since
+       curves that double back until they nearly close look like a squiggle
+       rather than a road. One bold stroke and nothing else, because 16px
+       beside the address bar is the size seen most and anything finer
+       disappears there. (No double hyphen anywhere in this comment: XML
+       forbids it and rsvg-convert rejects the file outright.) -->
   <rect width="128" height="128" rx="26" fill="#ffdd00"/>
-  <path d="M30 112
-           C 30 92, 74 90, 74 70
-           C 74 52, 30 50, 30 32
-           C 30 18, 66 14, 98 16"
-        fill="none" stroke="#101010" stroke-width="14"
+  <path d="M16 104
+           C 46 104, 34 74, 62 72
+           C 88 70, 74 44, 96 38
+           C 106 35, 108 30, 112 22"
+        fill="none" stroke="#101010" stroke-width="13"
         stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
