@@ -2,56 +2,48 @@
   "http_by_kind": {
     "event-stream": [
       {
-        "captured_at": "2026-07-25T09:43:06.137+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNalZpTURVMU1tWTROMkZoIiwiaWF0IjoxNzg0OTcyNTg1fQFUOwzQ2qhxkxFXRXCa2hNSdWJHVD7H-7DKIUr5ZKHDI",
+        "captured_at": "2026-07-26T14:20:39.844+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOakppT0ROaFpUWXdZV1EzIiwiaWF0IjoxNzg1MDc1NjM5fQu0Qh7ylXmkKn9FddKHR2mN-xufxl4tk5GXj97tr_s6E",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:43:08.341+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPV1F4TVRGaU1qSXdaVFE1IiwiaWF0IjoxNzg0OTcyNTg4fQfi95lMO5Uz_ysLIGTuiWGKwKkcHXrH4lCzgEiZDpHpI",
+        "captured_at": "2026-07-26T14:20:52.511+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOakEyTXpjeVlUTTJNV0UwIiwiaWF0IjoxNzg1MDc1NjUyfQHkXWvrpGHhUOOc9WzOFxU7q_zWpZ4uGSMLYxJeTSaOg",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:43:37.246+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaVGt4TUdJME1qSTBaalV5IiwiaWF0IjoxNzg0OTcyNjE3fQp67nEkGhv66C1OfU-9kP5eiYV3t6KTYRTq-FNsIKzTc",
+        "captured_at": "2026-07-26T14:21:21.571+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZMk0zTlRsaU5qSTBZelUyIiwiaWF0IjoxNzg1MDc1NjgxfQ7BOckbdKvJDvfm7734pQCXSS_ofzU4SI9kRY7piwoI0",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:44:06.282+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOemswWm1Oak5XRmtNelJpIiwiaWF0IjoxNzg0OTcyNjQ2fQpYrI63USz29oaUby8qRFy6X350S_5nxttcNiqvmzvwE",
+        "captured_at": "2026-07-26T14:21:50.616+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNMkl3TkdFMlkyVTJZVEJrIiwiaWF0IjoxNzg1MDc1NzEwfQWZCFIn0wUFIKDYwseEwUmglnGz44l6hhYcXSMibGz14",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:44:35.421+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVGMxWldZeE5tSmtNVGcwIiwiaWF0IjoxNzg0OTcyNjc1fQffGQBp1WsjkmO0oIIX3fqBYBdYALZkmM4GkiGE7Fg1Q",
+        "captured_at": "2026-07-26T14:22:19.633+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaRGt4TlRNeU16ZzJOemszIiwiaWF0IjoxNzg1MDc1NzM5fQcfWadmKv_OlpBNpXagaTEx3HWfWC-f6OC1caYequQ4Q",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:45:04.523+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPRGN3TWpBNFpqaGhPV1UxIiwiaWF0IjoxNzg0OTcyNzA0fQI3LtGe54IJMV5own1mPLsKAWnYtyiAA0SpNkSh_fXRM",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-07-25T09:45:33.796+00:00",
-        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVFk0Tmpoak9UVTRZek01IiwiaWF0IjoxNzg0OTcyNzMzfQ0mN1wqcvL29WfUNKJLK0zcZ3uvC15Vv-0q7QtKVklOY",
+        "captured_at": "2026-07-26T14:22:48.594+00:00",
+        "url": "https://racecenter.letour.fr/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPV00zTnpVM05qZGtNVGhtIiwiaWF0IjoxNzg1MDc1NzY4fQxp8ZFSQ-oqkE4-zoyIsXPzQsT1jfJhs8-e1mjmyoAzA",
         "status": 200,
         "mime": "text/event-stream",
         "kind": "event-stream",
@@ -60,194 +52,194 @@
     ],
     "json": [
       {
-        "captured_at": "2026-07-25T09:43:06.431+00:00",
-        "url": "https://syndication.twitter.com/settings?session_id=f9f65b193935f13fc7db73cadd033f99874f0e8c",
+        "captured_at": "2026-07-26T14:20:40.099+00:00",
+        "url": "https://syndication.twitter.com/settings?session_id=6e47208847ca43a0ee3a5e39e170709953a8269f",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "{\"should_obtain_cookie_consent\":true,\"features\":{\"tfw_timeline_list\":{\"bucket\":[],\"version\":null},\"tfw_follower_count_sunset\":{\"bucket\":true,\"version\":null},\"tfw_tweet_edit_backend\":{\"bucket\":\"on\",\"version\":null},\"tfw_refsrc_session\":{\"bucket\":\"on\",\"version\":null},\"tfw_fosnr_soft_interventions_enabled\":{\"bucket\":\"on\",\"version\":null},\"tfw_mixed_media_15897\":{\"bucket\":\"treatment\",\"version\":null},\"tf"
       },
       {
-        "captured_at": "2026-07-25T09:43:06.738+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_fr-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOekl6TnpCa04yRTJaak13IiwiaWF0IjoxNzg0OTcyNTg2fQm19aFN54bGVCs8UbkTosaUKZAFtrl172YlLEKsKqwfA",
+        "captured_at": "2026-07-26T14:20:40.100+00:00",
+        "url": "https://racecenter.letour.fr/api/checkpointList-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZelExTW1ZMVl6WTVOR1ZqIiwiaWF0IjoxNzg1MDc1NjM5fQAUuHufns0N-JqwzLaRrBW3tn5RsCQvYrxBk2uyOakT4",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[{\"stage\":20,\"title\":\"Une minute d'avance\",\"publicationAt\":\"2026-07-25T11:42:49+02:00\",\"locale\":\"fr\",\"type\":\"liv\",\"year\":2026,\"updatedBy\":\"dramadier\",\"highlight\":false,\"picto\":\"liv_1min_away\",\"updatedAt\":\"2026-07-25T11:42:49+02:00\",\"createdBy\":\"dramadier\",\"stageType\":\"HMG\",\"id\":1354431,\"pinned\":false,\"slug\":\"une-minute-davance-3\",\"text\":[\"Les six hommes de tête creusent peu à peu l'écart sur le pe"
+        "sample": "[{\"checkpoint\":1,\"caravanSchedule\":\"13:20:00\",\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"country\":\"France\",\"checkpointTypes\":[],\"length\":0,\"countryCode\":\"FRA\",\"checkpointSummits\":[],\"_id\":\"ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf-1\",\"_updatedAt\":1785074406621,\"_key\":\"checkpoint\",\"_bind\":\"checkpointList-2026-21\"},{\"checkpointSummits\":[],\"length\":0,\"road\":\"Yvelines\",\"checkpoint"
       },
       {
-        "captured_at": "2026-07-25T09:43:06.740+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_en-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOREJrT1dNeU1tTXpNbVUyIiwiaWF0IjoxNzg0OTcyNTg2fQ7fRXKLfjOHAuzxwczxaecD-lG5JK66s2ZnFLnDZzY7o",
+        "captured_at": "2026-07-26T14:20:40.254+00:00",
+        "url": "https://racecenter.letour.fr/api/event?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaVFEwT0RObE9URTBPRGN6IiwiaWF0IjoxNzg1MDc1NjM5fQLC9fYVFQf0jxNS9ivDwH0PT83KOMntHZAiyxGNvlMxE",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[{\"createdAt\":\"2026-07-25T10:56:53+02:00\",\"pinned\":false,\"slug\":\"le-bourg-doisans-at-the-bottom-of-alpe-dhuez\",\"text\":[\"With its special location, Le Bourg d’Oisans first appeared on the map of the Tour de France on the back of the maiden Alpe d’Huez ascent, in 1952. Following his stage win and conquest of the Maillot Jaune, Fausto Coppi triumphed in Italy, as the race headed to Sestrières.<br />\\"
+        "sample": "[{\"adUnit\":\"/366560878/ASO/TOUR-DE-FRANCE\",\"extras\":{\"hideRidersPage\":false,\"stageStartLabel\":[\"21:Paris Champs-Élysées\"],\"hideTemperature\":true,\"hideInsideRace\":false,\"radioUrl\":\"https://ice.creacast.com/lequipe-au1\"},\"_id\":\"dbfa6e3d5e33f66d138af5594b40fd1b5521af9063d2ff77d524978bf9dc7500\",\"_bind\":\"event\",\"_origin\":\"event\",\"_updatedAt\":1785057665776,\"_parent\":\":tdf\",\"_key\":\"_id\",\"_virtual\":\"/3665"
       },
       {
-        "captured_at": "2026-07-25T09:43:06.741+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_es-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJabU5tTVdFek1tUmtaV0k0IiwiaWF0IjoxNzg0OTcyNTg2fQ_l4cezBlh_GCMGcBEoamznVSChOBXrNOMzxQq80zRwI",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"createdAt\":\"2026-07-25T10:51:55+02:00\",\"slug\":\"bienvenidos-al-directo-de-la-etapa-20-del-tour-de-francia-2026\",\"pinned\":false,\"text\":[\"Bienvenidos a la narración en directo de la 20ª etapa de la edición número 113 del Tour de Francia. Estamos en el fin de semana final de esta edición de la Grande Boucle, con un gran fin de fiesta en los Alpes. El recorrido de hoy consta de 170,9 kilómetros entr"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.749+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_de-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNR05sWVRobE1USTFObUpsIiwiaWF0IjoxNzg0OTcyNTg2fQgy5B5giup3V7jubyz29nOqcctXzRksjmI1lMZirsZrg",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"slug\":\"kommt-noch-ein-franzosischer-etappensieg\",\"pinned\":false,\"text\":[\"Zu Beginn der 20. Etappe haben französische Fahrer noch keinen Etappensieg errungen. Das ist in der Geschichte bisher nur zweimal vorgekommen: 1926 und 1999 sind die einzigen Jahre in der Geschichte, bei denen Frankreich keinen Sieg erringen konnte.<br />\\nZumindest kommen sie dem Ziel immer näher. Mit seinem gestrigen zwe"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.767+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_sk-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaVEV6WkRjM1pUazNaVGhpIiwiaWF0IjoxNzg0OTcyNTg2fQ_1FtHp-tdGYfQ0BZPOSoU01g5I8raILN0jP6jCdCFk8",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"updatedAt\":\"2026-07-25T11:12:54+02:00\",\"highlight\":false,\"updatedBy\":\"console\",\"locale\":\"sk\",\"type\":\"liv\",\"year\":2026,\"publicationAt\":\"2026-07-25T11:12:45+02:00\",\"title\":\"Zachráni Francúzsko Tour?\",\"stage\":20,\"createdAt\":\"2026-07-25T11:12:54+02:00\",\"text\":[\"Na začiatku etapy 20 francúzski jazdci ešte nevyhrali etapu. Stalo sa to iba dvakrát v histórii a tieto odkazy nie sú dobrými predzvesťami "
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.768+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_da-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZV0prWm1SaU1qRTFaVFJpIiwiaWF0IjoxNzg0OTcyNTg2fQEfMY-O-a9ixWDZA-vdT6xhfvaht8v4V8OCL-kPzjZLE",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"pinned\":false,\"slug\":\"hvid-troeje-18\",\"text\":[\"Isaac del Toro fik et par sekunder på Paul Seixas i går ved L’Alpe d’Huez og fører nu ungdomsstandingen med et forspring på 24 sekunder. Lenny Martinez er nu tredje (+3’18’’), foran Juan Ayuso (+6’16’’).\"],\"createdAt\":\"2026-07-25T11:28:13+02:00\",\"createdBy\":\"console\",\"stageType\":\"HMG\",\"id\":1354345,\"publicationAt\":\"2026-07-25T11:28:11+02:00\",\"locale"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.768+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_sl-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOMkl3WTJJMVptUmpOemRtIiwiaWF0IjoxNzg0OTcyNTg2fQ0nALbukoIBPkayULcHb6rw218DCSFxeiCCTPCU9RfUY",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"text\":[\"Georg Steinhauser (EF Education-EasyPost), Jonas Abrahamsen (Uno-X Mobility), Baptiste Veistroffer (Lotto Intermarché), Xabier Mikel Azparren (Pinarello Q36.5), Joris Delbove (Total Energies) in Warren Barguil (Picnic PostNL) so 15 sekund pred pelotonom.\"],\"slug\":\"6-voditeljev-na-3-km\",\"pinned\":false,\"createdAt\":\"2026-07-25T11:39:46+02:00\",\"stageType\":\"HMG\",\"id\":1354420,\"createdBy\":\"con"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.770+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_it-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaalV4TnpRek56a3pORGswIiwiaWF0IjoxNzg0OTcyNTg2fQR3EnXqlVULjNyEI4NaqaI3uLgHoCN05Y_Os5faGnpZM",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"createdBy\":\"console\",\"stageType\":\"HMG\",\"id\":1354313,\"createdAt\":\"2026-07-25T11:22:48+02:00\",\"pinned\":false,\"slug\":\"maglia-gialla-11\",\"text\":[\"Conquistando l’Alpe d’Huez con un'altra prestazione dominante, Tadej Pogacar (UAE Emirates XRG) ha ampliato il suo vantaggio nella GC: 7’11’’ su Remco Evenepoel (Red Bull-Bora-Hansgrohe), 9’42’’ su Isaac del Toro (UAE Emirates XRG), 10’06’’ su Paul Seixas"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.771+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_cs-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVFUwTWpRMU5tSmxNV05rIiwiaWF0IjoxNzg0OTcyNTg2fQ8v4nbjhNX6RuTnBbvwPfZwsP9zSBxMFpJYSJ7Dpzl6k",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"updatedBy\":\"console\",\"highlight\":true,\"picto\":\"liv_actual_start\",\"updatedAt\":\"2026-07-25T11:34:57+02:00\",\"publicationAt\":\"2026-07-25T11:34:53+02:00\",\"locale\":\"cs\",\"type\":\"liv\",\"year\":2026,\"title\":\"Etapa 20 Tour de France 2026 je ZAHÁJENA!\",\"stage\":20,\"createdAt\":\"2026-07-25T11:34:57+02:00\",\"pinned\":false,\"slug\":\"etapa-20-tour-de-france-2026-je-zahajena\",\"text\":[\"160členný peloton právě překroči"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.774+00:00",
-        "url": "https://racecenter.letour.fr/api/checkpointList-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOakU1TURZMU1HVTVOVGRsIiwiaWF0IjoxNzg0OTcyNTg2fQj-Gu__tnYuAtT-ISetrvt87REU7ff1edUYmXoidb9c8",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"caravanSchedule\":\"11:53:00\",\"place\":\"Lavizard Dessus\",\"length\":84.09,\"checkpointSummits\":[],\"checkpointTypes\":[],\"longitude\":6.467997,\"highSchedule\":\"14:07:00\",\"middleSchedule\":\"13:58:00\",\"latitude\":45.193749,\"road\":\"Lavizard Dessus\",\"checkpoint\":43,\"lowSchedule\":\"13:48:00\",\"updatedAt\":\"2026-06-09T15:43:11+02:00\",\"_id\":\"6fd61462168b294550703b0e4f2906d0c7d41a3be64930e8f64b14880f05f80c-43\",\"_upda"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.774+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_nl-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPREJtTkRNMFlqYzJNbVZpIiwiaWF0IjoxNzg0OTcyNTg2fQPYxGqrg55E48dGfh7zFdTbDb0YNUZUCulpFZCG_nUAA",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"title\":\"Maillot Jaune\",\"stage\":20,\"updatedAt\":\"2026-07-25T11:22:36+02:00\",\"picto\":\"liv_yellow_jersey\",\"highlight\":false,\"updatedBy\":\"console\",\"year\":2026,\"type\":\"liv\",\"locale\":\"nl\",\"publicationAt\":\"2026-07-25T11:22:26+02:00\",\"stageType\":\"HMG\",\"id\":1354312,\"createdBy\":\"console\",\"createdAt\":\"2026-07-25T11:22:36+02:00\",\"text\":[\"Met een dominante prestatie veroverde Tadej Pogacar (UAE Emirates XRG)"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.777+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_nb-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOMkkyTVRJMk9HVXhPRFZtIiwiaWF0IjoxNzg0OTcyNTg2fQ04oIe7gwnWrmNdi8YMtWoB9bQkhuJwtoVO9whY-te8Q",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"picto\":\"liv_yellow_jersey\",\"updatedAt\":\"2026-07-25T11:22:54+02:00\",\"highlight\":false,\"updatedBy\":\"console\",\"locale\":\"nb\",\"type\":\"liv\",\"year\":2026,\"publicationAt\":\"2026-07-25T11:22:26+02:00\",\"title\":\"Maillot Jaune\",\"stage\":20,\"createdAt\":\"2026-07-25T11:22:54+02:00\",\"text\":[\"Med en ny dominerende prestasjon erobret Tadej Pogacar (UAE Emirates XRG) L’Alpe d’Huez og utvidet sin ledelse i sammendrag"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.779+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_pt-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZall5WmpJM056VXlZVFJrIiwiaWF0IjoxNzg0OTcyNTg2fQ-i4FKXzRCgPwUcgFOTFM0VHC0p29Y7W3NcdOZXbrx0c",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"publicationAt\":\"2026-07-25T11:36:30+02:00\",\"year\":2026,\"type\":\"liv\",\"locale\":\"pt\",\"updatedBy\":\"console\",\"highlight\":false,\"updatedAt\":\"2026-07-25T11:36:48+02:00\",\"picto\":\"liv_attack\",\"stage\":20,\"title\":\"Oliveira é o primeiro atacante do dia\",\"slug\":\"oliveira-e-o-primeiro-atacante-do-dia\",\"pinned\":false,\"text\":[\"Ele é seguido por Schmid, Abrahamsen, Dhondt, Velasco...\"],\"createdAt\":\"2026-07-25T1"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.779+00:00",
-        "url": "https://racecenter.letour.fr/api/publication_sv-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaR1ppWlRJME9ETXdOamszIiwiaWF0IjoxNzg0OTcyNTg2fQk76gztVZu0lS-4GrWEh39jB8L2bo74XQonkp6A6K0Bo",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"createdBy\":\"console\",\"stageType\":\"HMG\",\"id\":1354397,\"pinned\":false,\"slug\":\"etapp-20-av-tour-de-france-2026-aer-igaang\",\"text\":[\"Det 160-manna stora pelotonet har just passerat km 0.\"],\"createdAt\":\"2026-07-25T11:35:00+02:00\",\"stage\":20,\"title\":\"Etapp 20 av Tour de France 2026 är IGÅNG!\",\"publicationAt\":\"2026-07-25T11:34:53+02:00\",\"locale\":\"sv\",\"type\":\"liv\",\"year\":2026,\"highlight\":true,\"updatedBy"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.916+00:00",
-        "url": "https://racecenter.letour.fr/api/event?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNMkpoWWpFelltVm1PVFEzIiwiaWF0IjoxNzg0OTcyNTg2fQ9nMjc7JAcNc4mcN_32Cr0wZfKG7w_6Jp71lRxCQWxRI",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"extras\":{\"radioUrl\":\"https://ice.creacast.com/lequipe-au1\",\"hideTemperature\":true,\"hideInsideRace\":false,\"hideRidersPage\":false},\"adUnit\":\"/366560878/ASO/TOUR-DE-FRANCE\",\"_id\":\"dbfa6e3d5e33f66d138af5594b40fd1b5521af9063d2ff77d524978bf9dc7500\",\"_bind\":\"event\",\"_origin\":\"event\",\"_updatedAt\":1784650142949,\"_parent\":\":tdf\",\"_key\":\"_id\",\"_virtual\":\"/366560878/ASO/TOUR-DE-FRANCE\"}]"
-      },
-      {
-        "captured_at": "2026-07-25T09:43:06.916+00:00",
-        "url": "https://racecenter.letour.fr/api/flashInfoLive-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNelkyWlRNd05UWXdNREpoIiwiaWF0IjoxNzg0OTcyNTg2fQrZGltw5jrjvuiP86MydK2incB6bpGOYWm6DWu243zKw",
+        "captured_at": "2026-07-26T14:20:40.264+00:00",
+        "url": "https://racecenter.letour.fr/api/flashInfoLive-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNMlZsTVRSallqUmhZV0ZqIiwiaWF0IjoxNzg1MDc1NjM5fQLM3BqCkpjoj53wC0diENWqOrKJIIjyBZcMtLqVywQc4",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-07-25T09:43:06.948+00:00",
-        "url": "https://racecenter.letour.fr/api/social?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZell4TlRrNFpqY3dNek16IiwiaWF0IjoxNzg0OTcyNTg2fQ09WO1qYjmHBn8Uk0H0yvHEvRrvLHPHxSH_7qfqIyT64",
+        "captured_at": "2026-07-26T14:20:40.264+00:00",
+        "url": "https://racecenter.letour.fr/api/social?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPV0kyTTJNME5qbGhPVFUyIiwiaWF0IjoxNzg1MDc1NjM5fQj_xL9AxTq_Hv7cg9yWuVME_Z_0A8NScnewoV-VyxqzE",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-07-25T09:43:06.969+00:00",
-        "url": "https://racecenter.letour.fr/api/stage-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZelV3WWpObU5qZGxOVE5rIiwiaWF0IjoxNzg0OTcyNTg2fQsE7rchx68XUcs--FIrLT1F_GfkAgVtU9Ii59He-A1pE",
+        "captured_at": "2026-07-26T14:20:40.264+00:00",
+        "url": "https://racecenter.letour.fr/api/pack-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZVGM0WTJVMFl6WTFZekl4IiwiaWF0IjoxNzg1MDc1NjM5fQ6WokYOISSzlzKQH6XAMqLX9U9z7sv7B3fWly7Ll2jLs",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.264+00:00",
+        "url": "https://racecenter.letour.fr/api/telemetryCompetitor-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVGt4TnpRNVpUVTRZalV6IiwiaWF0IjoxNzg1MDc1NjM5fQOwDOWCZu7dmtJy_oUnrLDntzBRSI71ChTR7-xvkyFdw",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"RaceStatus\":false,\"Year\":2026,\"RaceName\":\"TDF\",\"Date\":\"2026-07-25T16:47:56.6996203+02:00\",\"StageId\":\"2000\",\"YGPW\":[1,33,41,2],\"TimeStamp\":1784990876,\"Riders\":[],\"Visible\":true,\"StageIndex\":20,\"_id\":\"telemetry\",\"_bind\":\"telemetryCompetitor-2026\",\"_origin\":\"telemetryCompetitor-2026\",\"_updatedAt\":1784990884550,\"_parent\":\"millesime:4a1ae068d5a47488663e9cacedf146b0c1c0f5f7944fd4e825b3dfecf219ec1c\",\""
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.264+00:00",
+        "url": "https://racecenter.letour.fr/api/team-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVGcyT0dRNE1XUmhaREUwIiwiaWF0IjoxNzg1MDc1NjM5fQ8nl4aax3Drm37X_t8nlpJIVLFxnLjLOi6cC-7jV4Vm4",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"nameShort\":\"COFIDIS\",\"logo_live\":null,\"jersey_sm\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/cof/71492/0:0,400:400-60-0-70/ffc36\",\"logo\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/cof/70177/0:0,284:284-0-0-70/12750\",\"jersey\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/cof/71492/0:0,400:400-0-0-70/67ae0\",\"nationality\":\"fra\",\"header\":null,\"color\":\"#000000\",\"banner\":null,\"code\":\"C"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.301+00:00",
+        "url": "https://racecenter.letour.fr/api/stage-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPR0k0TXpFNFpUSmlOelJrIiwiaWF0IjoxNzg1MDc1NjM5fQyU9C0Dsb5nHRKfCXAC4F_JF-8SLOzwG5hOQviNJCnYo",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"departureCity\":{\"label\":\"Carcassonne\",\"cityLangs\":[],\"id\":29595,\"code\":\"carcassonne\",\"content\":{\"texts\":[{\"locale\":\"fr\",\"text\":[\"<br />\\nVille-étape pour la 14e fois<br />\\nPréfecture de l’Aude (11)<br />\\nHabitants : 46 500 (Carcassonnais et Carcassonnaises)<br />\\n<br />\\nLa première visite du Tour à Carcassonne date de 1947 et la cité a d’emblée marqué l’histoire puisque c’est en la quittant"
       },
       {
-        "captured_at": "2026-07-25T09:43:06.969+00:00",
-        "url": "https://racecenter.letour.fr/api/team-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNalJsT0RRNVltTTBaak5tIiwiaWF0IjoxNzg0OTcyNTg2fQeXl-JVJLq4DNnmzOXS7ZH1Guqs8xECi_OAgGFEQpHGM",
+        "captured_at": "2026-07-26T14:20:40.407+00:00",
+        "url": "https://racecenter.letour.fr/api/allCompetitors-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZalEyWm1NeU9HVmlZbUZqIiwiaWF0IjoxNzg1MDc1NjM5fQHGzqy87DQ5UWiRzZt_Y7sUDX5F-zZXdRHq_OL1JzOlA",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[{\"nameShort\":\"COFIDIS\",\"logo_live\":null,\"jersey_sm\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/cof/71492/0:0,400:400-60-0-70/ffc36\",\"logo\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/cof/70177/0:0,284:284-0-0-70/12750\",\"jersey\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/cof/71492/0:0,400:400-0-0-70/67ae0\",\"nationality\":\"fra\",\"header\":null,\"color\":\"#000000\",\"banner\":null,\"code\":\"C"
+        "sample": "[{\"bib\":34,\"siteLinks\":{\"fr\":\"/coureur/34/lidl-trek/simmons-quinn\",\"en\":\"/rider/34/lidl-trek/simmons-quinn\",\"es\":\"/corredor/34/lidl-trek/simmons-quinn\",\"de\":\"/rennfahrer/34/lidl-trek/simmons-quinn\"},\"nationality\":\"usa\",\"sex\":\"M\",\"lastname\":\"SIMMONS\",\"idUCI\":\"USA20010508\",\"profile\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/34/71864/0:0,400:400-0-0-70/267bf\",\"profile_sm\":\"https://img.aso.fr/c"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.413+00:00",
+        "url": "https://racecenter.letour.fr/api/checkpoint-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZV1l5Tm1SbU9HSm1NMkl3IiwiaWF0IjoxNzg1MDc1NjM5fQrLR62W6-y6zF9AF5U4MRp7InA6Ys5igDYHW0qwoM78A",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"0\":{\"checkpoint\":1,\"caravanSchedule\":\"13:20:00\",\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"country\":\"France\",\"checkpointTypes\":[],\"length\":0,\"countryCode\":\"FRA\",\"checkpointSummits\":[]},\"1\":{\"checkpointSummits\":[],\"length\":0,\"road\":\"Yvelines\",\"checkpointTypes\":[],\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"place\":\"Yvelines\",\"caravanSchedule\":\"13:20:00\",\"checkpoint\":2},\"2\":{\"checkpointSummits\":[],\"len"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.413+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeJerseys-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJORE00WkdWbU5HUTFaV0U1IiwiaWF0IjoxNzg1MDc1NjM5fQCEgRmjm4Vamsp6VWHAqsX-jO8csilKIsmu-V1oed-uM",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"checkpoint\":76,\"status\":\"0\",\"type\":\"pmt\",\"length\":0,\"rankings\":[{\"bib\":1,\"relative\":0,\"position\":1,\"absolute\":262424000,\"$rider\":\"allCompetitors-2026:98ebdbb15aee1eca149591765648fe98b7cf74b3ad2555f48c35b01e902e3777\"}],\"_id\":\"0428cb702e9784749eb257827e9d686b3e2c7fb5f30271dac407daf26f736c62\",\"_updatedAt\":1784992818397,\"_bind\":\"rankingTypeJerseys-2026-21\",\"_origin\":\"rankingType-2026-20\",\"_parent\":"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.413+00:00",
+        "url": "https://racecenter.letour.fr/api/insights-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVEU1TmpOaE1qSmhNR00wIiwiaWF0IjoxNzg1MDc1NjM5fQIWSnc3rxXpOr5z8KpeDVwApT2sFnZLDmYTs3Ybzl4Bs",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.413+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingType-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNMlEyTVRVeVpEUmpOR0ppIiwiaWF0IjoxNzg1MDc1NjM5fQvyxrmLz2AR18_DATiEX0Hyz-dWV2QkbnvqPh91kqmeU",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.543+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingType-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVEJtT0RKaFpXRXhOelV6IiwiaWF0IjoxNzg1MDc1NjM5fQPwbAEzZtQh3kzEXwR0qBsb0bmTgDPYs-1LJIlnwGago",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"type\":\"ime\",\"rankings\":[{\"position\":1,\"penality\":0,\"relative\":0,\"bib\":41,\"absolute\":10,\"bonus\":0,\"$rider\":\"allCompetitors-2026:473172c3f0db2f7ea6b03f3ef73eb46591c5016c211775b8c5d697cb615e4282\"},{\"position\":2,\"relative\":0,\"penality\":0,\"absolute\":8,\"bib\":18,\"bonus\":0,\"$rider\":\"allCompetitors-2026:7f2d328ffb1d1e7b6d9148ff47496307f93fdfca5181d42cf910f27050e58fc5\"},{\"bib\":83,\"absolute\":6,\"bonus\":0,\""
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.543+00:00",
+        "url": "https://racecenter.letour.fr/api/telemetryPack-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaalZsTkRjNE5EQXdaVE14IiwiaWF0IjoxNzg1MDc1NjM5fQ2HhGZ9rzEbDlsk6Sd6-vChuKPNMP4E0ncWea06hwFRI",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.543+00:00",
+        "url": "https://racecenter.letour.fr/api/ad?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPV1UxT0RCbE56Wm1PRFF5IiwiaWF0IjoxNzg1MDc1NjM5fQiAPR-GD0kgqwh5AV_FKtkOUKYsYKZuwEeimQJ9hB0rU",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"adUnit\":\"dfp_chronometreur\",\"type\":\"core_static.block.service.pub_push\",\"_bind\":\"ad\",\"_origin\":\"ad\",\"_id\":\"1d878bf731892e95c752ad7bcd7dcebbc28846d53a751683cc95be0e6adc4ed9\",\"_key\":\"_id\",\"_updatedAt\":1780663452324,\"_parent\":\":tdf\",\"_virtual\":\"dfp_chronometreur\"},{\"adUnit\":\"dfp_pave-1\",\"type\":\"core_static.block.service.pub_push\",\"_bind\":\"ad\",\"_origin\":\"ad\",\"_id\":\"34c054a302dcd386a61dce58799a010c2"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.543+00:00",
+        "url": "https://racecenter.letour.fr/api/broadcaster?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOMlV4TXpabE9UUTNNVEE0IiwiaWF0IjoxNzg1MDc1NjQwfQ3KaEREBxMeURxFslAVRSayGPlu-Sid9tZveJ-dp6Ces",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"createdBy\":\"eBlancardi\",\"geolocation\":\"lac\",\"updatedAt\":\"2025-07-04T18:55:08+02:00\",\"broadcasterLangs\":[{\"locale\":\"fr\",\"url\":\"https://espndeportes.espn.com/ciclismo/\",\"countryLabel\":\"Amérique Latine & Caraïbes\",\"title\":\"ESPN\"},{\"url\":\"https://espndeportes.espn.com/ciclismo/\",\"locale\":\"en\",\"countryLabel\":\"LATIN AMERICA AND CARIBBEAN\",\"title\":\"ESPN\"},{\"locale\":\"de\",\"url\":\"https://espndeportes.esp"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.543+00:00",
+        "url": "https://racecenter.letour.fr/api/fantasy-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaalV4TXpjeVl6TXlNbVE1IiwiaWF0IjoxNzg1MDc1NjQwfQCwuagYWkzSo_UpSswB5rBgOQ_6lvnZzIcGzdW-Z16AY",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"stage\":{\"name\":\"21 - Thoiry &gt; Paris Champs-Élysées\",\"id\":21,\"deadline_UTC\":\"2026-07-26 15:50\"},\"points_definitive\":false,\"riders\":[{\"category\":\"Leaders\",\"points\":0,\"number\":1,\"points_captain\":0},{\"number\":2,\"points_captain\":0,\"points\":0,\"category\":\"Climbers\"},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":3},{\"number\":4,\"points_captain\":0,\"points\":0,\"category\":\"Climbers\"},{\"po"
+      },
+      {
+        "captured_at": "2026-07-26T14:20:40.544+00:00",
+        "url": "https://racecenter.letour.fr/api/publication_en-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPV0ZqTURVME16WTFaREZqIiwiaWF0IjoxNzg1MDc1NjQwfQEpZ46uc3wwFZX2StCmUvjhzo-_fFpJthUuLolKCTxAE",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"locale\":\"en\",\"text\":[\"Each day before the stage starts, pick your favourite for victory from among all the riders still in the race with the Stage Winner Predictor thanks to the Tour de France Club!\"],\"id\":1266,\"updatedAt\":\"2026-07-26T09:27:31+02:00\",\"title\":\"Vote for the Stage Winner Predictor\",\"type\":\"fastory\",\"contentId\":\"b6Bx76Jr\",\"url\":\"tdf_26_predictor---uk\",\"image\":\"https://img.aso.fr/co"
       }
     ],
     "api-path": [
       {
-        "captured_at": "2026-07-25T09:43:07.402+00:00",
-        "url": "https://racecenter.letour.fr/api/rankingTypeTrial-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaVEUzWkRWbU16Y3daVFpoIiwiaWF0IjoxNzg0OTcyNTg2fQAwJqkwYqrqUvRdkwgA5csMcNyoSpRxWyYDJvB9phq6g",
+        "captured_at": "2026-07-26T14:20:40.545+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeJerseys-2026-22?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOVGsyTVdWaE1EUTVaamRsIiwiaWF0IjoxNzg1MDc1NjM5fQTu2KEvi5QUQJTMNgo2S7OUMimMCpGOYz2DCz-yLN-6g",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:43:07.402+00:00",
-        "url": "https://racecenter.letour.fr/api/rankingTypeWidget-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZV1JqWmpneE0yRmxZelUxIiwiaWF0IjoxNzg0OTcyNTg2fQhQdHgFgSZJpBf7czm8zIP6AWhd7Pv9uAbutecbAdceE",
+        "captured_at": "2026-07-26T14:20:40.550+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeArrival-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPV0l5WWpFeU5ESXpaVGMwIiwiaWF0IjoxNzg1MDc1NjM5fQed5mNMSTKBsMeLpENiv9RbTTzSDoBlPrhyy2KGVO61A",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:43:07.402+00:00",
-        "url": "https://racecenter.letour.fr/api/rankingTypeJerseys-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaVGRrWlRabE5ESTNNVGd5IiwiaWF0IjoxNzg0OTcyNTg2fQ_Pn_b6Qn_rHgfJeKPBNU5e-n8DRXuZgFqBnORhKIWjY",
+        "captured_at": "2026-07-26T14:20:40.576+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeTrial-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNMlUxT1Roa1ptRTNZV1l4IiwiaWF0IjoxNzg1MDc1NjQwfQZh_M3xTp7mEmkFvWDvfn8bH5PriSTy61FP9m7zofluU",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:43:07.405+00:00",
-        "url": "https://racecenter.letour.fr/api/rankingTypeArrival-2026-20?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOR1F4WkdWbFkyRXdaR0ZqIiwiaWF0IjoxNzg0OTcyNTg2fQSsXqd_KpS7RFRXn2CgG1pBLHTJ1p4dAFKkcgJsAhsO8",
+        "captured_at": "2026-07-26T14:20:40.612+00:00",
+        "url": "https://racecenter.letour.fr/api/rankingTypeWidget-2026-21?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVE01WmpVeU9HSXhNamd5IiwiaWF0IjoxNzg1MDc1NjQwfQRiZC6hUrAw9ei1Gk1kHvepm2tz9b69LheekR0GNPFtM",
         "status": 204,
         "mime": "",
         "kind": "api-path",
@@ -256,24 +248,24 @@
     ],
     "csv": [
       {
-        "captured_at": "2026-07-25T09:43:07.424+00:00",
-        "url": "https://racecenter.letour.fr/profils/2026/profile-20-b7efb4f690263260c56062a24ce50688.csv",
+        "captured_at": "2026-07-26T14:20:40.577+00:00",
+        "url": "https://racecenter.letour.fr/profils/2026/profile-21-6effe840af7f5bc3c437a87d0177fb3f.csv",
         "status": 200,
         "mime": "text/csv; charset=UTF-8",
         "kind": "csv",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:43:07.425+00:00",
-        "url": "https://racecenter.letour.fr/profils/2026/profile-20-b7efb4f690263260c56062a24ce50688.csv",
+        "captured_at": "2026-07-26T14:20:40.577+00:00",
+        "url": "https://racecenter.letour.fr/profils/2026/profile-21-6effe840af7f5bc3c437a87d0177fb3f.csv",
         "status": 200,
         "mime": "text/csv; charset=UTF-8",
         "kind": "csv",
         "sample": ""
       },
       {
-        "captured_at": "2026-07-25T09:43:07.433+00:00",
-        "url": "https://racecenter.letour.fr/profils/2026/profile-20-tiny-72b592232b304a20d16b9bc92f4d5526.csv",
+        "captured_at": "2026-07-26T14:20:40.758+00:00",
+        "url": "https://racecenter.letour.fr/profils/2026/profile-21-tiny-c039761a4e729cd2c42426cebe111b52.csv",
         "status": 200,
         "mime": "text/csv; charset=UTF-8",
         "kind": "csv",
@@ -282,111 +274,97 @@
     ]
   },
   "sse_binds_seen": {
-    "(unparseable)": 58,
-    "video": 21,
-    "publication_fr": 12,
-    "publication_en": 12,
-    "publication_de": 8,
-    "publication_es": 9,
-    "socialContent": 73,
-    "checkpoint": 7,
-    "telemetryPack": 7,
-    "telemetryCompetitor": 7,
-    "fantasy": 7,
-    "pack": 71,
-    "insights": 71,
-    "extraVehicle": 88,
-    "(unknown)": 7,
-    "publication_da": 2,
-    "publication_sl": 2,
-    "publication_sk": 2,
-    "publication_cs": 2,
-    "publication_nl": 2,
-    "publication_it": 2,
-    "publication_sv": 2,
-    "publication_pt": 2,
-    "publication_nb": 2
+    "(unparseable)": 51,
+    "fantasy": 6,
+    "publication_fr": 6,
+    "publication_en": 6,
+    "publication_de": 6,
+    "publication_es": 6,
+    "event": 6,
+    "checkpoint": 6,
+    "extraVehicle": 80,
+    "(unknown)": 6
   },
   "sse_sample_events": [
     {
-      "captured_at": "2026-07-25T09:43:06.107+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.011256,
+      "captured_at": "2026-07-26T14:20:39.836+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.625666,
       "eventName": "uid",
       "eventId": "",
-      "data": "c547dcd6-babc-476b-a673-1e1096563005"
+      "data": "f2a9b4c6-7c13-4a3f-b135-adbf2dc73865"
     },
     {
-      "captured_at": "2026-07-25T09:43:06.107+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.011614,
+      "captured_at": "2026-07-26T14:20:39.836+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.625864,
       "eventName": "stage",
       "eventId": "",
-      "data": "6fd61462168b294550703b0e4f2906d0c7d41a3be64930e8f64b14880f05f80c"
+      "data": "ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf"
     },
     {
-      "captured_at": "2026-07-25T09:43:06.108+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.011744,
+      "captured_at": "2026-07-26T14:20:39.838+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.626248,
       "eventName": "update",
-      "eventId": "8",
-      "data": "{\"bind\":\"video-2026-20\",\"app\":\"tdf\",\"origin\":\"video-2026-20\",\"change\":\"added\",\"id\":\"7b22b03368dd026083d3c033c36be470787bd6c143e0c4385182265db5d4d90f\",\"data\":{\"videoLangs\":[{\"locale\":\"fr\",\"title\":\"Découvrez le parcours de l'Étape 20\"},{\"title\":\"Discover the route of Stage 20\",\"locale\":\"en\"},{\"title\":\"Discover the route of Etappe 20\",\"locale\":\"de\"},{\"locale\":\"es\",\"title\":\"Descubra el recorrido de la Etapa 20\"}],\"isData\":false,\"isClub\":false,\"createdAt\":\"2026-07-25T07:40:00+02:00\",\"onlyClubTab\":false,\"name\":\"Découvrez le parcours de l'Étape 20\",\"onlyDataTab\":false,\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=x9sikqg\",\"id\":11554,\"_id\":\"7b22b03368dd026083d3c033c36be470787bd6c143e0c4385182265db5d4d90f\",\"_bind\":\"video-2026-20\",\"_origin\":\"video-2026-20\",\"_updatedAt\":1784958124285,\"_parent\":\"stage-2026:6fd61462168b294550703b0e4f2906d0c7d41a3be64930e8f64b14880f05f80c\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Découvrez le parcours de l'Étape 20\",\"model\":\"video\"}}"
+      "eventId": "2",
+      "data": "{\"bind\":\"fantasy-2026-21\",\"app\":\"tdf\",\"origin\":\"fantasy-2026-21\",\"change\":\"added\",\"id\":\"riders-data\",\"data\":{\"stage\":{\"name\":\"21 - Thoiry &gt; Paris Champs-Élysées\",\"id\":21,\"deadline_UTC\":\"2026-07-26 15:50\"},\"points_definitive\":false,\"riders\":[{\"category\":\"Leaders\",\"points\":0,\"number\":1,\"points_captain\":0},{\"number\":2,\"points_captain\":0,\"points\":0,\"category\":\"Climbers\"},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":3},{\"number\":4,\"points_captain\":0,\"points\":0,\"category\":\"Climbers\"},{\"points_captain\":0,\"number\":5,\"points\":0,\"category\":\"All-rounders\"},{\"number\":6,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"number\":7,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"number\":8,\"points_captain\":0,\"points\":0,\"category\":\"Leaders\"},{\"category\":\"Leaders\",\"points\":0,\"points_captain\":0,\"number\":11},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":12},{\"number\":13,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":14},{\"number\":15,\"points_captain\":0,\"points\":0,\"category\":\"Climbers\"},{\"points_captain\":0,\"number\":16,\"points\":0,\"category\":\"Climbers\"},{\"category\":\"Climbers\",\"points\":0,\"number\":17,\"points_captain\":0},{\"points\":0,\"category\":\"Climbers\",\"number\":18,\"points_captain\":0},{\"points\":0,\"category\":\"Leaders\",\"number\":21,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":22},{\"points_captain\":0,\"number\":23,\"points\":0,\"category\":\"All-rounders\"},{\"points\":0,\"category\":\"Climbers\",\"number\":24,\"points_captain\":0},{\"number\":25,\"points_captain\":0,\"points\":0,\"category\":\"Leaders\"},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":26},{\"points_captain\":0,\"number\":27,\"category\":\"All-rounders\",\"points\":0},{\"number\":28,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"number\":31,\"points_captain\":0,\"category\":\"Leaders\",\"points\":0},{\"points_captain\":0,\"number\":32,\"points\":0,\"category\":\"Leaders\"},{\"points_captain\":0,\"number\":33,\"points\":0,\"category\":\"Sprinters\"},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":34},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":35},{\"number\":36,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":37},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":38},{\"points\":0,\"category\":\"Leaders\",\"number\":41,\"points_captain\":0},{\"number\":42,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":43},{\"number\":44,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"number\":45,\"points_captain\":0},{\"points\":0,\"category\":\"All-rounders\",\"number\":46,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"number\":47,\"points_captain\":0},{\"points_captain\":0,\"number\":48,\"category\":\"All-rounders\",\"points\":0},{\"number\":51,\"points_captain\":0,\"points\":0,\"category\":\"Leaders\"},{\"points\":0,\"category\":\"All-rounders\",\"number\":52,\"points_captain\":0},{\"points_captain\":0,\"number\":53,\"category\":\"Sprinters\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"number\":54,\"points_captain\":0},{\"category\":\"Sprinters\",\"points\":0,\"number\":55,\"points_captain\":0},{\"number\":56,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"number\":57,\"points_captain\":0,\"category\":\"Climbers\",\"points\":0},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":58},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":61},{\"category\":\"All-rounders\",\"points\":0,\"number\":62,\"points_captain\":0},{\"points\":0,\"category\":\"Sprinters\",\"points_captain\":0,\"number\":63},{\"points_captain\":0,\"number\":64,\"points\":0,\"category\":\"Sprinters\"},{\"number\":65,\"points_captain\":0,\"points\":0,\"category\":\"Climbers\"},{\"number\":66,\"points_captain\":0,\"category\":\"Sprinters\",\"points\":0},{\"number\":67,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"number\":68,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"points\":0,\"category\":\"Climbers\",\"number\":71,\"points_captain\":0},{\"category\":\"Sprinters\",\"points\":0,\"number\":72,\"points_captain\":0},{\"points_captain\":0,\"number\":73,\"points\":0,\"category\":\"Climbers\"},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":74},{\"points_captain\":0,\"number\":75,\"category\":\"All-rounders\",\"points\":0},{\"number\":76,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"category\":\"Leaders\",\"points\":0,\"number\":77,\"points_captain\":0},{\"points\":0,\"category\":\"All-rounders\",\"number\":78,\"points_captain\":0},{\"points\":0,\"category\":\"Leaders\",\"number\":81,\"points_captain\":0},{\"category\":\"Leaders\",\"points\":0,\"number\":82,\"points_captain\":0},{\"number\":83,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"number\":84,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"category\":\"Sprinters\",\"points\":0,\"number\":85,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"number\":86,\"points_captain\":0},{\"points_captain\":0,\"number\":87,\"points\":0,\"category\":\"All-rounders\"},{\"category\":\"Leaders\",\"points\":0,\"points_captain\":0,\"number\":88},{\"points\":0,\"category\":\"Sprinters\",\"number\":91,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":92},{\"number\":93,\"points_captain\":0,\"category\":\"Climbers\",\"points\":0},{\"number\":94,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"number\":95,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":96},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":97},{\"points_captain\":0,\"number\":98,\"points\":0,\"category\":\"Climbers\"},{\"category\":\"All-rounders\",\"points\":0,\"number\":101,\"points_captain\":0},{\"points_captain\":0,\"number\":102,\"points\":0,\"category\":\"All-rounders\"},{\"number\":103,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"points_captain\":0,\"number\":104,\"points\":0,\"category\":\"All-rounders\"},{\"category\":\"Sprinters\",\"points\":0,\"number\":105,\"points_captain\":0},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":106},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":107},{\"points_captain\":0,\"number\":108,\"category\":\"All-rounders\",\"points\":0},{\"points\":0,\"category\":\"Leaders\",\"points_captain\":0,\"number\":111},{\"points\":0,\"category\":\"Sprinters\",\"points_captain\":0,\"number\":112},{\"category\":\"All-rounders\",\"points\":0,\"number\":113,\"points_captain\":0},{\"points_captain\":0,\"number\":114,\"category\":\"All-rounders\",\"points\":0},{\"number\":115,\"points_captain\":0,\"category\":\"Sprinters\",\"points\":0},{\"number\":116,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"points\":0,\"category\":\"All-rounders\",\"number\":117,\"points_captain\":0},{\"points_captain\":0,\"number\":118,\"points\":0,\"category\":\"Climbers\"},{\"points_captain\":0,\"number\":121,\"category\":\"Leaders\",\"points\":0},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":122},{\"points_captain\":0,\"number\":123,\"category\":\"Climbers\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":124},{\"number\":125,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"points_captain\":0,\"number\":126,\"category\":\"All-rounders\",\"points\":0},{\"points_captain\":0,\"number\":127,\"points\":0,\"category\":\"Climbers\"},{\"number\":128,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"points\":0,\"category\":\"Sprinters\",\"number\":131,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":132},{\"number\":133,\"points_captain\":0,\"category\":\"Climbers\",\"points\":0},{\"points_captain\":0,\"number\":134,\"category\":\"Climbers\",\"points\":0},{\"points\":0,\"category\":\"All-rounders\",\"number\":135,\"points_captain\":0},{\"points_captain\":0,\"number\":136,\"points\":0,\"category\":\"All-rounders\"},{\"points\":0,\"category\":\"Sprinters\",\"number\":137,\"points_captain\":0},{\"points\":0,\"category\":\"All-rounders\",\"number\":138,\"points_captain\":0},{\"points\":0,\"category\":\"Leaders\",\"points_captain\":0,\"number\":141},{\"points\":0,\"category\":\"Climbers\",\"number\":142,\"points_captain\":0},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":143},{\"points_captain\":0,\"number\":144,\"points\":0,\"category\":\"All-rounders\"},{\"number\":145,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"category\":\"All-rounders\",\"points\":0,\"number\":146,\"points_captain\":0},{\"points_captain\":0,\"number\":147,\"points\":0,\"category\":\"All-rounders\"},{\"category\":\"Climbers\",\"points\":0,\"number\":148,\"points_captain\":0},{\"points_captain\":0,\"number\":151,\"points\":0,\"category\":\"Sprinters\"},{\"number\":152,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"number\":153,\"points_captain\":0,\"category\":\"Sprinters\",\"points\":0},{\"number\":154,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"number\":155,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"points_captain\":0,\"number\":156,\"category\":\"Climbers\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"number\":157,\"points_captain\":0},{\"points_captain\":0,\"number\":158,\"points\":0,\"category\":\"Climbers\"},{\"points_captain\":0,\"number\":161,\"points\":0,\"category\":\"Climbers\"},{\"number\":162,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"points\":0,\"category\":\"Sprinters\",\"number\":163,\"points_captain\":0},{\"points_captain\":0,\"number\":164,\"category\":\"All-rounders\",\"points\":0},{\"category\":\"Sprinters\",\"points\":0,\"number\":165,\"points_captain\":0},{\"number\":166,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"points\":0,\"category\":\"Sprinters\",\"number\":167,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":168},{\"points\":0,\"category\":\"Leaders\",\"number\":171,\"points_captain\":0},{\"category\":\"All-rounders\",\"points\":0,\"number\":172,\"points_captain\":0},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":173},{\"category\":\"All-rounders\",\"points\":0,\"number\":174,\"points_captain\":0},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":175},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":176},{\"number\":177,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":178},{\"number\":181,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"number\":182,\"points_captain\":0,\"category\":\"Climbers\",\"points\":0},{\"number\":183,\"points_captain\":0,\"category\":\"Climbers\",\"points\":0},{\"points_captain\":0,\"number\":184,\"category\":\"Climbers\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":185},{\"category\":\"Leaders\",\"points\":0,\"points_captain\":0,\"number\":186},{\"number\":187,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":188},{\"category\":\"All-rounders\",\"points\":0,\"points_captain\":0,\"number\":191},{\"number\":192,\"points_captain\":0,\"points\":0,\"category\":\"Sprinters\"},{\"points_captain\":0,\"number\":193,\"category\":\"All-rounders\",\"points\":0},{\"number\":194,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":195},{\"points\":0,\"category\":\"Leaders\",\"number\":196,\"points_captain\":0},{\"number\":197,\"points_captain\":0,\"category\":\"Sprinters\",\"points\":0},{\"category\":\"Climbers\",\"points\":0,\"points_captain\":0,\"number\":198},{\"number\":201,\"points_captain\":0,\"points\":0,\"category\":\"Leaders\"},{\"points\":0,\"category\":\"Climbers\",\"points_captain\":0,\"number\":202},{\"points\":0,\"category\":\"All-rounders\",\"number\":203,\"points_captain\":0},{\"points_captain\":0,\"number\":204,\"category\":\"All-rounders\",\"points\":0},{\"number\":205,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":206},{\"category\":\"All-rounders\",\"points\":0,\"number\":207,\"points_captain\":0},{\"number\":208,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"points_captain\":0,\"number\":211,\"category\":\"Climbers\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"number\":212,\"points_captain\":0},{\"number\":213,\"points_captain\":0,\"category\":\"Sprinters\",\"points\":0},{\"number\":214,\"points_captain\":0,\"category\":\"Sprinters\",\"points\":0},{\"category\":\"All-rounders\",\"points\":0,\"number\":215,\"points_captain\":0},{\"number\":216,\"points_captain\":0,\"points\":0,\"category\":\"All-rounders\"},{\"points_captain\":0,\"number\":217,\"category\":\"All-rounders\",\"points\":0},{\"number\":218,\"points_captain\":0,\"category\":\"All-rounders\",\"points\":0},{\"number\":221,\"points_captain\":0,\"category\":\"Sprinters\",\"points\":0},{\"category\":\"Leaders\",\"points\":0,\"points_captain\":0,\"number\":222},{\"number\":223,\"points_captain\":0,\"category\":\"Climbers\",\"points\":0},{\"points_captain\":0,\"number\":224,\"points\":0,\"category\":\"All-rounders\"},{\"points\":0,\"category\":\"Climbers\",\"number\":225,\"points_captain\":0},{\"points\":0,\"category\":\"Sprinters\",\"number\":226,\"points_captain\":0},{\"points\":0,\"category\":\"All-rounders\",\"points_captain\":0,\"number\":227},{\"points_captain\":0,\"number\":228,\"category\":\"Leaders\",\"points\":0}],\"status\":\"success\",\"_id\":\"riders-data\",\"_bind\":\"fantasy-2026-21\",\"_origin\":\"fantasy-2026-21\",\"_updatedAt\":1785034801169,\"_parent\":\"stage-2026:ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf\",\"_key\":\"_id\",\"_refs\":[]}}"
     },
     {
-      "captured_at": "2026-07-25T09:43:06.108+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.01299,
+      "captured_at": "2026-07-26T14:20:39.838+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.627832,
       "eventName": "update",
-      "eventId": "14",
-      "data": "{\"bind\":\"video-2026-20\",\"app\":\"tdf\",\"origin\":\"video-2026-20\",\"change\":\"added\",\"id\":\"94345d8c4620e651e2ef1bbe5c4bed7e8c81b0cbe2df42f193646912616f32cb\",\"data\":{\"isData\":false,\"isClub\":true,\"createdAt\":\"2026-06-30T17:12:00+02:00\",\"videoLangs\":[{\"title\":\"Briefing Étape 20\",\"id\":21718,\"locale\":\"fr\"},{\"locale\":\"en\",\"id\":21719,\"title\":\"Briefing Stage 20\"},{\"id\":21720,\"locale\":\"de\",\"title\":\"Briefing Etappe 20\"},{\"id\":21721,\"locale\":\"es\",\"title\":\"Briefing Etapa 20\"}],\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rrm\",\"onlyDataTab\":false,\"id\":10852,\"name\":\"Briefing Étape 20\",\"onlyClubTab\":false,\"_id\":\"94345d8c4620e651e2ef1bbe5c4bed7e8c81b0cbe2df42f193646912616f32cb\",\"_bind\":\"video-2026-20\",\"_origin\":\"video-2026-20\",\"_updatedAt\":1784958184272,\"_parent\":\"stage-2026:6fd61462168b294550703b0e4f2906d0c7d41a3be64930e8f64b14880f05f80c\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 20\",\"model\":\"video\"}}"
+      "eventId": "25",
+      "data": "{\"bind\":\"publication_fr-2026-21\",\"app\":\"tdf\",\"origin\":\"interactiveContent-2026-21\",\"change\":\"added\",\"id\":\"5407ed837e0069bda76a301b3f6306631c285b45c3dbbcd61dbe9d0b22e0e4cf\",\"data\":{\"locale\":\"fr\",\"id\":1265,\"text\":[\"Chaque jour avant le départ de l’étape, misez sur votre favori pour la victoire parmi tous les coureurs encore en course avec le Stage Winner Predictor !\"],\"type\":\"fastory\",\"title\":\"Votez pour le Stage Winner Predictor\",\"updatedAt\":\"2026-07-26T09:27:05+02:00\",\"url\":\"tdf_26_predictor---fr\",\"contentId\":\"SHUd5z_9\",\"image\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/tdf-gd-club-logo-white-background-rgb/63249/0:105,1179:1284-0-0-70/6a069\",\"_id\":\"5407ed837e0069bda76a301b3f6306631c285b45c3dbbcd61dbe9d0b22e0e4cf\",\"_bind\":\"publication_fr-2026-21\",\"_origin\":\"interactiveContent-2026-21\",\"_updatedAt\":1785050825992,\"_parent\":\"stage-2026:ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:frfastory-1265\",\"model\":\"interactive\",\"isClub\":true}}"
     },
     {
-      "captured_at": "2026-07-25T09:43:06.108+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.013255,
+      "captured_at": "2026-07-26T14:20:39.838+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.628089,
       "eventName": "update",
-      "eventId": "1432",
-      "data": "{\"bind\":\"publication_fr-2026-19\",\"app\":\"tdf\",\"origin\":\"video-2026-19\",\"change\":\"modified\",\"id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"data\":{\"videoLangs\":[{\"id\":21714,\"title\":\"Briefing Étape 19\",\"locale\":\"fr\"},{\"locale\":\"en\",\"id\":21715,\"title\":\"Briefing Stage 19\"},{\"title\":\"Briefing Etappe 19\",\"id\":21716,\"locale\":\"de\"},{\"locale\":\"es\",\"title\":\"Briefing Etapa 19\",\"id\":21717}],\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rne\",\"createdAt\":\"2026-06-30T16:51:00+02:00\",\"onlyClubTab\":false,\"id\":21714,\"isData\":false,\"name\":\"Briefing Étape 19\",\"isClub\":true,\"onlyDataTab\":false,\"_id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"_bind\":\"publication_fr-2026-19\",\"_origin\":\"video-2026-19\",\"_updatedAt\":1784966896410,\"_parent\":\"stage-2026:f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 19\",\"model\":\"video\",\"title\":\"Briefing Étape 19\",\"locale\":\"fr\"}}"
+      "eventId": "27",
+      "data": "{\"bind\":\"publication_en-2026-21\",\"app\":\"tdf\",\"origin\":\"interactiveContent-2026-21\",\"change\":\"added\",\"id\":\"5fccdc58953653ded943e6b7cdf28be04da54af5d66b016ace3ad756278959ee\",\"data\":{\"locale\":\"en\",\"text\":[\"Each day before the stage starts, pick your favourite for victory from among all the riders still in the race with the Stage Winner Predictor thanks to the Tour de France Club!\"],\"id\":1266,\"updatedAt\":\"2026-07-26T09:27:31+02:00\",\"title\":\"Vote for the Stage Winner Predictor\",\"type\":\"fastory\",\"contentId\":\"b6Bx76Jr\",\"url\":\"tdf_26_predictor---uk\",\"image\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/tdf-gd-club-logo-white-background-rgb/63249/0:105,1179:1284-0-0-70/6a069\",\"_id\":\"5fccdc58953653ded943e6b7cdf28be04da54af5d66b016ace3ad756278959ee\",\"_bind\":\"publication_en-2026-21\",\"_origin\":\"interactiveContent-2026-21\",\"_updatedAt\":1785050851733,\"_parent\":\"stage-2026:ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:enfastory-1266\",\"model\":\"interactive\",\"isClub\":true}}"
     },
     {
-      "captured_at": "2026-07-25T09:43:06.108+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.013532,
+      "captured_at": "2026-07-26T14:20:39.838+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.628243,
       "eventName": "update",
-      "eventId": "1433",
-      "data": "{\"bind\":\"publication_en-2026-19\",\"app\":\"tdf\",\"origin\":\"video-2026-19\",\"change\":\"modified\",\"id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"data\":{\"videoLangs\":[{\"id\":21714,\"title\":\"Briefing Étape 19\",\"locale\":\"fr\"},{\"locale\":\"en\",\"id\":21715,\"title\":\"Briefing Stage 19\"},{\"title\":\"Briefing Etappe 19\",\"id\":21716,\"locale\":\"de\"},{\"locale\":\"es\",\"title\":\"Briefing Etapa 19\",\"id\":21717}],\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rne\",\"createdAt\":\"2026-06-30T16:51:00+02:00\",\"onlyClubTab\":false,\"id\":21715,\"isData\":false,\"name\":\"Briefing Étape 19\",\"isClub\":true,\"onlyDataTab\":false,\"_id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"_bind\":\"publication_en-2026-19\",\"_origin\":\"video-2026-19\",\"_updatedAt\":1784966896410,\"_parent\":\"stage-2026:f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 19\",\"model\":\"video\",\"locale\":\"en\",\"title\":\"Briefing Stage 19\"}}"
+      "eventId": "29",
+      "data": "{\"bind\":\"publication_de-2026-21\",\"app\":\"tdf\",\"origin\":\"interactiveContent-2026-21\",\"change\":\"added\",\"id\":\"0c80c3a9262d34955d5d10d424d5f7c0dded212ff984a73f8bd9282ca298c303\",\"data\":{\"contentId\":\"b6Bx76Jr\",\"url\":\"tdf_26_predictor---uk\",\"image\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/tdf-gd-club-logo-white-background-rgb/63249/0:105,1179:1284-0-0-70/6a069\",\"text\":[\"Each day before the stage starts, pick your favourite for victory from among all the riders still in the race with the Stage Winner Predictor thanks to the Tour de France Club!\"],\"locale\":\"de\",\"id\":1267,\"title\":\"Vote for the Stage Winner Predictor\",\"updatedAt\":\"2026-07-26T09:27:55+02:00\",\"type\":\"fastory\",\"_id\":\"0c80c3a9262d34955d5d10d424d5f7c0dded212ff984a73f8bd9282ca298c303\",\"_bind\":\"publication_de-2026-21\",\"_origin\":\"interactiveContent-2026-21\",\"_updatedAt\":1785050876095,\"_parent\":\"stage-2026:ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:defastory-1267\",\"model\":\"interactive\",\"isClub\":true}}"
     },
     {
-      "captured_at": "2026-07-25T09:43:06.108+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.013717,
+      "captured_at": "2026-07-26T14:20:39.838+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.628361,
       "eventName": "update",
-      "eventId": "1434",
-      "data": "{\"bind\":\"publication_de-2026-19\",\"app\":\"tdf\",\"origin\":\"video-2026-19\",\"change\":\"modified\",\"id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"data\":{\"videoLangs\":[{\"id\":21714,\"title\":\"Briefing Étape 19\",\"locale\":\"fr\"},{\"locale\":\"en\",\"id\":21715,\"title\":\"Briefing Stage 19\"},{\"title\":\"Briefing Etappe 19\",\"id\":21716,\"locale\":\"de\"},{\"locale\":\"es\",\"title\":\"Briefing Etapa 19\",\"id\":21717}],\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rne\",\"createdAt\":\"2026-06-30T16:51:00+02:00\",\"onlyClubTab\":false,\"id\":21716,\"isData\":false,\"name\":\"Briefing Étape 19\",\"isClub\":true,\"onlyDataTab\":false,\"_id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"_bind\":\"publication_de-2026-19\",\"_origin\":\"video-2026-19\",\"_updatedAt\":1784966896410,\"_parent\":\"stage-2026:f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 19\",\"model\":\"video\",\"title\":\"Briefing Etappe 19\",\"locale\":\"de\"}}"
+      "eventId": "31",
+      "data": "{\"bind\":\"publication_es-2026-21\",\"app\":\"tdf\",\"origin\":\"interactiveContent-2026-21\",\"change\":\"added\",\"id\":\"209e6f46321c7f7860586dc03b7634407d32b061dfb2a9ed034ab97c2f41f16e\",\"data\":{\"updatedAt\":\"2026-07-26T09:28:19+02:00\",\"title\":\"Vote for the Stage Winner Predictor\",\"type\":\"fastory\",\"text\":[\"Each day before the stage starts, pick your favourite for victory from among all the riders still in the race with the Stage Winner Predictor thanks to the Tour de France Club!\"],\"id\":1268,\"locale\":\"es\",\"image\":\"https://img.aso.fr/core_app/img-cycling-tdf-png/tdf-gd-club-logo-white-background-rgb/63249/0:105,1179:1284-0-0-70/6a069\",\"contentId\":\"b6Bx76Jr\",\"url\":\"tdf_26_predictor---uk\",\"_id\":\"209e6f46321c7f7860586dc03b7634407d32b061dfb2a9ed034ab97c2f41f16e\",\"_bind\":\"publication_es-2026-21\",\"_origin\":\"interactiveContent-2026-21\",\"_updatedAt\":1785050899266,\"_parent\":\"stage-2026:ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:esfastory-1268\",\"model\":\"interactive\",\"isClub\":true}}"
     },
     {
-      "captured_at": "2026-07-25T09:43:06.109+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.013928,
+      "captured_at": "2026-07-26T14:20:39.839+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.628515,
       "eventName": "update",
-      "eventId": "1435",
-      "data": "{\"bind\":\"publication_es-2026-19\",\"app\":\"tdf\",\"origin\":\"video-2026-19\",\"change\":\"modified\",\"id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"data\":{\"videoLangs\":[{\"id\":21714,\"title\":\"Briefing Étape 19\",\"locale\":\"fr\"},{\"locale\":\"en\",\"id\":21715,\"title\":\"Briefing Stage 19\"},{\"title\":\"Briefing Etappe 19\",\"id\":21716,\"locale\":\"de\"},{\"locale\":\"es\",\"title\":\"Briefing Etapa 19\",\"id\":21717}],\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rne\",\"createdAt\":\"2026-06-30T16:51:00+02:00\",\"onlyClubTab\":false,\"id\":21717,\"isData\":false,\"name\":\"Briefing Étape 19\",\"isClub\":true,\"onlyDataTab\":false,\"_id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"_bind\":\"publication_es-2026-19\",\"_origin\":\"video-2026-19\",\"_updatedAt\":1784966896410,\"_parent\":\"stage-2026:f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 19\",\"model\":\"video\",\"locale\":\"es\",\"title\":\"Briefing Etapa 19\"}}"
+      "eventId": "60",
+      "data": "{\"bind\":\"event\",\"app\":\"tdf\",\"origin\":\"event\",\"change\":\"modified\",\"id\":\"dbfa6e3d5e33f66d138af5594b40fd1b5521af9063d2ff77d524978bf9dc7500\",\"data\":{\"adUnit\":\"/366560878/ASO/TOUR-DE-FRANCE\",\"extras\":{\"hideRidersPage\":false,\"stageStartLabel\":[\"21:Paris Champs-Élysées\"],\"hideTemperature\":true,\"hideInsideRace\":false,\"radioUrl\":\"https://ice.creacast.com/lequipe-au1\"},\"_id\":\"dbfa6e3d5e33f66d138af5594b40fd1b5521af9063d2ff77d524978bf9dc7500\",\"_bind\":\"event\",\"_origin\":\"event\",\"_updatedAt\":1785057665776,\"_parent\":\":tdf\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"/366560878/ASO/TOUR-DE-FRANCE\"}}"
     },
     {
-      "captured_at": "2026-07-25T09:43:06.109+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.01421,
+      "captured_at": "2026-07-26T14:20:39.841+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.628811,
       "eventName": "update",
-      "eventId": "1436",
-      "data": "{\"bind\":\"video-2026-19\",\"app\":\"tdf\",\"origin\":\"video-2026-19\",\"change\":\"modified\",\"id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"data\":{\"videoLangs\":[{\"id\":21714,\"title\":\"Briefing Étape 19\",\"locale\":\"fr\"},{\"locale\":\"en\",\"id\":21715,\"title\":\"Briefing Stage 19\"},{\"title\":\"Briefing Etappe 19\",\"id\":21716,\"locale\":\"de\"},{\"locale\":\"es\",\"title\":\"Briefing Etapa 19\",\"id\":21717}],\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xak6rne\",\"createdAt\":\"2026-06-30T16:51:00+02:00\",\"onlyClubTab\":false,\"id\":10851,\"isData\":false,\"name\":\"Briefing Étape 19\",\"isClub\":true,\"onlyDataTab\":false,\"_id\":\"3bd4de70263d901feaa52af6b1231ed1d314c4287125df0f5ad35f782bcf7a92\",\"_bind\":\"video-2026-19\",\"_origin\":\"video-2026-19\",\"_updatedAt\":1784966896410,\"_parent\":\"stage-2026:f645bea74ffb6582aef8d9c884488fa8ccf6fae238107138735516299a39b77d\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:Briefing Étape 19\",\"model\":\"video\"}}"
+      "eventId": "2329",
+      "data": "{\"bind\":\"checkpoint-2026-21\",\"app\":\"tdf\",\"origin\":\"checkpoint-2026-21\",\"change\":\"modified\",\"id\":\"ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf\",\"data\":{\"0\":{\"checkpoint\":1,\"caravanSchedule\":\"13:20:00\",\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"country\":\"France\",\"checkpointTypes\":[],\"length\":0,\"countryCode\":\"FRA\",\"checkpointSummits\":[]},\"1\":{\"checkpointSummits\":[],\"length\":0,\"road\":\"Yvelines\",\"checkpointTypes\":[],\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"place\":\"Yvelines\",\"caravanSchedule\":\"13:20:00\",\"checkpoint\":2},\"2\":{\"checkpointSummits\":[],\"length\":0,\"checkpointTypes\":[{\"code\":\"F\",\"id\":\"140941\",\"type\":\"fictive\",\"number\":\"0\"}],\"road\":\"THOIRY\",\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"place\":\"THOIRY\",\"caravanSchedule\":\"13:20:00\",\"checkpoint\":3},\"3\":{\"checkpoint\":4,\"caravanSchedule\":\"13:40:00\",\"place\":\"Transfert vers PARIS Champs-Élysées\",\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"road\":\"Transfert vers PARIS Champs-Élysées\",\"checkpointTypes\":[],\"length\":0,\"checkpointSummits\":[]},\"4\":{\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"place\":\"Paris\",\"checkpoint\":5,\"checkpointSummits\":[],\"length\":0,\"road\":\"Paris\",\"checkpointTypes\":[]},\"5\":{\"place\":\"PARIS Champs-Élysées\",\"road\":\"PARIS Champs-Élysées\",\"updatedAt\":\"2026-07-26T13:20:01+02:00\",\"checkpointSummits\":[],\"lowSchedule\":\"17:50:00\",\"longitude\":2.31153,\"highSchedule\":\"17:50:00\",\"checkpoint\":6,\"length\":0,\"middleSchedule\":\"17:50:00\",\"checkpointTypes\":[{\"code\":\"R\",\"type\":\"real\",\"id\":\"140942\",\"number\":\"0\"}],\"checkpointMeteo\":{\"windForce\":5,\"currentWeatherIcon\":\"04d\",\"latitude\":48.8685,\"currentWeatherDesc\":\"couvert\",\"meteoAt\":\"2026-07-26T16:00:05+02:00\",\"temperature\":22.99,\"windDirection\":\"OSO\",\"longitude\":2.3115,\"id\":1081,\"updatedBy\":\"console\",\"marginDistance\":3,\"updatedAt\":\"2026-07-26T16:00:05+02:00\",\"createdAt\":\"2026-07-26T16:00:05+02:00\",\"createdBy\":\"console\"},\"latitude\":48.86852,\"caravanSchedule\":\"15:15:00\"},\"6\":{\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"middleSchedule\":\"17:59:00\",\"length\":6.8,\"checkpointTypes\":[],\"road\":\"2e passage sur la ligne d'arrivée\",\"lowSchedule\":\"17:59:00\",\"place\":\"2e passage sur la ligne d'arrivée\",\"checkpoint\":7,\"highSchedule\":\"17:58:00\",\"checkpointSummits\":[]},\"7\":{\"middleSchedule\":\"18:08:00\",\"length\":13.6,\"checkpointTypes\":[],\"road\":\"3e passage sur la ligne d'arrivée\",\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"checkpointSummits\":[],\"lowSchedule\":\"18:09:00\",\"place\":\"3e passage sur la ligne d'arrivée\",\"highSchedule\":\"18:07:00\",\"checkpoint\":8},\"8\":{\"checkpointSummits\":[],\"lowSchedule\":\"18:18:00\",\"place\":\"4e passage sur la ligne d'arrivée\",\"checkpoint\":9,\"highSchedule\":\"18:15:00\",\"middleSchedule\":\"18:17:00\",\"length\":20.4,\"checkpointTypes\":[],\"road\":\"4e passage sur la ligne d'arrivée\",\"updatedAt\":\"2026-07-25T23:03:52+02:00\"},\"9\":{\"lowSchedule\":\"18:28:00\",\"checkpoint\":10,\"highSchedule\":\"18:24:00\",\"place\":\"5e passage sur la ligne d'arrivée\",\"checkpointSummits\":[],\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"length\":27.2,\"middleSchedule\":\"18:26:00\",\"road\":\"5e passage sur la ligne d'arrivée\",\"checkpointTypes\":[]},\"10\":{\"longitude\":2.30348,\"checkpoint\":11,\"highSchedule\":\"18:25:00\",\"lowSchedule\":\"18:29:00\",\"checkpointSummits\":[],\"latitude\":48.87107,\"checkpointMeteo\":{\"id\":1082,\"longitude\":2.3035,\"windDirection\":\"OSO\",\"temperature\":22.9,\"currentWeatherDesc\":\"couvert\",\"meteoAt\":\"2026-07-26T16:00:05+02:00\",\"latitude\":48.8711,\"currentWeatherIcon\":\"04d\",\"windForce\":5,\"createdBy\":\"console\",\"createdAt\":\"2026-07-26T16:00:05+02:00\",\"updatedAt\":\"2026-07-26T16:00:05+02:00\",\"marginDistance\":3,\"updatedBy\":\"console\"},\"checkpointTypes\":[{\"type\":\"sprint\",\"id\":\"140943\",\"number\":\"1\",\"code\":\"N\"}],\"middleSchedule\":\"18:27:00\",\"length\":27.9,\"place\":\"PARIS - HAUT DES CHAMPS-ÉLYSÉES (5E PASSAGE)\",\"updatedAt\":\"2026-07-26T13:19:58+02:00\",\"road\":\"PARIS - HAUT DES CHAMPS-ÉLYSÉES (5E PASSAGE)\"},\"11\":{\"checkpointSummits\":[],\"lowSchedule\":\"18:37:00\",\"highSchedule\":\"18:32:00\",\"checkpoint\":12,\"place\":\"6e passage sur la ligne d'arrivée\",\"length\":34,\"middleSchedule\":\"18:35:00\",\"road\":\"6e passage sur la ligne d'arrivée\",\"checkpointTypes\":[],\"updatedAt\":\"2026-07-25T23:03:52+02:00\"},\"12\":{\"length\":40.8,\"middleSchedule\":\"18:44:00\",\"checkpointTypes\":[],\"road\":\"7e passage sur la ligne d'arrivée\",\"updatedAt\":\"2026-07-25T23:03:52+02:00\",\"checkpointSummits\":[],\"lowSchedule\":\"18:47:00\",\"highSchedule\":\"18:41:00\",\"checkpoint\":13,\"place\":\"7e passage sur la ligne d'arrivée\"},\"13\":{\"checkpointSummits\":[{\"length\":1000,\"number\":1,\"code\":\"4\",\"state\":\"6.5\",\"id\":4306,\"summit\":{\"altitude\":128,\"name\":\"Côte de la Butte Montmartre\"},\"imageVersion\":\"\"}],\"lowSchedule\":\"18:57:00\",\"highSchedule\":\"18:49:00\",\"checkpoint\":14,\"longitude\":2.34122,\"length\":46.4,\"middleSchedule\":\"18:53:00\",\"checkpointTypes\":[],\"checkpointMeteo\":{\"createdAt\":\"2026-07-26T16:00:05+02:00\",\"createdBy\":\"console\",\"updatedAt\":\"2026-07-26T16:00:05+02:00\",\"marginDistance\":1,\"updatedBy\":\"console\",\"longitude\":2.3412,\"id\":1083,\"windDirection\":\"OSO\",\"latitude\":48.8866,\"meteoAt\":\"2026-07-26T16:00:05+02:00\",\"currentWeatherDesc\":\"couvert\",\"temperature\":22.48,\"currentWeatherIcon\":\"04d\",\"windForce\":5},\"latitude\":48.88661,\"place\":\"Côte de la Butte Montmartre\",\"road\":\"Côte de la Butte Montmartre\",\"updatedAt\":\"2026-07-26T13:10:07+02:00\"},\"14\":{\"checkpointSummits\":[],\"checkpoint\":15,\"highSchedule\":\"19:01:00\",\"place\":\"8e passage sur la ligne d'arrivée\",\"lowSchedule\":\"19:09:00\",\"road\":\"8e passage sur la ligne d'arrivée\",\"checkpointTypes\":[],\"length\":56.7,\"middleSchedule\":\"19:05:00\",\"updatedAt\":\"2026-07-25T23:03:52+02:00\"},\"15\":{\"length\":62.4,\"middleSchedule\":\"19:12:00\",\"checkpointTypes\":[],\"checkpointMeteo\":{\"currentWeatherDesc\":\"couvert\",\"meteoAt\":\"2026-07-26T16:00:05+02:00\",\"temperature\":22.48,\"latitude\":48.8866,\"currentWeatherIcon\":\"04d\",\"windForce\":5,\"id\":1084,\"longitude\":2.3412,\"windDirection\":\"OSO\",\"updatedAt\":\"2026-07-26T16:00:05+02:00\",\"marginDistance\":1,\"updatedBy\":\"console\",\"createdBy\":\"console\",\"createdAt\":\"2026-07-26T16:00:05+02:00\"},\"latitude\":48.88661,\"checkpointSummits\":[{\"summit\":{\"name\":\"Côte de la Butte Montmartre\",\"altitude\":128},\"imageVersion\":\"\",\"id\":4307,\"code\":\"4\",\"state\":\"6.5\",\"number\":2,\"length\":1000}],\"lowSchedule\":\"19:16:00\",\"highSchedule\":\"19:09:00\",\"longitude\":2.34122,\"checkpoint\":16,\"road\":\"Côte de la Butte Montmartre\",\"updatedAt\":\"2026-07-26T13:10:10+02:00\",\"place\":\"Côte de la Butte Montmartre\"},\"16\":{\"checkpointSummits\":[],\"place\":\"9e passage sur la ligne d'arrivée\",\"highSchedule\":\"19:21:00\",\"checkpoint\":17,\"lowSchedule\":\"19:30:00\",\"road\":\"9e passage sur la ligne d'arrivée\",\"checkpointTypes\":[],\"middleSchedule\":\"19:26:00\",\"length\":72.7,\"updatedAt\":\"2026-07-25T23:03:52+02:00\"},\"17\":{\"middleSchedule\":\"19:33:00\",\"length\":78.4,\"checkpointTypes\":[],\"checkpointMeteo\":{\"createdBy\":\"console\",\"createdAt\":\"2026-07-26T16:00:05+02:00\",\"marginDistance\":1,\"updatedAt\":\"2026-07-26T16:00:05+02:00\",\"updatedBy\":\"console\",\"id\":1085,\"longitude\":2.3412,\"windDirection\":\"OSO\",\"temperature\":22.48,\"meteoAt\":\"2026-07-26T16:00:05+02:00\",\"currentWeatherDesc\":\"couvert\",\"latitude\":48.8866,\"windForce\":5,\"currentWeatherIcon\":\"04d\"},\"latitude\":48.88661,\"checkpointSummits\":[{\"length\":1000,\"number\":3,\"state\":\"6.5\",\"code\":\"4\",\"id\":4308,\"summit\":{\"name\":\"Côte de la Butte Montmartre\",\"altitude\":128},\"imageVersion\":\"\"}],\"lowSchedule\":\"19:37:00\",\"checkpoint\":18,\"longitude\":2.34122,\"highSchedule\":\"19:28:00\",\"road\":\"Côte de la Butte Montmartre\",\"updatedAt\":\"2026-07-26T13:10:13+02:00\",\"place\":\"Côte de la Butte Montmartre\"},\"18\":{\"road\":\"PARIS Champs-Élysées\",\"updatedAt\":\"2026-07-26T13:20:04+02:00\",\"place\":\"PARIS Champs-Élysées\",\"checkpointTypes\":[{\"id\":\"140944\",\"type\":\"sprint\",\"number\":\"2\",\"code\":\"N\"},{\"type\":\"arrival\",\"id\":\"140945\",\"number\":\"0\",\"code\":\"A\"}],\"middleSchedule\":\"19:46:00\",\"length\":88.7,\"latitude\":48.86852,\"checkpointMeteo\":{\"createdBy\":\"console\",\"createdAt\":\"2026-07-26T16:00:05+02:00\",\"updatedBy\":\"console\",\"updatedAt\":\"2026-07-26T16:00:05+02:00\",\"marginDistance\":3,\"windDirection\":\"OSO\",\"id\":1086,\"longitude\":2.3115,\"windForce\":5,\"currentWeatherIcon\":\"04d\",\"meteoAt\":\"2026-07-26T16:00:05+02:00\",\"currentWeatherDesc\":\"couvert\",\"temperature\":22.99,\"latitude\":48.8685},\"checkpointSummits\":[],\"checkpoint\":19,\"longitude\":2.31153,\"highSchedule\":\"19:41:00\",\"lowSchedule\":\"19:51:00\"},\"_id\":\"ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf\",\"_bind\":\"checkpoint-2026-21\",\"_origin\":\"checkpoint-2026-21\",\"_updatedAt\":1785074406621,\"_parent\":\"stage-2026:ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf\",\"_key\":\"_id\",\"_refs\":[]}}"
     },
     {
-      "captured_at": "2026-07-25T09:43:06.110+00:00",
-      "requestId": "3083.252",
-      "timestamp": 86.014652,
+      "captured_at": "2026-07-26T14:20:39.841+00:00",
+      "requestId": "3065.251",
+      "timestamp": 86.629361,
       "eventName": "update",
-      "eventId": "2167",
-      "data": "{\"bind\":\"socialContent-2026-20\",\"app\":\"tdf\",\"origin\":\"socialContent-2026-20\",\"change\":\"added\",\"id\":\"d307d4aec387355121603d90e511139d31a1a2a88962e95b87fc4439ff1b0d7d\",\"data\":{\"publicationAt\":\"2026-07-25T10:52:00+02:00\",\"type\":\"instagram\",\"updatedAt\":\"2026-07-25T10:53:22+02:00\",\"id\":8624,\"updatedBy\":\"ganz\",\"createdAt\":\"2026-07-25T10:53:22+02:00\",\"onlyDataTab\":false,\"onlyClubTab\":false,\"socialContentLangs\":[{\"createdBy\":\"ganz\",\"createdAt\":\"2026-07-25T10:53:22+02:00\",\"updatedAt\":\"2026-07-25T10:53:22+02:00\",\"locale\":\"en\",\"title\":\"Queen stage\",\"updatedBy\":\"ganz\"},{\"createdAt\":\"2026-07-25T10:53:22+02:00\",\"createdBy\":\"ganz\",\"locale\":\"fr\",\"updatedAt\":\"2026-07-25T10:53:22+02:00\",\"updatedBy\":\"ganz\",\"title\":\"Étape reine\"},{\"locale\":\"de\",\"updatedAt\":\"2026-07-25T10:53:22+02:00\",\"createdAt\":\"2026-07-25T10:53:22+02:00\",\"createdBy\":\"ganz\",\"title\":\"Königsetappe\",\"updatedBy\":\"ganz\"}],\"url\":\"https://www.instagram.com/p/DbNNNAUN6MA/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==\",\"createdBy\":\"ganz\",\"highlight\":false,\"pinned\":false,\"stage\":{\"timezone\":\"Europe/Paris\",\"type\":\"HMG\",\"isCancelled\":false,\"length\":170.9,\"showGroups\":true,\"stage\":20,\"date\":\"2026-07-25T00:00:00+02:00\",\"podiumDisplayMode\":\"instantpodium\",\"lengthDisplay\":171},\"embedCode\":\"<blockquote class=\\\"instagram-media\\\" data-instgrm-captioned data-instgrm-permalink=\\\"https://www.instagram.com/p/DbNNNAUN6MA/?utm_source=ig_embed&amp;utm_campaign=loading\\\" data-instgrm-version=\\\"14\\\" style=\\\" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);\\\"><div style=\\\"padding:16px;\\\"> <a href=\\\"https://www.instagram.com/p/DbNNNAUN6MA/?utm_source=ig_embed&amp;utm_campaign=loading\\\" style=\\\" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;\\\" target=\\\"_blank\\\"> <div style=\\\" display: flex; flex-direction: row; align-items: center;\\\"> <div style=\\\"background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;\\\"></div> <div style=\\\"display: flex; flex-direction: column; flex-grow: 1; justify-content: center;\\\"> <div style=\\\" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;\\\"></div> <div style=\\\" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;\\\"></div></div></div><div style=\\\"padding: 19% 0;\\\"></div> <div style=\\\"display:block; height:50px; margin:0 auto 12px; width:50px;\\\"><svg width=\\\"50px\\\" height=\\\"50px\\\" viewBox=\\\"0 0 60 60\\\" version=\\\"1.1\\\" xmlns=\\\"https://www.w3.org/2000/svg\\\" xmlns:xlink=\\\"https://www.w3.org/1999/xlink\\\"><g stroke=\\\"none\\\" stroke-width=\\\"1\\\" fill=\\\"none\\\" fill-rule=\\\"evenodd\\\"><g transform=\\\"translate(-511.000000, -20.000000)\\\" fill=\\\"#000000\\\"><g><path d=\\\"M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80.001 541,80.001 C549.148,80.001 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631\\\"></path></g></g></g></svg></div><div style=\\\"padding-top: 8px;\\\"> <div style=\\\" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;\\\">View this post on Instagram</div></div><div style=\\\"padding: 12.5% 0;\\\"></div> <div style=\\\"display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;\\\"><div> <div style=\\\"background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);\\\"></div> <div style=\\\"background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;\\\"></div> <div style=\\\"background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);\\\"></div></div><div style=\\\"margin-left: 8px;\\\"> <div style=\\\" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;\\\"></div> <div style=\\\" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)\\\"></div></div><div style=\\\"margin-left: auto;\\\"> <div style=\\\" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);\\\"></div> <div style=\\\" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);\\\"></div> <div style=\\\" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);\\\"></div></div></div> <div style=\\\"display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;\\\"> <div style=\\\" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;\\\"></div> <div style=\\\" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;\\\"></div></div></a><p style=\\\" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;\\\"><a href=\\\"https://www.instagram.com/p/DbNNNAUN6MA/?utm_source=ig_embed&amp;utm_campaign=loading\\\" style=\\\" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;\\\" target=\\\"_blank\\\">A post shared by Tour de France™ (@letourdefrance)</a></p></div></blockquote>\\n<script async src=\\\"//www.instagram.com/embed.js\\\"></script>\",\"_id\":\"d307d4aec387355121603d90e511139d31a1a2a88962e95b87fc4439ff1b0d7d\",\"_bind\":\"socialContent-2026-20\",\"_origin\":\"socialContent-2026-20\",\"_updatedAt\":1784969602291,\"_parent\":\"stage-2026:6fd61462168b294550703b0e4f2906d0c7d41a3be64930e8f64b14880f05f80c\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"social:d307d4aec387355121603d90e511139d31a1a2a88962e95b87fc4439ff1b0d7d\",\"model\":\"socialContent\"}}"
+      "eventId": "2813",
+      "data": "{\"bind\":\"extraVehicle-2026-21\",\"app\":\"tdf\",\"origin\":\"extraVehicle-2026-21\",\"change\":\"modified\",\"id\":\"8d71ce49d992fde7feeb4c4d299f1d824218a024fad78c60a2810f0b34faffda\",\"data\":{\"toArrival\":87130,\"fromStart\":1570,\"link\":null,\"raceStatus\":null,\"longitude\":2.294196,\"brand\":null,\"contents\":[{\"title\":\"Caravane\",\"label\":\"C\",\"locale\":\"fr\"},{\"title\":\"Caravan\",\"label\":\"C\",\"locale\":\"en\"},{\"locale\":\"es\",\"label\":\"C\",\"title\":\"Caravana\"},{\"label\":\"C\",\"title\":\"Caravan\",\"locale\":\"de\"}],\"color\":{\"circle\":\"#d0378d\",\"text\":\"#fff\"},\"type\":\"caravan\",\"total\":88700,\"timestamp\":\"2026-07-26 16:20:16\",\"latitude\":48.873671,\"haversine\":8.89357794511248,\"isVisible\":true,\"_id\":\"8d71ce49d992fde7feeb4c4d299f1d824218a024fad78c60a2810f0b34faffda\",\"_bind\":\"extraVehicle-2026-21\",\"_origin\":\"extraVehicle-2026-21\",\"_updatedAt\":1785075616532,\"_parent\":\"stage-2026:ddf08221d1fde5e7101221ab5790d6e644b31d12b138713e507caf596d948ccf\",\"_key\":\"_id\",\"_refs\":[]}}"
     }
   ]
 }
