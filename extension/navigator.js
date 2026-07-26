@@ -1729,16 +1729,50 @@ watch.">Add reading</button>
       else if (r.height < Math.min(4, rect.height * 0.25)) rec.why = "too short to be a tick";
       else if (!(frac > 0.005 && frac < 0.995)) rec.why = "at an end";
       else if (playFrac >= 0 && Math.abs(frac - playFrac) < 0.01) rec.why = "at the playhead (thumb)";
-      else { rec.why = "KEPT"; out.push(Math.round(frac * dur)); }
+      else {
+        rec.why = "KEPT";
+        out.push({ sec: Math.round(frac * dur), w: rec.w, h: rec.h });
+      }
       considered.push(rec);
     }
 
-    // A marker often nests a child that also qualifies, so collapse anything
-    // landing within half a minute, and refuse an implausible haul -- a stage
-    // carries roughly 8-12 breaks, not dozens.
-    const positions = [...new Set(out)].sort((a, b) => a - b)
-      .filter((s, i, arr) => i === 0 || s - arr[i - 1] > 30);
-    return { positions: positions.length > 40 ? [] : positions, considered };
+    /* Which of the survivors are actually the markers?
+     *
+     * Widening the search stopped it missing them and started it catching
+     * furniture instead -- 27 on a broadcast that has nearer a dozen. Rather
+     * than tighten the shape tests by eye again, use the property that makes
+     * markers markers: a player draws them all THE SAME. Ticks for one kind
+     * of thing share a width, a height and a styling; the odd bits of control
+     * furniture that survive the shape tests do not match each other.
+     *
+     * So group the survivors by their exact rendered size, and take the
+     * largest group that is a plausible number of breaks. A single stray
+     * element cannot form a group, and a set of identical ticks will.
+     */
+    const groups = new Map();
+    for (const c of out) {
+      const key = `${c.w}x${c.h}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(c.sec);
+    }
+    const dedupe = (arr) => [...new Set(arr)].sort((a, b) => a - b)
+      .filter((s, i, a2) => i === 0 || s - a2[i - 1] > 30);
+
+    let best = [], bestKey = null;
+    for (const [key, secs] of groups) {
+      const d = dedupe(secs);
+      // A stage carries roughly 8-12 breaks. Two is the fewest that can show
+      // a pattern; past ~20 it is furniture, however uniform it looks.
+      if (d.length < 2 || d.length > 20) continue;
+      if (d.length > best.length) { best = d; bestKey = key; }
+    }
+    for (const c of considered) {
+      if (c.why === "KEPT" && bestKey && `${c.w}x${c.h}` !== bestKey) {
+        c.why = `dropped: not the ${bestKey} group`;
+      }
+    }
+    return { positions: best, considered, groups: [...groups].map(([k, v]) =>
+      ({ size: k, count: dedupe(v).length, chosen: k === bestKey })) };
   }
 
   /* Paste-able diagnostic, for when detection finds nothing on a player whose
@@ -1767,7 +1801,7 @@ watch.">Add reading</button>
       return wide;
     }
     const rect = bar.getBoundingClientRect();
-    const { positions, considered } = breakCandidates(bar, rect, video?.duration || 0);
+    const { positions, considered, groups } = breakCandidates(bar, rect, video?.duration || 0);
     console.log("[TourNavigator] seek bar:", {
       tag: bar.tagName.toLowerCase(),
       cls: String(bar.className || "").slice(0, 80),
@@ -1776,6 +1810,7 @@ watch.">Add reading</button>
       descendants: bar.querySelectorAll("*").length,
     });
     console.log("[TourNavigator] kept:", positions.map(fmt));
+    console.log("[TourNavigator] identical-size groups found:", groups);
     console.table(considered.slice(0, 60));
     const report = {
       bar: {
@@ -1785,6 +1820,7 @@ watch.">Add reading</button>
       },
       duration: Math.round(video?.duration || 0),
       kept: positions,
+      groups,
       considered: considered.slice(0, 120),
     };
     const blob = JSON.stringify(report);
