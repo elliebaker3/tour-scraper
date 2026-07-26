@@ -68,17 +68,26 @@ Two weights, two different claims:
 | | meaning |
 |---|---|
 | solid | GPS-observed |
-| dashed, dimmer | estimated — GPS was offline, pace inferred from the known start |
+| solid, dimmer | estimated — GPS was offline, pace inferred from the known start |
+
+Both are drawn solid. Dashes read as a broken trace rather than as lower
+confidence, and the silhouette is the thing being read; the estimated stretch
+stays dimmer and the diag line names it outright.
 
 The profile covers the part of the recording the **race** covers, not the whole
 bar. The build-up before the flag and the coverage after the line are left
 empty rather than filled flat, so where the silhouette begins is where the race
 begins — and the playhead lines up with the player's own position.
 
-Profile-only stages do this too, once calibrated. Uncalibrated their bar is a
-distance axis spanning the full width, because nothing yet relates the route to
-the recording; two readings turn it into a recording timeline like a full
-bundle's, and the profile then occupies only the stretch the race does.
+Profile-only stages do this too. Even uncalibrated they assume the Peacock
+shape — the flag an hour in, then the scheduled race duration at 0.92x — so
+the bar is a recording timeline from the start and the playhead shows where
+you are watching. Two readings replace the assumption with the measured thing,
+which is why the prompt still asks for them.
+
+There is a margin at the right-hand end of the bar so a finish-line label has
+somewhere to sit. Everything positional maps into that reduced width, playhead
+and click targets included, so the drawing area shrinks as one piece.
 
 Every climb is drawn in the same deep red whatever its grade; the grade is on
 the badge, so colouring by it was saying the same thing twice at the cost of

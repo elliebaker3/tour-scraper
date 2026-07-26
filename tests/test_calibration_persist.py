@@ -207,11 +207,18 @@ try:
         lite0 = state()
         check("lite stage shows the calibrate prompt", lite0["setup"])
         check("lite stage still draws its profile bar", lite0["bar"])
-        check("lite stage has no playhead before calibration", not lite0["playhead"])
+        # Uncalibrated it assumes the Peacock shape -- flag an hour in, then
+        # the scheduled race duration at 0.92x -- so it already knows roughly
+        # where in the recording you are and shows it. It used to draw no
+        # playhead at all until two readings existed.
+        check("uncalibrated lite stage still shows where you are watching",
+              lite0["playhead"], lite0["anchorState"][:70])
+        check("and says it is an assumption, not a measurement",
+              "assuming" in lite0["anchorState"], lite0["anchorState"][:70])
 
         calibrate(150, 600)
-        check("one reading is recorded but no playhead yet",
-              not state()["playhead"], state()["anchorState"][:60])
+        check("one reading is recorded, prompt still asking for a second",
+              state()["setup"], state()["anchorState"][:60])
         calibrate(20, 9000, ".tn-togo-km2", ".tn-togo-set2")
         lite2 = state()
         check("two readings give the lite stage a playhead", lite2["playhead"],

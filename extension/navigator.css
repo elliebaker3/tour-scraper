@@ -157,13 +157,15 @@
 
 
 
-/* Estimated stretch: full stage is shown, but inferred pacing is visibly not
-   the same claim as observed GPS. */
+/* Estimated stretch: GPS was offline, so the pacing across it is inferred
+   rather than observed. Drawn SOLID like the rest -- the dashes read as a
+   broken or glitching trace rather than as a claim about confidence, and the
+   silhouette is the thing being read. The distinction is not lost: the
+   stretch stays slightly dimmer, and the diag line names it outright. */
 .tn-profile-est {
   fill: rgba(120, 190, 255, 0.30);
   stroke: rgba(158, 210, 255, 0.85);
   stroke-width: 1.2;
-  stroke-dasharray: 5 3;
 }
 
 /* The four assumptions behind every alignment, stated permanently. Each
@@ -181,15 +183,14 @@
 
 
 
-/* Imputed stretches: the recording runs before km 0 and past the finish, where
-   there is no elevation because nobody is racing. Held flat at the start and
-   finish altitudes so the trace spans the whole bar, but drawn faint enough
-   that it can never be mistaken for measured terrain. */
+/* Imputed stretches are no longer drawn at all -- the build-up before the flag
+   and the coverage past the line are left empty, so the profile spans the race
+   rather than the broadcast. The rule is kept only so an older bundle cannot
+   render an unstyled path, and it is solid like everything else. */
 .tn-profile-imp {
   fill: rgba(120, 190, 255, 0.10);
   stroke: rgba(158, 210, 255, 0.35);
   stroke-width: 1;
-  stroke-dasharray: 2 4;
 }
 
 /* Calibration inputs. The km-to-go pair is the primary route now — the

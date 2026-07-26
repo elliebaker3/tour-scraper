@@ -105,6 +105,13 @@
   const PROFILE_TOP_PAD = 30;
   const PROFILE_BOT_PAD = 2;
 
+  // Horizontal margin at the END of the bar. The finish is the one marker
+  // guaranteed to sit at the extreme right, and its name would otherwise be
+  // pinned against the edge. Everything positional maps into (width - this),
+  // playhead included, so the drawing area shrinks as one piece and the
+  // playhead still lines up with the recording.
+  const PROFILE_RIGHT_PAD = 30;
+
   let bundle = null;
   let bundle_index = null;
   let bundle_selection_ok = false;
@@ -377,7 +384,7 @@
    *  Sampled once per pixel column rather than once per route point, so every
    *  column of the bar gets a value -- measured, estimated, or imputed where
    *  the recording is running but no race is (build-up, post-finish). */
-  function profilePath(width, height) {
+  function profilePath(width, height, plotW) {
     const alts = bundle.profile.map((p) => p.alt);
     const loA = Math.min(...alts), hiA = Math.max(...alts);
     const rangeA = Math.max(1, hiA - loA);
@@ -391,8 +398,8 @@
     };
 
     const cols = [];
-    for (let px = 0; px <= width; px++) {
-      const sec = (px / width) * video.duration;
+    for (let px = 0; px <= plotW; px++) {
+      const sec = (px / plotW) * video.duration;
       const tMs = videoToUtc(sec);
       const e = tMs == null ? null : elevationAt(tMs);
       if (e) cols.push({ x: px, y: y(e.alt), cls: e.cls });
@@ -418,7 +425,7 @@
    *  Sampled once per pixel column rather than once per route point, so every
    *  column of the bar gets a value -- measured, estimated, or imputed where
    *  the recording is running but no race is (build-up, post-finish). */
-  function profilePath(width, height) {
+  function profilePath(width, height, plotW) {
     const alts = bundle.profile.map((p) => p.alt);
     const loA = Math.min(...alts), hiA = Math.max(...alts);
     const rangeA = Math.max(1, hiA - loA);
@@ -432,8 +439,8 @@
     };
 
     const cols = [];
-    for (let px = 0; px <= width; px++) {
-      const sec = (px / width) * video.duration;
+    for (let px = 0; px <= plotW; px++) {
+      const sec = (px / plotW) * video.duration;
       const tMs = videoToUtc(sec);
       const e = tMs == null ? null : elevationAt(tMs);
       if (e) cols.push({ x: px, y: y(e.alt), cls: e.cls });
@@ -492,6 +499,34 @@
     };
   }
 
+  /** The Peacock assumption, for a stage with no telemetry at all: the flag
+   *  drops an hour into the recording, and the race then occupies its
+   *  scheduled duration at 0.92x. That is enough to place the profile on the
+   *  recording and to show where you are watching, without a single reading --
+   *  the same two constants the full bundles default to. Readings replace it
+   *  the moment there are two (liteMap), which is why the prompt still asks
+   *  for them. */
+  function defaultLiteMap() {
+    const dur = video?.duration;
+    const sched = bundle?.stage?.scheduled_sec;
+    const len = bundle?.stage?.length_km;
+    if (!dur || !sched || !len) return null;
+    const start = Math.min(BROADCAST_PREROLL_SEC, dur * 0.25);
+    const span = Math.min(sched * DEFAULT_RATE, dur - start);
+    if (span <= 0) return null;
+    return {
+      __default: true,
+      kmtoAtSec(sec) {
+        const f = Math.max(0, Math.min(1, (sec - start) / span));
+        return len - f * len;
+      },
+      secAtKmto(kmto) {
+        const f = Math.max(0, Math.min(1, (len - kmto) / len));
+        return start + f * span;
+      },
+    };
+  }
+
   /** Lite stages: a velowire distance/elevation profile and route markers.
    *  The x-axis is DISTANCE, not recording time -- the profile shape is real
    *  regardless of any clock. Uncalibrated it is a reference card; with two
@@ -500,6 +535,7 @@
   function renderLite() {
     const bar = root.querySelector(".tn-bar");
     const width = bar.clientWidth || 900;
+    const plotW = Math.max(10, width - PROFILE_RIGHT_PAD);
     const height = bar.clientHeight || 78;
     const prof = bundle.profile;
     const len = bundle.stage?.length_km || Math.max(...prof.map((p) => p.km)) || 1;
@@ -509,11 +545,17 @@
     const rangeA = Math.max(1, hiA - loA);
     const y = (alt) => height - ((alt - loA) / rangeA) * (height - PROFILE_TOP_PAD - PROFILE_BOT_PAD) - PROFILE_BOT_PAD;
 
-    const lm = liteMap();
+    const pinned = liteMap();                 // from readings, if there are two
+    const lm = pinned || defaultLiteMap();     // else the Peacock assumption
     const dur = video?.duration || 0;
-    // The setup prompt shows until the map exists; the bar always shows --
-    // the profile shape is honest with or without a clock.
-    root.classList.toggle("tn-lite-setup", !lm);
+    // The status line is otherwise written once at load, before the player has
+    // reported a duration -- at which point there is no assumption to describe
+    // yet and it settles on "not calibrated", contradicting the diag. With no
+    // readings there is no status worth preserving, so keep it current.
+    if (!pins().length) refreshAnchorState();
+    // The prompt asks for readings until there ARE readings -- the assumption
+    // is a starting point, not a substitute for one. The bar always shows.
+    root.classList.toggle("tn-lite-setup", !pinned);
 
     /* Which axis the bar is drawn on.
      *
@@ -527,8 +569,8 @@
      * with the player's own position instead of merely being the right shape. */
     const timeAxis = !!(lm && dur);
     const x = timeAxis
-      ? (km) => (Math.max(0, Math.min(dur, lm.secAtKmto(len - km))) / dur) * width
-      : (km) => (km / len) * width;
+      ? (km) => (Math.max(0, Math.min(dur, lm.secAtKmto(len - km))) / dur) * plotW
+      : (km) => (km / len) * plotW;
 
     // On a time axis the silhouette must not be closed back to the bar's
     // corners, or it would stretch across the empty build-up; it closes at
@@ -575,7 +617,7 @@
       // On a time axis the playhead is simply where the recording is -- no
       // round trip through distance, so it lines up with the player's own
       // position exactly rather than to within the map's resolution.
-      playhead = `<div class="tn-playhead" style="left:${((video.currentTime / dur) * width).toFixed(1)}px"></div>`;
+      playhead = `<div class="tn-playhead" style="left:${((video.currentTime / dur) * plotW).toFixed(1)}px"></div>`;
     }
 
     bar.innerHTML = `
@@ -614,7 +656,10 @@
     root.querySelector(".tn-diag").textContent =
       `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
       `profile only (no live capture) · elevation: velowire.com · ` +
-      `${lm ? `${pins().length} readings, steady-pace interpolation` : "uncalibrated"} · ` +
+      `${pinned ? `${pins().length} readings, steady-pace interpolation`
+                : lm ? `assuming ${Math.round(BROADCAST_PREROLL_SEC / 60)} min of build-up ` +
+                       `then ${DEFAULT_RATE.toFixed(2)}× at a steady pace`
+                     : "uncalibrated"} · ` +
       `${bundle.__selection || ""}`;
   }
 
@@ -649,9 +694,10 @@
 
     const bar = root.querySelector(".tn-bar");
     const width = bar.clientWidth || 900;
+    const plotW = Math.max(10, width - PROFILE_RIGHT_PAD);
     const height = bar.clientHeight || 78;
 
-    const { segs, loA, hiA } = profilePath(width, height);
+    const { segs, loA, hiA } = profilePath(width, height, plotW);
     const CLS = { obs: "tn-profile", est: "tn-profile tn-profile-est",
                   imp: "tn-profile tn-profile-imp" };
     const paths = segs.filter((g) => g.d)
@@ -668,7 +714,7 @@
       if (!m.t || !enabled[m.kind]) continue;
       const sec = utcToVideo(Date.parse(m.t));
       if (sec == null || sec < 0 || sec > dur) continue;
-      const x = (sec / dur) * width;
+      const x = (sec / dur) * plotW;
       const y = m.alt != null ? yForAlt(m.alt) : height / 2;
       const isKom = m.kind === "kom";
       const color = isKom ? (KOM_COLOR[m.cat] || "#ef4444") : CATEGORIES.sprint.color;
@@ -711,7 +757,7 @@
       const color = own ? EVENT_COLOR[g.category] : CATEGORIES.significant.color;
       const sec = utcToVideo(Date.parse(g.t_utc));
       if (sec == null || sec < 0 || sec > dur) continue;
-      const x = (sec / dur) * width;
+      const x = (sec / dur) * plotW;
       markers.push(
         `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${color}"
               data-sec="${sec.toFixed(1)}" title="${word}"></div>`);
@@ -726,7 +772,7 @@
       for (const m of bundle.special_markers || []) {
         const sec = utcToVideo(Date.parse(m.t_utc));
         if (sec == null || sec < 0 || sec > dur) continue;
-        const x = (sec / dur) * width;
+        const x = (sec / dur) * plotW;
         const alt = altAtRaceMs(Date.parse(m.t_utc));
         const y = alt != null ? yForAlt(alt) : height / 2;
         const place =
@@ -743,13 +789,13 @@
     for (const s of bundle.intensity || []) {
       const sec = utcToVideo(Date.parse(s.t_utc));
       if (sec == null || sec < 0 || sec > dur) continue;
-      const x = (sec / dur) * width;
-      const w = Math.max(1, (s.window_min * 60 / dur) * width);
+      const x = (sec / dur) * plotW;
+      const w = Math.max(1, (s.window_min * 60 / dur) * plotW);
       heat += `<div class="tn-heat" style="left:${x.toFixed(1)}px;width:${w.toFixed(1)}px;
                 opacity:${(s.normalised * 0.75).toFixed(2)}"></div>`;
     }
 
-    const playX = (video.currentTime / dur) * width;
+    const playX = (video.currentTime / dur) * plotW;
     bar.innerHTML = `
       <div class="tn-heatwrap">${heat}</div>
       <svg class="tn-svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"
@@ -923,7 +969,8 @@ watch.">Add reading</button>
     bar.addEventListener("click", (ev) => {
       if (!video?.duration) return;
       const rect = ev.currentTarget.getBoundingClientRect();
-      const frac = (ev.clientX - rect.left) / rect.width;
+      const plot = Math.max(10, rect.width - PROFILE_RIGHT_PAD);
+      const frac = Math.max(0, Math.min(1, (ev.clientX - rect.left) / plot));
       if (bundle.__kind === "profile") {
         const lm = liteMap();
         if (!lm) return;
@@ -938,7 +985,8 @@ watch.">Add reading</button>
 
     bar.addEventListener("mousemove", (ev) => {
       const rect = bar.getBoundingClientRect();
-      const frac = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+      const plot = Math.max(10, rect.width - PROFILE_RIGHT_PAD);
+      const frac = Math.max(0, Math.min(1, (ev.clientX - rect.left) / plot));
       let bits = null;
       if (bundle.__kind === "profile") {
         // Lite: x is distance, so the readout is direct -- no clock involved.
@@ -956,7 +1004,7 @@ watch.">Add reading</button>
       }
       hoverEl.textContent = bits.join(" · ");
       hoverEl.style.display = "block";
-      const x = frac * rect.width;
+      const x = frac * plot;
       hoverEl.style.left = `${x.toFixed(0)}px`;
       hoverEl.style.transform = x > rect.width - 130 ? "translateX(-100%)" : "translateX(4px)";
     });
@@ -1144,8 +1192,12 @@ watch.">Add reading</button>
     const el = root.querySelector(".tn-anchor-state");
     const p = pins();
     if (!p.length) {
-      el.textContent = cal
-        ? `assuming ${BROADCAST_PREROLL_SEC / 60} min of build-up then ` +
+      // A lite stage has no race clock to default from, but it does have the
+      // Peacock shape; say so rather than "not calibrated", which the diag
+      // line would immediately contradict.
+      const assumed = cal || (bundle?.__kind === "profile" && defaultLiteMap());
+      el.textContent = assumed
+        ? `assuming ${Math.round(BROADCAST_PREROLL_SEC / 60)} min of build-up then ` +
           `${DEFAULT_RATE.toFixed(2)}× — a reading makes it exact where you are`
         : "not calibrated";
       return;

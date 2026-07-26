@@ -194,6 +194,7 @@ def parse_all_stages(kml_path: Path, stages_meta: dict[int, dict]) -> dict[int, 
         result["date"] = meta.get("date")
         result["departure"] = meta.get("departure")
         result["arrival"] = meta.get("arrival")
+        result["scheduled_sec"] = meta.get("scheduled_sec")
         out[idx] = result
     return out
 
@@ -213,11 +214,27 @@ def build(year_dir: Path, out_dir: Path | None = None) -> list[Path]:
         n = s.get("stage")
         if n is None:
             continue
+        # The scheduled start->end span is how long the racing lasts. A
+        # profile-only stage has no telemetry, so this is the only thing that
+        # says how much RECORDING the race should occupy -- see the extension's
+        # default lite map, which places it an hour in at 0.92x.
+        dur = None
+        try:
+            st, en = s.get("startTime"), s.get("endTime")
+            if st and en:
+                h1, m1, *_ = (int(x) for x in st.split(":"))
+                h2, m2, *_ = (int(x) for x in en.split(":"))
+                dur = ((h2 * 60 + m2) - (h1 * 60 + m1)) * 60
+                if dur <= 0:
+                    dur = None
+        except (ValueError, AttributeError):
+            dur = None
         stages_meta[n] = {
             "length_km": s.get("length") or s.get("lengthDisplay"),
             "date": str(s.get("date", ""))[:10],
             "departure": (s.get("departureCity") or {}).get("label"),
             "arrival": (s.get("arrivalCity") or {}).get("label"),
+            "scheduled_sec": dur,
         }
 
     out_dir = out_dir or (year_dir / "profiles" / "velowire")
@@ -391,7 +408,8 @@ def publish_lite_bundles(velowire_dir: Path, extension_data_dir: Path,
         bundle = {
             "schema": "profile-1",
             "stage": {"stage": n, "date": data.get("date"), "departure": dep,
-                     "arrival": arr, "length_km": data.get("length_km")},
+                     "arrival": arr, "length_km": data.get("length_km"),
+                     "scheduled_sec": data.get("scheduled_sec")},
             "elevation_source": elev_src,
             "profile": profile,
             "markers": markers,
