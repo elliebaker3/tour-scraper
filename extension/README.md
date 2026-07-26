@@ -8,6 +8,29 @@ history, and a strip showing where the race got intense.
 It reads `video.currentTime` and sets it to seek. It does not capture,
 download or modify any stream.
 
+## Where it runs
+
+Peacock and NPO (`npo.nl`). Adding another broadcaster is a manifest entry
+plus a line in `SITE_PROFILES`, which holds the two numbers that make up the
+uncalibrated clock for that feed:
+
+| | rate | preroll | why |
+|---|---|---|---|
+| Peacock | 0.92 | 60 min | adverts take about 20 min of racing out of a stage, and replays open with build-up |
+| NPO | 1.00 | 0 | public broadcaster, no commercial breaks in live sport; a live stream has no build-up to skip |
+
+Assuming 0.92 on an advert-free feed would drift it by roughly an hour across
+a stage, so the numbers are per-site rather than global. Ad-break detection is
+skipped entirely where a feed carries none, so it cannot mistake some other
+tick for a marker.
+
+**Live streams work too.** A live feed reports `duration` as Infinity and
+keeps the addressable DVR window in `seekable`; reading only `duration` meant
+such a video was rejected as "not a real video" and the panel never appeared.
+It also calibrates itself: the frame on screen now is the race now, so the
+clock is anchored present-to-present with no assumption about where the flag
+dropped, which is exact at the live edge and holds scrubbing back.
+
 ## Install
 
 1. `chrome://extensions` → enable **Developer mode**

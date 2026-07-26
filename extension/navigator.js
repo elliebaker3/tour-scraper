@@ -165,12 +165,34 @@
   // short span turns it into a wild slope. Under it, offset only.
   const MIN_RATE_BASELINE_SEC = 20 * 60;
 
-  /* Rate used until two readings far enough apart can fit one. Not 1.0: the
-   * recording runs SLOWER than race time (roughly 20 min of racing is missing
-   * across a stage to ad breaks), and 0.92 is what the flag-drop and finish
-   * pins measured. Starting there means a single reading is already close
-   * across the whole stage instead of drifting worse toward the finish. */
-  const DEFAULT_RATE = 0.92;
+  /* What a broadcast looks like before anyone has calibrated it, per site.
+   *
+   * These two numbers ARE the uncalibrated model, and they are not universal:
+   *
+   *   rate    recording seconds per second of racing. Below 1 when the feed
+   *           cuts away to adverts, since race time keeps running while the
+   *           recording does not show it. Peacock measured 0.92 from its
+   *           flag-drop and finish pins -- roughly 20 minutes of a stage
+   *           missing. A public broadcaster carries no commercial breaks
+   *           during live sport, so its feed runs about 1:1 and assuming
+   *           0.92 would drift it by an hour across a stage.
+   *
+   *   preroll how far into the recording the flag drops. Peacock's replays
+   *           open with about an hour of build-up. A live stream has no such
+   *           thing -- it begins wherever you tuned in -- so there is nothing
+   *           to skip.
+   *
+   * Anything not listed falls back to the Peacock shape, which is the safer
+   * guess for a commercial broadcaster and is what most of them are. */
+  const SITE_PROFILES = {
+    "www.peacocktv.com": { rate: 0.92, preroll: 3600, ads: true,  label: "Peacock" },
+    "npo.nl":            { rate: 1.00, preroll: 0,    ads: false, label: "NPO" },
+    "www.npo.nl":        { rate: 1.00, preroll: 0,    ads: false, label: "NPO" },
+  };
+  const SITE_PROFILE = SITE_PROFILES[SITE] ||
+    { rate: 0.92, preroll: 3600, ads: true, label: SITE };
+
+  const DEFAULT_RATE = SITE_PROFILE.rate;
 
   /** Race time (ms) that a reading implies sits at recording second 0, for a
    *  given rate: videoSec = rate * (t - zero)/1000. */
@@ -235,10 +257,18 @@
    * avoid. With no breaks detected the panel behaves exactly as the global
    * model alone -- no worse than before, and never speculatively better.
    */
-  const BROADCAST_PREROLL_SEC = 3600;
+  const BROADCAST_PREROLL_SEC = SITE_PROFILE.preroll;
 
   /** The no-readings model: race start sits at the preroll, then 0.92x. */
   function defaultCal() {
+    // Watching it happen: the frame on screen right now is the race right
+    // now, so the clock needs no assumption about where the flag dropped in
+    // the recording. Anchoring the present to the present is exact at the
+    // live edge and stays good scrubbing back through the DVR window.
+    if (isLive(video) && video.currentTime > 0) {
+      return { refMs: Date.now(), offsetSec: video.currentTime,
+               rate: DEFAULT_RATE, source: "live" };
+    }
     const startMs = Date.parse(bundle?.coverage?.race_start_utc || "");
     if (!isFinite(startMs)) return null;
     return { refMs: startMs, offsetSec: BROADCAST_PREROLL_SEC,
@@ -262,7 +292,7 @@
    *  Null when there are no breaks, so callers fall through to global. */
   function intervalAt(sec) {
     if (!adBreaks.length || !isFinite(sec)) return null;
-    let lo = 0, hi = video?.duration || Infinity;
+    let lo = 0, hi = spanOf(video) || Infinity;
     for (const b of adBreaks) {
       if (b <= sec) lo = b;
       else { hi = b; break; }
@@ -423,7 +453,7 @@
 
     const cols = [];
     for (let px = 0; px <= plotW; px++) {
-      const sec = (px / plotW) * video.duration;
+      const sec = (px / plotW) * spanOf(video);
       const tMs = videoToUtc(sec);
       const e = tMs == null ? null : elevationAt(tMs);
       if (e) cols.push({ x: px, y: y(e.alt), cls: e.cls });
@@ -464,7 +494,7 @@
 
     const cols = [];
     for (let px = 0; px <= plotW; px++) {
-      const sec = (px / plotW) * video.duration;
+      const sec = (px / plotW) * spanOf(video);
       const tMs = videoToUtc(sec);
       const e = tMs == null ? null : elevationAt(tMs);
       if (e) cols.push({ x: px, y: y(e.alt), cls: e.cls });
@@ -531,7 +561,7 @@
    *  the moment there are two (liteMap), which is why the prompt still asks
    *  for them. */
   function defaultLiteMap() {
-    const dur = video?.duration;
+    const dur = spanOf(video);
     const sched = bundle?.stage?.scheduled_sec;
     const len = bundle?.stage?.length_km;
     if (!dur || !sched || !len) return null;
@@ -571,7 +601,7 @@
 
     const pinned = liteMap();                 // from readings, if there are two
     const lm = pinned || defaultLiteMap();     // else the Peacock assumption
-    const dur = video?.duration || 0;
+    const dur = spanOf(video);
     // The status line is otherwise written once at load, before the player has
     // reported a duration -- at which point there is no assumption to describe
     // yet and it settles on "not calibrated", contradicting the diag. With no
@@ -689,7 +719,7 @@
   function render() {
     if (!root || !bundle) return;
     if (bundle.__kind === "profile") { renderLite(); return; }
-    const dur = video?.duration || 0;
+    const dur = spanOf(video);
 
     // Until it is calibrated there is nothing honest to draw: the profile only
     // means something once every position on the bar is a known moment of the
@@ -890,8 +920,8 @@
 
   /** Nearest profile point to a fractional position along the bar. */
   function sampleAt(frac) {
-    if (!bundle?.profile?.length || !cal || !video?.duration) return null;
-    const target = frac * video.duration;
+    if (!bundle?.profile?.length || !cal || !spanOf(video)) return null;
+    const target = frac * spanOf(video);
     let best = null, bestGap = Infinity;
     for (const p of bundle.profile) {
       if (!p.t) continue;
@@ -991,7 +1021,7 @@ watch.">Add reading</button>
     // is a seek. Lite bundle: x is distance, so the click goes through the
     // readings' distance<->time map instead -- and only once that map exists.
     bar.addEventListener("click", (ev) => {
-      if (!video?.duration) return;
+      if (!spanOf(video)) return;
       const rect = ev.currentTarget.getBoundingClientRect();
       const plot = Math.max(10, rect.width - PROFILE_RIGHT_PAD);
       const frac = Math.max(0, Math.min(1, (ev.clientX - rect.left) / plot));
@@ -1000,11 +1030,11 @@ watch.">Add reading</button>
         if (!lm) return;
         const len = bundle.stage?.length_km || 1;
         const sec = lm.secAtKmto(len - frac * len);
-        video.currentTime = Math.max(0, Math.min(video.duration, sec));
+        video.currentTime = Math.max(0, Math.min(spanOf(video), sec));
         return;
       }
       if (!cal) return;
-      video.currentTime = frac * video.duration;
+      video.currentTime = frac * spanOf(video);
     });
 
     bar.addEventListener("mousemove", (ev) => {
@@ -1064,7 +1094,7 @@ watch.">Add reading</button>
       clearLegacyStored();
       try {
         const key = calStoreKey();
-        const dur = video?.duration;
+        const dur = spanOf(video);
         chrome.storage.local.get([key], (r) => {
           const list = (r?.[key]?.recordings || []).filter((rec) =>
             !dur || Math.abs((rec.duration_sec || 0) - dur) > DUR_TOL_SEC);
@@ -1120,7 +1150,7 @@ watch.">Add reading</button>
    *  rather than hidden, and it is why several pins are better than one: the
    *  median cancels rounding that falls either way. */
   function syncKmToGo(km) {
-    if (!video?.duration) { flash("no video"); return; }
+    if (!spanOf(video)) { flash("no video"); return; }
     if (!isFinite(km)) { flash("enter the kilometres to go, e.g. 42"); return; }
 
     const lite = bundle.__kind === "profile";
@@ -1266,7 +1296,7 @@ watch.">Add reading</button>
       stage: bundle?.stage?.stage ?? null,
       date: bundle?.stage?.date ?? null,
       site: SITE,
-      duration_sec: Math.round((video?.duration || 0) * 10) / 10,
+      duration_sec: Math.round(spanOf(video) * 10) / 10,
       airing_ms: bundle?.__airingMs ?? null,
       // kmto matters as much as km: it carries the whole-kilometre midpoint
       // correction, and on lite stages it is the only thing liteMap reads.
@@ -1292,13 +1322,13 @@ watch.">Add reading</button>
   function saveCalibration() {
     // Lite stages never have a `cal` -- their anchors ARE the calibration --
     // so the readings, not the transform, are what makes this worth storing.
-    if (!video?.duration || !pins().length) return;
+    if (!spanOf(video) || !pins().length) return;
     if (bundle?.__kind !== "profile" && !cal) return;
     const key = calStoreKey();
     try {
       chrome.storage.local.get([key], (r) => {
         const list = (r?.[key]?.recordings) || [];
-        const dur = video.duration;
+        const dur = spanOf(video);
         const i = list.findIndex((rec) =>
           Math.abs((rec.duration_sec || 0) - dur) <= DUR_TOL_SEC);
         const rec = calRecord();
@@ -1410,8 +1440,8 @@ watch.">Add reading</button>
   }
 
   function restoreCalibration() {
-    if (!video?.duration) return;
-    const dur = video.duration;
+    if (!spanOf(video)) return;
+    const dur = spanOf(video);
     const key = calStoreKey();
     const trySharedThenGiveUp = async () => {
       try { await sharedCalReady; } catch (_) {}
@@ -1490,9 +1520,27 @@ watch.">Add reading</button>
 
   // --------------------------------------------------------------- bootstrap
 
+  /** How much of the recording is addressable, in seconds.
+   *
+   *  A recording reports it as `duration`. A LIVE stream reports Infinity and
+   *  keeps the real answer in `seekable` -- the DVR window you can scrub back
+   *  through. Reading only `duration` meant a live feed was rejected as "not
+   *  a real video" and the panel never appeared on one at all. */
+  function spanOf(v) {
+    if (!v) return 0;
+    if (isFinite(v.duration) && v.duration > 0) return v.duration;
+    try {
+      const s = v.seekable;
+      if (s && s.length) return s.end(s.length - 1) - s.start(0);
+    } catch (_) { /* not seekable yet */ }
+    return 0;
+  }
+
+  const isLive = (v) => !!v && !isFinite(v.duration) && spanOf(v) > 0;
+
   function findVideo() {
     const vids = [...document.querySelectorAll("video")]
-      .filter((v) => v.duration && isFinite(v.duration) && v.duration > 600);
+      .filter((v) => spanOf(v) > 600);
     return vids[0] || null;
   }
 
@@ -1639,7 +1687,7 @@ watch.">Add reading</button>
     setInterval(() => {
       const v = findVideo();
       if (v && v !== video) video = v;
-      if (video?.duration && !triedRestore) {
+      if (spanOf(video) && !triedRestore) {
         triedRestore = true;
         restoreCalibration();
       }
@@ -1736,9 +1784,12 @@ watch.">Add reading</button>
    * false interval boundary and drift silently, so the bar is set high --
    * better no local layer than an invented one. */
   function detectAdBreaks() {
+    // A feed with no commercial breaks has no markers to find, and scanning
+    // for them would only invite a false positive off some other tick.
+    if (!SITE_PROFILE.ads) return [];
     const bar = nativeSeekBarEl();
-    const dur = video?.duration;
-    if (!bar || !dur || !isFinite(dur)) return [];
+    const dur = spanOf(video);
+    if (!bar || !dur) return [];
     const rect = bar.getBoundingClientRect();
     if (!rect.width) return [];
     return breakCandidates(bar, rect, dur).positions;
@@ -1874,7 +1925,7 @@ watch.">Add reading</button>
       return wide;
     }
     const rect = bar.getBoundingClientRect();
-    const { positions, considered, groups } = breakCandidates(bar, rect, video?.duration || 0);
+    const { positions, considered, groups } = breakCandidates(bar, rect, spanOf(video));
     console.log("[TourNavigator] seek bar:", {
       tag: bar.tagName.toLowerCase(),
       cls: String(bar.className || "").slice(0, 80),
@@ -1891,7 +1942,7 @@ watch.">Add reading</button>
         testid: bar.getAttribute("data-testid"),
         w: Math.round(rect.width), h: Math.round(rect.height),
       },
-      duration: Math.round(video?.duration || 0),
+      duration: Math.round(spanOf(video)),
       kept: positions,
       groups,
       considered: considered.slice(0, 120),
@@ -1925,7 +1976,7 @@ watch.">Add reading</button>
   let adBreakSource = "";        // which recording the current set belongs to
 
   function refreshAdBreaks() {
-    const key = video ? String(Math.round(video.duration || 0)) : "";
+    const key = video ? String(Math.round(spanOf(video))) : "";
     if (key !== adBreakSource) {
       // A different recording, so anything held belongs to the old one --
       // EXCEPT breaks a restore just supplied for this one, which arrive

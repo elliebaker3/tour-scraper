@@ -112,7 +112,16 @@
     // as a DIFFERENT cut of the same stage and assert the fingerprint refuses
     // to restore another recording's calibration onto it.
     const dur = Number(qs.get("dur") || 19225.94);
-    Object.defineProperty(v, "duration", { value: dur, configurable: true });
+    // ?live=1 poses as a live stream: duration is Infinity and the addressable
+    // window lives in `seekable`, the way a DVR feed reports itself. The panel
+    // used to reject such a video outright and never appear.
+    if (qs.get("live") === "1") {
+      Object.defineProperty(v, "duration", { value: Infinity, configurable: true });
+      Object.defineProperty(v, "seekable", { configurable: true, value: {
+        length: 1, start: () => 0, end: () => dur } });
+    } else {
+      Object.defineProperty(v, "duration", { value: dur, configurable: true });
+    }
     let ct = Number(qs.get("t") || 0);
     Object.defineProperty(v, "currentTime", {
       get: () => ct, set: (x) => { ct = x; }, configurable: true,

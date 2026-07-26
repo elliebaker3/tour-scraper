@@ -1,20 +1,24 @@
 {
   "manifest_version": 3,
   "name": "Tour Navigator",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Replaces a useless scrub bar with guideposts that matter: the stage elevation profile synced to race time, plus crashes, breakaways, scenery and race intensity.",
   "permissions": [
     "storage"
   ],
   "host_permissions": [
     "https://www.peacocktv.com/*",
+    "https://npo.nl/*",
+    "https://*.npo.nl/*",
     "https://raw.githubusercontent.com/*",
     "https://tour-calibrations.tournavigator.workers.dev/*"
   ],
   "content_scripts": [
     {
       "matches": [
-        "https://www.peacocktv.com/*"
+        "https://www.peacocktv.com/*",
+        "https://npo.nl/*",
+        "https://*.npo.nl/*"
       ],
       "js": [
         "probe_main.js"
@@ -25,7 +29,9 @@
     },
     {
       "matches": [
-        "https://www.peacocktv.com/*"
+        "https://www.peacocktv.com/*",
+        "https://npo.nl/*",
+        "https://*.npo.nl/*"
       ],
       "js": [
         "probe.js",
@@ -45,7 +51,9 @@
         "data/index.json"
       ],
       "matches": [
-        "https://www.peacocktv.com/*"
+        "https://www.peacocktv.com/*",
+        "https://npo.nl/*",
+        "https://*.npo.nl/*"
       ]
     }
   ]
