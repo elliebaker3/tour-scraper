@@ -8,6 +8,24 @@ history, and a strip showing where the race got intense.
 It reads `video.currentTime` and sets it to seek. It does not capture,
 download or modify any stream.
 
+## Permissions it asks for
+
+Two hosts, both for data rather than code:
+
+| | why |
+|---|---|
+| `raw.githubusercontent.com` | reading the shared calibration store |
+| the collector Worker | submitting a calibration |
+
+The broadcaster sites are NOT listed under `host_permissions`, deliberately.
+A content script's `matches` already grants access to the origins it runs on,
+so repeating them there added nothing and widened both the install warning and
+the review surface for no functional gain.
+
+No remote code: every script is bundled, there is no background worker, no
+HTML in the package, and nothing fetched is executed. The two hosts above
+return JSON that is parsed and read as numbers.
+
 ## Where it runs
 
 Peacock and NPO (`npo.nl`). Adding another broadcaster is a manifest entry
