@@ -67,7 +67,8 @@
         "saved_at": "2026-07-25T22:30:54.747Z",
         "extension_version": "0.2.0",
         "ingested_at": "2026-07-25T22:30:54.812Z",
-        "via": "worker"
+        "via": "worker",
+        "submitter": "sha:260Ã"
       }
     ],
     "stage-20|www.peacocktv.com": [
@@ -187,7 +188,8 @@
         "saved_at": "2026-07-26T02:11:04.558Z",
         "extension_version": "0.2.0",
         "ingested_at": "2026-07-26T02:11:04.741Z",
-        "via": "worker"
+        "via": "worker",
+        "submitter": "sha:260"
       },
       {
         "schema": 1,
@@ -235,7 +237,8 @@
         "saved_at": "2026-07-26T00:40:29.676Z",
         "extension_version": "0.2.0",
         "ingested_at": "2026-07-26T00:40:29.954Z",
-        "via": "worker"
+        "via": "worker",
+        "submitter": "sha:260Ã"
       },
       {
         "schema": 1,
@@ -353,7 +356,8 @@
         "saved_at": "2026-07-26T03:04:20.487Z",
         "extension_version": null,
         "ingested_at": "2026-07-26T03:04:20.507Z",
-        "via": "worker"
+        "via": "worker",
+        "submitter": "sha:260"
       },
       {
         "schema": 1,
@@ -408,7 +412,7 @@
         ],
         "saved_at": "2026-07-26T00:00:00.000Z",
         "extension_version": "0.2.0",
-        "ingested_at": "2026-07-26T03:47:25.016Z",
+        "ingested_at": "2026-07-26T03:49:42.383Z",
         "via": "worker"
       }
     ]
