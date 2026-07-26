@@ -32,5 +32,16 @@
       "flashInfoLive",
       "checkpointList"
     ]
+  },
+  {
+    "recorded_at": "2026-07-26T16:08:57.198+00:00",
+    "kind": "live-stream",
+    "action": "stop",
+    "counts": {
+      "telemetry": 314,
+      "groups": 314,
+      "events": 0,
+      "raw-only": 11712
+    }
   }
 ]
