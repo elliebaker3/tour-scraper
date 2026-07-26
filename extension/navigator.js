@@ -140,6 +140,7 @@
   };
   const flashNow = () => (Date.now() < flashUntil ? flashText : "");
   let triedRestore = false;   // restore runs once, when the video first appears
+  let anchoredToVideo = false;// the default model is settled once, likewise
   const enabled = Object.fromEntries(
     Object.entries(CATEGORIES).map(([k, v]) => [k, v.on]));
 
@@ -261,17 +262,30 @@
 
   /** The no-readings model: race start sits at the preroll, then 0.92x. */
   function defaultCal() {
-    // Watching it happen: the frame on screen right now is the race right
+    // Watching it happen: the far end of the DVR window is the race as of
     // now, so the clock needs no assumption about where the flag dropped in
-    // the recording. Anchoring the present to the present is exact at the
-    // live edge and stays good scrubbing back through the DVR window.
-    if (isLive(video) && video.currentTime > 0) {
-      return { refMs: Date.now(), offsetSec: video.currentTime,
-               rate: DEFAULT_RATE, source: "live" };
+    // the recording. Anchor the LIVE EDGE to the present -- not the viewer's
+    // own position, which would read as the live edge wherever they had
+    // scrubbed to and make every earlier moment look like the present.
+    const startMs0 = Date.parse(bundle?.coverage?.race_start_utc || "");
+    const finishMs0 = Date.parse(bundle?.coverage?.race_finish_utc || "");
+    const edge = liveEdge(video);
+    if (edge != null && isFinite(startMs0)) {
+      const live = { refMs: Date.now(), offsetSec: edge,
+                     rate: DEFAULT_RATE, source: "live" };
+      // Only if it actually lands the race inside this recording. Anchoring
+      // the present to the present is right for a stage happening NOW, and
+      // nonsense for one that finished yesterday -- which is what a replay,
+      // or simply the wrong stage in the picker, looks like. Getting that
+      // wrong draws an empty bar with nothing to say why, so the overlap is
+      // checked rather than assumed.
+      const span = spanOf(video);
+      const at = (t) => live.offsetSec + live.rate * (t - live.refMs) / 1000;
+      const a = at(startMs0), b = at(isFinite(finishMs0) ? finishMs0 : startMs0);
+      if (Math.min(a, b) < span && Math.max(a, b) > 0) return live;
     }
-    const startMs = Date.parse(bundle?.coverage?.race_start_utc || "");
-    if (!isFinite(startMs)) return null;
-    return { refMs: startMs, offsetSec: BROADCAST_PREROLL_SEC,
+    if (!isFinite(startMs0)) return null;
+    return { refMs: startMs0, offsetSec: BROADCAST_PREROLL_SEC,
              rate: DEFAULT_RATE, source: "default" };
   }
 
@@ -1538,6 +1552,16 @@ watch.">Add reading</button>
 
   const isLive = (v) => !!v && !isFinite(v.duration) && spanOf(v) > 0;
 
+  /** Recording-second of the live edge, or null if this is not a live feed. */
+  function liveEdge(v) {
+    if (!isLive(v)) return null;
+    try {
+      const s = v.seekable;
+      if (s && s.length) return s.end(s.length - 1);
+    } catch (_) {}
+    return null;
+  }
+
   function findVideo() {
     const vids = [...document.querySelectorAll("video")]
       .filter((v) => spanOf(v) > 600);
@@ -1687,6 +1711,17 @@ watch.">Add reading</button>
     setInterval(() => {
       const v = findVideo();
       if (v && v !== video) video = v;
+      if (spanOf(video) && !anchoredToVideo) {
+        // start() runs before any <video> exists, so the model built there
+        // could not know whether this is a live feed. Rebuild it once, now
+        // that there is something to ask -- but only while no reading has
+        // been given, since a reading outranks any assumption.
+        anchoredToVideo = true;
+        if (!pins().length) {
+          const d = defaultCal();
+          if (d) { cal = d; render(); }
+        }
+      }
       if (spanOf(video) && !triedRestore) {
         triedRestore = true;
         restoreCalibration();
