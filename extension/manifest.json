@@ -63,8 +63,7 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "data/*.json",
-        "data/index.json"
+        "data/*.json"
       ],
       "matches": [
         "https://www.peacocktv.com/*",
