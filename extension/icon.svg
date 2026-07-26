@@ -1,42 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
   <!-- Source art for the toolbar icon. Edit this, then regenerate the PNGs:
          cd extension && ./make-icons.sh
-
-       Drawn in the visual language of a printed stage profile: yellow fill
-       with fine horizontal hatching, a thin dark ridge line, and a solid
-       black distance bar along the bottom, all on white. The silhouette
-       itself is our own, not any particular stage.
-
-       Two peaks and a summit finish, because at 16px beside the address bar
-       the hatching and the ridge both vanish and only the shape is left; it
-       has to say "mountain profile" from the outline alone.
-
-       (No double hyphen anywhere in this comment: XML forbids it inside one
-       and rsvg-convert rejects the whole file rather than warning.) -->
-  <defs>
-    <pattern id="hatch" patternUnits="userSpaceOnUse" x="0" y="0" width="8" height="6">
-      <rect width="8" height="6" fill="#ffdd00"/>
-      <rect width="8" height="2" fill="#ffffff" fill-opacity="0.55"/>
-    </pattern>
-    <clipPath id="profile">
-      <path d="M6 104 L20 86 L30 66 L38 78 L48 58 L56 74 L64 92 L74 70
-               L84 44 L94 62 L104 34 L114 46 L122 30 L122 104 Z"/>
-    </clipPath>
-  </defs>
-
-  <rect width="128" height="128" rx="26" fill="#ffffff"/>
-
-  <!-- the terrain: hatched yellow, clipped to the silhouette -->
-  <g clip-path="url(#profile)">
-    <rect x="0" y="0" width="128" height="128" fill="url(#hatch)"/>
-  </g>
-
-  <!-- the ridge line over the top of it -->
-  <path d="M6 104 L20 86 L30 66 L38 78 L48 58 L56 74 L64 92 L74 70
-           L84 44 L94 62 L104 34 L114 46 L122 30"
-        fill="none" stroke="#101010" stroke-width="3.5"
-        stroke-linejoin="round" stroke-linecap="round"/>
-
-  <!-- the distance bar the profile sits on -->
-  <rect x="6" y="104" width="116" height="12" rx="2" fill="#101010"/>
+       A winding route on maillot yellow. Kept to one bold stroke because at
+       16px, the size seen most beside the address bar, nothing finer
+       survives; the switchbacks have to read as a path from the silhouette
+       alone. (No double hyphen anywhere in here: XML forbids it in a
+       comment, and rsvg-convert rejects the file outright.) -->
+  <rect width="128" height="128" rx="26" fill="#ffdd00"/>
+  <path d="M30 112
+           C 30 92, 74 90, 74 70
+           C 74 52, 30 50, 30 32
+           C 30 18, 66 14, 98 16"
+        fill="none" stroke="#101010" stroke-width="14"
+        stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
