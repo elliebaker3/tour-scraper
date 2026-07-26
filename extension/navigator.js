@@ -69,7 +69,7 @@
   const CATEGORIES = {
     sprint:          { label: "Sprints",           color: "#22c55e", on: true },
     kom:             { label: "Climbs",            color: KOM_RED,   on: true },
-    poi:             { label: "Contenders",        color: "#facc15", on: false },
+    poi:             { label: "Contenders",        color: "#38bdf8", on: false },
     crash:           { label: "Crashes",           color: "#e5484d", on: false },
     breakaway_start: { label: "Attacks",           color: "#f5a524", on: false },
     breakaway_end:   { label: "Catches",           color: "#8b7cf6", on: false },
@@ -94,6 +94,9 @@
   // saying a second time what the label already said, at the cost of the
   // climbs no longer reading as one kind of thing.
 
+  // Contenders are sky blue rather than gold: the elevation profile is drawn
+  // in the race's own yellow, so a gold star sat on top of it read as part of
+  // the terrain instead of as a marker over it.
   // Persons of interest (contenders for each jersey) are marked when involved
   // in an event, but the rider's identity is NEVER shown -- that would spoil
   // what's about to happen. The names live in the data only to place the
