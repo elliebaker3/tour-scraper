@@ -282,6 +282,21 @@ try:
         check("the panel says it shared",
               "shared" in state()["anchorState"], state()["anchorState"][-40:])
 
+        # A failing collector must SAY it failed. Falling back to the issue
+        # form looks identical whether none is configured, one is deployed but
+        # erroring, or it is refusing this record -- and that ambiguity hid a
+        # broken collector behind a working fallback for a while.
+        page.unroute("**/tour-calibrations*.workers.dev/**")
+        page.route("**/tour-calibrations*.workers.dev/**", lambda route:
+                   route.fulfill(status=502, content_type="application/json",
+                                 body='{"error":"Unexpected end of JSON input"}'))
+        load(dur=12500)
+        calibrate(150, 1500)
+        said = state()["anchorState"]
+        check("a failing collector names the failure", "502" in said, said[-70:])
+        check("and quotes the reason it gave",
+              "Unexpected end of JSON input" in said)
+
         # Collector unreachable -> the issue form has to take over, or an
         # offline viewer's calibration would be silently dropped.
         page.unroute("**/tour-calibrations*.workers.dev/**")

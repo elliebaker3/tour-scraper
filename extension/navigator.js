@@ -1406,8 +1406,19 @@ watch.">Add reading</button>
           body: JSON.stringify(rec),
         });
         if (r.ok) { note("shared"); return; }
-        console.warn("[TourNavigator] collector rejected the calibration", r.status);
+        // SAY which failure this is. Falling back to the issue form looks
+        // identical whether no collector is configured, one is deployed but
+        // erroring, or it is refusing this particular record -- and that
+        // ambiguity hid a broken collector behind a working fallback for a
+        // while. The reason it gives is worth surfacing verbatim: a 400 names
+        // the field it objected to, and a 5xx means the collector itself is
+        // unwell rather than the record being bad.
+        let why = "";
+        try { why = ((await r.json()) || {}).error || ""; } catch (_) {}
+        note(`⚠ collector said ${r.status}${why ? `: ${why}` : ""} — ` +
+             "opening the issue form instead", 20000);
       } catch (e) {
+        note("⚠ collector unreachable — opening the issue form instead", 20000);
         console.warn("[TourNavigator] collector unreachable", e);
       }
       // Fall through: a rejected or unreachable collector shouldn't silently

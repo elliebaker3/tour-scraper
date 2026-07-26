@@ -208,6 +208,13 @@ and write to the repo — so contributing goes one of two ways:
 | `COLLECTOR_URL` → the Worker in [`worker/`](../worker) | no | whenever it's deployed. One silent POST; the Worker holds the token and commits. Status line says `· shared`. |
 | prefilled GitHub issue | yes | fallback, when no collector is set or it's unreachable. `ingest-calibration.yml` validates and merges it. |
 
+When the collector fails, the panel says so rather than just falling back:
+`⚠ collector said 502: … — opening the issue form instead`, quoting the
+reason verbatim. A 400 names the field it objected to; a 5xx means the
+collector itself is unwell rather than the record being bad. Without that,
+every failure looked identical to having no collector configured at all,
+which hid a broken one behind a working fallback.
+
 `COLLECTOR_URL` is empty until you deploy the Worker — see
 [worker/README.md](../worker/README.md), it's about ten minutes and free. Until
 then the issue route is used: its tab is **named**, so a second reading reuses
