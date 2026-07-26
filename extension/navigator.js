@@ -1835,14 +1835,37 @@ watch.">Add reading</button>
     return report;
   };
 
+  /* Scanning is not destructive.
+   *
+   * The markers only exist in the DOM while the player's own control bar is
+   * up, and it comes and goes with the mouse. The scan therefore returns
+   * nothing most of the time -- not because the recording has no breaks, but
+   * because there is nothing on screen to read. Treating that as an answer
+   * wiped a good set of breaks the moment the controls faded, so the panel
+   * flipped back to "no ad breaks found" seconds after finding them, and the
+   * local calibration layer went with it.
+   *
+   * So an empty scan is ignored, and a smaller one is not allowed to replace
+   * a larger one for the same recording: markers fade in progressively, and a
+   * half-rendered bar should not overwrite a complete reading. Anything found
+   * is kept until the recording itself changes. */
+  let adBreakSource = "";        // which recording the current set belongs to
+
   function refreshAdBreaks() {
+    const key = video ? String(Math.round(video.duration || 0)) : "";
+    if (key !== adBreakSource) {          // different recording: start over
+      adBreakSource = key;
+      adBreaks = [];
+    }
     const found = detectAdBreaks();
+    if (!found.length) return;            // nothing on screen to read, not an answer
+    if (found.length < adBreaks.length) return;   // partial render; keep the fuller set
     const changed = found.length !== adBreaks.length ||
                     found.some((s, i) => s !== adBreaks[i]);
     if (changed) {
       adBreaks = found;
       console.log("[TourNavigator] ad breaks detected:", adBreaks.length,
-                  adBreaks.map((s) => fmt(s)).join(", ") || "(none)");
+                  adBreaks.map((s) => fmt(s)).join(", "));
       render();
     }
   }
