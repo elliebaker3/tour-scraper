@@ -68,7 +68,7 @@
         "extension_version": "0.2.0",
         "ingested_at": "2026-07-25T22:30:54.812Z",
         "via": "worker",
-        "submitter": "sha:260ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¦"
+        "submitter": "sha:260ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¦"
       }
     ],
     "stage-20|www.peacocktv.com": [
@@ -114,6 +114,34 @@
         "saved_at": "2026-07-25T23:48:48.975Z",
         "extension_version": "0.2.0",
         "ingested_at": "2026-07-25T23:48:49.189Z",
+        "via": "worker",
+        "submitter": "sha:260â¦"
+      },
+      {
+        "schema": 1,
+        "stage": 20,
+        "date": "2026-07-25",
+        "site": "www.peacocktv.com",
+        "duration_sec": 21744.2,
+        "airing_ms": 1784970000000,
+        "anchors": [
+          {
+            "tUtcMs": 1784974995000,
+            "videoSec": 5175.27712,
+            "kind": "kmtogo",
+            "km": 143.2,
+            "label": "143.2 km to go"
+          }
+        ],
+        "cal": {
+          "refMs": 1784974995000,
+          "offsetSec": 5175.27712,
+          "rate": 0.92
+        },
+        "ad_breaks": [],
+        "saved_at": "2026-07-26T00:04:35.000Z",
+        "extension_version": "0.2.0",
+        "ingested_at": "2026-07-26T00:04:35.248Z",
         "via": "worker",
         "submitter": "sha:260…"
       }
