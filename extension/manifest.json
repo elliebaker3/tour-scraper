@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Tour Navigator",
   "version": "0.3.0",
-  "description": "Replaces a useless navigation bar with guideposts that matter: the stage elevation profile including sprints and named climbs, plus crashes, attacks, and jersey action.",
+  "description": "Replaces a useless navigation bar with guideposts that matter including elevation profile, sprints and named climbs, crashes, and attacks.",
   "icons": {
     "16": "icon-16.png",
     "32": "icon-32.png",
