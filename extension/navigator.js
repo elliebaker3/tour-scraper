@@ -69,7 +69,7 @@
   const CATEGORIES = {
     sprint:          { label: "Sprints",           color: "#22c55e", on: true },
     kom:             { label: "Climbs",            color: KOM_RED,   on: true },
-    poi:             { label: "Contenders",        color: "#facc15", on: true },
+    poi:             { label: "Contenders",        color: "#facc15", on: false },
     crash:           { label: "Crashes",           color: "#e5484d", on: false },
     breakaway_start: { label: "Attacks",           color: "#f5a524", on: false },
     breakaway_end:   { label: "Catches",           color: "#8b7cf6", on: false },
@@ -122,6 +122,19 @@
   let sharedCal = null;       // calibrations.json content, fetched once at start
   let sharedCalReady = null;  // promise for that fetch, so restore can await it
   let restoredFrom = "";      // "" | "this browser" | "shared store" -- for the note
+  /* Transient feedback -- a reading landing, or refusing to. It rides in the
+   * diag line rather than a status field of its own: the panel had a strip of
+   * white text beside the buttons that spent most of its life restating what
+   * the diag said one line below. Errors still have to be visible, so they
+   * appear there briefly and then clear. */
+  let flashText = "";
+  let flashUntil = 0;
+  const flash = (msg, ms = 9000) => {
+    flashText = msg;
+    flashUntil = Date.now() + ms;
+    console.log("[TourNavigator]", msg);
+  };
+  const flashNow = () => (Date.now() < flashUntil ? flashText : "");
   let triedRestore = false;   // restore runs once, when the video first appears
   const enabled = Object.fromEntries(
     Object.entries(CATEGORIES).map(([k, v]) => [k, v.on]));
@@ -552,7 +565,6 @@
     // reported a duration -- at which point there is no assumption to describe
     // yet and it settles on "not calibrated", contradicting the diag. With no
     // readings there is no status worth preserving, so keep it current.
-    if (!pins().length) refreshAnchorState();
     // The prompt asks for readings until there ARE readings -- the assumption
     // is a starting point, not a substitute for one. The bar always shows.
     root.classList.toggle("tn-lite-setup", !pinned);
@@ -653,14 +665,14 @@
       clock.textContent = `${len} km`;
       clock.className = "tn-clock";
     }
-    root.querySelector(".tn-diag").textContent =
-      `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
-      `profile only (no live capture) · elevation: velowire.com · ` +
-      `${pinned ? `${pins().length} readings, steady-pace interpolation`
-                : lm ? `assuming ${Math.round(BROADCAST_PREROLL_SEC / 60)} min of build-up ` +
-                       `then ${DEFAULT_RATE.toFixed(2)}× at a steady pace`
-                     : "uncalibrated"} · ` +
-      `${bundle.__selection || ""}`;
+    root.querySelector(".tn-diag").textContent = [
+      `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"})`,
+      "profile only (no live capture)",
+      "elevation: velowire.com",
+      clockSummary(),
+      bundle.__selection || "",
+      flashNow(),
+    ].filter(Boolean).join(" · ");
   }
 
   function render() {
@@ -832,13 +844,15 @@
     clock.className = "tn-clock" +
       (g == null ? "" : g > 1.5 ? " tn-up" : g < -1.5 ? " tn-down" : "");
 
-    root.querySelector(".tn-diag").textContent =
-      `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"}) · ` +
-      `rate ${effectiveRate().toFixed(3)}× · ` +
-      (adBreaks.length
-         ? `${adBreaks.length} ad breaks · 1× inside the one you calibrated in · `
-         : "no ad breaks found — global rate only · ") +
-      `${bundle.__selection || ""}`;
+    root.querySelector(".tn-diag").textContent = [
+      `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"})`,
+      `rate ${effectiveRate().toFixed(3)}×`,
+      adBreaks.length ? `${adBreaks.length} ad breaks · 1× inside the calibrated one`
+                      : "no ad breaks found — global rate only",
+      clockSummary(),
+      bundle.__selection || "",
+      flashNow(),
+    ].filter(Boolean).join(" · ");
   }
 
   /** Altitude at a race time (ms), from the nearest timed profile point -- so a
@@ -937,7 +951,6 @@ automatically. Sent anonymously: the stage, this site's name, the recording
 length and the readings themselves — never who you are or what else you
 watch.">Add reading</button>
           <button class="tn-anchor-clear" title="Clear the calibration">reset</button>
-          <span class="tn-anchor-state"></span>
         </div>
       </div>`;
     document.body.appendChild(root);
@@ -1047,7 +1060,6 @@ watch.">Add reading</button>
           chrome.storage.local.set({ [key]: { v: 1, recordings: list } });
         });
       } catch (_) {}
-      refreshAnchorState();
       render();
     });
   }
@@ -1097,14 +1109,13 @@ watch.">Add reading</button>
    *  rather than hidden, and it is why several pins are better than one: the
    *  median cancels rounding that falls either way. */
   function syncKmToGo(km) {
-    const el = root.querySelector(".tn-anchor-state");
-    if (!video?.duration) { el.textContent = "no video"; return; }
-    if (!isFinite(km)) { el.textContent = "enter the kilometres to go, e.g. 42"; return; }
+    if (!video?.duration) { flash("no video"); return; }
+    if (!isFinite(km)) { flash("enter the kilometres to go, e.g. 42"); return; }
 
     const lite = bundle.__kind === "profile";
     const len = lite ? (bundle.stage?.length_km || 1) : routeLength();
     if (km < 0 || km > len) {
-      el.textContent = `${km} km to go is outside this stage (0–${len.toFixed(1)} km)`;
+      flash(`${km} km to go is outside this stage (0–${len.toFixed(1)} km)`);
       return;
     }
     // A whole-kilometre graphic reads "42" from 42.0 down to 43.0, so the
@@ -1124,17 +1135,14 @@ watch.">Add reading</button>
       shareCalibration();
       render();
       const n = pins().length;
-      el.textContent = `${km} km to go — reading added · ${n} reading${n === 1 ? "" : "s"}` +
-        (n < 2 ? " · ▶ add one far away to place the playhead (assumes steady " +
-                 "pace between readings)"
-               : "");
-      console.log("[TourNavigator] lite km-to-go pin:", el.textContent);
+      flash(`${km} km to go — reading added · ${n} reading${n === 1 ? "" : "s"}` +
+        (n < 2 ? " · add one far away to place the playhead" : ""));
       return;
     }
 
     const hit = timeAtKmToGo(exact);
     if (!hit) {
-      el.textContent = `no GPS coverage at ${km} km to go — try another point`;
+      flash(`no GPS coverage at ${km} km to go — try another point`);
       return;
     }
 
@@ -1178,8 +1186,7 @@ watch.">Add reading</button>
       }
     }
     if (localAnchor(at)) parts.push("1× inside this ad break interval");
-    el.textContent = parts.join(" · ");
-    console.log("[TourNavigator] km-to-go sync:", el.textContent);
+    flash(parts.join(" · "));
   }
 
 
@@ -1188,35 +1195,34 @@ watch.">Add reading</button>
 
 
 
-  function refreshAnchorState() {
-    const el = root.querySelector(".tn-anchor-state");
+  /** One phrase describing what the clock is currently doing. Folded into the
+   *  diag line by render(), where it sits beside the rest of the assumptions
+   *  instead of duplicating them in a second place. */
+  function clockSummary() {
     const p = pins();
     if (!p.length) {
       // A lite stage has no race clock to default from, but it does have the
-      // Peacock shape; say so rather than "not calibrated", which the diag
-      // line would immediately contradict.
+      // Peacock shape, so say what is assumed rather than "not calibrated".
       const assumed = cal || (bundle?.__kind === "profile" && defaultLiteMap());
-      el.textContent = assumed
-        ? `assuming ${Math.round(BROADCAST_PREROLL_SEC / 60)} min of build-up then ` +
-          `${DEFAULT_RATE.toFixed(2)}× — a reading makes it exact where you are`
+      return assumed
+        ? `assuming ${Math.round(BROADCAST_PREROLL_SEC / 60)} min build-up then ` +
+          `${DEFAULT_RATE.toFixed(2)}×`
         : "not calibrated";
-      return;
     }
+    const restored = restoredFrom ? `restored from ${restoredFrom}, ` : "";
     if (bundle?.__kind === "profile") {
-      el.textContent = p.length < 2
+      return restored + (p.length < 2
         ? "1 reading — add one far away to place the playhead"
-        : `${p.length} readings · steady-pace interpolation between them`;
-      return;
+        : `${p.length} readings, steady-pace interpolation`);
     }
     if (p.length === 1) {
-      el.textContent = `1 reading · rate ${DEFAULT_RATE.toFixed(2)}× assumed — ` +
-        "add one far away to fit it exactly";
-      return;
+      return restored + `1 reading, rate ${DEFAULT_RATE.toFixed(2)}× assumed — ` +
+        "add one far away to fit it";
     }
     const res = pinResidualsSec().map(Math.abs);
     const worst = res.length ? Math.max(...res) : 0;
-    el.textContent =
-      `${p.length} readings · rate ${effectiveRate().toFixed(3)}× · fits to ±${worst.toFixed(0)}s`;
+    return restored +
+      `${p.length} readings, fits to ±${worst.toFixed(0)}s`;
   }
 
 
@@ -1337,14 +1343,10 @@ watch.">Add reading</button>
       if (!cal) { anchors = []; return false; }
     }
     restoredFrom = from;
-    const el = root.querySelector(".tn-anchor-state");
-    if (el) {
-      el.textContent = `calibration restored (${from}, ` +
-        `${pins().length} reading${pins().length === 1 ? "" : "s"}` +
-        `${cal ? `, rate ${effectiveRate().toFixed(3)}×` : ""}` +
-        `${adBreaks.length ? `, ${adBreaks.length} ad breaks` : ""}` +
-        `) — reset if it looks off`;
-    }
+    flash(`calibration restored from ${from} ` +
+          `(${pins().length} reading${pins().length === 1 ? "" : "s"}` +
+          `${adBreaks.length ? `, ${adBreaks.length} ad breaks` : ""})` +
+          " — reset if it looks off");
     render();
     return true;
   }
@@ -1387,10 +1389,7 @@ watch.">Add reading</button>
     if (payload === lastSharedPayload) return;
     lastSharedPayload = payload;
 
-    const note = (msg) => {
-      const el = root?.querySelector(".tn-anchor-state");
-      if (el) el.textContent += ` · ${msg}`;
-    };
+    const note = (msg) => flash(msg, 5000);
 
     if (COLLECTOR_URL) {
       try {
@@ -1565,7 +1564,6 @@ watch.">Add reading</button>
     // readings -- but a stated, visible default is not the same thing as no
     // clock at all, and the diag says which model is in use.)
     cal = defaultCal();
-    refreshAnchorState();
     render();
     sharedCalReady = fetchSharedCalibrations();
 

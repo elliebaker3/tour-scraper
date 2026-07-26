@@ -99,7 +99,7 @@ try:
               return {
                 setup: vis('.tn-setup'),
                 bar: vis('.tn-bar'),
-                anchorState: document.querySelector('.tn-anchor-state')?.textContent || '',
+                anchorState: document.querySelector('.tn-diag')?.textContent || '',
                 diag: document.querySelector('.tn-diag')?.textContent || '',
                 clock: document.querySelector('.tn-clock')?.textContent || '',
                 playhead: !!document.querySelector('.tn-playhead'),

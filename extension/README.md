@@ -70,6 +70,10 @@ Two weights, two different claims:
 | solid | GPS-observed |
 | solid, dimmer | estimated — GPS was offline, pace inferred from the known start |
 
+State that used to sit in a strip of text beside the buttons now rides in the
+diag line, along with transient feedback on a reading, which clears after a few
+seconds.
+
 Both are drawn solid. Dashes read as a broken trace rather than as lower
 confidence, and the silhouette is the thing being read; the estimated stretch
 stays dimmer and the diag line names it outright.
@@ -107,10 +111,10 @@ mouse and out after a few seconds of stillness, sitting just above the player's
 own scrub bar, so it is there when you're scrubbing and gone when you're
 watching. Hovering it keeps it up.
 
-**Sprints and climbs are shown by default; race events are not.** The elevation
+**Sprints and climbs are shown by default; nothing else is.** The elevation
 graphic (profile + sprint/climb markers) is always on; crashes, attacks,
-catches and scenery each have a checkbox that starts off, so the bar is calm
-until you opt into a kind. Collapsing (**–**) keeps the profile as a slim strip.
+catches, scenery and contenders each have a checkbox that starts off, so the
+bar is the profile and nothing else until you opt into a kind. Collapsing (**–**) keeps the profile as a slim strip.
 
 Tests (need Playwright):
 

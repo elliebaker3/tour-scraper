@@ -73,7 +73,7 @@
   cursor: pointer;
 }
 .tn-svg { position: absolute; inset: 0; display: block; }
-.tn-profile { fill: rgba(120, 190, 255, 0.42); stroke: #9ed2ff; stroke-width: 1.4; }
+.tn-profile { fill: rgba(234, 179, 8, 0.38); stroke: #fbbf24; stroke-width: 1.4; }
 
 /* Intensity reads as a thin strip along the bottom edge. Full-height shading
    competes with the elevation profile, which is the primary signal. */
@@ -140,7 +140,6 @@
   border-radius: 5px; padding: 3px 8px; cursor: pointer;
 }
 .tn-anchors button:hover { background: #38404f; }
-.tn-anchor-state { color: #8f97a3; }
 
 /* Stage selection is the one thing that must never fail silently: wrong stage
    means every marker is confidently wrong with nothing to reveal it. */
@@ -163,8 +162,8 @@
    silhouette is the thing being read. The distinction is not lost: the
    stretch stays slightly dimmer, and the diag line names it outright. */
 .tn-profile-est {
-  fill: rgba(120, 190, 255, 0.30);
-  stroke: rgba(158, 210, 255, 0.85);
+  fill: rgba(234, 179, 8, 0.24);
+  stroke: rgba(251, 191, 36, 0.8);
   stroke-width: 1.2;
 }
 
@@ -188,8 +187,8 @@
    rather than the broadcast. The rule is kept only so an older bundle cannot
    render an unstyled path, and it is solid like everything else. */
 .tn-profile-imp {
-  fill: rgba(120, 190, 255, 0.10);
-  stroke: rgba(158, 210, 255, 0.35);
+  fill: rgba(234, 179, 8, 0.10);
+  stroke: rgba(251, 191, 36, 0.35);
   stroke-width: 1;
 }
 

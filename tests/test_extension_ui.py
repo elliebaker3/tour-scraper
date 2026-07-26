@@ -120,7 +120,7 @@ try:
                 komBadges: [...bar.querySelectorAll('.tn-rm-kom .tn-rm-badge')]
                             .map(e => e.textContent),
                 clock: document.querySelector('.tn-clock').textContent,
-                status: document.querySelector('.tn-anchor-state').textContent,
+                status: document.querySelector('.tn-diag').textContent,
                 diag: document.querySelector('.tn-diag').textContent,
                 width: bar.clientWidth,
                 obs: seg('.tn-profile:not(.tn-profile-est):not(.tn-profile-imp)'),
@@ -184,7 +184,7 @@ try:
         # The default must SAY what it is assuming -- an unstated default is
         # exactly the silent-wrong-position problem the old gate guarded against.
         assumed = page.evaluate(
-            "() => document.querySelector('.tn-anchor-state').textContent")
+            "() => document.querySelector('.tn-diag').textContent")
         print(f"  states default {assumed!r}")
         assert "0.92" in assumed and "build-up" in assumed, \
             f"FAIL: default model not declared to the viewer: {assumed!r}"
@@ -201,8 +201,15 @@ try:
             f"FAIL: History/Stats still offered: {s['filters']}"
         assert "Contenders" in joined, f"FAIL: no contenders toggle: {s['filters']}"
         print(f"  filters        {s['filters']}  ({s['checkedFilters']} on)")
-        assert s["checkedFilters"] == 3, \
-            f"FAIL: expected Sprints+Climbs+Contenders on by default, got {s['checkedFilters']}"
+        # Only the elevation graphic is on by default -- sprints and climbs.
+        # Contenders now start OFF like every other event kind, so the bar is
+        # the profile and nothing else until a kind is asked for.
+        assert s["checkedFilters"] == 2, \
+            f"FAIL: expected only Sprints+Climbs on by default, got {s['checkedFilters']}"
+        contenders_on = page.evaluate("""() => [...document.querySelectorAll('.tn-filter')]
+            .filter(f => f.textContent.includes('Contenders'))
+            .map(f => f.querySelector('input').checked)[0]""")
+        assert contenders_on is False, "FAIL: Contenders should default off"
 
         # A calibration left behind by an OLDER extension version is keyed only
         # by stage, so it could belong to any recording of it -- exactly the
@@ -215,7 +222,7 @@ try:
         show()
         s2 = state()
         stale_state = page.evaluate(
-            "() => document.querySelector('.tn-anchor-state').textContent")
+            "() => document.querySelector('.tn-diag').textContent")
         print("\n--- load with a legacy saved calibration present ---")
         print(f"  bar shown {s2['barShown']} · state {stale_state!r}")
         assert "restored" not in stale_state, \
@@ -270,7 +277,14 @@ try:
         # data appears in the whole panel's rendered text.
         n_special = sum(1 for m in bundle.get("special_markers", [])
                         if m.get("t_utc"))
-        print(f"\n  POI markers drawn: {s['poiMarks']} (bundle has {n_special})")
+        # Contenders default OFF now, so nothing is drawn until asked for --
+        # then all of them are.
+        assert s["poiMarks"] == 0, \
+            f"FAIL: contender markers drawn before being asked for: {s['poiMarks']}"
+        page.click(".tn-filter:has-text('Contenders') input")
+        page.wait_for_timeout(400)
+        s = state()
+        print(f"\n  POI markers drawn once enabled: {s['poiMarks']} (bundle has {n_special})")
         assert s["poiMarks"] == n_special, "FAIL: POI markers not all drawn"
         # The only text allowed on a contender marker is the star glyph itself;
         # no rider name, no event description, no tooltip.
