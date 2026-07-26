@@ -66,10 +66,18 @@ jobs:
             kill -0 $CAPTURE_PID 2>/dev/null || break
             git add data/
             if git commit -m "data: incremental capture $(date -u +%H:%M) UTC" >/dev/null 2>&1; then
-              # -X theirs: during a rebase this favours OUR replayed capture
-              # commits, so an append-only data file never deadlocks the push.
+              # NOT -X theirs. With one long job that was safe: the only thing
+              # to conflict with was unrelated repo activity, and favouring the
+              # replayed capture commit kept an append-only file from
+              # deadlocking the push. With CHUNKS it destroys data -- a later
+              # chunk's shorter copy of telemetry.jsonl wins over the longer
+              # one the previous chunk pushed. That is exactly what happened on
+              # stage 20 (2026-07-25): the file reached 75MB by 11:52 and the
+              # next commit replaced it with 5.9MB, losing 2.5 hours of the
+              # leader's GPS. A plain rebase makes such a clash fail loudly and
+              # retry instead of silently picking the smaller file.
               for attempt in 1 2 3; do
-                if git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" >/dev/null 2>&1 \
+                if git pull --rebase origin "${GITHUB_REF_NAME}" >/dev/null 2>&1 \
                    && git push >/dev/null 2>&1; then
                   echo "pushed incremental at $(date -u +%H:%M)"; break
                 fi
