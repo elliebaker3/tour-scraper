@@ -48,8 +48,9 @@ CRASH_RE = re.compile(r"\b(crash|crashe[sd]|fell|fall|falls|came down|hit the de
                       r"abandon\w*|withdraw\w*|puncture\w*|mechanical)\b", re.I)
 
 BREAK_START_PICTOS = {"liv_attack", "liv_breakaway"}
-BREAK_START_RE = re.compile(r"\b(attack\w*|clip off|jump\w* away|goes clear|got away|"
-                            r"break(?:s)? away|launch\w* an attack|escape\w*)\b", re.I)
+BREAK_START_RE = re.compile(r"\b(attacks?|attacked|attacking|clip off|jump\w* away|"
+                            r"goes clear|got away|break(?:s)? away|breaks clear|"
+                            r"launch\w* an attack|escap(?:e|es|ed|ing))\b", re.I)
 BREAK_END_RE = re.compile(r"\b(caught|catch(?:es|ing)?|reeled in|brought back|"
                           r"swallowed up|absorbed|has been caught|neutralis\w*|"
                           r"back together|regroup\w*)\b", re.I)
@@ -127,9 +128,23 @@ def _to_utc(text: str) -> str:
     return dt.astimezone(timezone.utc).isoformat(timespec="seconds")
 
 
+def _titled(title: str, rx) -> bool:
+    """Whether the headline settles this question on its own."""
+    return bool(title and rx.search(title))
+
+
+def _parse_ts(s: str) -> datetime:
+    return datetime.fromisoformat(s)
+
+
 def _mk(t, category, label, detail="", source="", **extra) -> dict:
     g = {"t_utc": _to_utc(t), "category": category, "label": label,
-         "detail": detail[:400], "source": source}
+         "detail": detail[:400], "source": source,
+         # Sources read "ticker:liv_attack" for a pictogram item and
+         # "ticker:<type>" for a plain headline, which is what dedupe_streams
+         # keys on. (A cleverer expression here got it backwards and marked
+         # everything a headline, silently disabling the dedupe.)
+         "picto": str(source).startswith("ticker:liv_")}
     g.update(extra)
     return g
 
@@ -138,32 +153,35 @@ def classify_ticker(items: list[dict]) -> list[dict]:
     guideposts = []
     for it in items:
         picto, text, title = it["picto"], it["all"], it["title"]
+        # hit(RE): the title's verdict if it has one, else the body's.
+        def hit(rx, _t=title, _x=text):
+            return rx.search(_t) or (not _titled(_t, rx) and rx.search(_x))
 
-        if (picto in CRASH_PICTOS) or CRASH_RE.search(text):
+        if (picto in CRASH_PICTOS) or hit(CRASH_RE):
             guideposts.append(_mk(it["t"], "crash", title or "Incident", it["body"],
                                   f"ticker:{picto or it['type']}"))
             continue
 
         # Stat/standings lines are checked before the action patterns so a
         # phrase like "average speed after 2 hours" can't read as an attack.
-        if picto in STAT_PICTOS and not BREAK_END_RE.search(text) \
-                and not BREAK_START_RE.search(title):
+        if picto in STAT_PICTOS and not hit(BREAK_END_RE) \
+                and not hit(BREAK_START_RE):
             guideposts.append(_mk(it["t"], "stat", title or "Race data", it["body"],
                                   f"ticker:{picto}"))
             continue
 
-        if BREAK_END_RE.search(text):
+        if hit(BREAK_END_RE):
             guideposts.append(_mk(it["t"], "breakaway_end", title or "Breakaway caught",
                                   it["body"], f"ticker:{picto or it['type']}"))
             continue
 
-        if (picto in BREAK_START_PICTOS) or BREAK_START_RE.search(text):
+        if (picto in BREAK_START_PICTOS) or hit(BREAK_START_RE):
             guideposts.append(_mk(it["t"], "breakaway_start", title or "Attack",
                                   it["body"], f"ticker:{picto or it['type']}"))
             continue
 
-        if ((picto in HISTORY_PICTOS) or HISTORY_RE.search(text)) \
-                and not NOT_HISTORY_RE.search(text):
+        if ((picto in HISTORY_PICTOS) or hit(HISTORY_RE)) \
+                and not hit(NOT_HISTORY_RE):
             guideposts.append(_mk(it["t"], "history", title or "Race history",
                                   it["body"], f"ticker:{picto or it['type']}"))
             continue
@@ -171,7 +189,7 @@ def classify_ticker(items: list[dict]) -> list[dict]:
         # Scenic: ASO's own timestamped imagery of atmosphere rather than
         # incident. Requires media, so a passing mention of "the peloton" in a
         # tactical note doesn't register as a landscape beat.
-        if it["media"] and ((picto in SCENIC_PICTOS) or SCENIC_RE.search(text)):
+        if it["media"] and ((picto in SCENIC_PICTOS) or hit(SCENIC_RE)):
             guideposts.append(_mk(it["t"], "scenic", title or "Race imagery",
                                   it["body"], f"aso-media:{it['type'] or 'photo'}"))
     return guideposts
@@ -228,15 +246,57 @@ def intensity_curve(items: list[dict], synced_points: list[dict],
     return series
 
 
+# ASO publishes the same moment twice: a pictogram item with detail, then a
+# plain headline restating it a minute or three later. On stage 20 that put two
+# markers on Carapaz's Croix de Fer attack and two on Pedersen's, inside four
+# minutes of each other.
+DUPLICATE_WINDOW_SEC = 300
+
+
+def dedupe_streams(guideposts: list[dict]) -> list[dict]:
+    """Drop a plain headline that merely restates a nearby pictogram item.
+
+    The two are distinguishable structurally rather than by comparing wording:
+    a pictogram item carries a picto and usually body detail, a plain headline
+    carries neither. So where both describe the same KIND of moment within a
+    few minutes, the pictogram one is kept -- it is the richer record, with the
+    detail line the panel shows.
+
+    Restricted to the same category deliberately. Nearly every plain headline
+    is within five minutes of SOME pictogram item simply because there are 91
+    of them across a stage; only a same-category collision is evidence of a
+    restatement rather than a coincidence. Two genuine attacks minutes apart
+    both carry pictos, so neither is ever dropped by this.
+    """
+    picto_by_cat: dict[str, list] = {}
+    for g in guideposts:
+        if g.get("picto"):
+            picto_by_cat.setdefault(g["category"], []).append(_parse_ts(g["t_utc"]))
+
+    kept = []
+    for g in guideposts:
+        if not g.get("picto"):
+            t = _parse_ts(g["t_utc"])
+            near = any(abs((t - o).total_seconds()) <= DUPLICATE_WINDOW_SEC
+                       for o in picto_by_cat.get(g["category"], []))
+            if near:
+                continue
+        kept.append(g)
+    return kept
+
+
 def build_guideposts(stage_dir: Path, synced_points: list[dict]) -> dict:
     items = load_ticker(stage_dir)
     guideposts = classify_ticker(items)
+    before = len(guideposts)
+    guideposts = dedupe_streams(guideposts)
     guideposts.sort(key=lambda g: g["t_utc"])
     counts: dict[str, int] = {}
     for g in guideposts:
         counts[g["category"]] = counts.get(g["category"], 0) + 1
     return {
         "ticker_items": len(items),
+        "duplicates_dropped": before - len(guideposts),
         "counts": counts,
         "guideposts": guideposts,
         "intensity": intensity_curve(items, synced_points),
