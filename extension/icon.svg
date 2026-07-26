@@ -1,16 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
   <!-- Source art for the toolbar icon. Edit this, then regenerate the PNGs:
          cd extension && ./make-icons.sh
-       Kept deliberately simple: at 16px only the silhouette survives, so the
-       shape has to carry it without relying on the detail. Same maillot
-       yellow and dark panel the bar itself uses. -->
-  <rect width="128" height="128" rx="26" fill="#12151b"/>
-  <!-- one climb, one descent, one summit finish: the profile in miniature -->
-  <path d="M8 104 L28 92 L44 74 L58 84 L76 46 L92 62 L110 20 L120 24 L120 104 Z"
-        fill="#ffdd00" fill-opacity="0.9"/>
-  <path d="M8 104 L28 92 L44 74 L58 84 L76 46 L92 62 L110 20"
-        fill="none" stroke="#ffe863" stroke-width="6"
+
+       Drawn in the visual language of a printed stage profile: yellow fill
+       with fine horizontal hatching, a thin dark ridge line, and a solid
+       black distance bar along the bottom, all on white. The silhouette
+       itself is our own, not any particular stage.
+
+       Two peaks and a summit finish, because at 16px beside the address bar
+       the hatching and the ridge both vanish and only the shape is left; it
+       has to say "mountain profile" from the outline alone.
+
+       (No double hyphen anywhere in this comment: XML forbids it inside one
+       and rsvg-convert rejects the whole file rather than warning.) -->
+  <defs>
+    <pattern id="hatch" patternUnits="userSpaceOnUse" x="0" y="0" width="8" height="6">
+      <rect width="8" height="6" fill="#ffdd00"/>
+      <rect width="8" height="2" fill="#ffffff" fill-opacity="0.55"/>
+    </pattern>
+    <clipPath id="profile">
+      <path d="M6 104 L20 86 L30 66 L38 78 L48 58 L56 74 L64 92 L74 70
+               L84 44 L94 62 L104 34 L114 46 L122 30 L122 104 Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="128" height="128" rx="26" fill="#ffffff"/>
+
+  <!-- the terrain: hatched yellow, clipped to the silhouette -->
+  <g clip-path="url(#profile)">
+    <rect x="0" y="0" width="128" height="128" fill="url(#hatch)"/>
+  </g>
+
+  <!-- the ridge line over the top of it -->
+  <path d="M6 104 L20 86 L30 66 L38 78 L48 58 L56 74 L64 92 L74 70
+           L84 44 L94 62 L104 34 L114 46 L122 30"
+        fill="none" stroke="#101010" stroke-width="3.5"
         stroke-linejoin="round" stroke-linecap="round"/>
-  <!-- the playhead: what the bar is actually for -->
-  <rect x="86" y="14" width="6" height="98" rx="3" fill="#ffffff"/>
+
+  <!-- the distance bar the profile sits on -->
+  <rect x="6" y="104" width="116" height="12" rx="2" fill="#101010"/>
 </svg>
