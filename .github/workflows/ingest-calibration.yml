@@ -73,8 +73,8 @@ jobs:
           # Ad-break boundaries carry the LOCAL calibration layer; without
           # them a restored reading can only refit the global rate.
           breaks = rec.get("ad_breaks") or []
-          if not isinstance(breaks, list) or len(breaks) > 60:
-              fail("ad_breaks must be a list of at most 60 positions")
+          if not isinstance(breaks, list) or len(breaks) > 120:
+              fail("ad_breaks must be a list of at most 120 positions")
           for b in breaks:
               if not isinstance(b, (int, float)) or not (0 <= b <= dur):
                   fail("each ad break must sit inside the recording")

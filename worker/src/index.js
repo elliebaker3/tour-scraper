@@ -91,12 +91,12 @@ function validate(rec) {
   }
   // Ad-break boundaries, in recording seconds. These carry the LOCAL layer:
   // without them a restored reading can only refit the global rate, so they
-  // are as much a part of the contribution as the readings themselves. A
-  // stage carries roughly 8-12 breaks, so a list in the hundreds is not a
-  // break map.
+  // are as much a part of the contribution as the readings themselves. A long
+  // broadcast can carry a lot of breaks -- a stage has been observed with
+  // nearer 30 -- so this bound only rejects a list that could not be breaks.
   if (rec.ad_breaks != null) {
-    if (!Array.isArray(rec.ad_breaks) || rec.ad_breaks.length > 60) {
-      return "ad_breaks must be a list of at most 60 positions";
+    if (!Array.isArray(rec.ad_breaks) || rec.ad_breaks.length > 120) {
+      return "ad_breaks must be a list of at most 120 positions";
     }
     for (const b of rec.ad_breaks) {
       if (typeof b !== "number" || !isFinite(b) || b < 0 || b > dur) {

@@ -247,6 +247,13 @@
    * which is the point: no invented intervals. */
   let adBreaks = [];
 
+  /* Above this a "group of identical ticks" is page furniture rather than ad
+   * markers. Set high on purpose: guessing this number low is what broke
+   * detection before, and the cost of the two errors is not symmetric -- too
+   * high merely risks a wrong set that __tnAdDebug can diagnose, too low
+   * silently discards the right one. */
+  const MAX_PLAUSIBLE_BREAKS = 80;
+
   /** The ad-bracketed interval containing a recording second: [lo, hi].
    *  Null when there are no breaks, so callers fall through to global. */
   function intervalAt(sec) {
@@ -1761,9 +1768,13 @@ watch.">Add reading</button>
     let best = [], bestKey = null;
     for (const [key, secs] of groups) {
       const d = dedupe(secs);
-      // A stage carries roughly 8-12 breaks. Two is the fewest that can show
-      // a pattern; past ~20 it is furniture, however uniform it looks.
-      if (d.length < 2 || d.length > 20) continue;
+      // Two is the fewest that can show a pattern. The upper bound is
+      // deliberately loose: an earlier version capped at 20 on the assumption
+      // that a stage carries 8-12 breaks, which threw away the real set on a
+      // broadcast that has nearer 30 and left a stray pair to win instead.
+      // A five-hour broadcast can carry a lot of breaks, so only a count that
+      // could not be breaks at all is rejected here.
+      if (d.length < 2 || d.length > MAX_PLAUSIBLE_BREAKS) continue;
       if (d.length > best.length) { best = d; bestKey = key; }
     }
     for (const c of considered) {
