@@ -74,6 +74,11 @@
     breakaway_start: { label: "Attacks",           color: "#f5a524", on: false },
     breakaway_end:   { label: "Catches",           color: "#8b7cf6", on: false },
     significant:     { label: "Significant event", color: "#cbd5e1", on: false },
+    // Yours, not the race's: moments you flagged while watching. Last in the
+    // list because it is the only kind that comes from you rather than from
+    // the ticker, and on by default because a marker you placed yourself is
+    // never a surprise.
+    favourite:       { label: "My moments",        color: "#f472b6", on: true },
   };
 
   // The race-event guidepost kinds, the word shown for each (the KIND of moment,
@@ -298,6 +303,12 @@
    * player's own scrub bar yields them (detectAdBreaks). Everything local
    * keys off this list, so an empty list means the global model runs alone --
    * which is the point: no invented intervals. */
+  /* Moments the viewer flagged, as recording seconds. Kept with the
+   * calibration for this recording, so they come back on reload. Not shared:
+   * a reading describes the RECORDING and helps everyone watching it, whereas
+   * a flagged moment describes what one person found interesting. */
+  let favourites = [];
+
   let adBreaks = [];
 
   /* Above this a "group of identical ticks" is page furniture rather than ad
@@ -817,6 +828,22 @@
          </div>`);
     }
 
+    // Flagged moments, drawn from the recording position they were taken at
+    // rather than through the clock: the viewer marked a spot in the
+    // RECORDING, and that spot should not move if the calibration is later
+    // refined.
+    const favMarks = [];
+    if (enabled.favourite) {
+      for (const f of favourites) {
+        if (!(f.videoSec >= 0 && f.videoSec <= dur)) continue;
+        const fx = (f.videoSec / dur) * plotW;
+        favMarks.push(
+          `<div class="tn-marker tn-fav-mark" data-sec="${f.videoSec.toFixed(1)}"
+                style="left:${fx.toFixed(1)}px;background:${CATEGORIES.favourite.color}"
+                title="Your flagged moment"></div>`);
+      }
+    }
+
     const markers = [];
     for (const g of bundle.guideposts) {
       const word = SIGNIFICANT_WORD[g.category];
@@ -874,7 +901,7 @@
            preserveAspectRatio="none">
         ${paths}
       </svg>
-      <div class="tn-markers">${markers.join("")}</div>
+      <div class="tn-markers">${markers.join("")}${favMarks.join("")}</div>
       <div class="tn-routemarks">${routeMarks.join("")}</div>
       <div class="tn-poimarks">${poiMarks.join("")}</div>
       <div class="tn-playhead" style="left:${playX.toFixed(1)}px"></div>
@@ -1002,6 +1029,9 @@ length and the reading itself — never who you are or what else you watch.">Cal
       <div class="tn-controls">
         <div class="tn-filters"></div>
         <div class="tn-anchors">
+          <button class="tn-fav" title="Flag this moment so you can jump back to
+it. Saved on this device with the rest of this recording's settings, and never
+shared.">★ Flag moment</button>
           <input class="tn-togo-km2" size="5" placeholder="42" inputmode="decimal"
                  title="Refine: type another km-to-go reading from elsewhere in
 the stage. The median of all readings is used.">
@@ -1102,6 +1132,21 @@ watch.">Add reading</button>
     // Reset clears the readings AND this recording's saved slot -- local
     // only. The shared store is other people's data; a bad entry there gets
     // superseded by the next share, not deleted from a viewer's browser.
+    root.querySelector(".tn-fav").addEventListener("click", () => {
+      const at = video?.currentTime;
+      if (!(at >= 0)) { flash("no video"); return; }
+      // Flagging the same spot twice is a mis-click, not two moments.
+      if (favourites.some((f) => Math.abs(f.videoSec - at) < 5)) {
+        flash("already flagged this moment");
+        return;
+      }
+      favourites.push({ videoSec: at, at: new Date().toISOString() });
+      favourites.sort((a, b) => a.videoSec - b.videoSec);
+      saveCalibration();
+      flash(`moment flagged at ${fmt(at)} · ${favourites.length} saved`);
+      render();
+    });
+
     root.querySelector(".tn-anchor-clear").addEventListener("click", () => {
       anchors = [];
       // Reset drops the READINGS, not the clock. The broadcast's stated
@@ -1328,6 +1373,9 @@ watch.">Add reading</button>
       // exist for the next viewer. They are a property of the recording, so
       // everyone watching this same cut shares them.
       ad_breaks: adBreaks.slice(),
+      // Local only. share/ingest drop anything they do not recognise, so
+      // these never travel even though they ride in the same record.
+      favourites: favourites.slice(),
       cal,
       saved_at: new Date().toISOString(),
       extension_version: version,
@@ -1341,7 +1389,8 @@ watch.">Add reading</button>
   function saveCalibration() {
     // Lite stages never have a `cal` -- their anchors ARE the calibration --
     // so the readings, not the transform, are what makes this worth storing.
-    if (!spanOf(video) || !pins().length) return;
+    if (!spanOf(video)) return;
+    if (!pins().length && !favourites.length) return;
     if (bundle?.__kind !== "profile" && !cal) return;
     const key = calStoreKey();
     try {
@@ -1429,12 +1478,21 @@ watch.">Add reading</button>
   }
 
   function applyRecord(rec, from) {
-    if (!rec || !Array.isArray(rec.anchors) || !rec.anchors.length) return false;
+    if (!rec) return false;
+    if (Array.isArray(rec.favourites)) {
+      favourites = rec.favourites.filter((f) => f && isFinite(f.videoSec))
+                                 .sort((a, b) => a.videoSec - b.videoSec);
+    }
+    if (!Array.isArray(rec.anchors) || !rec.anchors.length) return favourites.length > 0;
     const re = rehomeAnchors(rec.anchors);
-    if (!re.list.length) return false;
+    if (!re.list.length) return favourites.length > 0;
     anchors = re.list;
     // Take the contributor's breaks unless this player has already shown us
     // its own -- live markers beat remembered ones for the same recording.
+    if (Array.isArray(rec.favourites)) {
+      favourites = rec.favourites.filter((f) => f && isFinite(f.videoSec))
+                                 .sort((a, b) => a.videoSec - b.videoSec);
+    }
     if (!adBreaks.length && Array.isArray(rec.ad_breaks)) {
       adBreaks = rec.ad_breaks.filter((n) => isFinite(n)).sort((a, b) => a - b);
     }

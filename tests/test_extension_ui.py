@@ -201,11 +201,14 @@ try:
             f"FAIL: History/Stats still offered: {s['filters']}"
         assert "Contenders" in joined, f"FAIL: no contenders toggle: {s['filters']}"
         print(f"  filters        {s['filters']}  ({s['checkedFilters']} on)")
-        # Only the elevation graphic is on by default -- sprints and climbs.
-        # Contenders now start OFF like every other event kind, so the bar is
-        # the profile and nothing else until a kind is asked for.
-        assert s["checkedFilters"] == 2, \
-            f"FAIL: expected only Sprints+Climbs on by default, got {s['checkedFilters']}"
+        # On by default: the elevation graphic (sprints and climbs) and "My
+        # moments". Every kind sourced from the TICKER starts off, so the bar
+        # is calm until one is asked for -- but a moment the viewer flagged
+        # themselves is never a surprise, so it shows without being asked.
+        assert s["checkedFilters"] == 3, \
+            f"FAIL: expected Sprints+Climbs+My moments on by default, got {s['checkedFilters']}"
+        assert "My moments" in " ".join(s["filters"]), \
+            f"FAIL: no flagged-moments toggle: {s['filters']}"
         contenders_on = page.evaluate("""() => [...document.querySelectorAll('.tn-filter')]
             .filter(f => f.textContent.includes('Contenders'))
             .map(f => f.querySelector('input').checked)[0]""")

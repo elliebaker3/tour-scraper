@@ -137,6 +137,10 @@
 
 .tn-anchors { display: flex; align-items: center; gap: 6px; margin-left: auto; }
 
+/* Flagged moments: same tick shape as a race event, in a colour nothing else
+   uses, so your own marks are never confused with the ticker's. */
+.tn-fav-mark { box-shadow: 0 0 0 1px rgba(0,0,0,.55), 0 0 6px rgba(244,114,182,.7); }
+
 .tn-anchors button {
   background: #2b3140; color: #e6e9ee; border: 1px solid rgba(255,255,255,.16);
   border-radius: 5px; padding: 3px 8px; cursor: pointer;
