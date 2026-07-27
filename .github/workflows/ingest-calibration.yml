@@ -80,6 +80,16 @@ jobs:
                   fail("each ad break must sit inside the recording")
           breaks = sorted({round(b) for b in breaks})
 
+          TOL = 30          # same recording if durations are within this
+          favs = rec.get("favourites") or []
+          if not isinstance(favs, list) or len(favs) > 200:
+              fail("favourites must be a list of at most 200 positions")
+          for f in favs:
+              v = f.get("videoSec") if isinstance(f, dict) else None
+              if not isinstance(v, (int, float)) or not (0 <= v <= dur + TOL):
+                  fail("each flagged moment must sit inside the recording")
+          favs = [{"videoSec": round(f["videoSec"], 1)} for f in favs]
+
           # Keep only known fields, dropping anything unexpected the issue
           # might have carried.
           keep_anchor = ("tUtcMs", "videoSec", "kind", "km", "kmto", "label")
@@ -93,6 +103,7 @@ jobs:
               "anchors": [{k: a[k] for k in keep_anchor if k in a} for a in anchors],
               "cal": rec.get("cal") if isinstance(rec.get("cal"), dict) else None,
               "ad_breaks": breaks,
+              "favourites": favs,
               "saved_at": rec.get("saved_at"),
               "extension_version": rec.get("extension_version"),
               "ingested_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -103,7 +114,6 @@ jobs:
           store = json.load(open(path))
           key = f"stage-{clean['stage']}|{site}"
           lst = store.setdefault("recordings", {}).setdefault(key, [])
-          TOL = 30
           for i, existing in enumerate(lst):
               if abs(existing.get("duration_sec", 0) - clean["duration_sec"]) <= TOL:
                   lst[i] = clean

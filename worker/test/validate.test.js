@@ -33,6 +33,7 @@ const good = () => ({
   ],
   cal: { refMs: 1784900000000, offsetSec: 1200, rate: 0.92 },
   ad_breaks: [1800, 3600, 5400, 7200],
+  favourites: [{ videoSec: 4200 }, { videoSec: 9100.44 }],
   saved_at: "2026-07-24T23:00:00.000Z",
   extension_version: "0.2.0",
 });
@@ -75,6 +76,11 @@ rejects("ad break beyond the recording",
         (r) => { r.ad_breaks = [999999]; }, "inside the recording");
 rejects("negative ad break", (r) => { r.ad_breaks = [-5]; }, "inside the recording");
 rejects("ad breaks not a list", (r) => { r.ad_breaks = "many"; }, "ad_breaks");
+rejects("flagged moment beyond the recording",
+        (r) => { r.favourites = [{ videoSec: 999999 }]; }, "inside the recording");
+rejects("flagged moments not a list", (r) => { r.favourites = "lots"; }, "favourites");
+rejects("absurdly many flagged moments",
+        (r) => { r.favourites = Array(500).fill({ videoSec: 10 }); }, "favourites");
 rejects("absurdly many ad breaks",
         (r) => { r.ad_breaks = Array(500).fill(100); }, "ad_breaks");
 check("null body rejected", validate(null) !== null);
@@ -94,6 +100,9 @@ check("known anchor fields kept",
 check("date truncated to a plain day", c.date === "2026-07-24");
 check("duration rounded to 0.1s", c.duration_sec === 19225.9);
 check("marked as worker-ingested", c.via === "worker");
+check("flagged moments kept as bare positions",
+      JSON.stringify(c.favourites) === JSON.stringify([{videoSec:4200},{videoSec:9100.4}]),
+      JSON.stringify(c.favourites));
 check("ad breaks kept, deduped and sorted",
       JSON.stringify(c.ad_breaks) === JSON.stringify([1800, 3600, 5400, 7200]),
       JSON.stringify(c.ad_breaks));

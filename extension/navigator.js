@@ -1373,9 +1373,9 @@ watch.">Add reading</button>
       // exist for the next viewer. They are a property of the recording, so
       // everyone watching this same cut shares them.
       ad_breaks: adBreaks.slice(),
-      // Local only. share/ingest drop anything they do not recognise, so
-      // these never travel even though they ride in the same record.
-      favourites: favourites.slice(),
+      // Submitted, but never restored onto anyone else's bar -- see
+      // applyRecord. Kept as bare positions with no note or label attached.
+      favourites: favourites.map((f) => ({ videoSec: f.videoSec })),
       cal,
       saved_at: new Date().toISOString(),
       extension_version: version,
@@ -1479,7 +1479,13 @@ watch.">Add reading</button>
 
   function applyRecord(rec, from) {
     if (!rec) return false;
-    if (Array.isArray(rec.favourites)) {
+    // Flagged moments come back only from THIS browser. They are submitted to
+    // the shared store so they can be studied in aggregate, but they are one
+    // person's opinion of what was interesting -- restoring a stranger's onto
+    // your bar would put marks there you never placed and cannot account for.
+    // Readings are the opposite: they describe the recording itself, so
+    // everyone watching it benefits from them.
+    if (from === "this browser" && Array.isArray(rec.favourites)) {
       favourites = rec.favourites.filter((f) => f && isFinite(f.videoSec))
                                  .sort((a, b) => a.videoSec - b.videoSec);
     }
@@ -1489,10 +1495,6 @@ watch.">Add reading</button>
     anchors = re.list;
     // Take the contributor's breaks unless this player has already shown us
     // its own -- live markers beat remembered ones for the same recording.
-    if (Array.isArray(rec.favourites)) {
-      favourites = rec.favourites.filter((f) => f && isFinite(f.videoSec))
-                                 .sort((a, b) => a.videoSec - b.videoSec);
-    }
     if (!adBreaks.length && Array.isArray(rec.ad_breaks)) {
       adBreaks = rec.ad_breaks.filter((n) => isFinite(n)).sort((a, b) => a - b);
     }

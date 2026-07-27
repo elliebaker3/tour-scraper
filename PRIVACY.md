@@ -13,6 +13,7 @@ Using `chrome.storage.local`, on your machine only:
 - **Your calibration readings** — the "km to go" figures you type in and the
   corresponding positions in the recording, so the profile is aligned the next
   time you open it.
+- **Moments you flag** with the star button, so you can find them again.
 - **Which stage you selected** from the dropdown, if the extension could not
   work it out on its own.
 
@@ -23,7 +24,8 @@ you enter a reading (see below).
 
 Entering a calibration reading submits that calibration so other viewers of the
 **same recording** inherit it. Nothing else you do in the browser triggers a
-request. A submission contains:
+request — the extension does not track what you watch, and records nothing
+unless you press a button. A submission contains:
 
 | field | example |
 |---|---|
@@ -32,11 +34,17 @@ request. A submission contains:
 | the recording's length in seconds | 21519.4 |
 | your km-to-go readings and their positions in the recording | 60 km at 4500s |
 | ad-break positions detected in the player's own scrub bar | — |
+| positions of any moments you flagged with the star button | 4200s |
 | timestamps and the extension's version number | — |
 
 It does **not** contain your name, email, account, IP address, device
 identifiers, browsing history, or anything about pages other than the one you
 calibrated. The extension has no analytics and no tracking of any kind.
+
+Flagged moments are submitted as bare positions in the recording, with no note
+or label attached. They are collected so the parts of a stage people mark can
+be studied, and are **never shown to anyone else** — the extension only ever
+displays the moments flagged in your own browser.
 
 ## Where it goes
 

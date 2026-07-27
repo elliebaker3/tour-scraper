@@ -104,6 +104,20 @@ function validate(rec) {
       }
     }
   }
+  // Moments a viewer flagged, as recording seconds. Collected so the sections
+  // people actually mark can be studied; never served back onto anyone's bar
+  // (the extension only restores its own). Bare positions, no notes.
+  if (rec.favourites != null) {
+    if (!Array.isArray(rec.favourites) || rec.favourites.length > 200) {
+      return "favourites must be a list of at most 200 positions";
+    }
+    for (const f of rec.favourites) {
+      const v = f && f.videoSec;
+      if (typeof v !== "number" || !isFinite(v) || v < 0 || v > dur + DUR_TOL) {
+        return "each flagged moment must sit inside the recording";
+      }
+    }
+  }
   return null;
 }
 
@@ -126,6 +140,9 @@ function clean(rec) {
     cal: rec.cal ?? null,
     ad_breaks: Array.isArray(rec.ad_breaks)
       ? [...new Set(rec.ad_breaks.map((b) => Math.round(b)))].sort((a, b) => a - b)
+      : [],
+    favourites: Array.isArray(rec.favourites)
+      ? rec.favourites.map((f) => ({ videoSec: Math.round(f.videoSec * 10) / 10 }))
       : [],
     saved_at: typeof rec.saved_at === "string" ? rec.saved_at.slice(0, 32) : null,
     extension_version: typeof rec.extension_version === "string"
