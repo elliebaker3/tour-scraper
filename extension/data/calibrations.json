@@ -418,6 +418,35 @@
         "ingested_at": "2026-07-26T03:49:42.383Z",
         "via": "worker"
       }
+    ],
+    "stage-19|npo.nl": [
+      {
+        "schema": 1,
+        "stage": 19,
+        "date": "2026-07-24",
+        "site": "npo.nl",
+        "duration_sec": 19328.7,
+        "airing_ms": null,
+        "anchors": [
+          {
+            "tUtcMs": 1784897517000,
+            "videoSec": 7775.761599,
+            "kind": "kmtogo",
+            "km": 107,
+            "label": "107 km to go"
+          }
+        ],
+        "cal": {
+          "refMs": 1784897517000,
+          "offsetSec": 7775.761599,
+          "rate": 1
+        },
+        "ad_breaks": [],
+        "saved_at": "2026-07-27T19:10:55.605Z",
+        "extension_version": "0.3.0",
+        "ingested_at": "2026-07-27T19:10:56.138Z",
+        "via": "worker"
+      }
     ]
   }
 }
