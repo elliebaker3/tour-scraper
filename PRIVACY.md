@@ -24,8 +24,7 @@ you enter a reading (see below).
 
 Entering a calibration reading submits that calibration so other viewers of the
 **same recording** inherit it. Nothing else you do in the browser triggers a
-request — the extension does not track what you watch, and records nothing
-unless you press a button. A submission contains:
+request. A submission contains:
 
 | field | example |
 |---|---|
@@ -39,7 +38,28 @@ unless you press a button. A submission contains:
 
 It does **not** contain your name, email, account, IP address, device
 identifiers, browsing history, or anything about pages other than the one you
-calibrated. The extension has no analytics and no tracking of any kind.
+calibrated.
+
+## Viewing measurement
+
+While a stage is open, the extension also records **how the recording was
+watched**, and sends a summary when you close the tab:
+
+- **Coverage** — how many seconds were spent on each kilometre of the route.
+- **Navigation** — each skip or rewind, with the kilometre jumped from and to.
+
+These are grouped under a random session identifier that is generated fresh
+each time and is not linked to you, an account, or any previous session. They
+are used to understand which parts of a stage people watch and how they move
+around a recording.
+
+This is measurement of the video, not of you: it records positions within one
+recording and nothing about other tabs, sites, or activity. It runs
+automatically while the extension is active. If you would rather it did not
+run, remove or disable the extension.
+
+Session data is sent to a **private** repository, separate from the public
+calibration store below, and is not published.
 
 Flagged moments are submitted as bare positions in the recording, with no note
 or label attached. They are collected so the parts of a stage people mark can
@@ -63,6 +83,7 @@ file or retained.
 ## What the extension does not do
 
 - It does not sell or transfer your data to third parties.
+- It does not publish session viewing data; that store is private.
 - It does not use your data for advertising, profiling, or creditworthiness.
 - It does not read, capture, download or modify any video or stream content.
   It reads the player's current position and sets it when you click to seek.

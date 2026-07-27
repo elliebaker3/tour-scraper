@@ -23,6 +23,22 @@ const REPO = "elliebaker3/tour-scraper";
 const FILE = "extension/data/calibrations.json";
 const BRANCH = "main";
 
+/* Session telemetry lives in a SEPARATE, PRIVATE repository.
+ *
+ * Calibrations must be public: the extension reads them back with no
+ * credentials, so the file has to be world-readable. How one person moved
+ * through a recording carries no such requirement, and publishing it would
+ * put individual viewing behaviour in a permanent public git history.
+ *
+ * Each session is written as its OWN file rather than merged into a shared
+ * one. Sessions arrive concurrently from unrelated viewers, and a
+ * read-modify-write against a single file would have them clobbering each
+ * other -- the same failure that cost stage 20 its telemetry. Separate paths
+ * make the question impossible to get wrong.
+ */
+const SESSION_REPO = "elliebaker3/tour-sessions";
+const MAX_SESSION_BYTES = 64 * 1024;
+
 // A recording is one entry; two entries whose durations are within this are
 // the same recording (the extension uses the same tolerance to match).
 const DUR_TOL = 30;
@@ -243,6 +259,58 @@ async function merge(env, rec) {
   return { ok: false, reason: "contended, try again" };
 }
 
+/** Shape-check a session before it is written. Same principle as validate():
+ *  this arrives from the open internet, so nothing is taken on faith. */
+function validateSession(rec) {
+  if (typeof rec !== "object" || rec === null) return "not an object";
+  if (typeof rec.session_id !== "string" || !/^[\w-]{8,64}$/.test(rec.session_id)) {
+    return "session_id must be a plain id";
+  }
+  if (rec.stage != null && (!Number.isInteger(rec.stage) || rec.stage < 1 || rec.stage > 21)) {
+    return "stage must be an int 1-21";
+  }
+  if (typeof rec.site !== "string" || !/^[a-z0-9.-]{4,64}$/.test(rec.site)) {
+    return "site must be a plain hostname";
+  }
+  if (typeof rec.coverage !== "object" || rec.coverage === null) return "coverage must be an object";
+  if (Object.keys(rec.coverage).length > 500) return "coverage has too many buckets";
+  for (const [k, v] of Object.entries(rec.coverage)) {
+    if (!/^-?\d+$/.test(k)) return "coverage keys must be whole kilometres";
+    if (typeof v !== "number" || !isFinite(v) || v < 0) return "coverage values must be seconds";
+  }
+  if (!Array.isArray(rec.events) || rec.events.length > 500) {
+    return "events must be a list of at most 500";
+  }
+  return null;
+}
+
+async function storeSession(env, rec) {
+  const day = (rec.ended || new Date().toISOString()).slice(0, 10);
+  const path = `sessions/${day}/${rec.session_id}.json`;
+  const body = JSON.stringify({ ...rec, received_at: new Date().toISOString() }, null, 2) + "\n";
+  // A later write for the same session replaces the earlier partial one, so
+  // the periodic sends and the final send converge on one file.
+  let sha;
+  const cur = await fetch(`https://api.github.com/repos/${SESSION_REPO}/contents/${path}`, {
+    headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+               "User-Agent": "tour-navigator-calibration-worker",
+               Accept: "application/vnd.github+json" },
+  });
+  if (cur.ok) sha = (await cur.json()).sha;
+  const put = await fetch(`https://api.github.com/repos/${SESSION_REPO}/contents/${path}`, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+               "User-Agent": "tour-navigator-calibration-worker",
+               Accept: "application/vnd.github+json" },
+    body: JSON.stringify({
+      message: `session ${rec.session_id.slice(0, 8)} · stage ${rec.stage} · ${rec.site}`,
+      content: btoa(unescape(encodeURIComponent(body))),
+      ...(sha ? { sha } : {}),
+    }),
+  });
+  if (!put.ok) throw new Error(`write session: ${put.status}`);
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS });
@@ -252,8 +320,24 @@ export default {
     const ip = request.headers.get("CF-Connecting-IP") || "";
     if (await rateLimited(env, ip)) return json(429, { error: "rate limited" });
 
+    const isSession = new URL(request.url).pathname.endsWith("/session");
     const raw = await request.text();
-    if (raw.length > MAX_BODY_BYTES) return json(413, { error: "payload too large" });
+    const cap = isSession ? MAX_SESSION_BYTES : MAX_BODY_BYTES;
+    if (raw.length > cap) return json(413, { error: "payload too large" });
+
+    if (isSession) {
+      let rec;
+      try { rec = JSON.parse(raw); }
+      catch { return json(400, { error: "invalid JSON" }); }
+      const bad = validateSession(rec);
+      if (bad) return json(400, { error: bad });
+      try {
+        await storeSession(env, rec);
+        return json(200, { ok: true });
+      } catch (e) {
+        return json(502, { error: String(e.message || e) });
+      }
+    }
 
     let rec;
     try { rec = JSON.parse(raw); }

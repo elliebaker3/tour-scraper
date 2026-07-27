@@ -50,6 +50,10 @@
   // Blank here would mean fallback-only; this is the deployed collector.
   const COLLECTOR_URL = "https://tour-calibrations.tournavigator.workers.dev";
   const SHARE_ISSUE_URL = "https://github.com/elliebaker3/tour-scraper/issues/new";
+  // Session telemetry goes to a SEPARATE, private store. Calibrations have to
+  // be public for the extension to read them back without credentials; how one
+  // person moved through a recording does not, and should not be.
+  const SESSION_URL = COLLECTOR_URL ? COLLECTOR_URL + "/session" : "";
   // Same asset re-opened: duration identical to within ~2s. Different cut:
   // minutes apart. 30s splits those cleanly.
   const DUR_TOL_SEC = 30;
@@ -308,6 +312,115 @@
    * a reading describes the RECORDING and helps everyone watching it, whereas
    * a flagged moment describes what one person found interesting. */
   let favourites = [];
+
+  /* What was actually watched.
+   *
+   * Two things get recorded, because they answer two different questions:
+   *
+   *   coverage  seconds spent on each kilometre of the ROUTE. Answers "which
+   *             parts of a stage do people watch or rewatch". Accumulated, so
+   *             watching a climb twice counts twice.
+   *   events    seeks, with where from and where to. Answers "how do people
+   *             navigate" -- which the coverage alone cannot, since it cannot
+   *             tell a skipped hour from one nobody reached.
+   *
+   * Sampling rides on the render tick, which runs whether or not the panel is
+   * on screen, so a viewer who never opens the bar is still measured. Progress
+   * is only credited when the playhead advances at roughly playback speed; a
+   * jump is a seek, not sixty seconds of viewing.
+   */
+  const SESSION = {
+    id: (crypto.randomUUID ? crypto.randomUUID()
+                           : String(Date.now()) + Math.random().toString(16).slice(2)),
+    started: new Date().toISOString(),
+    coverage: {},          // km-to-go (rounded) -> seconds watched
+    events: [],            // { at, kind, fromSec, toSec, fromKm, toKm }
+    sampled: 0,
+  };
+  let lastSampleSec = null;
+  let lastSampleAt = 0;
+  let sessionDirty = false;
+
+  const MAX_SESSION_EVENTS = 500;
+
+  function sampleWatching() {
+    const now = Date.now();
+    const at = video?.currentTime;
+    if (!(at >= 0) || !spanOf(video)) { lastSampleSec = null; return; }
+    const wall = (now - lastSampleAt) / 1000;
+    const moved = lastSampleSec == null ? null : at - lastSampleSec;
+    lastSampleAt = now;
+    const prev = lastSampleSec;
+    lastSampleSec = at;
+    if (moved == null || wall <= 0 || wall > 5) return;   // first sample, or we were asleep
+
+    // Advancing at about playback speed: count it as watched.
+    if (moved > 0 && moved <= wall * 3) {
+      const kmto = kmToGoAt(at);
+      if (kmto != null) {
+        const bucket = String(Math.round(kmto));
+        SESSION.coverage[bucket] = +((SESSION.coverage[bucket] || 0) + moved).toFixed(2);
+        SESSION.sampled++;
+        sessionDirty = true;
+      }
+      return;
+    }
+    // Anything else is a jump. Backwards, or forwards faster than play allows.
+    if (Math.abs(moved) > Math.max(3, wall * 3)) {
+      if (SESSION.events.length < MAX_SESSION_EVENTS) {
+        SESSION.events.push({
+          at: new Date(now).toISOString(),
+          kind: moved > 0 ? "skip" : "rewind",
+          fromSec: +prev.toFixed(1), toSec: +at.toFixed(1),
+          fromKm: kmToGoAt(prev), toKm: kmToGoAt(at),
+        });
+      }
+      sessionDirty = true;
+    }
+  }
+
+  /** Km-to-go at a recording position, or null if the clock cannot say. */
+  function kmToGoAt(sec) {
+    const ms = videoToUtc(sec);
+    if (ms == null) return null;
+    const s = series();
+    if (!s.length) return null;
+    if (ms <= s[0].t || ms >= s[s.length - 1].t) return null;
+    let lo = 0, hi = s.length - 1;
+    while (hi - lo > 1) {
+      const mid = (lo + hi) >> 1;
+      if (s[mid].t <= ms) lo = mid; else hi = mid;
+    }
+    return +s[lo].kmto.toFixed(1);
+  }
+
+  async function sendSession(final) {
+    if (!SESSION_URL || !sessionDirty) return;
+    if (!Object.keys(SESSION.coverage).length && !SESSION.events.length) return;
+    sessionDirty = false;
+    const body = JSON.stringify({
+      schema: 1,
+      session_id: SESSION.id,
+      started: SESSION.started,
+      ended: new Date().toISOString(),
+      final: !!final,
+      stage: bundle?.stage?.stage ?? null,
+      date: bundle?.stage?.date ?? null,
+      site: SITE,
+      duration_sec: Math.round(spanOf(video) * 10) / 10,
+      coverage: SESSION.coverage,
+      events: SESSION.events,
+      extension_version: (() => {
+        try { return chrome.runtime.getManifest().version; } catch (_) { return null; }
+      })(),
+    });
+    try {
+      // keepalive so the last write survives the tab closing, which is exactly
+      // when a session is complete and most worth having.
+      await fetch(SESSION_URL, { method: "POST", keepalive: true,
+                                 headers: { "Content-Type": "application/json" }, body });
+    } catch (_) { sessionDirty = true; }
+  }
 
   let adBreaks = [];
 
@@ -1794,10 +1907,19 @@ watch.">Add reading</button>
       // Markers only exist in the DOM while the player's own bar is up, and
       // it comes and goes with the mouse -- so this keeps looking rather than
       // checking once at load and concluding there are none.
+      sampleWatching();
       refreshAdBreaks();
       render();          // unconditional: the profile draws with or without video
     }, 500);
     window.addEventListener("resize", render);
+
+    // Send periodically so a crashed tab still yields most of the session, and
+    // once more when the page goes away.
+    setInterval(() => sendSession(false), 120000);
+    window.addEventListener("pagehide", () => sendSession(true));
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") sendSession(true);
+    });
 
     installChrome();
   }
