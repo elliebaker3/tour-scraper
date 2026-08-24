@@ -135,22 +135,25 @@ def backfill_stage(cfg: Config, session, stage_no: int) -> None:
             print(f"[backfill] stage {stage_no}: {name} FAILED {exc}")
         time.sleep(DELAY_SECONDS)
 
-    if not pages:
-        print(f"[backfill] stage {stage_no}: nothing fetched, skipping")
-        return
-
+    # PCS and the official site are independent sources -- one being down
+    # (PCS 403'd outright during this session's Vuelta testing) shouldn't
+    # also skip the other, which used to happen because both were gated
+    # behind PCS having returned at least one page.
     date = None
     for html in pages.values():
         date = parse_stage_date(html, cfg.year)
         if date:
             break
     store = StageStore(cfg.year_dir, stage_no, date)
-    raw_dir = store.dir / "backfill" / "pcs"
-    raw_dir.mkdir(parents=True, exist_ok=True)
-    for name, html in pages.items():
-        (raw_dir / f"{name}.html").write_text(html, encoding="utf-8")
 
-    _parse_saved(store, stage_no)
+    if pages:
+        raw_dir = store.dir / "backfill" / "pcs"
+        raw_dir.mkdir(parents=True, exist_ok=True)
+        for name, html in pages.items():
+            (raw_dir / f"{name}.html").write_text(html, encoding="utf-8")
+        _parse_saved(store, stage_no)
+    else:
+        print(f"[backfill] stage {stage_no}: no PCS pages fetched")
 
     # Best-effort official stage-review page (raw only; the markup changes
     # too often to promise a parser). site_base_url so this follows whichever
