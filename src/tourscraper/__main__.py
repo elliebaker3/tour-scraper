@@ -10,6 +10,8 @@
   python -m tourscraper har capture.har        # discover endpoints from a HAR
   python -m tourscraper autodiscover           # same discovery, headless, no browser needed
   python -m tourscraper reparse data/2026/stage-14_2026-07-18
+  python -m tourscraper vuelta-komoot-profiles # Vuelta route/elevation, via komoot
+  python -m tourscraper startlist --stage 1    # per-rider departure/intermediate/arrival (ITT stages)
 """
 
 from __future__ import annotations
@@ -23,6 +25,9 @@ from .archive_stage import archive_stage
 from .navigator.build_bundle import build as build_navigator
 from .navigator.velowire_profile import build as build_velowire_profiles
 from .navigator.velowire_profile import publish_lite_bundles
+from .navigator.komoot_profile import build as build_komoot_profiles
+from .navigator.komoot_profile import publish_lite_bundles as publish_komoot_bundles
+from .navigator.startlist_scrape import run_loop as run_startlist_loop
 from .autodiscover import run_autodiscover
 from .backfill import reparse_backfill, run_backfill
 from .events_parse import write_events
@@ -117,6 +122,20 @@ def main() -> None:
 
     sub.add_parser("velowire-profiles")
 
+    p = sub.add_parser("vuelta-komoot-profiles")
+    p.add_argument("--out", default="data/vuelta/2026", help="output dir (default data/vuelta/2026)")
+    p.add_argument("--max-stage", type=int, default=21)
+    p.add_argument("--refresh", action="store_true",
+                   help="re-scrape lavuelta.es for tour ids instead of using the cached reference file")
+
+    p = sub.add_parser("startlist",
+                       help="scrape the racecenter's per-rider departure/intermediate/arrival "
+                            "table (headless browser) -- for stages with an individual start, "
+                            "e.g. an ITT, where there's no clean JSON endpoint for it")
+    p.add_argument("--stage", type=int, required=True)
+    p.add_argument("--max-hours", type=float, default=4.0)
+    p.add_argument("--interval-seconds", type=float, default=120)
+
     args = parser.parse_args()
     cfg = load_config(args.config)
 
@@ -146,7 +165,9 @@ def main() -> None:
             tele.extend(Path(h) for h in hits) if hits else tele.append(Path(pat).expanduser())
         build_navigator(Path(args.stage_dir), tele,
                         cfg.year_dir, args.stage,
-                        Path(args.out) if args.out else None)
+                        Path(args.out) if args.out else None,
+                        racecenter_base=cfg.base_url.rstrip("/") + "/api",
+                        site_base=cfg.site_base_url)
     elif args.command == "archive":
         archive_stage(cfg, args.stage, args.date)
     elif args.command == "velowire-profiles":
@@ -154,6 +175,15 @@ def main() -> None:
         publish_lite_bundles(cfg.year_dir / "profiles" / "velowire",
                              cfg.year_dir.parent.parent / "extension" / "data",
                              gpx_dir=cfg.year_dir / "gpx")
+    elif args.command == "vuelta-komoot-profiles":
+        build_komoot_profiles(Path(args.out), max_stage=args.max_stage, refresh=args.refresh)
+        repo_root = Path(__file__).resolve().parents[2]
+        publish_komoot_bundles(Path(args.out) / "profiles" / "komoot",
+                               repo_root / "extension" / "data")
+    elif args.command == "startlist":
+        store = StageStore(cfg.year_dir, args.stage)
+        run_startlist_loop(cfg.base_url, store.dir, args.max_hours * 3600,
+                           interval_seconds=args.interval_seconds)
     else:
         store_needed = args.command in ("live", "poll", "radio")
         stop_after = int(args.max_hours * 3600)

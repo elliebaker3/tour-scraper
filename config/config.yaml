@@ -2,6 +2,9 @@
 # src/tourscraper/config.py.
 
 base_url: "https://racecenter.letour.fr"
+# Main public site -- persons_of_interest.py reads the points classification
+# from here, since racecenter doesn't expose it cleanly.
+site_base_url: "https://www.letour.fr"
 year: 2026
 data_dir: "data"
 

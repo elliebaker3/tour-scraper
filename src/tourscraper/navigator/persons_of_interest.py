@@ -34,8 +34,12 @@ from pathlib import Path
 
 import requests
 
-RACECENTER = "https://racecenter.letour.fr/api"
-LETOUR = "https://www.letour.fr"
+# Defaults are the Tour's; every fetch function below takes the racecenter/
+# site base URLs as parameters so a different race (different config.yaml)
+# can pass its own without touching this module -- see config.py's
+# `base_url`/`site_base_url` and build_bundle.py's `_persons_of_interest`.
+DEFAULT_RACECENTER = "https://racecenter.letour.fr/api"
+DEFAULT_SITE = "https://www.letour.fr"
 _HEADERS = {"User-Agent": "Mozilla/5.0 (tour-scraper persons-of-interest)"}
 _TIMEOUT = 20
 
@@ -81,9 +85,9 @@ def _get(url: str):
     return requests.get(url, headers=_HEADERS, timeout=_TIMEOUT)
 
 
-def fetch_gc_order(prev_stage: int, year: int) -> list[int]:
+def fetch_gc_order(prev_stage: int, year: int, racecenter: str = DEFAULT_RACECENTER) -> list[int]:
     """Full general-classification order (bibs) after `prev_stage`."""
-    data = _get(f"{RACECENTER}/rankingTypeArrival-{year}-{prev_stage}").json()
+    data = _get(f"{racecenter}/rankingTypeArrival-{year}-{prev_stage}").json()
     for block in data:
         if block.get("type") == "itg":                    # individual time, general
             ranked = sorted(block.get("rankings", []),
@@ -92,9 +96,9 @@ def fetch_gc_order(prev_stage: int, year: int) -> list[int]:
     return []
 
 
-def fetch_points_slugs(prev_stage: int, year: int) -> list[str]:
-    """Points-classification order as rider slugs, from letour.fr."""
-    page = _get(f"{LETOUR}/en/rankings/stage-{prev_stage}").text
+def fetch_points_slugs(prev_stage: int, year: int, site: str = DEFAULT_SITE) -> list[str]:
+    """Points-classification order as rider slugs, from the organiser's site."""
+    page = _get(f"{site}/en/rankings/stage-{prev_stage}").text
     m = re.search(r"data-ajax-stack\s*=\s*(\{.*?\})", page)
     if not m:
         return []
@@ -102,7 +106,7 @@ def fetch_points_slugs(prev_stage: int, year: int) -> list[str]:
     ipg = stack.get("ipg")
     if not ipg:
         return []
-    body = _get(LETOUR + ipg).text
+    body = _get(site + ipg).text
     slugs, seen = [], set()
     for slug in re.findall(r"/en/rider/\d+/[^\"/]+/([a-z0-9\-]+)", body):
         if slug not in seen:
@@ -135,8 +139,16 @@ def _poi(riders: dict, bib: int, jersey: str, position: int) -> dict:
             "jersey": jersey, "position": position}
 
 
-def build(stage: int, year: int, year_dir: Path) -> dict:
-    """Persons of interest for `stage`, from the standings entering it."""
+def build(stage: int, year: int, year_dir: Path,
+          racecenter: str = DEFAULT_RACECENTER, site: str = DEFAULT_SITE) -> dict:
+    """Persons of interest for `stage`, from the standings entering it.
+
+    `yellow`/`green`/`white` are the jersey ROLES this module tracks (GC
+    leader / points leader / best young rider) -- an internal label carried
+    over from the Tour, not a claim about which colour a race actually
+    awards them in (the Vuelta's leader jersey is red, for instance). See
+    JERSEY_NAME for the human-readable name of each role.
+    """
     prev = stage - 1
     riders = load_rider_index(year_dir)
     out = {"stage": stage, "standings_after_stage": prev,
@@ -145,7 +157,7 @@ def build(stage: int, year: int, year_dir: Path) -> dict:
         out["note"] = "no standings before stage 1"
         return out
 
-    gc = fetch_gc_order(prev, year)
+    gc = fetch_gc_order(prev, year, racecenter)
     out["yellow"] = [_poi(riders, b, "yellow", i + 1) for i, b in enumerate(gc[:10])]
 
     cutoff = year - 25                                     # young-rider birth-year floor
@@ -154,7 +166,7 @@ def build(stage: int, year: int, year_dir: Path) -> dict:
     out["white"] = [_poi(riders, b, "white", i + 1) for i, b in enumerate(young[:5])]
 
     green: list[int] = []
-    for slug in fetch_points_slugs(prev, year):
+    for slug in fetch_points_slugs(prev, year, site):
         b = _match_slug(slug, riders)
         if b and b not in green:
             green.append(b)

@@ -53,6 +53,10 @@ check("the extension's own payload validates", validate(good()) === null,
 console.log("\n--- rejects malformed / hostile input ---");
 rejects("stage out of range", (r) => { r.stage = 99; }, "stage");
 rejects("stage not an integer", (r) => { r.stage = "19"; }, "stage");
+rejects("unknown race", (r) => { r.race = "giro"; }, "race");
+check("vuelta race accepted", validate({ ...good(), race: "vuelta" }) === null);
+check("explicit tdf race accepted", validate({ ...good(), race: "tdf" }) === null);
+check("omitted race accepted (defaults to the Tour)", validate(good()) === null);
 rejects("site with a path traversal", (r) => { r.site = "evil.com/../../etc"; }, "site");
 rejects("site with a space", (r) => { r.site = "not a host"; }, "site");
 rejects("loopback host (a test harness)", (r) => { r.site = "127.0.0.1"; }, "local test host");
@@ -109,6 +113,13 @@ check("ad breaks kept, deduped and sorted",
 check("no IP-derived field is stored at all",
       !("submitter" in c) && !JSON.stringify(c).includes("203.0.113.9"));
 check("ingested_at stamped", typeof c.ingested_at === "string" && c.ingested_at.length > 10);
+
+console.log("\n--- race field: omitted/tdf stay omitted, anything else is kept ---");
+check("no race field -> not stored (stays the Tour's un-prefixed key)",
+      !("race" in clean(good(), "")));
+check("explicit tdf -> not stored either, same reason",
+      !("race" in clean({ ...good(), race: "tdf" }, "")));
+check("vuelta -> stored", clean({ ...good(), race: "vuelta" }, "").race === "vuelta");
 
 const longVer = good();
 longVer.extension_version = "x".repeat(500);

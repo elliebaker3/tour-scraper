@@ -20,6 +20,161 @@ Everything on the SSE stream is *also* written verbatim to
 2026, you lose nothing on capture day — fix the parser later and run
 `reparse`.
 
+## La Vuelta a España
+
+Confirmed 2026-08-22 (stage 1 day): `racecenter.lavuelta.es` is the **same
+racecenter platform** as the Tour's `racecenter.letour.fr` -- identical
+endpoint paths, identical JSON shapes, identical SSE bind-name convention,
+even the same `img.aso.fr` asset CDN in the riders/teams payloads. So rather
+than a separate scraper, the Vuelta is just this repo's existing pipeline
+pointed at a different `base_url`, with everything written under a separate
+`data/vuelta/` tree (`config/config-vuelta.yaml`'s `data_dir`) so a capture
+can never collide with a Tour one in `data/2026`:
+
+```bash
+python -m tourscraper --config config/config-vuelta.yaml probe        # confirm the endpoints still match
+python -m tourscraper --config config/config-vuelta.yaml bootstrap    # riders/teams/stages -> data/vuelta/2026/reference/
+python -m tourscraper --config config/config-vuelta.yaml autodiscover # radio URL + profile CSV, same as the Tour
+python -m tourscraper --config config/config-vuelta.yaml stage --stage 14 --max-hours 6
+```
+
+Every other command (`live`, `poll`, `radio`, `har`, `reparse`, `archive`,
+`navigator`, `backfill`...) takes the same `--config` flag. GitHub Actions
+parity is `scrape-stage-vuelta.yml` (all 21 stages' discover/scrape crons,
+computed from each stage's real `startTime`/`endTime` in
+`data/vuelta/2026/reference/stages.json`) alongside the Tour's
+`scrape-stage.yml`; both call the same shared `scrape-chunk.yml`, now taking
+an optional `config:` input.
+
+One real difference so far: **stage 1 (2026-08-22, Monaco) is an individual
+time trial** (`"type": "itt"` in stages.json) -- nothing like it appears on
+the Tour side of this repo. Two extra sources cover it:
+
+- `config-vuelta.yaml` polls `rankingType-{year}-{stage}`, carrying per-bib
+  `{position, absolute, relative}` at each checkpoint the field has reached
+  (confirmed live: entries carry a `checkpoint` number that advances as the
+  stage runs) -- the same "record everything raw" poll pattern as every
+  other endpoint here.
+- **Per-rider departure time has no JSON endpoint at all** -- confirmed by
+  capturing every network response (JSON and otherwise) a real page load
+  makes. The racecenter page renders it anyway: a `q-table` with one row per
+  rider (start order, name, bib, team, departure time, intermediate-point
+  split, arrival split), computed client-side as
+  `stage.startTime + (start_order - 1) x 60s` -- `start_order` itself isn't
+  in `allCompetitors-{year}` either, so the rendered table is the only place
+  this exists. `startlist_scrape.py` reads it with a real headless browser
+  (Playwright, already a dependency) rather than reverse-engineering the
+  client-side computation:
+
+  ```bash
+  python -m tourscraper --config config/config-vuelta.yaml startlist --stage 1
+  ```
+
+  Snapshots the full table every `--interval-seconds` (default 120) into
+  `<stage-dir>/startlist.jsonl` -- one line per snapshot, since intermediate/
+  arrival cells fill in live as the stage runs and a single scrape only ever
+  sees whatever had finished by that moment. Not wired into `stage`'s three
+  concurrent threads (live/poll/radio): unlike those, this needs a browser,
+  so it's a separate process run alongside it for stages that need it.
+
+**Radio has no static shortcut here.** The Tour's `radio_stream_url` comes
+from `/api/event`'s `extras.radioUrl`; the Vuelta's `/api/event` carried no
+such field as of 2026-08-22, and `autodiscover` found no confident candidate
+either. `radio_stream_url` stays blank in `config-vuelta.yaml` until one
+turns up -- everything else works unaffected (`record_radio` no-ops with
+nothing configured).
+
+**Event classification and persons-of-interest tagging work unchanged.**
+`extract_events.py` (crash/breakaway/scenic/history classification + the
+intensity curve) and `events_parse.py` read only captured
+`polls/publication.jsonl` -- no host baked in -- so they needed nothing.
+Verified against real stage 1 commentary: 70 ticker items parsed, correctly
+classified (15 history, 2 stat, 2 crash -- the crash hits are pre-race
+biographical text mentioning a rider's past crashes, the same class of false
+positive this classifier already produces on the Tour's side, not a Vuelta-
+specific issue). Zero breakaway events, correctly, since stage 1 is an ITT --
+there's no group to attack out of or get caught by.
+
+`persons_of_interest.py` (GC/points/young-rider contenders, and the
+POI x event tags on crash/breakaway markers) DID have the Tour's URLs
+hardcoded -- `racecenter.letour.fr` for the GC standings,
+`www.letour.fr/en/rankings/stage-N` for the points classification page. Both
+now come from `cfg.base_url`/`cfg.site_base_url` (`build()`,
+`fetch_gc_order()`, `fetch_points_slugs()` all take them as parameters,
+defaulting to the Tour's own values so nothing about the Tour's behaviour
+changed). Confirmed live against the Vuelta: `rankingTypeArrival-2026-1`
+carries the same `itg` (GC) type code, and `lavuelta.es/en/rankings/stage-1`
+embeds the same `data-ajax-stack` (`ipg` = points) the parser already reads.
+Fetching persons-of-interest for stage 2 (standings after stage 1) returned
+real data -- Pogačar leading GC, both the points and young-rider lists
+populated. The `yellow`/`green`/`white` field names are jersey ROLES carried
+over from the Tour's implementation, not literal colours -- the Vuelta's
+leader jersey is red, but the role is still "GC leader" underneath (see
+`JERSEY_NAME` for the human-readable label); left alone since nothing
+currently renders the raw key as a colour.
+
+`backfill.py`'s ProCyclingStats slug (`race/tour-de-france`) and its
+official-site stage-review fetch (`letour.fr/en/stage-N`) were also
+hardcoded; now `cfg.pcs_race_slug` and `cfg.site_base_url`
+(`config-vuelta.yaml` sets `pcs_race_slug: "race/vuelta-a-espana"`, PCS's
+standard slug convention, though NOT independently confirmed live -- PCS
+403'd every request during this session's testing, including the Tour's own
+already-working slug with a full browser UA, which looks like a general
+bot-block rather than anything specific to this value). The saved directory
+is `backfill/official/` now (was `backfill/letour/`) since it's no longer
+Tour-specific.
+
+**Elevation/route also has its own, separate source here** (not source 5's
+velowire KMZ, which is Tour-only): lavuelta.es embeds one komoot.com tour per
+stage (`<iframe data-src="…komoot.com/tour/<id>/embed?share_token=…">`,
+lazy-loaded so it sits in the page's raw HTML unchanged, no headless browser
+needed). komoot's own API serves the full route behind that id+token with no
+further auth -- a dense real-survey trace with elevation on every point, same
+shape as the Tour's GPX source (`gpx_profile.py`), just with no climb/sprint
+names.
+
+```bash
+python -m tourscraper vuelta-komoot-profiles
+```
+
+Scrapes all 21 `lavuelta.es/en/stage-N` pages for their komoot tour id +
+share token (cached to `reference/komoot-tours.json`; pass `--refresh` to
+re-scrape), downloads each route, and writes:
+
+```
+data/vuelta/2026/
+  gpx/stage-N.gpx                  full-resolution track, GPX 1.1
+  profiles/komoot/stage-NN.json    {profile: [{km, alt}], raw_km, length_km,
+                                    scale, elevation_up_m, elevation_down_m}
+  reference/komoot-tours.json      stage -> {tour_id, share_token, url}
+  reference/komoot-stages.json     stage -> {name, length_km, elevation_up_m/down_m}
+```
+
+Deliberately NOT `reference/stages.json` -- that filename means `bootstrap`'s
+own output (ASO's authoritative stage metadata) everywhere else in this repo,
+Tour or Vuelta, and the two pipelines would otherwise silently overwrite each
+other's file there.
+
+`length_km` is rescaled from komoot's own reported distance, same rule as
+`gpx_profile.profile_from_track` — flagged via `note` rather than silently
+squeezed if a stage's traced route disagrees with it by more than 5 km.
+
+### Crowdsourced calibration, race-scoped
+
+The Tour and the Vuelta both run 21 stages in 2026, so "stage 14" alone isn't
+a unique key once two races share a year -- see `extension/navigator.js`'s
+`stageKey()`/`raceStageKey()` and `worker/src/index.js`'s `KNOWN_RACES`. A
+Vuelta bundle is tagged `race: "vuelta"` in `extension/data/index.json`
+(`vuelta-profile-stage-NN.json`, published by `vuelta-komoot-profiles`); a
+calibration recorded against one carries `race: "vuelta"` too, both locally
+(`chrome.storage.local`, key `tnCal:v1:{year}|stage-vuelta-N|{site}`) and in
+the shared store (`extension/data/calibrations.json`, key
+`stage-vuelta-N|{site}`). Tour calibrations are completely unaffected: no
+`race` field, or `race: "tdf"`, both mean exactly what an un-prefixed
+`stage-N` key has always meant, so every calibration recorded before this
+existed -- local or in the already-published shared store -- keeps resolving
+exactly as it did.
+
 ## Data layout
 
 ```
@@ -126,8 +281,9 @@ python -m tourscraper backfill --stages 1-12
 
 Per stage this archives (raw HTML under `backfill/pcs/`) the livestats
 timeline, race-events, breakaway-gap evolution, virtual GC, during-race
-weather, and the result page, plus the official letour.fr stage page under
-`backfill/letour/`, and parses the timelines into `events.pcs.jsonl` with
+weather, and the result page, plus the organiser's own stage page (letour.fr
+for the Tour, lavuelta.es for the Vuelta -- see `site_base_url`) under
+`backfill/official/`, and parses the timelines into `events.pcs.jsonl` with
 markers classified per PCS's legend (P=preview, 27m=27 min to start,
 -3.2=neutralized zone, 171=171 km to finish, F=post-finish).
 

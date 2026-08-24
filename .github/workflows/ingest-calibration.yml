@@ -56,6 +56,11 @@ jobs:
               print(f"::error::{msg}"); sys.exit(1)
           if not isinstance(rec.get("stage"), int) or not (1 <= rec["stage"] <= 21):
               fail("stage must be an int 1-21")
+          # Both races run 21 stages; omitted (or "tdf") means the Tour, same
+          # as the collector Worker's KNOWN_RACES check -- see its comment.
+          race = rec.get("race")
+          if race is not None and race not in ("tdf", "vuelta"):
+              fail("race must be one of: tdf, vuelta")
           site = rec.get("site")
           if not isinstance(site, str) or not re.fullmatch(r"[a-z0-9.-]{4,64}", site):
               fail("site must be a plain hostname")
@@ -96,6 +101,10 @@ jobs:
           clean = {
               "schema": 1,
               "stage": rec["stage"],
+              # Only stored for a non-Tour race, matching the Worker's clean()
+              # -- an omitted field keeps meaning "the Tour" for every existing
+              # entry and every older extension version's submissions.
+              **({"race": race} if race and race != "tdf" else {}),
               "date": rec.get("date"),
               "site": site,
               "duration_sec": round(float(dur), 1),
@@ -112,7 +121,9 @@ jobs:
 
           path = "extension/data/calibrations.json"
           store = json.load(open(path))
-          key = f"stage-{clean['stage']}|{site}"
+          # Matches navigator.js's stageKey() / the Worker's merge() exactly.
+          race_prefix = f"{race}-" if race and race != "tdf" else ""
+          key = f"stage-{race_prefix}{clean['stage']}|{site}"
           lst = store.setdefault("recordings", {}).setdefault(key, [])
           for i, existing in enumerate(lst):
               if abs(existing.get("duration_sec", 0) - clean["duration_sec"]) <= TOL:

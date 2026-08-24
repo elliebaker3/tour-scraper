@@ -186,13 +186,19 @@ def route_markers(sync_points: list[dict]) -> list[dict]:
     return dedup
 
 
-def _persons_of_interest(stage_number, year, year_dir, guideposts, markers):
+def _persons_of_interest(stage_number, year, year_dir, guideposts, markers,
+                         racecenter=None, site=None):
     """Contenders per jersey + POI x event markers. Best-effort: this reaches
-    the network (race API + letour.fr), so a failure degrades to empty rather
-    than breaking the whole bundle."""
+    the network (race API + the organiser's site), so a failure degrades to
+    empty rather than breaking the whole bundle."""
     try:
         from . import persons_of_interest as poi_mod
-        poi = poi_mod.build(stage_number, year, year_dir)
+        kwargs = {}
+        if racecenter:
+            kwargs["racecenter"] = racecenter
+        if site:
+            kwargs["site"] = site
+        poi = poi_mod.build(stage_number, year, year_dir, **kwargs)
         specials = poi_mod.special_markers(guideposts, markers, poi)
         return poi, specials, None
     except Exception as e:                                   # network/parse/etc
@@ -201,7 +207,8 @@ def _persons_of_interest(stage_number, year, year_dir, guideposts, markers):
 
 def build(stage_dir: Path, telemetry_paths, year_dir: Path,
           stage_number: int, out_path: Path | None = None,
-          fetch_poi: bool = True) -> Path:
+          fetch_poi: bool = True, racecenter_base: str | None = None,
+          site_base: str | None = None) -> Path:
     meta = stage_meta(year_dir, stage_number)
     length_km = float(meta.get("length_km") or 0) or None
     if not length_km:
@@ -245,7 +252,8 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
 
     year = int(year_dir.name) if year_dir.name.isdigit() else int(str(meta.get("date"))[:4])
     poi, specials, poi_err = (
-        _persons_of_interest(stage_number, year, year_dir, events["guideposts"], markers)
+        _persons_of_interest(stage_number, year, year_dir, events["guideposts"], markers,
+                             racecenter=racecenter_base, site=site_base)
         if fetch_poi else (None, [], "skipped"))
 
     bundle = {

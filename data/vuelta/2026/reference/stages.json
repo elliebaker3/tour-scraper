@@ -1,0 +1,1873 @@
+[
+  {
+    "endTime": "17:30:00",
+    "showGroups": true,
+    "startTime": "13:21:00",
+    "stage": 3,
+    "length": 174,
+    "lengthDisplay": 174,
+    "hasCoordinates": true,
+    "arrivalCity": {
+      "label": "Font Romeu",
+      "cityLangs": [],
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e03-meta-font-romeu/27400/0:0,960:960-0-0-70/f25a2",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Situada a 1.800 metros de altitud, en el corazón de los Pirineos catalanes, Font-Romeu-Odeillo-Via es una zona reconocida por su oferta para el entrenamiento y la práctica deportiva. En torno al Centro Nacional de Entrenamiento en Altitud, su territorio ofrece un entorno privilegiado para el ciclismo de carretera, la bicicleta de montaña y el gravel, entre puertos de montaña, pistas forestales e instalaciones específicas. Tras el paso del pelotón en 2021, Font-Romeu acogerá en 2026 la primera llegada de La Vuelta de su historia.<br />\n<br />\nPrimera meta de La Vuelta<br />\n2.200 habitantes.<br />\nDepartamento de los Pirineos Orientales<br />\n<a href=\"https://font-romeu.fr/\" target=\"_blank\">https://font-romeu.fr/</a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Situated at an altitude of 1,800 metres in the heart of the Catalan Pyrenees, Font-Romeu-Odeillo-Via is a renowned destination for training and sporting activities. Centred around the National High-Altitude Training Centre, the area offers an ideal setting for road cycling, mountain biking and gravel cycling, with mountain passes, forest tracks and dedicated facilities. Following the peloton’s visit in 2021, Font-Romeu will host the first-ever finish of La Vuelta in its history in 2026.<br />\n<br />\nFirst stage finish of La Vuelta.<br />\nPopulation: 2,200.<br />\nPyrénées-Orientales department.<br />\n<a href=\"https://font-romeu.fr/\" target=\"_blank\">https://font-romeu.fr/</a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "Située à 1 800 mètres d’altitude au cœur des Pyrénées catalanes, Font-Romeu-Odeillo-Via est une terre d’entraînement et de pratiques sportives reconnue. Autour du Centre national d’entraînement en altitude, son territoire offre un terrain privilégié pour le vélo de route, le VTT et le Gravel, entre cols de montagne, pistes forestières et équipements dédiés. Après le passage du peloton en 2021, Font-Romeu accueillera en 2026 la Première arrivée de La Vuelta.<br />\n<br />\nPremière arrivée de La Vuelta de son histoire.<br />\n2200 habitants.<br />\nDépartement des Pyrénées-Orientales<br />\n<a href=\"https://font-romeu.fr/\" target=\"_blank\">https://font-romeu.fr/</a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "code": "font-romeu",
+      "id": 29688
+    },
+    "departureCity": {
+      "createdAt": "2026-03-09T14:42:41+01:00",
+      "cityLangs": [],
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "content": {
+        "texts": [
+          {
+            "text": [
+              "Curiosamente, Gruissan se estrenó antes como sede de etapa de La Vuelta que del Tour de Francia. Fue en 2017, cuando acogió la meta de la segunda jornada, que partió de Nimes. Más adelante, en 2024, hizo su debut como salida de la etapa 16 de la ronda francesa. De marcado carácter marítimo, en esta localidad francesa destaca su castillo, que sirve como centro de las calles concéntricas que lo rodean, creando su característica forma en espiral.<br />\n<br />\nGruissan ha acogido una llegada de La Vuelta.<br />\n5.068 habitantes.<br />\nDepartamento del Aude.<br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "Interestingly, Gruissan made its debut as a host location for La Vuelta before it did so for the Tour de France. In 2017, it hosted the finish-line for the second stage, that departed from Nimes. Later, in 2024, it made its debut hosting a stage departure in Stage 16 of the French Tour. This French locality, with its distinctly maritime character, stands out for its castle, which acts as the centre of the concentric streets that surround it, creating its characteristic spiral outline.<br />\n<br />\nGruissan has already hosted a La Vuelta finish-line once before.<br />\n5,068 inhabitants.<br />\nDepartment of Aude.<br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Il est intéressant de noter que Gruissan a accueilli une étape de La Vuelta avant d’en accueillir une du Tour de France. C'était en 2017, avec l'arrivée de la deuxième journée, dont le départ avait été donné à Nîmes. Plus tard, en 2024, elle a fait ses débuts en tant que départ de la 16e étape de l’épreuve française. Cette ville au caractère maritime marqué se distingue par son château, qui constitue le centre des rues concentriques qui l'entourent, ce qui lui confère sa forme caractéristique en spirale.<br />\n<br />\nGruissan a accueilli une arrivée de La Vuelta.<br />\n5 068 habitants.<br />\nDépartement de l’Aude.<br />\n"
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e03-salida-gruissan/27403/0:0,960:960-0-0-70/f8caa"
+      },
+      "label": "Gruissan - Aude",
+      "createdBy": "eBlancardi",
+      "code": "gruissan-aude",
+      "updatedBy": "eBlancardi",
+      "updatedAt": "2026-03-09T14:42:41+01:00",
+      "id": 32871
+    },
+    "type": "MMG",
+    "timezone": "Europe/Paris",
+    "date": "2026-08-24T00:00:00+02:00",
+    "id": 25099,
+    "isCancelled": false,
+    "podiumDisplayMode": "instantpodium",
+    "_id": "362a3d3d77c8b9f6d2a49f13301476938da7ac66d389c92bb62fc45988f93186",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1787144820194,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae",
+    "_key": "stage"
+  },
+  {
+    "timezone": "Europe/Madrid",
+    "length": 171,
+    "hasCoordinates": true,
+    "stage": 8,
+    "lengthDisplay": 171,
+    "type": "PLN",
+    "showGroups": true,
+    "podiumDisplayMode": "instantpodium",
+    "date": "2026-08-29T00:00:00+02:00",
+    "arrivalCity": {
+      "id": 31014,
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e08-salida-puerto-de-sagunto/27398/0:0,960:960-0-0-70/c6e68",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              " Xeraco es mucho más que su amplia playa de arena fina y aguas tranquilas, un lugar que cada verano reúne a familias en busca de sol, mar y calma. El municipio combina a la perfección litoral y montaña: hacia el interior, senderos como el PRV-183 permiten descubrir miradores, parajes frondosos y rincones silenciosos. En la desembocadura del río Vaca, la actividad se mezcla con la naturaleza entre pesca y deportes acuáticos. Su marjal, su gastronomía y la vida cultural del Centro Cívico completan un destino mediterráneo que invita a desconectar sin prisas.<br />\n<br />\nSede inédita de La Vuelta.<br />\n6.044 habitantes.<br />\nProvincia de Valencia. <br />\n<a href=\"https://www.xeraco.eu\" target=\"_blank\">xeraco.eu</a> / <a href=\"https://www.dival.es\" target=\"_blank\">dival.es</a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              " Xeraco is much more than its vast fine sandy beach and calm waters, a place that brings families together each summer in search of sun, sea and relaxation. The municipality combines the coast and the mountains perfectly: inland, trails such as the PRV-183 allow visitors to discover lookouts, lush landscapes and quiet corners. At the mouth of the Vaca River, activity and nature come together through fishing and water sports. Its marshland, its gastronomy and the cultural life of its Civic Centre complete this Mediterranean destination that invites its visitors to disconnect at their leisure.<br />\n<br />\nUnprecedented La Vuelta finish-line.<br />\n6,044 inhabitants.<br />\nProvince of Valencia.<br />\n<a href=\"https://www.xeraco.eu\" target=\"_blank\">xeraco.eu</a> / <a href=\"https://www.dival.es\" target=\"_blank\">dival.es</a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "Xeraco est bien plus qu'une vaste plage de sable fin aux eaux paisibles, un lieu qui rassemble chaque été des familles en quête de soleil, de mer et de tranquillité. La commune réunit à la perfection côte et montagne : vers l'intérieur des terres, des sentiers comme le PRV-183 permettent de découvrir des belvédères, des paysages verdoyants et des îlots de silence. À l'embouchure de la rivière Vaca, la pêche et les sports nautiques se déroulent au contact de la nature. Ses marais, sa gastronomie et la vie culturelle du Centre civique font de cette destination méditerranéenne un lieu propice à la détente et à la déconnexion.<br />\n<br />\nArrivée inédite de La Vuelta.<br />\n6 044 habitants.<br />\nProvince de Valence.<br />\n<br />\n<br />\n<a href=\"https://www.xeraco.eu\" target=\"_blank\">xeraco.eu</a> / <a href=\"https://www.dival.es\" target=\"_blank\">dival.es</a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "label": "Xeraco",
+      "cityLangs": [],
+      "code": "xeraco"
+    },
+    "departureCity": {
+      "createdBy": "Clerat",
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "createdAt": "2025-12-15T11:15:42+01:00",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e08-salida-pucol/27406/0:0,960:960-0-0-70/517ff",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Puçol combina la esencia mediterránea con un valioso patrimonio natural y urbano. Su casco histórico conserva casas tradicionales, retablos cerámicos y monumentos como la Iglesia de los Santos Juanes o la antigua torre vigía de la Torreta. En las afueras, el Molino de Viento y el Paraje Natural Municipal La Costera ofrecen vistas únicas. Hacia la costa, el Marjal dels Moros y la playa de Puçol completan una escapada llena de naturaleza y tradición.<br />\n<br />\nSede inédita de La Vuelta.<br />\n21.298 habitantes.<br />\nProvincia de Valencia.<br />\n<a href=\"https://www.pucol.es\" target=\"_blank\">pucol.es</a> / <a href=\"https://www.dival.es\" target=\"_blank\">dival.es</a><br />\n"
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "Puçol combines a Mediterranean essence with a valuable natural and urban heritage. Its historical centre preserves traditional houses, ceramic altarpieces and monuments such as the Church of the Santos Juanes (or Saint Johns) and the ancient Torreta watchtower. Its windmill and La Costera Municipal Natural Area, located in the municipality’s outskirts, offer unique views. Heading towards the coastline, the Moros Marshland and Puçol Beach complete a getaway filled with nature and tradition.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n21,298 inhabitants.<br />\nProvince of Valencia.<br />\n<br />\n<br />\n<a href=\"https://www.pucol.es\" target=\"_blank\">pucol.es</a> / <a href=\"https://www.dival.es\" target=\"_blank\">dival.es</a><br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "À Puçol, l'essence méditerranéenne se conjugue avec un patrimoine naturel et urbain de grande valeur. Son centre historique conserve des maisons traditionnelles, des retables en céramique et des monuments tels que l'église des Saints Jeans ou l'ancienne tour de guet de la Torreta. À la périphérie, le moulin à vent et le site naturel municipal La Costera offrent des vues uniques. Côté littoral, le marais du Marjal dels Moros et la plage de Puçol complètent une escapade placée sous le signe de la nature et de la tradition.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n21 298 habitants.<br />\nProvince de Valence.<br />\n<br />\n<br />\n<a href=\"https://www.pucol.es\" target=\"_blank\">pucol.es</a> / <a href=\"https://www.dival.es\" target=\"_blank\">dival.es</a><br />\n"
+            ]
+          }
+        ]
+      },
+      "label": "Puçol",
+      "code": "pucol",
+      "cityLangs": [],
+      "updatedBy": "Clerat",
+      "updatedAt": "2025-12-15T11:15:42+01:00",
+      "id": 32848
+    },
+    "isCancelled": false,
+    "startTime": "13:42:00",
+    "endTime": "17:30:00",
+    "id": 25104,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "486e05f026f037b939f04d9a209de7ff9b5758a0262e30ffad7471bf4c1e42f3",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "lengthDisplay": 193,
+    "stage": 13,
+    "timezone": "Europe/Madrid",
+    "length": 192.8,
+    "endTime": "17:30:00",
+    "id": 25111,
+    "hasCoordinates": true,
+    "type": "MMG",
+    "arrivalCity": {
+      "createdBy": "Clerat",
+      "label": "Loja",
+      "createdAt": "2025-12-15T12:30:20+01:00",
+      "id": 32857,
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "updatedAt": "2025-12-15T12:30:20+01:00",
+      "code": "loja",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e13-meta-loja/27422/0:0,960:960-0-0-70/78583",
+        "texts": [
+          {
+            "text": [
+              "Loja combina historia, arquitectura y naturaleza en un mismo recorrido. Su Alcazaba y el Alcázar recuerdan su pasado nazarí, mientras que palacios, iglesias y miradores muestran la evolución de la ciudad con el tiempo. El agua es protagonista: fuentes, manantiales y espacios naturales como Los Infiernos del Genil dan carácter al entorno. Un destino que permite descubrir patrimonio y paisaje sin salir del casco urbano.<br />\n<br />\nLoja ha acogido una salida de La Vuelta y se estrena como meta de la carrera.<br />\n20.846 habitantes.<br />\nProvincia de Granada.<br />\n<a href=\"https://www.aytoloja.org\" target=\"_blank\" rel=\"noopener noreferrer\"> aytoloja.org </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "Loja combines history, architecture and nature along one itinerary. Its Alcazaba and the Alcázar evoke its Nasrid past, while its palaces, churches and lookouts show the city’s evolution over time. Water, however, is the true star: fountains, springs and natural areas such as Los Infiernos de Genil give the surroundings character. This destination allows visitors to discover both heritage and landscapes without leaving the urban centre.<br />\n<br />\nLoja has already hosted a La Vuelta stage departure once before and now makes its debut hosting a La Vuelta finish-line.<br />\n20,846 inhabitants.<br />\nProvince of Granada.<br />\n<a href=\"https://www.aytoloja.org\" target=\"_blank\" rel=\"noopener noreferrer\"> aytoloja.org </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "<br />\nLoja combine histoire, architecture et nature en un seul parcours. Sa forteresse et son palais fortifié évoquent son passé nasride, tandis que ses palais, ses églises et ses points de vue témoignent de l'évolution de la ville au fil du temps. L'eau y occupe une place centrale : fontaines, sources et espaces naturels tels que Los Infiernos del Genil donnent tout leur caractère à ses environs. Une destination qui permet d’admirer le patrimoine et les paysages sans quitter le noyau urbain.<br />\n<br />\nLoja a accueilli un départ de La Vuelta et fait ses débuts en tant qu’arrivée de la course.<br />\n20 846 habitants.<br />\nProvince de Grenade.<br />\n<a href=\"http://aytoloja.org/ayuntamiento/index.htm\">aytoloja.org</a> / <a href=\"https://www.dipgra.es/\">dipgra.es</a><br />\n<br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      }
+    },
+    "podiumDisplayMode": "instantpodium",
+    "isCancelled": false,
+    "startTime": "12:41:00",
+    "date": "2026-09-04T00:00:00+02:00",
+    "departureCity": {
+      "cityLangs": [],
+      "updatedBy": "Clerat",
+      "id": 32856,
+      "label": "Almuñécar",
+      "updatedAt": "2025-12-15T12:30:09+01:00",
+      "createdBy": "Clerat",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e13-salida-almunecar/27421/0:0,960:960-0-0-70/fe2de",
+        "texts": [
+          {
+            "text": [
+              "En Almuñécar, la historia aparece en cada cambio de calle: un acueducto romano que sorprende entre casas blancas, recuerdos fenicios a pocos pasos y el Castillo de San Miguel dominándolo todo desde lo alto. El mar completa el paisaje con playas amplias y calas resguardadas, perfectas para disfrutar del clima templado de la Costa Tropical. Un lugar que combina pasado, sabor y luz mediterránea en cada rincón.<br />\n<br />\nSede inédita de La Vuelta.<br />\n27.311 habitantes.<br />\nProvincia de Granada.<br />\n<a href=\"https://www.almunecar.es\" target=\"_blank\" rel=\"noopener noreferrer\"> almunecar.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "In Almuñecar, history is present in every street: a Roman aqueduct nestled among white houses, Phoenician remains just a few steps away and San Miguel Castle presiding over everything down below. The sea completes the landscape with vast beaches and sheltered coves, perfect for enjoying the Tropical Coast’s mild climate. It is a place that truly combines the Mediterranean past, flavour and light in every corner.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n27,311 inhabitants.<br />\nProvince of Granada.<br />\n<a href=\"https://www.almunecar.es\" target=\"_blank\" rel=\"noopener noreferrer\"> almunecar.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "À Almuñécar, l'histoire est présente au détour de chaque rue : un aqueduc romain surgit entre les maisons blanches, des vestiges phéniciens apparaissent à quelques pas et le château de San Miguel domine le tout depuis les hauteurs. La mer complète le paysage avec ses vastes plages et ses criques bien protégées, parfaites pour profiter du climat tempéré de la Costa Tropical. Un lieu qui regorge d'histoire, de saveurs et de lumière.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n27 311 habitants.<br />\nProvince de Grenade.<br />\n<a href=\"https://www.almunecar.es\" target=\"_blank\" rel=\"noopener noreferrer\"> almunecar.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ]
+          }
+        ]
+      },
+      "createdAt": "2025-12-15T12:30:09+01:00",
+      "code": "almunecar",
+      "country": {
+        "code": "esp",
+        "id": 1959
+      }
+    },
+    "showGroups": true,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "b89eb424b960625ae773a2255fb0cd01a8d97920e51427cfb572e761dba63422",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "podiumDisplayMode": "instantpodium",
+    "length": 185,
+    "hasCoordinates": true,
+    "showGroups": true,
+    "endTime": "17:30:00",
+    "departureCity": {
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e17-salida-dos-hermanas/27388/0:0,960:960-0-0-70/fafae",
+        "texts": [
+          {
+            "text": [
+              "Dos Hermanas combina tradición y energía contemporánea en un entorno lleno de vida. Su casco urbano reúne enclaves históricos como la Parroquia de Santa María Magdalena, junto a una oferta comercial y cultural muy activa. El deporte también tiene un papel destacado, con instalaciones como el velódromo municipal, uno de sus referentes. Entre parques, gastronomía y un calendario repleto de fiestas y eventos, la ciudad ofrece un ambiente cercano y auténtico.<br />\n<br />\nSede inédita de La Vuelta.<br />\n140.430 habitantes.<br />\nProvincia de Sevilla.<br />\n<a href=\"https://www.doshermanas.es\" target=\"_blank\" rel=\"noopener noreferrer\"> doshermanas.es </a><br />\n<a href=\"https://www.dipusevilla.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipusevilla.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "Dos Hermanas combines tradition and contemporary energy in a very lively setting. Its urban centre combines such historical places as the Parish Church of Santa María Magdalena (or Saint Mary Magdalene) with a very active commercial and cultural life. Sports also plays an important role, with installations like the municipal velodrome, one of its landmarks. Between parks, gastronomy and a jam-packed calendar full of festivities and other events, the city offers an authentic and welcoming atmosphere.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n140,430 inhabitants.<br />\nProvince of Seville.<br />\n<a href=\"https://www.doshermanas.es\" target=\"_blank\" rel=\"noopener noreferrer\"> doshermanas.es </a><br />\n<a href=\"https://www.dipusevilla.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipusevilla.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Dos Hermanas conjugue tradition et énergie contemporaine dans un environnement plein de vie. Son centre-ville regroupe des sites historiques tels que la paroisse Santa María Magdalena, ainsi qu'une offre commerciale et culturelle très dynamique. Le sport occupe également une place importante, avec des installations telles que le vélodrome municipal, un de ses points de référence. Entre ses parcs, sa gastronomie et son calendrier riche en fêtes et événements, la ville offre une ambiance chaleureuse et authentique.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n140 430 habitants.<br />\nProvince de Séville.<br />\n<a href=\"https://www.doshermanas.es\" target=\"_blank\" rel=\"noopener noreferrer\"> doshermanas.es </a><br />\n<a href=\"https://www.dipusevilla.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipusevilla.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "id": 32862,
+      "updatedAt": "2025-12-15T12:39:44+01:00",
+      "createdBy": "Clerat",
+      "label": "Dos Hermanas",
+      "createdAt": "2025-12-15T12:39:44+01:00",
+      "code": "dos-hermanas"
+    },
+    "startTime": "13:24:00",
+    "date": "2026-09-09T00:00:00+02:00",
+    "type": "PLN",
+    "timezone": "Europe/Madrid",
+    "lengthDisplay": 185,
+    "id": 25116,
+    "isCancelled": false,
+    "stage": 17,
+    "arrivalCity": {
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "cityLangs": [],
+      "updatedBy": "Clerat",
+      "updatedAt": "2025-12-15T12:39:55+01:00",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e17-meta-sevilla/27384/0:0,960:960-0-0-70/85bd2",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Dos años después de su última aparición, Sevilla volverá a ser meta de La Vuelta. Como ocurriera en 2024, la ciudad de la Giralda, la Torre del Oro y la Maestranza será llegada en una etapa llana. En el recuerdo de los hispalenses brilla la histórica contrarreloj inaugural de La Vuelta en 2010, donde la ciudad a orillas del Guadalquivir asombró al mundo del ciclismo con una etapa disputada de noche donde las luces de la ciudad dejaron una estampa única. <br />\n<br />\nSevilla ha sido meta de La Vuelta en 15 ocasiones.<br />\n687.488 habitantes.<br />\nProvincia de Sevilla.<br />\n<a href=\"https://www.sevilla.org\" target=\"_blank\" rel=\"noopener noreferrer\"> sevilla.org </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Two years after the last time, Seville will once again host a La Vuelta finish-line. Just like in 2024, the city of the Giralda, the Torre del Oro and the Maestranza will host a flat finale. The historic inaugural time trial of La Vuelta in 2010 lives on in our country’s memory, when the city on the banks of the Guadalquivir River surprised the cycling world with a nighttime stage where the city lights created a truly unique backdrop. <br />\n<br />\nSeville has already hosted 15 La Vuelta finish-lines.<br />\n687,488 inhabitants.<br />\nProvince of Seville.<br />\n<a href=\"https://www.sevilla.org\" target=\"_blank\" rel=\"noopener noreferrer\"> sevilla.org </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Deux ans après sa dernière apparition, Séville accueillera à nouveau l'arrivée de La Vuelta. Comme en 2024, la ville de la Giralda, de la Tour de l'Or et de la Maestranza sera le point d'arrivée d'une étape plate. Les Sévillans se souviennent avec émotion du contre-la-montre historique qui a inauguré La Vuelta en 2010, lorsque la ville des bords du Guadalquivir a étonné le monde du cyclisme avec une étape disputée de nuit, dont les lumières de la ville ont donné une image unique. <br />\n<br />\nSéville a accueilli 15 arrivées de La Vuelta.<br />\n687 488 habitants.<br />\nProvince de Séville.<br />\n<a href=\"https://www.sevilla.org\" target=\"_blank\" rel=\"noopener noreferrer\"> sevilla.org </a><br />\n"
+            ]
+          }
+        ]
+      },
+      "id": 32863,
+      "createdBy": "Clerat",
+      "code": "sevilla-1",
+      "label": "Sevilla",
+      "createdAt": "2025-12-15T12:39:55+01:00"
+    },
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "6656f537dd60fac4d280519087c7c9ce6273a81d92b4d3768af68510b5fe04f3",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "id": 25115,
+    "timezone": "Europe/Madrid",
+    "lengthDisplay": 181.5,
+    "length": 181.1,
+    "endTime": "17:31:00",
+    "hasCoordinates": true,
+    "type": "VAL",
+    "stage": 16,
+    "date": "2026-09-08T00:00:00+02:00",
+    "showGroups": true,
+    "arrivalCity": {
+      "code": "la-rabida-palos-de-la-frontera",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e16-meta-la-rabida/27383/0:0,960:960-0-0-70/c494d",
+        "texts": [
+          {
+            "text": [
+              "La Rábida es uno de los enclaves históricos más singulares de Huelva, estrechamente ligado al origen de la gesta colombina. Su monasterio franciscano, declarado Bien de Interés Cultural, fue refugio e inspiración de Cristóbal Colón antes del viaje que cambiaría la historia. Rodeado de jardines y miradores, el conjunto monumental se completa con los Lugares Colombinos, que evocan aquel episodio decisivo y hacen de La Rábida un centro cultural y turístico de referencia.<br />\n<br />\nSede inédita de La Vuelta.<br />\n12.663 habitantes (Palos de la Frontera).<br />\nProvincia de Huelva.<br />\n<a href=\"https://www.palosfrontera.com\" target=\"_blank\" rel=\"noopener noreferrer\"> palosfrontera.com </a><br />\n<a href=\"https://www.diphuelva.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diphuelva.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "La Rábida is one of Huelva’s most unique historical enclaves, closely linked to the origins of Columbus’ great feat. Its Franciscan monastery, declared an Asset of Cultural Interest, was Christopher Columbus’ refuge and inspiration before embarking on the voyage that would forever change history. The monumental complex is surrounded by gardens and lookouts and is completed by the Lugares Colombinos, which evoke that decisive episode and make La Rábida a reference in terms of culture and tourism.<br />\n<br />\nUnprecedented La Vuelta finish-line.<br />\n12,663 inhabitants (Palos de la Frontera).<br />\nProvince of Huelva.<br />\n<a href=\"https://www.palosfrontera.com\" target=\"_blank\" rel=\"noopener noreferrer\"> palosfrontera.com </a><br />\n<a href=\"https://www.diphuelva.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diphuelva.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "La Rábida est l'un des sites historiques les plus singuliers de Huelva, étroitement lié à l'origine de l'épopée de Christophe Colomb. Son monastère franciscain, déclaré bien d'intérêt culturel, fut le refuge et la source d'inspiration de Christophe Colomb avant le voyage qui allait changer le cours de l'histoire. Entouré de jardins et de belvédères, l'ensemble monumental est complété par les Lieux Colombiens, qui évoquent cet épisode décisif et font de La Rábida un centre culturel et touristique de référence.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n12 663 habitants (Palos de la Frontera).<br />\nProvince de Huelva.<br />\n<a href=\"https://www.palosfrontera.com\" target=\"_blank\" rel=\"noopener noreferrer\"> palosfrontera.com </a><br />\n<a href=\"https://www.diphuelva.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diphuelva.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "updatedAt": "2025-12-15T12:38:07+01:00",
+      "createdBy": "Clerat",
+      "label": "La Rábida. Palos de la Frontera",
+      "createdAt": "2025-12-15T12:38:07+01:00",
+      "id": 32861
+    },
+    "isCancelled": false,
+    "departureCity": {
+      "createdAt": "2025-12-15T12:37:54+01:00",
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e16-salida-cortegana/27386/0:0,960:960-0-0-70/14f0e",
+        "texts": [
+          {
+            "text": [
+              "Cortegana conserva un valioso patrimonio monumental que enriquece su casco urbano, con templos y ermitas que reflejan la identidad y la historia del municipio. Su gran emblema es el Castillo Medieval, originario del siglo XIII y pieza clave de la Banda Gallega, levantada para defender la frontera sevillana frente a Portugal. Declarado Bien de Interés Cultural, es hoy uno de los monumentos más visitados de Huelva y un destacado enclave turístico.<br />\n<br />\nSede inédita de La Vuelta.<br />\n4.618 habitantes.<br />\nProvincia de Huelva.<br />\n<a href=\"https://www.cortegana.es\" target=\"_blank\" rel=\"noopener noreferrer\"> cortegana.es </a><br />\n<a href=\"https://www.diphuelva.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diphuelva.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "Cortegana is home to a valuable monumental heritage that enriches its urban centre, with temples and chapels that reflect the municipality’s identity and history. Its main emblematic building is the Medieval Castle, built in the 13th century as part of the Banda Gallega in order to defend Seville’s border from Portugal. Declared an Asset of Cultural Interest, it is now one of Huelva’s most visited monuments and a prominent tourist attraction.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n4,618 inhabitants.<br />\nProvince of Huelva.<br />\n<a href=\"https://www.cortegana.es\" target=\"_blank\" rel=\"noopener noreferrer\"> cortegana.es </a><br />\n<a href=\"https://www.diphuelva.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diphuelva.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Cortegana conserve un remarquable patrimoine monumental qui embellit son centre-ville, avec des temples et des ermitages qui sont le reflet de l'identité et de l'histoire de la commune. Son emblème principal est le château médiéval. Construit au XIIIe siècle, il est un élément clé de la bande galicienne, une ligne de défense construite pour protéger la frontière sévillane face au Portugal. Déclaré bien d'intérêt culturel, il est aujourd'hui l'un des monuments les plus visités de Huelva et un site touristique de premier plan.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n4 618 habitants.<br />\nProvince de Huelva.<br />\n<a href=\"https://www.cortegana.es\" target=\"_blank\" rel=\"noopener noreferrer\"> cortegana.es </a><br />\n<a href=\"https://www.diphuelva.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diphuelva.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "createdBy": "Clerat",
+      "code": "cortegana",
+      "id": 32860,
+      "label": "Cortegana",
+      "updatedAt": "2025-12-15T12:37:54+01:00",
+      "updatedBy": "Clerat",
+      "cityLangs": []
+    },
+    "startTime": "13:18:00",
+    "podiumDisplayMode": "instantpodium",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "dbf7fd7af4eb7895c4d2f9ee4f006d4206974d252b631987bd80a72a5df3fdd6",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "type": "VAL",
+    "showGroups": true,
+    "stage": 10,
+    "date": "2026-09-01T00:00:00+02:00",
+    "departureCity": {
+      "id": 32852,
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "code": "alcaraz",
+      "createdAt": "2025-12-15T11:40:54+01:00",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e10-salida-alcaraz/27416/0:0,960:960-0-0-70/c8b73",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Entre calles de piedra y un paisaje que respira historia, Alcaraz se descubre como un rincón lleno de carácter. Su Plaza Mayor renacentista, las torres que recortan el cielo y los restos de su castillo hablan de un pasado que sigue muy vivo. Un pueblo sereno, rodeado de naturaleza, donde cada paseo invita a detenerse y mirar con calma.<br />\n<br />\nSede inédita de La Vuelta.<br />\n1.304 habitantes.<br />\nProvincia de Albacete.<br />\n<a href=\"https://www.alcaraz.es\" target=\"_blank\" rel=\"noopener noreferrer\"> alcaraz.es </a><br />\n<a href=\"https://www.dipualba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipualba.es </a><br />\n<a href=\"https://www.castillalamancha.es\" target=\"_blank\" rel=\"noopener noreferrer\"> castillalamancha.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Between its cobblestoned streets and a landscape drenched in history, Alcaraz is filled with character. Its Renaissance Main Plaza, its towers that pierce the sky and its castle remains all speak of a past that is still very much alive. This calm town, surrounded by nature, invites visitors to stroll, while occasionally stopping to take it all in.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n1,304 inhabitants.<br />\nProvince of Albacete.<br />\n<a href=\"https://www.alcaraz.es\" target=\"_blank\" rel=\"noopener noreferrer\"> alcaraz.es </a><br />\n<a href=\"https://www.dipualba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipualba.es </a><br />\n<a href=\"https://www.castillalamancha.es\" target=\"_blank\" rel=\"noopener noreferrer\"> castillalamancha.es </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Avec ses rues pavées et son paysage chargé d'histoire, Alcaraz se révèle être un lieu plein de caractère. Sa place principale de style Renaissance, ses tours qui se détachent dans le ciel et les vestiges de son château témoignent d'un passé qui demeure encore bien vivant. Un village paisible, au cœur de la nature, où chaque promenade est une invitation à s'arrêter et à contempler sereinement le paysage.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n1 304 habitants.<br />\nProvince d’Albacete.<br />\n<a href=\"https://www.alcaraz.es\" target=\"_blank\" rel=\"noopener noreferrer\"> alcaraz.es </a><br />\n<a href=\"https://www.dipualba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipualba.es </a><br />\n<a href=\"https://www.castillalamancha.es\" target=\"_blank\" rel=\"noopener noreferrer\"> castillalamancha.es </a><br />\n"
+            ]
+          }
+        ]
+      },
+      "createdBy": "Clerat",
+      "updatedAt": "2025-12-15T11:40:57+01:00",
+      "label": "Alcaraz",
+      "cityLangs": [],
+      "updatedBy": "Clerat"
+    },
+    "id": 25108,
+    "startTime": "13:00:00",
+    "endTime": "17:30:00",
+    "length": 184.7,
+    "timezone": "Europe/Madrid",
+    "hasCoordinates": true,
+    "podiumDisplayMode": "instantpodium",
+    "isCancelled": false,
+    "arrivalCity": {
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e10-meta-elche-de-la-sierra/27417/0:0,960:960-0-0-70/b045d",
+        "texts": [
+          {
+            "text": [
+              " En el corazón de la Sierra del Segura, Elche de la Sierra es uno de los mayores pueblos de la zona. El arte efímero de las alfombras de serrín forma parte de la cultura elcheña y es el eje central de una fiesta declarada de Interés turístico Nacional y Bien de Interés Cultural. Estas obras de arte adornan las calles del pueblo que son atravesadas, y pisadas, por la tradicional procesión del Corpus Christi.<br />\n<br />\nSede inédita de La Vuelta.<br />\n3.596 habitantes.<br />\nProvincia de Albacete.<br />\n<a href=\"https://www.elchedelasierra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> elchedelasierra.es </a><br />\n<a href=\"https://www.dipualba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipualba.es </a><br />\n<a href=\"https://www.castillalamancha.es\" target=\"_blank\" rel=\"noopener noreferrer\"> castillalamancha.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              " Elche de la Sierra, one of the area’s largest towns, is located right in the heart of the Segura Mountain Range. The ephemeral art of sawdust carpets is part of Elche’s culture and is at the centre of a festivity that has been declared of National Touristic Interest as well as an Asset of Cultural Interest. These works of art adorn the town streets that are crossed and stepped on during the traditional Corpus Christi procession.<br />\n<br />\nUnprecedented La Vuelta finish-line.<br />\n3,596 inhabitants.<br />\nProvince of Albacete.<br />\n<a href=\"https://www.elchedelasierra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> elchedelasierra.es </a><br />\n<a href=\"https://www.dipualba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipualba.es </a><br />\n<a href=\"https://www.castillalamancha.es\" target=\"_blank\" rel=\"noopener noreferrer\"> castillalamancha.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              " Situé au cœur des montagnes de la Sierra del Segura, Elche de la Sierra est l'un des plus grands villages de la région. L'art éphémère des tapis de sciure fait partie intégrante de la culture du lieu et constitue le point central d'une fête déclarée d'intérêt touristique national et bien d'intérêt culturel. Ces œuvres d'art ornent les rues du village qui sont traversées, et foulées, par la procession traditionnelle du Corpus Christi.<br />\n<br />\nArrivée inédite de La Vuelta.<br />\n3 596 habitants.<br />\nProvince d’Albacete.<br />\n<a href=\"https://www.elchedelasierra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> elchedelasierra.es </a><br />\n<a href=\"https://www.dipualba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipualba.es </a><br />\n<a href=\"https://www.castillalamancha.es\" target=\"_blank\" rel=\"noopener noreferrer\"> castillalamancha.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "createdBy": "Clerat",
+      "createdAt": "2025-12-15T11:41:14+01:00",
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "id": 32853,
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "code": "elche-de-la-sierra",
+      "label": "Elche de la Sierra",
+      "updatedAt": "2025-12-15T11:41:14+01:00"
+    },
+    "lengthDisplay": 185,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "069b7608533f1f51b91deeff5faf16a7b67a37defe6ed2e790591d3660c6e68f",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "endTime": "17:30:00",
+    "arrivalCity": {
+      "code": "manosque",
+      "label": "Manosque",
+      "id": 29427,
+      "cityLangs": [],
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e02-meta-manosque/27399/0:0,960:960-0-0-70/be546",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Manosque, la ciudad más poblada de Alta Provenza, combina un centro histórico de marcado carácter provenzal con un entorno natural preservado entre viñedos y olivares. La ciudad ha acogido dos llegadas del Tour de Francia, en 1976 y 1982, con victoria para el español José Luis Viejo en la primera de ellas. Además, ha acogido en múltiples ocasiones la París-Niza y, más recientemente, el Tour de la Provence. <br />\n<br />\nSede inédita de La Vuelta.<br />\n23 424 habitantes.<br />\nDepartamento de Alpes de Alta Provenza.<br />\n"
+            ]
+          },
+          {
+            "text": [
+              "La Principauté de Monaco est une référence en matière d'organisation d'événements sportifs. Outre le Grand Prix de Monaco de Formule 1, la course automobile par excellence, ce petit pays organise des événements de grand prestige international tels que l'Open de Monte-Carlo de tennis ou le Meeting Herculis d'athlétisme, qui se déroule au stade Louis II, siège du club de football A.S. Mónaco CF.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n38 423 habitants.<br />\nPrincipauté de Monaco<br />\n"
+            ],
+            "locale": "fr"
+          },
+          {
+            "text": [
+              "Manosque, the most populated city in Haute Provence, combines a historical centre with a distinct Provençal style with natural surroundings preserved among vineyards and olive groves. The city has already hosted two arrivals in the Tour de France, in 1976 and 1982, with victory going to the Spanish rider José Luis Viejo in the first one. It has also hosted the Paris-Nice race on multiple occasions and, more recently, the Tour de la Provence. <br />\n<br />\nUnprecedented La Vuelta finish-line.<br />\n23,424 inhabitants.<br />\nDepartment of Alpes-de-Haute-Provence.<br />\n"
+            ],
+            "locale": "en"
+          }
+        ]
+      }
+    },
+    "startTime": "12:42:00",
+    "isCancelled": false,
+    "length": 214.3,
+    "lengthDisplay": 214.5,
+    "timezone": "Europe/Paris",
+    "id": 25098,
+    "podiumDisplayMode": "instantpodium",
+    "stage": 2,
+    "showGroups": true,
+    "date": "2026-08-23T00:00:00+02:00",
+    "type": "VAL",
+    "departureCity": {
+      "id": 29587,
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e02-salida-monaco/27401/0:0,960:960-0-0-70/6241f",
+        "texts": [
+          {
+            "text": [
+              "El Principado de Mónaco es un referente en la celebración de eventos deportivos. Además del GP de Mónaco de Fórmula 1, la prueba automovilística por excelencia, este pequeño país organiza eventos de gran prestigio internacional como el Open de Monte-Carlo de Tenis o el Meeting Herculis de Atletismo, celebrado en el Estadio Louis II, casa del A.S. Mónaco de fútbol.<br />\n<br />\nSede inédita de La Vuelta.<br />\n38.423 habitantes.<br />\nPrincipado de Mónaco.<br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "The Principality of Monaco is a reference when it comes to celebrating sporting events. Besides the Monaco Formula 1 Grand Prix, the motor racing event par excellence, this tiny country organises such prestigious international events as the Monte Carlo Masters and the Herculis Athletics Meeting, held in the Louis II Stadium, home to the A.S. Monaco Football Club.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n38,423 inhabitants.<br />\nPrincipality of Monaco.<br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              " La Principauté de Monaco est une référence en matière d'organisation d'événements sportifs. Outre le Grand Prix de Monaco de Formule 1, la course automobile par excellence, ce petit pays organise des événements de grand prestige international tels que l'Open de Monte-Carlo de tennis ou le Meeting Herculis d'athlétisme, qui se déroule au stade Louis II, siège du club de football A.S. Mónaco CF.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n38 423 habitants.<br />\nPrincipauté de Monaco<br />\n"
+            ]
+          }
+        ]
+      },
+      "label": "Monaco",
+      "code": "monaco",
+      "cityLangs": []
+    },
+    "hasCoordinates": true,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "8dca2abda32e34c6d270333603a7b924ea8e688aba2c612aea611e9145611eed",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "endTime": "17:31:00",
+    "podiumDisplayMode": "instantpodium",
+    "stage": 14,
+    "startTime": "13:33:00",
+    "showGroups": true,
+    "timezone": "Europe/Madrid",
+    "departureCity": {
+      "label": "Jaén",
+      "code": "jaen",
+      "id": 32105,
+      "cityLangs": [],
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e14-salida-jaen/27387/0:0,960:960-0-0-70/50117",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Jaén combina historia y patrimonio en cada rincón de su casco antiguo. Su imponente Catedral, una de las grandes joyas del Renacimiento español, marca el perfil urbano junto a palacios, baños árabes y plazas con siglos de vida. Sobre la ciudad, el Castillo de Santa Catalina ofrece una panorámica que resume la fuerza paisajística de la zona, rodeada de un mar de olivos. Museos, gastronomía y tradición completan una visita que permite entender la identidad del interior andaluz.<br />\n<br />\nLa Vuelta ha salido diez veces de Jaén.<br />\n112.074 habitantes.<br />\nProvincia de Jaén.<br />\n<a href=\"https://www.aytojaen.es\" target=\"_blank\" rel=\"noopener noreferrer\"> aytojaen.es </a><br />\n<a href=\"https://www.dipujaen.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipujaen.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "Jaén combines history and heritage in each and every corner of its old city centre. Its impressive cathedral, one of the great jewels of the Spanish Renaissance, dominates the city landscape, along with palaces, Arab baths and plazas with histories spanning over several centuries. Above the city, Santa Catalina Castle offers a panoramic view that encompasses the area’s landscape value, surrounded by a sea of olive groves. Jaén’s museums, gastronomy and tradition allow visitors to understand the identity of inland Andalusia.<br />\n<br />\nJaén has already hosted 10 La Vuelta stage departures.<br />\n112,074 inhabitants.<br />\nProvince of Jaén.<br />\n<a href=\"https://www.aytojaen.es\" target=\"_blank\" rel=\"noopener noreferrer\"> aytojaen.es </a><br />\n<a href=\"https://www.dipujaen.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipujaen.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Le centre historique de Jaén est imprégné d'histoire et de patrimoine. Son imposante cathédrale, l'un des joyaux de la Renaissance espagnole, marque le profil urbain, tout comme les palais, les bains arabes et les places vieilles de plusieurs siècles. Surplombant la ville, le château de Santa Catalina offre une vue panoramique qui illustre toute la puissance du paysage de la région, au milieu d'une mer d'oliviers. Les musées, la gastronomie et les traditions complètent une visite qui permet de comprendre l'identité de l'intérieur de l'Andalousie.<br />\n<br />\nJaén a accueilli 10 départs de La Vuelta.<br />\n112 074 habitants.<br />\nProvince de Jaén.<br />\n<a href=\"https://www.aytojaen.es\" target=\"_blank\" rel=\"noopener noreferrer\"> aytojaen.es </a><br />\n<a href=\"https://www.dipujaen.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipujaen.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      }
+    },
+    "type": "HMG",
+    "lengthDisplay": 154.5,
+    "length": 154.5,
+    "date": "2026-09-05T00:00:00+02:00",
+    "id": 25112,
+    "arrivalCity": {
+      "code": "sierra-de-la-pandera",
+      "cityLangs": [],
+      "id": 30611,
+      "label": "Sierra de La Pandera",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e14-meta-sierra-de-la-pandera/27423/0:0,960:960-0-0-70/8cc7f",
+        "texts": [
+          {
+            "text": [
+              "La Sierra de la Pandera se ha convertido, desde su estreno en 2002, en uno de los finales en alto más presentes en La Vuelta. Una cima en la que han ganado dos vencedores de la carrera, Roberto Heras y Alejandro Valverde, y que vio alzar los brazos a Richard Carapaz en su última aparición en 2022. En este enclave jienense, el entorno natural permite disfrutar de la práctica de deportes al aire libre. <br />\n<br />\nLa Vuelta ha llegado seis veces a la Sierra de la Pandera.<br />\n3.556 habitantes (Valdepeñas de Jaén) / 6.079 habitantes (Los Villares).<br />\nProvincia de Jaén.<br />\n<a href=\"https://www.dipujaen.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipujaen.es </a><br />\n<a href=\"https://www.losvillares.com\" target=\"_blank\" rel=\"noopener noreferrer\"> losvillares.com </a><br />\n<a href=\"https://www.martos.es\" target=\"_blank\" rel=\"noopener noreferrer\"> martos.es </a><br />\n<a href=\"https://www.sierrasurjaen.com\" target=\"_blank\" rel=\"noopener noreferrer\"> sierrasurjaen.com </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              "Since its debut in 2002, the La Pandera Mountain Range has become one of La Vuelta’s most recurring high-altitude finales. Two race winners emerged victorious at this summit - Roberto Heras and Alejandro Valverde. It also saw Richard Carapaz win during his final appearance in 2022. In this part of Jaén, the natural surroundings are ideal for the practice of outdoor sports. <br />\n<br />\nThe La Pandera Mountain Range has already hosted 6 La Vuelta finish-lines.<br />\n3,556 inhabitants (Valdepeñas de Jaén) / 6,079 inhabitants (Los Villares).<br />\nProvince of Jaén.<br />\n<a href=\"https://www.dipujaen.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipujaen.es </a><br />\n<a href=\"https://www.losvillares.com\" target=\"_blank\" rel=\"noopener noreferrer\"> losvillares.com </a><br />\n<a href=\"https://www.martos.es\" target=\"_blank\" rel=\"noopener noreferrer\"> martos.es </a><br />\n<a href=\"https://www.sierrasurjaen.com\" target=\"_blank\" rel=\"noopener noreferrer\"> sierrasurjaen.com </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "Depuis sa première apparition en 2002, la Sierra de la Pandera est devenue l'une des arrivées en altitude les plus présentes dans La Vuelta. Un sommet où deux vainqueurs de la course, Roberto Heras et Alejandro Valverde, se sont imposés, et qui a permis à Richard Carapaz de décrocher la victoire lors de sa dernière apparition en 2022. L'environnement naturel de cette zone de Jaén permet de pratiquer des sports de plein air. <br />\n<br />\nSierra de la Pandera a accueilli 6 arrivées de La Vuelta.<br />\n3 556 habitants (Valdepeñas de Jaén) / 6 079 habitants (Los Villares).<br />\nProvince de Jaén.<br />\n<a href=\"https://www.dipujaen.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipujaen.es </a><br />\n<a href=\"https://www.losvillares.com\" target=\"_blank\" rel=\"noopener noreferrer\"> losvillares.com </a><br />\n<a href=\"https://www.martos.es\" target=\"_blank\" rel=\"noopener noreferrer\"> martos.es </a><br />\n<a href=\"https://www.sierrasurjaen.com\" target=\"_blank\" rel=\"noopener noreferrer\"> sierrasurjaen.com </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      }
+    },
+    "hasCoordinates": true,
+    "isCancelled": false,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "bafc37c6011eaf0cc59253fe81244a4ba3ba92d911a74e796e5d0425ede42888",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "date": "2026-09-10T00:00:00+02:00",
+    "stage": 18,
+    "type": "PAS",
+    "endTime": "17:30:00",
+    "id": 25117,
+    "timezone": "Europe/Madrid",
+    "lengthDisplay": 32,
+    "podiumDisplayMode": "instantpodium",
+    "showGroups": false,
+    "length": 32,
+    "startTime": "14:06:00",
+    "hasCoordinates": true,
+    "isCancelled": false,
+    "arrivalCity": {
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e18-meta-jerez-de-la-frontera/27392/0:0,960:960-0-0-70/256b6",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Jerez de la Frontera reúne tradición, carácter y un patrimonio que impresiona. Famosa por sus vinos, sus caballos y su vínculo con el flamenco, invita a descubrir su Catedral, el Alcázar y elegantes casas palacio. Su calendario festivo brilla con citas como la Semana Santa o la Feria del Caballo. La visita se completa con sabores locales como la berza jerezana, los riñones al jerez o el tradicional ajo de viña típico de los meses más fríos.<br />\n<br />\nJerez de la Frontera ha acogido 12 llegadas de La Vuelta. <br />\n213.688 habitantes.<br />\nProvincia de Cádiz.<br />\n<a href=\"https://www.jerez.es\" target=\"_blank\" rel=\"noopener noreferrer\"> jerez.es </a><br />\n<a href=\"https://www.dipucadiz.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucadiz.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              " Jerez de la Frontera brings together tradition, character and an impressive heritage. Famous for its wines, its horses and its links to flamenco, it invites visitors to discover its Cathedral, the Alcázar and its elegant house-palaces. Its festive calendar shines with such events as its Holy Week and the Horse Fair. The visit is completed with local flavours including the Jerez kale stew, kidneys with sherry sauce or the traditional ajo de viña, typical of the colder months.<br />\n<br />\nJerez de la Frontera has already hosted 12 La Vuelta finish-lines. <br />\n213,688 inhabitants.<br />\nProvince of Cádiz.<br />\n<a href=\"https://www.jerez.es\" target=\"_blank\" rel=\"noopener noreferrer\"> jerez.es </a><br />\n<a href=\"https://www.dipucadiz.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucadiz.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Jerez de la Frontera associe tradition, caractère et un patrimoine impressionnant. Célèbre pour ses vins, ses chevaux et ses liens avec le flamenco, sa cathédrale, son alcazar et ses élégantes maisons-palais sont autant d'invitations à la découverte. Ses fêtes, telles que la Semaine sainte ou la Foire du cheval, sont des rendez-vous incontournables. La visite s'accompagne de saveurs locales telles que la berza jerezana (ragoût typique de la région), les rognons au xérès ou l'ail chaud, plat traditionnel des mois les plus froids.<br />\n<br />\nJerez de la Frontera a accueilli 12 arrivées de La Vuelta. <br />\n213 688 habitants.<br />\nProvince de Cadix.<br />\n<a href=\"https://www.jerez.es\" target=\"_blank\" rel=\"noopener noreferrer\"> jerez.es </a><br />\n<a href=\"https://www.dipucadiz.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucadiz.es </a><br />\n"
+            ]
+          }
+        ]
+      },
+      "code": "jerez-de-la-frontera-1",
+      "createdBy": "Clerat",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "createdAt": "2025-12-15T12:42:12+01:00",
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "id": 32865,
+      "label": "Jerez de la Frontera",
+      "updatedAt": "2025-12-15T12:42:12+01:00"
+    },
+    "departureCity": {
+      "label": "El Puerto de Santa María",
+      "createdAt": "2025-12-15T12:41:51+01:00",
+      "code": "el-puerto-santa-maria",
+      "createdBy": "Clerat",
+      "updatedAt": "2026-04-22T16:02:18+02:00",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "cityLangs": [],
+      "updatedBy": "gsanzgadea",
+      "id": 32864,
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e18-salida-el-puerto-de-santa-maria/27391/0:0,960:960-0-0-70/35980",
+        "texts": [
+          {
+            "text": [
+              "El Puerto de Santa María concentra lo mejor de la Bahía de Cádiz: historia, naturaleza y una costa privilegiada que se extiende a lo largo de 16 kilómetros de playas de arena dorada. A este litoral se suman paisajes protegidos que van de marismas a dunas y campiñas, además de un valioso legado monumental y una tradición vinícola que ha dado fama a sus emblemáticas bodegas.<br />\n<br />\nSede inédita de La Vuelta.<br />\n89.960 habitantes.<br />\nProvincia de Cádiz.<br />\n<a href=\"https://www.elpuertodesantamaria.es\" target=\"_blank\" rel=\"noopener noreferrer\"> elpuertodesantamaria.es </a><br />\n<a href=\"https://www.dipucadiz.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucadiz.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "The Port of Santa María encompasses the best of the Bay of Cádiz: history, nature and a privileged coastline that extends over 16 kilometres of golden sandy beaches. It is also home to protected landscapes ranging from marshlands to dunes and even countryside, besides a priceless monumental heritage and a winemaking tradition that has made its iconic wineries famous.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n89,960 inhabitants.<br />\nProvince of Cádiz.<br />\n<a href=\"https://www.elpuertodesantamaria.es\" target=\"_blank\" rel=\"noopener noreferrer\"> elpuertodesantamaria.es </a><br />\n<a href=\"https://www.dipucadiz.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucadiz.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "El Puerto de Santa María concentre tout ce que la baie de Cadix a de mieux à offrir : histoire, nature et un littoral privilégié qui s'étend sur 16 kilomètres de plages de sable doré. Celui-ci est complété par des paysages protégés allant des marais aux dunes et aux paysages champêtres, ainsi que par un remarquable patrimoine monumental et une tradition viticole qui a fait la renommée de ses caves emblématiques.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n<br />\n<br />\n89 960 habitants.<br />\n<br />\n<br />\nProvince de Cadix<br />\n"
+            ]
+          }
+        ]
+      }
+    },
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "992c0c0a72f90c14bba5cff4c4ac68ce153ab0fa44a07486e27dc5b3b57c47eb",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "id": 25100,
+    "length": 104.8,
+    "hasCoordinates": true,
+    "endTime": "17:30:00",
+    "timezone": "Europe/Madrid",
+    "departureCity": {
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e04-salida-andorra/27405/0:0,960:960-0-0-70/b736e",
+        "texts": [
+          {
+            "text": [
+              "El montañoso Principado de Andorra forma parte de la historia de La Vuelta y su capital, Andorra la Vella, ya cuenta con amplia experiencia como sede de la carrera. Este territorio ciclista, gracias a sus características orográficas, atrae a numerosos ciclistas profesionales a entrenar en sus carreteras. El Principado es, además, un destino para los amantes de deportes de nieve en invierno y para aquellos que buscan disfrutar al máximo de la naturaleza durante el resto del año.<br />\n<br />\nLa Vuelta ha salido 12 veces de Andorra La Vella.<br />\n20.719 habitantes<br />\n Principado de Andorra.<br />\n<a href=\"https://visitandorra.com/fr/\">visitandorra.com</a> / <a href=\"https://www.govern.ad/ca/inici\">govern.ad</a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "The mountainous Principality of Andorra is part of La Vuelta’s history and its capital, Andorra la Vella, has vast experience hosting the race. Thanks to its orographic characteristics, this cycling territory attracts numerous professional cyclists who train on its roads. The Principality is also a popular destination for winter sports lovers and for those wishing to enjoy nature to the fullest the rest of the year.<br />\n<br />\nAndorra La Vella has already hosted 12 La Vuelta departures.<br />\n20,719 inhabitants. <br />\nPrincipality of Andorra.<br />\n<a href=\"https://visitandorra.com/fr/\">visitandorra.com</a> / <a href=\"https://www.govern.ad/ca/inici\">govern.ad</a><br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "La très montagneuse Principauté d'Andorre fait partie de l'histoire de La Vuelta et sa capitale, Andorre-la-Vieille, a déjà accueilli la course de nombreuses fois. Cette terre propice aux cyclistes, grâce à ses caractéristiques orographiques, attire de nombreux coureurs professionnels qui s'entraînent sur ses routes. La Principauté est également une destination pour les amateurs de sports de glisse en hiver et pour les amoureux de la nature le reste de l'année.<br />\n<br />\nAndorre-la-Vieille a accueilli 12 départs de La Vuelta.<br />\n20 719 habitants. <br />\nPrincipauté d'Andorre.<br />\n<a href=\"https://visitandorra.com/fr/\">visitandorra.com</a> / <a href=\"https://www.govern.ad/ca/inici\">govern.ad</a><br />\n"
+            ]
+          }
+        ]
+      },
+      "code": "andorra-la-vella",
+      "cityLangs": [],
+      "id": 30195,
+      "label": "Andorra la Vella"
+    },
+    "startTime": "14:49:00",
+    "podiumDisplayMode": "instantpodium",
+    "lengthDisplay": 105,
+    "showGroups": true,
+    "stage": 4,
+    "type": "HMG",
+    "arrivalCity": {
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e04-meta-andorra/27404/0:0,960:960-0-0-70/bcd93",
+        "texts": [
+          {
+            "text": [
+              "La Vuelta contará con una etapa cien por cien andorrana por quinta vez en su historia. La última ocasión fue en 2019 cuando el entonces prometedor Tadej Pogacar se daba a conocer al mundo con su primera victoria de etapa en una gran vuelta en su debut en carreras de tres semanas. Será, además, la primera vez en la historia de La Vuelta que una misma etapa tenga tanto la salida como la meta en Andorra La Vella.<br />\n<br />\nLa Vuelta ha llegado seis veces a Andorra La Vella.<br />\n20.719 habitantes <br />\nPrincipado de Andorra.<br />\n<a href=\"https://visitandorra.com/fr/\">visitandorra.com</a> / <a href=\"https://www.govern.ad/ca/inici\">govern.ad</a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              " For the fifth time in its history, La Vuelta will feature a stage held entirely within Andorra. The last time was in 2019 when, the then promising young rider, Tadej Pogacar made his debut on the world stage by obtaining his first stage victory in a Grand Tour, in his very first three-week race. It will also be the first time in La Vuelta’s history that a single stage has both its departure and finishing-line within Andorra La Vella.<br />\n<br />\nAndorra La Vella has already hosted 6 La Vuelta finish-lines.<br />\n20,719 inhabitants. <br />\nPrincipality of Andorra.<br />\n<a href=\"https://visitandorra.com/fr/\">visitandorra.com</a> / <a href=\"https://www.govern.ad/ca/inici\">govern.ad</a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              " La Vuelta comptera pour la cinquième fois de son histoire une étape 100 % andorrane. La dernière fois, c'était en 2019, lorsque Tadej Pogacar, alors jeune promesse, s'est fait connaître du monde entier en remportant sa première victoire d'étape dans un grand Tour, lors de ses débuts dans des courses de trois semaines. Ce sera également la première fois dans l'histoire de La Vuelta qu'une même étape aura son départ et son arrivée à Andorre-la-Vieille.<br />\n<br />\nAndorre-la-Vieille a accueilli 6 arrivées de La Vuelta.<br />\n20 719 habitants. <br />\nPrincipauté d'Andorre.<br />\n<a href=\"https://visitandorra.com/fr/\">visitandorra.com</a> / <a href=\"https://www.govern.ad/ca/inici\">govern.ad</a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "label": "Andorra la Vella",
+      "id": 30195,
+      "code": "andorra-la-vella",
+      "cityLangs": []
+    },
+    "date": "2026-08-25T00:00:00+02:00",
+    "isCancelled": false,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "startTime": "13:11:00",
+    "endTime": "17:31:00",
+    "hasCoordinates": true,
+    "isCancelled": false,
+    "length": 177.4,
+    "arrivalCity": {
+      "code": "castello",
+      "createdAt": "2026-01-14T15:02:54+01:00",
+      "label": "Castelló",
+      "createdBy": "gsanzgadea",
+      "updatedAt": "2026-01-14T15:02:54+01:00",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e06-meta-castellon/27409/0:0,960:960-0-0-70/a63ee",
+        "texts": [
+          {
+            "text": [
+              "En Castellón de la Plana, la esencia mediterránea se respira en cada rincón: desde las calles del casco antiguo, presididas por la concatedral de Santa María y la torre El Fadrí, hasta el animado Grau, donde la ciudad se abre al mar. Entre parques, tradición marinera y una intensa vida cultural, Castellón ofrece un equilibrio singular entre patrimonio, naturaleza y ritmo urbano.<br />\n<br />\nLa Vuelta ha llegado ocho veces a Castellón de la Plana.<br />\n180.379 habitantes.<br />\nProvincia de Castellón <br />\n<a href=\"https://www.castello.es\" target=\"_blank\">castello.es</a> / <a href=\"https://www.dipcas.es\" target=\"_blank\">dipcas.es</a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              "The essence of the Mediterranean is present in every corner of Castellón de la Plana: from the streets of the old city centre, dominated by the Co-cathedral of Santa María (or Saint Mary) and the El Fadrí Tower, to the lively Grau, where the city opens up to the sea. With its parks, its seafaring tradition and intense cultural life, Castellón offers a unique balance between heritage, nature and urban rhythm.<br />\n<br />\nCastellón de la Plana has already hosted 8 La Vuelta finish-lines.<br />\n180,379 inhabitants.<br />\nProvince of Castellón. <br />\n<br />\n<br />\n<a href=\"https://www.castello.es\" target=\"_blank\">castello.es</a> / <a href=\"https://www.dipcas.es\" target=\"_blank\">dipcas.es</a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Castellón de la Plana représente l’essence même de la Méditerranée : des ruelles de la vieille ville, dominées par la cocathédrale Santa María et la tour El Fadrí, au quartier animé du Grau, où la ville s'ouvre sur la mer. Avec ses parcs, sa tradition maritime et sa vie culturelle intense, Castellón offre un équilibre unique entre patrimoine, nature et rythme urbain.<br />\n<br />\nCastellón de la Plana a accueilli 8 arrivées de La Vuelta.<br />\n180 379 habitants.<br />\nProvince de Castellón <br />\n<br />\n<br />\n<a href=\"https://www.castello.es\" target=\"_blank\">castello.es</a> / <a href=\"https://www.dipcas.es\" target=\"_blank\">dipcas.es</a><br />\n"
+            ]
+          }
+        ]
+      },
+      "updatedBy": "gsanzgadea",
+      "cityLangs": [],
+      "id": 32870
+    },
+    "id": 25102,
+    "lengthDisplay": 177.5,
+    "date": "2026-08-27T00:00:00+02:00",
+    "timezone": "Europe/Madrid",
+    "type": "MMG",
+    "departureCity": {
+      "code": "alcossebre",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e06-salida-alcocebre/27408/0:0,960:960-0-0-70/0c1b9",
+        "texts": [
+          {
+            "text": [
+              "Alcocebre combina mar y montaña gracias a su ubicación entre las calas mediterráneas y el Parque Natural de la Serra d’Irta, que ofrece senderos y miradores ideales para actividades al aire libre. Su litoral, con playas como Las Fuentes o la Romana, aporta el toque más relajado a este destino. La localidad ya sabe lo que es vivir la emoción de La Vuelta: en 2017 acogió una meta que dejó imágenes inolvidables junto al Mediterráneo.<br />\n<br />\nAlcocebre ha acogido una llegada de La Vuelta.<br />\n7.176 habitantes (Alcalà de Xivert).<br />\nProvincia de Castellón.<br />\n<a href=\"https://www.alcaladexivert.es\" target=\"_blank\">alcaladexivert.es</a> / <a href=\"https://www.dipcas.es\" target=\"_blank\">dipcas.es</a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              "Alcocebre combines sea and mountains thanks to its location between the Mediterranean coves and the Serra d’Irta Natural Park, which offers ideal trails and lookouts for outdoor activities. Its coastline, with beaches such as those of Las Fuentes and Romana, provide a more relaxed side to this tourist destination. The locality knows what it means to feel the excitement of La Vuelta: in 2017, it hosted a finish-line that gave us truly unforgettable moments by the Mediterranean.<br />\n<br />\nAlcocebre has already hosted a La Vuelta finish-line once before.<br />\n7,176 inhabitants (Alcalà de Xivert).<br />\nProvince of Castellón.<br />\n<a href=\"https://www.alcaladexivert.es\" target=\"_blank\">alcaladexivert.es</a> / <a href=\"https://www.dipcas.es\" target=\"_blank\">dipcas.es</a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Grâce à son emplacement entre les criques méditerranéennes et le parc naturel de la Serra d'Irta, qui offre des sentiers et des points de vue idéaux pour les activités de plein air, Alcocebre combine mer et montagne. Son littoral, avec des plages comme Las Fuentes ou La Romana, en fait un lieu idéal pour se détendre. La localité connaît déjà la ferveur de La Vuelta : en 2017, elle a accueilli une arrivée qui a donné lieu à des images inoubliables sur les rives de la Méditerranée.<br />\n<br />\nAlocebre a accueilli une arrivée de La Vuelta.<br />\n7 176 habitants (Alcalà de Xivert).<br />\nProvince de Castellón<br />\n<br />\n<br />\n<a href=\"https://www.alcaladexivert.es\" target=\"_blank\">alcaladexivert.es</a> / <a href=\"https://www.dipcas.es\" target=\"_blank\">dipcas.es</a><br />\n"
+            ]
+          }
+        ]
+      },
+      "label": "Alcossebre",
+      "id": 30602,
+      "cityLangs": []
+    },
+    "showGroups": true,
+    "stage": 6,
+    "podiumDisplayMode": "instantpodium",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "6270c995ee12956cead183de008f8c1c700514f74ec36df643515064ee2863d8",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "podiumDisplayMode": "instantpodium",
+    "isCancelled": false,
+    "lengthDisplay": 190,
+    "arrivalCity": {
+      "cityLangs": [],
+      "id": 30201,
+      "code": "cordoba",
+      "label": "Córdoba",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e15-meta-cordoba/27382/0:0,960:960-0-0-70/06e66",
+        "texts": [
+          {
+            "text": [
+              "Córdoba encuentra en la Mezquita el epicentro de su historia y la principal seña de identidad de la ciudad. Desde la sierra al Guadalquivir, siglos de historia han pasado por ti, canta el grupo local Medina Azahara, que toma nombre de otro de los símbolos de una ciudad que puede presumir de ser la única en el mundo que cuenta con cuatro bienes reconocidos como Patrimonio Mundial de la Unesco. <br />\n<br />\nLa Vuelta ha llegado 22 veces a Córdoba.<br />\n322.811 habitantes.<br />\nProvincia de Córdoba.<br />\n<a href=\"https://www.cordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> cordoba.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              "Córdoba’s mosque is at the very epicentre of its history and is the city’s main sign of identity. Desde la sierra al Guadalquivir, siglos de historia han pasado por ti (From the mountains to the Guadalquivir, centuries of history have passed through you), sings the local group Medina Azahara, who gets its name from another of the city’s symbols - a city that boasts the honour of being the only one in the world to have four of its sites appear on the UNESCO World Heritage List. <br />\n<br />\nCórdoba has already hosted 22 La Vuelta finish-lines.<br />\n322,811 inhabitants.<br />\nProvince of Córdoba.<br />\n<a href=\"https://www.cordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> cordoba.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "La mosquée constitue le point central de l'histoire de Cordoue et le principal marqueur de son identité. De la sierra au Guadalquivir, tu as vu passer des siècles d'histoire, chante le groupe local Medina Azahara, qui tire son nom d'un autre symbole d'une ville qui peut s’enorgueillir d'être la seule au monde à posséder quatre sites classés au patrimoine mondial de l'UNESCO. <br />\n<br />\nCordoue a accueilli 22 arrivées de La Vuelta.<br />\n322 811 habitants.<br />\nProvince de Cordoue.<br />\n<a href=\"https://www.cordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> cordoba.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
+            ]
+          }
+        ]
+      }
+    },
+    "timezone": "Europe/Madrid",
+    "length": 189.7,
+    "startTime": "12:46:00",
+    "showGroups": true,
+    "endTime": "17:31:00",
+    "type": "MMG",
+    "id": 25113,
+    "hasCoordinates": true,
+    "date": "2026-09-06T00:00:00+02:00",
+    "departureCity": {
+      "createdBy": "Clerat",
+      "id": 32858,
+      "createdAt": "2025-12-15T12:33:52+01:00",
+      "label": "Palma del Río",
+      "cityLangs": [],
+      "updatedBy": "Clerat",
+      "code": "palma-del-rio",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e15-salida-palma-del-rio/27385/0:0,960:960-0-0-70/4a77e",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Palma del Río combina historia, patrimonio y vida tranquila a orillas del Guadalquivir. Su casco histórico conserva iglesias, conventos y palacios que recuerdan siglos de tradición, mientras que las plazas y calles invitan a pasear y descubrir su carácter andaluz. Entre olivares y jardines, Palma del Río ofrece un equilibrio entre patrimonio, paisaje y cultura local, donde la gastronomía y las festividades completan la experiencia de este rincón cordobés.<br />\n<br />\nSede inédita de La Vuelta.<br />\n20.546 habitantes.<br />\nProvincia de Córdoba.<br />\n<a href=\"https://www.palmadelrio.es\" target=\"_blank\" rel=\"noopener noreferrer\"> palmadelrio.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Palma del Río combines history, heritage and a quiet life on the banks of the Guadalquivir River. Its historical centre is home to churches, convents and palaces that preserve centuries of tradition, while the streets and plazas invite visitors to stroll and discover the Andalusian style. Nestled among olive groves and gardens, Palma del Río offers the perfect balance between heritage, landscapes and local culture, where gastronomy and festivities complete the tourist experience in this part of Córdoba.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n20,546 inhabitants.<br />\nProvince of Córdoba.<br />\n<a href=\"https://www.palmadelrio.es\" target=\"_blank\" rel=\"noopener noreferrer\"> palmadelrio.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "Palma del Río offre histoire, patrimoine et douceur de vivre sur les rives du Guadalquivir. Son centre historique abrite des églises, des couvents et des palais qui évoquent des siècles de tradition. Ses places et ses rues invitent à la flânerie et à la découverte de son identité andalouse. Palma del Río, au milieu des oliveraies et des jardins, offre un équilibre parfait entre patrimoine, paysage et culture locale, et la gastronomie et les festivités sont les éléments clés qui définissent ce petit coin de la province de Cordoue.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n20 546 habitants.<br />\nProvince de Cordoue.<br />\n<a href=\"https://www.palmadelrio.es\" target=\"_blank\" rel=\"noopener noreferrer\"> palmadelrio.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "updatedAt": "2025-12-15T12:33:52+01:00",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      }
+    },
+    "stage": 15,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "74bb80a3264706965ce17df84305f7587a79121f30aaecec364015e181a73303",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "timezone": "Europe/Madrid",
+    "stage": 9,
+    "startTime": "12:26:00",
+    "lengthDisplay": 187.5,
+    "endTime": "17:30:00",
+    "podiumDisplayMode": "instantpodium",
+    "length": 187.4,
+    "type": "HMG",
+    "id": 25105,
+    "hasCoordinates": true,
+    "date": "2026-08-30T00:00:00+02:00",
+    "arrivalCity": {
+      "createdAt": "2025-12-15T11:16:37+01:00",
+      "id": 32851,
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "createdBy": "Clerat",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e09-meta-aitana/27414/0:0,960:960-0-0-70/d94a0",
+        "texts": [
+          {
+            "text": [
+              " El Alto de Aitana es una de esas cimas que forman parte de la historia de La Vuelta. En 2026, acogerá su quinta llegada de etapa tras una década de ausencia en el año en el que se cumple el 25 aniversario de su estreno en la carrera. En 2016, en la antesala de la etapa final en Madrid, la subida vivió un intenso duelo entre los dos hombres que se jugaban la victoria en la clasificación general, Nairo Quintana y Chris Froome, que certificaron su 1er y 2º puesto la base del Ejército del Aire.<br />\n<br />\nEl Alto de Aitana ha acogido cuatro llegadas de La Vuelta.<br />\nProvincia de Alicante.<br />\n<a href=\"https://www.costablanca.org\" target=\"_blank\" rel=\"noopener noreferrer\"> costablanca.org </a><br />\n<a href=\"https://www.diputacionalicante.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diputacionalicante.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "The Alto de Aitana is one of those summits that form part of the history of La Vuelta. In 2026, it will host its fifth finish-line following a 10-year absence on the year of the 25th anniversary since it made its race debut. In 2016, in the prelude to the final stage in Madrid, the climb was the scene of an intense battle between two men fighting for the general classification, Nairo Quintana and Chris Froome, who obtained 1st and 2nd place at the Air Base.<br />\n<br />\nThe Alto de Aitana has already hosted 4 La Vuelta finish-lines.<br />\nProvince of Alicante.<br />\n<a href=\"https://www.costablanca.org\" target=\"_blank\" rel=\"noopener noreferrer\"> costablanca.org </a><br />\n<a href=\"https://www.diputacionalicante.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diputacionalicante.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "L'Alto de Aitana est l'un de ces sommets qui font partie intégrante de l'histoire de La Vuelta. En 2026, il accueillera sa cinquième arrivée d'étape après une décennie d'absence, l'année même du 25e anniversaire de sa première apparition dans la course. En 2016, à la veille de l'étape finale à Madrid, la montée a été le théâtre d'un duel intense entre les deux hommes qui se disputaient la victoire au classement général, Nairo Quintana et Chris Froome, qui ont confirmé leur 1re et 2e place sur la base de l'Armée de l'air.<br />\n<br />\nEl Alto de Aitana a accueilli 4 arrivées de La Vuelta.<br />\nProvince d'Alicante.<br />\n<a href=\"https://www.costablanca.org\" target=\"_blank\" rel=\"noopener noreferrer\"> costablanca.org </a><br />\n<a href=\"https://www.diputacionalicante.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diputacionalicante.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "updatedAt": "2025-12-15T11:16:37+01:00",
+      "label": "Alto de Aitana.Costa Blanca",
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "code": "alto-de-aitana-costa-blanca"
+    },
+    "isCancelled": false,
+    "showGroups": true,
+    "departureCity": {
+      "cityLangs": [],
+      "updatedBy": "Clerat",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e09-salida-villajoyosa/27413/0:0,960:960-0-0-70/bce2a",
+        "texts": [
+          {
+            "text": [
+              "Villajoyosa deslumbra con sus coloridas casas frente al Mediterráneo, una estampa que resume el carácter marinero de esta localidad alicantina. Su casco histórico, antiguo enclave amurallado, invita a perderse entre calles estrechas, murallas renacentistas y la parroquia de Nuestra Señora de la Asunción. A lo largo del litoral, playas amplias y calas tranquilas se combinan con torres vigía que miran al horizonte. Y entre historia y mar, un aroma dulce: el del chocolate, convertido en patrimonio local gracias a su célebre museo.<br />\n<br />\nSede inédita de La Vuelta.<br />\n36.891 habitantes.<br />\nProvincia de Alicante.<br />\n<a href=\"https://www.villajoyosa.com\" target=\"_blank\">villajoyosa.com</a> / <a href=\"https://www.costablanca.org\" target=\"_blank\">costablanca.org</a> / <a href=\"https://www.diputacionalicante.es\" target=\"_blank\">diputacionalicante.es</a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              "Villajoyosa dazzles with its colourful houses in front of the Mediterranean, an image that summarises the maritime character of this Alicante locality. Its old city centre, an ancient walled enclave, invites visitors to lose themselves between its narrow streets, Renaissance walls and the Parish Church of Nuestra Señora de la Asunción (or Our Lady of the Assumption). Along the coast, vast beaches and calm coves mix with watchtowers that face the horizon. And somewhere between this history and the sea, lingers a sweet scent: that of chocolate, now an important part of its local heritage thanks to its famous museum.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n36,891 inhabitants.<br />\nProvince of Alicante.<br />\n<a href=\"https://www.villajoyosa.com\" target=\"_blank\">villajoyosa.com</a> / <a href=\"https://www.costablanca.org\" target=\"_blank\">costablanca.org</a> / <a href=\"https://www.diputacionalicante.es\" target=\"_blank\">diputacionalicante.es</a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Villajoyosa rayonne avec ses maisons colorées face à la Méditerranée, une image qui illustre parfaitement le caractère maritime de cette localité d'Alicante. Son centre historique, ancienne enclave fortifiée, invite à se perdre dans ses ruelles étroites, ses remparts de la Renaissance et l'église paroissiale Nuestra Señora de la Asunción. Le long du littoral, de vastes plages et des criques tranquilles côtoient des tours de guet qui scrutent l'horizon. Et entre histoire et mer, un arôme délicieux : celui du chocolat, devenu patrimoine local grâce à son célèbre musée.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n36 891 habitants.<br />\nProvince d'Alicante.<br />\n<a href=\"https://www.villajoyosa.com\" target=\"_blank\" rel=\"noopener noreferrer\"> villajoyosa.com </a><br />\n<a href=\"https://www.costablanca.org\" target=\"_blank\" rel=\"noopener noreferrer\"> costablanca.org </a><br />\n<a href=\"https://www.diputacionalicante.es\" target=\"_blank\" rel=\"noopener noreferrer\"> diputacionalicante.es </a><br />\n"
+            ]
+          }
+        ]
+      },
+      "code": "la-vila-joiosa-villajoyosa",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "id": 32850,
+      "updatedAt": "2025-12-15T11:16:23+01:00",
+      "label": "La Vila Joiosa/ Villajoyosa",
+      "createdBy": "Clerat",
+      "createdAt": "2025-12-15T11:16:23+01:00"
+    },
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "5e90fa6e3a7248c4a120e6478eb0c08e3d6feea814e4cd26d48473c951241a90",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "showGroups": true,
+    "endTime": "17:30:00",
+    "departureCity": {
+      "createdAt": "2023-01-04T15:00:03+01:00",
+      "createdBy": "hkohler",
+      "code": "cartagena",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e11-salida-cartagena/27415/0:0,960:960-0-0-70/150fc",
+        "texts": [
+          {
+            "text": [
+              "Con más de 2.500 años de historia, Cartagena vivió su periodo de máximo esplendor durante la época romana en Hispania. El teatro romano es hoy uno de los vestigios más significativos de aquella etapa en la que Cartago Nova fue una de las ciudades de mayor relevancia de la península gracias a la riqueza mineral de su sierra y al valor estratégico y naval de la ciudad para el Imperio Romano.<br />\n<br />\nCartagena ha acogido tres salidas de La Vuelta.<br />\n219.777 habitantes.<br />\nRegión de Murcia.<br />\n<a href=\"https://www.cartagena.es\" target=\"_blank\" rel=\"noopener noreferrer\"> cartagena.es </a><br />\n<a href=\"https://www.carm.es\" target=\"_blank\" rel=\"noopener noreferrer\"> carm.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              "With a history spanning over 2,500 years, Cartagena lived its maximum splendour during Spain’s Roman period. The Roman theatre is, today, one of the most important remains of that time, back when Cartago Nova was one of the peninsula’s most relevant cities thanks to the mineral wealth of its mountain range and to the strategic and naval value it held for the Roman Empire.<br />\n<br />\nCartagena has already hosted 3 La Vuelta stage departures.<br />\n219,777 inhabitants.<br />\nRegion of Murcia.<br />\n<a href=\"https://www.cartagena.es\" target=\"_blank\" rel=\"noopener noreferrer\"> cartagena.es </a><br />\n<a href=\"https://www.carm.es\" target=\"_blank\" rel=\"noopener noreferrer\"> carm.es </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "Avec plus de 2 500 ans d'histoire, Carthagène a connu sa période de splendeur maximale pendant la période romaine en Hispanie. Le théâtre romain est aujourd'hui l'un des vestiges les plus significatifs de cette période pendant laquelle Cartago Nova était l'une des villes les plus importantes de la péninsule, grâce à la richesse minérale de ses montagnes et à la valeur stratégique et navale de la ville pour l'Empire romain.<br />\n<br />\nCartagena a accueilli 3 départs de La Vuelta.<br />\n219 777 habitants.<br />\nRégion de Murcie.<br />\n<a href=\"https://www.cartagena.es\" target=\"_blank\" rel=\"noopener noreferrer\"> cartagena.es </a><br />\n<a href=\"https://www.carm.es\" target=\"_blank\" rel=\"noopener noreferrer\"> carm.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "updatedAt": "2023-01-04T15:00:03+01:00",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "id": 32758,
+      "cityLangs": [],
+      "updatedBy": "hkohler",
+      "label": "Cartagena"
+    },
+    "isCancelled": false,
+    "startTime": "14:08:00",
+    "arrivalCity": {
+      "code": "lorca",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e11-meta-lorca/27418/0:0,960:960-0-0-70/192b3",
+        "texts": [
+          {
+            "text": [
+              "La esencia de Lorca se reconoce en cada piedra de su casco histórico y en la silueta imponente de la Fortaleza del Sol. Entre mezquitas, sinagogas y la colegiata de San Patricio, la ciudad reúne siglos de tradición y patrimonio vivo. Su Semana Santa, declarada de Interés Turístico Internacional, convierte la pasión en un espectáculo único que mantiene a Lorca vibrante y sorprendente durante todo el año.<br />\n<br />\nLa Vuelta ha llegado tres veces a Lorca.<br />\n98.334 habitantes.<br />\nRegión de Murcia.<br />\n<a href=\"https://www.lorca.es\" target=\"_blank\" rel=\"noopener noreferrer\"> lorca.es </a><br />\n<a href=\"https://www.carm.es\" target=\"_blank\" rel=\"noopener noreferrer\"> carm.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              " The essence of Lorca can be seen in each and every stone found in its historical centre and in the impressive Fortaleza del Sol. With its mosques, synagogues and the Collegiate Church of San Patricio (or Saint Patrick), the city encompasses several centuries of tradition and living heritage. Its Holy Week, declared of International Touristic Interest, turns the Passion into a unique sight that keeps Lorca vibrant and amazing all year round.<br />\n<br />\nLorca has already hosted 3 La Vuelta finish-lines.<br />\n98,334 inhabitants.<br />\nRegion of Murcia.<br />\n<a href=\"https://www.lorca.es\" target=\"_blank\" rel=\"noopener noreferrer\"> lorca.es </a><br />\n<a href=\"https://www.carm.es\" target=\"_blank\" rel=\"noopener noreferrer\"> carm.es </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "Chaque pierre de son centre historique et la silhouette imposante de la forteresse del Sol sont autant de témoignages de l'essence même de Lorca. Avec ses mosquées, ses synagogues et la collégiale San Patricio, la ville concentre des siècles de tradition et de patrimoine vivant. Sa Semaine sainte, déclarée d'intérêt touristique international, transforme la passion en un spectacle unique qui fait de Lorca une ville vibrante et surprenante tout au long de l'année.<br />\n<br />\nLorca a accueilli 3 arrivées de La Vuelta.<br />\n98 334 habitants.<br />\nRégion de Murcie.<br />\n<a href=\"https://www.lorca.es\" target=\"_blank\" rel=\"noopener noreferrer\"> lorca.es </a><br />\n<a href=\"https://www.carm.es\" target=\"_blank\" rel=\"noopener noreferrer\"> carm.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "cityLangs": [],
+      "id": 30245,
+      "label": "Lorca"
+    },
+    "hasCoordinates": true,
+    "timezone": "Europe/Madrid",
+    "stage": 11,
+    "length": 151.3,
+    "podiumDisplayMode": "instantpodium",
+    "type": "PLN",
+    "lengthDisplay": 151.5,
+    "date": "2026-09-02T00:00:00+02:00",
+    "id": 25109,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "5ce1301eb449fd522d920af164173ce278c773c186f9c1b536afe7075df6ae40",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "stage": 19,
+    "date": "2026-09-11T00:00:00+02:00",
+    "type": "VAA",
+    "departureCity": {
+      "code": "velez-malaga",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e19-salida-velezmalaga/27389/0:0,960:960-0-0-70/42f67",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Vélez-Málaga, capital de la Axarquía y municipio con 22 kilómetros de costa, conserva un pasado marcado por romanos, fenicios y, sobre todo, por la profunda huella andalusí visible en sus calles y en monumentos como la Fortaleza y las antiguas mezquitas transformadas en iglesias. Hoy combina patrimonio, playas y una pujante agricultura subtropical que exporta aguacates y mangos a medio mundo, además de un dinamismo cultural ligado a la figura de María Zambrano.<br />\n<br />\nLa Vuelta ha salido una vez de Vélez-Málaga.<br />\n85.990 habitantes.<br />\nProvincia de Málaga.<br />\n<a href=\"https://www.velezmalaga.es\" target=\"_blank\" rel=\"noopener noreferrer\"> velezmalaga.es </a><br />\n<a href=\"https://www.malaga.es\" target=\"_blank\" rel=\"noopener noreferrer\"> malaga.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "Vélez-Málaga, the capital of Axarquía and a municipality with 22 kilometres of coastline, preserves a past marked by Romans, Phoenicians and, above all, by a deep Moorish influence, visible in its streets and in its monuments, including the Fortaleza and the ancient mosques that have been transformed into churches. Today, it combines heritage, beaches and a thriving subtropical agriculture that exports avocados and mangoes to half the globe, as well as a cultural dynamism linked to the figure of María Zambrano.<br />\n<br />\nVélez-Málaga has already hosted a La Vuelta stage departure once before.<br />\n85,990 inhabitants.<br />\nProvince of Málaga.<br />\n<a href=\"https://www.velezmalaga.es\" target=\"_blank\" rel=\"noopener noreferrer\"> velezmalaga.es </a><br />\n<a href=\"https://www.malaga.es\" target=\"_blank\" rel=\"noopener noreferrer\"> malaga.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Vélez-Málaga, capitale de la comarque d'Axarquía, est une commune dotée de 22 kilomètres de côtes. Elle est fière de son passé marqué par les Romains, les Phéniciens et, surtout, par la profonde empreinte de l’époque musulmane visible dans ses rues et ses monuments, notamment la forteresse et les anciennes mosquées transformées en églises. Aujourd'hui, elle combine patrimoine, plages et une agriculture subtropicale florissante qui exporte des avocats et des mangues dans le monde entier, ainsi qu'un dynamisme culturel lié à la personnalité de María Zambrano.<br />\n<br />\nVélez-Málaga a accueilli un seul départ de La Vuelta.<br />\n85 990 habitants.<br />\nProvince de Malaga.<br />\n<a href=\"https://www.velezmalaga.es\" target=\"_blank\" rel=\"noopener noreferrer\"> velezmalaga.es </a><br />\n<a href=\"https://www.malaga.es\" target=\"_blank\" rel=\"noopener noreferrer\"> malaga.es </a><br />\n"
+            ]
+          }
+        ]
+      },
+      "id": 32594,
+      "cityLangs": [],
+      "label": "Vélez-Málaga"
+    },
+    "timezone": "Europe/Madrid",
+    "arrivalCity": {
+      "updatedAt": "2021-12-03T16:35:28+01:00",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "id": 32733,
+      "label": "Peñas Blancas. Estepona",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e19-meta-penas-blancas/27390/0:0,960:960-0-0-70/3f037",
+        "texts": [
+          {
+            "text": [
+              "En Estepona, la tradición marinera convive con un casco histórico plenamente renovado y convertido en un gran jardín urbano. Sus kilómetros de playas, un puerto deportivo muy activo y una amplia oferta cultural —con murales, esculturas y el orquidario como icono reciente— hacen del municipio uno de los destinos más atractivos de la Costa del Sol. La subida a Peñas Blancas volverá a estar presente tres años después de la victoria de Richard Carapaz en 2022.<br />\n<br />\nLa Vuelta ha llegado dos veces a Peñas Blancas.<br />\n78.413 habitantes.<br />\nProvincia de Málagaayuntamiento.<br />\n<a href=\"https://www.ayuntamiento.estepona.es\" target=\"_blank\" rel=\"noopener noreferrer\"> ayuntamiento.estepona.es </a><br />\n<a href=\"https://www.malaga.es\" target=\"_blank\" rel=\"noopener noreferrer\"> malaga.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              " In Estepona, the seafaring tradition coexists with a historical centre that has been completely refurbished and transformed into a large urban garden. Its many kilometres of beaches and a very active marina with a vast cultural offer - with murals, sculptures and an orchidarium as its most recent addition - make the municipality one of the most attractive along the Costa del Sol. The climb to Peñas Blancas will, once again, be present three years after Richard Carapaz’s victory in 2022.<br />\n<br />\nPeñas Blancas has already hosted 2 La Vuelta finish-lines.<br />\n78,413 inhabitants.<br />\nProvince of Málaga.<br />\n<a href=\"https://www.ayuntamiento.estepona.es\" target=\"_blank\" rel=\"noopener noreferrer\"> ayuntamiento.estepona.es </a><br />\n<a href=\"https://www.malaga.es\" target=\"_blank\" rel=\"noopener noreferrer\"> malaga.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "À Estepona, la tradition maritime cohabite avec un centre historique entièrement rénové et transformé en un vaste jardin urbain. Ses kilomètres de plages, son port de plaisance très actif et son offre culturelle variée, avec des fresques murales, des sculptures et l'orchidarium devenu emblématique, font de cette commune l'une des destinations les plus attrayantes de la Costa del Sol. La montée vers Peñas Blancas sera de nouveau au programme trois ans après la victoire de Richard Carapaz en 2022.<br />\n<br />\nPeñas Blancas a accueilli 2 arrivées de La Vuelta.<br />\n78 413 habitants.<br />\nProvince de Malaga.<br />\n<a href=\"https://www.ayuntamiento.estepona.es\" target=\"_blank\" rel=\"noopener noreferrer\">ayuntamiento.estepona.es</a><br />\n<a href=\"https://www.malaga.es\" target=\"_blank\" rel=\"noopener noreferrer\">malaga.es</a><br />\n"
+            ]
+          }
+        ]
+      },
+      "cityLangs": [],
+      "updatedBy": "tmigeat",
+      "createdAt": "2021-12-03T16:35:28+01:00",
+      "code": "penas-blancas-estepona",
+      "createdBy": "tmigeat"
+    },
+    "isCancelled": false,
+    "lengthDisplay": 210,
+    "id": 25118,
+    "startTime": "12:06:00",
+    "hasCoordinates": true,
+    "podiumDisplayMode": "instantpodium",
+    "showGroups": true,
+    "endTime": "17:30:00",
+    "length": 210,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "047a83daf1879d892051715e205e8ec2fff618c5bf0bc2f912f74af42d1d19c4",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "isCancelled": false,
+    "arrivalCity": {
+      "updatedAt": "2025-12-15T11:49:48+01:00",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e12-meta-calar-alto/27419/0:0,960:960-0-0-70/6a87d",
+        "texts": [
+          {
+            "text": [
+              "La subida al Observatorio Astronómico de Calar Alto es una de las grandes ascensiones del sur peninsular. Una subida en la que solo han ganado grandes escaladores: Roberto Heras, Igor Antón y Miguel Ángel López. En 2026, La Vuelta volverá nueve años después a esta cima que alberga el observatorio astronómico más grande del continente europeo, a más de 2100 metros sobre el nivel del mar.<br />\n<br />\nCalar Alto ha acogido tres llegadas de La Vuelta. <br />\nProvincia de Almería.<br />\n<a href=\"https://www.dipalme.org\" target=\"_blank\" rel=\"noopener noreferrer\"> dipalme.org </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              " The ascent up to the Calar Alto Astronomical Observatory is one of the great climbs in the Peninsula’s South. A climb that has only been won by truly great climbers: Roberto Heras, Igor Antón and Miguel Ángel López. In 2026, La Vuelta will return to this summit, home to the largest astronomical observatory in Europe, following a 9-year absence. It is located more than 2,100 metres above sea level.<br />\n<br />\nCalar Alto has already hosted 3 La Vuelta finish-lines. <br />\nProvince of Almería.<br />\n<a href=\"https://www.dipalme.org\" target=\"_blank\" rel=\"noopener noreferrer\"> dipalme.org </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "L'ascension vers l'observatoire astronomique de Calar Alto est l'une des plus importantes du sud de la péninsule. Seuls de grands grimpeurs ont réussi à la remporter : Roberto Heras, Igor Antón et Miguel Ángel López. En 2026, La Vuelta reviendra neuf ans après sur ce sommet qui abrite le plus grand observatoire astronomique du continent européen, à plus de 2 100 mètres d'altitude.<br />\n<br />\nCalar Alto a accueilli 3 arrivées de La Vuelta. <br />\nProvince d’Almeria.<br />\n<a href=\"https://www.dipalme.org\" target=\"_blank\" rel=\"noopener noreferrer\"> dipalme.org </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "label": "Calar Alto",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "code": "calar-alto",
+      "createdAt": "2025-12-15T11:49:48+01:00",
+      "createdBy": "Clerat",
+      "id": 32855
+    },
+    "timezone": "Europe/Madrid",
+    "length": 166.6,
+    "hasCoordinates": true,
+    "date": "2026-09-03T00:00:00+02:00",
+    "podiumDisplayMode": "instantpodium",
+    "stage": 12,
+    "startTime": "13:07:00",
+    "type": "HMG",
+    "departureCity": {
+      "code": "vera",
+      "createdAt": "2025-12-15T11:49:37+01:00",
+      "createdBy": "Clerat",
+      "updatedAt": "2025-12-15T11:49:37+01:00",
+      "id": 32854,
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "label": "Vera",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e12-salida-vera/27420/0:0,960:960-0-0-70/a60ec",
+        "texts": [
+          {
+            "text": [
+              "Vera combina la serenidad de su casco histórico con el dinamismo de un destino abierto al Mediterráneo. Su Plaza Mayor, la Iglesia de la Encarnación y el Ayuntamiento forman un conjunto lleno de carácter, mientras que el antiguo trazado andalusí asoma en calles y rincones. A pocos kilómetros, amplias playas de arena fina y espacios naturales completan un municipio que invita a disfrutarse con calma y luz propia.<br />\n<br />\nSede inédita de La Vuelta.<br />\n19.488 habitantes.<br />\nProvincia de Almería.<br />\n<a href=\"https://www.vera.es\" target=\"_blank\" rel=\"noopener noreferrer\"> vera.es </a><br />\n<a href=\"https://www.dipalme.org\" target=\"_blank\" rel=\"noopener noreferrer\"> dipalme.org </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              "Vera combines the serenity of its historical centre with the dynamism of a destination that opens up to the Mediterranean. Its Main Plaza, the Church of the Encarnación (or Incarnation) and its Town Hall all form part of a complex that is filled with character, while its streets and hidden corners reflect its ancient Moorish layout. Just a few kilometres away, vast fine sandy beaches and natural areas complete a municipality that invites visitors to enjoy themselves calmly and bask in their own light.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n19,488 inhabitants.<br />\nProvince of Almería.<br />\n<a href=\"https://www.vera.es\" target=\"_blank\" rel=\"noopener noreferrer\"> vera.es </a><br />\n<a href=\"https://www.dipalme.org\" target=\"_blank\" rel=\"noopener noreferrer\"> dipalme.org </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Vera allie la sérénité de son centre historique au dynamisme d'une destination ouverte sur la Méditerranée. Sa place principale, l'église de l'Encarnación et l’Hôtel de Ville forment un ensemble plein de caractère, tandis que ses rues et ses moindres recoins révèlent son origine arabo-andalouse. À quelques kilomètres, de vastes plages de sable fin et des espaces naturels complètent une commune qui nous invite à en profiter sereinement sous sa lumière unique.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n19 488 habitants.<br />\nProvince d’Almeria.<br />\n<a href=\"https://www.vera.es\" target=\"_blank\" rel=\"noopener noreferrer\"> vera.es </a><br />\n<a href=\"https://www.dipalme.org\" target=\"_blank\" rel=\"noopener noreferrer\"> dipalme.org </a><br />\n"
+            ]
+          }
+        ]
+      },
+      "cityLangs": [],
+      "updatedBy": "Clerat"
+    },
+    "id": 25110,
+    "lengthDisplay": 167,
+    "endTime": "17:30:00",
+    "showGroups": true,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "2b04ffe490dd4bf9e3918b4334bc27f01bcc349c9637fb83ce90e60917ed5b5d",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "length": 173.4,
+    "endTime": "17:30:00",
+    "date": "2026-08-26T00:00:00+02:00",
+    "arrivalCity": {
+      "id": 32845,
+      "createdBy": "Clerat",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e05-meta-roquetes/27407/0:0,960:960-0-0-70/9f56f",
+        "texts": [
+          {
+            "text": [
+              "Enmarcada entre el canal derecho del Ebro y el Macizo de los Puertos, Roquetes combina patrimonio natural y cultural. Desde el Mont Caro, el punto más alto de las comarcas del Ebro, se contempla un paisaje espectacular del río y sus canales. Su legado histórico incluye el Observatorio del Ebro, el Ayuntamiento Viejo y el Antiguo Matadero. Las Fiestas Mayores de julio y el Tradicionàrius de las Tierras del Ebro de agosto muestran la tradición, música y gastronomía del Baix Ebre.<br />\n<br />\nSede inédita de La Vuelta.<br />\n8.369 habitantes.<br />\nProvincia de Tarragona<br />\n<a href=\"https://www.roquetes.cat\" target=\"_blank\">roquetes.cat</a> / <a href=\"http://www.terresdelebre.travel\" target=\"_blank\">terresdelebre.travel</a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              " Nestled between the right channel of the Ebro River and the Los Puertos Massif, Roquetes combines natural and cultural heritage. The Mont Caro, the tallest peak of Ebro regions, offers spectacular views of the river and its channels. Its historical legacy includes the Ebro Observatory, the Old Town Hall and the Old Slaughterhouse. Its Fiestas Mayores, held in July, and the Tradicionàrius de las Tierras del Ebro, held in August, show the tradition, music and gastronomy of the Baix Ebre.<br />\n<br />\nUnprecedented La Vuelta finish-line.<br />\n8,369 inhabitants.<br />\nProvince of Tarragona.roquetes.<br />\n<br />\n<br />\n<a href=\"https://www.roquetes.cat\" target=\"_blank\">roquetes.cat</a> / <a href=\"http://www.terresdelebre.travel\" target=\"_blank\">terresdelebre.travel</a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Située entre le canal droit de l'Èbre et le massif des Ports, Roquetes allie patrimoine naturel et culturel. Depuis le Mont Caro, le point culminant des comarques de l'Èbre, la vue sur le fleuve et ses canaux est saisissante. Son patrimoine historique comprend l'Observatoire de l'Èbre, l’ancien Hôtel de Ville et l'ancien abattoir. Les fêtes patronales du mois de juillet et le Tradicionàrius des Terres de l’Ebre en août mettent en valeur les traditions, la musique et la gastronomie de la région du Baix Ebre.<br />\n<br />\nArrivée inédite de La Vuelta.<br />\n8 369 habitants.<br />\nProvince de Tarragone<br />\n<br />\n<br />\n<a href=\"https://www.roquetes.cat\" target=\"_blank\">roquetes.cat</a> / <a href=\"http://www.terresdelebre.travel\" target=\"_blank\">terresdelebre.travel</a><br />\n<br />\n "
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "createdAt": "2025-12-15T11:05:22+01:00",
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "label": "Roquetes. Terres de l'Ebre",
+      "updatedAt": "2025-12-15T11:05:22+01:00",
+      "code": "roquetes-terres-de-lebre"
+    },
+    "timezone": "Europe/Madrid",
+    "isCancelled": false,
+    "type": "VAL",
+    "stage": 5,
+    "lengthDisplay": 173.5,
+    "podiumDisplayMode": "instantpodium",
+    "departureCity": {
+      "code": "falset-costa-daurada",
+      "updatedAt": "2025-12-15T11:04:48+01:00",
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e05-salida-falset/27411/0:0,960:960-0-0-70/d3782",
+        "texts": [
+          {
+            "text": [
+              "En pleno corazón del Priorat, entre viñedos y paisajes de llicorella, Falset combina historia y cultura del vino. Su casco antiguo, presidido por el castillo, convive con la bodega cooperativa modernista de César Martinell, símbolo de la tradición vitivinícola local. La Feria del Vino y las “coques” artesanales completan la esencia de una localidad que resume el carácter auténtico y singular de esta comarca catalana.<br />\n<br />\nSede inédita de La Vuelta.<br />\n2.856 habitantes.<br />\nProvincia de Tarragona.<br />\n<a href=\"https://www.falset.org\" target=\"_blank\">falset.org</a> / <a href=\"https://www.costadaurada.info/\" target=\"_blank\">costadaurada.info/</a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "Falset, located right in the heart of Priorat, among vineyards and slate landscapes, combines history and winemaking culture. Its old city centre, dominated by the castle, coexists with César Martinell’s Modernist cooperative winery - a symbol of local winemaking tradition. The Wine Festival and artisanal coques complete the essence of a locality that encapsulates the authentic and unique character of this Catalan region.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n2,856 inhabitants.<br />\nProvince of Tarragona.<br />\n<br />\n<br />\n<a href=\"https://www.falset.org\" target=\"_blank\">falset.org</a> / <a href=\"http://www.terresdelebre.travel\" target=\"_blank\">terresdelebre.travel</a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Au cœur du Priorat, entre les vignobles et les paysages d’ardoise, Falset conjugue histoire et culture du vin. Sa vieille ville, dominée par le château, cohabite avec la cave coopérative moderniste de César Martinell, symbole de la tradition viticole locale. La Foire du vin et les « coques » artisanales constituent l'essence même d'une localité qui illustre le caractère authentique et singulier de cette région catalane.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n2 856 habitants.<br />\nProvince de Tarragone.<br />\n<br />\n<br />\n<a href=\"https://www.falset.org\" target=\"_blank\">falset.org</a> / <a href=\"https://www.costadaurada.info/\" target=\"_blank\">costadaurada.info</a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "createdAt": "2025-12-15T11:04:48+01:00",
+      "label": "Falset . Costa Daurada",
+      "id": 32844,
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "createdBy": "Clerat"
+    },
+    "hasCoordinates": true,
+    "startTime": "13:34:00",
+    "id": 25101,
+    "showGroups": true,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "9416e039f175b31b6562305318c873e04ed8bae96cf7686bc22f5477c49ae170",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  },
+  {
+    "isCancelled": false,
+    "stage": 21,
+    "date": "2026-09-13T00:00:00+02:00",
+    "lengthDisplay": 112,
+    "arrivalCity": {
+      "cityLangs": [],
+      "id": 32595,
+      "code": "granada",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e21-salida-armilla/27396/0:0,960:960-0-0-70/e7a48",
+        "texts": [
+          {
+            "text": [
+              "Granada cuenta con un lugar especial en la historia de La Vuelta y, en 2026, lo refrendará al convertirse en la octava ciudad en acoger la meta final de la carrera. La Alhambra, el gran tesoro y seña de identidad de la ciudad, será testigo de un momento único para coronar al vencedor de la 81ª edición de La Vuelta.<br />\n<br />\nLa Vuelta ha llegado 20 veces a Granada.<br />\n232.717 habitantes.<br />\nProvincia de Granada.<br />\n<a href=\"https://www.granada.org\" target=\"_blank\" rel=\"noopener noreferrer\"> granada.org </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "Granada has a special place in La Vuelta’s history and, in 2026, it will affirm it by becoming the eighth city in hosting the race’s final finish-line. The Alhambra, the city’s greatest treasure and sign of identity, will bear witness to this unique moment that will crown the winner of the 81st edition of La Vuelta.<br />\n<br />\nGranada has already hosted 20 La Vuelta finish-lines.<br />\n232,717 inhabitants.<br />\nProvince of Granada.<br />\n<a href=\"https://www.granada.org\" target=\"_blank\" rel=\"noopener noreferrer\"> granada.org </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Grenade occupe une place particulière dans l'histoire de La Vuelta et, en 2026, elle le confirmera en devenant la huitième ville à accueillir la dernière étape de la course. L'Alhambra, grand trésor et symbole de la ville, sera le témoin d'un moment unique pour couronner le vainqueur de la 81e édition de La Vuelta. <br />\n<br />\nGrenade a accueilli 20 arrivées de La Vuelta.<br />\n232 717 habitants.<br />\nProvince de Grenade.<br />\n<a href=\"https://www.granada.org\" target=\"_blank\" rel=\"noopener noreferrer\"> granada.org </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ]
+          }
+        ]
+      },
+      "label": "Granada"
+    },
+    "startTime": "16:23:00",
+    "id": 25120,
+    "length": 112,
+    "showGroups": true,
+    "podiumDisplayMode": "instantpodium",
+    "timezone": "Europe/Madrid",
+    "type": "PLN",
+    "departureCity": {
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "createdAt": "2025-12-15T12:45:59+01:00",
+      "code": "carrefour-granada",
+      "updatedBy": "Clerat",
+      "label": "Carrefour Granada",
+      "id": 32868,
+      "content": {
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Las calles de Armilla, a la que muchos consideran la cuna del ciclismo granadino, sirvieron para curtirse a todo un ganador de etapa en el Tour de Francia, Joaquín Galera, quien consiguió alzar los brazos en Briançon en 1965. Carrefour, patrocinador principal de La Vuelta, volverá a protagonizar una salida de la carrera como ya hiciera en 2023 con el Carrefour Jerez Sur como inicio de la etapa 6.<br />\n<br />\nSede inédita de La Vuelta.<br />\n25.405 habitantes.<br />\nProvincia de Granada.<br />\n<a href=\"https://www.carrefour.es\" target=\"_blank\" rel=\"noopener noreferrer\"> carrefour.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "The streets of Armilla, considered by many to be the birthplace of cycling in Granada, served to toughen up a Tour de France winner. Joaquin Galera, who emerged victorious in Briançon in 1965, amassed an extensive victory tally with such legendary races as the Subida a Arrate, the Subida al Naranco and the Escalada a Montjuic. His brother, Manuel Galera, was also an Armilla cycling reference.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n25,405 inhabitants.<br />\nProvince of Granada.<br />\n<a href=\"https://www.carrefour.es\" target=\"_blank\" rel=\"noopener noreferrer\"> carrefour.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "C'est dans les rues d'Armilla, considérée par beaucoup comme le berceau du cyclisme grenadin, qu'un grand vainqueur d'étape du Tour de France a fait ses armes. Joaquín Galera, proclamé vainqueur à Briançon en 1965, a accumulé un palmarès impressionnant avec des victoires dans des épreuves mythiques telles que la montée d'Arrate, la montée du Naranco ou l'ascension de Montjuic. Son frère, Manuel Galera, a également été une figure de proue du cyclisme local.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n25 405 habitants.<br />\nProvince de Grenade.<br />\n<a href=\"https://www.carrefour.es\" target=\"_blank\" rel=\"noopener noreferrer\"> carrefour.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e21-meta-alhambra/27395/0:0,960:960-0-0-70/760c1"
+      },
+      "createdBy": "Clerat",
+      "updatedAt": "2025-12-15T12:45:59+01:00",
+      "cityLangs": []
+    },
+    "hasCoordinates": true,
+    "endTime": "19:15:00",
+    "_id": "8bb74c198b26df28aad6a71f95413b41e60ab24297655aa1f08b2fa1aba9c744",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1786974292636,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae",
+    "_key": "stage"
+  },
+  {
+    "hasCoordinates": true,
+    "id": 25097,
+    "date": "2026-08-22T00:00:00+02:00",
+    "length": 9.4,
+    "arrivalCity": {
+      "id": 29587,
+      "content": {
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "La llegada de la primera etapa de La Vuelta 26 estará en el Boulevard Albert 1er, donde cada año se sitúa la meta del GP de Mónaco de Fórmula 1. Los ciclistas recorrerán buena parte del trazado pasando por lugares como la curva Loews, el túnel de Louis II o la Piscine. Con esta etapa, Mónaco habrá acogido la salida oficial de las tres grandes vueltas del ciclismo, Giro, Tour y Vuelta.<br />\n<br />\nSede inédita de La Vuelta.<br />\n38.423 habitantes.<br />\nPrincipado de Mónaco.<br />\nWeb<br />\n"
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              " The arrival of the first stage of La Vuelta 26 will take place on Boulevard Albert 1er, where the finish-line for the Monaco Formula 1 Grand Prix is located every year. The riders will cover a large part of the route, passing through such places as the Loews curve, the Louis II tunnel and the Piscine. With this stage, Monaco will have hosted the Grand Departure of the three cycling Grand Tours: Il Giro, Le Tour and La Vuelta.<br />\n<br />\nUnprecedented La Vuelta finish-line.<br />\n38,423 inhabitants.<br />\nPrincipality of Monaco.<br />\nweb<br />\n"
+            ]
+          },
+          {
+            "text": [
+              "L'arrivée de la première étape de La Vuelta 26 aura lieu sur le boulevard Albert 1er, là où se trouve chaque année la ligne d'arrivée du Grand Prix de Monaco de Formule 1. Les cyclistes couvriront une grande partie du tracé en passant par des endroits tels que le virage Loews, le tunnel Louis II ou la Piscine. Avec cette étape, Monaco aura accueilli le départ officiel des trois grands Tours cyclistes : le Giro, le Tour et La Vuelta.<br />\n<br />\nArrivée inédite de La Vuelta.<br />\n38 423 habitants.<br />\nPrincipauté de Monaco<br />\nSite Web<br />\n"
+            ],
+            "locale": "fr"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e01-meta-monaco/27397/0:0,960:960-0-0-70/ea733"
+      },
+      "cityLangs": [],
+      "label": "Monaco",
+      "code": "monaco"
+    },
+    "type": "PAS",
+    "startTime": "16:17:00",
+    "lengthDisplay": 9.4,
+    "isCancelled": false,
+    "stage": 1,
+    "departureCity": {
+      "cityLangs": [],
+      "label": "Monaco",
+      "code": "monaco",
+      "id": 29587,
+      "content": {
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Mónaco dará el pistoletazo de salida de La Vuelta 26 con una espectacular contrarreloj por las calles del Principado. El Casino de Monte-Carlo será el punto de partida de una etapa que pasará por puntos emblemáticos como la Playa de Larvotto, el estadio Louis II o el interior del Chapiteau de l’Espace Fontvieille. Se convertirá en 2026 en la primera ciudad en acoger la salida de la primera etapa de las tres grandes vueltas del ciclismo.<br />\n<br />\nSede inédita de La Vuelta.<br />\n38.423 habitantes.<br />\nPrincipado de Mónaco.web<br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Monaco will fire the starting gun for the Grand Departure of La Vuelta 26 with a spectacular time trial through the streets of the Principality. The Monte Carlo Casino will be the starting point for the stage that will pass through such emblematic locations as Larvotto Beach, the Louis II Stadium and the interior of the Chapiteau de l’Espace Fontvieille. In 2026, Monaco will become the first city to host the start of the first stage in all three cycling Grand Tours.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n38,423 inhabitants.<br />\nPrincipality of Monaco.web<br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "Le coup d'envoi de La Vuelta 26 sera donné à Monaco avec un contre-la-montre spectaculaire disputé dans les rues de la Principauté. Le Casino de Monte-Carlo sera le point de départ d'une étape qui passera par des lieux emblématiques tels que la plage du Larvotto, le stade Louis II ou l'intérieur du Chapiteau de l'Espace Fontvieille. En 2026, Monaco deviendra la première ville à accueillir le départ de la première étape des trois grands Tours.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n38 423 habitants.<br />\nPrincipauté de Monaco<br />\nSite Web<br />\n"
+            ]
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e01-salida-monaco/27402/0:0,960:960-0-0-70/f1ef6"
+      }
+    },
+    "showGroups": false,
+    "endTime": "19:30:00",
+    "podiumDisplayMode": "instantpodium",
+    "timezone": "Europe/Paris",
+    "_id": "93bd5639e913abc271fb13124da9db9a6a602ca76973eeae9a729197feefbbdb",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1787144811735,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae",
+    "_key": "stage"
+  },
+  {
+    "date": "2026-09-12T00:00:00+02:00",
+    "type": "HMG",
+    "showGroups": true,
+    "length": 186.8,
+    "lengthDisplay": 187,
+    "timezone": "Europe/Madrid",
+    "startTime": "12:36:00",
+    "id": 25119,
+    "isCancelled": false,
+    "hasCoordinates": true,
+    "stage": 20,
+    "arrivalCity": {
+      "label": "Collado del Alguacil",
+      "cityLangs": [],
+      "createdBy": "Clerat",
+      "createdAt": "2025-12-15T12:44:41+01:00",
+      "code": "collado-del-alguacil",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "updatedAt": "2025-12-15T12:44:41+01:00",
+      "content": {
+        "texts": [
+          {
+            "text": [
+              " La última gran etapa de montaña de La Vuelta 26 tendrá como colofón una subida inédita en el ciclismo profesional: el Collado del Alguacil. Sus 8,3 kilómetros al 9,8% serán el último gran reto para los aspirantes a la victoria en la general de La Vuelta. Será la segunda cima del municipio de Güejar Sierra que sea meta de La Vuelta: en 2013, la subida a Hazallanas fue escenario de la sorprende victoria del estadounidense Chris Horner, que se vestía de líder y acabaría ganando aquella edición de la carrera.<br />\n<br />\nSede inédita de La Vuelta.<br />\n2.926 habitantes (Güejar Sierra).<br />\nProvincia de Granada.<br />\n<a href=\"https://www.guejarsierra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> guejarsierra.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              " The final great mountain stage of La Vuelta 26 will culminate with an unprecedented climb in the world of professional cycling: the Collado del Alguacil. Its 8.3 kilometres, with an inclination of 9.8%, will be the last big challenge for those hoping to achieve the overall victory in La Vuelta. It will be the second summit within the municipality of Güejar Sierra to host a finish-line for La Vuelta: back in 2013, the climb to Hazallanas was the setting for a surprising victory by American rider Chris Horner who wore the leader’s jersey and would ultimately go on to win that edition of the race.<br />\n<br />\nUnprecedented La Vuelta finish-line.<br />\n2.926 inhabitants (Güejar Sierra).<br />\nProvince of Granada.<br />\n<a href=\"https://www.guejarsierra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> guejarsierra.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "La dernière grande étape de montagne de La Vuelta 26 se terminera par une ascension inédite dans le cyclisme professionnel : le Collado del Alguacil. Ses 8,3 kilomètres à 9,8 % représenteront le dernier grand défi pour les prétendants à la victoire au classement général de La Vuelta. Ce sera le deuxième sommet de la commune de Güejar Sierra à accueillir une arrivée de La Vuelta : en 2013, la montée à Hazallanas avait été le théâtre de la victoire surprise de l'Américain Chris Horner, qui avait endossé le maillot de leader et fini par remporter cette édition de la course.<br />\n<br />\nArrivée inédite de La Vuelta.<br />\n2 926 habitants (Güejar Sierra).<br />\nProvince de Grenade.<br />\n<a href=\"https://www.guejarsierra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> guejarsierra.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e20-meta-gueejar-sierra/27393/0:0,960:960-0-0-70/3c61f"
+      },
+      "id": 32867,
+      "updatedBy": "Clerat"
+    },
+    "departureCity": {
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "updatedBy": "Clerat",
+      "code": "la-calahorra",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e20-salida-la-calahorra/27394/0:0,960:960-0-0-70/44e32",
+        "texts": [
+          {
+            "text": [
+              "La Calahorra, antigua capital del señorío del marqués del Zenete, destaca por su imponente castillo-palacio renacentista, construido por Rodrigo de Mendoza para dominar el territorio y el paso hacia la Alpujarra. Hoy es puerta de acceso al Puerto de La Ragua y a su estación de esquí de fondo. Sus calles tranquilas, sus tradiciones y su patrimonio invitan a descubrir un enclave serrano donde historia y paisaje se entrelazan.<br />\n<br />\nSede inédita de La Vuelta.<br />\n681 habitantes.<br />\nProvincia de Granada.<br />\n<a href=\"https://www.lacalahorra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> lacalahorra.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "locale": "en",
+            "text": [
+              "La Calahorra, the ancient capital of the Marquis of Zenete’s estate, stands out for its impressive Renaissance castle-palace, built by Rodrigo de Mendoza in order to dominate the territory and control the passage to Alpujarra. Today, it is the access point to the La Ragua Mountain Pass and to its cross-country ski resort. Its quiet streets, its traditions and its heritage invite visitors to discover the mountain enclave where history and landscapes are intertwined.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n681 inhabitants.<br />\nProvince of Granada.<br />\n<a href=\"https://www.lacalahorra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> lacalahorra.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ]
+          },
+          {
+            "locale": "fr",
+            "text": [
+              "La Calahorra, ancienne capitale du domaine du marquis du Zenete, se distingue par son imposant château-palais de style Renaissance, construit par Rodrigo de Mendoza pour dominer le territoire et le passage vers l'Alpujarra. Aujourd'hui, elle est la porte d'accès au col de La Ragua et à sa station de ski de fond. Ses rues tranquilles, ses traditions et son patrimoine invitent à découvrir un territoire montagneux où se mêlent histoire et paysages.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n681 habitants.<br />\nProvince de Grenade.<br />\n<a href=\"https://www.lacalahorra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> lacalahorra.es </a><br />\n<a href=\"https://www.dipgra.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipgra.es </a><br />\n"
+            ]
+          }
+        ]
+      },
+      "updatedAt": "2025-12-15T12:44:36+01:00",
+      "id": 32866,
+      "label": "La Calahorra",
+      "createdAt": "2025-12-15T12:44:36+01:00",
+      "cityLangs": [],
+      "createdBy": "Clerat"
+    },
+    "endTime": "17:31:00",
+    "podiumDisplayMode": "instantpodium",
+    "_id": "60085cf1da502cd2d041ebe70ecdb2b26a400b8f2af186e7693696bfda2e3b32",
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_updatedAt": 1787300591932,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae",
+    "_key": "stage"
+  },
+  {
+    "id": 25103,
+    "departureCity": {
+      "code": "vall-dalba",
+      "label": "vall d'Alba",
+      "createdAt": "2025-12-15T11:12:29+01:00",
+      "createdBy": "Clerat",
+      "id": 32846,
+      "updatedAt": "2025-12-15T11:12:38+01:00",
+      "country": {
+        "id": 1959,
+        "code": "esp"
+      },
+      "cityLangs": [],
+      "updatedBy": "Clerat",
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e07-salida-vall-d-alba/27412/0:0,960:960-0-0-70/6cbc3",
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "En Vall d’Alba, el paisaje rural guía al visitante entre senderos y pequeñas sierras. La Ermita de San Cristóbal se alza como uno de sus rincones emblemáticos, ideal para disfrutar de las vistas y del ambiente tranquilo que la rodea. Las iglesias históricas del municipio y rutas como la de les Sènies o la dels Aljubs permiten descubrir su pasado agrícola y la huella tradicional que define este rincón del interior castellonense.<br />\n<br />\nSede inédita de La Vuelta.<br />\n3.103 habitantes.<br />\nProvincia de Castellón.<br />\n<a href=\"https://www.valldalba.es\" target=\"_blank\">valldalba.es</a> / <a href=\"https://www.dipcas.es\" target=\"_blank\">dipcas.es</a><br />\n"
+            ]
+          },
+          {
+            "locale": "en",
+            "text": [
+              "In Vall d’Alba, the rural landscape guides visitors through trails and small mountain ranges. The Chapel of San Cristóbal (or Saint Christopher) stands as one of its most emblematic places, ideal for enjoying the view and the calm atmosphere that envelops it. The municipality’s historical churches and routes such as those of les Sènies and dels Aljubs allow visitors to discover its agricultural past as well as the traditional footprint that defines this corner of inland Castellón.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n3,103 inhabitants.<br />\nProvince of Castellón.<br />\n<br />\n<br />\n<a href=\"https://www.valldalba.es\" target=\"_blank\">valldalba.es</a> / <a href=\"https://www.dipcas.es\" target=\"_blank\">dipcas.es</a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Le visiteur qui se rend à Vall d'Alba découvre un paysage rural fait de sentiers et de petits massifs montagneux. L'ermitage de San Cristóbal est l'un des sites emblématiques de la région. Il constitue un endroit idéal pour profiter de la vue et de l'atmosphère paisible qui y règne. Les églises historiques de la commune et les circuits tels que celui des Sènies ou celui des Aljubs permettent de découvrir son passé agricole et le caractère traditionnel qui définit cette région de l'intérieur de la province de Castellón.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n3 103 habitants.<br />\nProvince de Castellón.<br />\n<br />\n<br />\n<a href=\"https://www.valldalba.es\" target=\"_blank\">valldalba.es</a> / <a href=\"https://www.dipcas.es\" target=\"_blank\">dipcas.es</a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      }
+    },
+    "arrivalCity": {
+      "createdBy": "Clerat",
+      "id": 32847,
+      "createdAt": "2025-12-15T11:13:03+01:00",
+      "code": "aramon-valdelinares",
+      "label": "Aramón Valdelinares",
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "updatedBy": "Clerat",
+      "cityLangs": [],
+      "content": {
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e07-meta-valdelinares/27410/0:0,960:960-0-0-70/49dc3",
+        "texts": [
+          {
+            "text": [
+              "Enclavada en la sierra de Gúdar, Aramón Valdelinares es la estación de esquí más alta de Teruel y uno de los grandes referentes invernales del sistema ibérico. Sus pistas, rodeadas de bosques de pino negro, ofrecen un ambiente familiar y muy accesible para todos los niveles. En verano, el entorno se transforma en un escenario perfecto para senderismo y BTT, con miradores y rutas que muestran la vertiente más serena de estas montañas turolenses.<br />\n<br />\nLa Vuelta ha llegado dos veces a Aramón Valdelinares.<br />\n75 habitantes.<br />\nProvincia de Teruel<br />\n<a href=\"https://www.valdelinares.es\" target=\"_blank\">valdelinares.es</a> / <a href=\"https://www.aragon.es\" target=\"_blank\">aragon.es</a><br />\n"
+            ],
+            "locale": "es"
+          },
+          {
+            "text": [
+              "Nestled in the Gúdar Mountain Range, Aramón Valdelinares is the highest ski resort in Teruel and one of the greatest winter destinations within the Iberian System. Its slopes, surrounded by black pine forests, offer a very accessible family atmosphere, suitable for all levels. In summer, the area transforms into the perfect setting for hiking and mountain biking, with lookouts and routes that highlight the calmest side of these Teruel mountains.<br />\n<br />\nAramón Valdelinares has already hosted 2 La Vuelta finish-lines.<br />\n75 inhabitants.<br />\nProvince of Teruel.<br />\n<br />\n<br />\n<a href=\"https://www.valdelinares.es\" target=\"_blank\">valdelinares.es</a> / <a href=\"https://www.aragon.es\" target=\"_blank\">aragon.es</a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "Blottie dans la sierra de Gúdar, Aramón Valdelinares est la station de ski la plus haute de Teruel et l'une des plus appréciées de la péninsule ibérique. Ses pistes, entourées de forêts de pins noirs, offrent une ambiance familiale et sont accessibles à tous les niveaux. En été, cet écrin naturel se transforme en un cadre idéal pour la randonnée et le VTT, avec des points de vue et des circuits qui révèlent le côté le plus serein de ces montagnes de la province de Teruel.<br />\n<br />\nAramón Valdelinares a accueilli 2 arrivées de La Vuelta.<br />\n75 habitants.<br />\nProvince de Teruel<br />\n<br />\n<br />\n<a href=\"https://www.valdelinares.es\" target=\"_blank\">valdelinares.es</a> / <a href=\"https://www.aragon.es\" target=\"_blank\">aragon.es</a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ]
+      },
+      "updatedAt": "2025-12-15T11:13:03+01:00"
+    },
+    "type": "HMG",
+    "isCancelled": false,
+    "showGroups": true,
+    "date": "2026-08-28T00:00:00+02:00",
+    "length": 149.8,
+    "endTime": "17:30:00",
+    "startTime": "13:40:00",
+    "podiumDisplayMode": "instantpodium",
+    "timezone": "Europe/Madrid",
+    "hasCoordinates": true,
+    "lengthDisplay": 150,
+    "stage": 7,
+    "_bind": "stage-2026",
+    "_origin": "stage-2026",
+    "_id": "ed92ad217cd0489ad3398a12c2ded33aec4678aa57fa670d3f53299c14faaa21",
+    "_key": "stage",
+    "_updatedAt": 1786959932230,
+    "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae"
+  }
+]

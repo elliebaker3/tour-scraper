@@ -11,10 +11,12 @@ Sources:
         171      km to the FINISH  <- during-race items, the ones the
                                       Navigator cares about
         F        after the finish
-  2. letour.fr stage pages (official race review / ticker), best-effort since
-     the URL layout shifts year to year.
+  2. The organiser's own stage pages (official race review / ticker;
+     letour.fr for the Tour, lavuelta.es for the Vuelta -- see
+     config.yaml's site_base_url), best-effort since the URL layout shifts
+     year to year.
 
-Design: SAVE RAW HTML FIRST (backfill/pcs/*.html, backfill/letour/*.html),
+Design: SAVE RAW HTML FIRST (backfill/pcs/*.html, backfill/official/*.html),
 then parse heuristically into events.pcs.jsonl. The parser is intentionally
 tolerant and records how much it could/couldn't parse; improve it after
 looking at the saved HTML and re-run with `backfill-reparse` — no re-fetching.
@@ -39,8 +41,6 @@ from .static_api import get_with_retry, make_session
 
 import os
 PCS_BASE = os.environ.get("PCS_BASE", "https://www.procyclingstats.com")
-LETOUR_BASE = os.environ.get("LETOUR_BASE", "https://www.letour.fr")
-PCS_RACE = "race/tour-de-france"
 DELAY_SECONDS = float(os.environ.get("PCS_DELAY", "4.0"))
 
 # Sub-pages worth archiving per stage (name -> path suffix under .../stage-N/)
@@ -119,7 +119,7 @@ def parse_stage_date(html: str, year: int) -> str | None:
 
 
 def backfill_stage(cfg: Config, session, stage_no: int) -> None:
-    stage_base = f"{PCS_BASE}/{PCS_RACE}/{cfg.year}/stage-{stage_no}"
+    stage_base = f"{PCS_BASE}/{cfg.pcs_race_slug}/{cfg.year}/stage-{stage_no}"
     pages: dict[str, str] = {}
     for name, suffix in PCS_PAGES.items():
         url = f"{stage_base}/{suffix}"
@@ -152,22 +152,24 @@ def backfill_stage(cfg: Config, session, stage_no: int) -> None:
 
     _parse_saved(store, stage_no)
 
-    # Best-effort letour.fr official page for the same stage (raw only; the
-    # markup changes too often to promise a parser).
-    letour_url = f"{LETOUR_BASE}/en/stage-{stage_no}"
+    # Best-effort official stage-review page (raw only; the markup changes
+    # too often to promise a parser). site_base_url so this follows whichever
+    # race cfg points at -- letour.fr for the Tour, lavuelta.es for the
+    # Vuelta (both confirmed to serve /en/stage-N -- see README).
+    official_url = f"{cfg.site_base_url}/en/stage-{stage_no}"
     try:
-        resp = get_with_retry(session, cfg, letour_url)
+        resp = get_with_retry(session, cfg, official_url)
         if resp.status_code == 200:
-            ldir = store.dir / "backfill" / "letour"
-            ldir.mkdir(parents=True, exist_ok=True)
-            (ldir / "stage.html").write_text(resp.text, encoding="utf-8")
-            print(f"[backfill] stage {stage_no}: saved letour page")
+            odir = store.dir / "backfill" / "official"
+            odir.mkdir(parents=True, exist_ok=True)
+            (odir / "stage.html").write_text(resp.text, encoding="utf-8")
+            print(f"[backfill] stage {stage_no}: saved official site page")
         else:
-            print(f"[backfill] stage {stage_no}: letour -> HTTP {resp.status_code} "
+            print(f"[backfill] stage {stage_no}: official site -> HTTP {resp.status_code} "
                   f"(URL pattern may differ this year; find it in a browser and "
-                  f"fetch manually, or adjust letour_url in backfill.py)")
+                  f"fetch manually, or adjust site_base_url in config.yaml)")
     except Exception as exc:
-        print(f"[backfill] stage {stage_no}: letour FAILED {exc}")
+        print(f"[backfill] stage {stage_no}: official site FAILED {exc}")
     time.sleep(DELAY_SECONDS)
 
     store.write_manifest({"kind": "backfill", "stage": stage_no,

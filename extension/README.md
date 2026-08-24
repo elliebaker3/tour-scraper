@@ -14,8 +14,16 @@ Two hosts, both for data rather than code:
 
 | | why |
 |---|---|
-| `raw.githubusercontent.com` | reading the shared calibration store |
+| `raw.githubusercontent.com` | reading the shared calibration store, and the stage bundle database (`extension/data/index.json` + the per-stage profile/elevation files) |
 | the collector Worker | submitting a calibration |
+
+The stage database is fetched fresh on every load (capped at 1.5s, then
+falling back to whatever was bundled at install time) rather than only read
+from the installed package -- so a new stage, a correction, or a whole new
+race being added to the repo shows up for everyone on their next reload, with
+no Chrome Web Store review needed. `fetchJsonRemoteFirst()` in navigator.js
+is the shared helper both the calibration store and the stage database go
+through for this.
 
 The broadcaster sites are NOT listed under `host_permissions`, deliberately.
 A content script's `matches` already grants access to the origins it runs on,

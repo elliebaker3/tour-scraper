@@ -66,10 +66,20 @@ const json = (status, obj) =>
 /** Reject anything that isn't the record the extension produces. Mirrors the
  *  validation in .github/workflows/ingest-calibration.yml -- the issue route
  *  still exists, and both doors need the same lock. */
+// Both races run 21 stages, so a stage number alone doesn't say which one --
+// see navigator.js's stageKey() for the client side of this. Omitted (or
+// "tdf") means the Tour, which is what every submission before this field
+// existed already meant; anything else must be an actual known race so a
+// typo can't quietly open a new, permanent bucket in the shared file.
+const KNOWN_RACES = new Set(["tdf", "vuelta"]);
+
 function validate(rec) {
   if (typeof rec !== "object" || rec === null) return "not an object";
   if (!Number.isInteger(rec.stage) || rec.stage < 1 || rec.stage > 21) {
     return "stage must be an int 1-21";
+  }
+  if (rec.race != null && !KNOWN_RACES.has(rec.race)) {
+    return "race must be one of: " + [...KNOWN_RACES].join(", ");
   }
   if (typeof rec.site !== "string" || !/^[a-z0-9.-]{4,64}$/.test(rec.site)) {
     return "site must be a plain hostname";
@@ -144,6 +154,10 @@ function clean(rec) {
   return {
     schema: 1,
     stage: rec.stage,
+    // Only stored for a non-Tour race -- see KNOWN_RACES. Keeps every
+    // existing entry, and every Tour submission from an extension that
+    // predates this field, in exactly the shape they've always been.
+    ...(rec.race && rec.race !== "tdf" ? { race: rec.race } : {}),
     date: typeof rec.date === "string" ? rec.date.slice(0, 10) : null,
     site: rec.site,
     duration_sec: Math.round(rec.duration_sec * 10) / 10,
@@ -231,7 +245,11 @@ async function merge(env, rec) {
     if (!raw.ok) throw new Error(`read body ${FILE}: ${raw.status}`);
     const store = JSON.parse(await raw.text());
 
-    const key = `stage-${rec.stage}|${rec.site}`;
+    // Matches navigator.js's stageKey() exactly -- a Tour submission (no
+    // `race`, or "tdf") lands in the same "stage-N" slot it always has;
+    // anything else gets its race folded in so it can't collide with the
+    // Tour's same-numbered stage.
+    const key = `stage-${rec.race ? rec.race + "-" : ""}${rec.stage}|${rec.site}`;
     store.recordings = store.recordings || {};
     const list = store.recordings[key] || (store.recordings[key] = []);
     const i = list.findIndex(

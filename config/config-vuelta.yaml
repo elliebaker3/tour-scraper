@@ -1,0 +1,61 @@
+# tour-scraper configuration for La Vuelta a España. Same racecenter
+# platform as the Tour's config.yaml (confirmed 2026-08-22: identical
+# endpoint paths, JSON shapes, and SSE bind-name convention -- right down to
+# img.aso.fr asset URLs in the riders/teams payloads), just a different
+# base_url and a separate data_dir so a capture session never writes into
+# the Tour's data/2026 tree.
+
+base_url: "https://racecenter.lavuelta.es"
+# Main public site (as opposed to the racecenter API host above) -- confirmed
+# 2026-08-22: lavuelta.es/en/rankings/stage-N carries the same
+# `data-ajax-stack` embed (itg/ipg/img/ijg/etg keys) as letour.fr's
+# equivalent page, which is what persons_of_interest.py reads the points
+# classification from.
+site_base_url: "https://www.lavuelta.es"
+# procyclingstats.com's slug for this race -- their standard, well-documented
+# kebab-case convention (matching "race/tour-de-france" for the Tour), but
+# NOT independently confirmed live: PCS 403'd every request during this
+# session's testing (2026-08-22), including the Tour's own already-working
+# slug with a full browser UA, so this looks like a general bot-block rather
+# than anything specific to this value. Only used by `backfill`.
+pcs_race_slug: "race/vuelta-a-espana"
+year: 2026
+data_dir: "data/vuelta"
+
+# Live SSE stream (EventSource endpoint used by the racecenter page)
+live_stream_endpoint: "/live-stream"
+
+# Static reference endpoints ({year} is substituted) -- confirmed live
+# 2026-08-22 (stage 1 day): /api/stage-2026, /api/allCompetitors-2026,
+# /api/team-2026 all return real data on this host, same shape as the Tour's.
+competitors_endpoint: "/api/allCompetitors-{year}"
+stages_endpoint: "/api/stage-{year}"
+teams_endpoint: "/api/team-{year}"
+
+# Fallback/complementary pollers -- carried over from config.yaml's URL
+# templates (same platform) and confirmed to return HTTP 200 on this host
+# 2026-08-22, but not yet confirmed to carry real in-race payloads the way
+# config.yaml's were (that only shows once a stage is actually live).
+poll_endpoints:
+  publication: "/api/publication_en-{year}-{stage}"
+  insights: "/api/insights-{year}-{stage}"
+  pack: "/api/pack-{year}-{stage}"
+  telemetry: "/api/telemetryCompetitor-{year}"
+  flashInfoLive: "/api/flashInfoLive-{year}-{stage}"
+  checkpointList: "/api/checkpointList-{year}-{stage}"
+  # Vuelta-only, not in config.yaml: stage 1 (2026-08-22) is an individual
+  # time trial ("type": "itt" in stages.json), unlike anything on the Tour's
+  # side of this repo. Per-bib {position, bib, absolute, relative} at each
+  # checkpoint the field has reached (a `checkpoint` number that advances as
+  # the stage runs) -- almost certainly elapsed time since that rider's own
+  # start, at that checkpoint. For the departure clock itself, which this
+  # endpoint does NOT carry, see `startlist` in __main__.py instead.
+  rankingType: "/api/rankingType-{year}-{stage}"
+poll_interval_seconds: 15
+
+# Radio: unlike the Tour, /api/event's extras came back empty here (no
+# radioUrl published statically) -- run `autodiscover` to find it, same as
+# any year the static shortcut doesn't work.
+radio_stream_url: ""
+
+timeout_seconds: 20

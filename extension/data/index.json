@@ -159,6 +159,174 @@
       "date": "2026-07-26",
       "route": "Thoiry → Paris Champs-Élysées",
       "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-01.json",
+      "stage": 1,
+      "race": "vuelta",
+      "date": "2026-08-22",
+      "route": "Monaco → Monaco",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-02.json",
+      "stage": 2,
+      "race": "vuelta",
+      "date": "2026-08-23",
+      "route": "Monaco → Manosque",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-03.json",
+      "stage": 3,
+      "race": "vuelta",
+      "date": "2026-08-24",
+      "route": "Gruissan - Aude → Font-Romeu",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-04.json",
+      "stage": 4,
+      "race": "vuelta",
+      "date": "2026-08-25",
+      "route": "Andorra la Vella → Andorra la Vella",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-05.json",
+      "stage": 5,
+      "race": "vuelta",
+      "date": "2026-08-26",
+      "route": "Falset. Costa Daurada → Roquetes. Terres de l'Ebre",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-06.json",
+      "stage": 6,
+      "race": "vuelta",
+      "date": "2026-08-27",
+      "route": "Alcossebre → Castelló",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-07.json",
+      "stage": 7,
+      "race": "vuelta",
+      "date": "2026-08-28",
+      "route": "Vall d'Alba → Aramón Valdelinares",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-08.json",
+      "stage": 8,
+      "race": "vuelta",
+      "date": "2026-08-29",
+      "route": "Puçol → Xeraco",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-09.json",
+      "stage": 9,
+      "race": "vuelta",
+      "date": "2026-08-30",
+      "route": "La Vila Joiosa/Villajoyosa → Alto de Aitana. Costa Blanca",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-10.json",
+      "stage": 10,
+      "race": "vuelta",
+      "date": "2026-09-01",
+      "route": "Alcaraz → Elche de la Sierra",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-11.json",
+      "stage": 11,
+      "race": "vuelta",
+      "date": "2026-09-02",
+      "route": "Cartagena → Lorca",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-12.json",
+      "stage": 12,
+      "race": "vuelta",
+      "date": "2026-09-03",
+      "route": "Vera → Calar Alto",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-13.json",
+      "stage": 13,
+      "race": "vuelta",
+      "date": "2026-09-04",
+      "route": "Almuñécar → Loja",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-14.json",
+      "stage": 14,
+      "race": "vuelta",
+      "date": "2026-09-05",
+      "route": "Jaén → Sierra de La Pandera",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-15.json",
+      "stage": 15,
+      "race": "vuelta",
+      "date": "2026-09-06",
+      "route": "Palma del Río → Córdoba",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-16.json",
+      "stage": 16,
+      "race": "vuelta",
+      "date": "2026-09-08",
+      "route": "Cortegana → La Rábida. Palos de la Frontera",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-17.json",
+      "stage": 17,
+      "race": "vuelta",
+      "date": "2026-09-09",
+      "route": "Dos Hermanas → Seville",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-18.json",
+      "stage": 18,
+      "race": "vuelta",
+      "date": "2026-09-10",
+      "route": "El Puerto de Santa María → Jerez de la Frontera",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-19.json",
+      "stage": 19,
+      "race": "vuelta",
+      "date": "2026-09-11",
+      "route": "Vélez-Málaga → Peñas Blancas. Estepona",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-20.json",
+      "stage": 20,
+      "race": "vuelta",
+      "date": "2026-09-12",
+      "route": "La Calahorra → Collado del Alguacil",
+      "kind": "profile"
+    },
+    {
+      "file": "vuelta-profile-stage-21.json",
+      "stage": 21,
+      "race": "vuelta",
+      "date": "2026-09-13",
+      "route": "Carrefour Granada → Granada",
+      "kind": "profile"
     }
   ]
 }

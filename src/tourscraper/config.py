@@ -27,6 +27,16 @@ DEFAULT_CONFIG_PATH = Path(__file__).resolve().parents[2] / "config" / "config.y
 @dataclass
 class Config:
     base_url: str = "https://racecenter.letour.fr"
+    # The organiser's main public site, as opposed to the racecenter API
+    # host above -- persons_of_interest.py reads the points-classification
+    # page from here (racecenter doesn't expose it cleanly), and backfill.py
+    # archives this site's own stage-review page. A different subdomain of
+    # the same platform, not a different host to discover.
+    site_base_url: str = "https://www.letour.fr"
+    # procyclingstats.com's URL slug for this race, e.g. "race/vuelta-a-espana"
+    # for the Vuelta -- backfill.py's other source, unrelated to the ASO
+    # platform above (PCS is third-party and covers every race).
+    pcs_race_slug: str = "race/tour-de-france"
     year: int = 2026
     data_dir: Path = Path("data")
     user_agent: str = (

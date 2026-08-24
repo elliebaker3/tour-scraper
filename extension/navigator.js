@@ -39,6 +39,14 @@
   const SITE = location.hostname;
   const SHARED_CAL_URL =
     "https://raw.githubusercontent.com/elliebaker3/tour-scraper/main/extension/data/calibrations.json";
+  // Stage bundles (index.json + profile-*.json / stage-*.json) follow the
+  // same two-tier rule as calibrations above: fetched fresh from the repo so
+  // a newly-published stage -- or a whole new race, like the Vuelta -- shows
+  // up next reload with no extension update, falling back to whatever was
+  // bundled at install time if the network (or the host permission) isn't
+  // there.
+  const REMOTE_DATA_BASE =
+    "https://raw.githubusercontent.com/elliebaker3/tour-scraper/main/extension/data/";
   // Contributing back, in preference order:
   //   1. COLLECTOR_URL -- the Cloudflare Worker in worker/. It holds the
   //      GitHub token (a token shipped inside an extension is readable by
@@ -1289,15 +1297,18 @@ watch.">Add reading</button>
     sel.innerHTML = "";
     for (const s of bundle_index.stages) {
       const o = document.createElement("option");
-      o.value = String(s.stage);
-      o.textContent = `Stage ${s.stage} (${s.date})` +
-        (s.kind === "profile" ? " — profile only" : "");
-      if (bundle.stage && s.stage === bundle.stage.stage) o.selected = true;
+      o.value = raceStageKey(s);
+      // Stage numbers reset per race (Vuelta stage 1 != Tour stage 1), so a
+      // mixed list needs the race named -- otherwise two identically-labelled
+      // "Stage 1" options are indistinguishable except by date.
+      const label = s.race && s.race !== "tdf"
+        ? `${s.race[0].toUpperCase()}${s.race.slice(1)} Stage ${s.stage}` : `Stage ${s.stage}`;
+      o.textContent = `${label} (${s.date})` + (s.kind === "profile" ? " — profile only" : "");
+      if (bundle.stage && raceStageKey(s) === raceStageKey(bundle.stage)) o.selected = true;
       sel.appendChild(o);
     }
     sel.addEventListener("change", () => {
-      const n = Number(sel.value);
-      try { chrome.storage.local.set({ tnPinnedStage: n }, () => location.reload()); }
+      try { chrome.storage.local.set({ tnPinnedStage: sel.value }, () => location.reload()); }
       catch (_) { location.reload(); }
     });
   }
@@ -1452,7 +1463,20 @@ watch.">Add reading</button>
    * applied to a different recording" cannot key-collide any more. The old
    * per-stage slot is still wiped on load so pre-rework leftovers never
    * resurface. */
-  const stageKey = () => `stage-${bundle?.stage?.stage ?? "?"}`;
+  // Both storage tiers key on (year, stage, site) alone, which was fine while
+  // the Tour was the only race this ever ran against -- year+stage was
+  // unique. The Vuelta breaks that: its 2026 stage 14 and the Tour's 2026
+  // stage 14 would land in the SAME slot, each one's readings silently
+  // overwriting or auto-restoring onto the other's recording. Vuelta bundles
+  // are tagged `race: "vuelta"` (see loadBundle's raceStageKey); Tour ones
+  // carry no race at all, since they predate this and their keys must not
+  // move -- real crowdsourced entries already live in the shared store and
+  // in viewers' local storage under the un-prefixed "stage-N" form.
+  const stageKey = () => {
+    const race = bundle?.stage?.race;
+    const prefix = race && race !== "tdf" ? `${race}-` : "";
+    return `stage-${prefix}${bundle?.stage?.stage ?? "?"}`;
+  };
   const calStoreKey = () =>
     `tnCal:v1:${(bundle?.stage?.date || "").slice(0, 4)}|${stageKey()}|${SITE}`;
 
@@ -1471,6 +1495,11 @@ watch.">Add reading</button>
     return {
       schema: 1,
       stage: bundle?.stage?.stage ?? null,
+      // Omitted entirely for the Tour rather than sent as "tdf": the worker
+      // and the shared-store key both treat a missing race as the Tour, so
+      // existing recordings (and older extension versions still submitting)
+      // keep landing in the same slot they always have.
+      ...(bundle?.stage?.race && bundle.stage.race !== "tdf" ? { race: bundle.stage.race } : {}),
       date: bundle?.stage?.date ?? null,
       site: SITE,
       duration_sec: Math.round(spanOf(video) * 10) / 10,
@@ -1528,18 +1557,35 @@ watch.">Add reading</button>
     return best;
   }
 
+  /** Fetch fresh from the repo, falling back to whatever this install
+   *  bundled locally -- so a git push updates every running copy without an
+   *  extension update, but a stale/offline/permission-denied fetch still
+   *  degrades to a working extension instead of a blank one. A plain fetch()
+   *  has no built-in timeout: a captive portal or a dropped-not-refused
+   *  connection hangs it far longer than a viewer waiting for the bar to
+   *  draw should ever be stuck, so the remote attempt is capped and moves on
+   *  to the local copy rather than trusting the network to fail fast. */
+  async function fetchJsonRemoteFirst(remoteUrl, localPath, remoteTimeoutMs = 1500) {
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), remoteTimeoutMs);
+      try {
+        const r = await fetch(remoteUrl, { cache: "no-cache", signal: ctrl.signal });
+        if (r.ok) return await r.json();
+      } finally { clearTimeout(timer); }
+    } catch (_) { /* offline, blocked, timed out, or the host permission was declined */ }
+    try {
+      const r = await fetch(chrome.runtime.getURL(localPath));
+      if (r.ok) return await r.json();
+    } catch (_) { /* fall through */ }
+    return null;
+  }
+
   /** The shared store is fetched fresh so contributions ingested since this
    *  extension was installed still arrive; the bundled copy is the offline
    *  fallback. Never fatal -- worst case the viewer just calibrates by hand. */
   async function fetchSharedCalibrations() {
-    try {
-      const r = await fetch(SHARED_CAL_URL, { cache: "no-cache" });
-      if (r.ok) { sharedCal = await r.json(); return; }
-    } catch (_) { /* offline, or the host permission was declined */ }
-    try {
-      const r = await fetch(chrome.runtime.getURL("data/calibrations.json"));
-      if (r.ok) sharedCal = await r.json();
-    } catch (_) { sharedCal = null; }
+    sharedCal = await fetchJsonRemoteFirst(SHARED_CAL_URL, "data/calibrations.json");
   }
 
   /** Apply a saved calibration: local first (it is this viewer's own reading
@@ -1760,17 +1806,35 @@ watch.">Add reading</button>
     return null;
   }
 
+  /** Stage numbers restart at 1 for every race (the Vuelta's stage 1 is not
+   *  the Tour's), so anything that has to look a stage up by number rather
+   *  than by its (unique) date -- the manual pin, the picker -- needs the
+   *  race folded into the key or it can silently pick the wrong race's
+   *  bundle. Index entries with no `race` are the Tour, the original data.
+   *  Named distinctly from the existing zero-arg stageKey() elsewhere (that one
+   *  keys calibration storage off whatever bundle is currently loaded; this
+   *  one keys an arbitrary index entry, which is why it takes one). */
+  function raceStageKey(s) {
+    return (s.race || "tdf") + ":" + s.stage;
+  }
+
   async function loadBundle() {
-    const index = await fetch(chrome.runtime.getURL("data/index.json"))
-      .then((r) => r.json()).catch(() => null);
+    const index = await fetchJsonRemoteFirst(REMOTE_DATA_BASE + "index.json", "data/index.json");
     if (!index || !index.stages || !index.stages.length) {
       throw new Error("no stage bundles shipped");
     }
 
-    // A manual choice always wins and is remembered per browser.
+    // A manual choice always wins and is remembered per browser. Pre-Vuelta
+    // versions of this extension stored a bare stage number here; since the
+    // Tour was the only race that existed then, a number found in storage
+    // now means exactly what raceStageKey() would have produced for it.
     const pinned = await new Promise((res) => {
-      try { chrome.storage.local.get(["tnPinnedStage"], (r) => res(r?.tnPinnedStage ?? null)); }
-      catch (_) { res(null); }
+      try {
+        chrome.storage.local.get(["tnPinnedStage"], (r) => {
+          const p = r?.tnPinnedStage ?? null;
+          res(typeof p === "number" ? raceStageKey({ race: "tdf", stage: p }) : p);
+        });
+      } catch (_) { res(null); }
     });
 
     let chosen = null, why = "", airing = null;
@@ -1803,12 +1867,12 @@ watch.">Add reading</button>
       if (detected) {
         chosen = detected;
         why = `matched airing date ${day}`;
-        if (pinned && pinned !== detected.stage) {
+        if (pinned && pinned !== raceStageKey(detected)) {
           why += ` (ignoring stale pin to stage ${pinned})`;
           try { chrome.storage.local.remove("tnPinnedStage"); } catch (_) {}
         }
-      } else if (pinned && index.stages.find((s) => s.stage === pinned)) {
-        chosen = index.stages.find((s) => s.stage === pinned);
+      } else if (pinned && index.stages.find((s) => raceStageKey(s) === pinned)) {
+        chosen = index.stages.find((s) => raceStageKey(s) === pinned);
         why = `pinned to stage ${pinned}` +
               (day ? ` — but this recording aired ${day}, which has no bundle`
                    : " (no airing time found — calibration may fail)");
@@ -1827,14 +1891,15 @@ watch.">Add reading</button>
     }
     console.log("[TourNavigator] stage selection:", why,
                 "| airing:", airing ? new Date(airing).toISOString() : null,
-                "| available:", index.stages.map((s) => `${s.stage}@${s.date}`));
+                "| available:", index.stages.map((s) => `${raceStageKey(s)}@${s.date}`));
     bundle_index = index;
     bundle_selection_ok = /^matched/.test(why);   // a pin means detection failed
-    const bundleRes = await fetch(chrome.runtime.getURL("data/" + chosen.file));
-    const b = await bundleRes.json();
+    const b = await fetchJsonRemoteFirst(REMOTE_DATA_BASE + chosen.file, "data/" + chosen.file);
+    if (!b) throw new Error(`stage bundle "${chosen.file}" fetched nowhere -- offline and not bundled`);
     b.__selection = why;
     b.__kind = chosen.kind || "full";
     b.__airingMs = airing;
+    if (b.stage) b.stage.race = chosen.race || "tdf";
     return b;
   }
 

@@ -41,6 +41,11 @@ on:
         description: "Which chunk this is; labels its output files so no two chunks write the same path"
         required: true
         type: string
+      config:
+        description: "Path to a config.yaml override, e.g. config/config-vuelta.yaml. Empty = the Tour's default config/config.yaml."
+        required: false
+        type: string
+        default: ""
 
 jobs:
   chunk:
@@ -69,7 +74,9 @@ jobs:
         run: |
           git config user.name "tour-scraper-bot"
           git config user.email "actions@users.noreply.github.com"
-          python -m tourscraper stage \
+          CFG=""
+          if [ -n "${{ inputs.config }}" ]; then CFG="--config ${{ inputs.config }}"; fi
+          python -m tourscraper $CFG stage \
             --stage "${{ inputs.stage }}" \
             --max-hours "${{ inputs.max_hours }}" \
             --part "${{ inputs.part }}" &
