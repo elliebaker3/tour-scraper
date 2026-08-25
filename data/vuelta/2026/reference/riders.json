@@ -771,33 +771,33 @@
     }
   },
   {
-    "firstname": "Ramses",
-    "bib": 104,
-    "UCICode": "10064997256",
-    "sex": "M",
-    "podiums": 8,
-    "lastnameshort": "DEBRUYNE",
-    "nationality": "bel",
+    "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/104/28443/0:0,400:400-70-0-70/34f46",
     "siteLinks": {
-      "en": "/rider/104/alpecin-premier-tech/debruyne-ramses",
-      "fr": "/coureur/104/alpecin-premier-tech/debruyne-ramses",
-      "es": "/corredor/104/alpecin-premier-tech/debruyne-ramses"
+      "fr": "/coureur/103/alpecin-premier-tech/debruyne-ramses",
+      "es": "/corredor/103/alpecin-premier-tech/debruyne-ramses",
+      "en": "/rider/103/alpecin-premier-tech/debruyne-ramses"
     },
-    "lastname": "DEBRUYNE",
-    "idUCI": "BEL20020831",
     "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/104/28443/0:0,400:400-0-0-70/377f2",
-    "header": null,
+    "sex": "M",
     "victories": 0,
     "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/104/28356/0:0,660:1000-0-0-70/f8a3d",
-    "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/104/28443/0:0,400:400-70-0-70/34f46",
+    "lastnameshort": "DEBRUYNE",
+    "bib": 103,
+    "nationality": "bel",
     "birthdate": "2002-08-31T00:00:00+02:00",
+    "header": null,
+    "podiums": 9,
+    "firstname": "Ramses",
+    "UCICode": "10064997256",
+    "lastname": "DEBRUYNE",
+    "idUCI": "BEL20020831",
     "_id": "cd14566c6b90dfae620b41d0006f4fd6b5e0efde61278a823de12053735b6e8d",
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-APT",
-    "_updatedAt": 1787318950987,
+    "_updatedAt": 1787662111530,
     "_parent": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
     "_key": "_id",
-    "_virtual": "APT-104-DEBRUYNE",
+    "_virtual": "APT-103-DEBRUYNE",
     "$team": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
     "_gets": {
       "team": "$team"
@@ -1143,33 +1143,33 @@
     }
   },
   {
+    "sex": "M",
+    "bib": 104,
+    "podiums": 2,
+    "firstname": "Lindsay",
+    "birthdate": "1995-05-30T00:00:00+02:00",
+    "lastname": "DE VYLDER",
+    "UCICode": "10009009866",
+    "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/103/28448/0:0,400:400-0-0-70/f973f",
+    "victories": 0,
+    "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/103/28351/0:0,660:1000-0-0-70/a6948",
     "header": null,
-    "podiums": 0,
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/103/28448/0:0,400:400-70-0-70/7515b",
     "idUCI": "BEL19950530",
-    "UCICode": "10009009866",
-    "firstname": "Lindsay",
-    "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/103/28351/0:0,660:1000-0-0-70/a6948",
-    "sex": "M",
-    "birthdate": "1995-05-30T00:00:00+02:00",
-    "lastnameshort": "DE VYLDER",
     "nationality": "bel",
-    "victories": 0,
-    "lastname": "DE VYLDER",
-    "bib": 103,
-    "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/103/28448/0:0,400:400-0-0-70/f973f",
+    "lastnameshort": "DE VYLDER",
     "siteLinks": {
-      "en": "/rider/103/alpecin-premier-tech/de-vylder-lindsay",
-      "fr": "/coureur/103/alpecin-premier-tech/de-vylder-lindsay",
-      "es": "/corredor/103/alpecin-premier-tech/de-vylder-lindsay"
+      "fr": "/coureur/104/alpecin-premier-tech/de-vylder-lindsay",
+      "es": "/corredor/104/alpecin-premier-tech/de-vylder-lindsay",
+      "en": "/rider/104/alpecin-premier-tech/de-vylder-lindsay"
     },
     "_id": "5b620a466565edfddce551fb12efc279a3ff6e6bb43f8c13333dca4bdcf615ed",
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-APT",
-    "_updatedAt": 1787318951153,
+    "_updatedAt": 1787662116149,
     "_parent": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
     "_key": "_id",
-    "_virtual": "APT-103-DE VYLDER",
+    "_virtual": "APT-104-DE VYLDER",
     "$team": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
     "_gets": {
       "team": "$team"
@@ -1299,15 +1299,18 @@
     "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/194/28382/0:0,660:1000-0-0-70/a2925",
     "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/194/28058/0:0,400:400-0-0-70/603c3",
     "_id": "fc6a88e66f35e940a41eb45f794b23607b26f1d82889b6050a59d165fede076c",
+    "_updatedAt": 1787589915096,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-BBH",
-    "_updatedAt": 1787313600727,
     "_parent": "team-2026:127ced39b77ad8bbc6ca005c10e1cd46bb6b8b57b18fdc72461fefa8b90fc3e2",
-    "_key": "_id",
     "_virtual": "BBH-194-CHUMIL GONZALEZ",
     "$team": "team-2026:127ced39b77ad8bbc6ca005c10e1cd46bb6b8b57b18fdc72461fefa8b90fc3e2",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 2,
+      "code": -1
     }
   },
   {
@@ -3602,15 +3605,18 @@
     "lastname": "KIRSCH",
     "idUCI": "LUX19920612",
     "_id": "a5f5d9c31c1db570b1e0d819b74025076a4941b780531b4e4ca28fae0cf66c05",
+    "_updatedAt": 1787581390350,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-COF",
-    "_updatedAt": 1787318963332,
     "_parent": "team-2026:5d32207e1b3c20089d2a5f59ee62c787d280d9cb3971a0107ea3791fa5ae39c3",
-    "_key": "_id",
     "_virtual": "COF-143-KIRSCH",
     "$team": "team-2026:5d32207e1b3c20089d2a5f59ee62c787d280d9cb3971a0107ea3791fa5ae39c3",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 3,
+      "code": -1
     }
   },
   {
