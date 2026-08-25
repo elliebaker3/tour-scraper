@@ -1,261 +1,253 @@
 {
   "http_by_kind": {
-    "event-stream": [
-      {
-        "captured_at": "2026-08-22T14:29:07.972+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV1poWkRabU5tVTVOalpqIiwiaWF0IjoxNzg3NDA4OTQ3fQYHhZa5M03ptPoOvGCpl_4YeS2A8Mo22FeirUXAPTBBY",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-22T14:29:23.363+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPV1E1WlRWalpqWm1NVE14IiwiaWF0IjoxNzg3NDA4OTYzfQDdhE3EUcQpIwmnfL56gtI6sz9DN0yOedLfNlMcnsKkM",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-22T14:29:52.604+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNamM1TkRBME5tSTRObVl5IiwiaWF0IjoxNzg3NDA4OTkyfQDaNdHKOxGAuKIEvp9layre8590qAZJrfrIcnyArfJ4c",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-22T14:30:21.993+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPR1E1WVRreU5qRXdaREUwIiwiaWF0IjoxNzg3NDA5MDIxfQeD_-W-p4cZENi5EgcCvHHeJuoR0SIueaRQzruborWPo",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-22T14:30:51.009+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOamsxTkdNNE9EWTBPR1UwIiwiaWF0IjoxNzg3NDA5MDUwfQ_yQ4oF4bepTYjExj4iRCqHmlWD92T-F3Z7tz-qswO6M",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-22T14:31:20.139+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZMll5T1RFMk9HSmpORFExIiwiaWF0IjoxNzg3NDA5MDc5fQxT39ZpH8rD20hEzqIsyHbjc9VnB1FcGt1wqWMiTSgQQ",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      }
-    ],
     "json": [
       {
-        "captured_at": "2026-08-22T14:29:08.083+00:00",
-        "url": "https://racecenter.lavuelta.es/api/event?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaR1kzWXpRMU4yVTFOakkwIiwiaWF0IjoxNzg3NDA4OTQ3fQUy8zLw_aqRh0CR9ULkYnQGWHImdKks3CtusEbAnfZU8",
+        "captured_at": "2026-08-25T11:45:17.055+00:00",
+        "url": "https://syndication.twitter.com/settings?session_id=790ff8784680e7373f002fdc6305bf5826f46492",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "{\"should_obtain_cookie_consent\":true,\"features\":{\"tfw_timeline_list\":{\"bucket\":[],\"version\":null},\"tfw_follower_count_sunset\":{\"bucket\":true,\"version\":null},\"tfw_tweet_edit_backend\":{\"bucket\":\"on\",\"version\":null},\"tfw_refsrc_session\":{\"bucket\":\"on\",\"version\":null},\"tfw_fosnr_soft_interventions_enabled\":{\"bucket\":\"on\",\"version\":null},\"tfw_mixed_media_15897\":{\"bucket\":\"treatment\",\"version\":null},\"tf"
+      },
+      {
+        "captured_at": "2026-08-25T11:45:17.128+00:00",
+        "url": "https://racecenter.lavuelta.es/api/event?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPREpqTkRBM09UazBNMlJpIiwiaWF0IjoxNzg3NjU4MzE2fQYpFbZVkksJBLQcuHqKZh1UEC4dnkAMncWDiYIm4ix9o",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"extras\":{},\"adUnit\":\"/366560878/ASO/LA-VUELTA\",\"_bind\":\"event\",\"_origin\":\"event\",\"_id\":\"dbfa6e3d5e33f66d138af5594b40fd1b5521af9063d2ff77d524978bf9dc7500\",\"_key\":\"_id\",\"_updatedAt\":1786959921012,\"_parent\":\":vue\",\"_virtual\":\"/366560878/ASO/LA-VUELTA\"}]"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.083+00:00",
-        "url": "https://racecenter.lavuelta.es/api/flashInfoLive-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOREkwT0RCbFlXWTVNV05qIiwiaWF0IjoxNzg3NDA4OTQ3fQVsx6opibhTtt7HGN3lzokX13t9mrfvMizcJlEUUjwuU",
+        "captured_at": "2026-08-25T11:45:17.128+00:00",
+        "url": "https://racecenter.lavuelta.es/api/flashInfoLive-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNamt6T0RrelpqSmlOamxrIiwiaWF0IjoxNzg3NjU4MzE2fQQBGuO_vXkMUbpdEpTfahHeytCAcmDivWj90yE9vTQ5E",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.084+00:00",
-        "url": "https://racecenter.lavuelta.es/api/social?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaRFV4T1RKbE1UTXlPR1V5IiwiaWF0IjoxNzg3NDA4OTQ3fQM46aWKODRCsHz4pKyH3XscgZKUjyKGP5qbGusWqliYM",
+        "captured_at": "2026-08-25T11:45:17.128+00:00",
+        "url": "https://racecenter.lavuelta.es/api/social?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOV1JoTTJOaVpEQmlNRGRqIiwiaWF0IjoxNzg3NjU4MzE2fQkuVLLAZtok1hPhYyQgP9mfjILY3PzgMl6ynAIavrkAs",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.084+00:00",
-        "url": "https://racecenter.lavuelta.es/api/checkpointList-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNamRqTXpCaVpqaGpNbU0zIiwiaWF0IjoxNzg3NDA4OTQ3fQoEMVouXlBxizQzcVqhG66SQT66LhOTMF8RufmSDDajE",
+        "captured_at": "2026-08-25T11:45:17.146+00:00",
+        "url": "https://racecenter.lavuelta.es/api/pack-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOelUwTnpreE4ySTRZems0IiwiaWF0IjoxNzg3NjU4MzE2fQBhB9X8TUE9DpRA2meFIZh5lQ6kAqqqy9y3aUfRVCT6M",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[{\"checkpoint\":1,\"countryCode\":\"ESP\",\"caravanSchedule\":\"00:00:00\",\"country\":\"Espagne\",\"checkpointSummits\":[],\"middleSchedule\":\"19:20:00\",\"length\":0,\"lowSchedule\":\"16:17:00\",\"checkpointTypes\":[],\"updatedAt\":\"2026-08-12T10:22:50+02:00\",\"_id\":\"93bd5639e913abc271fb13124da9db9a6a602ca76973eeae9a729197feefbbdb-1\",\"_updatedAt\":1787407325997,\"_key\":\"checkpoint\",\"_bind\":\"checkpointList-2026-1\"},{\"caravanSc"
+        "sample": "[]"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.087+00:00",
-        "url": "https://racecenter.lavuelta.es/api/stage-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOREJsWTJFMk9UazBZelExIiwiaWF0IjoxNzg3NDA4OTQ3fQB7BZJKsYZKYDtVg_JDvGtdZefhcEXja--wEXChddBmU",
+        "captured_at": "2026-08-25T11:45:17.159+00:00",
+        "url": "https://racecenter.lavuelta.es/api/checkpointList-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOV1ZsWkRaa1pEZGtOalZsIiwiaWF0IjoxNzg3NjU4MzE2fQB7M414xShnlSv2kzJDrPeHVly40dBvEyszh4BtXYhiU",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[{\"endTime\":\"17:30:00\",\"showGroups\":true,\"startTime\":\"13:21:00\",\"stage\":3,\"length\":174,\"lengthDisplay\":174,\"hasCoordinates\":true,\"arrivalCity\":{\"label\":\"Font Romeu\",\"cityLangs\":[],\"content\":{\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-jpg/e03-meta-font-romeu/27400/0:0,960:960-0-0-70/f25a2\",\"texts\":[{\"locale\":\"es\",\"text\":[\"Situada a 1.800 metros de altitud, en el corazón de los Pirineos ca"
+        "sample": "[{\"length\":0,\"latitude\":42.513549,\"longitude\":1.552719,\"place\":\"Salida lanzada por la CG -2 dirección Francia  Lat. 42°30'49.37\\\"N long 1°33'10.50\\\"E\",\"checkpointSummits\":[],\"caravanSchedule\":\"13:04:00\",\"lowSchedule\":\"14:49:00\",\"checkpointMeteo\":{\"windDirection\":\"SSO\",\"currentWeatherDesc\":\"couvert\",\"latitude\":42.5135,\"meteoAt\":\"2026-08-25T13:32:05+02:00\",\"createdBy\":\"console\",\"currentWeatherIcon\":"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.087+00:00",
-        "url": "https://racecenter.lavuelta.es/api/team-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZMkZsT1dRMk1qQXhaR1psIiwiaWF0IjoxNzg3NDA4OTQ3fQYNAA6blW1BIF16NkCx3mX2YxqeqWf_akINVL3toRTzs",
+        "captured_at": "2026-08-25T11:45:17.196+00:00",
+        "url": "https://racecenter.lavuelta.es/api/telemetryCompetitor-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZekU1WVdaa1kyRXdObUUwIiwiaWF0IjoxNzg3NjU4MzE2fQ_I9I-l6UDaJl0xoS_JRNSdbGCbTORsmTGBDMmx1dhxc",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-08-25T11:45:17.196+00:00",
+        "url": "https://racecenter.lavuelta.es/api/team-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZakJpTlRNeFpqazVPVEUxIiwiaWF0IjoxNzg3NjU4MzE2fQg-x_r2WQVsNmjxsnJQSDGWIGSeOxnLlM-ES07-UHaAg",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"logo\":\"https://img.aso.fr/core_app/img-cycling-vue-png/uxm/27586/0:0,400:400-0-0-70/292c4\",\"banner\":null,\"jersey_sm\":\"https://img.aso.fr/core_app/img-cycling-vue-png/uxm/27775/0:0,400:400-60-0-70/24bee\",\"logo_live\":null,\"header\":null,\"name\":\"UNO-X MOBILITY\",\"code\":\"UXM\",\"jersey\":\"https://img.aso.fr/core_app/img-cycling-vue-png/uxm/27775/0:0,400:400-0-0-70/67087\",\"nationality\":\"nor\",\"nameShort\":"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.088+00:00",
-        "url": "https://racecenter.lavuelta.es/api/telemetryCompetitor-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOVEV5TVdZek5UbGhZV1poIiwiaWF0IjoxNzg3NDA4OTQ3fQxe7A51WDVbwpbB_4aX5lypNhZ2iwiv3XaOv0laclvqI",
+        "captured_at": "2026-08-25T11:45:17.210+00:00",
+        "url": "https://racecenter.lavuelta.es/api/stage-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOREV3TnpOaVpEQTVNbVZrIiwiaWF0IjoxNzg3NjU4MzE2fQ6TTpMTW2lUAkloqSNIivrHdr2PR-3MiQBUUrVpLDDYw",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"hasCoordinates\":true,\"timezone\":\"Europe/Paris\",\"lengthDisplay\":174,\"endTime\":\"17:30:00\",\"podiumDisplayMode\":\"instantpodium\",\"departureCity\":{\"createdAt\":\"2026-03-09T14:42:41+01:00\",\"updatedBy\":\"eBlancardi\",\"country\":{\"code\":\"esp\",\"id\":1959},\"content\":{\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-jpg/e03-salida-gruissan/27403/0:0,960:960-0-0-70/f8caa\",\"texts\":[{\"locale\":\"es\",\"text\":[\"Cur"
+      },
+      {
+        "captured_at": "2026-08-25T11:45:17.211+00:00",
+        "url": "https://racecenter.lavuelta.es/api/checkpoint-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVGhtWWpFM1pXRXhPV1pqIiwiaWF0IjoxNzg3NjU4MzE2fQ6AIw02k4ADVic9Im3vkenTh-6UinT-B9zt7Q4J-fbpc",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"0\":{\"highSchedule\":\"14:49:00\",\"updatedAt\":\"2026-08-12T11:23:37+02:00\",\"length\":0,\"countryCode\":\"AND\",\"middleSchedule\":\"14:49:00\",\"latitude\":42.513549,\"checkpointTypes\":[{\"number\":\"0\",\"id\":\"142576\",\"type\":\"fictive\",\"code\":\"F\"}],\"lowSchedule\":\"14:49:00\",\"longitude\":1.552719,\"caravanSchedule\":\"13:04:00\",\"checkpointSummits\":[],\"checkpointMeteo\":{\"temperature\":23.36,\"currentWeatherDesc\":\"couvert\",\"u"
+      },
+      {
+        "captured_at": "2026-08-25T11:45:17.211+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeJerseys-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOVGxpTldKbU16RTJOemxrIiwiaWF0IjoxNzg3NjU4MzE2fQTeFBlVLcXW-RiNHxUnCnljPnpF3Lw5nDYBo9lTLAVt0",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"length\":0,\"status\":\"0\",\"rankings\":[{\"bib\":152,\"absolute\":6,\"position\":1,\"relative\":0,\"$rider\":\"allCompetitors-2026:498fa5b993ade79dac9520cb061dbd0d6eb151e673ce865ea20817012e7e009e\"}],\"type\":\"pmm\",\"checkpoint\":51,\"_id\":\"60731d29884730bc7eb489941c467b15003a2a609f6697b990d4973e6bf908ce\",\"_bind\":\"rankingTypeJerseys-2026-4\",\"_origin\":\"rankingType-2026-3\",\"_updatedAt\":1787595088986,\"_parent\":\"stage-2"
+      },
+      {
+        "captured_at": "2026-08-25T11:45:17.211+00:00",
+        "url": "https://racecenter.lavuelta.es/api/extraVehicle-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVFF3WmpGaFpEWTVaR1ZpIiwiaWF0IjoxNzg3NjU4MzE2fQ1oILVZQ6YPwb4Jmd7OV0Diuy9SDPFbmMlmZTZScFtm4",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.088+00:00",
-        "url": "https://racecenter.lavuelta.es/api/pack-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPREZsWm1NeU9HTTBZMlptIiwiaWF0IjoxNzg3NDA4OTQ3fQ6jvd-QCHGVsOZAyynrM-jKc_hv57_j7sGsBqGcLJMxE",
+        "captured_at": "2026-08-25T11:45:17.211+00:00",
+        "url": "https://racecenter.lavuelta.es/api/insights-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV0psTXpBNU5qZ3hNVGd3IiwiaWF0IjoxNzg3NjU4MzE2fQeMvIOWbvpuFeS3Jg24RMt_UMKCR16-gT2wwZ7hyYhNY",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.088+00:00",
-        "url": "https://racecenter.lavuelta.es/api/extraVehicle-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPRFJrWXpsa05qWTNNMk15IiwiaWF0IjoxNzg3NDA4OTQ3fQpSazShkzjP9PkBbJmaq6OSD0arbnF0lGwp6ndWmneYk",
+        "captured_at": "2026-08-25T11:45:17.223+00:00",
+        "url": "https://racecenter.lavuelta.es/api/telemetryPack-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV00wTmpJd09HSmpNMlZsIiwiaWF0IjoxNzg3NjU4MzE2fQ5RTlaS55v4AUlFfJvWl_P_aHlCgWxbP772P-_r9ty60",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.088+00:00",
-        "url": "https://racecenter.lavuelta.es/api/checkpoint-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVFZsTW1Jek4yVTVPVGhqIiwiaWF0IjoxNzg3NDA4OTQ3fQPJkdKE_mooUW0Ug7nD8CVJH6_NtBh25nV6z__ZDMnHU",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"0\":{\"checkpoint\":1,\"countryCode\":\"ESP\",\"caravanSchedule\":\"00:00:00\",\"country\":\"Espagne\",\"checkpointSummits\":[],\"middleSchedule\":\"19:20:00\",\"length\":0,\"lowSchedule\":\"16:17:00\",\"checkpointTypes\":[],\"updatedAt\":\"2026-08-12T10:22:50+02:00\"},\"1\":{\"caravanSchedule\":\"00:00:00\",\"checkpointSummits\":[],\"lowSchedule\":\"16:17:00\",\"department\":\"Provincia de Monaco\",\"checkpointTypes\":[],\"middleSchedule\":\"19:2"
-      },
-      {
-        "captured_at": "2026-08-22T14:29:08.088+00:00",
-        "url": "https://racecenter.lavuelta.es/api/ad?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVE0yTVRrek1XSm1aRGRqIiwiaWF0IjoxNzg3NDA4OTQ3fQxnsTLAirXWu_L9doyGCBGyAHq63vPRQsJM95ka9PhTs",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[]"
-      },
-      {
-        "captured_at": "2026-08-22T14:29:08.088+00:00",
-        "url": "https://racecenter.lavuelta.es/api/telemetryPack-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaakpsWlRsak5qZzVZek5oIiwiaWF0IjoxNzg3NDA4OTQ3fQvow1eXbSng_FB9yfceFJuIj1DRBd0KsWIf-t61C2OpA",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[]"
-      },
-      {
-        "captured_at": "2026-08-22T14:29:08.090+00:00",
-        "url": "https://racecenter.lavuelta.es/api/allCompetitors-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZalUxWVdRek4yVmlOREJoIiwiaWF0IjoxNzg3NDA4OTQ3fQ3VEOOrUy6VqM_5180sOraAOhpFyVBd1DAZrzKs-DOdo",
+        "captured_at": "2026-08-25T11:45:17.253+00:00",
+        "url": "https://racecenter.lavuelta.es/api/allCompetitors-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPR1E0TnpFMU9HRXhNak0wIiwiaWF0IjoxNzg3NjU4MzE2fQtVCdfPEHdK5M-Am5hupVp9aZaRGqK0NsjcFFDjGNfN8",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"lastname\":\"VAN AERT\",\"profile_podium_live\":\"https://img.aso.fr/core_app/img-cycling-vue-png/31/28296/0:0,660:1000-0-0-70/23936\",\"profile_sm\":\"https://img.aso.fr/core_app/img-cycling-vue-png/31/27913/0:0,400:400-70-0-70/bc742\",\"bib\":31,\"siteLinks\":{\"es\":\"/corredor/31/team-visma-lease-a-bike/van-aert-wout\",\"en\":\"/rider/31/team-visma-lease-a-bike/van-aert-wout\",\"fr\":\"/coureur/31/team-visma-lease-a"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.091+00:00",
-        "url": "https://racecenter.lavuelta.es/api/broadcaster?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZVFJtTlRZM05qZzNNVGs1IiwiaWF0IjoxNzg3NDA4OTQ3fQk0v9AyaeceMO19r-4rioXbnyoRYqPzSHNEGTlwHqFCg",
+        "captured_at": "2026-08-25T11:45:17.273+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingType-2026-3?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZbVZsTTJSalpHRm1aR0l3IiwiaWF0IjoxNzg3NjU4MzE2fQKE4YEVVT9lRPl6N28fh3CsNdy4V43ncBvgJifyexzHg",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"rankings\":[{\"absolute\":17930000,\"relative\":0,\"penality\":0,\"position\":1,\"bonus\":10000,\"bib\":33,\"$rider\":\"allCompetitors-2026:a3b2eedbd63dfddea4b144f4a4fe22682ef4abe1fb2b14efd3752bba48d7f38c\"},{\"bib\":42,\"absolute\":17932000,\"position\":2,\"relative\":2000,\"penality\":0,\"bonus\":0,\"$rider\":\"allCompetitors-2026:0e95917af3a38cd0235fe15b95b0ccc60481696b85a51deffdab4b512ca40253\"},{\"bonus\":0,\"absolute\":17934"
+      },
+      {
+        "captured_at": "2026-08-25T11:45:17.273+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingType-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOR1ExWTJSaU1tVm1NV0UyIiwiaWF0IjoxNzg3NjU4MzE2fQkFQ2UFxsVEviBAzszDq8wpyVgZ88iov8M4wv8_Ut-zU",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-08-25T11:45:17.273+00:00",
+        "url": "https://racecenter.lavuelta.es/api/ad?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNamRpTkdWbE1EUTVNVFEwIiwiaWF0IjoxNzg3NjU4MzE2fQILoiTC4JRCn7rgSnGylFczpzPx82OnO-HczjfdM0spE",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-08-25T11:45:17.273+00:00",
+        "url": "https://racecenter.lavuelta.es/api/broadcaster?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV1l6T1RjNE1qbGlNREExIiwiaWF0IjoxNzg3NjU4MzE2fQhfec1BpXorJ42X4WUqPSp2WV9oyKpM-b37DZnij4IGM",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"broadcasterLangs\":[{\"title\":\"Flosports\",\"url\":\"https://www.flosports.tv/\",\"liveUrl\":\"https://www.flosports.tv/\",\"countryLabel\":\"Canada\",\"locale\":\"fr\"},{\"countryLabel\":\"Canada\",\"title\":\"Flosports\",\"locale\":\"en\",\"url\":\"https://www.flosports.tv/\",\"liveUrl\":\"https://www.flosports.tv/\"},{\"locale\":\"es\",\"liveUrl\":\"https://www.flosports.tv/\",\"url\":\"https://www.flosports.tv/\",\"countryLabel\":\"CANADÁ\",\"ti"
       },
       {
-        "captured_at": "2026-08-22T14:29:08.091+00:00",
-        "url": "https://racecenter.lavuelta.es/api/fantasy-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOVFpsWmpkaFlXVXpZVEl4IiwiaWF0IjoxNzg3NDA4OTQ3fQCRk1o88CBYtDGtowT_Sh26ex2BxRTm-pb6xLLbFINvk",
+        "captured_at": "2026-08-25T11:45:17.273+00:00",
+        "url": "https://racecenter.lavuelta.es/api/fantasy-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZekptWXpkaE9UWTJPVFJpIiwiaWF0IjoxNzg3NjU4MzE2fQLbEwectdpoZKFCy5abWuDNMUqGozTBWSfXXbZY37r58",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
+      }
+    ],
+    "event-stream": [
+      {
+        "captured_at": "2026-08-25T11:45:17.292+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOREZrTmpjMFl6RTROMkUwIiwiaWF0IjoxNzg3NjU4MzE2fQlRfB6sgIy1cNQX3FYzEwBJiUia_gsJz6yRXawe2rgck",
+        "status": 200,
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.102+00:00",
-        "url": "https://racecenter.lavuelta.es/api/insights-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZbVE1WlRkaU1UQmtNamcxIiwiaWF0IjoxNzg3NDA4OTQ3fQiDrnDVNG55-PL57RR8FtTEhEY5wRj1SnxJLAQ6lsQT4",
+        "captured_at": "2026-08-25T11:45:21.126+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZalU0WkRkak5EWXhZMlF4IiwiaWF0IjoxNzg3NjU4MzIwfQNOmTojCkDWmsQO2LIRJ_8ne-dn8Xnxuf7dj2dWBXFPU",
         "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[]"
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.103+00:00",
-        "url": "https://racecenter.lavuelta.es/api/publication_en-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPREkyTnpjellXWmtaRGc1IiwiaWF0IjoxNzg3NDA4OTQ3fQS40sh7Q09Kr2D0SYgybDqW0XVDShLoXSCRgY_WoLK9E",
+        "captured_at": "2026-08-25T11:45:50.907+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPR0UzT0RWbE1tSmtOVFE0IiwiaWF0IjoxNzg3NjU4MzUwfQfs-Qv9ldEs_-dcUOC-z_TUa834CQo40_WHR1belLeBU",
         "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"updatedAt\":\"2026-08-22T16:14:48+02:00\",\"pinned\":false,\"type\":\"liv\",\"createdBy\":\"bvittek\",\"id\":51241,\"title\":\"Following the tracks of Formula 1 legends\",\"picto\":\"liv_chrono\",\"year\":2026,\"createdAt\":\"2026-08-22T16:14:48+02:00\",\"updatedBy\":\"bvittek\",\"locale\":\"en\",\"slug\":\"following-the-tracks-of-formula-1-legends\",\"text\":[\"“A very urban, very technical route, with plenty of speed and changes of pac"
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.122+00:00",
-        "url": "https://racecenter.lavuelta.es/api/publication_en-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZakJpTm1GbVpHSTJPREF5IiwiaWF0IjoxNzg3NDA4OTQ3fQ7zeZXgYXQi8pIVMQhgC3uw-KEiipxKTFgRSiPkt_5Ng",
+        "captured_at": "2026-08-25T11:46:20.335+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVE5tTkdKaE1qRmpNRFZtIiwiaWF0IjoxNzg3NjU4Mzc5fQjRTqHmMsyEuh31o5xSyRiuspUwZayTJzVX_8XK9ZEJs",
         "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"updatedAt\":\"2026-08-22T16:14:48+02:00\",\"pinned\":false,\"type\":\"liv\",\"createdBy\":\"bvittek\",\"id\":51241,\"title\":\"Following the tracks of Formula 1 legends\",\"picto\":\"liv_chrono\",\"year\":2026,\"createdAt\":\"2026-08-22T16:14:48+02:00\",\"updatedBy\":\"bvittek\",\"locale\":\"en\",\"slug\":\"following-the-tracks-of-formula-1-legends\",\"text\":[\"“A very urban, very technical route, with plenty of speed and changes of pac"
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.123+00:00",
-        "url": "https://racecenter.lavuelta.es/api/publication_fr-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPRFJtTVdSaE5qRTVaVEJqIiwiaWF0IjoxNzg3NDA4OTQ3fQ89kWBsE4mivKu-fS080YIfyNWAy75iCwiQiwspUQb90",
+        "captured_at": "2026-08-25T11:46:50.165+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVFEwWmpNMk56Z3hORGt4IiwiaWF0IjoxNzg3NjU4NDA5fQYWli0Qfmpn79LF8dW9d0KIGZAUCAv8rtaSvwKd6B61k",
         "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"slug\":\"sur-les-traces-des-legendes-de-la-f1\",\"createdBy\":\"dramadier\",\"stage\":1,\"updatedAt\":\"2026-08-22T15:54:53+02:00\",\"text\":[\"« Un tracé très urbain, très technique, avec beaucoup de vitesse et de changements de rythme » : ainsi Kiko Garcia, directeur technique de La Vuelta 26, décrit-il le parcours qui se présente aux coureurs depuis la rampe du casino de Monte-Carlo. « C’est un contre-la-mo"
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.124+00:00",
-        "url": "https://racecenter.lavuelta.es/api/checkpointList-2026-14?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV1ptT0RabU1EazJPR0V4IiwiaWF0IjoxNzg3NDA4OTQ3fQYgq4fCyDk57-Xny-XOeZuZ9J-bE2h3ZiW7OrtNVry6g",
+        "captured_at": "2026-08-25T11:47:19.820+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaV1F3T0RabU1qSXpORGs1IiwiaWF0IjoxNzg3NjU4NDM5fQTvnUGNVGxxH7x5BO7p7EK3TcAf2bXx7Dn96duN9t0E4",
         "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"length\":0,\"countryCode\":\"ESP\",\"checkpointSummits\":[],\"lowSchedule\":\"13:33:00\",\"country\":\"Espana\",\"caravanSchedule\":\"11:33:00\",\"highSchedule\":\"13:33:00\",\"checkpoint\":1,\"middleSchedule\":\"13:33:00\",\"checkpointTypes\":[],\"_id\":\"bafc37c6011eaf0cc59253fe81244a4ba3ba92d911a74e796e5d0425ede42888-1\",\"_updatedAt\":1787393982261,\"_key\":\"checkpoint\",\"_bind\":\"checkpoint"
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
+      },
+      {
+        "captured_at": "2026-08-25T11:47:49.221+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNRFkxT0dZeU9UTTFNelEyIiwiaWF0IjoxNzg3NjU4NDY4fQB8hW726gRqIEILQu0_A408GbwQRuXyEGo32hZlY57ho",
+        "status": 200,
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
       }
     ],
     "api-path": [
       {
-        "captured_at": "2026-08-22T14:29:08.126+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingTypeArrival-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVE0yT1RObE1EY3dPVEE0IiwiaWF0IjoxNzg3NDA4OTQ3fQkwE-nYWft8w1_FE1ToDTve1_hsEQJ1S_RkoCPEqqK6o",
+        "captured_at": "2026-08-25T11:45:17.380+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeArrival-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNREZqWWpaak9HSXpOMll4IiwiaWF0IjoxNzg3NjU4MzE2fQeBLShadt68fmCqUpXj6wnV-Zzmyxw-nSa79M11eKt1A",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.128+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingTypeJerseys-2026-2?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZekV3Tm1RMVpXVmxPRFUxIiwiaWF0IjoxNzg3NDA4OTQ3fQt0TeTBLspp6B4zSFb7mTAsDgIVU7cZqGXTEZHAqZXsc",
+        "captured_at": "2026-08-25T11:45:17.381+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeJerseys-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZbUk1TVdVME9HVXdOVGxoIiwiaWF0IjoxNzg3NjU4MzE2fQW9z-odGzcIZMVg864efu6w7gv7ojMVvKq-aBQHLGbi8",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.129+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingTypeJerseys-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZalEwTXpSbU5UVTNPR1JpIiwiaWF0IjoxNzg3NDA4OTQ3fQVN75B7gSBvrSUXkuiUWzvoFaOsKRxIGjasMQM8PrNFw",
+        "captured_at": "2026-08-25T11:45:17.381+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeTrial-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV1V3WWpZNE1UYzJNMkUwIiwiaWF0IjoxNzg3NjU4MzE2fQTyL3003alqRgePmSxGEVhJVZP2bmuwCAWPXixj6-fR0",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.163+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingTypeWidget-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZbVEwTjJVeFl6aGlPVGhqIiwiaWF0IjoxNzg3NDA4OTQ3fQHqI9Fk1hSiOTYclci2lLXk4idLP6UvHSEr2wKHM6dow",
-        "status": 204,
-        "mime": "",
-        "kind": "api-path",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-22T14:29:08.211+00:00",
-        "url": "https://racecenter.lavuelta.es/api/stageWithdrawals-2026-1?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaRGs0TnpZd1l6azVNbUl3IiwiaWF0IjoxNzg3NDA4OTQ3fQX_z2Zj9KiGIpF0BOrYYOacZFNs3wi0J-TbgteKjz4Fw",
-        "status": 204,
-        "mime": "",
-        "kind": "api-path",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-22T14:29:08.214+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingType-2026-0?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPV015TVRFMk5tRTVaREJrIiwiaWF0IjoxNzg3NDA4OTQ3fQ1wG1rkR2mjOtUWDSf0bOBGLgrT78WepjIXXMVuL7i7c",
+        "captured_at": "2026-08-25T11:45:17.383+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeWidget-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZakl5WVdFM09UTTFORFprIiwiaWF0IjoxNzg3NjU4MzE2fQG6Ct00TQINqUnCLFRIoZJKLwCbCoGCVdjcEAPSjTg1A",
         "status": 204,
         "mime": "",
         "kind": "api-path",
@@ -264,24 +256,24 @@
     ],
     "csv": [
       {
-        "captured_at": "2026-08-22T14:29:08.208+00:00",
-        "url": "https://racecenter.lavuelta.es/profils/2026/profile-01-tiny-110aa56cfe5b1de34b0c13c1c64e331b.csv",
+        "captured_at": "2026-08-25T11:45:17.436+00:00",
+        "url": "https://racecenter.lavuelta.es/profils/2026/profile-04-df875bb0c2fe1545195b3ccce5be88ed.csv",
         "status": 200,
         "mime": "text/csv; charset=UTF-8",
         "kind": "csv",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.209+00:00",
-        "url": "https://racecenter.lavuelta.es/profils/2026/profile-01-5196d2d1a6bd1b34f323136817b6666d.csv",
+        "captured_at": "2026-08-25T11:45:17.437+00:00",
+        "url": "https://racecenter.lavuelta.es/profils/2026/profile-04-df875bb0c2fe1545195b3ccce5be88ed.csv",
         "status": 200,
         "mime": "text/csv; charset=UTF-8",
         "kind": "csv",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-22T14:29:08.210+00:00",
-        "url": "https://racecenter.lavuelta.es/profils/2026/profile-01-5196d2d1a6bd1b34f323136817b6666d.csv",
+        "captured_at": "2026-08-25T11:45:17.460+00:00",
+        "url": "https://racecenter.lavuelta.es/profils/2026/profile-04-tiny-1ad6815f52a3f2fd84f09095f2436d38.csv",
         "status": 200,
         "mime": "text/csv; charset=UTF-8",
         "kind": "csv",
@@ -290,108 +282,95 @@
     ]
   },
   "sse_binds_seen": {
-    "(unparseable)": 51,
-    "video": 6,
-    "checkpoint": 18,
-    "publication_de": 54,
-    "publication_da": 53,
-    "publication_sl": 53,
-    "publication_sk": 53,
-    "publication_cs": 53,
-    "publication_nl": 53,
-    "publication_it": 52,
-    "publication_sv": 52,
-    "publication_pt": 52,
-    "publication_nb": 52,
-    "socialContent": 18,
-    "image": 12,
-    "rankingTypeTrial": 26,
-    "rankingType": 34,
-    "(unknown)": 6,
-    "publication_es": 4,
-    "publication_en": 2,
-    "publication_fr": 2
+    "(unparseable)": 55,
+    "publication_fr": 14,
+    "publication_en": 14,
+    "publication_es": 14,
+    "video": 7,
+    "stage": 14,
+    "checkpoint": 42,
+    "(unknown)": 7
   },
   "sse_sample_events": [
     {
-      "captured_at": "2026-08-22T14:29:07.976+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.655961,
+      "captured_at": "2026-08-25T11:45:17.303+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.14959,
       "eventName": "uid",
       "eventId": "",
-      "data": "e0743e1d-5390-4a08-88d3-493e696aead1"
+      "data": "7e1f2486-f4fc-4cf1-a9d2-20559d83951f"
     },
     {
-      "captured_at": "2026-08-22T14:29:07.976+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.656002,
+      "captured_at": "2026-08-25T11:45:17.303+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.14966,
       "eventName": "stage",
       "eventId": "",
-      "data": "93bd5639e913abc271fb13124da9db9a6a602ca76973eeae9a729197feefbbdb"
+      "data": "c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f"
     },
     {
-      "captured_at": "2026-08-22T14:29:07.976+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.656036,
+      "captured_at": "2026-08-25T11:45:17.303+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.149822,
+      "eventName": "update",
+      "eventId": "2",
+      "data": "{\"bind\":\"publication_fr-2026-4\",\"app\":\"vue\",\"origin\":\"video-2026-4\",\"change\":\"added\",\"id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"data\":{\"onlyDataTab\":false,\"isClub\":false,\"name\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xayq2s6\",\"videoLangs\":[{\"locale\":\"fr\",\"id\":7878,\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"},{\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\",\"id\":7879},{\"locale\":\"es\",\"id\":7880,\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}],\"createdAt\":\"2026-08-18T11:27:00+02:00\",\"onlyClubTab\":false,\"id\":7878,\"isData\":false,\"_id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"_bind\":\"publication_fr-2026-4\",\"_origin\":\"video-2026-4\",\"_updatedAt\":1787642037772,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"model\":\"video\",\"locale\":\"fr\",\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"}}"
+    },
+    {
+      "captured_at": "2026-08-25T11:45:17.303+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.150213,
+      "eventName": "update",
+      "eventId": "3",
+      "data": "{\"bind\":\"publication_en-2026-4\",\"app\":\"vue\",\"origin\":\"video-2026-4\",\"change\":\"added\",\"id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"data\":{\"onlyDataTab\":false,\"isClub\":false,\"name\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xayq2s6\",\"videoLangs\":[{\"locale\":\"fr\",\"id\":7878,\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"},{\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\",\"id\":7879},{\"locale\":\"es\",\"id\":7880,\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}],\"createdAt\":\"2026-08-18T11:27:00+02:00\",\"onlyClubTab\":false,\"id\":7879,\"isData\":false,\"_id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"_bind\":\"publication_en-2026-4\",\"_origin\":\"video-2026-4\",\"_updatedAt\":1787642037772,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"model\":\"video\",\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\"}}"
+    },
+    {
+      "captured_at": "2026-08-25T11:45:17.303+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.150344,
+      "eventName": "update",
+      "eventId": "4",
+      "data": "{\"bind\":\"publication_es-2026-4\",\"app\":\"vue\",\"origin\":\"video-2026-4\",\"change\":\"added\",\"id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"data\":{\"onlyDataTab\":false,\"isClub\":false,\"name\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xayq2s6\",\"videoLangs\":[{\"locale\":\"fr\",\"id\":7878,\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"},{\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\",\"id\":7879},{\"locale\":\"es\",\"id\":7880,\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}],\"createdAt\":\"2026-08-18T11:27:00+02:00\",\"onlyClubTab\":false,\"id\":7880,\"isData\":false,\"_id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"_bind\":\"publication_es-2026-4\",\"_origin\":\"video-2026-4\",\"_updatedAt\":1787642037772,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"model\":\"video\",\"locale\":\"es\",\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}}"
+    },
+    {
+      "captured_at": "2026-08-25T11:45:17.303+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.150448,
       "eventName": "update",
       "eventId": "5",
-      "data": "{\"bind\":\"video-2026-1\",\"app\":\"vue\",\"origin\":\"video-2026-1\",\"change\":\"added\",\"id\":\"228a682f0414f20fd1b8ccaaaa5651742b897de443719efb0035ac6b798570cf\",\"data\":{\"id\":3519,\"onlyDataTab\":false,\"videoLangs\":[{\"title\":\"La Vuelta 2026 - Étape 1 : Parcours et altimétrie\",\"id\":7869,\"locale\":\"fr\"},{\"locale\":\"en\",\"id\":7870,\"title\":\"La Vuelta 2026 - Stage 1: Route & Elevation Profile\"},{\"locale\":\"es\",\"id\":7871,\"title\":\"La Vuelta 2026 - Etapa 1: Recorrido y Altimetria\"}],\"onlyClubTab\":false,\"isData\":false,\"createdAt\":\"2026-08-18T11:30:00+02:00\",\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xaypzqu\",\"isClub\":false,\"name\":\"La Vuelta 2026 - Étape 1 : Parcours et altimétrie\",\"_id\":\"228a682f0414f20fd1b8ccaaaa5651742b897de443719efb0035ac6b798570cf\",\"_bind\":\"video-2026-1\",\"_origin\":\"video-2026-1\",\"_updatedAt\":1787382770785,\"_parent\":\"stage-2026:93bd5639e913abc271fb13124da9db9a6a602ca76973eeae9a729197feefbbdb\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:La Vuelta 2026 - Étape 1 : Parcours et altimétrie\",\"model\":\"video\"}}"
+      "data": "{\"bind\":\"video-2026-4\",\"app\":\"vue\",\"origin\":\"video-2026-4\",\"change\":\"added\",\"id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"data\":{\"onlyDataTab\":false,\"isClub\":false,\"name\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xayq2s6\",\"videoLangs\":[{\"locale\":\"fr\",\"id\":7878,\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"},{\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\",\"id\":7879},{\"locale\":\"es\",\"id\":7880,\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}],\"createdAt\":\"2026-08-18T11:27:00+02:00\",\"onlyClubTab\":false,\"id\":3522,\"isData\":false,\"_id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"_bind\":\"video-2026-4\",\"_origin\":\"video-2026-4\",\"_updatedAt\":1787642037772,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"model\":\"video\"}}"
     },
     {
-      "captured_at": "2026-08-22T14:29:07.977+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.656182,
+      "captured_at": "2026-08-25T11:45:17.304+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.150545,
       "eventName": "update",
-      "eventId": "50",
-      "data": "{\"bind\":\"checkpoint-2026-14\",\"app\":\"vue\",\"origin\":\"checkpoint-2026-14\",\"change\":\"modified\",\"id\":\"bafc37c6011eaf0cc59253fe81244a4ba3ba92d911a74e796e5d0425ede42888\",\"data\":{\"0\":{\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"length\":0,\"countryCode\":\"ESP\",\"checkpointSummits\":[],\"lowSchedule\":\"13:33:00\",\"country\":\"Espana\",\"caravanSchedule\":\"11:33:00\",\"highSchedule\":\"13:33:00\",\"checkpoint\":1,\"middleSchedule\":\"13:33:00\",\"checkpointTypes\":[]},\"1\":{\"checkpointTypes\":[{\"type\":\"fictive\",\"code\":\"F\",\"number\":\"0\",\"id\":\"142685\"}],\"checkpointSummits\":[],\"length\":0,\"caravanSchedule\":\"11:33:00\",\"longitude\":-3.741139,\"updatedAt\":\"2026-08-12T11:23:15+02:00\",\"latitude\":37.777809,\"department\":\"Provincia de Jaen\",\"highSchedule\":\"13:33:00\",\"middleSchedule\":\"13:33:00\",\"checkpoint\":2,\"lowSchedule\":\"13:33:00\"},\"2\":{\"length\":0,\"checkpointTypes\":[{\"id\":\"142686\",\"number\":\"0\",\"type\":\"real\",\"code\":\"R\"}],\"highSchedule\":\"13:33:00\",\"middleSchedule\":\"13:33:00\",\"lowSchedule\":\"13:33:00\",\"longitude\":-3.741139,\"latitude\":37.777809,\"road\":\"Salida lanzada por la N-323a dirección Mancha Real, Baeza  Lat. 37°46'40.12\\\"N long 3°44'28.12\\\"O\",\"updatedAt\":\"2026-08-12T11:23:15+02:00\",\"checkpointSummits\":[],\"place\":\"Salida lanzada por la N-323a dirección Mancha Real, Baeza  Lat. 37°46'40.12\\\"N long 3°44'28.12\\\"O\",\"caravanSchedule\":\"11:33:00\",\"checkpoint\":3},\"3\":{\"checkpoint\":4,\"place\":\"Rotonda derecha dirección Mancha Real\",\"checkpointTypes\":[],\"highSchedule\":\"13:38:00\",\"road\":\"Rotonda derecha dirección Mancha Real\",\"middleSchedule\":\"13:38:00\",\"length\":3.4,\"checkpointSummits\":[],\"lowSchedule\":\"13:38:00\",\"caravanSchedule\":\"11:38:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\"},\"4\":{\"length\":9.1,\"road\":\"Cruce derecha dirección Mancha Real\",\"caravanSchedule\":\"11:46:00\",\"checkpoint\":5,\"middleSchedule\":\"13:46:00\",\"checkpointTypes\":[],\"place\":\"Cruce derecha dirección Mancha Real\",\"checkpointSummits\":[],\"lowSchedule\":\"13:46:00\",\"highSchedule\":\"13:47:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\"},\"5\":{\"place\":\"Mancha Real C/Lonja, rotonda derecha direc. Jimena\",\"highSchedule\":\"13:55:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"checkpoint\":6,\"middleSchedule\":\"13:54:00\",\"road\":\"Mancha Real C/Lonja, rotonda derecha direc. Jimena\",\"caravanSchedule\":\"11:54:00\",\"length\":13.5,\"lowSchedule\":\"13:53:00\",\"checkpointTypes\":[],\"checkpointSummits\":[]},\"6\":{\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"middleSchedule\":\"14:07:00\",\"checkpointSummits\":[],\"place\":\"Cruce derecha dirección Torres\",\"caravanSchedule\":\"12:22:00\",\"lowSchedule\":\"14:06:00\",\"checkpoint\":7,\"highSchedule\":\"14:09:00\",\"checkpointTypes\":[],\"road\":\"Cruce derecha dirección Torres\",\"length\":24.6},\"7\":{\"checkpointTypes\":[],\"lowSchedule\":\"14:19:00\",\"place\":\"Torres\",\"checkpointSummits\":[],\"road\":\"Torres\",\"caravanSchedule\":\"12:36:00\",\"highSchedule\":\"14:24:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"length\":33.1,\"middleSchedule\":\"14:21:00\",\"checkpoint\":8},\"8\":{\"checkpointSummits\":[],\"middleSchedule\":\"14:36:00\",\"place\":\"Mancha Real C/Velazquez, Avda. San Juan de la Cruz, C/Lonja, Avda Vista Alegre, Avda. Argentina, \",\"lowSchedule\":\"14:33:00\",\"checkpoint\":9,\"road\":\"Mancha Real C/Velazquez, Avda. San Juan de la Cruz, C/Lonja, Avda Vista Alegre, Avda. Argentina, \",\"checkpointTypes\":[],\"length\":43.9,\"highSchedule\":\"14:39:00\",\"caravanSchedule\":\"12:51:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\"},\"9\":{\"caravanSchedule\":\"13:04:00\",\"checkpoint\":10,\"place\":\"Pegalajar cruce izquierda, rotonda derecha dirección Granada, Jaen\",\"length\":52.9,\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"checkpointTypes\":[],\"road\":\"Pegalajar cruce izquierda, rotonda derecha dirección Granada, Jaen\",\"lowSchedule\":\"14:46:00\",\"middleSchedule\":\"14:49:00\",\"highSchedule\":\"14:54:00\",\"checkpointSummits\":[]},\"10\":{\"road\":\"Rotonda recto dirección Jaen\",\"highSchedule\":\"14:58:00\",\"checkpointSummits\":[],\"caravanSchedule\":\"13:09:00\",\"middleSchedule\":\"14:54:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"length\":57.9,\"checkpointTypes\":[],\"lowSchedule\":\"14:50:00\",\"place\":\"Rotonda recto dirección Jaen\",\"checkpoint\":11},\"11\":{\"checkpointTypes\":[],\"place\":\"Giro izquierda dirección La Guardia de Jaen\",\"caravanSchedule\":\"13:10:00\",\"highSchedule\":\"15:00:00\",\"checkpoint\":12,\"lowSchedule\":\"14:51:00\",\"middleSchedule\":\"14:55:00\",\"length\":59.2,\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"checkpointSummits\":[],\"road\":\"Giro izquierda dirección La Guardia de Jaen\"},\"12\":{\"road\":\"La Guardia de Jaen (paso estrecho)\",\"checkpointSummits\":[],\"highSchedule\":\"15:04:00\",\"lowSchedule\":\"14:55:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"checkpoint\":13,\"caravanSchedule\":\"13:15:00\",\"middleSchedule\":\"15:00:00\",\"length\":61.2,\"checkpointTypes\":[],\"place\":\"La Guardia de Jaen (paso estrecho)\"},\"13\":{\"highSchedule\":\"15:11:00\",\"checkpointTypes\":[],\"place\":\"Puente Jontoyya\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"road\":\"Puente Jontoyya\",\"middleSchedule\":\"15:06:00\",\"caravanSchedule\":\"13:21:00\",\"lowSchedule\":\"15:02:00\",\"length\":67.2,\"checkpoint\":14,\"checkpointSummits\":[]},\"14\":{\"place\":\"Jaen Avda. Granada, Avda. Madrid, C/Pio XII, C/Arquitecto Berges, C/Castilla, C/Milan de Priego, C/Doctor Eduardo Arroyo, C/Campanas, C/Carrera de Jesus, Rotonda dirección Los Villares\",\"road\":\"Jaen Avda. Granada, Avda. Madrid, C/Pio XII, C/Arquitecto Berges, C/Castilla, C/Milan de Priego, C/Doctor Eduardo Arroyo, C/Campanas, C/Carrera de Jesus, Rotonda dirección Los Villares\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"length\":69.7,\"checkpointTypes\":[],\"highSchedule\":\"15:16:00\",\"middleSchedule\":\"15:11:00\",\"lowSchedule\":\"15:06:00\",\"checkpoint\":15,\"caravanSchedule\":\"13:25:00\",\"checkpointSummits\":[]},\"15\":{\"length\":73.4,\"road\":\"Rotonda recto dirección Los Villares\",\"lowSchedule\":\"15:09:00\",\"middleSchedule\":\"15:16:00\",\"highSchedule\":\"15:21:00\",\"place\":\"Rotonda recto dirección Los Villares\",\"caravanSchedule\":\"13:46:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"checkpoint\":16,\"checkpointTypes\":[],\"checkpointSummits\":[]},\"16\":{\"checkpointTypes\":[],\"checkpoint\":17,\"lowSchedule\":\"15:24:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"caravanSchedule\":\"13:59:00\",\"checkpointSummits\":[],\"length\":82.3,\"place\":\"Los Villares comienza puerto\",\"middleSchedule\":\"15:29:00\",\"highSchedule\":\"15:36:00\",\"road\":\"Los Villares comienza puerto\"},\"17\":{\"checkpointSummits\":[{\"id\":3898,\"state\":\"5,4\",\"length\":11000,\"number\":1,\"code\":\"2\",\"imageVersion\":\"\",\"summit\":{\"name\":\"PM 2ª Los Villares desnivel 567 mts. distancia 10,5 km porcentaje 5,4 %  cruce derecha dirección Fuensanta\",\"altitude\":1180}}],\"checkpointTypes\":[],\"longitude\":-3.830788,\"middleSchedule\":\"15:51:00\",\"length\":92.8,\"lowSchedule\":\"15:44:00\",\"road\":\"PM 2ª Los Villares\",\"caravanSchedule\":\"14:36:00\",\"latitude\":37.651958,\"updatedAt\":\"2026-08-13T10:57:04+02:00\",\"checkpoint\":18,\"highSchedule\":\"15:59:00\",\"place\":\"PM 2ª Los Villares\"},\"18\":{\"checkpoint\":19,\"lowSchedule\":\"15:52:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"checkpointSummits\":[],\"place\":\"Fuensanta de Martos Avda. de Andalucia, cruce izquierda dirección Castillo de Locubín\",\"checkpointTypes\":[],\"middleSchedule\":\"15:59:00\",\"road\":\"Fuensanta de Martos Avda. de Andalucia, cruce izquierda dirección Castillo de Locubín\",\"caravanSchedule\":\"14:44:00\",\"highSchedule\":\"16:07:00\",\"length\":101.2},\"19\":{\"checkpointTypes\":[],\"length\":109.3,\"highSchedule\":\"16:18:00\",\"place\":\"El Regüelo\",\"checkpoint\":20,\"caravanSchedule\":\"14:54:00\",\"road\":\"El Regüelo\",\"lowSchedule\":\"16:02:00\",\"checkpointSummits\":[],\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"middleSchedule\":\"16:09:00\"},\"20\":{\"length\":123.1,\"checkpointTypes\":[],\"place\":\"Castillo de Locubín giro izquierda direc. Valdepeñas\",\"road\":\"Castillo de Locubín giro izquierda direc. Valdepeñas\",\"checkpoint\":21,\"caravanSchedule\":\"15:14:00\",\"middleSchedule\":\"16:29:00\",\"highSchedule\":\"16:39:00\",\"lowSchedule\":\"16:21:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"checkpointSummits\":[]},\"21\":{\"place\":\"Sprint intermedio\",\"checkpoint\":22,\"length\":123.6,\"middleSchedule\":\"16:30:00\",\"longitude\":-3.939437,\"caravanSchedule\":\"15:15:00\",\"road\":\"Sprint intermedio\",\"highSchedule\":\"16:39:00\",\"lowSchedule\":\"16:21:00\",\"updatedAt\":\"2026-08-12T11:23:15+02:00\",\"checkpointTypes\":[{\"id\":\"142687\",\"number\":\"1\",\"type\":\"sprint\",\"code\":\"N\"}],\"checkpointSummits\":[],\"latitude\":37.533169},\"22\":{\"highSchedule\":\"16:40:00\",\"road\":\"Cruce izquierda dirección Valdepeñas de Jaen\",\"middleSchedule\":\"16:30:00\",\"place\":\"Cruce izquierda dirección Valdepeñas de Jaen\",\"checkpoint\":23,\"checkpointTypes\":[],\"length\":123.9,\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"caravanSchedule\":\"15:15:00\",\"lowSchedule\":\"16:22:00\",\"checkpointSummits\":[]},\"23\":{\"place\":\"Comienza puerto\",\"checkpoint\":24,\"length\":124.4,\"checkpointTypes\":[],\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"caravanSchedule\":\"15:16:00\",\"highSchedule\":\"16:41:00\",\"lowSchedule\":\"16:22:00\",\"checkpointSummits\":[],\"middleSchedule\":\"16:31:00\",\"road\":\"Comienza puerto\"},\"24\":{\"length\":133.2,\"place\":\"PM 2ª Puerto de Locubín\",\"checkpoint\":25,\"checkpointSummits\":[{\"state\":\"5,1\",\"code\":\"2\",\"imageVersion\":\"\",\"summit\":{\"name\":\"PM 2ª Puerto de Locubín desnivel 444 mts. distancia 8,7 km porcentaje 5,1%  Bonificado\",\"altitude\":1088},\"number\":2,\"length\":9000,\"id\":3899}],\"latitude\":37.565459,\"updatedAt\":\"2026-08-22T12:11:29+02:00\",\"checkpointTypes\":[{\"code\":\"B\",\"id\":\"142732\",\"number\":\"1\",\"type\":\"bonus\",\"subType\":\"bonusclimb\"}],\"road\":\"PM 2ª Puerto de Locubín\",\"middleSchedule\":\"16:49:00\",\"lowSchedule\":\"16:39:00\",\"longitude\":-3.869484,\"highSchedule\":\"16:59:00\",\"caravanSchedule\":\"15:34:00\"},\"25\":{\"checkpointSummits\":[],\"road\":\"Valdepeñas de Jaen C/Vilches, C/Chaparral, giro izquierda dirección Jaen \",\"caravanSchedule\":\"15:41:00\",\"checkpoint\":26,\"middleSchedule\":\"16:56:00\",\"checkpointTypes\":[],\"lowSchedule\":\"16:46:00\",\"highSchedule\":\"17:07:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"length\":139.5,\"place\":\"Valdepeñas de Jaen C/Vilches, C/Chaparral, giro izquierda dirección Jaen \"},\"26\":{\"place\":\"Comienza puerto\",\"checkpointSummits\":[],\"length\":142.6,\"lowSchedule\":\"16:51:00\",\"checkpoint\":27,\"highSchedule\":\"17:12:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"caravanSchedule\":\"16:01:00\",\"checkpointTypes\":[],\"middleSchedule\":\"17:01:00\",\"road\":\"Comienza puerto\"},\"27\":{\"road\":\"Giro derecha dirección La Pandera\",\"checkpoint\":28,\"highSchedule\":\"17:21:00\",\"updatedAt\":\"2026-08-12T10:24:43+02:00\",\"checkpointSummits\":[],\"caravanSchedule\":\"16:09:00\",\"lowSchedule\":\"16:59:00\",\"middleSchedule\":\"17:09:00\",\"length\":146.1,\"checkpointTypes\":[],\"place\":\"Giro derecha dirección La Pandera\"},\"28\":{\"lowSchedule\":\"17:19:00\",\"checkpoint\":29,\"updatedAt\":\"2026-08-22T12:11:48+02:00\",\"road\":\"Meta Sierra de la Pandera desnivel 860 mts 11,9 km porcentage 7,2%\",\"caravanSchedule\":\"16:31:00\",\"checkpointSummits\":[{\"id\":3909,\"length\":12000,\"number\":3,\"summit\":{\"name\":\"Sierra de la Pandera\",\"altitude\":1820},\"state\":\"7,2\",\"imageVersion\":\"\",\"code\":\"1\"}],\"place\":\"Meta Sierra de la Pandera desnivel 860 mts 11,9 km porcentage 7,2%\",\"middleSchedule\":\"17:31:00\",\"latitude\":37.6313,\"highSchedule\":\"17:44:00\",\"length\":154.5,\"longitude\":-3.775389,\"checkpointTypes\":[{\"type\":\"sprint\",\"code\":\"N\",\"id\":\"142688\",\"number\":\"2\"},{\"id\":\"142689\",\"number\":\"0\",\"type\":\"arrival\",\"code\":\"A\"}]},\"_id\":\"bafc37c6011eaf0cc59253fe81244a4ba3ba92d911a74e796e5d0425ede42888\",\"_bind\":\"checkpoint-2026-14\",\"_origin\":\"checkpoint-2026-14\",\"_updatedAt\":1787393982261,\"_parent\":\"stage-2026:bafc37c6011eaf0cc59253fe81244a4ba3ba92d911a74e796e5d0425ede42888\",\"_key\":\"_id\",\"_refs\":[]}}"
+      "eventId": "7",
+      "data": "{\"bind\":\"publication_fr-2026-4\",\"app\":\"vue\",\"origin\":\"interactiveContent-2026-4\",\"change\":\"added\",\"id\":\"cbbe616c5697f217b757032a5b4c9b73ed53ab4ac9bac712a21fc8fc6663ec5a\",\"data\":{\"contentId\":\"VJPuHhtS\",\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-png/picto-cofidis-400x400/28518/0:0,400:400-0-0-70/78002\",\"url\":\"vuelta26-predictor-fr\",\"type\":\"fastory\",\"text\":[\"Prédisez le vainqueur du jour avec Cofidis\"],\"updatedAt\":\"2026-08-25T09:14:36+02:00\",\"title\":\"Prédisez le vainqueur du jour avec Cofidis\",\"id\":148,\"locale\":\"fr\",\"_id\":\"cbbe616c5697f217b757032a5b4c9b73ed53ab4ac9bac712a21fc8fc6663ec5a\",\"_bind\":\"publication_fr-2026-4\",\"_origin\":\"interactiveContent-2026-4\",\"_updatedAt\":1787642076696,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:frfastory-148\",\"model\":\"interactive\",\"isClub\":false}}"
     },
     {
-      "captured_at": "2026-08-22T14:29:07.977+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.656405,
+      "captured_at": "2026-08-25T11:45:17.304+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.150598,
       "eventName": "update",
-      "eventId": "99",
-      "data": "{\"bind\":\"checkpoint-2026-9\",\"app\":\"vue\",\"origin\":\"checkpoint-2026-9\",\"change\":\"modified\",\"id\":\"5e90fa6e3a7248c4a120e6478eb0c08e3d6feea814e4cd26d48473c951241a90\",\"data\":{\"0\":{\"country\":\"Espana\",\"countryCode\":\"ESP\",\"checkpoint\":1,\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointSummits\":[],\"lowSchedule\":\"12:26:00\",\"highSchedule\":\"12:26:00\",\"length\":0,\"caravanSchedule\":\"10:41:00\",\"middleSchedule\":\"12:26:00\",\"checkpointTypes\":[]},\"1\":{\"department\":\"Provincia de Castelló\",\"length\":0,\"lowSchedule\":\"12:26:00\",\"highSchedule\":\"12:26:00\",\"longitude\":-0.21301,\"latitude\":38.53812,\"caravanSchedule\":\"10:41:00\",\"middleSchedule\":\"12:26:00\",\"updatedAt\":\"2026-08-12T11:23:36+02:00\",\"checkpointTypes\":[{\"id\":\"142680\",\"type\":\"fictive\",\"code\":\"F\",\"number\":\"0\"}],\"checkpoint\":2,\"checkpointSummits\":[]},\"2\":{\"checkpointTypes\":[{\"code\":\"R\",\"number\":\"0\",\"type\":\"real\",\"id\":\"142681\"}],\"middleSchedule\":\"12:26:00\",\"checkpointSummits\":[],\"place\":\"Salida lanzada por la CV-759 dirección Finestrat  Lat. 38°32'17.01\\\"N long 0°12'46.98\\\"O\",\"checkpoint\":3,\"lowSchedule\":\"12:26:00\",\"highSchedule\":\"12:26:00\",\"latitude\":38.53812,\"longitude\":-0.21301,\"caravanSchedule\":\"10:41:00\",\"updatedAt\":\"2026-08-12T11:23:36+02:00\",\"length\":0,\"road\":\"Salida lanzada por la CV-759 dirección Finestrat  Lat. 38°32'17.01\\\"N long 0°12'46.98\\\"O\"},\"3\":{\"place\":\"Finestrat\",\"checkpointSummits\":[],\"length\":3.1,\"road\":\"Finestrat\",\"middleSchedule\":\"12:32:00\",\"checkpointTypes\":[],\"lowSchedule\":\"12:31:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"highSchedule\":\"12:32:00\",\"checkpoint\":4,\"caravanSchedule\":\"10:47:00\"},\"4\":{\"caravanSchedule\":\"10:49:00\",\"checkpoint\":5,\"checkpointTypes\":[],\"checkpointSummits\":[],\"middleSchedule\":\"12:34:00\",\"road\":\"Rotonda derecha dirección centro urbano, Benidorm\",\"highSchedule\":\"12:34:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"length\":4.1,\"lowSchedule\":\"12:33:00\",\"place\":\"Rotonda derecha dirección centro urbano, Benidorm\"},\"5\":{\"highSchedule\":\"12:46:00\",\"length\":12.7,\"checkpointSummits\":[],\"checkpoint\":6,\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"caravanSchedule\":\"11:00:00\",\"middleSchedule\":\"12:45:00\",\"road\":\"Rotonda izquierda dirección La Nucia\",\"place\":\"Rotonda izquierda dirección La Nucia\",\"checkpointTypes\":[],\"lowSchedule\":\"12:44:00\"},\"6\":{\"length\":17.4,\"middleSchedule\":\"12:53:00\",\"place\":\"Rotonda recto dirección La Nucia, Polop\",\"checkpointSummits\":[],\"highSchedule\":\"12:54:00\",\"checkpointTypes\":[],\"lowSchedule\":\"12:51:00\",\"checkpoint\":7,\"caravanSchedule\":\"11:08:00\",\"road\":\"Rotonda recto dirección La Nucia, Polop\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\"},\"7\":{\"highSchedule\":\"12:55:00\",\"caravanSchedule\":\"11:08:00\",\"lowSchedule\":\"12:52:00\",\"road\":\"La Nucia\",\"middleSchedule\":\"12:53:00\",\"checkpointTypes\":[],\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"place\":\"La Nucia\",\"checkpoint\":8,\"length\":18.1,\"checkpointSummits\":[]},\"8\":{\"checkpoint\":9,\"checkpointSummits\":[],\"place\":\"Polop\",\"checkpointTypes\":[],\"road\":\"Polop\",\"middleSchedule\":\"12:56:00\",\"caravanSchedule\":\"11:26:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"length\":20.5,\"highSchedule\":\"12:58:00\",\"lowSchedule\":\"12:55:00\"},\"9\":{\"highSchedule\":\"13:04:00\",\"lowSchedule\":\"13:00:00\",\"checkpointSummits\":[],\"caravanSchedule\":\"11:32:00\",\"middleSchedule\":\"13:02:00\",\"road\":\"Callosa d'en Sarria\",\"place\":\"Callosa d'en Sarria\",\"length\":24.3,\"checkpoint\":10,\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointTypes\":[]},\"10\":{\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointTypes\":[],\"checkpoint\":11,\"length\":29.5,\"caravanSchedule\":\"11:54:00\",\"middleSchedule\":\"13:09:00\",\"highSchedule\":\"13:12:00\",\"lowSchedule\":\"13:07:00\",\"road\":\"Bolulla Comienza puerto\",\"checkpointSummits\":[],\"place\":\"Bolulla Comienza puerto\"},\"11\":{\"middleSchedule\":\"13:24:00\",\"checkpointTypes\":[],\"place\":\"Tárbena\",\"road\":\"Tárbena\",\"caravanSchedule\":\"12:09:00\",\"highSchedule\":\"13:27:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointSummits\":[],\"length\":36,\"lowSchedule\":\"13:21:00\",\"checkpoint\":12},\"12\":{\"middleSchedule\":\"13:25:00\",\"checkpoint\":13,\"updatedAt\":\"2026-08-13T10:51:36+02:00\",\"checkpointSummits\":[{\"id\":3893,\"summit\":{\"name\":\"PM 2ª Puerto de Tárbena desnivel 392 mts. distancia 7,2 km porcentaje 5,4 %  \",\"altitude\":594},\"length\":7000,\"number\":1,\"state\":\"5,4\",\"imageVersion\":\"\",\"code\":\"2\"}],\"checkpointTypes\":[],\"longitude\":-0.102105,\"highSchedule\":\"13:29:00\",\"lowSchedule\":\"13:22:00\",\"latitude\":38.698495,\"road\":\"PM 2ª Puerto de Tárbena\",\"caravanSchedule\":\"12:10:00\",\"length\":36.7,\"place\":\"PM 2ª Puerto de Tárbena\"},\"13\":{\"caravanSchedule\":\"12:28:00\",\"checkpoint\":14,\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointTypes\":[],\"highSchedule\":\"13:47:00\",\"length\":50.3,\"lowSchedule\":\"13:39:00\",\"checkpointSummits\":[],\"place\":\"Parcent\",\"road\":\"Parcent\",\"middleSchedule\":\"13:43:00\"},\"14\":{\"caravanSchedule\":\"12:33:00\",\"road\":\"Orba\",\"checkpointSummits\":[],\"checkpoint\":15,\"checkpointTypes\":[],\"length\":55.5,\"highSchedule\":\"13:53:00\",\"place\":\"Orba\",\"middleSchedule\":\"13:48:00\",\"lowSchedule\":\"13:44:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\"},\"15\":{\"length\":59.9,\"checkpoint\":16,\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"lowSchedule\":\"13:49:00\",\"place\":\"Sagra\",\"highSchedule\":\"13:59:00\",\"caravanSchedule\":\"12:39:00\",\"checkpointSummits\":[],\"road\":\"Sagra\",\"checkpointTypes\":[],\"middleSchedule\":\"13:54:00\"},\"16\":{\"middleSchedule\":\"14:03:00\",\"checkpoint\":17,\"checkpointSummits\":[],\"highSchedule\":\"14:08:00\",\"checkpointTypes\":[],\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"caravanSchedule\":\"12:48:00\",\"length\":66.7,\"lowSchedule\":\"13:58:00\",\"place\":\"Pego cruce izquierda dirección puerto del Miserat\",\"road\":\"Pego cruce izquierda dirección puerto del Miserat\"},\"17\":{\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpoint\":18,\"road\":\"Comienza puerto\",\"lowSchedule\":\"14:01:00\",\"middleSchedule\":\"14:06:00\",\"highSchedule\":\"14:12:00\",\"place\":\"Comienza puerto\",\"caravanSchedule\":\"13:06:00\",\"checkpointSummits\":[],\"length\":68.7,\"checkpointTypes\":[]},\"18\":{\"lowSchedule\":\"14:16:00\",\"checkpointTypes\":[],\"place\":\"PM 1ª Miserat\",\"length\":73.9,\"middleSchedule\":\"14:22:00\",\"checkpointSummits\":[{\"imageVersion\":\"\",\"state\":\"10\",\"number\":2,\"id\":3894,\"code\":\"1\",\"length\":5000,\"summit\":{\"name\":\"PM 1ª Miserat desnivel 527 mts. distancia 5,2 km porcentaje 10 %  \",\"altitude\":634}}],\"longitude\":-0.176269,\"caravanSchedule\":\"13:22:00\",\"latitude\":38.827619,\"checkpoint\":19,\"highSchedule\":\"14:29:00\",\"updatedAt\":\"2026-08-13T10:51:47+02:00\",\"road\":\"PM 1ª Miserat\"},\"19\":{\"checkpointTypes\":[],\"place\":\"Cruce derecha dirección Vall d'Alcala\",\"road\":\"Cruce derecha dirección Vall d'Alcala\",\"lowSchedule\":\"14:26:00\",\"caravanSchedule\":\"13:33:00\",\"highSchedule\":\"14:40:00\",\"checkpoint\":20,\"length\":80.6,\"checkpointSummits\":[],\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"middleSchedule\":\"14:33:00\"},\"20\":{\"length\":83.7,\"place\":\"Alcala de la Jovada\",\"checkpointSummits\":[],\"checkpoint\":21,\"middleSchedule\":\"14:38:00\",\"highSchedule\":\"14:45:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"lowSchedule\":\"14:31:00\",\"caravanSchedule\":\"13:38:00\",\"road\":\"Alcala de la Jovada\",\"checkpointTypes\":[]},\"21\":{\"caravanSchedule\":\"13:40:00\",\"highSchedule\":\"14:48:00\",\"road\":\"Cruce izquierda dirección Beniaia, Tollos\",\"checkpointTypes\":[],\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointSummits\":[],\"place\":\"Cruce izquierda dirección Beniaia, Tollos\",\"middleSchedule\":\"14:40:00\",\"lowSchedule\":\"14:33:00\",\"checkpoint\":22,\"length\":85.9},\"22\":{\"checkpoint\":23,\"checkpointSummits\":[],\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"length\":86.6,\"caravanSchedule\":\"13:41:00\",\"middleSchedule\":\"14:41:00\",\"lowSchedule\":\"14:34:00\",\"highSchedule\":\"14:49:00\",\"place\":\"Comienza puerto\",\"checkpointTypes\":[],\"road\":\"Comienza puerto\"},\"23\":{\"caravanSchedule\":\"13:45:00\",\"highSchedule\":\"14:52:00\",\"checkpointTypes\":[],\"road\":\"Beniaia\",\"checkpoint\":24,\"place\":\"Beniaia\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"middleSchedule\":\"14:45:00\",\"lowSchedule\":\"14:37:00\",\"length\":88.2,\"checkpointSummits\":[]},\"24\":{\"lowSchedule\":\"14:43:00\",\"caravanSchedule\":\"13:50:00\",\"length\":90.7,\"road\":\"PM 3ª Tollos\",\"checkpointSummits\":[{\"summit\":{\"name\":\"PM 3ª Tollos  desnivel 237 mts. distancia 4,1 km porcentaje 5,8%  \",\"altitude\":829},\"length\":4000,\"id\":3895,\"code\":\"3\",\"number\":3,\"state\":\"5,8\",\"imageVersion\":\"\"}],\"highSchedule\":\"14:59:00\",\"longitude\":-0.268002,\"checkpoint\":25,\"checkpointTypes\":[],\"middleSchedule\":\"14:50:00\",\"latitude\":38.762059,\"place\":\"PM 3ª Tollos\",\"updatedAt\":\"2026-08-13T10:51:58+02:00\"},\"25\":{\"place\":\"Tollos\",\"road\":\"Tollos\",\"length\":92.8,\"highSchedule\":\"14:59:00\",\"middleSchedule\":\"14:50:00\",\"lowSchedule\":\"14:43:00\",\"checkpoint\":26,\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointTypes\":[],\"checkpointSummits\":[],\"caravanSchedule\":\"13:50:00\"},\"26\":{\"road\":\"Cruce izquierda dirección Fageca\",\"highSchedule\":\"15:01:00\",\"middleSchedule\":\"14:53:00\",\"checkpointSummits\":[],\"checkpoint\":27,\"lowSchedule\":\"14:45:00\",\"place\":\"Cruce izquierda dirección Fageca\",\"checkpointTypes\":[],\"length\":92.7,\"caravanSchedule\":\"13:53:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\"},\"27\":{\"lowSchedule\":\"14:49:00\",\"place\":\"Fageca cruce derecha dirección Quatretondeta\",\"road\":\"Fageca cruce derecha dirección Quatretondeta\",\"length\":95.4,\"highSchedule\":\"15:06:00\",\"checkpointSummits\":[],\"caravanSchedule\":\"13:57:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointTypes\":[],\"checkpoint\":28,\"middleSchedule\":\"14:57:00\"},\"28\":{\"highSchedule\":\"15:14:00\",\"middleSchedule\":\"15:05:00\",\"lowSchedule\":\"14:56:00\",\"caravanSchedule\":\"14:04:00\",\"place\":\"Quatretondeta\",\"checkpointTypes\":[],\"checkpoint\":29,\"length\":101,\"road\":\"Quatretondeta\",\"checkpointSummits\":[],\"updatedAt\":\"2026-08-12T10:24:21+02:00\"},\"29\":{\"place\":\"Gorga rotonda izquierda dirección Benilloba\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointSummits\":[],\"length\":106,\"middleSchedule\":\"15:11:00\",\"road\":\"Gorga rotonda izquierda dirección Benilloba\",\"checkpoint\":30,\"highSchedule\":\"15:21:00\",\"caravanSchedule\":\"14:11:00\",\"lowSchedule\":\"15:03:00\",\"checkpointTypes\":[]},\"30\":{\"checkpointSummits\":[],\"road\":\"Cruce izquierda dirección Benasau, Benidorm\",\"length\":110.1,\"highSchedule\":\"15:28:00\",\"place\":\"Cruce izquierda dirección Benasau, Benidorm\",\"checkpointTypes\":[],\"checkpoint\":31,\"caravanSchedule\":\"14:18:00\",\"lowSchedule\":\"15:09:00\",\"middleSchedule\":\"15:18:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\"},\"31\":{\"caravanSchedule\":\"14:24:00\",\"place\":\"Benasau cruce derecha dirección Alcoleja\",\"checkpoint\":32,\"length\":113.2,\"checkpointSummits\":[],\"lowSchedule\":\"15:15:00\",\"checkpointTypes\":[],\"road\":\"Benasau cruce derecha dirección Alcoleja\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"highSchedule\":\"15:34:00\",\"middleSchedule\":\"15:24:00\"},\"32\":{\"checkpointTypes\":[],\"lowSchedule\":\"15:16:00\",\"caravanSchedule\":\"14:25:00\",\"highSchedule\":\"15:35:00\",\"place\":\"Comienza puerto\",\"checkpoint\":33,\"length\":114.8,\"road\":\"Comienza puerto\",\"checkpointSummits\":[],\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"middleSchedule\":\"15:25:00\"},\"33\":{\"middleSchedule\":\"15:29:00\",\"checkpointSummits\":[],\"lowSchedule\":\"15:20:00\",\"highSchedule\":\"15:40:00\",\"checkpointTypes\":[],\"checkpoint\":34,\"length\":116.4,\"place\":\"Alcoleja\",\"road\":\"Alcoleja\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"caravanSchedule\":\"14:29:00\"},\"34\":{\"length\":121.8,\"checkpointTypes\":[],\"updatedAt\":\"2026-08-13T10:52:10+02:00\",\"middleSchedule\":\"15:41:00\",\"place\":\"PM 2ª Puerto de Tudons\",\"latitude\":38.650235,\"lowSchedule\":\"15:31:00\",\"longitude\":-0.326304,\"highSchedule\":\"15:52:00\",\"checkpointSummits\":[{\"id\":3896,\"number\":4,\"state\":\"5,3\",\"code\":\"2\",\"length\":7000,\"summit\":{\"name\":\"PM 2ª Puerto de Tudons desnivel 373 mts. distancia 7 km porcentaje 5,3 %  cruce derecha Penáguila\",\"altitude\":1027},\"imageVersion\":\"\"}],\"caravanSchedule\":\"14:41:00\",\"checkpoint\":35,\"road\":\"PM 2ª Puerto de Tudons\"},\"35\":{\"lowSchedule\":\"15:32:00\",\"highSchedule\":\"15:54:00\",\"length\":123,\"caravanSchedule\":\"14:43:00\",\"checkpoint\":36,\"road\":\"Cruce derecha dirección Penáguila\",\"place\":\"Cruce derecha dirección Penáguila\",\"checkpointTypes\":[],\"middleSchedule\":\"15:43:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointSummits\":[]},\"36\":{\"caravanSchedule\":\"14:49:00\",\"highSchedule\":\"16:00:00\",\"road\":\"Penáguila\",\"middleSchedule\":\"15:49:00\",\"checkpointTypes\":[],\"checkpoint\":37,\"place\":\"Penáguila\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"lowSchedule\":\"15:38:00\",\"length\":129.6,\"checkpointSummits\":[]},\"37\":{\"checkpoint\":38,\"lowSchedule\":\"15:46:00\",\"longitude\":-0.400617,\"caravanSchedule\":\"14:57:00\",\"place\":\"Benifallim\",\"updatedAt\":\"2026-08-12T15:23:39+02:00\",\"road\":\"Benifallim\",\"latitude\":38.663176,\"checkpointTypes\":[{\"number\":\"1\",\"id\":\"142682\",\"type\":\"sprint\",\"code\":\"N\"}],\"middleSchedule\":\"15:57:00\",\"length\":134.6,\"checkpointSummits\":[],\"highSchedule\":\"16:09:00\"},\"38\":{\"checkpointSummits\":[],\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"length\":135.1,\"checkpointTypes\":[],\"lowSchedule\":\"15:47:00\",\"road\":\"Giro izquierda dirección La Torre de les Maçanes Cpto.\",\"highSchedule\":\"16:10:00\",\"place\":\"Giro izquierda dirección La Torre de les Maçanes Cpto.\",\"caravanSchedule\":\"14:58:00\",\"middleSchedule\":\"15:58:00\",\"checkpoint\":39},\"39\":{\"updatedAt\":\"2026-08-19T14:40:48+02:00\",\"highSchedule\":\"16:21:00\",\"middleSchedule\":\"16:09:00\",\"road\":\"PM 2ª Puerto de Benufallim\",\"checkpoint\":40,\"caravanSchedule\":\"15:09:00\",\"longitude\":-0.403876,\"length\":139.9,\"lowSchedule\":\"15:57:00\",\"checkpointTypes\":[{\"code\":\"B\",\"id\":\"142727\",\"number\":\"1\",\"type\":\"bonus\",\"subType\":\"bonusclimb\"}],\"checkpointSummits\":[{\"id\":3897,\"number\":5,\"imageVersion\":\"\",\"code\":\"2\",\"state\":\"5,8\",\"summit\":{\"altitude\":1013,\"name\":\"PM 2ª Puerto de Benufallim desnivel 282 mts. distancia 4,8 km porcentaje 5,8 %  \"},\"length\":5000}],\"place\":\"PM 2ª Puerto de Benufallim\",\"latitude\":38.639934},\"40\":{\"checkpoint\":41,\"highSchedule\":\"16:26:00\",\"length\":144,\"middleSchedule\":\"16:13:00\",\"checkpointTypes\":[],\"road\":\"La Torre de les Maçanes rotonda izquierda dirección Relleu, La Vila-Joiosa\",\"caravanSchedule\":\"15:13:00\",\"lowSchedule\":\"16:01:00\",\"checkpointSummits\":[],\"place\":\"La Torre de les Maçanes rotonda izquierda dirección Relleu, La Vila-Joiosa\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\"},\"41\":{\"caravanSchedule\":\"15:31:00\",\"checkpoint\":42,\"length\":158.8,\"checkpointTypes\":[],\"lowSchedule\":\"16:19:00\",\"highSchedule\":\"16:45:00\",\"middleSchedule\":\"16:31:00\",\"checkpointSummits\":[],\"road\":\"Relleu cruce izquierda dirección Sella\",\"place\":\"Relleu cruce izquierda dirección Sella\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\"},\"42\":{\"middleSchedule\":\"16:40:00\",\"lowSchedule\":\"16:27:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"place\":\"Cruce izquierda dirección Sella, Finestrat\",\"checkpoint\":43,\"length\":165.2,\"checkpointTypes\":[],\"road\":\"Cruce izquierda dirección Sella, Finestrat\",\"checkpointSummits\":[],\"highSchedule\":\"16:54:00\",\"caravanSchedule\":\"15:40:00\"},\"43\":{\"length\":165.4,\"highSchedule\":\"16:55:00\",\"checkpoint\":44,\"middleSchedule\":\"16:40:00\",\"place\":\"Comienza puerto\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"checkpointTypes\":[],\"road\":\"Comienza puerto\",\"checkpointSummits\":[],\"lowSchedule\":\"16:27:00\",\"caravanSchedule\":\"15:40:00\"},\"44\":{\"road\":\"Sella\",\"caravanSchedule\":\"15:46:00\",\"checkpointSummits\":[],\"checkpointTypes\":[],\"length\":169,\"lowSchedule\":\"16:33:00\",\"middleSchedule\":\"16:46:00\",\"checkpoint\":45,\"place\":\"Sella\",\"highSchedule\":\"17:01:00\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\"},\"45\":{\"highSchedule\":\"17:29:00\",\"road\":\"Cruce derecha dirección Aitana\",\"checkpointSummits\":[],\"checkpointTypes\":[],\"length\":180.8,\"checkpoint\":46,\"place\":\"Cruce derecha dirección Aitana\",\"updatedAt\":\"2026-08-12T10:24:21+02:00\",\"middleSchedule\":\"17:13:00\",\"caravanSchedule\":\"16:13:00\",\"lowSchedule\":\"16:58:00\"},\"46\":{\"checkpointSummits\":[{\"number\":6,\"id\":3907,\"state\":\"5,8\",\"imageVersion\":\"\",\"code\":\"1\",\"summit\":{\"altitude\":1543,\"name\":\"Alto de Aitana. Costa Blanca\"},\"length\":22000}],\"road\":\"Meta Alto de Aitana.Costa Blanca Interior desnivel 1264 mts 22 km porcentage 5,8 %\",\"place\":\"Meta Alto de Aitana.Costa Blanca Interior desnivel 1264 mts 22 km porcentage 5,8 %\",\"caravanSchedule\":\"16:30:00\",\"highSchedule\":\"17:47:00\",\"middleSchedule\":\"17:30:00\",\"longitude\":-0.267735,\"latitude\":38.649663,\"checkpointTypes\":[{\"type\":\"sprint\",\"code\":\"N\",\"id\":\"142683\",\"number\":\"2\"},{\"type\":\"arrival\",\"id\":\"142684\",\"code\":\"A\",\"number\":\"0\"}],\"lowSchedule\":\"17:14:00\",\"updatedAt\":\"2026-08-22T12:08:35+02:00\",\"checkpoint\":47,\"length\":187.4},\"_id\":\"5e90fa6e3a7248c4a120e6478eb0c08e3d6feea814e4cd26d48473c951241a90\",\"_bind\":\"checkpoint-2026-9\",\"_origin\":\"checkpoint-2026-9\",\"_updatedAt\":1787394008889,\"_parent\":\"stage-2026:5e90fa6e3a7248c4a120e6478eb0c08e3d6feea814e4cd26d48473c951241a90\",\"_key\":\"_id\",\"_refs\":[]}}"
+      "eventId": "9",
+      "data": "{\"bind\":\"publication_en-2026-4\",\"app\":\"vue\",\"origin\":\"interactiveContent-2026-4\",\"change\":\"added\",\"id\":\"9ed74f8a3ea1bca4ba2bd038936d86931656986d6c719371d40d516c6fd60877\",\"data\":{\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-png/picto-cofidis-400x400/28518/0:0,400:400-0-0-70/78002\",\"type\":\"fastory\",\"updatedAt\":\"2026-08-25T09:15:00+02:00\",\"url\":\"vuelta26-predictor-uk\",\"locale\":\"en\",\"contentId\":\"91iabrFF\",\"text\":[\"Predict today's stage winner with Cofidis\"],\"id\":149,\"title\":\"Predict today's stage winner with Cofidis\",\"_id\":\"9ed74f8a3ea1bca4ba2bd038936d86931656986d6c719371d40d516c6fd60877\",\"_bind\":\"publication_en-2026-4\",\"_origin\":\"interactiveContent-2026-4\",\"_updatedAt\":1787642101074,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:enfastory-149\",\"model\":\"interactive\",\"isClub\":false}}"
     },
     {
-      "captured_at": "2026-08-22T14:29:07.977+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.656666,
+      "captured_at": "2026-08-25T11:45:17.304+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.150645,
       "eventName": "update",
-      "eventId": "194",
-      "data": "{\"bind\":\"publication_de-2026-1\",\"app\":\"vue\",\"origin\":\"news-2026-1\",\"change\":\"added\",\"id\":\"75af02839f0260b9d2328934151275b68af90988d7e944cff5b0a57a7def13b1\",\"data\":{\"createdAt\":\"2026-08-22T15:45:28+02:00\",\"id\":51175,\"locale\":\"de\",\"slug\":\"willkommen-bei-der-live-berichterstattung-von-la-vuelta-26\",\"text\":[\"Die 81. Ausgabe von La Vuelta beginnt in Monaco mit einem historischen Gran Salida. Das Fürstentum wird damit zur ersten Stadt, die den Start aller drei Grand Tours ausgerichtet hat. Die Topfavoriten rüsten sich für einen spektakulären ersten Schlagabtausch. Das Rote Trikot steht bei einem 9.4 km langen Einzelzeitfahren auf dem Spiel, das die erste Rangordnung festlegen und an den berühmtesten Wahrzeichen Monacos vorbeiführen soll.<br />\\nDiego Uriarte (Kern Pharma) eröffnet das Rennen um 16:17 Uhr, während Primoz Roglic (Red Bull-Bora-Hansgrohe) um 19:20 Uhr als letzter Fahrer von der Rampe rollt.\"],\"title\":\"Willkommen bei der Live-Berichterstattung von La Vuelta 26!\",\"picto\":\"liv_start\",\"createdBy\":\"console\",\"publicationAt\":\"2026-08-22T15:45:20+02:00\",\"updatedAt\":\"2026-08-22T15:45:28+02:00\",\"highlight\":true,\"type\":\"liv\",\"pinned\":false,\"stageType\":\"PAS\",\"stage\":1,\"year\":2026,\"updatedBy\":\"console\",\"_id\":\"75af02839f0260b9d2328934151275b68af90988d7e944cff5b0a57a7def13b1\",\"_bind\":\"publication_de-2026-1\",\"_origin\":\"news-2026-1\",\"_updatedAt\":1787406330313,\"_parent\":\"stage-2026:93bd5639e913abc271fb13124da9db9a6a602ca76973eeae9a729197feefbbdb\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"news:willkommen-bei-der-live-berichterstattung-von-la-vuelta-26\",\"model\":\"news\"}}"
+      "eventId": "11",
+      "data": "{\"bind\":\"publication_es-2026-4\",\"app\":\"vue\",\"origin\":\"interactiveContent-2026-4\",\"change\":\"added\",\"id\":\"e59ffd70a3e7f5aa2fe5187fa54d83164b19399014fbb424dfe1565dcebe78d8\",\"data\":{\"url\":\"vuelta26-predictor-es\",\"updatedAt\":\"2026-08-25T09:15:23+02:00\",\"contentId\":\"GGeHsY3e\",\"title\":\"Predice al ganador de etapa con Cofidis\",\"type\":\"fastory\",\"locale\":\"es\",\"text\":[\"Predice al ganador de etapa con Cofidis\"],\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-png/picto-cofidis-400x400/28518/0:0,400:400-0-0-70/78002\",\"id\":150,\"_id\":\"e59ffd70a3e7f5aa2fe5187fa54d83164b19399014fbb424dfe1565dcebe78d8\",\"_bind\":\"publication_es-2026-4\",\"_origin\":\"interactiveContent-2026-4\",\"_updatedAt\":1787642124072,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:esfastory-150\",\"model\":\"interactive\",\"isClub\":false}}"
     },
     {
-      "captured_at": "2026-08-22T14:29:07.977+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.6567,
+      "captured_at": "2026-08-25T11:45:17.304+00:00",
+      "requestId": "3121.240",
+      "timestamp": 88.15092,
       "eventName": "update",
-      "eventId": "196",
-      "data": "{\"bind\":\"publication_da-2026-1\",\"app\":\"vue\",\"origin\":\"news-2026-1\",\"change\":\"added\",\"id\":\"0996e7536a155ac1153989ec95f2f74d066feb70864e2cc69afb452621a37e70\",\"data\":{\"stageType\":\"PAS\",\"text\":[\"Den 81. udgave af La Vuelta starter i Monaco, som lægger asfalt til en historisk Gran Salida. Fyrstendømmet bliver den første by, der har lagt start til alle tre Grand Tours, og topfavoritterne gør sig klar til et spektakulært første slag. La Roja er på spil i en 9.4 km individuel enkeltstart, der skal fastlægge den første rangorden og føre feltet forbi Monacos mest ikoniske seværdigheder.<br />\\nDiego Uriarte (Kern Pharma) sætter løbet i gang kl. 16:17, mens Primoz Roglic (Red Bull-Bora-Hansgrohe) bliver den sidste rytter, der kører ned ad startrampen kl. 19:20.\"],\"picto\":\"liv_start\",\"slug\":\"velkommen-til-livedaekningen-af-la-vuelta-26\",\"highlight\":true,\"updatedBy\":\"console\",\"title\":\"Velkommen til livedækningen af La Vuelta 26!\",\"pinned\":false,\"stage\":1,\"createdAt\":\"2026-08-22T15:45:35+02:00\",\"type\":\"liv\",\"updatedAt\":\"2026-08-22T15:45:35+02:00\",\"year\":2026,\"publicationAt\":\"2026-08-22T15:45:20+02:00\",\"id\":51176,\"createdBy\":\"console\",\"locale\":\"da\",\"_id\":\"0996e7536a155ac1153989ec95f2f74d066feb70864e2cc69afb452621a37e70\",\"_bind\":\"publication_da-2026-1\",\"_origin\":\"news-2026-1\",\"_updatedAt\":1787406335253,\"_parent\":\"stage-2026:93bd5639e913abc271fb13124da9db9a6a602ca76973eeae9a729197feefbbdb\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"news:velkommen-til-livedaekningen-af-la-vuelta-26\",\"model\":\"news\"}}"
-    },
-    {
-      "captured_at": "2026-08-22T14:29:07.977+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.656739,
-      "eventName": "update",
-      "eventId": "198",
-      "data": "{\"bind\":\"publication_sl-2026-1\",\"app\":\"vue\",\"origin\":\"news-2026-1\",\"change\":\"added\",\"id\":\"cde9a28a514816c2a79c52e9f0fbb1c3877e0cdf501436e9e8c76a872d71df9d\",\"data\":{\"stage\":1,\"slug\":\"dobrodosli-v-neposrednem-prenosu-dirke-la-vuelta-26\",\"text\":[\"81. izvedba dirke La Vuelta se začenja v Monaku, ki bo gostil zgodovinski Gran Salida. Kneževina bo tako postala prvo mesto, ki je gostilo start vseh treh velikih etapnih dirk, favoriti pa se pripravljajo na spektakularen prvi obračun. Rdeča majica bo na voljo po 9,4 km dolgem posamičnem kronometru, ki bo vzpostavil prvo razmerje moči in obiskal najbolj znamenite monaške znamenitosti.<br />\\nDiego Uriarte (Kern Pharma) bo ob 16:17 prvi kolesar na progi, Primoz Roglic (Red Bull-Bora-Hansgrohe) pa bo ob 19:20 zadnji zapustil startno ploščad.\"],\"createdAt\":\"2026-08-22T15:45:39+02:00\",\"updatedAt\":\"2026-08-22T15:45:39+02:00\",\"createdBy\":\"console\",\"publicationAt\":\"2026-08-22T15:45:20+02:00\",\"pinned\":false,\"picto\":\"liv_start\",\"stageType\":\"PAS\",\"type\":\"liv\",\"highlight\":true,\"id\":51177,\"updatedBy\":\"console\",\"year\":2026,\"title\":\"Dobrodošli v neposrednem prenosu dirke La Vuelta 26!\",\"locale\":\"sl\",\"_id\":\"cde9a28a514816c2a79c52e9f0fbb1c3877e0cdf501436e9e8c76a872d71df9d\",\"_bind\":\"publication_sl-2026-1\",\"_origin\":\"news-2026-1\",\"_updatedAt\":1787406339216,\"_parent\":\"stage-2026:93bd5639e913abc271fb13124da9db9a6a602ca76973eeae9a729197feefbbdb\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"news:dobrodosli-v-neposrednem-prenosu-dirke-la-vuelta-26\",\"model\":\"news\"}}"
-    },
-    {
-      "captured_at": "2026-08-22T14:29:07.977+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.656803,
-      "eventName": "update",
-      "eventId": "200",
-      "data": "{\"bind\":\"publication_sk-2026-1\",\"app\":\"vue\",\"origin\":\"news-2026-1\",\"change\":\"added\",\"id\":\"65fa04005b61c3e56f13784ceb4f808901d85c6aeda904544ef4c3a9a656cd4a\",\"data\":{\"createdBy\":\"console\",\"text\":[\"81. ročník La Vuelta sa začne v Monaku, ktoré bude dejiskom historickej Gran Salida. Kniežatstvo sa stane prvým mestom, ktoré hostilo štart všetkých troch Grand Tours, a tak sa najväčší favoriti chystajú na spektakulárny prvý súboj. O červený dres sa bude bojovať v 9,4 km dlhej individuálnej časovke, ktorá určí prvé poradie a prevedie pretekárov okolo najikonickejších pamiatok Monaka.<br />\\nDiego Uriarte (Kern Pharma) odštartuje o 16:17 a Primoz Roglic (Red Bull-Bora-Hansgrohe) vyrazí z rampy ako posledný o 19:20.\"],\"updatedAt\":\"2026-08-22T15:45:44+02:00\",\"slug\":\"vitajte-pri-online-prenose-z-la-vuelta-26\",\"stage\":1,\"createdAt\":\"2026-08-22T15:45:44+02:00\",\"locale\":\"sk\",\"id\":51178,\"publicationAt\":\"2026-08-22T15:45:20+02:00\",\"title\":\"Vitajte pri online prenose z La Vuelta 26!\",\"updatedBy\":\"console\",\"type\":\"liv\",\"picto\":\"liv_start\",\"pinned\":false,\"highlight\":true,\"year\":2026,\"stageType\":\"PAS\",\"_id\":\"65fa04005b61c3e56f13784ceb4f808901d85c6aeda904544ef4c3a9a656cd4a\",\"_bind\":\"publication_sk-2026-1\",\"_origin\":\"news-2026-1\",\"_updatedAt\":1787406344165,\"_parent\":\"stage-2026:93bd5639e913abc271fb13124da9db9a6a602ca76973eeae9a729197feefbbdb\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"news:vitajte-pri-online-prenose-z-la-vuelta-26\",\"model\":\"news\"}}"
-    },
-    {
-      "captured_at": "2026-08-22T14:29:07.977+00:00",
-      "requestId": "13519.247",
-      "timestamp": 168033.656857,
-      "eventName": "update",
-      "eventId": "202",
-      "data": "{\"bind\":\"publication_cs-2026-1\",\"app\":\"vue\",\"origin\":\"news-2026-1\",\"change\":\"added\",\"id\":\"222cfc6d9a0a54e24c0a43be727f84dabdc49eea7601037345e75224e1ccf2f2\",\"data\":{\"picto\":\"liv_start\",\"createdBy\":\"console\",\"slug\":\"vitejte-u-ziveho-prenosu-z-la-vuelta-26\",\"publicationAt\":\"2026-08-22T15:45:20+02:00\",\"text\":[\"81. ročník La Vuelta odstartuje v Monaku, dějišti historického Gran Salida. Monako se stane prvním městem, které hostilo start všech tří Grand Tours, a favorité se chystají na spektakulární první souboj. O červený dres se pojede v individuální časovce na 9.4 km, která určí první pořadí a zavede závodníky kolem nejikoničtějších monackých památek.<br />\\nDiego Uriarte (Kern Pharma) odstartuje ve 16:17, zatímco Primoz Roglic (Red Bull-Bora-Hansgrohe) se jako poslední vydá ze startovní rampy v 19:20.\"],\"locale\":\"cs\",\"id\":51179,\"updatedAt\":\"2026-08-22T15:45:52+02:00\",\"createdAt\":\"2026-08-22T15:45:52+02:00\",\"title\":\"Vítejte u živého přenosu z La Vuelta 26!\",\"stage\":1,\"type\":\"liv\",\"updatedBy\":\"console\",\"pinned\":false,\"highlight\":true,\"year\":2026,\"stageType\":\"PAS\",\"_id\":\"222cfc6d9a0a54e24c0a43be727f84dabdc49eea7601037345e75224e1ccf2f2\",\"_bind\":\"publication_cs-2026-1\",\"_origin\":\"news-2026-1\",\"_updatedAt\":1787406352828,\"_parent\":\"stage-2026:93bd5639e913abc271fb13124da9db9a6a602ca76973eeae9a729197feefbbdb\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"news:vitejte-u-ziveho-prenosu-z-la-vuelta-26\",\"model\":\"news\"}}"
+      "eventId": "15",
+      "data": "{\"bind\":\"stage-2026\",\"app\":\"vue\",\"origin\":\"stage-2026\",\"change\":\"modified\",\"id\":\"dbf7fd7af4eb7895c4d2f9ee4f006d4206974d252b631987bd80a72a5df3fdd6\",\"data\":{\"departureCity\":{\"createdBy\":\"Clerat\",\"country\":{\"code\":\"esp\",\"id\":1959},\"updatedBy\":\"Clerat\",\"createdAt\":\"2025-12-15T12:37:54+01:00\",\"updatedAt\":\"2025-12-15T12:37:54+01:00\",\"cityLangs\":[],\"content\":{\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-jpg/e16-salida-cortegana/27386/0:0,960:960-0-0-70/14f0e\",\"texts\":[{\"text\":[\"Cortegana conserva un valioso patrimonio monumental que enriquece su casco urbano, con templos y ermitas que reflejan la identidad y la historia del municipio. Su gran emblema es el Castillo Medieval, originario del siglo XIII y pieza clave de la Banda Gallega, levantada para defender la frontera sevillana frente a Portugal. Declarado Bien de Interés Cultural, es hoy uno de los monumentos más visitados de Huelva y un destacado enclave turístico.<br />\\n<br />\\nSede inédita de La Vuelta.<br />\\n4.618 habitantes.<br />\\nProvincia de Huelva.<br />\\n<a href=\\\"https://www.cortegana.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> cortegana.es </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"],\"locale\":\"es\"},{\"locale\":\"en\",\"text\":[\"Cortegana is home to a valuable monumental heritage that enriches its urban centre, with temples and chapels that reflect the municipality’s identity and history. Its main emblematic building is the Medieval Castle, built in the 13th century as part of the Banda Gallega in order to defend Seville’s border from Portugal. Declared an Asset of Cultural Interest, it is now one of Huelva’s most visited monuments and a prominent tourist attraction.<br />\\n<br />\\nUnprecedented La Vuelta departure.<br />\\n4,618 inhabitants.<br />\\nProvince of Huelva.<br />\\n<a href=\\\"https://www.cortegana.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> cortegana.es </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"]},{\"text\":[\"Cortegana conserve un remarquable patrimoine monumental qui embellit son centre-ville, avec des temples et des ermitages qui sont le reflet de l'identité et de l'histoire de la commune. Son emblème principal est le château médiéval. Construit au XIIIe siècle, il est un élément clé de la bande galicienne, une ligne de défense construite pour protéger la frontière sévillane face au Portugal. Déclaré bien d'intérêt culturel, il est aujourd'hui l'un des monuments les plus visités de Huelva et un site touristique de premier plan.<br />\\n<br />\\nDépart inédit de La Vuelta.<br />\\n4 618 habitants.<br />\\nProvince de Huelva.<br />\\n<a href=\\\"https://www.cortegana.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> cortegana.es </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"],\"locale\":\"fr\"}]},\"label\":\"Cortegana\",\"code\":\"cortegana\",\"id\":32860},\"endTime\":\"17:30:00\",\"startTime\":\"13:18:00\",\"stage\":16,\"arrivalCity\":{\"cityLangs\":[],\"updatedBy\":\"Clerat\",\"content\":{\"texts\":[{\"locale\":\"es\",\"text\":[\"La Rábida es uno de los enclaves históricos más singulares de Huelva, estrechamente ligado al origen de la gesta colombina. Su monasterio franciscano, declarado Bien de Interés Cultural, fue refugio e inspiración de Cristóbal Colón antes del viaje que cambiaría la historia. Rodeado de jardines y miradores, el conjunto monumental se completa con los Lugares Colombinos, que evocan aquel episodio decisivo y hacen de La Rábida un centro cultural y turístico de referencia.<br />\\n<br />\\nSede inédita de La Vuelta.<br />\\n12.663 habitantes (Palos de la Frontera).<br />\\nProvincia de Huelva.<br />\\n<a href=\\\"https://www.palosfrontera.com\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> palosfrontera.com </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"]},{\"text\":[\"La Rábida is one of Huelva’s most unique historical enclaves, closely linked to the origins of Columbus’ great feat. Its Franciscan monastery, declared an Asset of Cultural Interest, was Christopher Columbus’ refuge and inspiration before embarking on the voyage that would forever change history. The monumental complex is surrounded by gardens and lookouts and is completed by the Lugares Colombinos, which evoke that decisive episode and make La Rábida a reference in terms of culture and tourism.<br />\\n<br />\\nUnprecedented La Vuelta finish-line.<br />\\n12,663 inhabitants (Palos de la Frontera).<br />\\nProvince of Huelva.<br />\\n<a href=\\\"https://www.palosfrontera.com\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> palosfrontera.com </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"],\"locale\":\"en\"},{\"locale\":\"fr\",\"text\":[\"La Rábida est l'un des sites historiques les plus singuliers de Huelva, étroitement lié à l'origine de l'épopée de Christophe Colomb. Son monastère franciscain, déclaré bien d'intérêt culturel, fut le refuge et la source d'inspiration de Christophe Colomb avant le voyage qui allait changer le cours de l'histoire. Entouré de jardins et de belvédères, l'ensemble monumental est complété par les Lieux Colombiens, qui évoquent cet épisode décisif et font de La Rábida un centre culturel et touristique de référence.<br />\\n<br />\\nDépart inédit de La Vuelta.<br />\\n12 663 habitants (Palos de la Frontera).<br />\\nProvince de Huelva.<br />\\n<a href=\\\"https://www.palosfrontera.com\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> palosfrontera.com </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"]}],\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-jpg/e16-meta-la-rabida/27383/0:0,960:960-0-0-70/c494d\"},\"updatedAt\":\"2025-12-15T12:38:07+01:00\",\"createdAt\":\"2025-12-15T12:38:07+01:00\",\"country\":{\"id\":1959,\"code\":\"esp\"},\"id\":32861,\"code\":\"la-rabida-palos-de-la-frontera\",\"label\":\"La Rábida. Palos de la Frontera\",\"createdBy\":\"Clerat\"},\"id\":25115,\"showGroups\":true,\"date\":\"2026-09-08T00:00:00+02:00\",\"type\":\"VAL\",\"hasCoordinates\":true,\"lengthDisplay\":181.1,\"podiumDisplayMode\":\"instantpodium\",\"length\":181.1,\"isCancelled\":false,\"timezone\":\"Europe/Madrid\",\"_id\":\"dbf7fd7af4eb7895c4d2f9ee4f006d4206974d252b631987bd80a72a5df3fdd6\",\"_bind\":\"stage-2026\",\"_origin\":\"stage-2026\",\"_updatedAt\":1787648654493,\"_parent\":\"millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae\",\"_key\":\"stage\",\"_refs\":[]}}"
     }
   ]
 }
