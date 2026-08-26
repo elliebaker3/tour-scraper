@@ -40,5 +40,16 @@
       "checkpointList",
       "rankingType"
     ]
+  },
+  {
+    "recorded_at": "2026-08-26T12:39:38.695+00:00",
+    "kind": "live-stream",
+    "action": "stop",
+    "counts": {
+      "telemetry": 0,
+      "groups": 528,
+      "events": 0,
+      "raw-only": 21814
+    }
   }
 ]
