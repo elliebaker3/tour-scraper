@@ -1,253 +1,229 @@
 {
   "http_by_kind": {
-    "json": [
+    "event-stream": [
       {
-        "captured_at": "2026-08-25T11:45:17.055+00:00",
-        "url": "https://syndication.twitter.com/settings?session_id=790ff8784680e7373f002fdc6305bf5826f46492",
+        "captured_at": "2026-08-26T04:28:11.502+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVFZoTVdSbVpqa3laRGM0IiwiaWF0IjoxNzg3NzE4NDkxfQs0DOATOQpEmrbofhkIZEWQr2Txv7CjDoJeYajZUrK0A",
         "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "{\"should_obtain_cookie_consent\":true,\"features\":{\"tfw_timeline_list\":{\"bucket\":[],\"version\":null},\"tfw_follower_count_sunset\":{\"bucket\":true,\"version\":null},\"tfw_tweet_edit_backend\":{\"bucket\":\"on\",\"version\":null},\"tfw_refsrc_session\":{\"bucket\":\"on\",\"version\":null},\"tfw_fosnr_soft_interventions_enabled\":{\"bucket\":\"on\",\"version\":null},\"tfw_mixed_media_15897\":{\"bucket\":\"treatment\",\"version\":null},\"tf"
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
       },
       {
-        "captured_at": "2026-08-25T11:45:17.128+00:00",
-        "url": "https://racecenter.lavuelta.es/api/event?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPREpqTkRBM09UazBNMlJpIiwiaWF0IjoxNzg3NjU4MzE2fQYpFbZVkksJBLQcuHqKZh1UEC4dnkAMncWDiYIm4ix9o",
+        "captured_at": "2026-08-26T04:28:29.869+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJObVpqT1dGa05qVmtNREZoIiwiaWF0IjoxNzg3NzE4NTA5fQKnCBLilg1LnOhE7OJMV6Bg2RhthUUofzV6tBVCJaA_k",
+        "status": 200,
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
+      },
+      {
+        "captured_at": "2026-08-26T04:29:00.040+00:00",
+        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJabUUyWWpNM1pUTXlabUprIiwiaWF0IjoxNzg3NzE4NTM5fQJW6AYHp3Add1_ytKoYXXdfquR4zf-WIjAGuBpGuNTZY",
+        "status": 200,
+        "mime": "text/event-stream",
+        "kind": "event-stream",
+        "sample": ""
+      }
+    ],
+    "json": [
+      {
+        "captured_at": "2026-08-26T04:28:11.526+00:00",
+        "url": "https://racecenter.lavuelta.es/api/event?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNRGcyWkdGaVlXTXlaVE15IiwiaWF0IjoxNzg3NzE4NDkxfQKIPtDG8eZ24GoIGVSg90XlTG4-Aqa5WLy3EFNkmvXE4",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"extras\":{},\"adUnit\":\"/366560878/ASO/LA-VUELTA\",\"_bind\":\"event\",\"_origin\":\"event\",\"_id\":\"dbfa6e3d5e33f66d138af5594b40fd1b5521af9063d2ff77d524978bf9dc7500\",\"_key\":\"_id\",\"_updatedAt\":1786959921012,\"_parent\":\":vue\",\"_virtual\":\"/366560878/ASO/LA-VUELTA\"}]"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.128+00:00",
-        "url": "https://racecenter.lavuelta.es/api/flashInfoLive-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNamt6T0RrelpqSmlOamxrIiwiaWF0IjoxNzg3NjU4MzE2fQQBGuO_vXkMUbpdEpTfahHeytCAcmDivWj90yE9vTQ5E",
+        "captured_at": "2026-08-26T04:28:11.526+00:00",
+        "url": "https://racecenter.lavuelta.es/api/flashInfoLive-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZakUwTWpCak5EUmhOemMxIiwiaWF0IjoxNzg3NzE4NDkxfQy3hFmxpoVssI9SewcxyL5k1cllxWDzfuDd0GmO4sJmU",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.128+00:00",
-        "url": "https://racecenter.lavuelta.es/api/social?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOV1JoTTJOaVpEQmlNRGRqIiwiaWF0IjoxNzg3NjU4MzE2fQkuVLLAZtok1hPhYyQgP9mfjILY3PzgMl6ynAIavrkAs",
+        "captured_at": "2026-08-26T04:28:11.526+00:00",
+        "url": "https://racecenter.lavuelta.es/api/social?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOelkxWldZNFpHWmhaakkyIiwiaWF0IjoxNzg3NzE4NDkxfQuEugbgah-66wUqaQ7lrZuPly998YMjJwkXW4kDdmG0g",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.146+00:00",
-        "url": "https://racecenter.lavuelta.es/api/pack-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOelUwTnpreE4ySTRZems0IiwiaWF0IjoxNzg3NjU4MzE2fQBhB9X8TUE9DpRA2meFIZh5lQ6kAqqqy9y3aUfRVCT6M",
+        "captured_at": "2026-08-26T04:28:11.531+00:00",
+        "url": "https://racecenter.lavuelta.es/api/pack-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNamd3TWprelkyRXdOekl6IiwiaWF0IjoxNzg3NzE4NDkxfQEAiwEltFiggcjD0DzITru9jm-6n4sq5vd55JDeyqnWE",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.159+00:00",
-        "url": "https://racecenter.lavuelta.es/api/checkpointList-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOV1ZsWkRaa1pEZGtOalZsIiwiaWF0IjoxNzg3NjU4MzE2fQB7M414xShnlSv2kzJDrPeHVly40dBvEyszh4BtXYhiU",
+        "captured_at": "2026-08-26T04:28:11.531+00:00",
+        "url": "https://racecenter.lavuelta.es/api/checkpointList-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJabVV5WldNeE1UQTVaVE0xIiwiaWF0IjoxNzg3NzE4NDkxfQxrDhUVMHsphBei3W-Z8CMV9z80vF6w9bLGPQVICEsaw",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[{\"length\":0,\"latitude\":42.513549,\"longitude\":1.552719,\"place\":\"Salida lanzada por la CG -2 dirección Francia  Lat. 42°30'49.37\\\"N long 1°33'10.50\\\"E\",\"checkpointSummits\":[],\"caravanSchedule\":\"13:04:00\",\"lowSchedule\":\"14:49:00\",\"checkpointMeteo\":{\"windDirection\":\"SSO\",\"currentWeatherDesc\":\"couvert\",\"latitude\":42.5135,\"meteoAt\":\"2026-08-25T13:32:05+02:00\",\"createdBy\":\"console\",\"currentWeatherIcon\":"
+        "sample": "[{\"countryCode\":\"ESP\",\"country\":\"Espana\",\"checkpointSummits\":[],\"middleSchedule\":\"13:34:00\",\"checkpoint\":1,\"checkpointTypes\":[],\"updatedAt\":\"2026-08-12T10:24:01+02:00\",\"highSchedule\":\"13:34:00\",\"lowSchedule\":\"13:34:00\",\"caravanSchedule\":\"11:34:00\",\"length\":0,\"_id\":\"9416e039f175b31b6562305318c873e04ed8bae96cf7686bc22f5477c49ae170-1\",\"_updatedAt\":1787574000332,\"_key\":\"checkpoint\",\"_bind\":\"checkpoint"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.196+00:00",
-        "url": "https://racecenter.lavuelta.es/api/telemetryCompetitor-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZekU1WVdaa1kyRXdObUUwIiwiaWF0IjoxNzg3NjU4MzE2fQ_I9I-l6UDaJl0xoS_JRNSdbGCbTORsmTGBDMmx1dhxc",
+        "captured_at": "2026-08-26T04:28:11.532+00:00",
+        "url": "https://racecenter.lavuelta.es/api/checkpoint-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOR0U0Tm1VMVpXRXhaR0U0IiwiaWF0IjoxNzg3NzE4NDkxfQDzW7x09NUl22dZ4UT3iQ9HsQYGhQ7nV43LnU_p6gL5Y",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[]"
+        "sample": "[{\"0\":{\"countryCode\":\"ESP\",\"country\":\"Espana\",\"checkpointSummits\":[],\"middleSchedule\":\"13:34:00\",\"checkpoint\":1,\"checkpointTypes\":[],\"updatedAt\":\"2026-08-12T10:24:01+02:00\",\"highSchedule\":\"13:34:00\",\"lowSchedule\":\"13:34:00\",\"caravanSchedule\":\"11:34:00\",\"length\":0},\"1\":{\"middleSchedule\":\"13:34:00\",\"caravanSchedule\":\"11:34:00\",\"length\":0,\"department\":\"Provincia de Tarragona\",\"checkpointTypes\":[{\"typ"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.196+00:00",
-        "url": "https://racecenter.lavuelta.es/api/team-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZakJpTlRNeFpqazVPVEUxIiwiaWF0IjoxNzg3NjU4MzE2fQg-x_r2WQVsNmjxsnJQSDGWIGSeOxnLlM-ES07-UHaAg",
+        "captured_at": "2026-08-26T04:28:11.536+00:00",
+        "url": "https://racecenter.lavuelta.es/api/team-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaRFpoTkRZek16QTBORGMzIiwiaWF0IjoxNzg3NzE4NDkxfQSrN12xCiXgOGl9aNRm2Lipq32yUtzittjGioWGK4UvI",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"logo\":\"https://img.aso.fr/core_app/img-cycling-vue-png/uxm/27586/0:0,400:400-0-0-70/292c4\",\"banner\":null,\"jersey_sm\":\"https://img.aso.fr/core_app/img-cycling-vue-png/uxm/27775/0:0,400:400-60-0-70/24bee\",\"logo_live\":null,\"header\":null,\"name\":\"UNO-X MOBILITY\",\"code\":\"UXM\",\"jersey\":\"https://img.aso.fr/core_app/img-cycling-vue-png/uxm/27775/0:0,400:400-0-0-70/67087\",\"nationality\":\"nor\",\"nameShort\":"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.210+00:00",
-        "url": "https://racecenter.lavuelta.es/api/stage-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOREV3TnpOaVpEQTVNbVZrIiwiaWF0IjoxNzg3NjU4MzE2fQ6TTpMTW2lUAkloqSNIivrHdr2PR-3MiQBUUrVpLDDYw",
+        "captured_at": "2026-08-26T04:28:11.536+00:00",
+        "url": "https://racecenter.lavuelta.es/api/extraVehicle-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJObVE1TVRjNE1HWm1PVGt6IiwiaWF0IjoxNzg3NzE4NDkxfQa0bQ1e0zS_BtmGaWrQtEFKRNcUOk21NpNmLNRipSj0E",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-08-26T04:28:11.538+00:00",
+        "url": "https://racecenter.lavuelta.es/api/telemetryCompetitor-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOV1ppWkRVM1ltRmpZbVEwIiwiaWF0IjoxNzg3NzE4NDkxfQPue-bv6OSmbGZrQ3AY6vyKeVj4gkLihq2LtZfw4tFWM",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
+      },
+      {
+        "captured_at": "2026-08-26T04:28:11.559+00:00",
+        "url": "https://racecenter.lavuelta.es/api/stage-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPRGxqWW1Oak5qRXhPRGxsIiwiaWF0IjoxNzg3NzE4NDkxfQvrue5f5g5IyxCU15jmSGYvRkH9_gZKTns6RWobDOd34",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"hasCoordinates\":true,\"timezone\":\"Europe/Paris\",\"lengthDisplay\":174,\"endTime\":\"17:30:00\",\"podiumDisplayMode\":\"instantpodium\",\"departureCity\":{\"createdAt\":\"2026-03-09T14:42:41+01:00\",\"updatedBy\":\"eBlancardi\",\"country\":{\"code\":\"esp\",\"id\":1959},\"content\":{\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-jpg/e03-salida-gruissan/27403/0:0,960:960-0-0-70/f8caa\",\"texts\":[{\"locale\":\"es\",\"text\":[\"Cur"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.211+00:00",
-        "url": "https://racecenter.lavuelta.es/api/checkpoint-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVGhtWWpFM1pXRXhPV1pqIiwiaWF0IjoxNzg3NjU4MzE2fQ6AIw02k4ADVic9Im3vkenTh-6UinT-B9zt7Q4J-fbpc",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"0\":{\"highSchedule\":\"14:49:00\",\"updatedAt\":\"2026-08-12T11:23:37+02:00\",\"length\":0,\"countryCode\":\"AND\",\"middleSchedule\":\"14:49:00\",\"latitude\":42.513549,\"checkpointTypes\":[{\"number\":\"0\",\"id\":\"142576\",\"type\":\"fictive\",\"code\":\"F\"}],\"lowSchedule\":\"14:49:00\",\"longitude\":1.552719,\"caravanSchedule\":\"13:04:00\",\"checkpointSummits\":[],\"checkpointMeteo\":{\"temperature\":23.36,\"currentWeatherDesc\":\"couvert\",\"u"
-      },
-      {
-        "captured_at": "2026-08-25T11:45:17.211+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingTypeJerseys-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOVGxpTldKbU16RTJOemxrIiwiaWF0IjoxNzg3NjU4MzE2fQTeFBlVLcXW-RiNHxUnCnljPnpF3Lw5nDYBo9lTLAVt0",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"length\":0,\"status\":\"0\",\"rankings\":[{\"bib\":152,\"absolute\":6,\"position\":1,\"relative\":0,\"$rider\":\"allCompetitors-2026:498fa5b993ade79dac9520cb061dbd0d6eb151e673ce865ea20817012e7e009e\"}],\"type\":\"pmm\",\"checkpoint\":51,\"_id\":\"60731d29884730bc7eb489941c467b15003a2a609f6697b990d4973e6bf908ce\",\"_bind\":\"rankingTypeJerseys-2026-4\",\"_origin\":\"rankingType-2026-3\",\"_updatedAt\":1787595088986,\"_parent\":\"stage-2"
-      },
-      {
-        "captured_at": "2026-08-25T11:45:17.211+00:00",
-        "url": "https://racecenter.lavuelta.es/api/extraVehicle-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVFF3WmpGaFpEWTVaR1ZpIiwiaWF0IjoxNzg3NjU4MzE2fQ1oILVZQ6YPwb4Jmd7OV0Diuy9SDPFbmMlmZTZScFtm4",
+        "captured_at": "2026-08-26T04:28:11.559+00:00",
+        "url": "https://racecenter.lavuelta.es/api/fantasy-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOREJqTm1NME1qZ3lPVEpsIiwiaWF0IjoxNzg3NzE4NDkxfQLqi_jwDnsQdDxK5tRvBWAbSWYpmIUqQxJpV_OSoPKjE",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.211+00:00",
-        "url": "https://racecenter.lavuelta.es/api/insights-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV0psTXpBNU5qZ3hNVGd3IiwiaWF0IjoxNzg3NjU4MzE2fQeMvIOWbvpuFeS3Jg24RMt_UMKCR16-gT2wwZ7hyYhNY",
+        "captured_at": "2026-08-26T04:28:11.559+00:00",
+        "url": "https://racecenter.lavuelta.es/api/ad?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV0poWldKbU9XWTNNV1JtIiwiaWF0IjoxNzg3NzE4NDkxfQs7mjlYBDL7V2rzVMK6r2ED_XLRKL6z50upJsXOuC9d8",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.223+00:00",
-        "url": "https://racecenter.lavuelta.es/api/telemetryPack-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV00wTmpJd09HSmpNMlZsIiwiaWF0IjoxNzg3NjU4MzE2fQ5RTlaS55v4AUlFfJvWl_P_aHlCgWxbP772P-_r9ty60",
+        "captured_at": "2026-08-26T04:28:11.559+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeJerseys-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPR1kwTURaa1l6azFNREV3IiwiaWF0IjoxNzg3NzE4NDkxfQ2mL85AKVDkoBlJS2fahly1bhH2l2HexwKTH2I2ixdfs",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
-        "sample": "[]"
+        "sample": "[{\"rankings\":[{\"relative\":0,\"position\":1,\"bib\":124,\"absolute\":37,\"$rider\":\"allCompetitors-2026:315c7304f48cd6d332d92e474e9887e3c7adb4ffecba05fe4512a311c2b69901\"},{\"absolute\":82,\"penality\":999,\"relative\":0,\"position\":1,\"bonus\":0,\"bib\":11,\"$rider\":\"allCompetitors-2026:109159b3db6998429880611d635b45f5474ca7389a0996eb980d3af25106b236\"}],\"checkpoint\":33,\"status\":\"0\",\"type\":\"pmp\",\"length\":0,\"_id\":\"243ad"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.253+00:00",
-        "url": "https://racecenter.lavuelta.es/api/allCompetitors-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPR1E0TnpFMU9HRXhNak0wIiwiaWF0IjoxNzg3NjU4MzE2fQtVCdfPEHdK5M-Am5hupVp9aZaRGqK0NsjcFFDjGNfN8",
+        "captured_at": "2026-08-26T04:28:11.571+00:00",
+        "url": "https://racecenter.lavuelta.es/api/allCompetitors-2026?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJabVF5WVRKa016bGxaams1IiwiaWF0IjoxNzg3NzE4NDkxfQqxySlqk1737xna6-znQ8OGyYlmV97P562MazOF0do-s",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"lastname\":\"VAN AERT\",\"profile_podium_live\":\"https://img.aso.fr/core_app/img-cycling-vue-png/31/28296/0:0,660:1000-0-0-70/23936\",\"profile_sm\":\"https://img.aso.fr/core_app/img-cycling-vue-png/31/27913/0:0,400:400-70-0-70/bc742\",\"bib\":31,\"siteLinks\":{\"es\":\"/corredor/31/team-visma-lease-a-bike/van-aert-wout\",\"en\":\"/rider/31/team-visma-lease-a-bike/van-aert-wout\",\"fr\":\"/coureur/31/team-visma-lease-a"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.273+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingType-2026-3?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZbVZsTTJSalpHRm1aR0l3IiwiaWF0IjoxNzg3NjU4MzE2fQKE4YEVVT9lRPl6N28fh3CsNdy4V43ncBvgJifyexzHg",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[{\"rankings\":[{\"absolute\":17930000,\"relative\":0,\"penality\":0,\"position\":1,\"bonus\":10000,\"bib\":33,\"$rider\":\"allCompetitors-2026:a3b2eedbd63dfddea4b144f4a4fe22682ef4abe1fb2b14efd3752bba48d7f38c\"},{\"bib\":42,\"absolute\":17932000,\"position\":2,\"relative\":2000,\"penality\":0,\"bonus\":0,\"$rider\":\"allCompetitors-2026:0e95917af3a38cd0235fe15b95b0ccc60481696b85a51deffdab4b512ca40253\"},{\"bonus\":0,\"absolute\":17934"
-      },
-      {
-        "captured_at": "2026-08-25T11:45:17.273+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingType-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOR1ExWTJSaU1tVm1NV0UyIiwiaWF0IjoxNzg3NjU4MzE2fQkFQ2UFxsVEviBAzszDq8wpyVgZ88iov8M4wv8_Ut-zU",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[]"
-      },
-      {
-        "captured_at": "2026-08-25T11:45:17.273+00:00",
-        "url": "https://racecenter.lavuelta.es/api/ad?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNamRpTkdWbE1EUTVNVFEwIiwiaWF0IjoxNzg3NjU4MzE2fQILoiTC4JRCn7rgSnGylFczpzPx82OnO-HczjfdM0spE",
-        "status": 200,
-        "mime": "application/json; charset=utf-8",
-        "kind": "json",
-        "sample": "[]"
-      },
-      {
-        "captured_at": "2026-08-25T11:45:17.273+00:00",
-        "url": "https://racecenter.lavuelta.es/api/broadcaster?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV1l6T1RjNE1qbGlNREExIiwiaWF0IjoxNzg3NjU4MzE2fQhfec1BpXorJ42X4WUqPSp2WV9oyKpM-b37DZnij4IGM",
+        "captured_at": "2026-08-26T04:28:11.571+00:00",
+        "url": "https://racecenter.lavuelta.es/api/broadcaster?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJORGxsWWpjNFlUQmtNbVV5IiwiaWF0IjoxNzg3NzE4NDkxfQFndBRGEVfyYjYBriFCpabvutahwGqiFvAA6sEOUO6YA",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[{\"broadcasterLangs\":[{\"title\":\"Flosports\",\"url\":\"https://www.flosports.tv/\",\"liveUrl\":\"https://www.flosports.tv/\",\"countryLabel\":\"Canada\",\"locale\":\"fr\"},{\"countryLabel\":\"Canada\",\"title\":\"Flosports\",\"locale\":\"en\",\"url\":\"https://www.flosports.tv/\",\"liveUrl\":\"https://www.flosports.tv/\"},{\"locale\":\"es\",\"liveUrl\":\"https://www.flosports.tv/\",\"url\":\"https://www.flosports.tv/\",\"countryLabel\":\"CANADÁ\",\"ti"
       },
       {
-        "captured_at": "2026-08-25T11:45:17.273+00:00",
-        "url": "https://racecenter.lavuelta.es/api/fantasy-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZekptWXpkaE9UWTJPVFJpIiwiaWF0IjoxNzg3NjU4MzE2fQLbEwectdpoZKFCy5abWuDNMUqGozTBWSfXXbZY37r58",
+        "captured_at": "2026-08-26T04:28:11.588+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingType-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaR0prWkRRM00yVm1OV1EzIiwiaWF0IjoxNzg3NzE4NDkxfQf6fzVpe_vz0EqbQqav2YIDi5Opv4Z_Xk7O4d92xQdko",
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[{\"checkpoint\":20,\"type\":\"ime\",\"status\":\"0\",\"rankings\":[{\"position\":1,\"relative\":0,\"bonus\":0,\"bib\":11,\"absolute\":10,\"penality\":0,\"$rider\":\"allCompetitors-2026:109159b3db6998429880611d635b45f5474ca7389a0996eb980d3af25106b236\"},{\"position\":2,\"relative\":0,\"bib\":161,\"absolute\":6,\"penality\":0,\"bonus\":0,\"$rider\":\"allCompetitors-2026:ebb3b0654c6984fe98b418e15e3d1e952649f6a61e842f6fe81fe0448c1a7156\"},{\"po"
+      },
+      {
+        "captured_at": "2026-08-26T04:28:11.612+00:00",
+        "url": "https://racecenter.lavuelta.es/api/telemetryPack-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVEk0TjJSbE9UZzBZelJoIiwiaWF0IjoxNzg3NzE4NDkxfQ-GpsvgM6SshJDeN2c05C6tAZPstrUNvuu4BessYe_20",
         "status": 200,
         "mime": "application/json; charset=utf-8",
         "kind": "json",
         "sample": "[]"
-      }
-    ],
-    "event-stream": [
-      {
-        "captured_at": "2026-08-25T11:45:17.292+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOREZrTmpjMFl6RTROMkUwIiwiaWF0IjoxNzg3NjU4MzE2fQlRfB6sgIy1cNQX3FYzEwBJiUia_gsJz6yRXawe2rgck",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
       },
       {
-        "captured_at": "2026-08-25T11:45:21.126+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZalU0WkRkak5EWXhZMlF4IiwiaWF0IjoxNzg3NjU4MzIwfQNOmTojCkDWmsQO2LIRJ_8ne-dn8Xnxuf7dj2dWBXFPU",
+        "captured_at": "2026-08-26T04:28:11.613+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingType-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJORGM1TldNMllXSTFaR1F6IiwiaWF0IjoxNzg3NzE4NDkxfQ2fOdLo0XzYiGvgKsNFPRgvP8PDc8PH18-EyZYl3A06w",
         "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
       },
       {
-        "captured_at": "2026-08-25T11:45:50.907+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPR0UzT0RWbE1tSmtOVFE0IiwiaWF0IjoxNzg3NjU4MzUwfQfs-Qv9ldEs_-dcUOC-z_TUa834CQo40_WHR1belLeBU",
+        "captured_at": "2026-08-26T04:28:11.613+00:00",
+        "url": "https://racecenter.lavuelta.es/api/insights-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJOVEJrWXpFd09EazJZVE00IiwiaWF0IjoxNzg3NzE4NDkxfQALqQ7n0oTHF3fr5cz7GA_A_h81-7dqmVeqMaiQo0UJo",
         "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "[]"
       },
       {
-        "captured_at": "2026-08-25T11:46:20.335+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNVE5tTkdKaE1qRmpNRFZtIiwiaWF0IjoxNzg3NjU4Mzc5fQjRTqHmMsyEuh31o5xSyRiuspUwZayTJzVX_8XK9ZEJs",
+        "captured_at": "2026-08-26T04:28:11.850+00:00",
+        "url": "https://syndication.twitter.com/settings?session_id=5013262669580399113dde8edc55a120c0dea8a0",
         "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-25T11:46:50.165+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPVFEwWmpNMk56Z3hORGt4IiwiaWF0IjoxNzg3NjU4NDA5fQYWli0Qfmpn79LF8dW9d0KIGZAUCAv8rtaSvwKd6B61k",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-25T11:47:19.820+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaV1F3T0RabU1qSXpORGs1IiwiaWF0IjoxNzg3NjU4NDM5fQTvnUGNVGxxH7x5BO7p7EK3TcAf2bXx7Dn96duN9t0E4",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
-      },
-      {
-        "captured_at": "2026-08-25T11:47:49.221+00:00",
-        "url": "https://racecenter.lavuelta.es/live-stream?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNRFkxT0dZeU9UTTFNelEyIiwiaWF0IjoxNzg3NjU4NDY4fQB8hW726gRqIEILQu0_A408GbwQRuXyEGo32hZlY57ho",
-        "status": 200,
-        "mime": "text/event-stream",
-        "kind": "event-stream",
-        "sample": ""
+        "mime": "application/json; charset=utf-8",
+        "kind": "json",
+        "sample": "{\"should_obtain_cookie_consent\":false,\"features\":{\"tfw_timeline_list\":{\"bucket\":[],\"version\":null},\"tfw_follower_count_sunset\":{\"bucket\":true,\"version\":null},\"tfw_tweet_edit_backend\":{\"bucket\":\"on\",\"version\":null},\"tfw_refsrc_session\":{\"bucket\":\"on\",\"version\":null},\"tfw_fosnr_soft_interventions_enabled\":{\"bucket\":\"on\",\"version\":null},\"tfw_mixed_media_15897\":{\"bucket\":\"treatment\",\"version\":null},\"t"
       }
     ],
     "api-path": [
       {
-        "captured_at": "2026-08-25T11:45:17.380+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingTypeArrival-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNREZqWWpaak9HSXpOMll4IiwiaWF0IjoxNzg3NjU4MzE2fQeBLShadt68fmCqUpXj6wnV-Zzmyxw-nSa79M11eKt1A",
+        "captured_at": "2026-08-26T04:28:11.614+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeJerseys-2026-6?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaak0wTnpFM056WTNNRFl5IiwiaWF0IjoxNzg3NzE4NDkxfQx040t13dWJNuoJGTnaKRI_7iYD4kI8Ctv6iN27V3gx4",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-25T11:45:17.381+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingTypeJerseys-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZbUk1TVdVME9HVXdOVGxoIiwiaWF0IjoxNzg3NjU4MzE2fQW9z-odGzcIZMVg864efu6w7gv7ojMVvKq-aBQHLGbi8",
+        "captured_at": "2026-08-26T04:28:11.619+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeArrival-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNbVEzWkdSaE1XWTRZVFZoIiwiaWF0IjoxNzg3NzE4NDkxfQH8v0zoFvj9l4mS06L4u0hTvONePDXfUTxutYTS_YuW4",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-25T11:45:17.381+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingTypeTrial-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNV1V3WWpZNE1UYzJNMkUwIiwiaWF0IjoxNzg3NjU4MzE2fQTyL3003alqRgePmSxGEVhJVZP2bmuwCAWPXixj6-fR0",
+        "captured_at": "2026-08-26T04:28:11.620+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeTrial-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJaamMxTUdFMllUaGpZMll3IiwiaWF0IjoxNzg3NzE4NDkxfQeqLaeTq_-54LB6YuFkY0xMI6iHaXocUg9ff4cnYALd8",
         "status": 204,
         "mime": "",
         "kind": "api-path",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-25T11:45:17.383+00:00",
-        "url": "https://racecenter.lavuelta.es/api/rankingTypeWidget-2026-4?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJZakl5WVdFM09UTTFORFprIiwiaWF0IjoxNzg3NjU4MzE2fQG6Ct00TQINqUnCLFRIoZJKLwCbCoGCVdjcEAPSjTg1A",
+        "captured_at": "2026-08-26T04:28:11.627+00:00",
+        "url": "https://racecenter.lavuelta.es/api/rankingTypeWidget-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJPR0V6TVdSa1pHVmxPRGMyIiwiaWF0IjoxNzg3NzE4NDkxfQZChD2z7qSHi9L4ND_23nC9b041yLvoNNACsqg6ydqUo",
+        "status": 204,
+        "mime": "",
+        "kind": "api-path",
+        "sample": ""
+      },
+      {
+        "captured_at": "2026-08-26T04:28:11.627+00:00",
+        "url": "https://racecenter.lavuelta.es/api/publication_en-2026-5?xdt=245feyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJrc3AiOiJNelk1WXpoalptSm1NR1ZtIiwiaWF0IjoxNzg3NzE4NDkxfQH4oS-m3RkakNE3C3ux46sIfBytmpFjarV4Kgf5JOFVI",
         "status": 204,
         "mime": "",
         "kind": "api-path",
@@ -256,24 +232,24 @@
     ],
     "csv": [
       {
-        "captured_at": "2026-08-25T11:45:17.436+00:00",
-        "url": "https://racecenter.lavuelta.es/profils/2026/profile-04-df875bb0c2fe1545195b3ccce5be88ed.csv",
+        "captured_at": "2026-08-26T04:28:11.660+00:00",
+        "url": "https://racecenter.lavuelta.es/profils/2026/profile-05-tiny-9d31c21df30a55b39f07a22017edeb77.csv",
         "status": 200,
         "mime": "text/csv; charset=UTF-8",
         "kind": "csv",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-25T11:45:17.437+00:00",
-        "url": "https://racecenter.lavuelta.es/profils/2026/profile-04-df875bb0c2fe1545195b3ccce5be88ed.csv",
+        "captured_at": "2026-08-26T04:28:11.687+00:00",
+        "url": "https://racecenter.lavuelta.es/profils/2026/profile-05-97be3d8bcc9fc8dc26350c0992106f54.csv",
         "status": 200,
         "mime": "text/csv; charset=UTF-8",
         "kind": "csv",
         "sample": ""
       },
       {
-        "captured_at": "2026-08-25T11:45:17.460+00:00",
-        "url": "https://racecenter.lavuelta.es/profils/2026/profile-04-tiny-1ad6815f52a3f2fd84f09095f2436d38.csv",
+        "captured_at": "2026-08-26T04:28:11.688+00:00",
+        "url": "https://racecenter.lavuelta.es/profils/2026/profile-05-97be3d8bcc9fc8dc26350c0992106f54.csv",
         "status": 200,
         "mime": "text/csv; charset=UTF-8",
         "kind": "csv",
@@ -282,95 +258,88 @@
     ]
   },
   "sse_binds_seen": {
-    "(unparseable)": 55,
-    "publication_fr": 14,
-    "publication_en": 14,
-    "publication_es": 14,
-    "video": 7,
-    "stage": 14,
-    "checkpoint": 42,
-    "(unknown)": 7
+    "(unparseable)": 23
   },
   "sse_sample_events": [
     {
-      "captured_at": "2026-08-25T11:45:17.303+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.14959,
+      "captured_at": "2026-08-26T04:28:11.503+00:00",
+      "requestId": "62014.238",
+      "timestamp": 245827.60278,
       "eventName": "uid",
       "eventId": "",
       "data": "7e1f2486-f4fc-4cf1-a9d2-20559d83951f"
     },
     {
-      "captured_at": "2026-08-25T11:45:17.303+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.14966,
+      "captured_at": "2026-08-26T04:28:11.503+00:00",
+      "requestId": "62014.238",
+      "timestamp": 245827.602826,
       "eventName": "stage",
       "eventId": "",
-      "data": "c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f"
+      "data": "9416e039f175b31b6562305318c873e04ed8bae96cf7686bc22f5477c49ae170"
     },
     {
-      "captured_at": "2026-08-25T11:45:17.303+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.149822,
-      "eventName": "update",
-      "eventId": "2",
-      "data": "{\"bind\":\"publication_fr-2026-4\",\"app\":\"vue\",\"origin\":\"video-2026-4\",\"change\":\"added\",\"id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"data\":{\"onlyDataTab\":false,\"isClub\":false,\"name\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xayq2s6\",\"videoLangs\":[{\"locale\":\"fr\",\"id\":7878,\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"},{\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\",\"id\":7879},{\"locale\":\"es\",\"id\":7880,\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}],\"createdAt\":\"2026-08-18T11:27:00+02:00\",\"onlyClubTab\":false,\"id\":7878,\"isData\":false,\"_id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"_bind\":\"publication_fr-2026-4\",\"_origin\":\"video-2026-4\",\"_updatedAt\":1787642037772,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"model\":\"video\",\"locale\":\"fr\",\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"}}"
+      "captured_at": "2026-08-26T04:28:11.503+00:00",
+      "requestId": "62014.238",
+      "timestamp": 245827.602862,
+      "eventName": "message",
+      "eventId": "",
+      "data": ""
     },
     {
-      "captured_at": "2026-08-25T11:45:17.303+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.150213,
-      "eventName": "update",
-      "eventId": "3",
-      "data": "{\"bind\":\"publication_en-2026-4\",\"app\":\"vue\",\"origin\":\"video-2026-4\",\"change\":\"added\",\"id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"data\":{\"onlyDataTab\":false,\"isClub\":false,\"name\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xayq2s6\",\"videoLangs\":[{\"locale\":\"fr\",\"id\":7878,\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"},{\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\",\"id\":7879},{\"locale\":\"es\",\"id\":7880,\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}],\"createdAt\":\"2026-08-18T11:27:00+02:00\",\"onlyClubTab\":false,\"id\":7879,\"isData\":false,\"_id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"_bind\":\"publication_en-2026-4\",\"_origin\":\"video-2026-4\",\"_updatedAt\":1787642037772,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"model\":\"video\",\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\"}}"
+      "captured_at": "2026-08-26T04:28:11.503+00:00",
+      "requestId": "62014.238",
+      "timestamp": 245827.602863,
+      "eventName": "message",
+      "eventId": "",
+      "data": ""
     },
     {
-      "captured_at": "2026-08-25T11:45:17.303+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.150344,
-      "eventName": "update",
-      "eventId": "4",
-      "data": "{\"bind\":\"publication_es-2026-4\",\"app\":\"vue\",\"origin\":\"video-2026-4\",\"change\":\"added\",\"id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"data\":{\"onlyDataTab\":false,\"isClub\":false,\"name\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xayq2s6\",\"videoLangs\":[{\"locale\":\"fr\",\"id\":7878,\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"},{\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\",\"id\":7879},{\"locale\":\"es\",\"id\":7880,\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}],\"createdAt\":\"2026-08-18T11:27:00+02:00\",\"onlyClubTab\":false,\"id\":7880,\"isData\":false,\"_id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"_bind\":\"publication_es-2026-4\",\"_origin\":\"video-2026-4\",\"_updatedAt\":1787642037772,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"model\":\"video\",\"locale\":\"es\",\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}}"
+      "captured_at": "2026-08-26T04:28:11.503+00:00",
+      "requestId": "62014.238",
+      "timestamp": 245827.602864,
+      "eventName": "message",
+      "eventId": "",
+      "data": ""
     },
     {
-      "captured_at": "2026-08-25T11:45:17.303+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.150448,
-      "eventName": "update",
-      "eventId": "5",
-      "data": "{\"bind\":\"video-2026-4\",\"app\":\"vue\",\"origin\":\"video-2026-4\",\"change\":\"added\",\"id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"data\":{\"onlyDataTab\":false,\"isClub\":false,\"name\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"url\":\"https://geo.dailymotion.com/player/xbbut.html?video=xayq2s6\",\"videoLangs\":[{\"locale\":\"fr\",\"id\":7878,\"title\":\"La Vuelta 2026 - Étape 4 : Parcours et altimétrie\"},{\"locale\":\"en\",\"title\":\"La Vuelta 2026 - Stage 4: Route & Elevation Profile\",\"id\":7879},{\"locale\":\"es\",\"id\":7880,\"title\":\"La Vuelta 2026 - Etapa 4: Recorrido y Altimetria\"}],\"createdAt\":\"2026-08-18T11:27:00+02:00\",\"onlyClubTab\":false,\"id\":3522,\"isData\":false,\"_id\":\"e3e7feaa22ff5eb354f2da1602ce67b9656d228959f3e38df0e5cc3c6f12f173\",\"_bind\":\"video-2026-4\",\"_origin\":\"video-2026-4\",\"_updatedAt\":1787642037772,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"video:La Vuelta 2026 - Étape 4 : Parcours et altimétrie\",\"model\":\"video\"}}"
+      "captured_at": "2026-08-26T04:28:16.157+00:00",
+      "requestId": "62014.238",
+      "timestamp": 245832.267586,
+      "eventName": "message",
+      "eventId": "",
+      "data": ""
     },
     {
-      "captured_at": "2026-08-25T11:45:17.304+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.150545,
-      "eventName": "update",
-      "eventId": "7",
-      "data": "{\"bind\":\"publication_fr-2026-4\",\"app\":\"vue\",\"origin\":\"interactiveContent-2026-4\",\"change\":\"added\",\"id\":\"cbbe616c5697f217b757032a5b4c9b73ed53ab4ac9bac712a21fc8fc6663ec5a\",\"data\":{\"contentId\":\"VJPuHhtS\",\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-png/picto-cofidis-400x400/28518/0:0,400:400-0-0-70/78002\",\"url\":\"vuelta26-predictor-fr\",\"type\":\"fastory\",\"text\":[\"Prédisez le vainqueur du jour avec Cofidis\"],\"updatedAt\":\"2026-08-25T09:14:36+02:00\",\"title\":\"Prédisez le vainqueur du jour avec Cofidis\",\"id\":148,\"locale\":\"fr\",\"_id\":\"cbbe616c5697f217b757032a5b4c9b73ed53ab4ac9bac712a21fc8fc6663ec5a\",\"_bind\":\"publication_fr-2026-4\",\"_origin\":\"interactiveContent-2026-4\",\"_updatedAt\":1787642076696,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:frfastory-148\",\"model\":\"interactive\",\"isClub\":false}}"
+      "captured_at": "2026-08-26T04:28:21.089+00:00",
+      "requestId": "62014.238",
+      "timestamp": 245837.206112,
+      "eventName": "message",
+      "eventId": "",
+      "data": ""
     },
     {
-      "captured_at": "2026-08-25T11:45:17.304+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.150598,
-      "eventName": "update",
-      "eventId": "9",
-      "data": "{\"bind\":\"publication_en-2026-4\",\"app\":\"vue\",\"origin\":\"interactiveContent-2026-4\",\"change\":\"added\",\"id\":\"9ed74f8a3ea1bca4ba2bd038936d86931656986d6c719371d40d516c6fd60877\",\"data\":{\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-png/picto-cofidis-400x400/28518/0:0,400:400-0-0-70/78002\",\"type\":\"fastory\",\"updatedAt\":\"2026-08-25T09:15:00+02:00\",\"url\":\"vuelta26-predictor-uk\",\"locale\":\"en\",\"contentId\":\"91iabrFF\",\"text\":[\"Predict today's stage winner with Cofidis\"],\"id\":149,\"title\":\"Predict today's stage winner with Cofidis\",\"_id\":\"9ed74f8a3ea1bca4ba2bd038936d86931656986d6c719371d40d516c6fd60877\",\"_bind\":\"publication_en-2026-4\",\"_origin\":\"interactiveContent-2026-4\",\"_updatedAt\":1787642101074,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:enfastory-149\",\"model\":\"interactive\",\"isClub\":false}}"
+      "captured_at": "2026-08-26T04:28:26.079+00:00",
+      "requestId": "62014.238",
+      "timestamp": 245842.196011,
+      "eventName": "message",
+      "eventId": "",
+      "data": ""
     },
     {
-      "captured_at": "2026-08-25T11:45:17.304+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.150645,
-      "eventName": "update",
-      "eventId": "11",
-      "data": "{\"bind\":\"publication_es-2026-4\",\"app\":\"vue\",\"origin\":\"interactiveContent-2026-4\",\"change\":\"added\",\"id\":\"e59ffd70a3e7f5aa2fe5187fa54d83164b19399014fbb424dfe1565dcebe78d8\",\"data\":{\"url\":\"vuelta26-predictor-es\",\"updatedAt\":\"2026-08-25T09:15:23+02:00\",\"contentId\":\"GGeHsY3e\",\"title\":\"Predice al ganador de etapa con Cofidis\",\"type\":\"fastory\",\"locale\":\"es\",\"text\":[\"Predice al ganador de etapa con Cofidis\"],\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-png/picto-cofidis-400x400/28518/0:0,400:400-0-0-70/78002\",\"id\":150,\"_id\":\"e59ffd70a3e7f5aa2fe5187fa54d83164b19399014fbb424dfe1565dcebe78d8\",\"_bind\":\"publication_es-2026-4\",\"_origin\":\"interactiveContent-2026-4\",\"_updatedAt\":1787642124072,\"_parent\":\"stage-2026:c5d141302f23e101946d1226a6e12418c865310ed6bdf335ad8b53cc051fef3f\",\"_key\":\"_id\",\"_refs\":[],\"_virtual\":\"interactiveContent:esfastory-150\",\"model\":\"interactive\",\"isClub\":false}}"
+      "captured_at": "2026-08-26T04:28:29.125+00:00",
+      "requestId": "62014.238",
+      "timestamp": 245845.240805,
+      "eventName": "end",
+      "eventId": "",
+      "data": ""
     },
     {
-      "captured_at": "2026-08-25T11:45:17.304+00:00",
-      "requestId": "3121.240",
-      "timestamp": 88.15092,
-      "eventName": "update",
-      "eventId": "15",
-      "data": "{\"bind\":\"stage-2026\",\"app\":\"vue\",\"origin\":\"stage-2026\",\"change\":\"modified\",\"id\":\"dbf7fd7af4eb7895c4d2f9ee4f006d4206974d252b631987bd80a72a5df3fdd6\",\"data\":{\"departureCity\":{\"createdBy\":\"Clerat\",\"country\":{\"code\":\"esp\",\"id\":1959},\"updatedBy\":\"Clerat\",\"createdAt\":\"2025-12-15T12:37:54+01:00\",\"updatedAt\":\"2025-12-15T12:37:54+01:00\",\"cityLangs\":[],\"content\":{\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-jpg/e16-salida-cortegana/27386/0:0,960:960-0-0-70/14f0e\",\"texts\":[{\"text\":[\"Cortegana conserva un valioso patrimonio monumental que enriquece su casco urbano, con templos y ermitas que reflejan la identidad y la historia del municipio. Su gran emblema es el Castillo Medieval, originario del siglo XIII y pieza clave de la Banda Gallega, levantada para defender la frontera sevillana frente a Portugal. Declarado Bien de Interés Cultural, es hoy uno de los monumentos más visitados de Huelva y un destacado enclave turístico.<br />\\n<br />\\nSede inédita de La Vuelta.<br />\\n4.618 habitantes.<br />\\nProvincia de Huelva.<br />\\n<a href=\\\"https://www.cortegana.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> cortegana.es </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"],\"locale\":\"es\"},{\"locale\":\"en\",\"text\":[\"Cortegana is home to a valuable monumental heritage that enriches its urban centre, with temples and chapels that reflect the municipality’s identity and history. Its main emblematic building is the Medieval Castle, built in the 13th century as part of the Banda Gallega in order to defend Seville’s border from Portugal. Declared an Asset of Cultural Interest, it is now one of Huelva’s most visited monuments and a prominent tourist attraction.<br />\\n<br />\\nUnprecedented La Vuelta departure.<br />\\n4,618 inhabitants.<br />\\nProvince of Huelva.<br />\\n<a href=\\\"https://www.cortegana.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> cortegana.es </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"]},{\"text\":[\"Cortegana conserve un remarquable patrimoine monumental qui embellit son centre-ville, avec des temples et des ermitages qui sont le reflet de l'identité et de l'histoire de la commune. Son emblème principal est le château médiéval. Construit au XIIIe siècle, il est un élément clé de la bande galicienne, une ligne de défense construite pour protéger la frontière sévillane face au Portugal. Déclaré bien d'intérêt culturel, il est aujourd'hui l'un des monuments les plus visités de Huelva et un site touristique de premier plan.<br />\\n<br />\\nDépart inédit de La Vuelta.<br />\\n4 618 habitants.<br />\\nProvince de Huelva.<br />\\n<a href=\\\"https://www.cortegana.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> cortegana.es </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"],\"locale\":\"fr\"}]},\"label\":\"Cortegana\",\"code\":\"cortegana\",\"id\":32860},\"endTime\":\"17:30:00\",\"startTime\":\"13:18:00\",\"stage\":16,\"arrivalCity\":{\"cityLangs\":[],\"updatedBy\":\"Clerat\",\"content\":{\"texts\":[{\"locale\":\"es\",\"text\":[\"La Rábida es uno de los enclaves históricos más singulares de Huelva, estrechamente ligado al origen de la gesta colombina. Su monasterio franciscano, declarado Bien de Interés Cultural, fue refugio e inspiración de Cristóbal Colón antes del viaje que cambiaría la historia. Rodeado de jardines y miradores, el conjunto monumental se completa con los Lugares Colombinos, que evocan aquel episodio decisivo y hacen de La Rábida un centro cultural y turístico de referencia.<br />\\n<br />\\nSede inédita de La Vuelta.<br />\\n12.663 habitantes (Palos de la Frontera).<br />\\nProvincia de Huelva.<br />\\n<a href=\\\"https://www.palosfrontera.com\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> palosfrontera.com </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"]},{\"text\":[\"La Rábida is one of Huelva’s most unique historical enclaves, closely linked to the origins of Columbus’ great feat. Its Franciscan monastery, declared an Asset of Cultural Interest, was Christopher Columbus’ refuge and inspiration before embarking on the voyage that would forever change history. The monumental complex is surrounded by gardens and lookouts and is completed by the Lugares Colombinos, which evoke that decisive episode and make La Rábida a reference in terms of culture and tourism.<br />\\n<br />\\nUnprecedented La Vuelta finish-line.<br />\\n12,663 inhabitants (Palos de la Frontera).<br />\\nProvince of Huelva.<br />\\n<a href=\\\"https://www.palosfrontera.com\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> palosfrontera.com </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"],\"locale\":\"en\"},{\"locale\":\"fr\",\"text\":[\"La Rábida est l'un des sites historiques les plus singuliers de Huelva, étroitement lié à l'origine de l'épopée de Christophe Colomb. Son monastère franciscain, déclaré bien d'intérêt culturel, fut le refuge et la source d'inspiration de Christophe Colomb avant le voyage qui allait changer le cours de l'histoire. Entouré de jardins et de belvédères, l'ensemble monumental est complété par les Lieux Colombiens, qui évoquent cet épisode décisif et font de La Rábida un centre culturel et touristique de référence.<br />\\n<br />\\nDépart inédit de La Vuelta.<br />\\n12 663 habitants (Palos de la Frontera).<br />\\nProvince de Huelva.<br />\\n<a href=\\\"https://www.palosfrontera.com\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> palosfrontera.com </a><br />\\n<a href=\\\"https://www.diphuelva.es\\\" target=\\\"_blank\\\" rel=\\\"noopener noreferrer\\\"> diphuelva.es </a><br />\\n\"]}],\"image\":\"https://img.aso.fr/core_app/img-cycling-vue-jpg/e16-meta-la-rabida/27383/0:0,960:960-0-0-70/c494d\"},\"updatedAt\":\"2025-12-15T12:38:07+01:00\",\"createdAt\":\"2025-12-15T12:38:07+01:00\",\"country\":{\"id\":1959,\"code\":\"esp\"},\"id\":32861,\"code\":\"la-rabida-palos-de-la-frontera\",\"label\":\"La Rábida. Palos de la Frontera\",\"createdBy\":\"Clerat\"},\"id\":25115,\"showGroups\":true,\"date\":\"2026-09-08T00:00:00+02:00\",\"type\":\"VAL\",\"hasCoordinates\":true,\"lengthDisplay\":181.1,\"podiumDisplayMode\":\"instantpodium\",\"length\":181.1,\"isCancelled\":false,\"timezone\":\"Europe/Madrid\",\"_id\":\"dbf7fd7af4eb7895c4d2f9ee4f006d4206974d252b631987bd80a72a5df3fdd6\",\"_bind\":\"stage-2026\",\"_origin\":\"stage-2026\",\"_updatedAt\":1787648654493,\"_parent\":\"millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae\",\"_key\":\"stage\",\"_refs\":[]}}"
+      "captured_at": "2026-08-26T04:28:29.870+00:00",
+      "requestId": "62014.607",
+      "timestamp": 245845.986127,
+      "eventName": "uid",
+      "eventId": "",
+      "data": "7e1f2486-f4fc-4cf1-a9d2-20559d83951f"
     }
   ]
 }

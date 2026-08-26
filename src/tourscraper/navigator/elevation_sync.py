@@ -157,6 +157,40 @@ def _leader_km_to_finish(riders) -> float | None:
     return vals[-1]
 
 
+def _clean_track(samples: list[tuple[datetime, float]]) -> list[tuple[datetime, float]]:
+    """Shared cleaning tail for any raw (timestamp, km-to-finish) sample
+    list, whatever source it came from.
+
+    A stale cached response repeats a payload already seen, so identical
+    (time, position) pairs collapse rather than being counted twice.
+
+    Distance to the finish only ever decreases -- but "only ever decreases"
+    on its own is a trap. A single fix reporting half a kilometre too far up
+    the road is accepted, and then every correct sample behind it is thrown
+    away for going "backwards", so one bad reading biases the track forward
+    until the race catches up with it. So a jump also has to be physically
+    possible: faster than MAX_SPEED_KMH since the last accepted sample is a
+    bad fix, not a decrease.
+    """
+    samples = sorted(set(samples), key=lambda s: s[0])
+    cleaned: list[tuple[datetime, float]] = []
+    best = float("inf")
+    last_ts = None
+    for ts, km_to in samples:
+        if km_to > best:
+            continue
+        if last_ts is not None:
+            # Never divide by a literal zero gap -- see MIN_SPEED_CHECK_SECONDS.
+            # A same-timestamp pair is held to one second's worth of movement,
+            # so ordinary jitter passes and a teleport does not.
+            secs = max((ts - last_ts).total_seconds(), MIN_SPEED_CHECK_SECONDS)
+            if (best - km_to) / (secs / 3600) > MAX_SPEED_KMH:
+                continue
+        best, last_ts = km_to, ts
+        cleaned.append((ts, km_to))
+    return cleaned
+
+
 def leader_track(telemetry_paths) -> list[tuple[datetime, float]]:
     """Merge GPS sources into (timestamp, leader km-to-finish) samples.
 
@@ -188,33 +222,65 @@ def leader_track(telemetry_paths) -> list[tuple[datetime, float]]:
                     continue
                 samples.append((when, km_to))
 
-    # A stale cached response repeats a payload we already have, so identical
-    # (time, position) pairs collapse rather than being counted twice.
-    samples = sorted(set(samples), key=lambda s: s[0])
+    return _clean_track(samples)
 
-    # Distance to the finish only ever decreases -- but "only ever decreases"
-    # on its own is a trap. A single fix reporting half a kilometre too far up
-    # the road is accepted, and then every correct sample behind it is thrown
-    # away for going "backwards", so one bad reading biases the track forward
-    # until the race catches up with it. So a jump also has to be physically
-    # possible: faster than MAX_SPEED_KMH since the last accepted sample is a
-    # bad fix, not a decrease.
-    cleaned: list[tuple[datetime, float]] = []
-    best = float("inf")
-    last_ts = None
-    for ts, km_to in samples:
-        if km_to > best:
+
+def _leader_km_to_finish_from_groups(groups: list[dict] | None) -> float | None:
+    """Smallest remaining distance across every group in one pack-{year}
+    snapshot, in km. Prefers computedRemainingDistance (the platform's own
+    smoothed figure -- consistently a little ahead of the raw one in every
+    sample checked) over remainingDistance when both are present."""
+    vals = []
+    for g in groups or []:
+        d = g.get("computedRemainingDistance")
+        if d is None:
+            d = g.get("remainingDistance")
+        if isinstance(d, (int, float)) and d >= 0:
+            vals.append(d / 1000.0)
+    return min(vals) if vals else None
+
+
+def leader_track_from_groups(groups_paths) -> list[tuple[datetime, float]]:
+    """Fallback leader track from group/pack composition (groups.jsonl)
+    instead of individual-rider GPS -- see build()'s docstring for when this
+    is used instead of leader_track().
+
+    A group already represents 1+ riders the feed itself has clustered and
+    positioned, so unlike individual telemetry there is no cross-rider
+    corroboration step here: the lead group's own reported distance is taken
+    directly. The one real cost against individual telemetry: captured_at is
+    the ONLY timestamp available in groups.jsonl (the feed's own per-payload
+    date is not kept there -- see live_stream.parse_message's `pack-{year}`
+    handling), so every sample carries whatever lag existed between the feed
+    publishing a snapshot and the scraper receiving it -- the same caveat
+    _sample_from_record's docstring makes about telemetry's own captured_at
+    fallback, just with no feed-native alternative to prefer here.
+    """
+    if isinstance(groups_paths, (str, Path)):
+        groups_paths = [groups_paths]
+
+    samples: list[tuple[datetime, float]] = []
+    for path in groups_paths:
+        path = Path(path)
+        if not path.exists():
             continue
-        if last_ts is not None:
-            # Never divide by a literal zero gap -- see MIN_SPEED_CHECK_SECONDS.
-            # A same-timestamp pair is held to one second's worth of movement,
-            # so ordinary jitter passes and a teleport does not.
-            secs = max((ts - last_ts).total_seconds(), MIN_SPEED_CHECK_SECONDS)
-            if (best - km_to) / (secs / 3600) > MAX_SPEED_KMH:
-                continue
-        best, last_ts = km_to, ts
-        cleaned.append((ts, km_to))
-    return cleaned
+        with open(path, encoding="utf-8") as fh:
+            for line in fh:
+                if not line.strip():
+                    continue
+                try:
+                    rec = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if not rec.get("captured_at"):
+                    continue
+                when = _parse_ts(rec["captured_at"])
+                km_to = _leader_km_to_finish_from_groups(rec.get("groups"))
+                if km_to is None:
+                    continue
+                samples.append((when, km_to))
+
+    return _clean_track(samples)
 
 
 def extend_track_to_start(track: list[tuple[datetime, float]],
@@ -327,9 +393,24 @@ def build(stage_dir: Path, telemetry_paths, stage_length_km: float | None = None
     `race_start_utc` and `race_finish_utc` let the profile span the whole stage
     even when GPS came online late or stopped early; the unobserved head and
     tail are marked estimated rather than dropped.
+
+    Falls back to groups.jsonl (pack/group composition) for the leader track
+    when individual-rider telemetry produced nothing -- confirmed the norm
+    so far for the Vuelta, whose telemetryCompetitor SSE bind hasn't fired in
+    any capture yet, unlike pack-{year} (groups), which has. Only a fallback,
+    never a supplement: individual GPS, when present, is corroborated across
+    riders and feed-timestamped, both better than a group's own reported
+    distance -- see leader_track_from_groups's docstring.
     """
     profile = load_profile(stage_dir / "profile.csv")
     track = leader_track(telemetry_paths)
+    track_source = "telemetry" if track else None
+    if not track:
+        groups_paths = sorted(Path(stage_dir).glob("groups*.jsonl"))
+        if groups_paths:
+            track = leader_track_from_groups(groups_paths)
+            if track:
+                track_source = "groups"
     route_len = max((p["km"] for p in profile), default=0)
     track, est_above = extend_track_to_start(track, route_len, race_start_utc)
     track, est_below = extend_track_to_finish(track, race_finish_utc)
@@ -349,5 +430,6 @@ def build(stage_dir: Path, telemetry_paths, stage_length_km: float | None = None
         "leader_first_seen": track[0][0].isoformat(timespec="seconds") if track else None,
         "leader_last_seen": track[-1][0].isoformat(timespec="seconds") if track else None,
         "leader_km_to_finish_range": [round(track[0][1], 2), round(track[-1][1], 2)] if track else None,
+        "leader_track_source": track_source,
         "points": synced,
     }

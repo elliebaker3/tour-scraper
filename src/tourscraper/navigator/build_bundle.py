@@ -205,10 +205,55 @@ def _persons_of_interest(stage_number, year, year_dir, guideposts, markers,
         return None, [], str(e)
 
 
+def publish_full_bundle(bundle: dict, stage_number: int, extension_data_dir: Path,
+                        race: str = "tdf") -> str:
+    """Publish a time-synced bundle to the extension as a "full" entry,
+    superseding any "profile" (lite) placeholder for the same stage.
+
+    Only meaningful once coverage.leader_track_source says the profile
+    actually got a real clock -- e.g. from elevation_sync.build()'s
+    groups.jsonl fallback for a stage with no individual GPS. Silently does
+    nothing otherwise: publishing an all-null-time bundle as "full" would be
+    WORSE than the lite fallback it would replace, since lite calibrates by
+    km-interpolation and full expects a real per-point clock to fit
+    calibration against.
+    """
+    if not bundle.get("coverage", {}).get("profile_points_observed"):
+        return "not published (no observed points -- still time-unsynced)"
+
+    extension_data_dir.mkdir(parents=True, exist_ok=True)
+    prefix = f"{race}-" if race and race != "tdf" else ""
+    fname = f"{prefix}stage-{stage_number:02d}.json"
+    (extension_data_dir / fname).write_text(
+        json.dumps(bundle, ensure_ascii=False, separators=(",", ":")))
+
+    index_path = extension_data_dir / "index.json"
+    index = (json.loads(index_path.read_text(encoding="utf-8"))
+             if index_path.exists() else {"schema": 1, "stages": []})
+    meta = bundle.get("stage", {})
+    dep, arr = meta.get("departure"), meta.get("arrival")
+    entry = {
+        "file": fname, "stage": stage_number, "date": meta.get("date"),
+        "route": f"{dep} → {arr}" if dep and arr else None,
+        "leader_first_utc": bundle["coverage"].get("leader_first_seen_utc"),
+        "leader_last_utc": bundle["coverage"].get("leader_last_seen_utc"),
+        "kind": "full",
+    }
+    if race and race != "tdf":
+        entry["race"] = race
+
+    others = [e for e in index["stages"]
+             if (e.get("race", "tdf"), e["stage"]) != (race, stage_number)]
+    index["stages"] = sorted([*others, entry], key=lambda e: e.get("date") or "")
+    index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return f"published -> {extension_data_dir / fname}"
+
+
 def build(stage_dir: Path, telemetry_paths, year_dir: Path,
           stage_number: int, out_path: Path | None = None,
           fetch_poi: bool = True, racecenter_base: str | None = None,
-          site_base: str | None = None) -> Path:
+          site_base: str | None = None, extension_data_dir: Path | None = None,
+          race: str = "tdf") -> Path:
     meta = stage_meta(year_dir, stage_number)
     length_km = float(meta.get("length_km") or 0) or None
     if not length_km:
@@ -273,6 +318,7 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
             "leader_last_seen_utc": sync["leader_last_seen"],
             "ticker_items": events["ticker_items"],
             "elevation_source": elevation_source,
+            "leader_track_source": sync.get("leader_track_source"),
         },
         "profile": profile,
         "route_markers": markers,
@@ -298,4 +344,8 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
               f"{len(specials)} POI×event marker(s)")
     else:
         print(f"[navigator]   persons of interest: unavailable ({poi_err})")
+
+    if extension_data_dir:
+        print(f"[navigator]   {publish_full_bundle(bundle, stage_number, extension_data_dir, race)}")
+
     return out_path

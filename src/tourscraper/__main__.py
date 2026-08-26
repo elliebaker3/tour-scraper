@@ -163,11 +163,14 @@ def main() -> None:
         for pat in args.telemetry:
             hits = sorted(_glob.glob(str(Path(pat).expanduser())))
             tele.extend(Path(h) for h in hits) if hits else tele.append(Path(pat).expanduser())
+        repo_root = Path(__file__).resolve().parents[2]
         build_navigator(Path(args.stage_dir), tele,
                         cfg.year_dir, args.stage,
                         Path(args.out) if args.out else None,
                         racecenter_base=cfg.base_url.rstrip("/") + "/api",
-                        site_base=cfg.site_base_url)
+                        site_base=cfg.site_base_url,
+                        extension_data_dir=repo_root / "extension" / "data",
+                        race=cfg.race)
     elif args.command == "archive":
         archive_stage(cfg, args.stage, args.date)
     elif args.command == "velowire-profiles":

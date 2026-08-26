@@ -6,6 +6,9 @@
 # the Tour's data/2026 tree.
 
 base_url: "https://racecenter.lavuelta.es"
+# Identifies this race in extension/data/index.json entries and shared
+# calibration keys -- must match a race navigator.js's stageKey() knows.
+race: "vuelta"
 # Main public site (as opposed to the racecenter API host above) -- confirmed
 # 2026-08-22: lavuelta.es/en/rankings/stage-N carries the same
 # `data-ajax-stack` embed (itg/ipg/img/ijg/etg keys) as letour.fr's

@@ -37,6 +37,12 @@ class Config:
     # for the Vuelta -- backfill.py's other source, unrelated to the ASO
     # platform above (PCS is third-party and covers every race).
     pcs_race_slug: str = "race/tour-de-france"
+    # Identifies this race in extension/data/index.json entries and shared
+    # calibration keys (navigator.js's stageKey()) -- "tdf" is the pre-
+    # existing, un-prefixed default every real entry before this field
+    # existed already means; anything else must be a race navigator.js
+    # actually knows (see its stageKey()/raceStageKey()).
+    race: str = "tdf"
     year: int = 2026
     data_dir: Path = Path("data")
     user_agent: str = (

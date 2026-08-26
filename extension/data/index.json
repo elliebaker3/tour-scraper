@@ -185,12 +185,14 @@
       "kind": "profile"
     },
     {
-      "file": "vuelta-profile-stage-04.json",
+      "file": "vuelta-stage-04.json",
       "stage": 4,
-      "race": "vuelta",
       "date": "2026-08-25",
       "route": "Andorra la Vella → Andorra la Vella",
-      "kind": "profile"
+      "leader_first_utc": "2026-08-25T12:53:10+00:00",
+      "leader_last_utc": "2026-08-25T13:55:35+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-05.json",
