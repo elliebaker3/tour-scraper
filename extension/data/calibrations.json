@@ -776,6 +776,39 @@
         "ingested_at": "2026-08-26T04:24:23+00:00",
         "issue": 4
       }
+    ],
+    "stage-14|www.peacocktv.com": [
+      {
+        "schema": 1,
+        "stage": 14,
+        "date": "2026-07-18",
+        "site": "www.peacocktv.com",
+        "duration_sec": 12000,
+        "airing_ms": null,
+        "anchors": [
+          {
+            "tUtcMs": 1787745000000,
+            "videoSec": 1000,
+            "kind": "kmtogo",
+            "km": 50,
+            "kmto": 50.5
+          },
+          {
+            "tUtcMs": 1787748000000,
+            "videoSec": 4000,
+            "kind": "kmtogo",
+            "km": 10,
+            "kmto": 10.5
+          }
+        ],
+        "cal": null,
+        "ad_breaks": [],
+        "favourites": [],
+        "saved_at": "2026-08-26T00:00:00.000Z",
+        "extension_version": "0.3.0",
+        "ingested_at": "2026-08-26T04:58:43.492Z",
+        "via": "worker"
+      }
     ]
   }
 }
