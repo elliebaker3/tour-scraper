@@ -776,6 +776,59 @@
         "ingested_at": "2026-08-26T04:24:23+00:00",
         "issue": 4
       }
+    ],
+    "stage-4|www.peacocktv.com": [
+      {
+        "schema": 1,
+        "stage": 4,
+        "date": "2026-08-25",
+        "site": "www.peacocktv.com",
+        "duration_sec": 12916.5,
+        "airing_ms": 1787661000000,
+        "anchors": [
+          {
+            "tUtcMs": 1787662704000,
+            "videoSec": 1745.666778,
+            "kind": "kmtogo",
+            "km": 101.6,
+            "kmto": 101.6,
+            "label": "101.6 km to go"
+          },
+          {
+            "tUtcMs": 1787664671000,
+            "videoSec": 4013.195074,
+            "kind": "kmtogo",
+            "km": 84,
+            "label": "84 km to go"
+          }
+        ],
+        "cal": {
+          "refMs": 1787662704000,
+          "offsetSec": 1745.6667780000002,
+          "rate": 1.15278510218607
+        },
+        "ad_breaks": [
+          661,
+          1634,
+          2397,
+          2824,
+          3526,
+          4137,
+          4575,
+          5037,
+          6244,
+          6803,
+          7383,
+          7851,
+          8407,
+          9957
+        ],
+        "favourites": [],
+        "saved_at": "2026-08-26T05:01:51.492Z",
+        "extension_version": "0.3.0",
+        "ingested_at": "2026-08-26T05:01:51.630Z",
+        "via": "worker"
+      }
     ]
   }
 }
