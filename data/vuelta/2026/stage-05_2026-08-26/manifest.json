@@ -22,5 +22,23 @@
     "kind": "profile",
     "source": "https://racecenter.lavuelta.es/profils/2026/profile-05-tiny-9d31c21df30a55b39f07a22017edeb77.csv",
     "via": "autodiscover"
+  },
+  {
+    "recorded_at": "2026-08-26T11:43:25.706+00:00",
+    "kind": "live-stream",
+    "action": "start"
+  },
+  {
+    "recorded_at": "2026-08-26T11:43:25.707+00:00",
+    "kind": "poll",
+    "endpoints": [
+      "publication",
+      "insights",
+      "pack",
+      "telemetry",
+      "flashInfoLive",
+      "checkpointList",
+      "rankingType"
+    ]
   }
 ]
