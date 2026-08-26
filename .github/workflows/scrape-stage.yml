@@ -269,3 +269,68 @@ jobs:
       stage: ${{ needs.determine-stage.outputs.number }}
       max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
       part: "5"
+
+  # Turns the raw capture scrape-1..5 committed into events.parsed.json
+  # (ticker classified into crash/breakaway/etc, plus persons-of-interest
+  # tagging) and stage_dir/navigator.json (time-synced elevation + those
+  # events). This was never automated before -- previously a manual step,
+  # which is why events.parsed.json only ever existed for stage 14 (every
+  # other stage is captured in chunks, and parse_publication()/load_ticker()
+  # both hardcoded polls/publication.jsonl rather than the
+  # polls/publication.part-N.jsonl a chunked capture actually writes; both
+  # now glob for either). Both steps are best-effort -- a stage the runner
+  # never got clean telemetry for still gets its events parsed even though
+  # navigator.json can't be time-synced.
+  postprocess:
+    needs: [determine-stage, scrape-5]
+    if: always() && needs.determine-stage.outputs.number != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -e .
+
+      - name: Build events + navigator bundle for today's stage
+        run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+
+          STAGE_NUM="${{ needs.determine-stage.outputs.number }}"
+          STAGE_DIR=$(ls -d data/2026/stage-$(printf '%02d' "$STAGE_NUM")_* 2>/dev/null | head -1)
+          if [ -z "$STAGE_DIR" ]; then
+            echo "::warning::no stage directory found for stage $STAGE_NUM -- nothing to post-process"
+            exit 0
+          fi
+          echo "stage dir: $STAGE_DIR"
+
+          python -m tourscraper events "$STAGE_DIR" \
+            || echo "::warning::events parsing failed (no publication capture?)"
+
+          python -m tourscraper navigator \
+            --stage "$STAGE_NUM" --stage-dir "$STAGE_DIR" \
+            --telemetry "$STAGE_DIR/telemetry.jsonl" \
+            --telemetry "$STAGE_DIR/telemetry.part-*.jsonl" \
+            || echo "::warning::navigator bundle failed (likely no profile.csv or no length in stages.json)"
+
+      - name: Commit results
+        run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/2026/
+          git commit -m "navigator: stage ${{ needs.determine-stage.outputs.number }} events + bundle" \
+            || echo "nothing to commit"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
+            echo "push attempt $i failed (concurrent write?), retrying..."
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done || echo "push failed after retries"
