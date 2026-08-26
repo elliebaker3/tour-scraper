@@ -30,16 +30,38 @@ def _clean(html_text: str) -> str:
     return " ".join(text.split())
 
 
+def _newest_snapshot(stage_dir: Path, name: str) -> dict:
+    """The single freshest snapshot across every polls/{name}*.jsonl file.
+
+    A chunked capture (scrape-chunk.yml's --part) writes polls/{name}.part-
+    N.jsonl per chunk instead of one polls/{name}.jsonl -- this was silently
+    unhandled before (only stage 14's un-chunked capture ever parsed
+    successfully; every chunk-captured stage since, Tour or Vuelta, raised
+    FileNotFoundError here). Each part is still individually cumulative (the
+    feed always returns everything published so far), so the snapshot with
+    the latest captured_at, across every part, is simply the most complete
+    one -- whichever file it happens to be in.
+    """
+    paths = sorted(stage_dir.glob(f"polls/{name}*.jsonl"))
+    if not paths:
+        raise FileNotFoundError(f"no {name} capture under {stage_dir / 'polls'}")
+    newest = None
+    for path in paths:
+        with open(path, encoding="utf-8") as fh:
+            for line in fh:
+                if not line.strip():
+                    continue
+                rec = json.loads(line)
+                if newest is None or rec.get("captured_at", "") > newest.get("captured_at", ""):
+                    newest = rec
+    if newest is None:
+        raise FileNotFoundError(f"no usable {name} snapshot under {stage_dir / 'polls'}")
+    return newest
+
+
 def parse_publication(stage_dir: Path) -> list[dict]:
     """Return all events from the newest snapshot, oldest first."""
-    src = stage_dir / "polls" / "publication.jsonl"
-    if not src.exists():
-        raise FileNotFoundError(f"no publication capture at {src}")
-    last = None
-    with open(src, encoding="utf-8") as fh:
-        for line in fh:
-            if line.strip():
-                last = json.loads(line)
+    last = _newest_snapshot(stage_dir, "publication")
     items = json.loads(last["body"])
     events = []
     seen_ids = set()

@@ -88,18 +88,28 @@ def _has_media(item: dict) -> bool:
 
 
 def load_ticker(stage_dir: Path) -> list[dict]:
-    """Newest publication snapshot holds the whole stage (the feed is cumulative)."""
-    path = stage_dir / "polls" / "publication.jsonl"
-    if not path.exists():
+    """Newest publication snapshot holds the whole stage (the feed is cumulative).
+
+    A chunked capture (scrape-chunk.yml's --part) writes polls/publication.
+    part-N.jsonl per chunk instead of one polls/publication.jsonl -- glob for
+    both rather than only the un-chunked name, and take the snapshot with the
+    latest captured_at across every part (each is individually cumulative, so
+    that one is simply the most complete)."""
+    paths = sorted(stage_dir.glob("polls/publication*.jsonl"))
+    if not paths:
         return []
     last = None
-    with open(path, encoding="utf-8") as fh:
-        for line in fh:
-            if line.strip():
-                last = line
+    for path in paths:
+        with open(path, encoding="utf-8") as fh:
+            for line in fh:
+                if not line.strip():
+                    continue
+                rec = json.loads(line)
+                if last is None or rec.get("captured_at", "") > last.get("captured_at", ""):
+                    last = rec
     if not last:
         return []
-    items = json.loads(json.loads(last)["body"])
+    items = json.loads(last["body"])
     out = []
     for it in items:
         pub = it.get("publicationAt")
