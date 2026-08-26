@@ -735,6 +735,47 @@
         "ingested_at": "2026-08-02T21:16:41.765Z",
         "via": "worker"
       }
+    ],
+    "stage-vuelta-4|www.peacocktv.com": [
+      {
+        "schema": 1,
+        "stage": 4,
+        "race": "vuelta",
+        "date": "2026-08-25",
+        "site": "www.peacocktv.com",
+        "duration_sec": 12901.5,
+        "airing_ms": null,
+        "anchors": [
+          {
+            "videoSec": 1745.666778,
+            "kind": "kmtogo",
+            "km": 101.6,
+            "kmto": 101.6,
+            "label": "101.6 km to go"
+          }
+        ],
+        "cal": null,
+        "ad_breaks": [
+          707,
+          2412,
+          2831,
+          3521,
+          4121,
+          4551,
+          5004,
+          6189,
+          6738,
+          7307,
+          7767,
+          8313,
+          9835
+        ],
+        "favourites": [],
+        "saved_at": "2026-08-26T04:23:25.329Z",
+        "extension_version": "0.3.0",
+        "ingested_at": "2026-08-26T04:24:23+00:00",
+        "issue": 4
+      }
     ]
   }
 }
