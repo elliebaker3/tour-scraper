@@ -2577,15 +2577,18 @@
     "sex": "M",
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/208/28065/0:0,400:400-70-0-70/f0692",
     "_id": "5be858513f3668c16a011594df3ec802e80639c40d3c5d12a3ccf1461351f8ad",
+    "_updatedAt": 1787751449021,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-LOI",
-    "_updatedAt": 1787313610685,
     "_parent": "team-2026:4c200ea3378451eaa66287fb5ee6d51b45db2ee34127c8f894741da997d65cd9",
-    "_key": "_id",
     "_virtual": "LOI-208-VAN SINTMAARTENSDIJK",
     "$team": "team-2026:4c200ea3378451eaa66287fb5ee6d51b45db2ee34127c8f894741da997d65cd9",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 5,
+      "code": -1
     }
   },
   {
@@ -2877,15 +2880,18 @@
     "birthdate": "2005-07-27T00:00:00+02:00",
     "idUCI": "ESP20050727",
     "_id": "3ca5d80c6fb36daae23b86a58e9789e4ee739025900f26d9dcda7fb81589c1d9",
+    "_updatedAt": 1787836904732,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-EFE",
-    "_updatedAt": 1787318963111,
     "_parent": "team-2026:aed772539996a954fead9dc38cd26e34c194655a3b67150af79dbad3dc59c615",
-    "_key": "_id",
     "_virtual": "EFE-163-BELOKI",
     "$team": "team-2026:aed772539996a954fead9dc38cd26e34c194655a3b67150af79dbad3dc59c615",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 6,
+      "code": -1
     }
   },
   {
@@ -4309,15 +4315,18 @@
     "sex": "M",
     "bib": 67,
     "_id": "b912c8f78a8b2ad5a3cbdb7f94cba08856746deae8576affa47c171849e1e975",
+    "_updatedAt": 1787833871479,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-NCI",
-    "_updatedAt": 1787313588396,
     "_parent": "team-2026:c4ac8146aa5681e88e9bfd663965e8551ed1aff42fb93e1a81ca5da6982d5e96",
-    "_key": "_id",
     "_virtual": "NCI-67-TARLING",
     "$team": "team-2026:c4ac8146aa5681e88e9bfd663965e8551ed1aff42fb93e1a81ca5da6982d5e96",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 6,
+      "code": -1
     }
   },
   {
@@ -4811,15 +4820,18 @@
     "sex": "M",
     "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/28/27895/0:0,400:400-0-0-70/fa270",
     "_id": "80109216e1050f13e5f2c045548e953b1a8fef02e5408ac47e3193f140f2b2f0",
+    "_updatedAt": 1787744657843,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-MOV",
-    "_updatedAt": 1787313577412,
     "_parent": "team-2026:c801b5da34b7e03b8b92a4aee7b7da9f8a44994645c3a95ab6c45d90d8cfd34f",
-    "_key": "_id",
     "_virtual": "MOV-28-UIJTDEBROEKS",
     "$team": "team-2026:c801b5da34b7e03b8b92a4aee7b7da9f8a44994645c3a95ab6c45d90d8cfd34f",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 5,
+      "code": -4
     }
   },
   {
