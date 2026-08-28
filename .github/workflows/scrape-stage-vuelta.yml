@@ -3,108 +3,58 @@
 # /api/team-2026, /live-stream and every poll endpoint all answer on
 # racecenter.lavuelta.es with the identical shape and SSE bind-name
 # convention as racecenter.letour.fr -- this is the same vendor, rebranded),
-# so this workflow reuses the exact same two-job design (see that file's
-# header for the full rationale) pointed at a different host and a separate
-# data tree (`data/vuelta`, via config/config-vuelta.yaml) so a run here can
-# never collide with a Tour capture in data/2026.
+# so this workflow reuses the exact same scrape-chunk.yml chaining as the
+# Tour's, pointed at a different host and a separate data tree (`data/vuelta`,
+# via config/config-vuelta.yaml) so a run here can never collide with a Tour
+# capture in data/2026.
 #
-# Two differences from the Tour's workflow:
-#   - max_hours is DERIVED per stage from stages.json's own startTime/endTime
-#     (scheduled duration + 45min margin, clamped to [2.5h, 6h]) rather than
-#     a flat default. The Tour's stages are all similar-length road stages,
-#     so one constant works there; the Vuelta's vary from a 9.4km stage 1 to
-#     a 214.5km stage 2, and a flat 5.5h would either waste runner time on
-#     the short ones or cut the finish off the longest (stage 19 needs ~6h).
-#   - radio_stream_url is left BLANK in config-vuelta.yaml: unlike the Tour's
-#     L'Équipe radio (published statically in /api/event), the Vuelta's
-#     /api/event carried no radioUrl as of 2026-08-22 and `autodiscover`
-#     found no confident candidate either. Radio capture will simply no-op
-#     until one is found and added -- everything else is unaffected, since
-#     record_radio degrades gracefully with no URL configured.
+# Trigger design is DELIBERATELY DIFFERENT from the Tour's, after real
+# failures: stage 6 (2026-08-27) fired ~9 hours late, and stage 7
+# (2026-08-28) never fired at all -- both silent (the workflow reported
+# healthy; nothing showed a red X), both only noticed days later when the
+# displayed data turned out incomplete or missing outright. The Tour's
+# scrape-stage.yml uses one precise cron per stage (start-90min discover,
+# start-25min scrape); that is a SINGLE point of failure against exactly the
+# GitHub Actions behaviour observed here -- `schedule` events are documented
+# to be delayed or dropped under platform load, worse than the "occasionally
+# tens of minutes late" this repo's own comments used to assume.
 #
-# KNOWN GAP: stage 1's own discover/scrape crons (2026-08-22, 12:47 / 13:52
-# UTC) fall before this workflow can plausibly be merged and live -- GitHub
-# Actions does not backfill a schedule that already passed. If stage 1 is
-# still worth capturing when this lands, run it by hand:
-#   python -m tourscraper --config config/config-vuelta.yaml stage --stage 1 --max-hours 4
-# or dispatch this workflow manually with stage=1. Every stage from 2 onward
-# has a schedule below same as normal.
+# So instead of one precise trigger per stage, this SWEEPS every 30 minutes
+# across the whole plausible race window and figures out what to do from
+# `determine`'s comparison of now vs. the day's actual stage schedule --
+# meaning a single dropped or delayed tick costs at most 30 minutes' margin,
+# not a whole stage. Idempotency (so the sweep doesn't restart an
+# already-running or already-finished capture) is a plain existence check on
+# that stage's own dated folder -- reliable now that stage_folder_date()
+# (see storage.py) makes every chunk of one stage land in ONE folder no
+# matter how late it runs, instead of splitting across two dates the way
+# stage 6's post-midnight chunk did before that existed.
+#
+# max_hours is still DERIVED per stage from stages.json's own
+# startTime/endTime (scheduled duration + 45min margin, clamped to [2.5h,
+# 6h]) rather than a flat default -- the Vuelta's stages vary from a 9.4km
+# stage 1 to a 214.5km stage 2, and a flat 5.5h would either waste runner
+# time on the short ones or cut the finish off the longest.
+#
+# radio_stream_url is left BLANK in config-vuelta.yaml: unlike the Tour's
+# L'Équipe radio (published statically in /api/event), the Vuelta's
+# /api/event carried no radioUrl as of 2026-08-22 and `autodiscover` found no
+# confident candidate either. Radio capture will simply no-op until one is
+# found and added -- everything else is unaffected, since record_radio
+# degrades gracefully with no URL configured.
 
 name: scrape-stage-vuelta
 
 on:
-  # EXPLICIT PER-STAGE SCHEDULE, all 21 -- see data/vuelta/2026/reference/
-  # stages.json (run `bootstrap --config config/config-vuelta.yaml` to
-  # refresh it if the route changes mid-race, same as the Tour's). Times are
-  # UTC, computed as startTime(Europe/Paris, -2h) minus 90min (discover) /
-  # 25min (scrape). Format: "MIN HOUR DAY MONTH *".
+  # Every 30 minutes, 06:00-21:00 UTC -- wide enough to cover every stage
+  # start time seen this Vuelta (09:xx-14:xx UTC) with generous margin on
+  # both sides, without running all night for no reason.
   schedule:
-    # Stage 2 - 2026-08-23
-    - cron: "12 9 23 8 *"    # discover
-    - cron: "17 10 23 8 *"   # scrape
-    # Stage 3 - 2026-08-24
-    - cron: "51 9 24 8 *"    # discover
-    - cron: "56 10 24 8 *"   # scrape
-    # Stage 4 - 2026-08-25
-    - cron: "19 11 25 8 *"   # discover
-    - cron: "24 12 25 8 *"   # scrape
-    # Stage 5 - 2026-08-26
-    - cron: "4 10 26 8 *"    # discover
-    - cron: "9 11 26 8 *"    # scrape
-    # Stage 6 - 2026-08-27
-    - cron: "41 9 27 8 *"    # discover
-    - cron: "46 10 27 8 *"   # scrape
-    # Stage 7 - 2026-08-28
-    - cron: "10 10 28 8 *"   # discover
-    - cron: "15 11 28 8 *"   # scrape
-    # Stage 8 - 2026-08-29
-    - cron: "12 10 29 8 *"   # discover
-    - cron: "17 11 29 8 *"   # scrape
-    # Stage 9 - 2026-08-30
-    - cron: "56 8 30 8 *"    # discover
-    - cron: "1 10 30 8 *"    # scrape
-    # (rest day 2026-08-31 - no schedule)
-    # Stage 10 - 2026-09-01
-    - cron: "30 9 1 9 *"     # discover
-    - cron: "35 10 1 9 *"    # scrape
-    # Stage 11 - 2026-09-02
-    - cron: "38 10 2 9 *"    # discover
-    - cron: "43 11 2 9 *"    # scrape
-    # Stage 12 - 2026-09-03
-    - cron: "37 9 3 9 *"     # discover
-    - cron: "42 10 3 9 *"    # scrape
-    # Stage 13 - 2026-09-04
-    - cron: "11 9 4 9 *"     # discover
-    - cron: "16 10 4 9 *"    # scrape
-    # Stage 14 - 2026-09-05
-    - cron: "3 10 5 9 *"     # discover
-    - cron: "8 11 5 9 *"     # scrape
-    # Stage 15 - 2026-09-06
-    - cron: "16 9 6 9 *"     # discover
-    - cron: "21 10 6 9 *"    # scrape
-    # (rest day 2026-09-07 - no schedule)
-    # Stage 16 - 2026-09-08
-    - cron: "48 9 8 9 *"     # discover
-    - cron: "53 10 8 9 *"    # scrape
-    # Stage 17 - 2026-09-09
-    - cron: "54 9 9 9 *"     # discover
-    - cron: "59 10 9 9 *"    # scrape
-    # Stage 18 - 2026-09-10
-    - cron: "36 10 10 9 *"   # discover
-    - cron: "41 11 10 9 *"   # scrape
-    # Stage 19 - 2026-09-11
-    - cron: "36 8 11 9 *"    # discover
-    - cron: "41 9 11 9 *"    # scrape
-    # Stage 20 - 2026-09-12
-    - cron: "6 9 12 9 *"     # discover
-    - cron: "11 10 12 9 *"   # scrape
-    # Stage 21 - 2026-09-13
-    - cron: "53 12 13 9 *"   # discover
-    - cron: "58 13 13 9 *"   # scrape
+    - cron: "0,30 6-21 * * *"
   workflow_dispatch:
     inputs:
       stage:
-        description: "Stage number (e.g. 14); also how you'd manually run stage 1"
+        description: "Stage number (e.g. 14) -- forces this stage regardless of today's date, and skips the idempotency check"
         required: false
       max_hours:
         description: "Hours to record (blank = derive from the stage's scheduled window)"
@@ -115,29 +65,112 @@ on:
         default: true
 
 jobs:
+  determine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      do_discover: ${{ steps.decide.outputs.do_discover }}
+      do_scrape: ${{ steps.decide.outputs.do_scrape }}
+      number: ${{ steps.decide.outputs.number }}
+      chunk_hours: ${{ steps.decide.outputs.chunk_hours }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -e .
+
+      - name: Decide whether to discover/scrape, and which stage
+        id: decide
+        env:
+          MANUAL_STAGE: ${{ github.event.inputs.stage }}
+          MANUAL_HOURS: ${{ github.event.inputs.max_hours }}
+          IS_DISPATCH: ${{ github.event_name == 'workflow_dispatch' && 'true' || 'false' }}
+          RUN_DISCOVER_INPUT: ${{ github.event.inputs.run_discover }}
+        run: |
+          python -m tourscraper --config config/config-vuelta.yaml bootstrap
+          python3 -c "
+          import datetime, os
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          import json
+
+          data = json.loads(Path('data/vuelta/2026/reference/stages.json').read_text())
+          now = datetime.datetime.now(datetime.timezone.utc)
+          today = now.strftime('%Y-%m-%d')
+          is_dispatch = os.environ.get('IS_DISPATCH') == 'true'
+          manual_stage = (os.environ.get('MANUAL_STAGE') or '').strip()
+
+          if manual_stage:
+              s = next((x for x in data if x.get('stage') == int(manual_stage)), None)
+          else:
+              matches = [x for x in data if str(x.get('date', '')).startswith(today)]
+              s = matches[0] if matches else None
+
+          out = {'do_discover': 'false', 'do_scrape': 'false', 'number': '', 'chunk_hours': ''}
+          if s:
+              n = s['stage']
+              date_str = str(s['date'])[:10]
+              tz = ZoneInfo(s.get('timezone') or 'UTC')
+              start = datetime.datetime.fromisoformat(f\"{date_str}T{s['startTime']}\").replace(tzinfo=tz).astimezone(datetime.timezone.utc)
+              end = datetime.datetime.fromisoformat(f\"{date_str}T{s['endTime']}\").replace(tzinfo=tz).astimezone(datetime.timezone.utc)
+              sched_h = (end - start).total_seconds() / 3600
+              total_hours = min(6.0, max(2.5, sched_h + 0.75))
+              if manual_stage and os.environ.get('MANUAL_HOURS'):
+                  total_hours = float(os.environ['MANUAL_HOURS'])
+
+              out['number'] = str(n)
+              out['chunk_hours'] = str(round(total_hours / 5, 3))
+
+              if is_dispatch:
+                  out['do_discover'] = 'true' if os.environ.get('RUN_DISCOVER_INPUT') == 'true' else 'false'
+                  out['do_scrape'] = 'true'
+              else:
+                  # Discover window: from 100min before start to 15min after --
+                  # cheap and idempotent server-side, so a handful of re-runs
+                  # across this window (the 30min sweep ticks 3-4 times in it)
+                  # cost little and only improve the odds of catching the
+                  # profile CSV / radio URL before the stage needs them.
+                  if start - datetime.timedelta(minutes=100) <= now <= start + datetime.timedelta(minutes=15):
+                      out['do_discover'] = 'true'
+
+                  # Scrape window: from 30min before start through the whole
+                  # scheduled capture budget. Only fires once -- guarded by
+                  # whether a REAL capture already started for this stage's
+                  # own dated folder (which stage_folder_date() in storage.py
+                  # guarantees every chunk of this stage writes into, however
+                  # late it runs). Checking the manifest merely EXISTING is
+                  # not enough: fetch_profiles()/autodiscover's saved profile
+                  # CSV, and archive/backfill's salvage runs, both write a
+                  # manifest entry into the same folder without ever starting
+                  # live/poll capture -- caught locally before this went live,
+                  # since it would have permanently blocked scraping any
+                  # stage discover already touched or a salvage ran against.
+                  stage_dir = Path('data/vuelta/2026') / f'stage-{n:02d}_{date_str}'
+                  manifest_path = stage_dir / 'manifest.json'
+                  already_started = False
+                  if manifest_path.exists():
+                      try:
+                          entries = json.loads(manifest_path.read_text())
+                          already_started = any(e.get('kind') in ('live-stream', 'poll', 'radio') for e in entries)
+                      except (json.JSONDecodeError, TypeError):
+                          already_started = False
+                  if not already_started and start - datetime.timedelta(minutes=30) <= now <= start + datetime.timedelta(hours=total_hours):
+                      out['do_scrape'] = 'true'
+
+          gh_out = os.environ['GITHUB_OUTPUT']
+          with open(gh_out, 'a') as f:
+              for k, v in out.items():
+                  f.write(f'{k}={v}\n')
+          print('decision:', out)
+          "
+
   discover:
-    if: >-
-      github.event_name == 'workflow_dispatch' && inputs.run_discover ||
-      github.event.schedule == '12 9 23 8 *' ||
-      github.event.schedule == '51 9 24 8 *' ||
-      github.event.schedule == '19 11 25 8 *' ||
-      github.event.schedule == '4 10 26 8 *' ||
-      github.event.schedule == '41 9 27 8 *' ||
-      github.event.schedule == '10 10 28 8 *' ||
-      github.event.schedule == '12 10 29 8 *' ||
-      github.event.schedule == '56 8 30 8 *' ||
-      github.event.schedule == '30 9 1 9 *' ||
-      github.event.schedule == '38 10 2 9 *' ||
-      github.event.schedule == '37 9 3 9 *' ||
-      github.event.schedule == '11 9 4 9 *' ||
-      github.event.schedule == '3 10 5 9 *' ||
-      github.event.schedule == '16 9 6 9 *' ||
-      github.event.schedule == '48 9 8 9 *' ||
-      github.event.schedule == '54 9 9 9 *' ||
-      github.event.schedule == '36 10 10 9 *' ||
-      github.event.schedule == '36 8 11 9 *' ||
-      github.event.schedule == '6 9 12 9 *' ||
-      github.event.schedule == '53 12 13 9 *'
+    needs: determine
+    if: needs.determine.outputs.do_discover == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -178,164 +211,81 @@ jobs:
           path: data/vuelta/*/reference/autodiscover-endpoints.json
           retention-days: 30
 
-  determine-stage:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      github.event.schedule == '17 10 23 8 *' ||
-      github.event.schedule == '56 10 24 8 *' ||
-      github.event.schedule == '24 12 25 8 *' ||
-      github.event.schedule == '9 11 26 8 *' ||
-      github.event.schedule == '46 10 27 8 *' ||
-      github.event.schedule == '15 11 28 8 *' ||
-      github.event.schedule == '17 11 29 8 *' ||
-      github.event.schedule == '1 10 30 8 *' ||
-      github.event.schedule == '35 10 1 9 *' ||
-      github.event.schedule == '43 11 2 9 *' ||
-      github.event.schedule == '42 10 3 9 *' ||
-      github.event.schedule == '16 10 4 9 *' ||
-      github.event.schedule == '8 11 5 9 *' ||
-      github.event.schedule == '21 10 6 9 *' ||
-      github.event.schedule == '53 10 8 9 *' ||
-      github.event.schedule == '59 10 9 9 *' ||
-      github.event.schedule == '41 11 10 9 *' ||
-      github.event.schedule == '41 9 11 9 *' ||
-      github.event.schedule == '11 10 12 9 *' ||
-      github.event.schedule == '58 13 13 9 *'
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    outputs:
-      number: ${{ steps.stage.outputs.number }}
-      chunk_hours: ${{ steps.stage.outputs.chunk_hours }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install
-        run: pip install -e .
-
-      - name: Determine today's stage number and per-chunk hours
-        id: stage
-        run: |
-          python -m tourscraper --config config/config-vuelta.yaml bootstrap
-          MANUAL="${{ github.event.inputs.stage }}"
-          if [ -n "$MANUAL" ]; then
-            STAGE_NUM="$MANUAL"
-          else
-            STAGE_NUM=$(python3 -c "
-          import json, datetime
-          data = json.load(open('data/vuelta/2026/reference/stages.json'))
-          today = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d')
-          matches = [s for s in data if str(s.get('date','')).startswith(today)]
-          print(matches[0]['stage'] if matches else '')
-          ")
-          fi
-          if [ -z "$STAGE_NUM" ]; then
-            echo "::error::no stage in data/vuelta/2026/reference/stages.json matches today's date ($(date -u +%F)) -- pass ?stage= manually via workflow_dispatch"
-            exit 1
-          fi
-          echo "number=$STAGE_NUM" >> "$GITHUB_OUTPUT"
-
-          MANUAL_HOURS="${{ github.event.inputs.max_hours }}"
-          if [ -n "$MANUAL_HOURS" ]; then
-            TOTAL="$MANUAL_HOURS"
-          else
-            # Scheduled window (endTime - startTime) + 45min margin, clamped
-            # to [2.5h, 6h] -- see this file's header for why a flat default
-            # doesn't fit a race whose stages run 9.4km to 214.5km.
-            TOTAL=$(python3 -c "
-          import json
-          data = json.load(open('data/vuelta/2026/reference/stages.json'))
-          n = int('$STAGE_NUM')
-          s = next(s for s in data if s.get('stage') == n)
-          sh, sm, _ = (int(x) for x in s['startTime'].split(':'))
-          eh, em, _ = (int(x) for x in s['endTime'].split(':'))
-          sched_h = ((eh * 60 + em) - (sh * 60 + sm)) / 60
-          print(round(min(6.0, max(2.5, sched_h + 0.75)), 2))
-          ")
-          fi
-          echo "chunk_hours=$(python3 -c "print(round(float('$TOTAL') / 5, 3))")" >> "$GITHUB_OUTPUT"
-
   scrape-1:
-    needs: determine-stage
-    if: needs.determine-stage.outputs.number != ''
+    needs: determine
+    if: needs.determine.outputs.do_scrape == 'true'
     uses: ./.github/workflows/scrape-chunk.yml
     permissions:
       contents: write
     secrets: inherit
     with:
-      stage: ${{ needs.determine-stage.outputs.number }}
-      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      stage: ${{ needs.determine.outputs.number }}
+      max_hours: ${{ needs.determine.outputs.chunk_hours }}
       part: "1"
       config: "config/config-vuelta.yaml"
 
   scrape-2:
-    needs: [determine-stage, scrape-1]
-    if: always() && needs.determine-stage.outputs.number != ''
+    needs: [determine, scrape-1]
+    if: always() && needs.determine.outputs.do_scrape == 'true'
     uses: ./.github/workflows/scrape-chunk.yml
     permissions:
       contents: write
     secrets: inherit
     with:
-      stage: ${{ needs.determine-stage.outputs.number }}
-      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      stage: ${{ needs.determine.outputs.number }}
+      max_hours: ${{ needs.determine.outputs.chunk_hours }}
       part: "2"
       config: "config/config-vuelta.yaml"
 
   scrape-3:
-    needs: [determine-stage, scrape-2]
-    if: always() && needs.determine-stage.outputs.number != ''
+    needs: [determine, scrape-2]
+    if: always() && needs.determine.outputs.do_scrape == 'true'
     uses: ./.github/workflows/scrape-chunk.yml
     permissions:
       contents: write
     secrets: inherit
     with:
-      stage: ${{ needs.determine-stage.outputs.number }}
-      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      stage: ${{ needs.determine.outputs.number }}
+      max_hours: ${{ needs.determine.outputs.chunk_hours }}
       part: "3"
       config: "config/config-vuelta.yaml"
 
   scrape-4:
-    needs: [determine-stage, scrape-3]
-    if: always() && needs.determine-stage.outputs.number != ''
+    needs: [determine, scrape-3]
+    if: always() && needs.determine.outputs.do_scrape == 'true'
     uses: ./.github/workflows/scrape-chunk.yml
     permissions:
       contents: write
     secrets: inherit
     with:
-      stage: ${{ needs.determine-stage.outputs.number }}
-      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      stage: ${{ needs.determine.outputs.number }}
+      max_hours: ${{ needs.determine.outputs.chunk_hours }}
       part: "4"
       config: "config/config-vuelta.yaml"
 
   scrape-5:
-    needs: [determine-stage, scrape-4]
-    if: always() && needs.determine-stage.outputs.number != ''
+    needs: [determine, scrape-4]
+    if: always() && needs.determine.outputs.do_scrape == 'true'
     uses: ./.github/workflows/scrape-chunk.yml
     permissions:
       contents: write
     secrets: inherit
     with:
-      stage: ${{ needs.determine-stage.outputs.number }}
-      max_hours: ${{ needs.determine-stage.outputs.chunk_hours }}
+      stage: ${{ needs.determine.outputs.number }}
+      max_hours: ${{ needs.determine.outputs.chunk_hours }}
       part: "5"
       config: "config/config-vuelta.yaml"
 
   # Turns the raw capture scrape-1..5 committed into events.parsed.json
   # (ticker classified into crash/breakaway/etc, plus persons-of-interest
   # tagging) and stage_dir/navigator.json (time-synced elevation + those
-  # events, when there's telemetry to sync against). Runs after every
-  # scrape-N chunk, succeeded or not, on whatever got committed. Both steps
-  # are best-effort: a stage with no live telemetry (confirmed the norm so
-  # far -- the Vuelta's telemetryCompetitor SSE bind hasn't fired in any
-  # capture yet) still gets its events parsed even though navigator.json
-  # can't be time-synced, which is exactly what --stage-dir alone (no
-  # --telemetry match) degrades to rather than failing outright.
+  # events, when there's telemetry -- or, failing that, groups.jsonl -- to
+  # sync against; see elevation_sync.py). Both steps are best-effort: a stage
+  # with no usable track still gets its events parsed even though
+  # navigator.json can't be time-synced.
   postprocess:
-    needs: [determine-stage, scrape-5]
-    if: always() && needs.determine-stage.outputs.number != ''
+    needs: [determine, scrape-5]
+    if: always() && needs.determine.outputs.do_scrape == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -356,7 +306,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git pull --rebase origin "${GITHUB_REF_NAME}"
 
-          STAGE_NUM="${{ needs.determine-stage.outputs.number }}"
+          STAGE_NUM="${{ needs.determine.outputs.number }}"
           STAGE_DIR=$(ls -d data/vuelta/2026/stage-$(printf '%02d' "$STAGE_NUM")_* 2>/dev/null | head -1)
           if [ -z "$STAGE_DIR" ]; then
             echo "::warning::no stage directory found for stage $STAGE_NUM -- nothing to post-process"
@@ -378,7 +328,7 @@ jobs:
           git config user.name "tour-scraper-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/vuelta/
-          git commit -m "navigator(vuelta): stage ${{ needs.determine-stage.outputs.number }} events + bundle" \
+          git commit -m "navigator(vuelta): stage ${{ needs.determine.outputs.number }} events + bundle" \
             || echo "nothing to commit"
           for i in 1 2 3; do
             git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break

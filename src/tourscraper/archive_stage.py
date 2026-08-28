@@ -24,7 +24,7 @@ import json
 
 from .config import Config
 from .static_api import get_with_retry, make_session
-from .storage import StageStore, utcnow
+from .storage import StageStore, stage_date, utcnow
 
 # name -> endpoint template. Only cumulative/static feeds belong here.
 ARCHIVE_ENDPOINTS = {
@@ -42,7 +42,7 @@ def archive_stage(cfg: Config, stage: int, date: str | None = None) -> dict:
     field marks these as backfilled rather than captured in real time.
     """
     session = make_session(cfg)
-    store = StageStore(cfg.year_dir, stage, date)
+    store = StageStore(cfg.year_dir, stage, date or stage_date(cfg.year_dir, stage))
     summary = {}
     for name, template in ARCHIVE_ENDPOINTS.items():
         url = cfg.url(template, stage=stage)

@@ -36,7 +36,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 from .config import Config
-from .storage import JsonlWriter, StageStore, utcnow
+from .storage import JsonlWriter, StageStore, stage_date, utcnow
 from .static_api import get_with_retry, make_session
 
 import os
@@ -139,11 +139,19 @@ def backfill_stage(cfg: Config, session, stage_no: int) -> None:
     # (PCS 403'd outright during this session's Vuelta testing) shouldn't
     # also skip the other, which used to happen because both were gated
     # behind PCS having returned at least one page.
-    date = None
-    for html in pages.values():
-        date = parse_stage_date(html, cfg.year)
-        if date:
-            break
+    #
+    # The stage's official date (from bootstrap's own reference data) is
+    # authoritative and preferred; a PCS page's own date is only a fallback
+    # for whenever that reference hasn't been fetched. Neither found means
+    # StageStore falls back to today's date, which is only right for a
+    # backfill run ON the stage's actual day -- wrong, and previously
+    # unhandled, for one run days later after PCS started 403ing everything.
+    date = stage_date(cfg.year_dir, stage_no)
+    if not date:
+        for html in pages.values():
+            date = parse_stage_date(html, cfg.year)
+            if date:
+                break
     store = StageStore(cfg.year_dir, stage_no, date)
 
     if pages:

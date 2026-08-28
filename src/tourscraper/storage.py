@@ -108,3 +108,29 @@ def save_reference(year_dir: Path, name: str, payload) -> Path:
     path = ref / f"{name}.json"
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
     return path
+
+
+def stage_date(year_dir: Path, stage: int) -> str | None:
+    """A stage's official date (YYYY-MM-DD) from bootstrap's own
+    reference/stages.json, or None if it isn't there.
+
+    Exists because StageStore falls back to *today's* date when none is
+    given, which is only correct for a capture actually run live, during
+    that stage. archive_stage()/backfill_stage() run after the fact --
+    sometimes hours or days after, once GitHub's scheduler catches up (or a
+    stage that never triggered live at all gets salvaged by hand) -- and
+    defaulting to "today" there scattered a single stage's data across
+    multiple wrongly-dated folders more than once before this existed.
+    """
+    path = year_dir / "reference" / "stages.json"
+    if not path.exists():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+    for s in data:
+        if s.get("stage") == stage:
+            date = s.get("date")
+            return str(date)[:10] if date else None
+    return None

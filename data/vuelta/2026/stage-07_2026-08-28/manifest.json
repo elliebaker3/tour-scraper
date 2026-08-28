@@ -1,0 +1,28 @@
+[
+  {
+    "recorded_at": "2026-08-28T16:45:18.037+00:00",
+    "kind": "archive-backfill",
+    "stage": 7,
+    "endpoints": {
+      "publication": 102,
+      "checkpointList": 35,
+      "pack_final": 202
+    }
+  },
+  {
+    "recorded_at": "2026-08-28T16:45:46.946+00:00",
+    "kind": "backfill",
+    "stage": 7,
+    "pcs_pages": []
+  },
+  {
+    "recorded_at": "2026-08-28T16:57:38.301+00:00",
+    "kind": "archive-backfill",
+    "stage": 7,
+    "endpoints": {
+      "publication": 102,
+      "checkpointList": 35,
+      "pack_final": 202
+    }
+  }
+]

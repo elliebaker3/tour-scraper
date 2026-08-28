@@ -36,12 +36,28 @@ from .har_discover import analyze_har
 from .live_stream import record_live, reparse
 from .polling import poll_loop, record_radio
 from .static_api import bootstrap, fetch_profiles, probe
-from .storage import StageStore
+from .storage import StageStore, stage_date
 
 
 def guess_stage_number(cfg) -> str:
     """Fallback when --stage isn't given: use the date so nothing is lost."""
     return datetime.now(timezone.utc).strftime("d%m%d")
+
+
+def stage_folder_date(cfg, stage) -> str | None:
+    """The date a capture's StageStore folder should use: the stage's own
+    official date when `stage` is a real stage number, so a session that
+    runs past midnight -- a chunk starting hours late, chasing a delayed
+    GitHub Actions cron, is exactly how this happened -- still lands in ONE
+    folder instead of splitting across two (stage 6, 2026-08-27/28, both
+    with the SAME chunk's data half in each). Falls back to StageStore's own
+    today-based default when `stage` isn't a plain number (guess_stage_
+    number's "no --stage given" fallback has no real stage to look up)."""
+    try:
+        n = int(stage)
+    except (TypeError, ValueError):
+        return None
+    return stage_date(cfg.year_dir, n)
 
 
 def cmd_stage(cfg, args) -> None:
@@ -50,6 +66,7 @@ def cmd_stage(cfg, args) -> None:
     bootstrap(cfg)
     fetch_profiles(cfg)
     store = StageStore(cfg.year_dir, args.stage or guess_stage_number(cfg),
+                       date=stage_folder_date(cfg, args.stage),
                        part=getattr(args, "part", None))
     stop_after = int(args.max_hours * 3600)
     threads = [
@@ -184,7 +201,7 @@ def main() -> None:
         publish_komoot_bundles(Path(args.out) / "profiles" / "komoot",
                                repo_root / "extension" / "data")
     elif args.command == "startlist":
-        store = StageStore(cfg.year_dir, args.stage)
+        store = StageStore(cfg.year_dir, args.stage, date=stage_folder_date(cfg, args.stage))
         run_startlist_loop(cfg.base_url, store.dir, args.max_hours * 3600,
                            interval_seconds=args.interval_seconds)
     else:
@@ -194,6 +211,7 @@ def main() -> None:
             cmd_stage(cfg, args)
         elif store_needed:
             store = StageStore(cfg.year_dir, args.stage or guess_stage_number(cfg),
+                       date=stage_folder_date(cfg, args.stage),
                        part=getattr(args, "part", None))
             if args.command == "live":
                 record_live(cfg, store, stop_after)
