@@ -1603,8 +1603,17 @@ watch.">Add reading</button>
    *  has no built-in timeout: a captive portal or a dropped-not-refused
    *  connection hangs it far longer than a viewer waiting for the bar to
    *  draw should ever be stuck, so the remote attempt is capped and moves on
-   *  to the local copy rather than trusting the network to fail fast. */
-  async function fetchJsonRemoteFirst(remoteUrl, localPath, remoteTimeoutMs = 1500) {
+   *  to the local copy rather than trusting the network to fail fast.
+   *
+   *  This is the whole mechanism that lets a Chrome Web Store listing add
+   *  each day's stage without a new store submission -- the PACKAGE only
+   *  ever ships whatever was current at publish time, and everything past
+   *  that point comes from here. Which makes the timeout worth being a
+   *  little generous with: this call only happens once per page load (no
+   *  retry after), so a viewer whose first attempt times out is stuck on
+   *  the stale bundled copy for their whole session, not just a slower
+   *  draw. 3s over 1.5s costs little against that. */
+  async function fetchJsonRemoteFirst(remoteUrl, localPath, remoteTimeoutMs = 3000) {
     try {
       const ctrl = new AbortController();
       const timer = setTimeout(() => ctrl.abort(), remoteTimeoutMs);
