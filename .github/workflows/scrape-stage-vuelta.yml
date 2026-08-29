@@ -327,7 +327,12 @@ jobs:
         run: |
           git config user.name "tour-scraper-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/vuelta/
+          # extension/data/ too: navigator's publish_full_bundle / publish_lite_guideposts
+          # write the extension-facing bundle there, separately from the raw
+          # capture under data/vuelta/ -- missing it here meant a stage that
+          # DID get time-synced (or km-placed) never actually reached the
+          # extension, only the raw archive.
+          git add data/vuelta/ extension/data/
           git commit -m "navigator(vuelta): stage ${{ needs.determine.outputs.number }} events + bundle" \
             || echo "nothing to commit"
           for i in 1 2 3; do

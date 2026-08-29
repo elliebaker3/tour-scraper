@@ -67,6 +67,20 @@ STAT_PICTOS = {"liv_speed", "liv_statistics", "liv_team_ranking",
 HISTORY_RE = re.compile(r"\b(19\d{2}|20[0-2]\d|first time|for the first|history|historic\w*|"
                         r"record|legendary|edition|since \d{4})\b", re.I)
 
+# Matches "at km 19", "km 16", "(cat. 1, km 25.1)" -- the ticker naming its
+# own position directly, which is the only way to place an event on a stage
+# that never captured telemetry OR groups.jsonl (so has no distance-over-time
+# track of any kind to sync against otherwise -- see elevation_sync.py).
+# Deliberately km-THEN-number only: a digit-before-km form ("45 km/h", "9.4
+# km stage", "first 5.6km") reads as a speed or a stage-length aside far more
+# often than a position, and would false-positive constantly.
+KM_MENTION_RE = re.compile(r"\bkm\s+(\d+(?:\.\d+)?)\b", re.I)
+
+
+def _extract_km(text: str) -> float | None:
+    m = KM_MENTION_RE.search(text or "")
+    return float(m.group(1)) if m else None
+
 
 def _clean(text: str) -> str:
     return " ".join(TAG_RE.sub(" ", text or "").split())
@@ -155,6 +169,9 @@ def _mk(t, category, label, detail="", source="", **extra) -> dict:
          # keys on. (A cleverer expression here got it backwards and marked
          # everything a headline, silently disabling the dedupe.)
          "picto": str(source).startswith("ticker:liv_")}
+    km = _extract_km(f"{label} {detail}")
+    if km is not None:
+        g["km"] = km
     g.update(extra)
     return g
 

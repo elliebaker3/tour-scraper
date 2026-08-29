@@ -814,6 +814,33 @@
          </div>`);
     }
 
+    // Guideposts placed by KM instead of by clock: a stage with no telemetry
+    // or groups.jsonl (so nothing to time-sync at all -- see
+    // elevation_sync.py) has no t_utc->recording mapping to place a crash or
+    // breakaway with, UNLESS the ticker named its own position directly
+    // ("caught by the bunch at km 16") -- extract_events._extract_km pulls
+    // exactly that into g.km. Styled and gated the same as the full bundle's
+    // event dots (SIGNIFICANT_WORD/EVENT_COLOR/enabled) for one consistent
+    // look; only the x-placement differs (distance here, clock there).
+    const eventMarks = [];
+    for (const g of bundle.guideposts || []) {
+      // A ticker-text km mention is regex-extracted, not route data --
+      // sanity-bound it against the actual route length rather than trust
+      // it blindly (a misread figure landing off the chart is silently
+      // confusing; skipping it is not).
+      if (typeof g.km !== "number" || g.km < 0 || g.km > len * 1.05) continue;
+      const word = SIGNIFICANT_WORD[g.category];
+      if (!word) continue;
+      const own = enabled[g.category];
+      if (!own && !enabled.significant) continue;
+      const color = own ? EVENT_COLOR[g.category] : CATEGORIES.significant.color;
+      const mx = x(g.km);
+      const sec = lm && dur ? Math.max(0, Math.min(dur, lm.secAtKmto(len - g.km))) : null;
+      eventMarks.push(
+        `<div class="tn-marker" style="left:${mx.toFixed(1)}px;background:${color}"
+              ${sec != null ? `data-sec="${sec.toFixed(1)}"` : ""} title="${word} — km ${g.km}"></div>`);
+    }
+
     // Playhead only when the distance<->time map exists: its x is the km the
     // map says the race is at now, so it moves nonlinearly along the bar.
     let playhead = "";
@@ -830,11 +857,12 @@
         <path d="${d}" class="tn-profile"/>
       </svg>
       <div class="tn-routemarks">${routeMarks.join("")}</div>
+      ${eventMarks.join("")}
       ${playhead}
       <span class="tn-alt tn-alt-hi">${Math.round(hiA)}m</span>
       <span class="tn-alt tn-alt-lo">${Math.round(loA)}m</span>
     `;
-    bar.querySelectorAll(".tn-rm[data-sec]").forEach((el) => {
+    bar.querySelectorAll(".tn-rm[data-sec], .tn-marker[data-sec]").forEach((el) => {
       el.addEventListener("click", (ev) => {
         ev.stopPropagation();
         if (video) video.currentTime = parseFloat(el.dataset.sec);
@@ -860,7 +888,7 @@
     root.querySelector(".tn-diag").textContent = [
       `stage ${bundle.stage?.stage ?? "?"} (${bundle.stage?.date ?? "?"})`,
       "profile only (no live capture)",
-      "elevation: velowire.com",
+      `elevation: ${bundle.elevation_source === "komoot" ? "komoot.com" : "velowire.com"}`,
       clockSummary(),
       bundle.__selection || "",
       flashNow(),

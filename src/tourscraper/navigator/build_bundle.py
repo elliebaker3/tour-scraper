@@ -249,6 +249,33 @@ def publish_full_bundle(bundle: dict, stage_number: int, extension_data_dir: Pat
     return f"published -> {extension_data_dir / fname}"
 
 
+def publish_lite_guideposts(guideposts: list[dict], stage_number: int,
+                            extension_data_dir: Path, race: str = "tdf") -> str:
+    """Fallback for a stage with no time-synced track at all -- no individual
+    telemetry and no groups.jsonl leader track either (see elevation_sync.
+    build()'s fallback chain) -- so publish_full_bundle() has nothing to
+    publish. A lite (profile-only) bundle has no clock to place most
+    guideposts against, but one whose ticker text named its own km directly
+    (KM_MENTION_RE in extract_events.py, e.g. "caught by the bunch at km
+    16") can still be positioned with no telemetry needed at all. Merges
+    just those into the lite bundle already published for this stage (by
+    velowire/komoot's publish_lite_bundles); a no-op if that bundle hasn't
+    been published yet or nothing here is placeable.
+    """
+    prefix = f"{race}-" if race and race != "tdf" else ""
+    fname = f"{prefix}profile-stage-{stage_number:02d}.json"
+    path = extension_data_dir / fname
+    if not path.exists():
+        return "lite guideposts not published (no lite bundle to merge into)"
+    placeable = [g for g in guideposts if isinstance(g.get("km"), (int, float))]
+    if not placeable:
+        return "lite guideposts not published (no ticker item named its own km)"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["guideposts"] = placeable
+    path.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
+    return f"published {len(placeable)} km-placed guidepost(s) -> {path}"
+
+
 def build(stage_dir: Path, telemetry_paths, year_dir: Path,
           stage_number: int, out_path: Path | None = None,
           fetch_poi: bool = True, racecenter_base: str | None = None,
@@ -258,6 +285,25 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     length_km = float(meta.get("length_km") or 0) or None
     if not length_km:
         raise SystemExit(f"stage {stage_number}: no length in stages.json; run bootstrap first")
+
+    # profile.csv is only ever written by a live poll session, off a
+    # per-session hashed URL that can't be recovered after the fact (see
+    # stage 2/7's gap). A stage that never got live-captured -- only
+    # backfilled/archived after the fact from the ticker -- has no route to
+    # time-sync against at all, so there is no full bundle to build. That
+    # still leaves the ticker: extract guideposts (a km-named one needs no
+    # track to place) and merge into whichever lite bundle already covers
+    # this stage, rather than raising and losing that entirely.
+    if not (stage_dir / "profile.csv").exists():
+        events = build_guideposts(stage_dir, [])
+        print(f"[navigator] stage {stage_number}: no profile.csv (never live-captured) "
+              f"-- ticker-only, no time-synced bundle")
+        print(f"[navigator]   guideposts {events['counts']}")
+        if extension_data_dir:
+            print(f"[navigator]   {publish_lite_guideposts(events['guideposts'], stage_number, extension_data_dir, race)}")
+        out_path = out_path or (stage_dir / "events_poi.json")
+        out_path.write_text(json.dumps(events, ensure_ascii=False, separators=(",", ":")))
+        return out_path
 
     # The real km-0 moment. The ticker tags it (liv_actual_start) and it can
     # differ from the schedule by minutes -- stage 14 rolled 5m38s late -- so
@@ -347,5 +393,7 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
 
     if extension_data_dir:
         print(f"[navigator]   {publish_full_bundle(bundle, stage_number, extension_data_dir, race)}")
+        if not bundle["coverage"]["profile_points_observed"]:
+            print(f"[navigator]   {publish_lite_guideposts(events['guideposts'], stage_number, extension_data_dir, race)}")
 
     return out_path
