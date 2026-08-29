@@ -937,6 +937,17 @@
     const rangeA = Math.max(1, hiA - loA);
     const yForAlt = (alt) => height - ((alt - loA) / rangeA) * (height - PROFILE_TOP_PAD - PROFILE_BOT_PAD) - PROFILE_BOT_PAD;
 
+    // A marker's estimated recording second, pinned inside [0, dur] rather
+    // than dropped when it lands just past either edge. Before any real
+    // reading (the assumed default calibration -- see defaultCal()) a small
+    // rate/offset error compounds over hours, so an event late in a long
+    // stage can compute just outside the window even though it obviously
+    // happened during the broadcast. Matches renderLite()'s own clamp for
+    // the same reason: a marker at the edge is still useful; a dropped one
+    // reads as "climbs and crashes only show up once you calibrate", which
+    // is the opposite of a stated default's whole point.
+    const clampSec = (raw) => raw == null ? null : Math.max(0, Math.min(dur, raw));
+
     // Sprints and climbs sit ON the elevation curve, at their own altitude, the
     // way a printed stage profile marks them. Drawn from route_markers, which
     // comes straight from ASO's route data, so they are exact and never lost to
@@ -944,8 +955,8 @@
     const routeMarks = [];
     for (const m of bundle.route_markers || []) {
       if (!m.t || !enabled[m.kind]) continue;
-      const sec = utcToVideo(Date.parse(m.t));
-      if (sec == null || sec < 0 || sec > dur) continue;
+      const sec = clampSec(utcToVideo(Date.parse(m.t)));
+      if (sec == null) continue;
       const x = (sec / dur) * plotW;
       const y = m.alt != null ? yForAlt(m.alt) : height / 2;
       const isKom = m.kind === "kom";
@@ -1003,8 +1014,8 @@
       const own = enabled[g.category];
       if (!own && !enabled.significant) continue;
       const color = own ? EVENT_COLOR[g.category] : CATEGORIES.significant.color;
-      const sec = utcToVideo(Date.parse(g.t_utc));
-      if (sec == null || sec < 0 || sec > dur) continue;
+      const sec = clampSec(utcToVideo(Date.parse(g.t_utc)));
+      if (sec == null) continue;
       const x = (sec / dur) * plotW;
       markers.push(
         `<div class="tn-marker" style="left:${x.toFixed(1)}px;background:${color}"
@@ -1018,8 +1029,8 @@
     const poiMarks = [];
     if (enabled.poi) {
       for (const m of bundle.special_markers || []) {
-        const sec = utcToVideo(Date.parse(m.t_utc));
-        if (sec == null || sec < 0 || sec > dur) continue;
+        const sec = clampSec(utcToVideo(Date.parse(m.t_utc)));
+        if (sec == null) continue;
         const x = (sec / dur) * plotW;
         const alt = altAtRaceMs(Date.parse(m.t_utc));
         const y = alt != null ? yForAlt(alt) : height / 2;
@@ -1035,8 +1046,8 @@
 
     let heat = "";
     for (const s of bundle.intensity || []) {
-      const sec = utcToVideo(Date.parse(s.t_utc));
-      if (sec == null || sec < 0 || sec > dur) continue;
+      const sec = clampSec(utcToVideo(Date.parse(s.t_utc)));
+      if (sec == null) continue;
       const x = (sec / dur) * plotW;
       const w = Math.max(1, (s.window_min * 60 / dur) * plotW);
       heat += `<div class="tn-heat" style="left:${x.toFixed(1)}px;width:${w.toFixed(1)}px;
