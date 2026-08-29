@@ -342,6 +342,10 @@ things year to year — `probe` + `har` are your recovery tools when they do.
   letour.fr's terms may restrict automated access and reuse; keep this archive
   personal, don't redistribute the data or audio, and if you ever want to ship
   Tour Tools publicly, that's the point to look into A.S.O. licensing.
+- This repo's data feeds the Tour Navigator browser extension, which in turn
+  collects a little of its own — crowdsourced calibration readings (public)
+  and passive session/viewing-pattern telemetry (private). See
+  [`PRIVACY.md`](PRIVACY.md) for exactly what and why.
 
 ## Known unknowns
 

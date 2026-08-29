@@ -1,6 +1,6 @@
 # Privacy policy — Tour Navigator
 
-_Last updated: 26 July 2026_
+_Last updated: 29 August 2026_
 
 Tour Navigator is a browser extension that draws a cycling stage's elevation
 profile over a video player's navigation bar. This policy describes everything
@@ -29,9 +29,11 @@ request. A submission contains:
 | field | example |
 |---|---|
 | stage number and date | 20, 2026-07-25 |
+| which race, for a stage number that exists in more than one (e.g. the Vuelta) | `vuelta` |
 | the site's hostname | `www.peacocktv.com` |
 | the recording's length in seconds | 21519.4 |
 | your km-to-go readings and their positions in the recording | 60 km at 4500s |
+| the broadcast's own displayed start time, if the player exposes one | — |
 | ad-break positions detected in the player's own scrub bar | — |
 | positions of any moments you flagged with the star button | 4200s |
 | timestamps and the extension's version number | — |

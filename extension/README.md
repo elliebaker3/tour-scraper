@@ -15,7 +15,7 @@ Two hosts, both for data rather than code:
 | | why |
 |---|---|
 | `raw.githubusercontent.com` | reading the shared calibration store, and the stage bundle database (`extension/data/index.json` + the per-stage profile/elevation files) |
-| the collector Worker | submitting a calibration |
+| the collector Worker | submitting a calibration, and separately, periodic session telemetry (which parts of a stage were watched, skips/rewinds) -- see *Privacy* below |
 
 The stage database is fetched fresh on every load (capped at 1.5s, then
 falling back to whatever was bundled at install time) rather than only read
@@ -33,6 +33,17 @@ the review surface for no functional gain.
 No remote code: every script is bundled, there is no background worker, no
 HTML in the package, and nothing fetched is executed. The two hosts above
 return JSON that is parsed and read as numbers.
+
+## Privacy
+
+Full policy: [`PRIVACY.md`](../PRIVACY.md). Short version: calibration
+readings you enter are submitted (anonymously) so other viewers of the same
+recording benefit, landing in a public file in this repo. Separately, and
+automatically while the extension is active, it also measures how the
+recording was watched -- coverage per kilometre and skip/rewind events --
+grouped under a random per-session id and sent to a **private** repository,
+never published. Neither stream carries your name, account, IP, or anything
+about other tabs or sites.
 
 ## Where it runs
 
