@@ -198,6 +198,18 @@ def build(out_dir: Path, max_stage: int = 21, refresh: bool = False) -> list[Pat
     return written
 
 
+def _load_pcs_climbs(profiles_dir: Path) -> dict[int, list[dict]]:
+    """pcs_route.py's cache of named locations, categorized climbs and
+    sprints per stage, if it's been fetched -- see that module. Keyed by
+    stage number; a stage missing from the file just gets no markers,
+    same as before this existed."""
+    path = profiles_dir.parent.parent / "reference" / "pcs-climbs.json"
+    if not path.exists():
+        return {}
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    return {int(k): v for k, v in raw.items()}
+
+
 def publish_lite_bundles(profiles_dir: Path, extension_data_dir: Path) -> None:
     """Copy every komoot profile into extension/data/ as a "profile" (lite)
     bundle the Navigator can load, and merge it into index.json.
@@ -210,16 +222,44 @@ def publish_lite_bundles(profiles_dir: Path, extension_data_dir: Path) -> None:
     (auto-detection itself never confuses them -- it matches by date, and the
     two seasons don't overlap -- this is only about the manual stage picker
     and pin, which do look stages up by number).
+
+    Climbs and sprints come from pcs_route.py's cache (komoot's own route has
+    elevation but no named waypoints -- see this module's docstring), keyed
+    by km the same way build_bundle.route_markers()'s full-bundle markers
+    are, so renderLite() draws both the same way.
     """
     extension_data_dir.mkdir(parents=True, exist_ok=True)
     index_path = extension_data_dir / "index.json"
     index = json.loads(index_path.read_text(encoding="utf-8")) if index_path.exists() else {"schema": 1, "stages": []}
+    pcs_climbs = _load_pcs_climbs(profiles_dir)
 
-    kept = [e for e in index["stages"] if e.get("race") != "vuelta"]
+    # A stage that build_bundle.publish_full_bundle() already promoted to a
+    # real time-synced "full" bundle keeps that index entry untouched -- this
+    # function republishing the lite profile underneath it (e.g. to pick up
+    # a fresh PCS climb fetch) must not regress a stage back to "profile"
+    # kind, which is what un-conditionally replacing every vuelta entry here
+    # used to do the first time this ran after stage 4 got a full bundle.
+    full_stages = {e["stage"] for e in index["stages"]
+                  if e.get("race") == "vuelta" and e.get("kind") == "full"}
+    kept = [e for e in index["stages"]
+           if e.get("race") != "vuelta" or e["stage"] in full_stages]
     new_entries = []
     for src in sorted(profiles_dir.glob("stage-*.json")):
         data = json.loads(src.read_text(encoding="utf-8"))
         n = data["stage"]
+        fname = f"vuelta-profile-stage-{n:02d}.json"
+        # A stage that already got km-placed ticker guideposts merged in
+        # (build_bundle.publish_lite_guideposts, for a stage with no
+        # telemetry to time-sync at all) keeps them across a republish here
+        # -- this function owns profile/markers, not guideposts, and a full
+        # overwrite would silently drop them the next time profiles refresh.
+        existing_path = extension_data_dir / fname
+        guideposts = None
+        if existing_path.exists():
+            try:
+                guideposts = json.loads(existing_path.read_text(encoding="utf-8")).get("guideposts")
+            except (json.JSONDecodeError, OSError):
+                pass
         bundle = {
             "schema": "profile-1",
             "stage": {"stage": n, "date": data.get("date"), "departure": data.get("departure"),
@@ -227,11 +267,14 @@ def publish_lite_bundles(profiles_dir: Path, extension_data_dir: Path) -> None:
                       "scheduled_sec": None},
             "elevation_source": "komoot",
             "profile": data["profile"],
-            "markers": [],
+            "markers": pcs_climbs.get(n, []),
         }
-        fname = f"vuelta-profile-stage-{n:02d}.json"
+        if guideposts:
+            bundle["guideposts"] = guideposts
         (extension_data_dir / fname).write_text(
             json.dumps(bundle, ensure_ascii=False, separators=(",", ":")))
+        if n in full_stages:
+            continue  # file written for completeness; the full bundle's index entry stands
         dep, arr = data.get("departure"), data.get("arrival")
         new_entries.append({
             "file": fname, "stage": n, "race": "vuelta", "date": data.get("date"),
@@ -240,5 +283,7 @@ def publish_lite_bundles(profiles_dir: Path, extension_data_dir: Path) -> None:
 
     index["stages"] = sorted([*kept, *new_entries], key=lambda e: e.get("date") or "")
     index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"[komoot] published {len(new_entries)} lite bundle(s) to {extension_data_dir}; "
+    n_markers = sum(len(pcs_climbs.get(e["stage"], [])) for e in new_entries)
+    print(f"[komoot] published {len(new_entries)} lite bundle(s) to {extension_data_dir} "
+          f"({n_markers} climb/sprint marker(s) from PCS); "
           f"index now covers {len(index['stages'])} stage(s)")

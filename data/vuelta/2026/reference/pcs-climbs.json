@@ -1,0 +1,173 @@
+{
+  "1": [],
+  "2": [
+    {
+      "kind": "kom",
+      "km": 32.3,
+      "label": "Alto Chateauneuf-Grasse",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 92.4,
+      "label": "Col de Saint Andrieu",
+      "cat": "2"
+    },
+    {
+      "kind": "sprint",
+      "km": 166.2,
+      "label": "Gréoux-les-Bains"
+    }
+  ],
+  "3": [
+    {
+      "kind": "sprint",
+      "km": 129.0,
+      "label": "Villefranche-de-Conflent"
+    },
+    {
+      "kind": "kom",
+      "km": 157.8,
+      "label": "Col de Mont-Louis",
+      "cat": "1"
+    },
+    {
+      "kind": "kom",
+      "km": 174.0,
+      "label": "Font Romeu",
+      "cat": "2"
+    }
+  ],
+  "4": [
+    {
+      "kind": "kom",
+      "km": 25.1,
+      "label": "Port d'Envalira",
+      "cat": "1"
+    },
+    {
+      "kind": "kom",
+      "km": 59.3,
+      "label": "Collada de Beixalis",
+      "cat": "1"
+    },
+    {
+      "kind": "sprint",
+      "km": 68.401,
+      "label": "Ordino"
+    },
+    {
+      "kind": "kom",
+      "km": 78.7,
+      "label": "Coll d'Ordino",
+      "cat": "1"
+    },
+    {
+      "kind": "kom",
+      "km": 100.0,
+      "label": "Alto de la Comella",
+      "cat": "2"
+    }
+  ],
+  "5": [
+    {
+      "kind": "sprint",
+      "km": 114.7,
+      "label": "Tivenys"
+    },
+    {
+      "kind": "kom",
+      "km": 148.4,
+      "label": "Puerto de Paüls",
+      "cat": "2"
+    }
+  ],
+  "6": [
+    {
+      "kind": "kom",
+      "km": 44.6,
+      "label": "Puerto de la Serratella",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 66.1,
+      "label": "Coll de la Bandereta",
+      "cat": "2"
+    },
+    {
+      "kind": "sprint",
+      "km": 120.1,
+      "label": "Benicàssim"
+    },
+    {
+      "kind": "kom",
+      "km": 128.5,
+      "label": "Alto del Desierto de las Palmas",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 156.8,
+      "label": "Puerto El Bartolo",
+      "cat": "1"
+    }
+  ],
+  "7": [
+    {
+      "kind": "kom",
+      "km": 52.2,
+      "label": "Puerto El Remolcador",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 66.5,
+      "label": "Alto de Zucaina",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 104.9,
+      "label": "Puerto de Fuente de Rubielos",
+      "cat": "2"
+    },
+    {
+      "kind": "sprint",
+      "km": 123.3,
+      "label": "Mora de Rubielos"
+    },
+    {
+      "kind": "kom",
+      "km": 136.3,
+      "label": "Puerto de San Rafael",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 149.8,
+      "label": "Aramón Valdelinares",
+      "cat": "1"
+    }
+  ],
+  "8": [],
+  "9": [],
+  "10": [],
+  "11": [],
+  "12": [],
+  "13": [],
+  "14": [],
+  "15": [],
+  "16": [],
+  "17": [],
+  "18": [],
+  "19": [],
+  "20": [],
+  "21": [
+    {
+      "kind": "sprint",
+      "km": 92.4,
+      "label": "3rd passage of the finish line"
+    }
+  ]
+}
