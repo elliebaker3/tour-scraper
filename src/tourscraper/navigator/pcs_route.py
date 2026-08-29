@@ -143,6 +143,19 @@ def fetch_all(race_slug: str, year: int, out_dir: Path, max_stage: int = 21,
     return results
 
 
+def load_climbs(out_dir: Path) -> dict[int, list[dict]]:
+    """The pcs-climbs.json cache written by fetch_all/reparse_all, keyed by
+    stage number. `out_dir` is the race's top-level data dir (e.g.
+    data/vuelta/2026) -- the same one passed to fetch_all. A stage missing
+    from the file (never fetched, or not yet raced when it was) just gets
+    no markers back, same as before this cache existed."""
+    path = out_dir / "reference" / "pcs-climbs.json"
+    if not path.exists():
+        return {}
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    return {int(k): v for k, v in raw.items()}
+
+
 def fetch_race_events(race_slug: str, year: int, stage_n: int, raw_dir: Path) -> str | None:
     """One stage's PCS 'race-events' timeline -- narrower than 'livestats'
     (see backfill.py's PCS_PAGES), but where livestats reverts to a

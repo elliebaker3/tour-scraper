@@ -31,6 +31,7 @@ from pathlib import Path
 import requests
 
 from .gpx_profile import profile_from_track
+from .pcs_route import load_climbs
 
 STAGE_PAGE = "https://www.lavuelta.es/en/stage-{n}"
 TOUR_RE = re.compile(r"komoot\.com/tour/(\d+)/embed\?share_token=([A-Za-z0-9]+)")
@@ -198,18 +199,6 @@ def build(out_dir: Path, max_stage: int = 21, refresh: bool = False) -> list[Pat
     return written
 
 
-def _load_pcs_climbs(profiles_dir: Path) -> dict[int, list[dict]]:
-    """pcs_route.py's cache of named locations, categorized climbs and
-    sprints per stage, if it's been fetched -- see that module. Keyed by
-    stage number; a stage missing from the file just gets no markers,
-    same as before this existed."""
-    path = profiles_dir.parent.parent / "reference" / "pcs-climbs.json"
-    if not path.exists():
-        return {}
-    raw = json.loads(path.read_text(encoding="utf-8"))
-    return {int(k): v for k, v in raw.items()}
-
-
 def publish_lite_bundles(profiles_dir: Path, extension_data_dir: Path) -> None:
     """Copy every komoot profile into extension/data/ as a "profile" (lite)
     bundle the Navigator can load, and merge it into index.json.
@@ -231,7 +220,7 @@ def publish_lite_bundles(profiles_dir: Path, extension_data_dir: Path) -> None:
     extension_data_dir.mkdir(parents=True, exist_ok=True)
     index_path = extension_data_dir / "index.json"
     index = json.loads(index_path.read_text(encoding="utf-8")) if index_path.exists() else {"schema": 1, "stages": []}
-    pcs_climbs = _load_pcs_climbs(profiles_dir)
+    pcs_climbs = load_climbs(profiles_dir.parent.parent)
 
     # A stage that build_bundle.publish_full_bundle() already promoted to a
     # real time-synced "full" bundle keeps that index entry untouched -- this

@@ -26,6 +26,7 @@ from . import gpx_profile
 from .elevation_sync import build as build_sync
 from .extract_events import build_guideposts, load_ticker
 from .gpx_profile import altitude_at_km as gpx_alt_at_km
+from .pcs_route import load_climbs
 from .gpx_profile import load_stage as gpx_load
 from .velowire_profile import name_route_markers
 
@@ -185,6 +186,84 @@ def route_markers(sync_points: list[dict]) -> list[dict]:
             seen.add(key)
             dedup.append(m)
     return dedup
+
+
+def _interp_at_km(sync_points: list[dict], km: float) -> tuple[float | None, str | None]:
+    """(altitude, time_utc) at a distance along the route, linearly
+    interpolated from the already time-synced profile -- the same idea as
+    gpx_profile.altitude_at_km, extended to time since this profile carries
+    both. Used to place a PCS-sourced climb/sprint (km only, no altitude or
+    time of its own) onto a full bundle's route_markers.
+    """
+    timed = [p for p in sync_points if p.get("time_utc") and p.get("altitude") is not None]
+    if not timed:
+        return None, None
+    if km <= timed[0]["km"]:
+        return timed[0]["altitude"], timed[0]["time_utc"]
+    if km >= timed[-1]["km"]:
+        return timed[-1]["altitude"], timed[-1]["time_utc"]
+    lo, hi = 0, len(timed) - 1
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        if timed[mid]["km"] <= km:
+            lo = mid
+        else:
+            hi = mid
+    a, b = timed[lo], timed[hi]
+    span = b["km"] - a["km"]
+    if span <= 0:
+        return a["altitude"], a["time_utc"]
+    frac = (km - a["km"]) / span
+    alt = a["altitude"] + (b["altitude"] - a["altitude"]) * frac
+    ta, tb = datetime.fromisoformat(a["time_utc"]), datetime.fromisoformat(b["time_utc"])
+    t = (ta + (tb - ta) * frac).isoformat(timespec="seconds")
+    return alt, t
+
+
+# PCS's own category codes (pcs_route.TIER_TO_CAT) -> route_markers()'s
+# formatted label. A different domain from _KOM_LABEL (ASO's raw "H"/"1".."4"
+# column values) even though the categories are the same, so kept separate
+# rather than reusing that dict with a mismatched key.
+_PCS_CAT_LABEL = {"HC": "HC", "1": "Cat 1", "2": "Cat 2", "3": "Cat 3", "4": "Cat 4"}
+
+
+def pcs_fallback_markers(year_dir: Path, stage_number: int,
+                         sync_points: list[dict], length_km: float) -> list[dict]:
+    """Climbs/sprints from pcs_route.py's scrape, converted into
+    route_markers()'s shape and placed on the time axis via the profile
+    that's already been time-synced against telemetry/groups.jsonl.
+
+    Only meaningful when route_markers() itself came back empty, which
+    happens whenever the base route shape came from a GPX track instead of
+    ASO's profile.csv -- a GPX track carries no checkpoint/climb-category
+    columns at all (see gpx_profile.as_route_points), so a stage synced that
+    way has no ASO climb data to draw from. PCS only has this once a stage
+    has actually been raced; one that hasn't yet just gets nothing here,
+    same as before this existed.
+    """
+    pcs_climbs = load_climbs(year_dir).get(stage_number, [])
+    out = []
+    for m in pcs_climbs:
+        km = m.get("km")
+        name = (m.get("label") or "").strip()
+        if km is None:
+            continue
+        alt, t = _interp_at_km(sync_points, km)
+        # "name" is the real place name (PCS gives one directly, same field
+        # velowire's name_route_markers() fills in for ASO markers); "label"
+        # stays the generic grade description that field is reserved for
+        # everywhere else in a bundle.
+        common = {"km": round(km, 1), "kmto": round(length_km - km, 1),
+                  "alt": round(alt) if alt is not None else None, "t": t,
+                  **({"name": name} if name else {})}
+        if m["kind"] == "sprint":
+            out.append({**common, "kind": "sprint", "label": "Intermediate sprint"})
+        else:
+            cat_label = _PCS_CAT_LABEL.get(m.get("cat"), m.get("cat") or "")
+            out.append({**common, "kind": "kom", "cat": cat_label,
+                        "label": f"Climb — {cat_label}" if cat_label else "Climb",
+                        "finish": km >= length_km - 0.5})
+    return out
 
 
 def _persons_of_interest(stage_number, year, year_dir, guideposts, markers,
@@ -359,6 +438,16 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     # name_route_markers for why the two distance scales are not interchanged.
     markers, naming = name_route_markers(
         markers, year_dir / "profiles" / "velowire", stage_number)
+
+    if not markers:
+        # No ASO climb/checkpoint data at all (route_markers() draws from
+        # sync["points"]' checkpoint_type/climb_category columns, which a
+        # GPX-sourced profile never has -- see gpx_profile.as_route_points).
+        # PCS's own scrape already carries real names, unlike ASO's generic
+        # "Climb — Cat 1" (which needs velowire's separate naming pass), so
+        # this skips straight past that step.
+        markers = pcs_fallback_markers(year_dir, stage_number, sync["points"], length_km)
+        naming = f"{len(markers)} from PCS (no ASO climb data)" if markers else naming
 
     year = int(year_dir.name) if year_dir.name.isdigit() else int(str(meta.get("date"))[:4])
     poi, specials, poi_err = (

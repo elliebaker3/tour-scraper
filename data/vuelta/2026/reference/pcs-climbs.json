@@ -150,7 +150,19 @@
       "cat": "1"
     }
   ],
-  "8": [],
+  "8": [
+    {
+      "kind": "sprint",
+      "km": 137.4,
+      "label": "Simat de Valldigna"
+    },
+    {
+      "kind": "kom",
+      "km": 143.6,
+      "label": "Puerto de Barx",
+      "cat": "2"
+    }
+  ],
   "9": [],
   "10": [],
   "11": [],
