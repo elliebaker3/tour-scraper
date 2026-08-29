@@ -318,6 +318,44 @@ jobs:
             --telemetry "$STAGE_DIR/telemetry.part-*.jsonl" \
             || echo "::warning::navigator bundle failed (likely no profile.csv or no length in stages.json)"
 
+      # A stage's navigator bundle is only ever (re)built the moment it's
+      # captured -- so a stage that gained a fix (elevation_sync's
+      # leader-track cleaning, GPX-fallback time-sync, etc) or whose capture
+      # simply never got run to completion (a manual `navigator` invocation
+      # forgotten afterward) sits on stale or missing data indefinitely.
+      # Stages 3 and 5 (2026-08-24/26) had real telemetry/groups.jsonl
+      # sitting unused since capture until this was caught by hand. Retrying
+      # every stage still marked "profile" (lite) in the index -- cheap,
+      # since build() degrades gracefully to a no-op republish when there's
+      # genuinely nothing more to sync against -- means a fix like that
+      # reaches every stage it applies to on its own, not just whichever one
+      # happens to be running when the fix lands.
+      - name: Retry any stage still lite, in case it can now be upgraded
+        env:
+          TODAY_STAGE: ${{ needs.determine.outputs.number }}
+        run: |
+          git config user.name "tour-scraper-bot"
+          git config user.email "actions@users.noreply.github.com"
+          python3 -c "
+          import json, os
+          idx = json.loads(open('extension/data/index.json').read())
+          today = int(os.environ.get('TODAY_STAGE') or 0)
+          lite = sorted(e['stage'] for e in idx['stages']
+                         if e.get('race') == 'vuelta' and e.get('kind') != 'full'
+                         and e['stage'] != today)
+          print(' '.join(str(n) for n in lite))
+          " > /tmp/lite_stages.txt
+          for N in $(cat /tmp/lite_stages.txt); do
+            DIR=$(ls -d data/vuelta/2026/stage-$(printf '%02d' "$N")_* 2>/dev/null | head -1)
+            [ -z "$DIR" ] && continue
+            echo "retrying stage $N ($DIR)"
+            python -m tourscraper --config config/config-vuelta.yaml navigator \
+              --stage "$N" --stage-dir "$DIR" \
+              --telemetry "$DIR/telemetry.jsonl" \
+              --telemetry "$DIR/telemetry.part-*.jsonl" \
+              || echo "::warning::stage $N retry failed"
+          done
+
       - name: Commit results
         run: |
           git config user.name "tour-scraper-bot"
