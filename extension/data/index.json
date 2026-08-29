@@ -177,12 +177,14 @@
       "kind": "profile"
     },
     {
-      "file": "vuelta-profile-stage-03.json",
+      "file": "vuelta-stage-03.json",
       "stage": 3,
-      "race": "vuelta",
       "date": "2026-08-24",
-      "route": "Gruissan - Aude → Font-Romeu",
-      "kind": "profile"
+      "route": "Gruissan - Aude → Font Romeu",
+      "leader_first_utc": "2026-08-24T11:27:29+00:00",
+      "leader_last_utc": "2026-08-24T18:17:53+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-stage-04.json",
@@ -195,12 +197,14 @@
       "race": "vuelta"
     },
     {
-      "file": "vuelta-profile-stage-05.json",
+      "file": "vuelta-stage-05.json",
       "stage": 5,
-      "race": "vuelta",
       "date": "2026-08-26",
-      "route": "Falset. Costa Daurada → Roquetes. Terres de l'Ebre",
-      "kind": "profile"
+      "route": "Falset . Costa Daurada → Roquetes. Terres de l'Ebre",
+      "leader_first_utc": "2026-08-26T11:37:49+00:00",
+      "leader_last_utc": "2026-08-26T12:39:31+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-06.json",

@@ -171,8 +171,33 @@ def _clean_track(samples: list[tuple[datetime, float]]) -> list[tuple[datetime, 
     until the race catches up with it. So a jump also has to be physically
     possible: faster than MAX_SPEED_KMH since the last accepted sample is a
     bad fix, not a decrease.
+
+    The very first sample gets no such check -- nothing precedes it to
+    compare against -- so it is trusted outright as the starting anchor,
+    which is exactly backwards when THAT one is the bad fix. Stage 5
+    (2026-08-26)'s groups.jsonl opened with a lone "Peloton" snapshot
+    reporting 0km remaining (and a completedDistance further than the whole
+    stage -- an uninitialized placeholder, not a real position) before any
+    real data arrived; every one of the ~120 genuine, correctly-decreasing
+    samples after it was then rejected as "going backwards" relative to that
+    false floor, leaving 2 surviving points out of 1733. So the search for a
+    starting anchor also skips forward past any leading sample an immediate
+    successor cannot be reconciled with -- the same corroboration principle
+    leader_track() already applies to individual telemetry, applied here to
+    the one sample per-step checking cannot itself validate.
     """
     samples = sorted(set(samples), key=lambda s: s[0])
+    start = 0
+    while start < len(samples) - 1:
+        (t0, k0), (t1, k1) = samples[start], samples[start + 1]
+        if k1 <= k0:
+            break
+        secs = max((t1 - t0).total_seconds(), MIN_SPEED_CHECK_SECONDS)
+        if (k1 - k0) / (secs / 3600) <= MAX_SPEED_KMH:
+            break
+        start += 1  # k0 is spuriously low; the jump back up rules it out
+    samples = samples[start:]
+
     cleaned: list[tuple[datetime, float]] = []
     best = float("inf")
     last_ts = None
