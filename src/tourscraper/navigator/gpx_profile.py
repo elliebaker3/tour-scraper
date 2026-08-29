@@ -126,6 +126,29 @@ def altitude_at_km(profile: list[dict], km: float):
     return a["alt"] + (b["alt"] - a["alt"]) * ((km - a["km"]) / span)
 
 
+def as_route_points(gpx_profile: dict) -> list[dict]:
+    """Adapt this module's {"profile": [{"km","alt"}]} shape into
+    elevation_sync's route-point shape (km, km_to_finish, altitude, plus the
+    checkpoint/climb fields ASO's profile.csv carries -- all None here, since
+    a GPX track has no waypoints, only shape; see this module's docstring).
+
+    Lets a stage with a GPX track but no profile.csv -- never live-captured,
+    so ASO's own hashed profile URL can't be recovered after the fact (the
+    Vuelta norm so far: komoot's GPX is the only route source most stages
+    ever get) -- still be time-synced against telemetry/groups.jsonl instead
+    of falling all the way back to build_bundle.build()'s last resort of
+    guessing positions from km mentions in ticker text.
+    """
+    length = gpx_profile.get("length_km") or 0
+    points = gpx_profile.get("profile") or []
+    if not points or not length:
+        return []
+    return [{"km": p["km"], "km_to_finish": round(length - p["km"], 3),
+             "altitude": p["alt"], "slope": None, "lat": None, "lon": None,
+             "checkpoint": None, "checkpoint_type": None, "climb_category": None}
+            for p in points]
+
+
 def km_at_coords(pts, profile: list[dict], lon: float, lat: float):
     """Distance along the GPX track of the point nearest a coordinate.
 

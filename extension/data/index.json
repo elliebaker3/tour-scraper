@@ -219,12 +219,14 @@
       "kind": "profile"
     },
     {
-      "file": "vuelta-profile-stage-08.json",
+      "file": "vuelta-stage-08.json",
       "stage": 8,
-      "race": "vuelta",
       "date": "2026-08-29",
       "route": "Puçol → Xeraco",
-      "kind": "profile"
+      "leader_first_utc": "2026-08-29T12:01:37+00:00",
+      "leader_last_utc": "2026-08-29T14:20:57+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-09.json",

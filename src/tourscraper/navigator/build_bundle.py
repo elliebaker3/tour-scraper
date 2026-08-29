@@ -22,6 +22,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+from . import gpx_profile
 from .elevation_sync import build as build_sync
 from .extract_events import build_guideposts, load_ticker
 from .gpx_profile import altitude_at_km as gpx_alt_at_km
@@ -288,15 +289,24 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
 
     # profile.csv is only ever written by a live poll session, off a
     # per-session hashed URL that can't be recovered after the fact (see
-    # stage 2/7's gap). A stage that never got live-captured -- only
-    # backfilled/archived after the fact from the ticker -- has no route to
-    # time-sync against at all, so there is no full bundle to build. That
-    # still leaves the ticker: extract guideposts (a km-named one needs no
-    # track to place) and merge into whichever lite bundle already covers
-    # this stage, rather than raising and losing that entirely.
-    if not (stage_dir / "profile.csv").exists():
+    # stage 2/7's gap). Losing profile.csv does NOT mean losing the ability
+    # to time-sync, though -- that only needs a route SHAPE (km, altitude)
+    # to place telemetry/groups.jsonl's leader track against, and a GPX
+    # track (komoot's, for the Vuelta) supplies exactly that, just without
+    # ASO's checkpoint/climb-category columns. Only when there is no route
+    # shape AT ALL does this fall back to the ticker's own km mentions,
+    # which need no track to place but only cover whichever guideposts
+    # happened to name their own position in the text.
+    have_profile_csv = (stage_dir / "profile.csv").exists()
+    gpx_fallback_profile = None
+    if not have_profile_csv:
+        gpx = gpx_load(year_dir / "gpx", stage_number, length_km)
+        if gpx and gpx["profile"] and not gpx.get("note"):
+            gpx_fallback_profile = gpx_profile.as_route_points(gpx)
+
+    if not have_profile_csv and not gpx_fallback_profile:
         events = build_guideposts(stage_dir, [])
-        print(f"[navigator] stage {stage_number}: no profile.csv (never live-captured) "
+        print(f"[navigator] stage {stage_number}: no profile.csv and no GPX track "
               f"-- ticker-only, no time-synced bundle")
         print(f"[navigator]   guideposts {events['counts']}")
         if extension_data_dir:
@@ -311,28 +321,37 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
     race_start = actual_start_utc(stage_dir) or scheduled_start_utc(meta)
     race_finish = actual_finish_utc(stage_dir)
     sync = build_sync(stage_dir, telemetry_paths, length_km,
-                      race_start_utc=race_start, race_finish_utc=race_finish)
+                      race_start_utc=race_start, race_finish_utc=race_finish,
+                      profile=gpx_fallback_profile)
     events = build_guideposts(stage_dir, sync["points"])
 
-    # Terrain from the official GPX track, positions from ASO. The GPX is the
-    # surveyed route -- denser than ASO's profile.csv and its own distance
-    # lands within a few tenths of the official length -- but it carries only
-    # track points: no km-to-finish column, no checkpoint types, no climb
-    # grades. So each of ASO's points keeps its km, its kmto, its checkpoint
-    # and its leader time, and only the ALTITUDE is re-read from the GPX at
-    # that same distance. One source for shape, one for structure, and the
-    # km scale stays ASO's throughout.
-    elevation_source = "aso"
-    gpx = gpx_load(year_dir / "gpx", stage_number, length_km)
-    if gpx and gpx["profile"]:
-        if gpx.get("note"):
-            print(f"[navigator]   gpx: {gpx['note']} -- keeping ASO elevation")
-        else:
-            for p in sync["points"]:
-                alt = gpx_alt_at_km(gpx["profile"], p["km"])
-                if alt is not None:
-                    p["altitude"] = alt
-            elevation_source = "gpx"
+    if gpx_fallback_profile:
+        # The GPX track itself already IS the profile sync ran against above
+        # -- no ASO base to overlay altitude onto, and no checkpoint/climb
+        # columns to keep either (see as_route_points). route_markers() will
+        # come back empty; that is expected, not a bug, for a stage with no
+        # ASO profile.csv at all.
+        elevation_source = "gpx"
+    else:
+        # Terrain from the official GPX track, positions from ASO. The GPX is
+        # the surveyed route -- denser than ASO's profile.csv and its own
+        # distance lands within a few tenths of the official length -- but it
+        # carries only track points: no km-to-finish column, no checkpoint
+        # types, no climb grades. So each of ASO's points keeps its km, its
+        # kmto, its checkpoint and its leader time, and only the ALTITUDE is
+        # re-read from the GPX at that same distance. One source for shape,
+        # one for structure, and the km scale stays ASO's throughout.
+        elevation_source = "aso"
+        gpx = gpx_load(year_dir / "gpx", stage_number, length_km)
+        if gpx and gpx["profile"]:
+            if gpx.get("note"):
+                print(f"[navigator]   gpx: {gpx['note']} -- keeping ASO elevation")
+            else:
+                for p in sync["points"]:
+                    alt = gpx_alt_at_km(gpx["profile"], p["km"])
+                    if alt is not None:
+                        p["altitude"] = alt
+                elevation_source = "gpx"
 
     profile = [_slim(p) for p in downsample_profile(sync["points"])]
     markers = route_markers(sync["points"])

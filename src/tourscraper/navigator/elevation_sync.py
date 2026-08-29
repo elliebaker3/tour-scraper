@@ -386,13 +386,19 @@ def sync_profile_to_time(profile: list[dict], track: list[tuple[datetime, float]
 
 def build(stage_dir: Path, telemetry_paths, stage_length_km: float | None = None,
           race_start_utc: datetime | None = None,
-          race_finish_utc: datetime | None = None) -> dict:
+          race_finish_utc: datetime | None = None,
+          profile: list[dict] | None = None) -> dict:
     """`stage_length_km` is accepted for reporting only; it is not used in the
     time mapping, which works purely in km-to-finish.
 
     `race_start_utc` and `race_finish_utc` let the profile span the whole stage
     even when GPS came online late or stopped early; the unobserved head and
     tail are marked estimated rather than dropped.
+
+    `profile`, when given, is used instead of loading stage_dir/profile.csv --
+    for a stage with a GPX track but no ASO profile.csv (see gpx_profile.
+    as_route_points), so it can still be time-synced against telemetry/
+    groups.jsonl rather than not synced at all.
 
     Falls back to groups.jsonl (pack/group composition) for the leader track
     when individual-rider telemetry produced nothing -- confirmed the norm
@@ -402,7 +408,7 @@ def build(stage_dir: Path, telemetry_paths, stage_length_km: float | None = None
     riders and feed-timestamped, both better than a group's own reported
     distance -- see leader_track_from_groups's docstring.
     """
-    profile = load_profile(stage_dir / "profile.csv")
+    profile = profile if profile is not None else load_profile(stage_dir / "profile.csv")
     track = leader_track(telemetry_paths)
     track_source = "telemetry" if track else None
     if not track:
