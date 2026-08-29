@@ -829,6 +829,39 @@
         "ingested_at": "2026-08-26T05:01:51.630Z",
         "via": "worker"
       }
+    ],
+    "stage-8|peacocktv.com": [
+      {
+        "schema": 1,
+        "stage": 8,
+        "date": "2026-08-29",
+        "site": "peacocktv.com",
+        "duration_sec": 5000,
+        "airing_ms": null,
+        "anchors": [
+          {
+            "videoSec": 100,
+            "kind": "kmtogo",
+            "km": 150,
+            "kmto": 150.5,
+            "label": "150 km to go"
+          },
+          {
+            "videoSec": 4000,
+            "kind": "kmtogo",
+            "km": 10,
+            "kmto": 10.5,
+            "label": "10 km to go"
+          }
+        ],
+        "cal": null,
+        "ad_breaks": [],
+        "favourites": [],
+        "saved_at": null,
+        "extension_version": null,
+        "ingested_at": "2026-08-29T15:44:26.214Z",
+        "via": "worker"
+      }
     ]
   }
 }
