@@ -97,6 +97,7 @@ jobs:
           from pathlib import Path
           from zoneinfo import ZoneInfo
           import json
+          from tourscraper.storage import read_manifest
 
           data = json.loads(Path('data/vuelta/2026/reference/stages.json').read_text())
           now = datetime.datetime.now(datetime.timezone.utc)
@@ -150,14 +151,8 @@ jobs:
                   # since it would have permanently blocked scraping any
                   # stage discover already touched or a salvage ran against.
                   stage_dir = Path('data/vuelta/2026') / f'stage-{n:02d}_{date_str}'
-                  manifest_path = stage_dir / 'manifest.json'
-                  already_started = False
-                  if manifest_path.exists():
-                      try:
-                          entries = json.loads(manifest_path.read_text())
-                          already_started = any(e.get('kind') in ('live-stream', 'poll', 'radio') for e in entries)
-                      except (json.JSONDecodeError, TypeError):
-                          already_started = False
+                  entries = read_manifest(stage_dir)
+                  already_started = any(e.get('kind') in ('live-stream', 'poll', 'radio') for e in entries)
                   if not already_started and start - datetime.timedelta(minutes=30) <= now <= start + datetime.timedelta(hours=total_hours):
                       out['do_scrape'] = 'true'
 
