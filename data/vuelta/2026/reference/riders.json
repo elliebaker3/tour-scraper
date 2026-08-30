@@ -1908,15 +1908,18 @@
     "nationality": "bel",
     "sex": "M",
     "_id": "2e4fcdb30cc10f4c480c505b96b88528155cd08affde158d50983897f9e35769",
+    "_updatedAt": 1788010485661,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-NSN",
-    "_updatedAt": 1787318951323,
     "_parent": "team-2026:ff825ebf33de122aa5c5b06f8daffb4900c7182eab920ed309c11333863ae3d9",
-    "_key": "_id",
     "_virtual": "NSN-118-VAN TRICHT",
     "$team": "team-2026:ff825ebf33de122aa5c5b06f8daffb4900c7182eab920ed309c11333863ae3d9",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 8,
+      "code": -1
     }
   },
   {
@@ -2409,15 +2412,18 @@
     "victories": 0,
     "firstname": "Diego",
     "_id": "66ea2e8e84d7c4397d3a38c09e03fee15913beb747679bda2dced6d9eb6daf51",
+    "_updatedAt": 1788010485662,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-EKP",
-    "_updatedAt": 1787313610414,
     "_parent": "team-2026:b4ed3f34c9ddcaad34fdfbe02e57685d85b713f969c8574dba64ddd83fc36a19",
-    "_key": "_id",
     "_virtual": "EKP-227-URIARTE BELZUNEGI",
     "$team": "team-2026:b4ed3f34c9ddcaad34fdfbe02e57685d85b713f969c8574dba64ddd83fc36a19",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 8,
+      "code": -1
     }
   },
   {
@@ -3779,15 +3785,18 @@
     "victories": 0,
     "nationality": "ita",
     "_id": "96de1c615e98801974e1512c333714e0c21fd78bc885555c03ac33f5613d2bbe",
+    "_updatedAt": 1788024466749,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TPP",
-    "_updatedAt": 1787313610713,
     "_parent": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
-    "_key": "_id",
     "_virtual": "TPP-213-GAFFURI",
     "$team": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 8,
+      "code": -1
     }
   },
   {
@@ -4549,15 +4558,18 @@
     "lastname": "POGACAR",
     "sex": "M",
     "_id": "109159b3db6998429880611d635b45f5474ca7389a0996eb980d3af25106b236",
+    "_updatedAt": 1788024466749,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-UEX",
-    "_updatedAt": 1787313577185,
     "_parent": "team-2026:2bce52b89c62d2f477a2855b701840bbec683e653d3fdea151782d7cf3760632",
-    "_key": "_id",
     "_virtual": "UEX-11-POGACAR",
     "$team": "team-2026:2bce52b89c62d2f477a2855b701840bbec683e653d3fdea151782d7cf3760632",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 8,
+      "code": -1
     }
   },
   {
@@ -4889,15 +4901,18 @@
     "birthdate": "2000-01-06T00:00:00+01:00",
     "bib": 207,
     "_id": "91804c8ce975d2c238b8d29dae99115676f74cab3ceb8e2154773f7efc88a3b7",
+    "_updatedAt": 1788024466750,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-LOI",
-    "_updatedAt": 1787313610638,
     "_parent": "team-2026:4c200ea3378451eaa66287fb5ee6d51b45db2ee34127c8f894741da997d65cd9",
-    "_key": "_id",
     "_virtual": "LOI-207-VAN BOVEN",
     "$team": "team-2026:4c200ea3378451eaa66287fb5ee6d51b45db2ee34127c8f894741da997d65cd9",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 8,
+      "code": -4
     }
   },
   {
