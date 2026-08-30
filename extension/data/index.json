@@ -233,12 +233,14 @@
       "race": "vuelta"
     },
     {
-      "file": "vuelta-profile-stage-09.json",
+      "file": "vuelta-stage-09.json",
       "stage": 9,
-      "race": "vuelta",
       "date": "2026-08-30",
-      "route": "La Vila Joiosa/Villajoyosa → Alto de Aitana. Costa Blanca",
-      "kind": "profile"
+      "route": "La Vila Joiosa/ Villajoyosa → Alto de Aitana.Costa Blanca",
+      "leader_first_utc": "2026-08-30T10:27:03+00:00",
+      "leader_last_utc": "2026-08-30T15:06:16+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-10.json",
