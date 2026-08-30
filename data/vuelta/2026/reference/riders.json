@@ -759,15 +759,18 @@
     "sex": "M",
     "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/16/27925/0:0,400:400-0-0-70/06a7c",
     "_id": "f650b8cf0790cd9567a6551c5bd2f96eff019249e4a1eea8c90763ebc9ac8d99",
+    "_updatedAt": 1788088994188,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-UEX",
-    "_updatedAt": 1787313577329,
     "_parent": "team-2026:2bce52b89c62d2f477a2855b701840bbec683e653d3fdea151782d7cf3760632",
-    "_key": "_id",
     "_virtual": "UEX-16-TORRES ARIAS",
     "$team": "team-2026:2bce52b89c62d2f477a2855b701840bbec683e653d3fdea151782d7cf3760632",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 9,
+      "code": -1
     }
   },
   {
@@ -5604,11 +5607,10 @@
     "firstname": "Raul",
     "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/26/27921/0:0,400:400-0-0-70/203b8",
     "_id": "98685fcc9f0cfff8c7df304668cc3ffd289c9dbb3bb524ec1543af239312a2a8",
+    "_updatedAt": 1788089144865,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-MOV",
-    "_updatedAt": 1787313577420,
     "_parent": "team-2026:c801b5da34b7e03b8b92a4aee7b7da9f8a44994645c3a95ab6c45d90d8cfd34f",
-    "_key": "_id",
     "_virtual": "MOV-26-GARCIA",
     "$team": "team-2026:c801b5da34b7e03b8b92a4aee7b7da9f8a44994645c3a95ab6c45d90d8cfd34f",
     "_gets": {
