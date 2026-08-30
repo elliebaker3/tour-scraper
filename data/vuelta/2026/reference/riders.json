@@ -4127,15 +4127,18 @@
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/184/28046/0:0,400:400-70-0-70/0a59b",
     "UCICode": "10008680773",
     "_id": "62cf74673c6be2ec2a27abab19943848db0ded1f3299ea69f5b3c691e0040172",
+    "_updatedAt": 1788097460544,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-XAT",
-    "_updatedAt": 1787313600309,
     "_parent": "team-2026:da463ebcbc467ea8a7c3457fcb5bf4a3015e14699e6ba37e5a56f04d4ddfd042",
-    "_key": "_id",
     "_virtual": "XAT-184-LANGELLOTTI",
     "$team": "team-2026:da463ebcbc467ea8a7c3457fcb5bf4a3015e14699e6ba37e5a56f04d4ddfd042",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 9,
+      "code": -1
     }
   },
   {
