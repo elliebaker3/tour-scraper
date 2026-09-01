@@ -1,2 +1,3 @@
 {"recorded_at": "2026-09-01T12:16:19.414+00:00", "kind": "live-stream", "action": "start"}
 {"recorded_at": "2026-09-01T12:16:19.415+00:00", "kind": "poll", "endpoints": ["publication", "insights", "pack", "telemetry", "flashInfoLive", "checkpointList", "rankingType"]}
+{"recorded_at": "2026-09-01T13:19:30.397+00:00", "kind": "live-stream", "action": "stop", "counts": {"telemetry": 0, "groups": 421, "events": 0, "raw-only": 4355}}
