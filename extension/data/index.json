@@ -243,12 +243,14 @@
       "race": "vuelta"
     },
     {
-      "file": "vuelta-profile-stage-10.json",
+      "file": "vuelta-stage-10.json",
       "stage": 10,
-      "race": "vuelta",
       "date": "2026-09-01",
       "route": "Alcaraz → Elche de la Sierra",
-      "kind": "profile"
+      "leader_first_utc": "2026-09-01T10:58:57+00:00",
+      "leader_last_utc": "2026-09-01T15:43:07+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-11.json",
