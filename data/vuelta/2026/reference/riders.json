@@ -5415,15 +5415,18 @@
     "firstname": "Henri François",
     "birthdate": "2002-12-12T00:00:00+01:00",
     "_id": "71f94947b3e4998fdecd7e76e04457231f1baed08f0e60aaba9a2274bbe5c9c3",
+    "_updatedAt": 1788275469820,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TPP",
-    "_updatedAt": 1787313610192,
     "_parent": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
-    "_key": "_id",
     "_virtual": "TPP-217-RENARD HAQUIN",
     "$team": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 10,
+      "code": -4
     }
   },
   {
