@@ -1374,15 +1374,18 @@
     "header": null,
     "podiums": 63,
     "_id": "fd8b65421f7816544222a90710e1c3898cd8e27e1a00586b4553c9574f420dcb",
+    "_updatedAt": 1788107406967,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-APT",
-    "_updatedAt": 1787313588924,
     "_parent": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
-    "_key": "_id",
     "_virtual": "APT-101-GROVES",
     "$team": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 9,
+      "code": -1
     }
   },
   {
@@ -4127,7 +4130,7 @@
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/184/28046/0:0,400:400-70-0-70/0a59b",
     "UCICode": "10008680773",
     "_id": "62cf74673c6be2ec2a27abab19943848db0ded1f3299ea69f5b3c691e0040172",
-    "_updatedAt": 1788097460544,
+    "_updatedAt": 1788107406967,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-XAT",
     "_parent": "team-2026:da463ebcbc467ea8a7c3457fcb5bf4a3015e14699e6ba37e5a56f04d4ddfd042",
@@ -6318,21 +6321,21 @@
     "_key": "code"
   },
   {
-    "banner": null,
-    "logo": "https://img.aso.fr/core_app/img-cycling-vue-png/loi/27580/0:0,400:400-0-0-70/721ee",
-    "code": "LOI",
-    "header": null,
-    "name": "LOTTO INTERMARCHE",
+    "jersey_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/loi/29384/0:0,400:400-60-0-70/c6a70",
     "nameShort": "LOTTO INTERMARCHE",
-    "jersey": "https://img.aso.fr/core_app/img-cycling-vue-png/loi/27772/0:0,400:400-0-0-70/8fbd2",
+    "banner": null,
+    "header": null,
+    "code": "LOI",
+    "jersey": "https://img.aso.fr/core_app/img-cycling-vue-png/loi/29384/0:0,400:400-0-0-70/7cb51",
     "nationality": "bel",
-    "jersey_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/loi/27772/0:0,400:400-60-0-70/793e4",
     "color": "#000000",
     "logo_live": null,
+    "name": "LOTTO INTERMARCHE",
+    "logo": "https://img.aso.fr/core_app/img-cycling-vue-png/loi/27580/0:0,400:400-0-0-70/721ee",
     "_id": "4c200ea3378451eaa66287fb5ee6d51b45db2ee34127c8f894741da997d65cd9",
     "_bind": "team-2026",
     "_origin": "team-2026",
-    "_updatedAt": 1787306693447,
+    "_updatedAt": 1788248383307,
     "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae",
     "_key": "code"
   },
