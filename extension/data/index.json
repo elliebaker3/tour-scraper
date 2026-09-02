@@ -253,12 +253,14 @@
       "race": "vuelta"
     },
     {
-      "file": "vuelta-profile-stage-11.json",
+      "file": "vuelta-stage-11.json",
       "stage": 11,
-      "race": "vuelta",
       "date": "2026-09-02",
       "route": "Cartagena → Lorca",
-      "kind": "profile"
+      "leader_first_utc": "2026-09-02T12:06:25+00:00",
+      "leader_last_utc": "2026-09-02T18:45:23+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-12.json",
