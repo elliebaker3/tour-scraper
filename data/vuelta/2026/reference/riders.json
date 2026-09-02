@@ -5921,15 +5921,18 @@
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/88/27972/0:0,400:400-70-0-70/dcfad",
     "podiums": 156,
     "_id": "6341abd13725cdaa5b7c573daf6293ff4d7abbce891f9fb82d19330364a77414",
+    "_updatedAt": 1788364584978,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-LTK",
-    "_updatedAt": 1787313588728,
     "_parent": "team-2026:77e32cfebb8512ac80b594d7578142cb6fd14021a998feaceca41c0dea08121b",
-    "_key": "_id",
     "_virtual": "LTK-88-PEDERSEN",
     "$team": "team-2026:77e32cfebb8512ac80b594d7578142cb6fd14021a998feaceca41c0dea08121b",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 11,
+      "code": -4
     }
   },
   {
