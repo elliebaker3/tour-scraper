@@ -3557,15 +3557,18 @@
     "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/68/28328/0:0,660:1000-0-0-70/c7ebb",
     "bib": 68,
     "_id": "fbfda32e84e9106f12c2d7ce77110370d15a3100189646c66b8794f7a719ac27",
+    "_updatedAt": 1788277118839,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-NCI",
-    "_updatedAt": 1787313588503,
     "_parent": "team-2026:c4ac8146aa5681e88e9bfd663965e8551ed1aff42fb93e1a81ca5da6982d5e96",
-    "_key": "_id",
     "_virtual": "NCI-68-TURNER",
     "$team": "team-2026:c4ac8146aa5681e88e9bfd663965e8551ed1aff42fb93e1a81ca5da6982d5e96",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 10,
+      "code": -1
     }
   },
   {
@@ -4605,15 +4608,18 @@
     "idUCI": "NZL19900407",
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/112/28453/0:0,400:400-70-0-70/4ff89",
     "_id": "8e652feee93cb7b8b40e108d9d9c9520bde6e69c4eb51e31f1cf7aae9b17b1d1",
+    "_updatedAt": 1788277118840,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-NSN",
-    "_updatedAt": 1787318950643,
     "_parent": "team-2026:ff825ebf33de122aa5c5b06f8daffb4900c7182eab920ed309c11333863ae3d9",
-    "_key": "_id",
     "_virtual": "NSN-112-BENNETT",
     "$team": "team-2026:ff825ebf33de122aa5c5b06f8daffb4900c7182eab920ed309c11333863ae3d9",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 10,
+      "code": -4
     }
   },
   {
@@ -5415,7 +5421,7 @@
     "firstname": "Henri François",
     "birthdate": "2002-12-12T00:00:00+01:00",
     "_id": "71f94947b3e4998fdecd7e76e04457231f1baed08f0e60aaba9a2274bbe5c9c3",
-    "_updatedAt": 1788275469820,
+    "_updatedAt": 1788275478272,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TPP",
     "_parent": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
