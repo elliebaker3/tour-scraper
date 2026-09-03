@@ -263,12 +263,14 @@
       "race": "vuelta"
     },
     {
-      "file": "vuelta-profile-stage-12.json",
+      "file": "vuelta-stage-12.json",
       "stage": 12,
-      "race": "vuelta",
       "date": "2026-09-03",
       "route": "Vera → Calar Alto",
-      "kind": "profile"
+      "leader_first_utc": "2026-09-03T11:09:31+00:00",
+      "leader_last_utc": "2026-09-03T15:17:36+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-13.json",
