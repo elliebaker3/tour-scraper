@@ -87,15 +87,18 @@
     "lastname": "MCKENZIE",
     "podiums": 0,
     "_id": "2377e6ea91189da9e2415cd9a8ae23421a024f41bb956f6ef20d864797f55e44",
+    "_updatedAt": 1788450718479,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-JAY",
-    "_updatedAt": 1787318962850,
     "_parent": "team-2026:70878c5f63a82dd494647d075b815209764a20452535caf1f0f116738b079188",
-    "_key": "_id",
     "_virtual": "JAY-155-MCKENZIE",
     "$team": "team-2026:70878c5f63a82dd494647d075b815209764a20452535caf1f0f116738b079188",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 12,
+      "code": -1
     }
   },
   {
@@ -522,15 +525,18 @@
     "header": null,
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/18/27910/0:0,400:400-70-0-70/09d5c",
     "_id": "7f96ca246d8c57a58abde0c7a8e7c430a6c8b2e8d819353eb6586bb1b7996ca1",
+    "_updatedAt": 1788453337416,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-UEX",
-    "_updatedAt": 1787313577256,
     "_parent": "team-2026:2bce52b89c62d2f477a2855b701840bbec683e653d3fdea151782d7cf3760632",
-    "_key": "_id",
     "_virtual": "UEX-18-VINE",
     "$team": "team-2026:2bce52b89c62d2f477a2855b701840bbec683e653d3fdea151782d7cf3760632",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 12,
+      "code": -1
     }
   },
   {
@@ -1167,15 +1173,18 @@
       "en": "/rider/104/alpecin-premier-tech/de-vylder-lindsay"
     },
     "_id": "5b620a466565edfddce551fb12efc279a3ff6e6bb43f8c13333dca4bdcf615ed",
+    "_updatedAt": 1788453337416,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-APT",
-    "_updatedAt": 1787662116149,
     "_parent": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
-    "_key": "_id",
     "_virtual": "APT-104-DE VYLDER",
     "$team": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 12,
+      "code": -4
     }
   },
   {
@@ -2859,15 +2868,18 @@
     "idUCI": "ESP19960221",
     "lastname": "GONZALEZ LOPEZ",
     "_id": "6ea6d81a0867c4913f4afad7fed066fddf98034502b7ac8572ad6c6bf10d4c54",
+    "_updatedAt": 1788453337416,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-PQT",
-    "_updatedAt": 1787313577025,
     "_parent": "team-2026:1d31fa640d16a97b67d51c0ffbbbda47233882b7717f5e9bd2ed7020e0a7a669",
-    "_key": "_id",
     "_virtual": "PQT-57-GONZALEZ LOPEZ",
     "$team": "team-2026:1d31fa640d16a97b67d51c0ffbbbda47233882b7717f5e9bd2ed7020e0a7a669",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 12,
+      "code": -4
     }
   },
   {
@@ -5756,15 +5768,18 @@
     "profile_sm": "https://img.aso.fr/core_app/img-cycling-vue-png/38/27891/0:0,400:400-70-0-70/cf10a",
     "lastname": "TULETT",
     "_id": "a7310d78d068f2659c14d4d3c63c441df56761a1f882f7bcc45d81a3eb0ade1a",
+    "_updatedAt": 1788450718479,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TVL",
-    "_updatedAt": 1787313577603,
     "_parent": "team-2026:70b191db911d22ac5c3e6f28b02addb7dc8102a799ff21e409ac2c5646a635c1",
-    "_key": "_id",
     "_virtual": "TVL-38-TULETT",
     "$team": "team-2026:70b191db911d22ac5c3e6f28b02addb7dc8102a799ff21e409ac2c5646a635c1",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 12,
+      "code": -4
     }
   },
   {
@@ -6089,15 +6104,18 @@
     "victories": 0,
     "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/173/28487/0:0,400:400-0-0-70/d5cd6",
     "_id": "b14b5f25a8c11c47af342672e0c4ac737e4a3527d53a580807037c2691bb5e26",
+    "_updatedAt": 1788453337417,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TUD",
-    "_updatedAt": 1787318963131,
     "_parent": "team-2026:85943205089337a4acc63c5140428ac47b69ad704ed2e609a681d7bc122b953f",
-    "_key": "_id",
     "_virtual": "TUD-173-KLUCKERS",
     "$team": "team-2026:85943205089337a4acc63c5140428ac47b69ad704ed2e609a681d7bc122b953f",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 12,
+      "code": -1
     }
   },
   {
