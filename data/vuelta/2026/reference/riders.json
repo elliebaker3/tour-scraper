@@ -225,15 +225,18 @@
     },
     "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/108/28360/0:0,660:1000-0-0-70/d4509",
     "_id": "69d1bf6e1d2e832bb65e7b330b2abccf32820daedee74d1738f3806cc3fe6d7c",
+    "_updatedAt": 1788535183168,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-APT",
-    "_updatedAt": 1787318950783,
     "_parent": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
-    "_key": "_id",
     "_virtual": "APT-108-SENTJENS",
     "$team": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 13,
+      "code": -1
     }
   },
   {
@@ -258,15 +261,18 @@
     "header": null,
     "nationality": "aut",
     "_id": "36c9c9017bb37ca33b5490a2353a6f85c05d168051c87a4d8f286c9be3129267",
+    "_updatedAt": 1788535561286,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-DCT",
-    "_updatedAt": 1787313576809,
     "_parent": "team-2026:32f125a1a596f3230c4395c9d1cfcde1584687dc661b07b744492a898a35047c",
-    "_key": "_id",
     "_virtual": "DCT-46-Mühlberger",
     "$team": "team-2026:32f125a1a596f3230c4395c9d1cfcde1584687dc661b07b744492a898a35047c",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 13,
+      "code": -1
     }
   },
   {
@@ -1857,15 +1863,18 @@
     "lastname": "LUTSENKO",
     "facebook": "",
     "_id": "926bd3725bd199ae149221a73555917e3c6c5542229d3e7ea03e73e0db04b03d",
+    "_updatedAt": 1788535561286,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-NSN",
-    "_updatedAt": 1787318951241,
     "_parent": "team-2026:ff825ebf33de122aa5c5b06f8daffb4900c7182eab920ed309c11333863ae3d9",
-    "_key": "_id",
     "_virtual": "NSN-111-LUTSENKO",
     "$team": "team-2026:ff825ebf33de122aa5c5b06f8daffb4900c7182eab920ed309c11333863ae3d9",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 13,
+      "code": -4
     }
   },
   {
@@ -2394,15 +2403,18 @@
     },
     "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/102/28353/0:0,660:1000-0-0-70/2ba1a",
     "_id": "55bbdeb1c0e7232ce14974bce03c91c8bc79c47200198e5b4902241092835360",
+    "_updatedAt": 1788535183170,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-APT",
-    "_updatedAt": 1787318950985,
     "_parent": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
-    "_key": "_id",
     "_virtual": "APT-102-BUSATTO",
     "$team": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 13,
+      "code": -1
     }
   },
   {
@@ -4112,15 +4124,18 @@
     "instagram": "https://www.instagram.com/pavel_sivakov/",
     "birthdate": "1997-07-11T00:00:00+02:00",
     "_id": "7765857f0d89fdc9719e898f02fe526cc9a603d12c7ad21e9e91941372022d22",
+    "_updatedAt": 1788535561287,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-UEX",
-    "_updatedAt": 1787313577227,
     "_parent": "team-2026:2bce52b89c62d2f477a2855b701840bbec683e653d3fdea151782d7cf3760632",
-    "_key": "_id",
     "_virtual": "UEX-15-SIVAKOV",
     "$team": "team-2026:2bce52b89c62d2f477a2855b701840bbec683e653d3fdea151782d7cf3760632",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 13,
+      "code": -1
     }
   },
   {
