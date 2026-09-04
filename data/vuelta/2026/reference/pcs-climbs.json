@@ -163,11 +163,149 @@
       "cat": "2"
     }
   ],
-  "9": [],
-  "10": [],
-  "11": [],
-  "12": [],
-  "13": [],
+  "9": [
+    {
+      "kind": "kom",
+      "km": 36.7,
+      "label": "Puerto de Tàrbena",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 73.9,
+      "label": "Puerto de El Miserat",
+      "cat": "1"
+    },
+    {
+      "kind": "kom",
+      "km": 90.7,
+      "label": "Puerto de Tollos",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 121.8,
+      "label": "Puerto de Tudons",
+      "cat": "2"
+    },
+    {
+      "kind": "sprint",
+      "km": 134.6,
+      "label": "Benifallim"
+    },
+    {
+      "kind": "kom",
+      "km": 139.9,
+      "label": "Puerto de Benifallim",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 187.4,
+      "label": "Alto de Aitana",
+      "cat": "1"
+    }
+  ],
+  "10": [
+    {
+      "kind": "kom",
+      "km": 47.6,
+      "label": "Puerto del Peralejo",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 86.3,
+      "label": "Puerto de Aýna",
+      "cat": "2"
+    },
+    {
+      "kind": "sprint",
+      "km": 125.0,
+      "label": "Hellín"
+    },
+    {
+      "kind": "kom",
+      "km": 163.3,
+      "label": "Puerto de Socovos",
+      "cat": "2"
+    }
+  ],
+  "11": [
+    {
+      "kind": "sprint",
+      "km": 111.9,
+      "label": "Totana"
+    },
+    {
+      "kind": "kom",
+      "km": 121.8,
+      "label": "Alto de Aledo",
+      "cat": "2"
+    }
+  ],
+  "12": [
+    {
+      "kind": "kom",
+      "km": 16.0,
+      "label": "Alto del Cabecico",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 57.5,
+      "label": "Alto de Cóbdar",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 86.4,
+      "label": "Collado García",
+      "cat": "2"
+    },
+    {
+      "kind": "sprint",
+      "km": 123.7,
+      "label": "Velefique"
+    },
+    {
+      "kind": "kom",
+      "km": 135.4,
+      "label": "Alto de Velefique",
+      "cat": "1"
+    },
+    {
+      "kind": "kom",
+      "km": 166.6,
+      "label": "Calar Alto",
+      "cat": "1"
+    }
+  ],
+  "13": [
+    {
+      "kind": "kom",
+      "km": 31.2,
+      "label": "Alto de la Venta de la Cebada",
+      "cat": "1"
+    },
+    {
+      "kind": "kom",
+      "km": 83.4,
+      "label": "Alto del Legionario",
+      "cat": "2"
+    },
+    {
+      "kind": "sprint",
+      "km": 145.0,
+      "label": "Tocón"
+    },
+    {
+      "kind": "kom",
+      "km": 155.4,
+      "label": "Puerto de Granada",
+      "cat": "2"
+    }
+  ],
   "14": [],
   "15": [],
   "16": [],

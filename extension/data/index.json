@@ -273,12 +273,14 @@
       "race": "vuelta"
     },
     {
-      "file": "vuelta-profile-stage-13.json",
+      "file": "vuelta-stage-13.json",
       "stage": 13,
-      "race": "vuelta",
       "date": "2026-09-04",
       "route": "Almuñécar → Loja",
-      "kind": "profile"
+      "leader_first_utc": "2026-09-04T10:39:51+00:00",
+      "leader_last_utc": "2026-09-04T15:31:47+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-14.json",
