@@ -188,6 +188,40 @@ def route_markers(sync_points: list[dict]) -> list[dict]:
     return dedup
 
 
+# How far apart the same real climb's km can land between ASO's route data
+# and PCS's own, before it's treated as a different climb rather than a
+# rounding difference. Every case checked so far agreed to within 0.1km.
+_PCS_NAME_MATCH_KM = 1.0
+
+
+def name_from_pcs(markers: list[dict], year_dir: Path, stage_number: int) -> tuple[list[dict], str]:
+    """Attach PCS's real climb/sprint names to ASO-sourced markers that
+    don't have one yet -- which, for the Vuelta, is every one of them:
+    name_route_markers() only has velowire to name from, and velowire has no
+    Vuelta coverage at all, so every ASO-positioned climb otherwise stays
+    "Climb — Cat 1" forever with no place name. Position and category stay
+    ASO's (exact, and authoritative over PCS's inferred category -- see
+    pcs_route.py's docstring); only the name is borrowed, matched by (kind,
+    nearest km) since the two sources don't share an ordering the way ASO
+    and velowire do in name_route_markers().
+    """
+    pcs = load_climbs(year_dir).get(stage_number, [])
+    if not markers or not pcs:
+        return markers, "no PCS climbs to name from"
+    named = 0
+    for m in markers:
+        if m.get("name") or m.get("km") is None:
+            continue
+        candidates = [p for p in pcs if p["kind"] == m["kind"] and p.get("km") is not None]
+        if not candidates:
+            continue
+        closest = min(candidates, key=lambda p: abs(p["km"] - m["km"]))
+        if abs(closest["km"] - m["km"]) <= _PCS_NAME_MATCH_KM and closest.get("label"):
+            m["name"] = closest["label"]
+            named += 1
+    return markers, f"named {named}/{len(markers)} from PCS"
+
+
 def _interp_at_km(sync_points: list[dict], km: float) -> tuple[float | None, str | None]:
     """(altitude, time_utc) at a distance along the route, linearly
     interpolated from the already time-synced profile -- the same idea as
@@ -448,6 +482,13 @@ def build(stage_dir: Path, telemetry_paths, year_dir: Path,
         # this skips straight past that step.
         markers = pcs_fallback_markers(year_dir, stage_number, sync["points"], length_km)
         naming = f"{len(markers)} from PCS (no ASO climb data)" if markers else naming
+    elif not any(m.get("name") for m in markers):
+        # ASO placed these (position/category stay theirs, authoritative),
+        # but velowire couldn't name any of them -- has no Vuelta coverage
+        # at all, so this is the only name source available for a Vuelta
+        # stage that was live-captured. A TDF stage that velowire DID name
+        # skips this (at least one marker already has "name" set).
+        markers, naming = name_from_pcs(markers, year_dir, stage_number)
 
     year = int(year_dir.name) if year_dir.name.isdigit() else int(str(meta.get("date"))[:4])
     poi, specials, poi_err = (
