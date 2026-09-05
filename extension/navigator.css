@@ -37,11 +37,17 @@
   pointer-events: none;
 }
 
-/* Collapsing hides the controls but never the profile — the profile is the
-   thing being read, the controls are only how it gets calibrated. Collapsed,
-   it becomes a slim always-on strip. */
-.tn-root.tn-collapsed .tn-controls { display: none; }
-.tn-root.tn-collapsed .tn-bar { height: 36px; }
+/* Collapsed: the whole display disappears -- profile, setup prompt,
+   controls, diagnostics -- down to just the head strip (title, stage,
+   clock, and the two buttons), which is what un-collapses it again.
+   !important because .tn-needs-setup/.tn-lite-setup force .tn-setup back to
+   flex with equal-or-higher specificity further down this file -- collapsed
+   must win over "still needs calibrating" unconditionally, not just when
+   neither of those states happens to apply. */
+.tn-root.tn-collapsed .tn-controls,
+.tn-root.tn-collapsed .tn-setup,
+.tn-root.tn-collapsed .tn-bar,
+.tn-root.tn-collapsed .tn-diag { display: none !important; }
 .tn-root.tn-collapsed { padding-bottom: 8px; }
 
 .tn-head {
@@ -54,11 +60,16 @@
 .tn-head strong { font-size: 12px; letter-spacing: 0.2px; }
 .tn-stage { color: #b9bec7; overflow: hidden; text-overflow: ellipsis; }
 .tn-clock { margin-left: auto; color: #8f97a3; font-variant-numeric: tabular-nums; }
-.tn-collapse {
+.tn-collapse, .tn-pin {
   background: transparent; color: #b9bec7; border: 1px solid rgba(255,255,255,.18);
   border-radius: 5px; width: 22px; height: 20px; cursor: pointer; line-height: 1;
 }
-.tn-collapse:hover { background: rgba(255,255,255,.08); }
+.tn-collapse:hover, .tn-pin:hover { background: rgba(255,255,255,.08); }
+/* On while pinned -- otherwise identical to the emoji's own colour, so this
+   is the only signal that idle-hide is currently disabled. */
+.tn-pin.tn-pin-on {
+  background: rgba(245, 165, 36, .18); border-color: #f5a524;
+}
 
 /* The bar itself: profile + heat + markers share one stacking context. */
 .tn-bar {
@@ -180,7 +191,6 @@
   font-variant-numeric: tabular-nums; white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis;
 }
-.tn-root.tn-collapsed .tn-diag { display: none; }
 
 /* The two unmistakable moments. Given for prominence over the dropdown: no
    judgement about which moment you're looking at is involved, which is exactly

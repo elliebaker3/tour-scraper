@@ -176,6 +176,12 @@
    * fudge layered on top of an anchor pair. */
   let cal = null;   // {refMs, offsetSec, rate}
 
+  // Pinned: stays on screen at the bottom of the viewport instead of hiding
+  // on mouse idle (see installChrome). Not persisted -- a per-page-load
+  // preference like the category filters, not a saved setting.
+  let pinned = false;
+  function setPinnedPosition() { root.style.bottom = "12px"; }
+
   /* Readings the viewer has given (km-to-go pinned against a recording spot).
    * One sets the offset at the default rate; two far enough apart fit the rate
    * itself, which is the accurate end state. */
@@ -1192,6 +1198,7 @@
         <select class="tn-stage-pick" title="Which stage this recording is"></select>
         <span class="tn-stage"></span>
         <span class="tn-clock"></span>
+        <button class="tn-pin" title="Pin — keep this on screen, at the bottom, instead of hiding when the mouse is idle">📌</button>
         <button class="tn-collapse" title="Hide">–</button>
       </div>
       <div class="tn-setup">
@@ -1240,8 +1247,17 @@ watch.">Add reading</button>
       filters.appendChild(el);
     }
 
-    root.querySelector(".tn-collapse").addEventListener("click", () => {
-      root.classList.toggle("tn-collapsed");
+    root.querySelector(".tn-collapse").addEventListener("click", (ev) => {
+      const collapsed = root.classList.toggle("tn-collapsed");
+      ev.currentTarget.textContent = collapsed ? "+" : "–";
+      ev.currentTarget.title = collapsed ? "Show" : "Hide";
+    });
+
+    root.querySelector(".tn-pin").addEventListener("click", (ev) => {
+      pinned = !pinned;
+      root.classList.toggle("tn-pinned", pinned);
+      ev.currentTarget.classList.toggle("tn-pin-on", pinned);
+      if (pinned) setPinnedPosition();
     });
 
     const bar = root.querySelector(".tn-bar");
@@ -2362,7 +2378,8 @@ watch.">Add reading</button>
     let hideTimer = null;
 
     const show = () => root.classList.remove("tn-hidden");
-    const hide = () => { if (!root.matches(":hover")) root.classList.add("tn-hidden"); };
+    // Pinned overrides idle-hide entirely -- that is the whole point of it.
+    const hide = () => { if (!pinned && !root.matches(":hover")) root.classList.add("tn-hidden"); };
 
     // Visibility is driven by mouse movement, plain and reliable: any movement
     // shows the panel and (re)arms a timer that hides it after a few idle
@@ -2383,8 +2400,11 @@ watch.">Add reading</button>
     // Positioning ONLY: park the panel just above the native control bar when it
     // can be found, so it hovers over the scrubber rather than covering it.
     // This never affects whether the panel is shown -- that is the timer's job.
+    // Pinned skips this entirely and sits at a fixed spot at the very bottom
+    // of the screen instead, regardless of where the native bar is.
     root.classList.add("tn-hidden");
     setInterval(() => {
+      if (pinned) { show(); setPinnedPosition(); return; }
       const top = nativeControlBar();
       if (top != null) root.style.bottom = Math.max(GAP, window.innerHeight - top + GAP) + "px";
     }, 300);
