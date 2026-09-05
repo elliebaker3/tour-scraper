@@ -903,7 +903,7 @@
         "stage": 12,
         "date": "2026-09-03",
         "site": "www.peacocktv.com",
-        "duration_sec": 19592.7,
+        "duration_sec": 19592.8,
         "airing_ms": 1788431400000,
         "anchors": [
           {
@@ -989,12 +989,19 @@
             "kind": "kmtogo",
             "km": 65.5,
             "label": "65.5 km to go"
+          },
+          {
+            "tUtcMs": 1788444981200,
+            "videoSec": 13284.62084,
+            "kind": "kmtogo",
+            "km": 39.4,
+            "label": "39.4 km to go"
           }
         ],
         "cal": {
           "refMs": 1788435366800,
-          "offsetSec": 3854.573756987371,
-          "rate": 0.9369267290886582
+          "offsetSec": 3797.224797870077,
+          "rate": 0.9548827708439787
         },
         "ad_breaks": [
           1243,
@@ -1010,9 +1017,9 @@
           15697
         ],
         "favourites": [],
-        "saved_at": "2026-09-05T03:32:22.181Z",
+        "saved_at": "2026-09-05T03:37:32.990Z",
         "extension_version": "0.3.0",
-        "ingested_at": "2026-09-05T03:32:22.342Z",
+        "ingested_at": "2026-09-05T03:37:33.153Z",
         "via": "worker"
       }
     ]
