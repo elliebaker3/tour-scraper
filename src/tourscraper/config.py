@@ -88,4 +88,23 @@ def load_config(path: str | os.PathLike | None = None) -> Config:
         cfg.year = int(os.environ["TOUR_YEAR"])
     if os.environ.get("TOUR_RADIO_URL"):
         cfg.radio_stream_url = os.environ["TOUR_RADIO_URL"]
+    # When set, every path under data_dir resolves under this root instead --
+    # see scrape-chunk.yml, which points it at a scratch directory OUTSIDE
+    # the git checkout for the live-capture step specifically. Needed because
+    # that step runs `git pull --rebase` (in its incremental-push loop) in
+    # the SAME working directory a live process is continuously appending
+    # to. Rebase necessarily rewrites the exact file being incrementally
+    # committed on disk to replay that commit -- which silently ORPHANS the
+    # live writer's open file descriptor: everything appended after that
+    # point goes into a now-untracked inode that vanishes when the process
+    # exits, no error anywhere. Confirmed on stage 13 (2026-09-04): the raw
+    # SSE capture had 417 real position updates spread across a full hour;
+    # only 31 survived to the pushed file (and the job's own uploaded
+    # artifact -- so this isn't a push failure, the data was gone before
+    # upload even ran). Isolating the live writer under a path git never
+    # touches mid-session, and rsyncing a snapshot into the real tree right
+    # before each git add, removes the hazard entirely: git only ever sees a
+    # static copy, never a path a live process still has open.
+    if os.environ.get("TOUR_CAPTURE_ROOT"):
+        cfg.data_dir = Path(os.environ["TOUR_CAPTURE_ROOT"]) / cfg.data_dir
     return cfg

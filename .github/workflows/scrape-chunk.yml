@@ -71,11 +71,27 @@ jobs:
       - name: Run capture chunk (with incremental pushes every 5 min)
         env:
           TOUR_RADIO_URL: ${{ secrets.TOUR_RADIO_URL }}
+          # See config.py's TOUR_CAPTURE_ROOT: the live capture writes here,
+          # outside the checkout, so git operations below never touch a path
+          # its file handles are still open on. Root-caused on stage 13
+          # (2026-09-04): 417 real position updates arrived over the raw SSE
+          # connection across a full hour: only 31 survived to the pushed
+          # file, or even the job's own uploaded artifact -- so the data was
+          # gone before upload ran, not lost in transit. This is almost
+          # certainly also what stage 20 (2026-07-25, see below) actually
+          # was: rebase necessarily rewrites the exact file being
+          # incrementally committed to replay that commit, on every single
+          # incremental push, whether or not there's a real conflict --
+          # which orphans the live writer's open descriptor. Everything it
+          # appends after that point goes into a now-untracked inode that
+          # vanishes when the process exits. No error, no warning.
+          TOUR_CAPTURE_ROOT: ${{ runner.temp }}/tn-capture
         run: |
           git config user.name "tour-scraper-bot"
           git config user.email "actions@users.noreply.github.com"
           CFG=""
           if [ -n "${{ inputs.config }}" ]; then CFG="--config ${{ inputs.config }}"; fi
+          mkdir -p "$TOUR_CAPTURE_ROOT"
           python -m tourscraper $CFG stage \
             --stage "${{ inputs.stage }}" \
             --max-hours "${{ inputs.max_hours }}" \
@@ -84,6 +100,12 @@ jobs:
           while kill -0 $CAPTURE_PID 2>/dev/null; do
             sleep 300
             kill -0 $CAPTURE_PID 2>/dev/null || break
+            # Snapshot the live capture into the git tree BEFORE git touches
+            # anything -- see TOUR_CAPTURE_ROOT above. rsync copies files git
+            # is about to add/commit; the live writer's own file descriptors
+            # stay open on paths under $TOUR_CAPTURE_ROOT the whole time,
+            # which nothing below this line ever touches.
+            rsync -a "$TOUR_CAPTURE_ROOT/" ./
             git add data/
             if git commit -m "data: incremental capture $(date -u +%H:%M) UTC" >/dev/null 2>&1; then
               # NOT -X theirs. With one long job that was safe: the only thing
@@ -108,6 +130,10 @@ jobs:
             fi
           done
           wait $CAPTURE_PID
+          # Final snapshot: whatever the process wrote between the last
+          # incremental sync and exit still needs to reach the git tree
+          # before the "Commit data back to repo" step below runs.
+          rsync -a "$TOUR_CAPTURE_ROOT/" ./
 
       - name: Upload chunk as artifact (belt and suspenders)
         if: always()
