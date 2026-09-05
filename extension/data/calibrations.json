@@ -1052,12 +1052,19 @@
             "kind": "kmtogo",
             "km": 7.7,
             "label": "7.7 km to go"
+          },
+          {
+            "tUtcMs": 1788623143000,
+            "videoSec": 11352.582251,
+            "kind": "kmtogo",
+            "km": 1.9,
+            "label": "1.9 km to go"
           }
         ],
         "cal": {
           "refMs": 1788615890400,
-          "offsetSec": 4264.42432,
-          "rate": 0.9599891632523655
+          "offsetSec": 4255.299910004206,
+          "rate": 0.9713941148636485
         },
         "ad_breaks": [
           1878,
@@ -1069,9 +1076,9 @@
           12611
         ],
         "favourites": [],
-        "saved_at": "2026-09-05T20:54:26.170Z",
+        "saved_at": "2026-09-05T20:56:48.507Z",
         "extension_version": "0.3.0",
-        "ingested_at": "2026-09-05T20:54:26.320Z",
+        "ingested_at": "2026-09-05T20:56:48.651Z",
         "via": "worker"
       }
     ]
