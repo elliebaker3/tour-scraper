@@ -293,7 +293,13 @@ jobs:
           python-version: "3.12"
 
       - name: Install
-        run: pip install -e .
+        run: |
+          pip install -e .
+          # Needed for the PCS climb/sprint fetch below (Cloudflare only
+          # clears for a real browser context -- see pcs_route.py). Only
+          # chromium, not --with-deps' full font/codec set, to keep this
+          # step's overhead down on a job that runs once per stage per day.
+          playwright install chromium --with-deps
 
       - name: Build events + navigator bundle for today's stage
         run: |
@@ -311,6 +317,15 @@ jobs:
 
           python -m tourscraper events "$STAGE_DIR" \
             || echo "::warning::events parsing failed (no publication capture?)"
+
+          # Named climbs/sprints on the profile: PCS only has these once the
+          # stage has actually been raced, so this can legitimately find
+          # nothing (still behind Cloudflare, or PCS hasn't posted results
+          # yet) -- best-effort, and the "retry any stage still unnamed"
+          # step below picks it up on a later run if so.
+          python -m tourscraper --config config/config-vuelta.yaml vuelta-pcs-climbs \
+            --stage "$STAGE_NUM" \
+            || echo "::warning::PCS climb fetch failed for stage $STAGE_NUM"
 
           python -m tourscraper --config config/config-vuelta.yaml navigator \
             --stage "$STAGE_NUM" --stage-dir "$STAGE_DIR" \
@@ -330,7 +345,18 @@ jobs:
       # genuinely nothing more to sync against -- means a fix like that
       # reaches every stage it applies to on its own, not just whichever one
       # happens to be running when the fix lands.
-      - name: Retry any stage still lite, in case it can now be upgraded
+      # Same idea, extended: a "full" stage's climbs/sprints are placed
+      # exactly right from ASO's own profile.csv, but nothing NAMES them --
+      # velowire (the name source for the Tour) has no Vuelta coverage at
+      # all, so PCS is the only name source there is, and PCS only has
+      # results once a stage has actually been raced. Stage 14
+      # (2026-09-05) built and published before PCS caught up, so it sat
+      # with correctly-placed but unnamed climbs indefinitely -- the same
+      # "only ever built once" gap the lite-stage retry above already
+      # covers, just for the name step instead of the sync step. Detected
+      # by checking pcs-climbs.json's own keys rather than re-parsing every
+      # bundle: a stage missing from it has never had a successful fetch.
+      - name: Retry any stage still lite or missing PCS names, in case it can now be upgraded
         env:
           TODAY_STAGE: ${{ needs.determine.outputs.number }}
         run: |
@@ -340,15 +366,21 @@ jobs:
           import json, os
           idx = json.loads(open('extension/data/index.json').read())
           today = int(os.environ.get('TODAY_STAGE') or 0)
-          lite = sorted(e['stage'] for e in idx['stages']
-                         if e.get('race') == 'vuelta' and e.get('kind') != 'full'
-                         and e['stage'] != today)
-          print(' '.join(str(n) for n in lite))
-          " > /tmp/lite_stages.txt
-          for N in $(cat /tmp/lite_stages.txt); do
+          climbs_path = 'data/vuelta/2026/reference/pcs-climbs.json'
+          have_climbs = set(json.loads(open(climbs_path).read()).keys()) if os.path.exists(climbs_path) else set()
+          vuelta = [e for e in idx['stages'] if e.get('race') == 'vuelta' and e['stage'] != today]
+          lite = {e['stage'] for e in vuelta if e.get('kind') != 'full'}
+          unnamed = {e['stage'] for e in vuelta if str(e['stage']) not in have_climbs}
+          stages = sorted(lite | unnamed)
+          print(' '.join(str(n) for n in stages))
+          " > /tmp/retry_stages.txt
+          for N in $(cat /tmp/retry_stages.txt); do
             DIR=$(ls -d data/vuelta/2026/stage-$(printf '%02d' "$N")_* 2>/dev/null | head -1)
             [ -z "$DIR" ] && continue
             echo "retrying stage $N ($DIR)"
+            python -m tourscraper --config config/config-vuelta.yaml vuelta-pcs-climbs \
+              --stage "$N" \
+              || echo "::warning::PCS climb fetch failed for stage $N"
             python -m tourscraper --config config/config-vuelta.yaml navigator \
               --stage "$N" --stage-dir "$DIR" \
               --telemetry "$DIR/telemetry.jsonl" \

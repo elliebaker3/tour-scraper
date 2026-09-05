@@ -145,6 +145,15 @@ def main() -> None:
     p.add_argument("--refresh", action="store_true",
                    help="re-scrape lavuelta.es for tour ids instead of using the cached reference file")
 
+    p = sub.add_parser("vuelta-pcs-climbs",
+                       help="fetch named climbs/sprints for one or more Vuelta stages from "
+                            "ProCyclingStats (headless browser, clears Cloudflare) -- only "
+                            "has data once a stage has actually been raced")
+    p.add_argument("--stage", type=int, action="append", required=True,
+                   help="stage number; repeat for more than one")
+    p.add_argument("--out", default="data/vuelta/2026", help="output dir (default data/vuelta/2026)")
+    p.add_argument("--race-slug", default="vuelta-a-espana")
+
     p = sub.add_parser("startlist",
                        help="scrape the racecenter's per-rider departure/intermediate/arrival "
                             "table (headless browser) -- for stages with an individual start, "
@@ -200,6 +209,9 @@ def main() -> None:
         repo_root = Path(__file__).resolve().parents[2]
         publish_komoot_bundles(Path(args.out) / "profiles" / "komoot",
                                repo_root / "extension" / "data")
+    elif args.command == "vuelta-pcs-climbs":
+        from .navigator.pcs_route import fetch_all as fetch_pcs_climbs
+        fetch_pcs_climbs(args.race_slug, cfg.year, Path(args.out), stages=args.stage)
     elif args.command == "startlist":
         store = StageStore(cfg.year_dir, args.stage, date=stage_folder_date(cfg, args.stage))
         run_startlist_loop(cfg.base_url, store.dir, args.max_hours * 3600,

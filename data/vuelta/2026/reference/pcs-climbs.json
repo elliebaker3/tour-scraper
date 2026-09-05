@@ -306,7 +306,31 @@
       "cat": "2"
     }
   ],
-  "14": [],
+  "14": [
+    {
+      "kind": "kom",
+      "km": 92.8,
+      "label": "Puerto de los Villares",
+      "cat": "2"
+    },
+    {
+      "kind": "sprint",
+      "km": 123.6,
+      "label": "Castillo de Locubín"
+    },
+    {
+      "kind": "kom",
+      "km": 133.2,
+      "label": "Puerto de Locubín",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 154.5,
+      "label": "Sierra de La Pandera",
+      "cat": "1"
+    }
+  ],
   "15": [],
   "16": [],
   "17": [],

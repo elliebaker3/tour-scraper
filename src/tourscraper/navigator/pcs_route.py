@@ -87,9 +87,17 @@ def parse_departure_arrival(html: str) -> tuple[str | None, str | None]:
 
 
 def fetch_all(race_slug: str, year: int, out_dir: Path, max_stage: int = 21,
-              delay_seconds: float = 3.0) -> dict[int, list[dict]]:
-    """Fetch every stage page via a real browser context (clears Cloudflare),
-    save the raw HTML, and return {stage_number: markers}."""
+              delay_seconds: float = 3.0, stages: list[int] | None = None) -> dict[int, list[dict]]:
+    """Fetch stage pages via a real browser context (clears Cloudflare),
+    save the raw HTML, and return {stage_number: markers}.
+
+    `stages`, when given, fetches only those stage numbers (e.g. a single
+    just-finished stage from the automated pipeline -- see
+    scrape-stage-vuelta.yml's postprocess job) instead of every stage 1..
+    max_stage. Results are MERGED into the existing pcs-climbs.json cache
+    rather than replacing it, so a single-stage fetch doesn't wipe out
+    every other stage already fetched.
+    """
     from playwright.sync_api import sync_playwright
 
     raw_dir = out_dir / "pcs-raw"
@@ -98,7 +106,7 @@ def fetch_all(race_slug: str, year: int, out_dir: Path, max_stage: int = 21,
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        for n in range(1, max_stage + 1):
+        for n in (stages if stages is not None else range(1, max_stage + 1)):
             # A fresh context per stage, not one page.goto()-ed repeatedly:
             # reusing one page across several navigations got Cloudflare's
             # challenge to re-trigger and stick on every request after the
@@ -127,7 +135,17 @@ def fetch_all(race_slug: str, year: int, out_dir: Path, max_stage: int = 21,
             (raw_dir / f"stage-{n:02d}.html").write_text(html, encoding="utf-8")
             markers = parse_stage_markers(html)
             dep, arr = parse_departure_arrival(html)
-            results[n] = markers
+            # An empty result is cached as "confirmed no climbs" the same as
+            # a real one -- which is right for an already-raced flat stage,
+            # but wrong for one that just hasn't been raced YET: caching an
+            # empty [] for it would stop the automated retry (see
+            # scrape-stage-vuelta.yml) from ever trying again once it
+            # actually has results, since "already a key in the cache" is
+            # what that retry checks. Leaving it out of `results` entirely
+            # keeps the stage retried daily until there's something real
+            # to show for it.
+            if markers:
+                results[n] = markers
             print(f"[pcs-route] stage {n}: {dep} -> {arr} · "
                   f"{sum(1 for m in markers if m['kind'] == 'sprint')} sprint(s), "
                   f"{sum(1 for m in markers if m['kind'] == 'kom')} climb(s)")
@@ -136,9 +154,9 @@ def fetch_all(race_slug: str, year: int, out_dir: Path, max_stage: int = 21,
 
     out_path = out_dir / "reference" / "pcs-climbs.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(
-        json.dumps({str(k): v for k, v in results.items()}, ensure_ascii=False, indent=2),
-        encoding="utf-8")
+    existing = json.loads(out_path.read_text(encoding="utf-8")) if out_path.exists() else {}
+    existing.update({str(k): v for k, v in results.items()})
+    out_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[pcs-route] wrote {len(results)} stage(s) -> {out_path}")
     return results
 
