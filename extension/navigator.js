@@ -873,11 +873,14 @@
     const clock = root.querySelector(".tn-clock");
     if (lm && dur && video) {
       const kmto = Math.max(0, Math.min(len, lm.kmtoAtSec(video.currentTime)));
-      const g = gradientAt(len - kmto);
+      const here = len - kmto;
+      const g = gradientAt(here);
+      const s = speedAt(here);
       const bits = [fmtToGo(kmto)];
       if (g != null) bits.push(g > 1.5 ? `climbing ${g.toFixed(1)}%`
                              : g < -1.5 ? `descending ${Math.abs(g).toFixed(1)}%`
                              : "flat");
+      if (s != null) bits.push(`${s.toFixed(0)} km/h`);
       clock.textContent = bits.join(" · ");
       clock.className = "tn-clock" +
         (g == null ? "" : g > 1.5 ? " tn-up" : g < -1.5 ? " tn-down" : "");
@@ -1082,11 +1085,13 @@
     const clock = root.querySelector(".tn-clock");
     const here = playheadPoint();
     const g = here ? gradientAt(here.km) : null;
+    const s = here ? speedAt(here.km) : null;
     const bits = [];
     if (here) bits.push(fmtToGo(kmToGo(here)));
     if (g != null) bits.push(g > 1.5 ? `climbing ${g.toFixed(1)}%`
                            : g < -1.5 ? `descending ${Math.abs(g).toFixed(1)}%`
                            : "flat");
+    if (s != null) bits.push(`${s.toFixed(0)} km/h`);
     clock.textContent = bits.join(" · ");
     clock.className = "tn-clock" +
       (g == null ? "" : g > 1.5 ? " tn-up" : g < -1.5 ? " tn-down" : "");
@@ -1122,6 +1127,23 @@
     const a = near[0], b = near[near.length - 1];
     const d = b.km - a.km;
     return d > 0 ? (b.alt - a.alt) / (d * 10) : null;
+  }
+
+  /** The leader's speed at a point on the route, in km/h, from the same
+   *  ~1km window as gradientAt() -- distance covered over the real elapsed
+   *  time between the window's first and last timed points. This is the
+   *  race's actual pace, not the recording's: it needs a real clock on the
+   *  profile, which only a full (time-synced) bundle has. A lite bundle's
+   *  profile carries no `t` at all (see komoot_profile.publish_lite_bundles),
+   *  so this returns null there rather than reporting the assumed playback
+   *  rate as if it were how fast the peloton is riding. */
+  function speedAt(km) {
+    const near = bundle.profile.filter((p) => Math.abs(p.km - km) <= 0.5 && p.t);
+    if (near.length < 2) return null;
+    const a = near[0], b = near[near.length - 1];
+    const dKm = b.km - a.km;
+    const dHrs = (Date.parse(b.t) - Date.parse(a.t)) / 3600000;
+    return dKm > 0 && dHrs > 0 ? dKm / dHrs : null;
   }
 
   /** Nearest profile point to a fractional position along the bar. */
