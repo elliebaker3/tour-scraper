@@ -83,7 +83,7 @@
     kom:             { label: "Climbs",            color: KOM_RED,   on: true },
     poi:             { label: "Contenders",        color: "#38bdf8", on: false },
     crash:           { label: "Crashes",           color: "#e5484d", on: false },
-    breakaway_start: { label: "Attacks",           color: "#f5a524", on: false },
+    breakaway_start: { label: "Attacks",           color: "#f5a524", on: true },
     breakaway_end:   { label: "Catches",           color: "#8b7cf6", on: false },
     significant:     { label: "Significant event", color: "#cbd5e1", on: false },
     // Yours, not the race's: moments you flagged while watching. Last in the

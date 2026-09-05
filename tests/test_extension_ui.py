@@ -201,12 +201,12 @@ try:
             f"FAIL: History/Stats still offered: {s['filters']}"
         assert "Contenders" in joined, f"FAIL: no contenders toggle: {s['filters']}"
         print(f"  filters        {s['filters']}  ({s['checkedFilters']} on)")
-        # On by default: the elevation graphic (sprints and climbs) and "My
-        # moments". Every kind sourced from the TICKER starts off, so the bar
-        # is calm until one is asked for -- but a moment the viewer flagged
-        # themselves is never a surprise, so it shows without being asked.
-        assert s["checkedFilters"] == 3, \
-            f"FAIL: expected Sprints+Climbs+My moments on by default, got {s['checkedFilters']}"
+        # On by default: the elevation graphic (sprints and climbs), "My
+        # moments", and Attacks -- a real attack (Carapaz's on stage 12,
+        # 2026-09-03) went unnoticed hidden behind this toggle, so it no
+        # longer starts off like the other ticker-sourced kinds do.
+        assert s["checkedFilters"] == 4, \
+            f"FAIL: expected Sprints+Climbs+My moments+Attacks on by default, got {s['checkedFilters']}"
         assert "My moments" in " ".join(s["filters"]), \
             f"FAIL: no flagged-moments toggle: {s['filters']}"
         contenders_on = page.evaluate("""() => [...document.querySelectorAll('.tn-filter')]
@@ -248,8 +248,14 @@ try:
         print(f"  diag    {s['diag']}")
         assert s["barShown"], "FAIL: bar still hidden after calibrating"
         assert not s["setupShown"], "FAIL: prompt still shown after a reading"
-        # Race-event markers default off, so the bar is uncluttered until asked.
-        assert s["markers"] == 0, "FAIL: event markers should default off"
+        # Attacks default on now (Carapaz's on stage 12, 2026-09-03, went
+        # unnoticed hidden behind this toggle); crash/catch/significant stay
+        # off, so the bar isn't cluttered with every OTHER ticker-sourced
+        # kind until asked. All 19 of stage 14's breakaway_start guideposts
+        # land in bounds here, same as before any reading -- one reading
+        # only refines the rate, it doesn't change which fall in [0, dur].
+        assert s["markers"] == 19, \
+            f"FAIL: expected stage 14's 19 attack markers (on by default), got {s['markers']}"
         # A reading refines the GLOBAL rate, which still governs everywhere
         # outside an ad-bracketed interval. With no breaks detected there is
         # no interval to override it, so one reading keeps the 0.92 default
@@ -330,11 +336,14 @@ try:
         print(f"  badges clipped by the bar edge: {clip or 'none'}")
         assert not clip, f"FAIL: route badges cut off: {clip}"
 
-        # The one "Significant event" toggle covers all the race-event kinds.
-        assert state()["markers"] == 0, "FAIL: significant events should default off"
+        # The one "Significant event" toggle covers all the OTHER race-event
+        # kinds (crash/catch/scenic) that don't have their own toggle on --
+        # Attacks does now, so its 19 markers are the baseline here, not 0.
+        before = state()["markers"]
+        assert before == 19, f"FAIL: expected 19 default-on attack markers, got {before}"
         page.click(".tn-filter:has-text('Significant event') input")
         page.wait_for_timeout(400)
-        assert state()["markers"] > 0, "FAIL: enabling Significant event drew no markers"
+        assert state()["markers"] > before, "FAIL: enabling Significant event drew no MORE markers"
         page.click(".tn-filter:has-text('Significant event') input")   # back off
         page.wait_for_timeout(300)
 
