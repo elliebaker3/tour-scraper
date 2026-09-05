@@ -1135,6 +1135,30 @@
     return d > 0 ? (b.alt - a.alt) / (d * 10) : null;
   }
 
+  // Real position fixes (groups.jsonl/telemetry) arrive in dense bursts --
+  // tens of seconds apart -- separated by dead stretches sometimes tens of
+  // KILOMETRES long with nothing real in them at all (confirmed against
+  // stage 13's raw capture: a full hour with zero groups.jsonl entries,
+  // entirely inside one chunk's own runtime, not a chunk-boundary artifact).
+  // Above this many minutes between the real fixes bracketing a position,
+  // treat it as one of those dead stretches rather than local resolution.
+  const SPEED_MAX_REAL_GAP_MIN = 3;
+
+  /** Minutes between the nearest genuinely-observed (non-interp, non-est)
+   *  points before and after `km`, wherever they are -- Infinity if either
+   *  side has none at all (e.g. past the last real fix, or before the
+   *  first). Profile is km-ordered, so one pass finds both. */
+  function realFixGapMinutes(km) {
+    let before = null, after = null;
+    for (const p of bundle.profile) {
+      if (!p.t || p.interp || p.est) continue;
+      if (p.km <= km) before = p;
+      else { after = p; break; }
+    }
+    if (!before || !after) return Infinity;
+    return (Date.parse(after.t) - Date.parse(before.t)) / 60000;
+  }
+
   /** The leader's speed at a point on the route, in km/h, from the same
    *  ~1km window as gradientAt() -- distance covered over the real elapsed
    *  time between the window's first and last timed points. This is the
@@ -1142,8 +1166,20 @@
    *  profile, which only a full (time-synced) bundle has. A lite bundle's
    *  profile carries no `t` at all (see komoot_profile.publish_lite_bundles),
    *  so this returns null there rather than reporting the assumed playback
-   *  rate as if it were how fast the peloton is riding. */
+   *  rate as if it were how fast the peloton is riding.
+   *
+   *  Also null wherever realFixGapMinutes() says the nearest real fixes are
+   *  too far apart in time: most of a stage's profile is `interp` --
+   *  linearly interpolated between real fixes wherever they're sparser than
+   *  the route's own km resolution -- and a straight line has the same
+   *  slope everywhere along it. Sampling two interpolated points a km apart
+   *  inside one of THOSE stretches doesn't measure two different moments of
+   *  racing; it just re-derives the one constant slope smeared across
+   *  however many km/minutes separate the real fixes bracketing it, which
+   *  is what "too consistent" was actually reporting: it wasn't wrong per
+   *  km, it was one number wearing many positions' worth of km. */
   function speedAt(km) {
+    if (realFixGapMinutes(km) > SPEED_MAX_REAL_GAP_MIN) return null;
     const near = bundle.profile.filter((p) => Math.abs(p.km - km) <= 0.5 && p.t);
     if (near.length < 2) return null;
     const a = near[0], b = near[near.length - 1];
