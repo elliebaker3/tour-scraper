@@ -442,6 +442,25 @@ def build(stage_dir: Path, telemetry_paths, stage_length_km: float | None = None
             track = leader_track_from_groups(groups_paths)
             if track:
                 track_source = "groups"
+    # The ticker's own occasional self-reported distance ("15 km to go",
+    # "about 39 km from the finish") is folded in as additional real
+    # samples, re-cleaned through the same monotonic + speed-sanity check as
+    # everything else. This tends to land exactly where GPS/groups.jsonl is
+    # sparsest -- an attack, a catch, a crash are exactly the moments worth
+    # a ticker line -- and exactly where the constant-pace interpolation
+    # assumption is most wrong (an attack IS a pace change). Confirmed
+    # against stage 12 (2026-09-03): groups.jsonl's nearest real fixes
+    # bracketing Carapaz's attack were 63 minutes and 30km apart, so the
+    # interpolated position at that instant (32.7km to go) landed nowhere
+    # near where the ticker itself said the attack happened (39km to go).
+    from .extract_events import ticker_km_samples
+    ticker_samples = ticker_km_samples(stage_dir)
+    if ticker_samples:
+        merged = _clean_track((track or []) + ticker_samples)
+        if merged:
+            track = merged
+            if track_source is None:
+                track_source = "ticker"
     route_len = max((p["km"] for p in profile), default=0)
     track, est_above = extend_track_to_start(track, route_len, race_start_utc)
     track, est_below = extend_track_to_finish(track, race_finish_utc)

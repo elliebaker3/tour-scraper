@@ -82,6 +82,61 @@ def _extract_km(text: str) -> float | None:
     return float(m.group(1)) if m else None
 
 
+# Digit-BEFORE-km, unlike KM_MENTION_RE above -- but scoped to only the two
+# phrasings that are unambiguously a distance-TO-FINISH rather than a climb
+# length, a speed, or a neutralized-zone distance: "N km to go" and "N km
+# from the finish". Checked against real ticker text before settling on
+# just these two ("13.1 km at 7.2%" is a climb's own length; "41.1 km/h" is
+# a speed; "after 35 km" is distance covered, the opposite reference frame;
+# "(166,6 Km)" is the stage's total length) -- both survive because there is
+# no other reading of "km to go" or "km from the finish" in cycling
+# commentary.
+TICKER_KM_TO_FINISH_RE = re.compile(
+    r"\b(\d+(?:\.\d+)?)\s*km\s+(?:to\s+go|from\s+the\s+finish)\b", re.I)
+
+
+def ticker_km_samples(stage_dir: Path) -> list[tuple[datetime, float]]:
+    """Extra real leader-position samples straight from the ticker's own
+    text, in exactly the places groups.jsonl/telemetry are least likely to
+    have one: ASO's commentary states a distance-to-finish directly ("15 km
+    to go", "about 39 km from the finish") at a moment worth describing --
+    an attack, a catch, a crash -- which is exactly when a sudden pace
+    change makes the surrounding GPS-derived interpolation most wrong (an
+    attack IS a sudden acceleration; a straight line between two distant
+    real fixes assumes there wasn't one).
+
+    Returned in the same (datetime, km_to_finish) shape elevation_sync's
+    leader_track()/leader_track_from_groups() produce, meant to be merged
+    into that same list and re-run through _clean_track()'s monotonic +
+    speed-sanity check -- so a wrong or ambiguous mention gets rejected the
+    same way a bad GPS fix would, not trusted blindly.
+    """
+    samples = []
+    for item in load_ticker(stage_dir):
+        if not item.get("t"):
+            continue
+        text = item.get("all") or ""
+        # A historical aside can name a km position from a PAST edition's
+        # race ("in 2017... Lampaert attacked with 1 km to go") -- caught
+        # exactly this way on stage 3 (2026-08-24): a Gruissan town-history
+        # item merged in as if it were the leader's live position, dragged
+        # the anchor down to ~1km, and rejected nearly every real sample
+        # after it as "going backwards". Same HISTORY_RE already used to
+        # classify these as the "history" guidepost category elsewhere in
+        # this file; reused here to exclude them instead.
+        if HISTORY_RE.search(text) and not NOT_HISTORY_RE.search(text):
+            continue
+        m = TICKER_KM_TO_FINISH_RE.search(text)
+        if not m:
+            continue
+        try:
+            when = _parse_ts(_to_utc(item["t"]))
+        except ValueError:
+            continue
+        samples.append((when, float(m.group(1))))
+    return samples
+
+
 def _clean(text: str) -> str:
     return " ".join(TAG_RE.sub(" ", text or "").split())
 
