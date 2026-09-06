@@ -1,6 +1,6 @@
 # Privacy policy — Tour Navigator
 
-_Last updated: 29 August 2026_
+_Last updated: 6 September 2026_
 
 Tour Navigator is a browser extension that draws a cycling stage's elevation
 profile over a video player's navigation bar. This policy describes everything
@@ -16,9 +16,12 @@ Using `chrome.storage.local`, on your machine only:
 - **Moments you flag** with the star button, so you can find them again.
 - **Which stage you selected** from the dropdown, if the extension could not
   work it out on its own.
+- **When you first installed it, and your license key once one verifies** —
+  used only to decide whether the free trial is still active. See
+  *Licensing* below.
 
 Nothing here is synced to a Google account, and nothing is transmitted unless
-you enter a reading (see below).
+you enter a reading (see below), or a license key once the trial ends.
 
 ## What is sent, and when
 
@@ -67,6 +70,22 @@ Flagged moments are submitted as bare positions in the recording, with no note
 or label attached. They are collected so the parts of a stage people mark can
 be studied, and are **never shown to anyone else** — the extension only ever
 displays the moments flagged in your own browser.
+
+## Licensing
+
+The extension is free to use for a limited trial, after which continuing to
+use it requires a one-time $5 payment. Payment is handled entirely by
+**Stripe** — this project never sees your card details, name, or email at
+all; that information stays with Stripe.
+
+Once you pay, Stripe hands you a license key. Entering it sends **only that
+key** to the same collector Worker described above, which checks it against
+a list of valid keys and reports back yes or no. Your IP address reaches the
+Worker for this the same way it does for a calibration submission (used
+briefly to rate-limit repeated attempts, never stored). Nothing about who you
+are is attached to a key at any point after Stripe's own checkout — the
+Worker only ever knows "this specific string is or isn't valid," never who
+holds it.
 
 ## Where it goes
 

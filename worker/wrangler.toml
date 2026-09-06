@@ -9,3 +9,17 @@ compatibility_date = "2026-07-01"
 # [[kv_namespaces]]
 # binding = "RATE"
 # id = "<paste the id wrangler prints>"
+
+# License keys for the paywall (see the licensing section in src/index.js).
+# Unlike RATE above, the licensing ROUTES actively require this -- they
+# return a 500 rather than silently no-opping, since "skip the check" would
+# mean unlimited free access, not a safe default.
+#   npx wrangler kv namespace create LICENSES
+# then paste the printed id below and redeploy.
+# [[kv_namespaces]]
+# binding = "LICENSES"
+# id = "<paste the id wrangler prints>"
+
+# Signing secret for verifying Stripe webhook deliveries (Stripe dashboard ->
+# Developers -> Webhooks -> your endpoint -> Signing secret, starts "whsec_"):
+#   npx wrangler secret put STRIPE_WEBHOOK_SECRET

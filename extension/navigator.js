@@ -2025,12 +2025,96 @@ watch.">Add reading</button>
     return b;
   }
 
+  /* Licensing: a free trial, then a one-time $5 unlock via Stripe. See
+   * worker/src/index.js's licensing section for the server side (Stripe
+   * webhook -> license key -> /verify-license) -- this is deliberately the
+   * only part of that whole flow living in the extension, since anything
+   * checked purely client-side in unminified, sideloaded source can be
+   * edited out by anyone determined enough. What this DOES accomplish: a
+   * real payment flow for everyone else, which is the actual goal.
+   *
+   * TRIAL_MS is a stated policy, not a technical constant -- change the
+   * number, not the mechanism, if the trial length changes. */
+  const TRIAL_MS = 24 * 60 * 60 * 1000;
+  const PAYMENT_LINK_URL = "https://buy.stripe.com/REPLACE_WITH_REAL_LINK";
+
+  const storageGet = (keys) => new Promise((res) => chrome.storage.local.get(keys, res));
+  const storageSet = (obj) => new Promise((res) => chrome.storage.local.set(obj, res));
+
+  /** True if the extension should run normally -- still inside the trial
+   *  window, or a key was verified before. A verified key is trusted
+   *  locally forever after that one check, so a normal page load never
+   *  hits the network for this; only entering a NEW key does. */
+  async function checkLicense() {
+    const stored = await storageGet(["tnInstalledAt", "tnLicensed"]);
+    if (stored.tnLicensed) return true;
+    let installedAt = stored.tnInstalledAt;
+    if (!installedAt) {
+      installedAt = Date.now();
+      await storageSet({ tnInstalledAt: installedAt });
+    }
+    return (Date.now() - installedAt) < TRIAL_MS;
+  }
+
+  /** Shown instead of the real panel once the trial's over and no key has
+   *  verified yet. Deliberately minimal -- reuses .tn-root's own fixed
+   *  positioning/styling, skips installChrome() entirely (no idle-hide, no
+   *  pin, no control-bar tracking): a paywall should stay put and be seen,
+   *  not behave like the thing it's blocking. */
+  function buildPaywallUi() {
+    root = document.createElement("div");
+    root.className = "tn-root tn-paywall";
+    root.innerHTML = `
+      <div class="tn-head"><strong>Tour Navigator</strong></div>
+      <p class="tn-paywall-msg">Your free trial has ended. Unlock Tour Navigator
+        for a one-time $5 payment.</p>
+      <a class="tn-paywall-buy" href="${PAYMENT_LINK_URL}" target="_blank" rel="noopener">Pay $5 to unlock →</a>
+      <div class="tn-paywall-license">
+        <input class="tn-license-key" placeholder="XXXX-XXXX-XXXX-XXXX" spellcheck="false">
+        <button class="tn-license-submit">Unlock</button>
+      </div>
+      <span class="tn-license-note"></span>
+    `;
+    document.body.appendChild(root);
+
+    const submit = async () => {
+      const input = root.querySelector(".tn-license-key");
+      const note = root.querySelector(".tn-license-note");
+      const key = input.value.trim().toUpperCase();
+      if (!key) { note.textContent = "Enter the key from your receipt first."; return; }
+      note.textContent = "Checking…";
+      try {
+        const r = await fetch(COLLECTOR_URL + "/verify-license", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ key }),
+        });
+        const d = await r.json();
+        if (d.valid) {
+          await storageSet({ tnLicensed: true, tnLicenseKey: key });
+          note.textContent = "Unlocked! Reloading…";
+          setTimeout(() => location.reload(), 600);
+        } else {
+          note.textContent = "That key isn't valid -- check for typos.";
+        }
+      } catch (e) {
+        note.textContent = "Couldn't reach the license server -- try again in a moment.";
+      }
+    };
+    root.querySelector(".tn-license-submit").addEventListener("click", submit);
+    root.querySelector(".tn-license-key").addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter") submit();
+    });
+  }
+
   async function start() {
     // Only the top document gets a panel. With all_frames enabled a panel was
     // being built in every iframe, and a subframe cannot see __PLAYBACK_STATE__
     // -- so it fell back to the last bundle and showed the wrong stage while
     // looking perfectly normal.
     if (window.top !== window.self) return;
+
+    if (!(await checkLicense())) { buildPaywallUi(); return; }
+
     try {
       bundle = await loadBundle();
     } catch (e) {

@@ -321,3 +321,25 @@
 .tn-poi:hover .tn-rm-badge { transform: translateX(-50%) scale(1.25); }
 .tn-poi.tn-rm-atleft:hover .tn-rm-badge,
 .tn-poi.tn-rm-atright:hover .tn-rm-badge { transform: scale(1.25); }
+
+/* Paywall: shown instead of the real panel once the trial's over. Reuses
+   .tn-root's own floating/positioning (no idle-hide, no pin -- see
+   buildPaywallUi), just its own compact content underneath. */
+.tn-paywall-msg { margin: 8px 0; color: #d6d9de; }
+.tn-paywall-buy {
+  display: inline-block; background: #f5a524; color: #1a1200; font-weight: 600;
+  text-decoration: none; padding: 8px 14px; border-radius: 6px; margin-bottom: 10px;
+}
+.tn-paywall-buy:hover { background: #ffb63d; }
+.tn-paywall-license { display: flex; gap: 8px; align-items: center; }
+.tn-license-key {
+  flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 5px; color: #f2f3f5; padding: 6px 8px; font: 13px/1.2 ui-monospace, monospace;
+  letter-spacing: .5px; text-transform: uppercase;
+}
+.tn-license-submit {
+  background: transparent; color: #f2f3f5; border: 1px solid rgba(255,255,255,.3);
+  border-radius: 5px; padding: 6px 12px; cursor: pointer;
+}
+.tn-license-submit:hover { background: rgba(255,255,255,.08); }
+.tn-license-note { display: block; margin-top: 8px; color: #8f97a3; font-size: 11px; }

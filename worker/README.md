@@ -93,3 +93,65 @@ Stage number, the site's hostname, the recording's length, the km-to-go
 readings and where in the recording they were taken, plus the fitted transform
 and extension version. No identity, no account, no viewing history. The panel's
 buttons say as much in their tooltip.
+
+## Licensing (paywall)
+
+The extension runs free for a stated trial, then needs a one-time $5 payment
+via Stripe to keep going. Stripe processes the payment and knows the buyer;
+this Worker only ever knows whether a given key string is valid -- see
+`PRIVACY.md` for the full breakdown of what that means for a buyer.
+
+Stripe has no built-in concept of a software license key (unlike Gumroad), so
+this Worker builds the missing piece: it turns a webhook Stripe fires on
+successful payment into a key, and gives the extension a way to check one.
+
+### One-time setup, in Stripe's dashboard
+
+1. **Create the product**: a one-time $5 price for "Tour Navigator unlock."
+2. **Create a Payment Link** for it. Set its post-payment redirect to:
+   ```
+   https://<your-worker-subdomain>.workers.dev/success?session_id={CHECKOUT_SESSION_ID}
+   ```
+   (Stripe substitutes `{CHECKOUT_SESSION_ID}` itself -- type it literally.)
+3. Put that Payment Link's URL into `PAYMENT_LINK_URL` in `extension/navigator.js`.
+4. **Create a webhook** (Developers → Webhooks → Add endpoint) pointed at:
+   ```
+   https://<your-worker-subdomain>.workers.dev/stripe-webhook
+   ```
+   subscribed to the `checkout.session.completed` event. Copy its **signing
+   secret** (starts `whsec_`) once created.
+
+### Deploy-side setup
+
+```bash
+# A KV namespace to store issued license keys (separate from RATE above --
+# this one is required, not optional; the licensing routes 500 without it
+# rather than silently granting free access).
+npx wrangler kv namespace create LICENSES
+# paste the printed id into wrangler.toml's LICENSES binding, then:
+
+npx wrangler secret put STRIPE_WEBHOOK_SECRET   # the whsec_... from step 4 above
+npx wrangler deploy
+```
+
+### What it exposes
+
+- `POST /stripe-webhook` — Stripe calls this. Verifies the request is
+  genuinely from Stripe (HMAC-SHA256 over the raw body, using the signing
+  secret above) before minting a key; a forged POST without a valid
+  signature is rejected outright, since this is the one part of the whole
+  feature actually worth attacking.
+- `GET /success?session_id=...` — an HTML page (not JSON; a human lands
+  here straight out of Checkout) that polls for and displays the key.
+- `GET /license?session_id=...` — what that page polls; empty until the
+  webhook above has landed for that session.
+- `POST /verify-license {key}` — what the extension itself calls when a
+  viewer enters a key; rate-limited the same way calibration submissions
+  are.
+
+```bash
+npm test        # includes licensing.test.js: a genuinely Stripe-signed
+                 # request verifies; wrong secret, tampered body, missing/
+                 # malformed signature, and a replayed old timestamp all
+                 # get rejected
+```

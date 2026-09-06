@@ -2,11 +2,12 @@
   "name": "tour-calibrations-worker",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Collects Tour Navigator calibrations from anonymous contributors and commits them to calibrations.json.",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "test": "node test/validate.test.js"
+    "test": "node test/validate.test.js && node test/licensing.test.js"
   },
   "devDependencies": {
     "wrangler": "^3.90.0"

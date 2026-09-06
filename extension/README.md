@@ -15,7 +15,7 @@ Two hosts, both for data rather than code:
 | | why |
 |---|---|
 | `raw.githubusercontent.com` | reading the shared calibration store, and the stage bundle database (`extension/data/index.json` + the per-stage profile/elevation files) |
-| the collector Worker | submitting a calibration, and separately, periodic session telemetry (which parts of a stage were watched, skips/rewinds) -- see *Privacy* below |
+| the collector Worker | submitting a calibration, periodic session telemetry (which parts of a stage were watched, skips/rewinds), and checking a license key once the free trial ends -- see *Privacy* below |
 
 The stage database is fetched fresh on every load (capped at 1.5s, then
 falling back to whatever was bundled at install time) rather than only read

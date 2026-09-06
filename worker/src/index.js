@@ -52,7 +52,7 @@ const RATE_WINDOW_SEC = 3600;
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Max-Age": "86400",
 };
@@ -329,9 +329,188 @@ async function storeSession(env, rec) {
   if (!put.ok) throw new Error(`write session: ${put.status}`);
 }
 
+/* Licensing: a $5 one-time Stripe payment unlocks the extension past its
+ * free-trial window. Stripe has no concept of "software license keys" the
+ * way Gumroad does, so this builds the missing piece on top of Stripe's raw
+ * payment primitives:
+ *
+ *   1. Stripe calls /stripe-webhook the instant a Checkout session
+ *      completes. Signature-verified (see verifyStripeSignature) so a
+ *      forged POST can't mint a free license -- this is the one part of the
+ *      whole feature an attacker would actually want to break.
+ *   2. A license key is generated and stored in KV as {LICENSES} under two
+ *      keys: `license:{key}` (what /verify-license checks) and
+ *      `session:{sessionId}` (what the success page polls, since it has the
+ *      session id from Stripe's redirect but not the key itself yet).
+ *   3. Stripe's Checkout success URL points at /success?session_id=
+ *      {CHECKOUT_SESSION_ID}, which polls /license until the webhook (2) has
+ *      landed, then shows the key to paste into the extension.
+ *   4. The extension calls /verify-license with whatever the viewer typed
+ *      in; a match unlocks it permanently, cached locally so this endpoint
+ *      is hit once per install, not once per page load.
+ *
+ * Storing "is this key valid" rather than anything about who bought it: no
+ * email, no name, nothing tied to a person longer than Stripe's own records
+ * already are.
+ */
+
+// Avoids 0/O/1/I/L -- a key gets read off a screen and typed by hand, and
+// those are the pairs a person actually misreads.
+const LICENSE_KEY_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
+
+function generateLicenseKey() {
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  let s = "";
+  for (const b of bytes) s += LICENSE_KEY_ALPHABET[b % LICENSE_KEY_ALPHABET.length];
+  return s.match(/.{1,4}/g).join("-");
+}
+
+function timingSafeEqual(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+/** Stripe signs each webhook with HMAC-SHA256 over "{timestamp}.{rawBody}",
+ *  sent as a `Stripe-Signature: t=...,v1=...` header. Verified from raw
+ *  bytes -- NOT the parsed JSON, which wouldn't reproduce the same bytes
+ *  Stripe signed -- using the Web Crypto API (no Stripe SDK dependency; the
+ *  official Node SDK doesn't run in the Workers runtime without a compat
+ *  shim, and this is the one primitive actually needed from it). A 5-minute
+ *  timestamp tolerance blocks replaying an old, captured request. */
+async function verifyStripeSignature(rawBody, sigHeader, secret) {
+  if (!sigHeader) return false;
+  const parts = Object.fromEntries(
+    sigHeader.split(",").map((kv) => kv.split("=")).filter((kv) => kv.length === 2));
+  const { t: timestamp, v1: sig } = parts;
+  if (!timestamp || !sig) return false;
+  if (Math.abs(Date.now() / 1000 - Number(timestamp)) > 300) return false;
+  const key = await crypto.subtle.importKey(
+    "raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const mac = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(`${timestamp}.${rawBody}`));
+  const hex = [...new Uint8Array(mac)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  return timingSafeEqual(hex, sig);
+}
+
+async function handleStripeWebhook(request, env) {
+  if (!env.STRIPE_WEBHOOK_SECRET) return json(500, { error: "worker missing STRIPE_WEBHOOK_SECRET" });
+  if (!env.LICENSES) return json(500, { error: "worker missing LICENSES binding" });
+  const rawBody = await request.text();
+  const ok = await verifyStripeSignature(rawBody, request.headers.get("Stripe-Signature"), env.STRIPE_WEBHOOK_SECRET);
+  if (!ok) return json(400, { error: "invalid signature" });
+
+  let event;
+  try { event = JSON.parse(rawBody); } catch { return json(400, { error: "invalid JSON" }); }
+
+  if (event.type === "checkout.session.completed") {
+    const sessionId = event.data?.object?.id;
+    if (sessionId) {
+      // Idempotent: Stripe retries a webhook delivery that didn't get a
+      // prompt 2xx, so a session that already has a key is left alone
+      // rather than issuing a second one for the same payment.
+      const existing = await env.LICENSES.get(`session:${sessionId}`);
+      if (!existing) {
+        const key = generateLicenseKey();
+        await env.LICENSES.put(`license:${key}`, "valid");
+        await env.LICENSES.put(`session:${sessionId}`, key);
+      }
+    }
+  }
+  return json(200, { received: true });
+}
+
+/** Polled by the success page: has the webhook for this Checkout session
+ *  landed yet? (Stripe's redirect and its webhook delivery race each
+ *  other -- there's no ordering guarantee -- so the key may not exist the
+ *  instant the buyer's browser arrives here.) */
+async function handleLicenseLookup(url, env) {
+  if (!env.LICENSES) return json(500, { error: "worker missing LICENSES binding" });
+  const sessionId = url.searchParams.get("session_id") || "";
+  if (!sessionId) return json(400, { error: "session_id required" });
+  const key = await env.LICENSES.get(`session:${sessionId}`);
+  return json(200, { key: key || null });
+}
+
+async function handleVerifyLicense(request, env) {
+  if (!env.LICENSES) return json(500, { error: "worker missing LICENSES binding" });
+  const ip = request.headers.get("CF-Connecting-IP") || "";
+  if (await rateLimited(env, ip)) return json(429, { error: "rate limited" });
+  let body;
+  try { body = JSON.parse(await request.text()); } catch { return json(400, { error: "invalid JSON" }); }
+  const key = String(body?.key || "").trim().toUpperCase();
+  if (!key) return json(400, { error: "key required" });
+  const valid = await env.LICENSES.get(`license:${key}`);
+  return json(200, { valid: !!valid });
+}
+
+/** Plain HTML, not JSON -- this is the page a human lands on straight out of
+ *  Stripe Checkout, not something the extension calls. Polls its own
+ *  /license endpoint client-side rather than blocking the response on it,
+ *  since the webhook (racing this same redirect) might take a few seconds. */
+function handleSuccessPage(url) {
+  const sessionId = url.searchParams.get("session_id") || "";
+  const html = `<!doctype html>
+<html><head><meta charset="utf-8"><title>Tour Navigator -- your license key</title>
+<style>
+  body { font: 16px/1.5 -apple-system, BlinkMacSystemFont, sans-serif; background:#0e1014;
+         color:#f2f3f5; max-width:560px; margin:60px auto; padding:0 20px; }
+  .key { font: 22px/1.4 ui-monospace, Menlo, monospace; background:#1b1e24; border:1px solid #333;
+         border-radius:8px; padding:16px; margin:20px 0; text-align:center; letter-spacing:1px; }
+  button { background:#f5a524; border:none; border-radius:6px; padding:10px 16px;
+           font-size:14px; cursor:pointer; }
+  .muted { color:#8f97a3; font-size:14px; }
+</style></head>
+<body>
+  <h2>Thanks! Here's your license key</h2>
+  <div id="key" class="key">Waiting for payment confirmation&hellip;</div>
+  <button id="copy" style="display:none">Copy key</button>
+  <p class="muted">Paste this into the Tour Navigator panel to unlock it. This page checks
+  automatically every couple seconds -- no need to refresh.</p>
+  <script>
+    const sessionId = ${JSON.stringify(sessionId)};
+    async function poll() {
+      if (!sessionId) { document.getElementById('key').textContent = 'No session id in URL.'; return; }
+      for (let i = 0; i < 20; i++) {
+        try {
+          const r = await fetch('/license?session_id=' + encodeURIComponent(sessionId));
+          const d = await r.json();
+          if (d.key) {
+            document.getElementById('key').textContent = d.key;
+            const btn = document.getElementById('copy');
+            btn.style.display = 'inline-block';
+            btn.onclick = () => navigator.clipboard.writeText(d.key);
+            return;
+          }
+        } catch (_) {}
+        await new Promise((res) => setTimeout(res, 2000));
+      }
+      document.getElementById('key').textContent =
+        'Still processing -- reload this page in a moment, or check your email receipt.';
+    }
+    poll();
+  </script>
+</body></html>`;
+  return new Response(html, { headers: { "Content-Type": "text/html; charset=utf-8", ...CORS } });
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS });
+
+    const url = new URL(request.url);
+    if (url.pathname === "/stripe-webhook" && request.method === "POST") {
+      return handleStripeWebhook(request, env);
+    }
+    if (url.pathname === "/success" && request.method === "GET") {
+      return handleSuccessPage(url);
+    }
+    if (url.pathname === "/license" && request.method === "GET") {
+      return handleLicenseLookup(url, env);
+    }
+    if (url.pathname === "/verify-license" && request.method === "POST") {
+      return handleVerifyLicense(request, env);
+    }
     if (request.method !== "POST") return json(405, { error: "POST only" });
     if (!env.GITHUB_TOKEN) return json(500, { error: "worker missing GITHUB_TOKEN" });
 
