@@ -1428,7 +1428,7 @@
     "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/107/28442/0:0,400:400-0-0-70/a70fd",
     "instagram": "https://instagram.com/hugohoule/",
     "_id": "af07503001232e55f25239dc6e9b20bbebda8fa2133921b5caa48592044d976f",
-    "_updatedAt": 1788625480222,
+    "_updatedAt": 1788626581655,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-APT",
     "_parent": "team-2026:cf36f019db0537919c8efd32f19b96be46aaf2c625fa8dc89882dee398076e8d",
@@ -5562,15 +5562,18 @@
     "header": null,
     "birthdate": "1992-12-11T00:00:00+01:00",
     "_id": "cae3a696fa03d7b61ed69cecf3278a77d5176b35d247c820a84c5f359c842c3f",
+    "_updatedAt": 1788626581656,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TVL",
-    "_updatedAt": 1787313577541,
     "_parent": "team-2026:70b191db911d22ac5c3e6f28b02addb7dc8102a799ff21e409ac2c5646a635c1",
-    "_key": "_id",
     "_virtual": "TVL-36-LAPORTE",
     "$team": "team-2026:70b191db911d22ac5c3e6f28b02addb7dc8102a799ff21e409ac2c5646a635c1",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 14,
+      "code": -1
     }
   },
   {

@@ -969,19 +969,59 @@
     "_key": "stage"
   },
   {
-    "lengthDisplay": 189.7,
-    "type": "MMG",
-    "length": 189.7,
-    "isCancelled": false,
-    "date": "2026-09-06T00:00:00+02:00",
+    "length": 110.2,
     "stage": 15,
-    "podiumDisplayMode": "instantpodium",
-    "hasCoordinates": true,
+    "date": "2026-09-06T00:00:00+02:00",
+    "startTime": "15:00:00",
     "timezone": "Europe/Madrid",
-    "id": 25113,
-    "startTime": "12:46:00",
+    "hasCoordinates": true,
+    "lengthDisplay": 110,
+    "endTime": "17:30:00",
+    "isCancelled": false,
     "showGroups": true,
+    "departureCity": {
+      "code": "palma-del-rio",
+      "createdBy": "Clerat",
+      "label": "Palma del Río",
+      "id": 32858,
+      "updatedAt": "2025-12-15T12:33:52+01:00",
+      "updatedBy": "Clerat",
+      "content": {
+        "texts": [
+          {
+            "locale": "es",
+            "text": [
+              "Palma del Río combina historia, patrimonio y vida tranquila a orillas del Guadalquivir. Su casco histórico conserva iglesias, conventos y palacios que recuerdan siglos de tradición, mientras que las plazas y calles invitan a pasear y descubrir su carácter andaluz. Entre olivares y jardines, Palma del Río ofrece un equilibrio entre patrimonio, paisaje y cultura local, donde la gastronomía y las festividades completan la experiencia de este rincón cordobés.<br />\n<br />\nSede inédita de La Vuelta.<br />\n20.546 habitantes.<br />\nProvincia de Córdoba.<br />\n<a href=\"https://www.palmadelrio.es\" target=\"_blank\" rel=\"noopener noreferrer\"> palmadelrio.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
+            ]
+          },
+          {
+            "text": [
+              "Palma del Río combines history, heritage and a quiet life on the banks of the Guadalquivir River. Its historical centre is home to churches, convents and palaces that preserve centuries of tradition, while the streets and plazas invite visitors to stroll and discover the Andalusian style. Nestled among olive groves and gardens, Palma del Río offers the perfect balance between heritage, landscapes and local culture, where gastronomy and festivities complete the tourist experience in this part of Córdoba.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n20,546 inhabitants.<br />\nProvince of Córdoba.<br />\n<a href=\"https://www.palmadelrio.es\" target=\"_blank\" rel=\"noopener noreferrer\"> palmadelrio.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
+            ],
+            "locale": "en"
+          },
+          {
+            "text": [
+              "Palma del Río offre histoire, patrimoine et douceur de vivre sur les rives du Guadalquivir. Son centre historique abrite des églises, des couvents et des palais qui évoquent des siècles de tradition. Ses places et ses rues invitent à la flânerie et à la découverte de son identité andalouse. Palma del Río, au milieu des oliveraies et des jardins, offre un équilibre parfait entre patrimoine, paysage et culture locale, et la gastronomie et les festivités sont les éléments clés qui définissent ce petit coin de la province de Cordoue.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n20 546 habitants.<br />\nProvince de Cordoue.<br />\n<a href=\"https://www.palmadelrio.es\" target=\"_blank\" rel=\"noopener noreferrer\"> palmadelrio.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
+            ],
+            "locale": "fr"
+          }
+        ],
+        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e15-salida-palma-del-rio/27385/0:0,960:960-0-0-70/4a77e"
+      },
+      "createdAt": "2025-12-15T12:33:52+01:00",
+      "country": {
+        "code": "esp",
+        "id": 1959
+      },
+      "cityLangs": []
+    },
+    "podiumDisplayMode": "instantpodium",
     "arrivalCity": {
+      "cityLangs": [],
+      "code": "cordoba",
+      "label": "Córdoba",
+      "id": 30201,
       "content": {
         "texts": [
           {
@@ -1004,54 +1044,14 @@
           }
         ],
         "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e15-meta-cordoba/27382/0:0,960:960-0-0-70/06e66"
-      },
-      "code": "cordoba",
-      "cityLangs": [],
-      "id": 30201,
-      "label": "Córdoba"
-    },
-    "endTime": "17:30:00",
-    "departureCity": {
-      "cityLangs": [],
-      "updatedBy": "Clerat",
-      "createdBy": "Clerat",
-      "id": 32858,
-      "label": "Palma del Río",
-      "code": "palma-del-rio",
-      "country": {
-        "code": "esp",
-        "id": 1959
-      },
-      "createdAt": "2025-12-15T12:33:52+01:00",
-      "updatedAt": "2025-12-15T12:33:52+01:00",
-      "content": {
-        "image": "https://img.aso.fr/core_app/img-cycling-vue-jpg/e15-salida-palma-del-rio/27385/0:0,960:960-0-0-70/4a77e",
-        "texts": [
-          {
-            "locale": "es",
-            "text": [
-              "Palma del Río combina historia, patrimonio y vida tranquila a orillas del Guadalquivir. Su casco histórico conserva iglesias, conventos y palacios que recuerdan siglos de tradición, mientras que las plazas y calles invitan a pasear y descubrir su carácter andaluz. Entre olivares y jardines, Palma del Río ofrece un equilibrio entre patrimonio, paisaje y cultura local, donde la gastronomía y las festividades completan la experiencia de este rincón cordobés.<br />\n<br />\nSede inédita de La Vuelta.<br />\n20.546 habitantes.<br />\nProvincia de Córdoba.<br />\n<a href=\"https://www.palmadelrio.es\" target=\"_blank\" rel=\"noopener noreferrer\"> palmadelrio.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
-            ]
-          },
-          {
-            "locale": "en",
-            "text": [
-              "Palma del Río combines history, heritage and a quiet life on the banks of the Guadalquivir River. Its historical centre is home to churches, convents and palaces that preserve centuries of tradition, while the streets and plazas invite visitors to stroll and discover the Andalusian style. Nestled among olive groves and gardens, Palma del Río offers the perfect balance between heritage, landscapes and local culture, where gastronomy and festivities complete the tourist experience in this part of Córdoba.<br />\n<br />\nUnprecedented La Vuelta departure.<br />\n20,546 inhabitants.<br />\nProvince of Córdoba.<br />\n<a href=\"https://www.palmadelrio.es\" target=\"_blank\" rel=\"noopener noreferrer\"> palmadelrio.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
-            ]
-          },
-          {
-            "locale": "fr",
-            "text": [
-              "Palma del Río offre histoire, patrimoine et douceur de vivre sur les rives du Guadalquivir. Son centre historique abrite des églises, des couvents et des palais qui évoquent des siècles de tradition. Ses places et ses rues invitent à la flânerie et à la découverte de son identité andalouse. Palma del Río, au milieu des oliveraies et des jardins, offre un équilibre parfait entre patrimoine, paysage et culture locale, et la gastronomie et les festivités sont les éléments clés qui définissent ce petit coin de la province de Cordoue.<br />\n<br />\nDépart inédit de La Vuelta.<br />\n20 546 habitants.<br />\nProvince de Cordoue.<br />\n<a href=\"https://www.palmadelrio.es\" target=\"_blank\" rel=\"noopener noreferrer\"> palmadelrio.es </a><br />\n<a href=\"https://www.dipucordoba.es\" target=\"_blank\" rel=\"noopener noreferrer\"> dipucordoba.es </a><br />\n"
-            ]
-          }
-        ]
       }
     },
+    "id": 25113,
+    "type": "MMG",
     "_id": "74bb80a3264706965ce17df84305f7587a79121f30aaecec364015e181a73303",
     "_bind": "stage-2026",
     "_origin": "stage-2026",
-    "_updatedAt": 1787583309856,
+    "_updatedAt": 1788632402900,
     "_parent": "millesime:da59ccdca22e1980469655f6c16f07f2ef2d1ee5bb9e60738a5c06071fcc83ae",
     "_key": "stage"
   },
