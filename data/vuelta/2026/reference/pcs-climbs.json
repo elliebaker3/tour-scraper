@@ -331,7 +331,25 @@
       "cat": "1"
     }
   ],
-  "15": [],
+  "15": [
+    {
+      "kind": "kom",
+      "km": 34.5,
+      "label": "Puerto de la Forestal",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 73.4,
+      "label": "Puerto Artafi",
+      "cat": "2"
+    },
+    {
+      "kind": "sprint",
+      "km": 78.5,
+      "label": "Santa María de Trassierra"
+    }
+  ],
   "16": [],
   "17": [],
   "18": [],
