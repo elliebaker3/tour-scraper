@@ -301,12 +301,14 @@
       "kind": "profile"
     },
     {
-      "file": "vuelta-profile-stage-16.json",
+      "file": "vuelta-stage-16.json",
       "stage": 16,
-      "race": "vuelta",
       "date": "2026-09-08",
       "route": "Cortegana → La Rábida. Palos de la Frontera",
-      "kind": "profile"
+      "leader_first_utc": "2026-09-08T11:16:15+00:00",
+      "leader_last_utc": "2026-09-08T19:59:37+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-17.json",

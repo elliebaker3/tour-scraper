@@ -350,7 +350,13 @@
       "label": "Santa María de Trassierra"
     }
   ],
-  "16": [],
+  "16": [
+    {
+      "kind": "sprint",
+      "km": 114.5,
+      "label": "Villarrasa"
+    }
+  ],
   "17": [],
   "18": [],
   "19": [],
