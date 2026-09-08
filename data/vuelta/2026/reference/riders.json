@@ -738,15 +738,18 @@
     "bib": 218,
     "podiums": 19,
     "_id": "e1b54374d0c978e95eb60fcf4b6fdffc3496a36ad1bc6edf8acf459e3a5d0c3d",
+    "_updatedAt": 1788882553871,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TPP",
-    "_updatedAt": 1787313610263,
     "_parent": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
-    "_key": "_id",
     "_virtual": "TPP-218-ROOSEN",
     "$team": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 16,
+      "code": -1
     }
   },
   {
