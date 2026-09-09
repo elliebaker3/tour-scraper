@@ -357,7 +357,13 @@
       "label": "Villarrasa"
     }
   ],
-  "17": [],
+  "17": [
+    {
+      "kind": "sprint",
+      "km": 165.0,
+      "label": "San José de la Rinconada"
+    }
+  ],
   "18": [],
   "19": [],
   "20": [],

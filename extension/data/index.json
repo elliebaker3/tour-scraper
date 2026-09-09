@@ -311,12 +311,14 @@
       "race": "vuelta"
     },
     {
-      "file": "vuelta-profile-stage-17.json",
+      "file": "vuelta-stage-17.json",
       "stage": 17,
-      "race": "vuelta",
       "date": "2026-09-09",
-      "route": "Dos Hermanas → Seville",
-      "kind": "profile"
+      "route": "Dos Hermanas → Sevilla",
+      "leader_first_utc": "2026-09-09T11:28:53+00:00",
+      "leader_last_utc": "2026-09-09T19:59:46+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-18.json",
