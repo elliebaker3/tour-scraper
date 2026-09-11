@@ -329,12 +329,14 @@
       "kind": "profile"
     },
     {
-      "file": "vuelta-profile-stage-19.json",
+      "file": "vuelta-stage-19.json",
       "stage": 19,
-      "race": "vuelta",
       "date": "2026-09-11",
       "route": "Vélez-Málaga → Peñas Blancas. Estepona",
-      "kind": "profile"
+      "leader_first_utc": "2026-09-11T10:09:43+00:00",
+      "leader_last_utc": "2026-09-11T13:10:35+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-20.json",
