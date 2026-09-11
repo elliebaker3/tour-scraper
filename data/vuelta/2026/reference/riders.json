@@ -741,11 +741,10 @@
     "bib": 218,
     "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/218/28418/0:0,660:1000-0-0-70/f04e3",
     "firstname": "Timo",
+    "_id": "e1b54374d0c978e95eb60fcf4b6fdffc3496a36ad1bc6edf8acf459e3a5d0c3d",
+    "_updatedAt": 1789122978516,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TPP",
-    "_id": "e1b54374d0c978e95eb60fcf4b6fdffc3496a36ad1bc6edf8acf459e3a5d0c3d",
-    "_key": "_id",
-    "_updatedAt": 1789036522262,
     "_parent": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
     "_virtual": "TPP-218-ROOSEN",
     "$team": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
@@ -1154,16 +1153,19 @@
     "header": null,
     "birthdate": "2000-02-16T00:00:00+01:00",
     "UCICode": "10036104491",
+    "_id": "0332bb81c297844d2ddac74a088b1ec1598aae76124a6aebf377f9da7ac73187",
+    "_updatedAt": 1789122389860,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-XAT",
-    "_id": "0332bb81c297844d2ddac74a088b1ec1598aae76124a6aebf377f9da7ac73187",
-    "_key": "_id",
-    "_updatedAt": 1789036527273,
     "_parent": "team-2026:da463ebcbc467ea8a7c3457fcb5bf4a3015e14699e6ba37e5a56f04d4ddfd042",
     "_virtual": "XAT-182-FEDOROV",
     "$team": "team-2026:da463ebcbc467ea8a7c3457fcb5bf4a3015e14699e6ba37e5a56f04d4ddfd042",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 19,
+      "code": -4
     }
   },
   {
@@ -2838,16 +2840,19 @@
     "idUCI": "SUI19931116",
     "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/174/28484/0:0,400:400-0-0-70/19b84",
     "sex": "M",
+    "_id": "7e1ade81f7c4ea458c91661c1b4b85bb45ceffa5ec0786852f266476fe6c9c2f",
+    "_updatedAt": 1789122389860,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TUD",
-    "_id": "7e1ade81f7c4ea458c91661c1b4b85bb45ceffa5ec0786852f266476fe6c9c2f",
-    "_key": "_id",
-    "_updatedAt": 1789036522406,
     "_parent": "team-2026:85943205089337a4acc63c5140428ac47b69ad704ed2e609a681d7bc122b953f",
     "_virtual": "TUD-174-KÜNG",
     "$team": "team-2026:85943205089337a4acc63c5140428ac47b69ad704ed2e609a681d7bc122b953f",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 19,
+      "code": -4
     }
   },
   {
@@ -4954,7 +4959,7 @@
       "en": "/rider/146/cofidis/renard-alexis"
     },
     "_id": "42a23f5d3526c6ec545de90d1074b4d32438eda8b2b1060d97b6a89e3455d619",
-    "_updatedAt": 1789042695819,
+    "_updatedAt": 1789054987346,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-COF",
     "_parent": "team-2026:5d32207e1b3c20089d2a5f59ee62c787d280d9cb3971a0107ea3791fa5ae39c3",
