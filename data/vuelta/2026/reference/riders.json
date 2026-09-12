@@ -537,16 +537,19 @@
     "idUCI": "GBR19960625",
     "firstname": "Paul",
     "lastname": "DOUBLE",
+    "_id": "31540f28bbf4867ea6ff095369daeec11d4c77c2d05f6ce973cd98a6e0505f84",
+    "_updatedAt": 1789141796015,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-JAY",
-    "_id": "31540f28bbf4867ea6ff095369daeec11d4c77c2d05f6ce973cd98a6e0505f84",
-    "_key": "_id",
-    "_updatedAt": 1789036526317,
     "_parent": "team-2026:70878c5f63a82dd494647d075b815209764a20452535caf1f0f116738b079188",
     "_virtual": "JAY-153-DOUBLE",
     "$team": "team-2026:70878c5f63a82dd494647d075b815209764a20452535caf1f0f116738b079188",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 19,
+      "code": -1
     }
   },
   {
@@ -742,7 +745,7 @@
     "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/218/28418/0:0,660:1000-0-0-70/f04e3",
     "firstname": "Timo",
     "_id": "e1b54374d0c978e95eb60fcf4b6fdffc3496a36ad1bc6edf8acf459e3a5d0c3d",
-    "_updatedAt": 1789122978516,
+    "_updatedAt": 1789130896822,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TPP",
     "_parent": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
@@ -1154,7 +1157,7 @@
     "birthdate": "2000-02-16T00:00:00+01:00",
     "UCICode": "10036104491",
     "_id": "0332bb81c297844d2ddac74a088b1ec1598aae76124a6aebf377f9da7ac73187",
-    "_updatedAt": 1789122389860,
+    "_updatedAt": 1789141796016,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-XAT",
     "_parent": "team-2026:da463ebcbc467ea8a7c3457fcb5bf4a3015e14699e6ba37e5a56f04d4ddfd042",
@@ -2841,7 +2844,7 @@
     "profile": "https://img.aso.fr/core_app/img-cycling-vue-png/174/28484/0:0,400:400-0-0-70/19b84",
     "sex": "M",
     "_id": "7e1ade81f7c4ea458c91661c1b4b85bb45ceffa5ec0786852f266476fe6c9c2f",
-    "_updatedAt": 1789122389860,
+    "_updatedAt": 1789141796016,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TUD",
     "_parent": "team-2026:85943205089337a4acc63c5140428ac47b69ad704ed2e609a681d7bc122b953f",
