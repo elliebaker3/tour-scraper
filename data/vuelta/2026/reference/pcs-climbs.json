@@ -390,7 +390,37 @@
       "cat": "1"
     }
   ],
-  "20": [],
+  "20": [
+    {
+      "kind": "kom",
+      "km": 50.7,
+      "label": "Puerto de Los Blancares",
+      "cat": "2"
+    },
+    {
+      "kind": "kom",
+      "km": 94.3,
+      "label": "Puerto de El Purche",
+      "cat": "1"
+    },
+    {
+      "kind": "kom",
+      "km": 125.5,
+      "label": "Puerto de El Purche",
+      "cat": "1"
+    },
+    {
+      "kind": "sprint",
+      "km": 144.0,
+      "label": "Güejar Sierra"
+    },
+    {
+      "kind": "kom",
+      "km": 155.4,
+      "label": "Puerto de El Duque",
+      "cat": "1"
+    }
+  ],
   "21": [
     {
       "kind": "sprint",

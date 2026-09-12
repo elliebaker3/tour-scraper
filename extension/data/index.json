@@ -339,12 +339,14 @@
       "race": "vuelta"
     },
     {
-      "file": "vuelta-profile-stage-20.json",
+      "file": "vuelta-stage-20.json",
       "stage": 20,
-      "race": "vuelta",
       "date": "2026-09-12",
       "route": "La Calahorra → Collado del Alguacil",
-      "kind": "profile"
+      "leader_first_utc": "2026-09-12T10:36:42+00:00",
+      "leader_last_utc": "2026-09-12T15:34:34+00:00",
+      "kind": "full",
+      "race": "vuelta"
     },
     {
       "file": "vuelta-profile-stage-21.json",
