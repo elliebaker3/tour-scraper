@@ -349,12 +349,14 @@
       "race": "vuelta"
     },
     {
-      "file": "vuelta-profile-stage-21.json",
+      "file": "vuelta-stage-21.json",
       "stage": 21,
-      "race": "vuelta",
       "date": "2026-09-13",
       "route": "Carrefour Granada → Granada",
-      "kind": "profile"
+      "leader_first_utc": "2026-09-13T14:31:51+00:00",
+      "leader_last_utc": "2026-09-13T18:57:03+00:00",
+      "kind": "full",
+      "race": "vuelta"
     }
   ]
 }
