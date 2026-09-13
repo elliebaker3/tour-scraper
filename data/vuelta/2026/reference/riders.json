@@ -5067,16 +5067,19 @@
     "profile_podium_live": "https://img.aso.fr/core_app/img-cycling-vue-png/55/28267/0:0,660:1000-0-0-70/6d0d3",
     "lastnameshort": "DUNBAR",
     "victories": 9,
+    "_id": "ec8228cc5a2f05e86e1899f3952817110533481f8e9b94e84009eb6b2f226ca4",
+    "_updatedAt": 1789231138540,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-PQT",
-    "_id": "ec8228cc5a2f05e86e1899f3952817110533481f8e9b94e84009eb6b2f226ca4",
-    "_key": "_id",
-    "_updatedAt": 1789036526060,
     "_parent": "team-2026:1d31fa640d16a97b67d51c0ffbbbda47233882b7717f5e9bd2ed7020e0a7a669",
     "_virtual": "PQT-55-DUNBAR",
     "$team": "team-2026:1d31fa640d16a97b67d51c0ffbbbda47233882b7717f5e9bd2ed7020e0a7a669",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 20,
+      "code": -1
     }
   },
   {
@@ -5103,16 +5106,19 @@
     "lastname": "HAMILTON",
     "victories": 1,
     "lastnameshort": "HAMILTON",
+    "_id": "9b8d62df652f2bc6469d2037d0d2b6a1ee692c4547681993449899c912802b8e",
+    "_updatedAt": 1789231138540,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-TPP",
-    "_id": "9b8d62df652f2bc6469d2037d0d2b6a1ee692c4547681993449899c912802b8e",
-    "_key": "_id",
-    "_updatedAt": 1789036522262,
     "_parent": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
     "_virtual": "TPP-211-HAMILTON",
     "$team": "team-2026:bd92a9d7c34c8970ba8a42a2ee4bc2e4a14d59a7a2b033ed0cb3f3e8d1e771a6",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 20,
+      "code": -1
     }
   },
   {
@@ -5437,16 +5443,19 @@
     "UCICode": "10063763740",
     "podiums": 14,
     "birthdate": "2002-03-05T00:00:00+01:00",
+    "_id": "8439c92d34f3eb154552c5c941543527344156606d23d9e04854b4cab0d28848",
+    "_updatedAt": 1789227633785,
     "_bind": "allCompetitors-2026",
     "_origin": "competitor-2026-DCT",
-    "_id": "8439c92d34f3eb154552c5c941543527344156606d23d9e04854b4cab0d28848",
-    "_key": "_id",
-    "_updatedAt": 1789036522007,
     "_parent": "team-2026:32f125a1a596f3230c4395c9d1cfcde1584687dc661b07b744492a898a35047c",
     "_virtual": "DCT-47-RICCITELLO",
     "$team": "team-2026:32f125a1a596f3230c4395c9d1cfcde1584687dc661b07b744492a898a35047c",
     "_gets": {
       "team": "$team"
+    },
+    "withdrew": {
+      "stage": 20,
+      "code": -1
     }
   },
   {
